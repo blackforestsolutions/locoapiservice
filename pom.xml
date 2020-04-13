@@ -5,7 +5,7 @@
 
     <groupId>org.springframework</groupId>
     <artifactId>locoapiservice</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.2-SNAPSHOT</version>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
