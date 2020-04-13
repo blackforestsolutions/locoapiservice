@@ -357,6 +357,20 @@
                         <artifactId>exec-maven-plugin</artifactId>
                         <groupId>org.codehaus.mojo</groupId>
                         <executions>
+                            <execution>
+                                <id>Add execution rigths on bash scripts</id>
+                                <phase>initialize</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                                <configuration>
+                                    <executable>chmod</executable>
+                                    <arguments>
+                                        <argument>755</argument>
+                                        <argument>${basedir}/deployment.sh</argument>
+                                    </arguments>
+                                </configuration>
+                            </execution>
                             <execution><!-- Automated Docker Push -->
                                 <id>Docker Push</id>
                                 <phase>generate-sources</phase>
@@ -364,6 +378,7 @@
                                     <goal>exec</goal>
                                 </goals>
                                 <configuration>
+
                                     <executable>${basedir}/deployment.sh</executable>
                                     <arguments>
                                         <argument>${version}</argument>
