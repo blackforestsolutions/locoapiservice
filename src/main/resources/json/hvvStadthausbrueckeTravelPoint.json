@@ -1,0 +1,20 @@
+{
+  "returnCode": "OK",
+  "results": [
+    {
+      "name": "Stadthausbrücke",
+      "city": "Hamburg",
+      "combinedName": "Stadthausbrücke",
+      "id": "Master:11952",
+      "type": "STATION",
+      "coordinate": {
+        "x": 9.984914,
+        "y": 53.549465
+      },
+      "serviceTypes": [
+        "s"
+      ],
+      "hasStationInformation": true
+    }
+  ]
+}

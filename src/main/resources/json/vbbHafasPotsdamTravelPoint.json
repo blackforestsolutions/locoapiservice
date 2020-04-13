@@ -1,0 +1,636 @@
+{
+  "ver": "1.16",
+  "ext": "VBB.1",
+  "lang": "deu",
+  "id": "nwkm2r9mggkpykc4",
+  "svcResL": [
+    {
+      "meth": "LocMatch",
+      "err": "OK",
+      "res": {
+        "common": {
+          "locL": [],
+          "prodL": [
+            {
+              "name": "",
+              "icoX": 0,
+              "cls": 32
+            },
+            {
+              "name": "DPN",
+              "nameS": "DPN",
+              "icoX": 1,
+              "cls": 64,
+              "prodCtx": {
+                "lineId": "DPN"
+              }
+            },
+            {
+              "name": "RB1",
+              "nameS": "RB1",
+              "icoX": 1,
+              "cls": 64,
+              "prodCtx": {
+                "lineId": "RB1"
+              }
+            },
+            {
+              "name": "RB20",
+              "nameS": "RB20",
+              "icoX": 1,
+              "cls": 64,
+              "prodCtx": {
+                "lineId": "RB20"
+              }
+            },
+            {
+              "name": "RB21",
+              "nameS": "RB21",
+              "icoX": 1,
+              "cls": 64,
+              "prodCtx": {
+                "lineId": "RB21"
+              }
+            },
+            {
+              "name": "RB22",
+              "nameS": "RB22",
+              "icoX": 1,
+              "cls": 64,
+              "prodCtx": {
+                "lineId": "RB22"
+              }
+            },
+            {
+              "name": "RB23",
+              "nameS": "RB23",
+              "icoX": 1,
+              "cls": 64,
+              "prodCtx": {
+                "lineId": "RB23"
+              }
+            },
+            {
+              "name": "RE1",
+              "nameS": "RE1",
+              "icoX": 1,
+              "cls": 64,
+              "prodCtx": {
+                "lineId": "RE1"
+              }
+            },
+            {
+              "name": "S7",
+              "nameS": "S7",
+              "icoX": 2,
+              "cls": 1,
+              "prodCtx": {
+                "lineId": "S7"
+              }
+            },
+            {
+              "name": "91",
+              "nameS": "91",
+              "icoX": 3,
+              "cls": 4,
+              "prodCtx": {
+                "lineId": "91"
+              }
+            },
+            {
+              "name": "92",
+              "nameS": "92",
+              "icoX": 3,
+              "cls": 4,
+              "prodCtx": {
+                "lineId": "92"
+              }
+            },
+            {
+              "name": "93",
+              "nameS": "93",
+              "icoX": 3,
+              "cls": 4,
+              "prodCtx": {
+                "lineId": "93"
+              }
+            },
+            {
+              "name": "96",
+              "nameS": "96",
+              "icoX": 3,
+              "cls": 4,
+              "prodCtx": {
+                "lineId": "96"
+              }
+            },
+            {
+              "name": "98",
+              "nameS": "98",
+              "icoX": 3,
+              "cls": 4,
+              "prodCtx": {
+                "lineId": "98"
+              }
+            },
+            {
+              "name": "99",
+              "nameS": "99",
+              "icoX": 3,
+              "cls": 4,
+              "prodCtx": {
+                "lineId": "99"
+              }
+            },
+            {
+              "name": "580",
+              "nameS": "580",
+              "icoX": 4,
+              "cls": 8,
+              "prodCtx": {
+                "lineId": "580"
+              }
+            },
+            {
+              "name": "601",
+              "nameS": "601",
+              "icoX": 4,
+              "cls": 8,
+              "prodCtx": {
+                "lineId": "601"
+              }
+            },
+            {
+              "name": "603",
+              "nameS": "603",
+              "icoX": 4,
+              "cls": 8,
+              "prodCtx": {
+                "lineId": "603"
+              }
+            },
+            {
+              "name": "604",
+              "nameS": "604",
+              "icoX": 4,
+              "cls": 8,
+              "prodCtx": {
+                "lineId": "604"
+              }
+            },
+            {
+              "name": "605",
+              "nameS": "605",
+              "icoX": 4,
+              "cls": 8,
+              "prodCtx": {
+                "lineId": "605"
+              }
+            },
+            {
+              "name": "606",
+              "nameS": "606",
+              "icoX": 4,
+              "cls": 8,
+              "prodCtx": {
+                "lineId": "606"
+              }
+            },
+            {
+              "name": "607",
+              "nameS": "607",
+              "icoX": 4,
+              "cls": 8,
+              "prodCtx": {
+                "lineId": "607"
+              }
+            },
+            {
+              "name": "608",
+              "nameS": "608",
+              "icoX": 4,
+              "cls": 8,
+              "prodCtx": {
+                "lineId": "608"
+              }
+            },
+            {
+              "name": "611",
+              "nameS": "611",
+              "icoX": 4,
+              "cls": 8,
+              "prodCtx": {
+                "lineId": "611"
+              }
+            },
+            {
+              "name": "614",
+              "nameS": "614",
+              "icoX": 4,
+              "cls": 8,
+              "prodCtx": {
+                "lineId": "614"
+              }
+            },
+            {
+              "name": "619",
+              "nameS": "619",
+              "icoX": 4,
+              "cls": 8,
+              "prodCtx": {
+                "lineId": "619"
+              }
+            },
+            {
+              "name": "631",
+              "nameS": "631",
+              "icoX": 4,
+              "cls": 8,
+              "prodCtx": {
+                "lineId": "631"
+              }
+            },
+            {
+              "name": "638",
+              "nameS": "638",
+              "icoX": 4,
+              "cls": 8,
+              "prodCtx": {
+                "lineId": "638"
+              }
+            },
+            {
+              "name": "643",
+              "nameS": "643",
+              "icoX": 4,
+              "cls": 8,
+              "prodCtx": {
+                "lineId": "643"
+              }
+            },
+            {
+              "name": "650",
+              "nameS": "650",
+              "icoX": 4,
+              "cls": 8,
+              "prodCtx": {
+                "lineId": "650"
+              }
+            },
+            {
+              "name": "690",
+              "nameS": "690",
+              "icoX": 4,
+              "cls": 8,
+              "prodCtx": {
+                "lineId": "690"
+              }
+            },
+            {
+              "name": "691",
+              "nameS": "691",
+              "icoX": 4,
+              "cls": 8,
+              "prodCtx": {
+                "lineId": "691"
+              }
+            },
+            {
+              "name": "694",
+              "nameS": "694",
+              "icoX": 4,
+              "cls": 8,
+              "prodCtx": {
+                "lineId": "694"
+              }
+            },
+            {
+              "name": "695",
+              "nameS": "695",
+              "icoX": 4,
+              "cls": 8,
+              "prodCtx": {
+                "lineId": "695"
+              }
+            },
+            {
+              "name": "715",
+              "nameS": "715",
+              "icoX": 4,
+              "cls": 8,
+              "prodCtx": {
+                "lineId": "715"
+              }
+            },
+            {
+              "name": "750",
+              "nameS": "750",
+              "icoX": 4,
+              "cls": 8,
+              "prodCtx": {
+                "lineId": "750"
+              }
+            },
+            {
+              "name": "N13",
+              "nameS": "N13",
+              "icoX": 4,
+              "cls": 8,
+              "prodCtx": {
+                "lineId": "N13"
+              }
+            },
+            {
+              "name": "N14",
+              "nameS": "N14",
+              "icoX": 4,
+              "cls": 8,
+              "prodCtx": {
+                "lineId": "N14"
+              }
+            },
+            {
+              "name": "N15",
+              "nameS": "N15",
+              "icoX": 4,
+              "cls": 8,
+              "prodCtx": {
+                "lineId": "N15"
+              }
+            },
+            {
+              "name": "N16",
+              "nameS": "N16",
+              "icoX": 4,
+              "cls": 8,
+              "prodCtx": {
+                "lineId": "N16"
+              }
+            },
+            {
+              "name": "N17",
+              "nameS": "N17",
+              "icoX": 4,
+              "cls": 8,
+              "prodCtx": {
+                "lineId": "N17"
+              }
+            },
+            {
+              "name": "RB13",
+              "nameS": "RB13",
+              "icoX": 4,
+              "cls": 8,
+              "prodCtx": {
+                "lineId": "RB13"
+              }
+            },
+            {
+              "name": "RB20",
+              "nameS": "RB20",
+              "icoX": 4,
+              "cls": 8,
+              "prodCtx": {
+                "lineId": "RB20"
+              }
+            },
+            {
+              "name": "RB23",
+              "nameS": "RB23",
+              "icoX": 4,
+              "cls": 8,
+              "prodCtx": {
+                "lineId": "RB23"
+              }
+            },
+            {
+              "name": "S7",
+              "nameS": "S7",
+              "icoX": 4,
+              "cls": 8,
+              "prodCtx": {
+                "lineId": "S7"
+              }
+            },
+            {
+              "name": "X1",
+              "nameS": "X1",
+              "icoX": 4,
+              "cls": 8,
+              "prodCtx": {
+                "lineId": "X1"
+              }
+            },
+            {
+              "name": "X5",
+              "nameS": "X5",
+              "icoX": 4,
+              "cls": 8,
+              "prodCtx": {
+                "lineId": "X5"
+              }
+            },
+            {
+              "name": "X15",
+              "nameS": "X15",
+              "icoX": 4,
+              "cls": 8,
+              "prodCtx": {
+                "lineId": "X15"
+              }
+            },
+            {
+              "name": "X43",
+              "nameS": "X43",
+              "icoX": 4,
+              "cls": 8,
+              "prodCtx": {
+                "lineId": "X43"
+              }
+            },
+            {
+              "name": "SXF 2",
+              "nameS": "SXF 2",
+              "icoX": 4,
+              "cls": 8,
+              "prodCtx": {
+                "lineId": "SXF 2"
+              }
+            }
+          ],
+          "polyL": [],
+          "layerL": [
+            {
+              "id": "standard",
+              "name": "standard",
+              "index": 0,
+              "annoCnt": 0
+            }
+          ],
+          "crdSysL": [
+            {
+              "id": "standard",
+              "index": 0,
+              "type": "WGS84",
+              "dim": 2
+            }
+          ],
+          "opL": [],
+          "remL": [],
+          "icoL": [
+            {
+              "res": "prod_ic",
+              "fg": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 255
+              },
+              "bg": {
+                "r": 125,
+                "g": 129,
+                "b": 133,
+                "a": 255
+              }
+            },
+            {
+              "res": "prod_reg",
+              "fg": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 255
+              },
+              "bg": {
+                "r": 226,
+                "g": 0,
+                "b": 25,
+                "a": 255
+              }
+            },
+            {
+              "res": "prod_comm_t",
+              "fg": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 255
+              },
+              "bg": {
+                "r": 55,
+                "g": 135,
+                "b": 74,
+                "a": 255
+              }
+            },
+            {
+              "res": "prod_tram_t",
+              "fg": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 255
+              },
+              "bg": {
+                "r": 204,
+                "g": 0,
+                "b": 0,
+                "a": 255
+              }
+            },
+            {
+              "res": "prod_bus_t",
+              "fg": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 255
+              },
+              "bg": {
+                "r": 153,
+                "g": 51,
+                "b": 153,
+                "a": 255
+              }
+            }
+          ]
+        },
+        "match": {
+          "field": "S",
+          "state": "F",
+          "locL": [
+            {
+              "lid": "A=1@O=S Potsdam Hauptbahnhof@X=13067187@Y=52390931@U=86@L=900230999@B=1@V=3.9,@p=1584011742@",
+              "type": "S",
+              "name": "S Potsdam Hauptbahnhof",
+              "icoX": 0,
+              "extId": "900230999",
+              "state": "F",
+              "crd": {
+                "x": 13067187,
+                "y": 52390931,
+                "type": "WGS84",
+                "layerX": 0,
+                "crdSysX": 0
+              },
+              "pCls": 109,
+              "pRefL": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32,
+                33,
+                34,
+                35,
+                36,
+                37,
+                38,
+                39,
+                40,
+                41,
+                42,
+                43,
+                44,
+                45,
+                46,
+                47,
+                48,
+                49
+              ],
+              "wt": 12971
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

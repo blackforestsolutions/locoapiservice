@@ -1,0 +1,876 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TripList serverVersion="1.9" dialectVersion="1.23" requestId="1575720147491"
+          scrB="2|OB|MTµ11µ137675µ137675µ137893µ137893µ0µ0µ405µ137582µ1µ-2147483550µ0µ1µ2|PDHµ68ef92c1a2181422601f980ebce98c0b|RDµ7122019|RTµ130227|USµ0"
+          scrF="2|OF|MTµ11µ138815µ138815µ139033µ139033µ0µ0µ5µ137876µ5µ-2147483550µ0µ1µ2|PDHµ68ef92c1a2181422601f980ebce98c0b|RDµ7122019|RTµ130227|USµ0"
+          xmlns="hafas_rest">
+    <Trip idx="0"
+          ctxRecon="¶HKI¶T$A=1@O=Ulrichstein Wiesenhof@L=3027290@a=128@$A=1@O=Lauterbach (Hessen) Nordbahnhof@L=3011203@a=128@$201912071435$201912071455$ALTVB-65$$1$$$§T$A=1@O=Lauterbach (Hessen) Nordbahnhof@L=3011203@a=128@$A=1@O=Gießen Bahnhof@L=3011016@a=128@$201912071505$201912071618$    RB45$$1$$$§T$A=1@O=Gießen Bahnhof@L=3011016@a=128@$A=1@O=Marburg Südbahnhof@L=3011323@a=128@$201912071639$201912071701$    RB41$$1$$$§W$A=1@O=Marburg Südbahnhof@L=3011323@a=128@$A=1@O=Marburg Südbahnhof-West@L=3010097@a=128@$201912071701$201912071705$$$1$$$§T$A=1@O=Marburg Südbahnhof-West@L=3010097@a=128@$A=1@O=Bad Endbach Sportzentrum@L=3010296@a=128@$201912071718$201912071813$Bus 383 $$3$$$"
+          checksum="a432e079_3" tripId="C-0" duration="PT3H38M">
+        <ServiceDays sDaysR="Sa" sDaysI="auch 24., 31. Dez"
+                     sDaysB="000000020408102040810204081224408102040810204081020408102040810204081020408102040810204081020400"
+                     planningPeriodBegin="2019-09-05" planningPeriodEnd="2020-09-17"/>
+        <LegList>
+            <Leg type="JNY" idx="0" name="ALTVB-65" number="2976" category="ALT" reachable="true"
+                 direction="Lauterbach (Hessen) Nordbahnhof">
+                <Origin id="A=1@O=Ulrichstein Wiesenhof@X=9211076@Y=50558812@U=80@L=3027290@" extId="3027290"
+                        name="Ulrichstein Wiesenhof" type="ST" routeIdx="6" lon="9.211076" lat="50.558812"
+                        date="2019-12-07" time="14:35:00" prognosisType="PROGNOSED"/>
+                <Destination id="A=1@O=Lauterbach (Hessen) Nordbahnhof@X=9406214@Y=50644138@U=80@L=3011203@"
+                             extId="3011203" name="Lauterbach (Hessen) Nordbahnhof" type="ST" routeIdx="25"
+                             lon="9.406214" lat="50.644138" date="2019-12-07" time="14:55:00"
+                             prognosisType="PROGNOSED"/>
+                <Notes>
+                    <Note routeIdxFrom="6" routeIdxTo="25" key="_s" priority="1" type="A">Anruf-Linien-Taxi: Anmeldung
+                        bis 60 Min. vor Abfahrt, Tel. 06044 2244 (Hans Sachs Reisen). Erreichbar tägl. 7-19 Uhr, Fahrten
+                        vor 8 Uhr am Vortag anmelden. Keine Innerortsbedienung!
+                    </Note>
+                    <Note routeIdxFrom="6" routeIdxTo="25" key="FD" type="I">322</Note>
+                </Notes>
+                <JourneyDetailRef ref="1|53502|3|80|7122019"/>
+                <Messages>
+                    <Message id="2114467-1" act="true" head="Vogelsbergkreis: Bus VB-65 - Verspätungen möglich"
+                             lead="Es muss mit Verspätungen gerechnet werden. Grund dafür ist eine Baustelle mit halbseitiger Straßensperrung.&lt;br />(Stand 05.12.2019, 10:36 Uhr)"
+                             text="Es muss mit Verspätungen gerechnet werden. Grund dafür ist eine Baustelle mit halbseitiger Straßensperrung.&lt;br />&lt;br />(Stand 05.12.2019, 10:36 Uhr)"
+                             priority="100" category="2" products="65535" altStart="" altEnd="" sTime="04:00:00"
+                             sDate="2019-04-29" eTime="23:59:00" eDate="2019-12-20" company="RMVU"/>
+                </Messages>
+                <JourneyStatus>P</JourneyStatus>
+                <Product catCode="9" catIn="ALT" catOut="ALT     " catOutL="ALT" catOutS="ALT" line="VB-65"
+                         name="ALTVB-65" num="2976" operator="VGO Alsfeld" operatorCode="VGO" admin="VBBUS_"/>
+            </Leg>
+            <Leg type="JNY" idx="1" name="    RB45" number="889" category="Cn1" reachable="true"
+                 direction="Limburg (Lahn) Bahnhof">
+                <Origin id="A=1@O=Lauterbach (Hessen) Nordbahnhof@X=9406214@Y=50644138@U=80@L=3011203@" extId="3011203"
+                        name="Lauterbach (Hessen) Nordbahnhof" type="ST" routeIdx="5" lon="9.406214" lat="50.644138"
+                        date="2019-12-07" time="15:05:00" track="2" rtDate="2019-12-07" rtTime="15:05:00" rtTrack="2"
+                        prognosisType="PROGNOSED"/>
+                <Destination id="A=1@O=Gießen Bahnhof@X=8663803@Y=50579883@U=80@L=3011016@" extId="3011016"
+                             name="Gießen Bahnhof" type="ST" routeIdx="19" lon="8.663803" lat="50.579883"
+                             date="2019-12-07" time="16:18:00" track="11" rtDate="2019-12-07" rtTime="16:18:00"
+                             rtTrack="11" prognosisType="PROGNOSED"/>
+                <Notes>
+                    <Note routeIdxFrom="5" routeIdxTo="19" key="FD" type="I">24832</Note>
+                </Notes>
+                <JourneyDetailRef ref="1|241991|1|80|7122019"/>
+                <JourneyStatus>P</JourneyStatus>
+                <Product catCode="2" catIn="Cn1" catOut="RB      " catOutL="RB" catOutS="Cn1" line="RB45"
+                         name="    RB45" num="889" operator="Hessische Landesbahn GmbH" operatorCode="HLB"
+                         admin="K4RB__"/>
+            </Leg>
+            <Leg type="JNY" idx="2" name="    RB41" number="147" category="BT1" reachable="true"
+                 direction="Stadtallendorf Bahnhof">
+                <Origin id="A=1@O=Gießen Bahnhof@X=8663803@Y=50579883@U=80@L=3011016@" extId="3011016"
+                        name="Gießen Bahnhof" type="ST" routeIdx="5" lon="8.663803" lat="50.579883" date="2019-12-07"
+                        time="16:39:00" track="2" prognosisType="PROGNOSED"/>
+                <Destination id="A=1@O=Marburg Südbahnhof@X=8763548@Y=50794869@U=80@L=3011323@" extId="3011323"
+                             name="Marburg Südbahnhof" type="ST" routeIdx="12" lon="8.763548" lat="50.794869"
+                             date="2019-12-07" time="17:01:00" track="2" prognosisType="PROGNOSED"/>
+                <Notes>
+                    <Note routeIdxFrom="5" routeIdxTo="12" key="bE" priority="560" type="A">Fahrzeuggebundene
+                        Einstiegshilfe vorhanden
+                    </Note>
+                    <Note routeIdxFrom="5" routeIdxTo="12" key="aU" priority="610" type="A">Klimaanlage</Note>
+                    <Note routeIdxFrom="5" routeIdxTo="12" key="FD" type="I">15020</Note>
+                </Notes>
+                <JourneyDetailRef ref="1|181677|0|80|7122019"/>
+                <JourneyStatus>P</JourneyStatus>
+                <Product catCode="2" catIn="BT1" catOut="RB      " catOutL="R-Bahn" catOutS="BT1" line="RB41"
+                         name="    RB41" num="147" operator="DB Regio AG Mitte Region Hessen" operatorCode="DB9"
+                         admin="800535"/>
+            </Leg>
+            <Leg type="WALK" idx="3" dist="122" duration="PT4M" name="">
+                <Origin id="A=1@O=Marburg Südbahnhof@X=8763548@Y=50794869@U=80@L=3011323@" extId="3011323"
+                        name="Marburg Südbahnhof" type="ST" lon="8.763548" lat="50.794869" date="2019-12-07"
+                        time="17:01:00"/>
+                <Destination id="A=1@O=Marburg Südbahnhof-West@X=8761813@Y=50794968@U=80@L=3010097@" extId="3010097"
+                             name="Marburg Südbahnhof-West" type="ST" lon="8.761813" lat="50.794968" date="2019-12-07"
+                             time="17:05:00"/>
+                <GisRef ref="H|1|W$A=1@O=Marburg Südbahnhof@L=3011323@a=128@$A=1@O=Marburg Südbahnhof-West@L=3010097@a=128@$201912071701$201912071705$$$1$$$"/>
+            </Leg>
+            <Leg type="JNY" idx="4" name="Bus 383 " number="152" category="BB1" reachable="true"
+                 direction="Bad Endbach-Schlierbach Brunnenstraße">
+                <Origin id="A=1@O=Marburg Südbahnhof-West@X=8761813@Y=50794968@U=80@L=3010097@" extId="3010097"
+                        name="Marburg Südbahnhof-West" type="ST" routeIdx="6" lon="8.761813" lat="50.794968"
+                        date="2019-12-07" time="17:18:00" track="2" prognosisType="PROGNOSED"/>
+                <Destination id="A=1@O=Bad Endbach Sportzentrum@X=8479300@Y=50756602@U=80@L=3010296@" extId="3010296"
+                             name="Bad Endbach Sportzentrum" type="ST" routeIdx="36" lon="8.4793" lat="50.756602"
+                             date="2019-12-07" time="18:13:00" prognosisType="PROGNOSED"/>
+                <Notes>
+                    <Note routeIdxFrom="6" routeIdxTo="36" key="FD" type="I">624</Note>
+                </Notes>
+                <JourneyDetailRef ref="1|266586|0|80|7122019"/>
+                <JourneyStatus>P</JourneyStatus>
+                <Product catCode="6" catIn="BB1" catOut="Bus     " catOutL="Niederflurbus" catOutS="BB1" line="383"
+                         name="Bus 383 " num="152" operator="Becker und Bender Busverkehr GbR" operatorCode="BEC"
+                         admin="BUBBUS"/>
+            </Leg>
+        </LegList>
+        <TariffResult>
+            <fareSetItem name="Tageskarten">
+                <fareItem name="0" desc="ohne Umweg" shpCtx="" price="0">
+                    <ticket name="Hessenticket (bis 5 Pers.)" desc="Erw. und Kinder"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;Hessenticket bis 5 Personen&quot;,&quot;TextMiddle&quot;:&quot;Hessenticket bis 5 Pers.&quot;,&quot;TextShort&quot;:&quot;Hessenticket 5P&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;50&quot;,&quot;TariffLevelIntern&quot;:&quot;95&quot;,&quot;Price&quot;:&quot;3600&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;9970&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;9970&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;1750&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Tageskarte&quot;,&quot;KartentypAnzeigename&quot;:&quot;Tageskarten&quot;,&quot;KAProduktnummer&quot;:&quot;10181&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-VTRB-Ausgabeart=Papier|ATTR-VTRB-Frg=2&quot;}}"
+                            cur="EUR" price="3600"/>
+                </fareItem>
+            </fareSetItem>
+            <fareSetItem name="Monatskarten">
+                <fareItem name="0" desc="ohne Umweg" shpCtx="" price="0">
+                    <ticket name="65-plus-Monatskarte" desc="Senioren"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;65-plus-Monatskarte&quot;,&quot;TextMiddle&quot;:&quot;65-plus-Monatskarte&quot;,&quot;TextShort&quot;:&quot;65-plus-Monatskarte&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;6&quot;,&quot;TariffLevelIntern&quot;:&quot;80&quot;,&quot;Price&quot;:&quot;14190&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;1300&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;400&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;120&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;minVVF&quot;:&quot;13.12.2019&quot;,&quot;minNKF&quot;:&quot;09.12.2019&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Monatskarte&quot;,&quot;KartentypAnzeigename&quot;:&quot;Monatskarten&quot;,&quot;KAProduktnummer&quot;:&quot;10238&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-SRTE-NACHWEIS-REDUZ=65-plus|ATTR-VTRB-Ausgabeart=eTicket|ATTR-VTRB-Frg=3|ATTR-VTRB-minNKF=2|ATTR-VTRB-minVVF=5&quot;}}"
+                            cur="EUR" price="14190"/>
+                </fareItem>
+            </fareSetItem>
+            <fareSetItem name="Jahreskarten">
+                <fareItem name="0" desc="ohne Umweg" shpCtx="" price="0">
+                    <ticket name="65-plus-Jahreskarte einmalige Zahlung" desc="Senioren"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;65-plus-Jahreskarte&quot;,&quot;TextShort&quot;:&quot;65-plus-Jahreskarte&quot;,&quot;Remark&quot;:&quot;einmalige Zahlung&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;6&quot;,&quot;TariffLevelIntern&quot;:&quot;80&quot;,&quot;Price&quot;:&quot;139060&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;1300&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;400&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;820&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Jahreskarte&quot;,&quot;KartentypAnzeigename&quot;:&quot;Jahreskarten&quot;,&quot;KAProduktnummer&quot;:&quot;10683&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-SRTE-KLASSE_1=Ja|ATTR-SRTE-NACHWEIS-REDUZ=65-plus|ATTR-VTRB-Ausgabeart=eTicket|ATTR-VTRB-Frg=3|ATTR-VTRB-minNKF=2|ATTR-VTRB-minVVF=5&quot;}}"
+                            cur="EUR" price="139060"/>
+                    <ticket name="Schülerticket Hessen einmalige Zahlung" desc="Auszubildende"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;Schülerticket Hessen&quot;,&quot;TextShort&quot;:&quot;Schülerticket Hessen&quot;,&quot;Remark&quot;:&quot;einmalige Zahlung&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;50&quot;,&quot;TariffLevelIntern&quot;:&quot;95&quot;,&quot;Price&quot;:&quot;36500&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;9990&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;9990&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;77400&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Jahreskarte&quot;,&quot;KartentypAnzeigename&quot;:&quot;Jahreskarten&quot;,&quot;KAProduktnummer&quot;:&quot;10547&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-SRTE-NACHWEIS-REDUZ=Schueler_Azubi|ATTR-VTRB-Ausgabeart=eTicket|ATTR-VTRB-Frg=3|ATTR-VTRB-minNKF=2|ATTR-VTRB-minVVF=5&quot;}}"
+                            cur="EUR" price="36500"/>
+                </fareItem>
+            </fareSetItem>
+            <fareSetItem name="JahresAbos persönlich">
+                <fareItem name="0" desc="ohne Umweg" shpCtx="" price="0">
+                    <ticket name="65-plus-Jahreskarte einmalige Abbuchung" desc="Senioren"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;65-plus-Jahreskarte&quot;,&quot;TextShort&quot;:&quot;65-plus-Jahreskarte&quot;,&quot;Remark&quot;:&quot;einmalige Abbuchung&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;6&quot;,&quot;TariffLevelIntern&quot;:&quot;80&quot;,&quot;Price&quot;:&quot;139060&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;1300&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;400&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;1420&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;minVVF&quot;:&quot;01.01.2020&quot;,&quot;minNKF&quot;:&quot;01.01.2020&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Jahresabos_persoenlich&quot;,&quot;KartentypAnzeigename&quot;:&quot;JahresAbos persönlich&quot;,&quot;KAProduktnummer&quot;:&quot;10097&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-SRTE-KLASSE_1=Ja|ATTR-SRTE-NACHWEIS-REDUZ=65-plus|ATTR-VTRB-Ausgabeart=eTicket|ATTR-VTRB-Frg=3|ATTR-VTRB-minNKF=2|ATTR-VTRB-minVVF=5&quot;}}"
+                            cur="EUR" price="139060"/>
+                    <ticket name="65-plus-Jahreskarte 12-fache Abbuchung" desc="Senioren"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;65-plus-Jahreskarte&quot;,&quot;TextShort&quot;:&quot;65-plus-Jahreskarte&quot;,&quot;Remark&quot;:&quot;12-fache Abbuchung&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;6&quot;,&quot;TariffLevelIntern&quot;:&quot;80&quot;,&quot;Price&quot;:&quot;141900&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;1300&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;400&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;1330&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;minVVF&quot;:&quot;01.01.2020&quot;,&quot;minNKF&quot;:&quot;01.01.2020&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Jahresabos_persoenlich&quot;,&quot;KartentypAnzeigename&quot;:&quot;JahresAbos persönlich&quot;,&quot;KAProduktnummer&quot;:&quot;10755&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-SRTE-KLASSE_1=Ja|ATTR-SRTE-NACHWEIS-REDUZ=65-plus|ATTR-VTRB-Ausgabeart=eTicket|ATTR-VTRB-Frg=3|ATTR-VTRB-minNKF=2|ATTR-VTRB-minVVF=5&quot;}}"
+                            cur="EUR" price="141900"/>
+                    <ticket name="Schülerticket Hessen einmalige Abbuchung" desc="Auszubildende"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;Schülerticket Hessen&quot;,&quot;TextShort&quot;:&quot;Schülerticket Hessen&quot;,&quot;Remark&quot;:&quot;einmalige Abbuchung&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;50&quot;,&quot;TariffLevelIntern&quot;:&quot;95&quot;,&quot;Price&quot;:&quot;36500&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;9990&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;9990&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;77401&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;minVVF&quot;:&quot;01.01.2020&quot;,&quot;minNKF&quot;:&quot;01.01.2020&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Jahresabos_persoenlich&quot;,&quot;KartentypAnzeigename&quot;:&quot;JahresAbos persönlich&quot;,&quot;KAProduktnummer&quot;:&quot;10548&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-SRTE-NACHWEIS-REDUZ=Schueler_Azubi_Jaka|ATTR-VTRB-Ausgabeart=eTicket|ATTR-VTRB-Frg=3|ATTR-VTRB-minNKF=2|ATTR-VTRB-minVVF=5&quot;}}"
+                            cur="EUR" price="36500"/>
+                    <ticket name="Schülerticket Hessen 12-fache Abbuchung" desc="Auszubildende"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;Schülerticket Hessen&quot;,&quot;TextShort&quot;:&quot;Schülerticket Hessen&quot;,&quot;Remark&quot;:&quot;12-fache Abbuchung&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;50&quot;,&quot;TariffLevelIntern&quot;:&quot;95&quot;,&quot;Price&quot;:&quot;37200&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;9990&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;9990&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;77402&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;minVVF&quot;:&quot;01.01.2020&quot;,&quot;minNKF&quot;:&quot;01.01.2020&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Jahresabos_persoenlich&quot;,&quot;KartentypAnzeigename&quot;:&quot;JahresAbos persönlich&quot;,&quot;KAProduktnummer&quot;:&quot;10552&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-SRTE-NACHWEIS-REDUZ=Schueler_Azubi_Jaka|ATTR-VTRB-Ausgabeart=eTicket|ATTR-VTRB-Frg=3|ATTR-VTRB-minNKF=2|ATTR-VTRB-minVVF=5&quot;}}"
+                            cur="EUR" price="37200"/>
+                </fareItem>
+            </fareSetItem>
+        </TariffResult>
+    </Trip>
+    <Trip idx="1"
+          ctxRecon="¶HKI¶T$A=1@O=Ulrichstein Wiesenhof@L=3027290@a=128@$A=1@O=Lauterbach (Hessen) Nordbahnhof@L=3011203@a=128@$201912071635$201912071655$ALTVB-65$$1$$$§T$A=1@O=Lauterbach (Hessen) Nordbahnhof@L=3011203@a=128@$A=1@O=Gießen Bahnhof@L=3011016@a=128@$201912071705$201912071818$    RB45$$1$$$§T$A=1@O=Gießen Bahnhof@L=3011016@a=128@$A=1@O=Marburg Südbahnhof@L=3011323@a=128@$201912071839$201912071901$    RB41$$1$$$§W$A=1@O=Marburg Südbahnhof@L=3011323@a=128@$A=1@O=Marburg Südbahnhof-West@L=3010097@a=128@$201912071901$201912071905$$$1$$$§T$A=1@O=Marburg Südbahnhof-West@L=3010097@a=128@$A=1@O=Bad Endbach Sportzentrum@L=3010296@a=128@$201912071918$201912072013$Bus 383 $$3$$$"
+          checksum="bf9d1ab8_3" tripId="C-1" duration="PT3H38M">
+        <ServiceDays sDaysR="Sa" sDaysI="auch 31. Dez"
+                     sDaysB="000000020408102040810204081024408102040810204081020408102040810204081020408102040810204081020400"
+                     planningPeriodBegin="2019-09-05" planningPeriodEnd="2020-09-17"/>
+        <LegList>
+            <Leg type="JNY" idx="0" name="ALTVB-65" number="2977" category="ALT" reachable="true"
+                 direction="Lauterbach (Hessen) Nordbahnhof">
+                <Origin id="A=1@O=Ulrichstein Wiesenhof@X=9211076@Y=50558812@U=80@L=3027290@" extId="3027290"
+                        name="Ulrichstein Wiesenhof" type="ST" routeIdx="6" lon="9.211076" lat="50.558812"
+                        date="2019-12-07" time="16:35:00" prognosisType="PROGNOSED"/>
+                <Destination id="A=1@O=Lauterbach (Hessen) Nordbahnhof@X=9406214@Y=50644138@U=80@L=3011203@"
+                             extId="3011203" name="Lauterbach (Hessen) Nordbahnhof" type="ST" routeIdx="25"
+                             lon="9.406214" lat="50.644138" date="2019-12-07" time="16:55:00"
+                             prognosisType="PROGNOSED"/>
+                <Notes>
+                    <Note routeIdxFrom="6" routeIdxTo="25" key="_s" priority="1" type="A">Anruf-Linien-Taxi: Anmeldung
+                        bis 60 Min. vor Abfahrt, Tel. 06044 2244 (Hans Sachs Reisen). Erreichbar tägl. 7-19 Uhr, Fahrten
+                        vor 8 Uhr am Vortag anmelden. Keine Innerortsbedienung!
+                    </Note>
+                    <Note routeIdxFrom="6" routeIdxTo="25" key="FD" type="I">324</Note>
+                </Notes>
+                <JourneyDetailRef ref="1|53502|4|80|7122019"/>
+                <Messages>
+                    <Message id="2114467-1" act="true" head="Vogelsbergkreis: Bus VB-65 - Verspätungen möglich"
+                             lead="Es muss mit Verspätungen gerechnet werden. Grund dafür ist eine Baustelle mit halbseitiger Straßensperrung.&lt;br />(Stand 05.12.2019, 10:36 Uhr)"
+                             text="Es muss mit Verspätungen gerechnet werden. Grund dafür ist eine Baustelle mit halbseitiger Straßensperrung.&lt;br />&lt;br />(Stand 05.12.2019, 10:36 Uhr)"
+                             priority="100" category="2" products="65535" altStart="" altEnd="" sTime="04:00:00"
+                             sDate="2019-04-29" eTime="23:59:00" eDate="2019-12-20" company="RMVU"/>
+                </Messages>
+                <JourneyStatus>P</JourneyStatus>
+                <Product catCode="9" catIn="ALT" catOut="ALT     " catOutL="ALT" catOutS="ALT" line="VB-65"
+                         name="ALTVB-65" num="2977" operator="VGO Alsfeld" operatorCode="VGO" admin="VBBUS_"/>
+            </Leg>
+            <Leg type="JNY" idx="1" name="    RB45" number="888" category="Cn1" reachable="true"
+                 direction="Limburg (Lahn) Bahnhof">
+                <Origin id="A=1@O=Lauterbach (Hessen) Nordbahnhof@X=9406214@Y=50644138@U=80@L=3011203@" extId="3011203"
+                        name="Lauterbach (Hessen) Nordbahnhof" type="ST" routeIdx="5" lon="9.406214" lat="50.644138"
+                        date="2019-12-07" time="17:05:00" track="2" prognosisType="PROGNOSED"/>
+                <Destination id="A=1@O=Gießen Bahnhof@X=8663803@Y=50579883@U=80@L=3011016@" extId="3011016"
+                             name="Gießen Bahnhof" type="ST" routeIdx="19" lon="8.663803" lat="50.579883"
+                             date="2019-12-07" time="18:18:00" track="11" prognosisType="PROGNOSED"/>
+                <Notes>
+                    <Note routeIdxFrom="5" routeIdxTo="19" key="FD" type="I">24846</Note>
+                </Notes>
+                <JourneyDetailRef ref="1|241991|2|80|7122019"/>
+                <JourneyStatus>P</JourneyStatus>
+                <Product catCode="2" catIn="Cn1" catOut="RB      " catOutL="RB" catOutS="Cn1" line="RB45"
+                         name="    RB45" num="888" operator="Hessische Landesbahn GmbH" operatorCode="HLB"
+                         admin="K4RB__"/>
+            </Leg>
+            <Leg type="JNY" idx="2" name="    RB41" number="173" category="BT1" reachable="true"
+                 direction="Schwalmstadt-Treysa Bahnhof">
+                <Origin id="A=1@O=Gießen Bahnhof@X=8663803@Y=50579883@U=80@L=3011016@" extId="3011016"
+                        name="Gießen Bahnhof" type="ST" routeIdx="5" lon="8.663803" lat="50.579883" date="2019-12-07"
+                        time="18:39:00" track="2" prognosisType="PROGNOSED"/>
+                <Destination id="A=1@O=Marburg Südbahnhof@X=8763548@Y=50794869@U=80@L=3011323@" extId="3011323"
+                             name="Marburg Südbahnhof" type="ST" routeIdx="12" lon="8.763548" lat="50.794869"
+                             date="2019-12-07" time="19:01:00" track="2" prognosisType="PROGNOSED"/>
+                <Notes>
+                    <Note routeIdxFrom="5" routeIdxTo="12" key="bE" priority="560" type="A">Fahrzeuggebundene
+                        Einstiegshilfe vorhanden
+                    </Note>
+                    <Note routeIdxFrom="5" routeIdxTo="12" key="aU" priority="610" type="A">Klimaanlage</Note>
+                    <Note routeIdxFrom="5" routeIdxTo="12" key="FD" type="I">15024</Note>
+                </Notes>
+                <JourneyDetailRef ref="1|181675|0|80|7122019"/>
+                <JourneyStatus>P</JourneyStatus>
+                <Product catCode="2" catIn="BT1" catOut="RB      " catOutL="R-Bahn" catOutS="BT1" line="RB41"
+                         name="    RB41" num="173" operator="DB Regio AG Mitte Region Hessen" operatorCode="DB9"
+                         admin="800535"/>
+            </Leg>
+            <Leg type="WALK" idx="3" dist="122" duration="PT4M" name="">
+                <Origin id="A=1@O=Marburg Südbahnhof@X=8763548@Y=50794869@U=80@L=3011323@" extId="3011323"
+                        name="Marburg Südbahnhof" type="ST" lon="8.763548" lat="50.794869" date="2019-12-07"
+                        time="19:01:00"/>
+                <Destination id="A=1@O=Marburg Südbahnhof-West@X=8761813@Y=50794968@U=80@L=3010097@" extId="3010097"
+                             name="Marburg Südbahnhof-West" type="ST" lon="8.761813" lat="50.794968" date="2019-12-07"
+                             time="19:05:00"/>
+                <GisRef ref="H|1|W$A=1@O=Marburg Südbahnhof@L=3011323@a=128@$A=1@O=Marburg Südbahnhof-West@L=3010097@a=128@$201912071901$201912071905$$$1$$$"/>
+            </Leg>
+            <Leg type="JNY" idx="4" name="Bus 383 " number="150" category="BB1" reachable="true"
+                 direction="Bad Endbach-Schlierbach Brunnenstraße">
+                <Origin id="A=1@O=Marburg Südbahnhof-West@X=8761813@Y=50794968@U=80@L=3010097@" extId="3010097"
+                        name="Marburg Südbahnhof-West" type="ST" routeIdx="6" lon="8.761813" lat="50.794968"
+                        date="2019-12-07" time="19:18:00" track="2" prognosisType="PROGNOSED"/>
+                <Destination id="A=1@O=Bad Endbach Sportzentrum@X=8479300@Y=50756602@U=80@L=3010296@" extId="3010296"
+                             name="Bad Endbach Sportzentrum" type="ST" routeIdx="36" lon="8.4793" lat="50.756602"
+                             date="2019-12-07" time="20:13:00" prognosisType="PROGNOSED"/>
+                <Notes>
+                    <Note routeIdxFrom="6" routeIdxTo="36" key="FD" type="I">628</Note>
+                </Notes>
+                <JourneyDetailRef ref="1|266579|0|80|7122019"/>
+                <JourneyStatus>P</JourneyStatus>
+                <Product catCode="6" catIn="BB1" catOut="Bus     " catOutL="Niederflurbus" catOutS="BB1" line="383"
+                         name="Bus 383 " num="150" operator="Becker und Bender Busverkehr GbR" operatorCode="BEC"
+                         admin="BUBBUS"/>
+            </Leg>
+        </LegList>
+        <TariffResult>
+            <fareSetItem name="Tageskarten">
+                <fareItem name="0" desc="ohne Umweg" shpCtx="" price="0">
+                    <ticket name="Hessenticket (bis 5 Pers.)" desc="Erw. und Kinder"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;Hessenticket bis 5 Personen&quot;,&quot;TextMiddle&quot;:&quot;Hessenticket bis 5 Pers.&quot;,&quot;TextShort&quot;:&quot;Hessenticket 5P&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;50&quot;,&quot;TariffLevelIntern&quot;:&quot;95&quot;,&quot;Price&quot;:&quot;3600&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;9970&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;9970&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;1750&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Tageskarte&quot;,&quot;KartentypAnzeigename&quot;:&quot;Tageskarten&quot;,&quot;KAProduktnummer&quot;:&quot;10181&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-VTRB-Ausgabeart=Papier|ATTR-VTRB-Frg=2&quot;}}"
+                            cur="EUR" price="3600"/>
+                </fareItem>
+            </fareSetItem>
+            <fareSetItem name="Monatskarten">
+                <fareItem name="0" desc="ohne Umweg" shpCtx="" price="0">
+                    <ticket name="65-plus-Monatskarte" desc="Senioren"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;65-plus-Monatskarte&quot;,&quot;TextMiddle&quot;:&quot;65-plus-Monatskarte&quot;,&quot;TextShort&quot;:&quot;65-plus-Monatskarte&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;6&quot;,&quot;TariffLevelIntern&quot;:&quot;80&quot;,&quot;Price&quot;:&quot;14190&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;1300&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;400&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;120&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;minVVF&quot;:&quot;13.12.2019&quot;,&quot;minNKF&quot;:&quot;09.12.2019&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Monatskarte&quot;,&quot;KartentypAnzeigename&quot;:&quot;Monatskarten&quot;,&quot;KAProduktnummer&quot;:&quot;10238&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-SRTE-NACHWEIS-REDUZ=65-plus|ATTR-VTRB-Ausgabeart=eTicket|ATTR-VTRB-Frg=3|ATTR-VTRB-minNKF=2|ATTR-VTRB-minVVF=5&quot;}}"
+                            cur="EUR" price="14190"/>
+                </fareItem>
+            </fareSetItem>
+            <fareSetItem name="Jahreskarten">
+                <fareItem name="0" desc="ohne Umweg" shpCtx="" price="0">
+                    <ticket name="65-plus-Jahreskarte einmalige Zahlung" desc="Senioren"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;65-plus-Jahreskarte&quot;,&quot;TextShort&quot;:&quot;65-plus-Jahreskarte&quot;,&quot;Remark&quot;:&quot;einmalige Zahlung&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;6&quot;,&quot;TariffLevelIntern&quot;:&quot;80&quot;,&quot;Price&quot;:&quot;139060&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;1300&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;400&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;820&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Jahreskarte&quot;,&quot;KartentypAnzeigename&quot;:&quot;Jahreskarten&quot;,&quot;KAProduktnummer&quot;:&quot;10683&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-SRTE-KLASSE_1=Ja|ATTR-SRTE-NACHWEIS-REDUZ=65-plus|ATTR-VTRB-Ausgabeart=eTicket|ATTR-VTRB-Frg=3|ATTR-VTRB-minNKF=2|ATTR-VTRB-minVVF=5&quot;}}"
+                            cur="EUR" price="139060"/>
+                    <ticket name="Schülerticket Hessen einmalige Zahlung" desc="Auszubildende"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;Schülerticket Hessen&quot;,&quot;TextShort&quot;:&quot;Schülerticket Hessen&quot;,&quot;Remark&quot;:&quot;einmalige Zahlung&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;50&quot;,&quot;TariffLevelIntern&quot;:&quot;95&quot;,&quot;Price&quot;:&quot;36500&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;9990&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;9990&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;77400&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Jahreskarte&quot;,&quot;KartentypAnzeigename&quot;:&quot;Jahreskarten&quot;,&quot;KAProduktnummer&quot;:&quot;10547&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-SRTE-NACHWEIS-REDUZ=Schueler_Azubi|ATTR-VTRB-Ausgabeart=eTicket|ATTR-VTRB-Frg=3|ATTR-VTRB-minNKF=2|ATTR-VTRB-minVVF=5&quot;}}"
+                            cur="EUR" price="36500"/>
+                </fareItem>
+            </fareSetItem>
+            <fareSetItem name="JahresAbos persönlich">
+                <fareItem name="0" desc="ohne Umweg" shpCtx="" price="0">
+                    <ticket name="65-plus-Jahreskarte einmalige Abbuchung" desc="Senioren"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;65-plus-Jahreskarte&quot;,&quot;TextShort&quot;:&quot;65-plus-Jahreskarte&quot;,&quot;Remark&quot;:&quot;einmalige Abbuchung&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;6&quot;,&quot;TariffLevelIntern&quot;:&quot;80&quot;,&quot;Price&quot;:&quot;139060&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;1300&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;400&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;1420&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;minVVF&quot;:&quot;01.01.2020&quot;,&quot;minNKF&quot;:&quot;01.01.2020&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Jahresabos_persoenlich&quot;,&quot;KartentypAnzeigename&quot;:&quot;JahresAbos persönlich&quot;,&quot;KAProduktnummer&quot;:&quot;10097&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-SRTE-KLASSE_1=Ja|ATTR-SRTE-NACHWEIS-REDUZ=65-plus|ATTR-VTRB-Ausgabeart=eTicket|ATTR-VTRB-Frg=3|ATTR-VTRB-minNKF=2|ATTR-VTRB-minVVF=5&quot;}}"
+                            cur="EUR" price="139060"/>
+                    <ticket name="65-plus-Jahreskarte 12-fache Abbuchung" desc="Senioren"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;65-plus-Jahreskarte&quot;,&quot;TextShort&quot;:&quot;65-plus-Jahreskarte&quot;,&quot;Remark&quot;:&quot;12-fache Abbuchung&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;6&quot;,&quot;TariffLevelIntern&quot;:&quot;80&quot;,&quot;Price&quot;:&quot;141900&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;1300&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;400&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;1330&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;minVVF&quot;:&quot;01.01.2020&quot;,&quot;minNKF&quot;:&quot;01.01.2020&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Jahresabos_persoenlich&quot;,&quot;KartentypAnzeigename&quot;:&quot;JahresAbos persönlich&quot;,&quot;KAProduktnummer&quot;:&quot;10755&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-SRTE-KLASSE_1=Ja|ATTR-SRTE-NACHWEIS-REDUZ=65-plus|ATTR-VTRB-Ausgabeart=eTicket|ATTR-VTRB-Frg=3|ATTR-VTRB-minNKF=2|ATTR-VTRB-minVVF=5&quot;}}"
+                            cur="EUR" price="141900"/>
+                    <ticket name="Schülerticket Hessen einmalige Abbuchung" desc="Auszubildende"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;Schülerticket Hessen&quot;,&quot;TextShort&quot;:&quot;Schülerticket Hessen&quot;,&quot;Remark&quot;:&quot;einmalige Abbuchung&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;50&quot;,&quot;TariffLevelIntern&quot;:&quot;95&quot;,&quot;Price&quot;:&quot;36500&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;9990&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;9990&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;77401&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;minVVF&quot;:&quot;01.01.2020&quot;,&quot;minNKF&quot;:&quot;01.01.2020&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Jahresabos_persoenlich&quot;,&quot;KartentypAnzeigename&quot;:&quot;JahresAbos persönlich&quot;,&quot;KAProduktnummer&quot;:&quot;10548&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-SRTE-NACHWEIS-REDUZ=Schueler_Azubi_Jaka|ATTR-VTRB-Ausgabeart=eTicket|ATTR-VTRB-Frg=3|ATTR-VTRB-minNKF=2|ATTR-VTRB-minVVF=5&quot;}}"
+                            cur="EUR" price="36500"/>
+                    <ticket name="Schülerticket Hessen 12-fache Abbuchung" desc="Auszubildende"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;Schülerticket Hessen&quot;,&quot;TextShort&quot;:&quot;Schülerticket Hessen&quot;,&quot;Remark&quot;:&quot;12-fache Abbuchung&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;50&quot;,&quot;TariffLevelIntern&quot;:&quot;95&quot;,&quot;Price&quot;:&quot;37200&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;9990&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;9990&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;77402&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;minVVF&quot;:&quot;01.01.2020&quot;,&quot;minNKF&quot;:&quot;01.01.2020&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Jahresabos_persoenlich&quot;,&quot;KartentypAnzeigename&quot;:&quot;JahresAbos persönlich&quot;,&quot;KAProduktnummer&quot;:&quot;10552&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-SRTE-NACHWEIS-REDUZ=Schueler_Azubi_Jaka|ATTR-VTRB-Ausgabeart=eTicket|ATTR-VTRB-Frg=3|ATTR-VTRB-minNKF=2|ATTR-VTRB-minVVF=5&quot;}}"
+                            cur="EUR" price="37200"/>
+                </fareItem>
+            </fareSetItem>
+        </TariffResult>
+    </Trip>
+    <Trip idx="2"
+          ctxRecon="¶HKI¶T$A=1@O=Ulrichstein Wiesenhof@L=3027290@a=128@$A=1@O=Schotten Vulkaneum@L=3019114@a=128@$201912071726$201912071736$ALTVB-65$$1$$$§T$A=1@O=Schotten Vulkaneum@L=3019114@a=128@$A=1@O=Nidda Bahnhof@L=3011145@a=128@$201912071832$201912071857$Bus 362 $$1$$$§T$A=1@O=Nidda Bahnhof@L=3011145@a=128@$A=1@O=Friedberg (Hessen) Bahnhof@L=3006401@a=128@$201912072002$201912072037$    RB48$$1$$$§T$A=1@O=Friedberg (Hessen) Bahnhof@L=3006401@a=128@$A=1@O=Marburg Südbahnhof@L=3011323@a=128@$201912072059$201912072201$    RB41$$1$$$§W$A=1@O=Marburg Südbahnhof@L=3011323@a=128@$A=1@O=Marburg Südbahnhof-West@L=3010097@a=128@$201912072201$201912072205$$$1$$$§T$A=1@O=Marburg Südbahnhof-West@L=3010097@a=128@$A=1@O=Bad Endbach Sportzentrum@L=3010296@a=128@$201912072218$201912072313$Bus 383 $$3$$$"
+          checksum="441bc7e3_3" tripId="C-2" duration="PT5H47M">
+        <ServiceDays sDaysR="nicht täglich" sDaysI="7. Dez 2019 bis 25. Apr 2020 Sa"
+                     sDaysB="000000000000000000000204081020408102040810204081020408102040000000000000000000000000000000000000"
+                     planningPeriodBegin="2019-09-05" planningPeriodEnd="2020-09-17"/>
+        <LegList>
+            <Leg type="JNY" idx="0" name="ALTVB-65" number="2952" category="ALT" reachable="true"
+                 direction="Schotten Kreiskrankenhaus">
+                <Origin id="A=1@O=Ulrichstein Wiesenhof@X=9211076@Y=50558812@U=80@L=3027290@" extId="3027290"
+                        name="Ulrichstein Wiesenhof" type="ST" routeIdx="19" lon="9.211076" lat="50.558812"
+                        date="2019-12-07" time="17:26:00" prognosisType="PROGNOSED"/>
+                <Destination id="A=1@O=Schotten Vulkaneum@X=9126748@Y=50504275@U=80@L=3019114@" extId="3019114"
+                             name="Schotten Vulkaneum" type="ST" routeIdx="24" lon="9.126748" lat="50.504275"
+                             date="2019-12-07" time="17:36:00" prognosisType="PROGNOSED"/>
+                <Notes>
+                    <Note routeIdxFrom="19" routeIdxTo="24" key="_s" priority="1" type="A">Anruf-Linien-Taxi: Anmeldung
+                        bis 60 Min. vor Abfahrt, Tel. 06044 2244 (Hans Sachs Reisen). Erreichbar tägl. 7-19 Uhr, Fahrten
+                        vor 8 Uhr am Vortag anmelden. Keine Innerortsbedienung!
+                    </Note>
+                    <Note routeIdxFrom="19" routeIdxTo="24" key="FD" type="I">323</Note>
+                </Notes>
+                <JourneyDetailRef ref="1|53491|4|80|7122019"/>
+                <Messages>
+                    <Message id="2114467-1" act="true" head="Vogelsbergkreis: Bus VB-65 - Verspätungen möglich"
+                             lead="Es muss mit Verspätungen gerechnet werden. Grund dafür ist eine Baustelle mit halbseitiger Straßensperrung.&lt;br />(Stand 05.12.2019, 10:36 Uhr)"
+                             text="Es muss mit Verspätungen gerechnet werden. Grund dafür ist eine Baustelle mit halbseitiger Straßensperrung.&lt;br />&lt;br />(Stand 05.12.2019, 10:36 Uhr)"
+                             priority="100" category="2" products="65535" altStart="" altEnd="" sTime="04:00:00"
+                             sDate="2019-04-29" eTime="23:59:00" eDate="2019-12-20" company="RMVU"/>
+                </Messages>
+                <JourneyStatus>P</JourneyStatus>
+                <Product catCode="9" catIn="ALT" catOut="ALT     " catOutL="ALT" catOutS="ALT" line="VB-65"
+                         name="ALTVB-65" num="2952" operator="VGO Alsfeld" operatorCode="VGO" admin="VBBUS_"/>
+            </Leg>
+            <Leg type="JNY" idx="1" name="Bus 362 " number="464" category="BB1" reachable="true"
+                 direction="Nidda Bahnhof">
+                <Origin id="A=1@O=Schotten Vulkaneum@X=9126748@Y=50504275@U=80@L=3019114@" extId="3019114"
+                        name="Schotten Vulkaneum" type="ST" routeIdx="0" lon="9.126748" lat="50.504275"
+                        date="2019-12-07" time="18:32:00" prognosisType="PROGNOSED"/>
+                <Destination id="A=1@O=Nidda Bahnhof@X=8999847@Y=50411228@U=80@L=3011145@" extId="3011145"
+                             name="Nidda Bahnhof" type="ST" routeIdx="13" lon="8.999847" lat="50.411228"
+                             date="2019-12-07" time="18:57:00" prognosisType="PROGNOSED"/>
+                <Notes>
+                    <Note routeIdxFrom="0" routeIdxTo="13" key="FD" type="I">308</Note>
+                </Notes>
+                <JourneyDetailRef ref="1|9101|5|80|7122019"/>
+                <Messages>
+                    <Message id="2118798-1" act="true"
+                             head="Wetteraukreis: Busse 362, FB-57 - Verspätungen möglich vom 02.12. bis 16.12."
+                             lead="Die Busse fahren zwischen Melbach und Weckesheim eine Umleitung. Es kann dadurch zu Verspätungen kommen. Grund ist die Sperrung der K 179 für Reparaturarbeiten an den Randsteinen.&lt;br />(Stand 06.12.2019, 12:24 Uhr)"
+                             text="Die Busse fahren zwischen Melbach und Weckesheim eine Umleitung. Es kann dadurch zu Verspätungen kommen. &lt;br />Grund ist die Sperrung der K 179 für Reparaturarbeiten an den Randsteinen.&lt;br />&lt;br />(Stand 06.12.2019, 12:24 Uhr)"
+                             priority="100" category="2" products="65535" altStart="" altEnd="" sTime="05:00:00"
+                             sDate="2019-12-02" eTime="23:59:00" eDate="2019-12-16" company="RMVU"/>
+                </Messages>
+                <JourneyStatus>P</JourneyStatus>
+                <Product catCode="6" catIn="BB1" catOut="Bus     " catOutL="Niederflurbus" catOutS="BB1" line="362"
+                         name="Bus 362 " num="464" operator="Frieda Gass" operatorCode="Gas" admin="FGRBUS"/>
+            </Leg>
+            <Leg type="JNY" idx="2" name="    RB48" number="1174" category="GWD" reachable="true"
+                 direction="Friedberg (Hessen) Bahnhof">
+                <Origin id="A=1@O=Nidda Bahnhof@X=8999847@Y=50411228@U=80@L=3011145@" extId="3011145"
+                        name="Nidda Bahnhof" type="ST" routeIdx="0" lon="8.999847" lat="50.411228" date="2019-12-07"
+                        time="20:02:00" track="4" prognosisType="PROGNOSED"/>
+                <Destination id="A=1@O=Friedberg (Hessen) Bahnhof@X=8761247@Y=50332743@U=80@L=3006401@" extId="3006401"
+                             name="Friedberg (Hessen) Bahnhof" type="ST" routeIdx="9" lon="8.761247" lat="50.332743"
+                             date="2019-12-07" time="20:37:00" track="12" prognosisType="PROGNOSED"/>
+                <Notes>
+                    <Note routeIdxFrom="0" routeIdxTo="9" key="dS" priority="300" type="A">nur 2. Klasse</Note>
+                    <Note routeIdxFrom="0" routeIdxTo="9" key="FD" type="I">61597</Note>
+                </Notes>
+                <JourneyDetailRef ref="1|242245|4|80|7122019"/>
+                <JourneyStatus>P</JourneyStatus>
+                <Product catCode="2" catIn="GWD" catOut="RB      " catOutL="RB" catOutS="GWD" line="RB48"
+                         name="    RB48" num="1174" operator="Hessische Landesbahn GmbH" operatorCode="HLB"
+                         admin="K4RB__"/>
+            </Leg>
+            <Leg type="JNY" idx="3" name="    RB41" number="158" category="BT1" reachable="true"
+                 direction="Marburg Hauptbahnhof">
+                <Origin id="A=1@O=Friedberg (Hessen) Bahnhof@X=8761247@Y=50332743@U=80@L=3006401@" extId="3006401"
+                        name="Friedberg (Hessen) Bahnhof" type="ST" routeIdx="3" lon="8.761247" lat="50.332743"
+                        date="2019-12-07" time="20:59:00" track="4" prognosisType="PROGNOSED"/>
+                <Destination id="A=1@O=Marburg Südbahnhof@X=8763548@Y=50794869@U=80@L=3011323@" extId="3011323"
+                             name="Marburg Südbahnhof" type="ST" routeIdx="17" lon="8.763548" lat="50.794869"
+                             date="2019-12-07" time="22:01:00" track="2" prognosisType="PROGNOSED"/>
+                <Notes>
+                    <Note routeIdxFrom="3" routeIdxTo="17" key="bE" priority="560" type="A">Fahrzeuggebundene
+                        Einstiegshilfe vorhanden
+                    </Note>
+                    <Note routeIdxFrom="3" routeIdxTo="17" key="aU" priority="610" type="A">Klimaanlage</Note>
+                    <Note routeIdxFrom="3" routeIdxTo="17" key="FD" type="I">15030</Note>
+                </Notes>
+                <JourneyDetailRef ref="1|181690|0|80|7122019"/>
+                <JourneyStatus>P</JourneyStatus>
+                <Product catCode="2" catIn="BT1" catOut="RB      " catOutL="R-Bahn" catOutS="BT1" line="RB41"
+                         name="    RB41" num="158" operator="DB Regio AG Mitte Region Hessen" operatorCode="DB9"
+                         admin="800535"/>
+            </Leg>
+            <Leg type="WALK" idx="4" dist="122" duration="PT4M" name="">
+                <Origin id="A=1@O=Marburg Südbahnhof@X=8763548@Y=50794869@U=80@L=3011323@" extId="3011323"
+                        name="Marburg Südbahnhof" type="ST" lon="8.763548" lat="50.794869" date="2019-12-07"
+                        time="22:01:00"/>
+                <Destination id="A=1@O=Marburg Südbahnhof-West@X=8761813@Y=50794968@U=80@L=3010097@" extId="3010097"
+                             name="Marburg Südbahnhof-West" type="ST" lon="8.761813" lat="50.794968" date="2019-12-07"
+                             time="22:05:00"/>
+                <GisRef ref="H|1|W$A=1@O=Marburg Südbahnhof@L=3011323@a=128@$A=1@O=Marburg Südbahnhof-West@L=3010097@a=128@$201912072201$201912072205$$$1$$$"/>
+            </Leg>
+            <Leg type="JNY" idx="5" name="Bus 383 " number="147" category="BB1" reachable="true"
+                 direction="Bad Endbach-Schlierbach Brunnenstraße">
+                <Origin id="A=1@O=Marburg Südbahnhof-West@X=8761813@Y=50794968@U=80@L=3010097@" extId="3010097"
+                        name="Marburg Südbahnhof-West" type="ST" routeIdx="6" lon="8.761813" lat="50.794968"
+                        date="2019-12-07" time="22:18:00" track="2" prognosisType="PROGNOSED"/>
+                <Destination id="A=1@O=Bad Endbach Sportzentrum@X=8479300@Y=50756602@U=80@L=3010296@" extId="3010296"
+                             name="Bad Endbach Sportzentrum" type="ST" routeIdx="36" lon="8.4793" lat="50.756602"
+                             date="2019-12-07" time="23:13:00" prognosisType="PROGNOSED"/>
+                <Notes>
+                    <Note routeIdxFrom="6" routeIdxTo="36" key="FD" type="I">634</Note>
+                </Notes>
+                <JourneyDetailRef ref="1|266573|0|80|7122019"/>
+                <JourneyStatus>P</JourneyStatus>
+                <Product catCode="6" catIn="BB1" catOut="Bus     " catOutL="Niederflurbus" catOutS="BB1" line="383"
+                         name="Bus 383 " num="147" operator="Becker und Bender Busverkehr GbR" operatorCode="BEC"
+                         admin="BUBBUS"/>
+            </Leg>
+        </LegList>
+        <TariffResult>
+            <fareSetItem name="Einzelfahrt">
+                <fareItem name="0" desc="ohne Umweg" shpCtx="" price="0">
+                    <ticket name="Einzelfahrkarte Regelpreis" desc="Erwachsene"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;Einzelfahrt Erwachsene&quot;,&quot;TextShort&quot;:&quot;Einzelfahrt Erw.&quot;,&quot;Remark&quot;:&quot;Regelpreis&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;6&quot;,&quot;TariffLevelIntern&quot;:&quot;80&quot;,&quot;Price&quot;:&quot;1235&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;1300&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;400&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;3100&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Einzelfahrkarte&quot;,&quot;KartentypAnzeigename&quot;:&quot;Einzelfahrt&quot;,&quot;KAProduktnummer&quot;:&quot;10185&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-VTRB-Einzelpreis=Erw.|ATTR-VTRB-replSorten=2100 2300 3700|ATTR-KTYP-billigTr=1&quot;}}"
+                            cur="EUR" price="1235"/>
+                    <ticket name="Einzelfahrkarte Regelpreis" desc="Kinder"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;Einzelfahrt Kinder&quot;,&quot;TextShort&quot;:&quot;Einzelfahrt Kind&quot;,&quot;Remark&quot;:&quot;Regelpreis&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;6&quot;,&quot;TariffLevelIntern&quot;:&quot;80&quot;,&quot;Price&quot;:&quot;730&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;1300&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;400&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;3300&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Einzelfahrkarte&quot;,&quot;KartentypAnzeigename&quot;:&quot;Einzelfahrt&quot;,&quot;KAProduktnummer&quot;:&quot;10186&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-VTRB-Einzelpreis=Kind|ATTR-VTRB-replSorten=2200 2500 3800|ATTR-KTYP-billigTr=1&quot;}}"
+                            cur="EUR" price="730"/>
+                    <ticket name="Einzelzuschlag 1. Klasse je Fahrt" desc="Erw. und Kinder"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;Zuschlag Erwachsene/Kinder&quot;,&quot;TextShort&quot;:&quot;Zuschlag Erw./Kind&quot;,&quot;Remark&quot;:&quot;je Fahrt&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;6&quot;,&quot;TariffLevelIntern&quot;:&quot;80&quot;,&quot;Price&quot;:&quot;500&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;1300&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;400&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;4000&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Einzelfahrkarte&quot;,&quot;KartentypAnzeigename&quot;:&quot;Einzelfahrt&quot;,&quot;KAProduktnummer&quot;:&quot;10189&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-SRTE-KLASSE_1=Ja|ATTR-KTYP-billigTr=1&quot;}}"
+                            cur="EUR" price="500"/>
+                    <ticket name="Anschlussfahrkarte zur Zeitkarte der PS 01" desc="Erwachsene"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;Anschlussfahrt Erw. zur ZK PS01&quot;,&quot;TextMiddle&quot;:&quot;Anschluss Erw. z.ZK PS01&quot;,&quot;TextShort&quot;:&quot;Anschluss Erw. PS01&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;6&quot;,&quot;TariffLevelIntern&quot;:&quot;80&quot;,&quot;Price&quot;:&quot;1115&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;1300&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;400&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;1201&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Einzelfahrkarte&quot;,&quot;KartentypAnzeigename&quot;:&quot;Einzelfahrt&quot;,&quot;KAProduktnummer&quot;:&quot;10109&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-VTRB-replSorten=3100|ATTR-KTYP-billigTr=1&quot;}}"
+                            cur="EUR" price="1115"/>
+                    <ticket name="Anschlussfahrkarte zur Zeitkarte der PS 01" desc="Kinder"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;Anschlussfahrt Kind zur ZK PS01&quot;,&quot;TextMiddle&quot;:&quot;Anschluss Kind z.ZK PS01&quot;,&quot;TextShort&quot;:&quot;Anschluss Kind PS01&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;6&quot;,&quot;TariffLevelIntern&quot;:&quot;80&quot;,&quot;Price&quot;:&quot;660&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;1300&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;400&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;1211&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Einzelfahrkarte&quot;,&quot;KartentypAnzeigename&quot;:&quot;Einzelfahrt&quot;,&quot;KAProduktnummer&quot;:&quot;10116&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-VTRB-replSorten=3300|ATTR-KTYP-billigTr=1&quot;}}"
+                            cur="EUR" price="660"/>
+                    <ticket name="Anschlussfahrkarte zur Zeitkarte der PS 02" desc="Erwachsene"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;Anschlussfahrt Erw. zur ZK PS02&quot;,&quot;TextMiddle&quot;:&quot;Anschluss Erw. z.ZK PS02&quot;,&quot;TextShort&quot;:&quot;Anschluss Erw. PS02&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;6&quot;,&quot;TariffLevelIntern&quot;:&quot;80&quot;,&quot;Price&quot;:&quot;1040&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;1300&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;400&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;1202&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Einzelfahrkarte&quot;,&quot;KartentypAnzeigename&quot;:&quot;Einzelfahrt&quot;,&quot;KAProduktnummer&quot;:&quot;10110&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-VTRB-replSorten=3100|ATTR-KTYP-billigTr=1&quot;}}"
+                            cur="EUR" price="1040"/>
+                    <ticket name="Anschlussfahrkarte zur Zeitkarte der PS 02" desc="Kinder"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;Anschlussfahrt Kind zur ZK PS02&quot;,&quot;TextMiddle&quot;:&quot;Anschluss Kind z.ZK PS02&quot;,&quot;TextShort&quot;:&quot;Anschluss Kind PS02&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;6&quot;,&quot;TariffLevelIntern&quot;:&quot;80&quot;,&quot;Price&quot;:&quot;615&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;1300&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;400&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;1212&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Einzelfahrkarte&quot;,&quot;KartentypAnzeigename&quot;:&quot;Einzelfahrt&quot;,&quot;KAProduktnummer&quot;:&quot;10117&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-VTRB-replSorten=3300|ATTR-KTYP-billigTr=1&quot;}}"
+                            cur="EUR" price="615"/>
+                    <ticket name="Anschlussfahrkarte zur Zeitkarte der PS 03" desc="Erwachsene"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;Anschlussfahrt Erw. zur ZK PS03&quot;,&quot;TextMiddle&quot;:&quot;Anschluss Erw. z.ZK PS03&quot;,&quot;TextShort&quot;:&quot;Anschluss Erw. PS03&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;6&quot;,&quot;TariffLevelIntern&quot;:&quot;80&quot;,&quot;Price&quot;:&quot;835&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;1300&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;400&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;1203&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Einzelfahrkarte&quot;,&quot;KartentypAnzeigename&quot;:&quot;Einzelfahrt&quot;,&quot;KAProduktnummer&quot;:&quot;10111&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-VTRB-replSorten=3100|ATTR-KTYP-billigTr=1&quot;}}"
+                            cur="EUR" price="835"/>
+                    <ticket name="Anschlussfahrkarte zur Zeitkarte der PS 03" desc="Kinder"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;Anschlussfahrt Kind zur ZK PS03&quot;,&quot;TextMiddle&quot;:&quot;Anschluss Kind z.ZK PS03&quot;,&quot;TextShort&quot;:&quot;Anschluss Kind PS03&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;6&quot;,&quot;TariffLevelIntern&quot;:&quot;80&quot;,&quot;Price&quot;:&quot;495&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;1300&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;400&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;1213&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Einzelfahrkarte&quot;,&quot;KartentypAnzeigename&quot;:&quot;Einzelfahrt&quot;,&quot;KAProduktnummer&quot;:&quot;10118&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-VTRB-replSorten=3300|ATTR-KTYP-billigTr=1&quot;}}"
+                            cur="EUR" price="495"/>
+                    <ticket name="Anschlussfahrkarte zur Zeitkarte der PS 30" desc="Erwachsene"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;Anschlussfahrt Erw. zur ZK PS30&quot;,&quot;TextShort&quot;:&quot;Anschlussfahrt Erw. zur ZK PS30&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;6&quot;,&quot;TariffLevelIntern&quot;:&quot;80&quot;,&quot;Price&quot;:&quot;775&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;1300&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;400&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;1208&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Einzelfahrkarte&quot;,&quot;KartentypAnzeigename&quot;:&quot;Einzelfahrt&quot;,&quot;KAProduktnummer&quot;:&quot;10766&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-VTRB-replSorten=3100|ATTR-KTYP-billigTr=1&quot;}}"
+                            cur="EUR" price="775"/>
+                    <ticket name="Anschlussfahrkarte zur Zeitkarte der PS 30" desc="Kinder"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;Anschlussfahrt Kind zur ZK PS30&quot;,&quot;TextShort&quot;:&quot;Anschlussfahrt Kind zur ZK PS30&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;6&quot;,&quot;TariffLevelIntern&quot;:&quot;80&quot;,&quot;Price&quot;:&quot;460&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;1300&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;400&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;1218&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Einzelfahrkarte&quot;,&quot;KartentypAnzeigename&quot;:&quot;Einzelfahrt&quot;,&quot;KAProduktnummer&quot;:&quot;10767&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-VTRB-replSorten=3300|ATTR-KTYP-billigTr=1&quot;}}"
+                            cur="EUR" price="460"/>
+                    <ticket name="Anschlussfahrkarte zur Zeitkarte der PS 04" desc="Erwachsene"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;Anschlussfahrt Erw. zur ZK PS04&quot;,&quot;TextMiddle&quot;:&quot;Anschluss Erw. z.ZK PS04&quot;,&quot;TextShort&quot;:&quot;Anschluss Erw. PS04&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;6&quot;,&quot;TariffLevelIntern&quot;:&quot;80&quot;,&quot;Price&quot;:&quot;670&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;1300&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;400&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;1204&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Einzelfahrkarte&quot;,&quot;KartentypAnzeigename&quot;:&quot;Einzelfahrt&quot;,&quot;KAProduktnummer&quot;:&quot;10112&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-VTRB-replSorten=3100|ATTR-KTYP-billigTr=1&quot;}}"
+                            cur="EUR" price="670"/>
+                    <ticket name="Anschlussfahrkarte zur Zeitkarte der PS 04" desc="Kinder"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;Anschlussfahrt Kind zur ZK PS04&quot;,&quot;TextMiddle&quot;:&quot;Anschluss Kind z.ZK PS04&quot;,&quot;TextShort&quot;:&quot;Anschluss Kind PS04&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;6&quot;,&quot;TariffLevelIntern&quot;:&quot;80&quot;,&quot;Price&quot;:&quot;395&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;1300&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;400&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;1214&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Einzelfahrkarte&quot;,&quot;KartentypAnzeigename&quot;:&quot;Einzelfahrt&quot;,&quot;KAProduktnummer&quot;:&quot;10119&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-VTRB-replSorten=3300|ATTR-KTYP-billigTr=1&quot;}}"
+                            cur="EUR" price="395"/>
+                    <ticket name="Anschlussfahrkarte zur Zeitkarte der PS 40" desc="Erwachsene"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;Anschlussfahrt Erw. zur ZK PS40&quot;,&quot;TextShort&quot;:&quot;Anschlussfahrt Erw. zur ZK PS40&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;6&quot;,&quot;TariffLevelIntern&quot;:&quot;80&quot;,&quot;Price&quot;:&quot;600&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;1300&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;400&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;1209&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Einzelfahrkarte&quot;,&quot;KartentypAnzeigename&quot;:&quot;Einzelfahrt&quot;,&quot;KAProduktnummer&quot;:&quot;10768&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-VTRB-replSorten=3100|ATTR-KTYP-billigTr=1&quot;}}"
+                            cur="EUR" price="600"/>
+                    <ticket name="Anschlussfahrkarte zur Zeitkarte der PS 40" desc="Kinder"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;Anschlussfahrt Kind zur ZK PS40&quot;,&quot;TextShort&quot;:&quot;Anschlussfahrt Kind zur ZK PS40&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;6&quot;,&quot;TariffLevelIntern&quot;:&quot;80&quot;,&quot;Price&quot;:&quot;355&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;1300&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;400&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;1219&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Einzelfahrkarte&quot;,&quot;KartentypAnzeigename&quot;:&quot;Einzelfahrt&quot;,&quot;KAProduktnummer&quot;:&quot;10769&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-VTRB-replSorten=3300|ATTR-KTYP-billigTr=1&quot;}}"
+                            cur="EUR" price="355"/>
+                    <ticket name="Anschlussfahrkarte zur Zeitkarte der PS 05" desc="Erwachsene"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;Anschlussfahrt Erw. zur ZK PS05&quot;,&quot;TextMiddle&quot;:&quot;Anschluss Erw. z.ZK PS05&quot;,&quot;TextShort&quot;:&quot;Anschluss Erw. PS05&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;6&quot;,&quot;TariffLevelIntern&quot;:&quot;80&quot;,&quot;Price&quot;:&quot;470&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;1300&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;400&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;1205&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Einzelfahrkarte&quot;,&quot;KartentypAnzeigename&quot;:&quot;Einzelfahrt&quot;,&quot;KAProduktnummer&quot;:&quot;10113&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-VTRB-replSorten=3100|ATTR-KTYP-billigTr=1&quot;}}"
+                            cur="EUR" price="470"/>
+                    <ticket name="Anschlussfahrkarte zur Zeitkarte der PS 05" desc="Kinder"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;Anschlussfahrt Kind zur ZK PS05&quot;,&quot;TextMiddle&quot;:&quot;Anschluss Kind z.ZK PS05&quot;,&quot;TextShort&quot;:&quot;Anschluss Kind PS05&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;6&quot;,&quot;TariffLevelIntern&quot;:&quot;80&quot;,&quot;Price&quot;:&quot;280&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;1300&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;400&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;1215&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Einzelfahrkarte&quot;,&quot;KartentypAnzeigename&quot;:&quot;Einzelfahrt&quot;,&quot;KAProduktnummer&quot;:&quot;10120&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-VTRB-replSorten=3300|ATTR-KTYP-billigTr=1&quot;}}"
+                            cur="EUR" price="280"/>
+                    <ticket name="Anschlussfahrkarte zur Zeitkarte der PS 06" desc="Erwachsene"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;Anschlussfahrt Erw. zur ZK PS06&quot;,&quot;TextMiddle&quot;:&quot;Anschluss Erw. z.ZK PS06&quot;,&quot;TextShort&quot;:&quot;Anschluss Erw. PS06&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;6&quot;,&quot;TariffLevelIntern&quot;:&quot;80&quot;,&quot;Price&quot;:&quot;350&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;1300&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;400&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;1206&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Einzelfahrkarte&quot;,&quot;KartentypAnzeigename&quot;:&quot;Einzelfahrt&quot;,&quot;KAProduktnummer&quot;:&quot;10114&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-VTRB-replSorten=3100|ATTR-KTYP-billigTr=1&quot;}}"
+                            cur="EUR" price="350"/>
+                    <ticket name="Anschlussfahrkarte zur Zeitkarte der PS 06" desc="Kinder"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;Anschlussfahrt Kind zur ZK PS06&quot;,&quot;TextMiddle&quot;:&quot;Anschluss Kind z.ZK PS06&quot;,&quot;TextShort&quot;:&quot;Anschluss Kind PS06&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;6&quot;,&quot;TariffLevelIntern&quot;:&quot;80&quot;,&quot;Price&quot;:&quot;205&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;1300&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;400&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;1216&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Einzelfahrkarte&quot;,&quot;KartentypAnzeigename&quot;:&quot;Einzelfahrt&quot;,&quot;KAProduktnummer&quot;:&quot;10121&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-VTRB-replSorten=3300|ATTR-KTYP-billigTr=1&quot;}}"
+                            cur="EUR" price="205"/>
+                    <ticket name="Anschlussfahrkarte zur Zeitkarte der PS 13" desc="Erwachsene"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;Anschlussfahrt Erw. zur ZK PS13&quot;,&quot;TextMiddle&quot;:&quot;Anschluss Erw. z.ZK PS13&quot;,&quot;TextShort&quot;:&quot;Anschluss Erw. PS13&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;6&quot;,&quot;TariffLevelIntern&quot;:&quot;80&quot;,&quot;Price&quot;:&quot;835&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;1300&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;400&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;1207&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Einzelfahrkarte&quot;,&quot;KartentypAnzeigename&quot;:&quot;Einzelfahrt&quot;,&quot;KAProduktnummer&quot;:&quot;10115&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-VTRB-replSorten=3100|ATTR-KTYP-billigTr=1&quot;}}"
+                            cur="EUR" price="835"/>
+                    <ticket name="Anschlussfahrkarte zur Zeitkarte der PS 13" desc="Kinder"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;Anschlussfahrt Kind zur ZK PS13&quot;,&quot;TextMiddle&quot;:&quot;Anschluss Kind z.ZK PS13&quot;,&quot;TextShort&quot;:&quot;Anschluss Kind PS13&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;6&quot;,&quot;TariffLevelIntern&quot;:&quot;80&quot;,&quot;Price&quot;:&quot;495&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;1300&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;400&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;1217&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Einzelfahrkarte&quot;,&quot;KartentypAnzeigename&quot;:&quot;Einzelfahrt&quot;,&quot;KAProduktnummer&quot;:&quot;10122&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-VTRB-replSorten=3300|ATTR-KTYP-billigTr=1&quot;}}"
+                            cur="EUR" price="495"/>
+                </fareItem>
+            </fareSetItem>
+            <fareSetItem name="Tageskarten">
+                <fareItem name="0" desc="ohne Umweg" shpCtx="" price="0">
+                    <ticket name="Tageskarte" desc="Erwachsene"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;Tageskarte Erwachsene&quot;,&quot;TextShort&quot;:&quot;Tageskarte Erw.&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;6&quot;,&quot;TariffLevelIntern&quot;:&quot;80&quot;,&quot;Price&quot;:&quot;2410&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;1300&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;400&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;1800&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Tageskarte&quot;,&quot;KartentypAnzeigename&quot;:&quot;Tageskarten&quot;,&quot;KAProduktnummer&quot;:&quot;10182&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-VTRB-Ausgabeart=Papier|ATTR-VTRB-Frg=3&quot;}}"
+                            cur="EUR" price="2410"/>
+                    <ticket name="Tageskarte" desc="Kinder"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;Tageskarte Kinder&quot;,&quot;TextShort&quot;:&quot;Tageskarte Kind&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;6&quot;,&quot;TariffLevelIntern&quot;:&quot;80&quot;,&quot;Price&quot;:&quot;1425&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;1300&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;400&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;1900&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Tageskarte&quot;,&quot;KartentypAnzeigename&quot;:&quot;Tageskarten&quot;,&quot;KAProduktnummer&quot;:&quot;10183&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-VTRB-Ausgabeart=Papier|ATTR-VTRB-Frg=3&quot;}}"
+                            cur="EUR" price="1425"/>
+                    <ticket name="Gruppentageskarte 5 Personen" desc="Erw. und Kinder"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;Gruppentageskarte bis zu 5 Personen&quot;,&quot;TextMiddle&quot;:&quot;Gruppentageskarte 5 Pers.&quot;,&quot;TextShort&quot;:&quot;Gruppe-Tag 5P&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;6&quot;,&quot;TariffLevelIntern&quot;:&quot;80&quot;,&quot;Price&quot;:&quot;3450&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;1300&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;400&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;2000&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Tageskarte&quot;,&quot;KartentypAnzeigename&quot;:&quot;Tageskarten&quot;,&quot;KAProduktnummer&quot;:&quot;10184&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-VTRB-Ausgabeart=Papier|ATTR-VTRB-Frg=3&quot;}}"
+                            cur="EUR" price="3450"/>
+                    <ticket name="Hessenticket (bis 5 Pers.)" desc="Erw. und Kinder"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;Hessenticket bis 5 Personen&quot;,&quot;TextMiddle&quot;:&quot;Hessenticket bis 5 Pers.&quot;,&quot;TextShort&quot;:&quot;Hessenticket 5P&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;50&quot;,&quot;TariffLevelIntern&quot;:&quot;95&quot;,&quot;Price&quot;:&quot;3600&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;9970&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;9970&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;1750&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Tageskarte&quot;,&quot;KartentypAnzeigename&quot;:&quot;Tageskarten&quot;,&quot;KAProduktnummer&quot;:&quot;10181&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-VTRB-Ausgabeart=Papier|ATTR-VTRB-Frg=2&quot;}}"
+                            cur="EUR" price="3600"/>
+                </fareItem>
+            </fareSetItem>
+            <fareSetItem name="Wochenkarten">
+                <fareItem name="0" desc="ohne Umweg" shpCtx="" price="0">
+                    <ticket name="Wochenkarte" desc="Erwachsene"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;Wochenkarte&quot;,&quot;TextShort&quot;:&quot;Wochenkarte&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;6&quot;,&quot;TariffLevelIntern&quot;:&quot;80&quot;,&quot;Price&quot;:&quot;6840&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;1300&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;400&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;300&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;minVVF&quot;:&quot;13.12.2019&quot;,&quot;minNKF&quot;:&quot;09.12.2019&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Wochenkarte&quot;,&quot;KartentypAnzeigename&quot;:&quot;Wochenkarten&quot;,&quot;KAProduktnummer&quot;:&quot;10107&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-VTRB-Ausgabeart=eTicket_und_Papier_1|ATTR-VTRB-Frg=3|ATTR-VTRB-minNKF=2|ATTR-VTRB-minVVF=5&quot;}}"
+                            cur="EUR" price="6840"/>
+                    <ticket name="Wochenkarte" desc="Auszubildende"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;Wochenkarte&quot;,&quot;TextShort&quot;:&quot;Wochenkarte&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;6&quot;,&quot;TariffLevelIntern&quot;:&quot;80&quot;,&quot;Price&quot;:&quot;5340&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;1300&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;400&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;600&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;minVVF&quot;:&quot;13.12.2019&quot;,&quot;minNKF&quot;:&quot;09.12.2019&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Wochenkarte&quot;,&quot;KartentypAnzeigename&quot;:&quot;Wochenkarten&quot;,&quot;KAProduktnummer&quot;:&quot;10180&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-SRTE-NACHWEIS-REDUZ=Schueler_Azubi|ATTR-VTRB-Ausgabeart=eTicket_und_Papier_1|ATTR-VTRB-Frg=3|ATTR-VTRB-minNKF=2|ATTR-VTRB-minVVF=5&quot;}}"
+                            cur="EUR" price="5340"/>
+                    <ticket name="Zuschlag zur Wochenkarte 1. Klasse" desc="Erw. und Kinder"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;Zuschlagkarte Woche&quot;,&quot;TextShort&quot;:&quot;Zuschlag Woche&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;6&quot;,&quot;TariffLevelIntern&quot;:&quot;80&quot;,&quot;Price&quot;:&quot;3080&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;1300&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;400&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;900&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;minVVF&quot;:&quot;13.12.2019&quot;,&quot;minNKF&quot;:&quot;09.12.2019&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Wochenkarte&quot;,&quot;KartentypAnzeigename&quot;:&quot;Wochenkarten&quot;,&quot;KAProduktnummer&quot;:&quot;10108&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-SRTE-KLASSE_1=Ja|ATTR-VTRB-Ausgabeart=eTicket_und_Papier_1|ATTR-VTRB-Frg=3|ATTR-VTRB-minNKF=2|ATTR-VTRB-minVVF=5&quot;}}"
+                            cur="EUR" price="3080"/>
+                </fareItem>
+            </fareSetItem>
+            <fareSetItem name="Monatskarten">
+                <fareItem name="0" desc="ohne Umweg" shpCtx="" price="0">
+                    <ticket name="Monatskarte" desc="Erwachsene"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;Monatskarte&quot;,&quot;TextShort&quot;:&quot;Monatskarte&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;6&quot;,&quot;TariffLevelIntern&quot;:&quot;80&quot;,&quot;Price&quot;:&quot;23270&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;1300&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;400&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;100&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;minVVF&quot;:&quot;13.12.2019&quot;,&quot;minNKF&quot;:&quot;09.12.2019&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Monatskarte&quot;,&quot;KartentypAnzeigename&quot;:&quot;Monatskarten&quot;,&quot;KAProduktnummer&quot;:&quot;10104&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-VTRB-Ausgabeart=eTicket_und_Papier_1|ATTR-VTRB-Frg=3|ATTR-VTRB-minNKF=2|ATTR-VTRB-minVVF=5&quot;}}"
+                            cur="EUR" price="23270"/>
+                    <ticket name="9-Uhr-Monatskarte" desc="Erwachsene"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;9-Uhr-Monatskarte&quot;,&quot;TextShort&quot;:&quot;9-Uhr-Monat&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;6&quot;,&quot;TariffLevelIntern&quot;:&quot;80&quot;,&quot;Price&quot;:&quot;17450&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;1300&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;400&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;150&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;minVVF&quot;:&quot;13.12.2019&quot;,&quot;minNKF&quot;:&quot;09.12.2019&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Monatskarte&quot;,&quot;KartentypAnzeigename&quot;:&quot;Monatskarten&quot;,&quot;KAProduktnummer&quot;:&quot;10105&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-VTRB-Ausgabeart=eTicket_und_Papier_1|ATTR-VTRB-Frg=3|ATTR-VTRB-minNKF=2|ATTR-VTRB-minVVF=5&quot;}}"
+                            cur="EUR" price="17450"/>
+                    <ticket name="65-plus-Monatskarte" desc="Senioren"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;65-plus-Monatskarte&quot;,&quot;TextMiddle&quot;:&quot;65-plus-Monatskarte&quot;,&quot;TextShort&quot;:&quot;65-plus-Monatskarte&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;6&quot;,&quot;TariffLevelIntern&quot;:&quot;80&quot;,&quot;Price&quot;:&quot;14190&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;1300&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;400&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;120&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;minVVF&quot;:&quot;13.12.2019&quot;,&quot;minNKF&quot;:&quot;09.12.2019&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Monatskarte&quot;,&quot;KartentypAnzeigename&quot;:&quot;Monatskarten&quot;,&quot;KAProduktnummer&quot;:&quot;10238&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-SRTE-NACHWEIS-REDUZ=65-plus|ATTR-VTRB-Ausgabeart=eTicket|ATTR-VTRB-Frg=3|ATTR-VTRB-minNKF=2|ATTR-VTRB-minVVF=5&quot;}}"
+                            cur="EUR" price="14190"/>
+                    <ticket name="Monatskarte" desc="Auszubildende"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;Monatskarte&quot;,&quot;TextShort&quot;:&quot;Monatskarte&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;6&quot;,&quot;TariffLevelIntern&quot;:&quot;80&quot;,&quot;Price&quot;:&quot;18150&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;1300&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;400&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;500&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;minVVF&quot;:&quot;13.12.2019&quot;,&quot;minNKF&quot;:&quot;09.12.2019&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Monatskarte&quot;,&quot;KartentypAnzeigename&quot;:&quot;Monatskarten&quot;,&quot;KAProduktnummer&quot;:&quot;10147&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-SRTE-NACHWEIS-REDUZ=Schueler_Azubi|ATTR-VTRB-Ausgabeart=eTicket_und_Papier_1|ATTR-VTRB-Frg=3|ATTR-VTRB-minNKF=2|ATTR-VTRB-minVVF=5&quot;}}"
+                            cur="EUR" price="18150"/>
+                    <ticket name="Zuschlag zur Monatskarte 1. Klasse" desc="Erw. und Kinder"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;Zuschlagkarte Monat&quot;,&quot;TextShort&quot;:&quot;Zuschlag Monat&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;6&quot;,&quot;TariffLevelIntern&quot;:&quot;80&quot;,&quot;Price&quot;:&quot;10470&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;1300&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;400&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;700&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;minVVF&quot;:&quot;13.12.2019&quot;,&quot;minNKF&quot;:&quot;09.12.2019&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Monatskarte&quot;,&quot;KartentypAnzeigename&quot;:&quot;Monatskarten&quot;,&quot;KAProduktnummer&quot;:&quot;10106&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-SRTE-KLASSE_1=Ja|ATTR-VTRB-Ausgabeart=eTicket_und_Papier_1|ATTR-VTRB-Frg=3|ATTR-VTRB-minNKF=2|ATTR-VTRB-minVVF=5&quot;}}"
+                            cur="EUR" price="10470"/>
+                </fareItem>
+            </fareSetItem>
+            <fareSetItem name="Jahreskarten">
+                <fareItem name="0" desc="ohne Umweg" shpCtx="" price="0">
+                    <ticket name="Jahreskarte übertragbar einmalige Zahlung" desc="Erwachsene"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;Jahreskarte&quot;,&quot;TextShort&quot;:&quot;Jahreskarte&quot;,&quot;Remark&quot;:&quot;einmalige Zahlung&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;6&quot;,&quot;TariffLevelIntern&quot;:&quot;80&quot;,&quot;Price&quot;:&quot;228030&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;1300&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;400&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;800&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;minVVF&quot;:&quot;01.01.2020&quot;,&quot;minNKF&quot;:&quot;01.01.2020&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Jahreskarte&quot;,&quot;KartentypAnzeigename&quot;:&quot;Jahreskarten&quot;,&quot;KAProduktnummer&quot;:&quot;6657&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-VTRB-Ausgabeart=eTicket_und_Papier_N|ATTR-VTRB-Frg=3|ATTR-VTRB-minNKF=2|ATTR-VTRB-minVVF=5&quot;}}"
+                            cur="EUR" price="228030"/>
+                    <ticket name="9-Uhr-Jahreskarte übertragbar einmalige Zahlung" desc="Erwachsene"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;9-Uhr-Jahreskarte&quot;,&quot;TextShort&quot;:&quot;9-Uhr-Jahr&quot;,&quot;Remark&quot;:&quot;einmalige Zahlung&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;6&quot;,&quot;TariffLevelIntern&quot;:&quot;80&quot;,&quot;Price&quot;:&quot;170990&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;1300&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;400&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;850&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;minVVF&quot;:&quot;01.01.2020&quot;,&quot;minNKF&quot;:&quot;01.01.2020&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Jahreskarte&quot;,&quot;KartentypAnzeigename&quot;:&quot;Jahreskarten&quot;,&quot;KAProduktnummer&quot;:&quot;6658&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-VTRB-Ausgabeart=eTicket_und_Papier_N|ATTR-VTRB-Frg=3|ATTR-VTRB-minNKF=2|ATTR-VTRB-minVVF=5&quot;}}"
+                            cur="EUR" price="170990"/>
+                    <ticket name="65-plus-Jahreskarte einmalige Zahlung" desc="Senioren"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;65-plus-Jahreskarte&quot;,&quot;TextShort&quot;:&quot;65-plus-Jahreskarte&quot;,&quot;Remark&quot;:&quot;einmalige Zahlung&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;6&quot;,&quot;TariffLevelIntern&quot;:&quot;80&quot;,&quot;Price&quot;:&quot;139060&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;1300&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;400&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;820&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Jahreskarte&quot;,&quot;KartentypAnzeigename&quot;:&quot;Jahreskarten&quot;,&quot;KAProduktnummer&quot;:&quot;10683&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-SRTE-KLASSE_1=Ja|ATTR-SRTE-NACHWEIS-REDUZ=65-plus|ATTR-VTRB-Ausgabeart=eTicket|ATTR-VTRB-Frg=3|ATTR-VTRB-minNKF=2|ATTR-VTRB-minVVF=5&quot;}}"
+                            cur="EUR" price="139060"/>
+                    <ticket name="Schülerticket Hessen einmalige Zahlung" desc="Auszubildende"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;Schülerticket Hessen&quot;,&quot;TextShort&quot;:&quot;Schülerticket Hessen&quot;,&quot;Remark&quot;:&quot;einmalige Zahlung&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;50&quot;,&quot;TariffLevelIntern&quot;:&quot;95&quot;,&quot;Price&quot;:&quot;36500&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;9990&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;9990&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;77400&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Jahreskarte&quot;,&quot;KartentypAnzeigename&quot;:&quot;Jahreskarten&quot;,&quot;KAProduktnummer&quot;:&quot;10547&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-SRTE-NACHWEIS-REDUZ=Schueler_Azubi|ATTR-VTRB-Ausgabeart=eTicket|ATTR-VTRB-Frg=3|ATTR-VTRB-minNKF=2|ATTR-VTRB-minVVF=5&quot;}}"
+                            cur="EUR" price="36500"/>
+                    <ticket name="Zuschlag zur Jahreskarte 1. Kl. übertragbar einmalige Zahlung" desc="Erw. und Kinder"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;Zuschlagkarte Jahr&quot;,&quot;TextShort&quot;:&quot;Zuschlag Jahr&quot;,&quot;Remark&quot;:&quot;einmalige Zahlung&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;6&quot;,&quot;TariffLevelIntern&quot;:&quot;80&quot;,&quot;Price&quot;:&quot;102610&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;1300&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;400&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;1200&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;minVVF&quot;:&quot;01.01.2020&quot;,&quot;minNKF&quot;:&quot;01.01.2020&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Jahreskarte&quot;,&quot;KartentypAnzeigename&quot;:&quot;Jahreskarten&quot;,&quot;KAProduktnummer&quot;:&quot;6667&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-SRTE-KLASSE_1=Ja|ATTR-VTRB-Ausgabeart=eTicket_und_Papier_N|ATTR-VTRB-Frg=3|ATTR-VTRB-minNKF=2|ATTR-VTRB-minVVF=5&quot;}}"
+                            cur="EUR" price="102610"/>
+                </fareItem>
+            </fareSetItem>
+            <fareSetItem name="JahresAbos persönlich">
+                <fareItem name="0" desc="ohne Umweg" shpCtx="" price="0">
+                    <ticket name="Jahreskarte persönlich einmalige Abbuchung" desc="Erwachsene"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;Jahreskarte&quot;,&quot;TextShort&quot;:&quot;Jahreskarte&quot;,&quot;Remark&quot;:&quot;einmalige Abbuchung&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;6&quot;,&quot;TariffLevelIntern&quot;:&quot;80&quot;,&quot;Price&quot;:&quot;228030&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;1300&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;400&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;1400&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;minVVF&quot;:&quot;01.01.2020&quot;,&quot;minNKF&quot;:&quot;01.01.2020&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Jahresabos_persoenlich&quot;,&quot;KartentypAnzeigename&quot;:&quot;JahresAbos persönlich&quot;,&quot;KAProduktnummer&quot;:&quot;6664&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-VTRB-Ausgabeart=eTicket|ATTR-VTRB-Frg=3|ATTR-VTRB-minNKF=2|ATTR-VTRB-minVVF=5&quot;}}"
+                            cur="EUR" price="228030"/>
+                    <ticket name="Jahreskarte persönlich 12-fache Abbuchung" desc="Erwachsene"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;Jahreskarte&quot;,&quot;TextShort&quot;:&quot;Jahreskarte&quot;,&quot;Remark&quot;:&quot;12-fache Abbuchung&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;6&quot;,&quot;TariffLevelIntern&quot;:&quot;80&quot;,&quot;Price&quot;:&quot;232680&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;1300&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;400&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;220&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;minVVF&quot;:&quot;01.01.2020&quot;,&quot;minNKF&quot;:&quot;01.01.2020&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Jahresabos_persoenlich&quot;,&quot;KartentypAnzeigename&quot;:&quot;JahresAbos persönlich&quot;,&quot;KAProduktnummer&quot;:&quot;10752&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-VTRB-Ausgabeart=eTicket|ATTR-VTRB-Frg=3|ATTR-VTRB-minNKF=2|ATTR-VTRB-minVVF=5&quot;}}"
+                            cur="EUR" price="232680"/>
+                    <ticket name="9-Uhr-Jahreskarte persönlich einmalige Abbuchung" desc="Erwachsene"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;9-Uhr-Jahreskarte&quot;,&quot;TextShort&quot;:&quot;9-Uhr-Jahr&quot;,&quot;Remark&quot;:&quot;einmalige Abbuchung&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;6&quot;,&quot;TariffLevelIntern&quot;:&quot;80&quot;,&quot;Price&quot;:&quot;170990&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;1300&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;400&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;1450&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;minVVF&quot;:&quot;01.01.2020&quot;,&quot;minNKF&quot;:&quot;01.01.2020&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Jahresabos_persoenlich&quot;,&quot;KartentypAnzeigename&quot;:&quot;JahresAbos persönlich&quot;,&quot;KAProduktnummer&quot;:&quot;6666&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-VTRB-Ausgabeart=eTicket|ATTR-VTRB-Frg=3|ATTR-VTRB-minNKF=2|ATTR-VTRB-minVVF=5&quot;}}"
+                            cur="EUR" price="170990"/>
+                    <ticket name="9-Uhr-Jahreskarte persönlich 12-fache Abbuchung" desc="Erwachsene"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;9-Uhr-Jahreskarte&quot;,&quot;TextShort&quot;:&quot;9-Uhr-Jahr&quot;,&quot;Remark&quot;:&quot;12-fache Abbuchung&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;6&quot;,&quot;TariffLevelIntern&quot;:&quot;80&quot;,&quot;Price&quot;:&quot;174480&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;1300&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;400&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;240&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;minVVF&quot;:&quot;01.01.2020&quot;,&quot;minNKF&quot;:&quot;01.01.2020&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Jahresabos_persoenlich&quot;,&quot;KartentypAnzeigename&quot;:&quot;JahresAbos persönlich&quot;,&quot;KAProduktnummer&quot;:&quot;10753&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-VTRB-Ausgabeart=eTicket|ATTR-VTRB-Frg=3|ATTR-VTRB-minNKF=2|ATTR-VTRB-minVVF=5&quot;}}"
+                            cur="EUR" price="174480"/>
+                    <ticket name="65-plus-Jahreskarte einmalige Abbuchung" desc="Senioren"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;65-plus-Jahreskarte&quot;,&quot;TextShort&quot;:&quot;65-plus-Jahreskarte&quot;,&quot;Remark&quot;:&quot;einmalige Abbuchung&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;6&quot;,&quot;TariffLevelIntern&quot;:&quot;80&quot;,&quot;Price&quot;:&quot;139060&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;1300&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;400&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;1420&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;minVVF&quot;:&quot;01.01.2020&quot;,&quot;minNKF&quot;:&quot;01.01.2020&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Jahresabos_persoenlich&quot;,&quot;KartentypAnzeigename&quot;:&quot;JahresAbos persönlich&quot;,&quot;KAProduktnummer&quot;:&quot;10097&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-SRTE-KLASSE_1=Ja|ATTR-SRTE-NACHWEIS-REDUZ=65-plus|ATTR-VTRB-Ausgabeart=eTicket|ATTR-VTRB-Frg=3|ATTR-VTRB-minNKF=2|ATTR-VTRB-minVVF=5&quot;}}"
+                            cur="EUR" price="139060"/>
+                    <ticket name="65-plus-Jahreskarte 12-fache Abbuchung" desc="Senioren"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;65-plus-Jahreskarte&quot;,&quot;TextShort&quot;:&quot;65-plus-Jahreskarte&quot;,&quot;Remark&quot;:&quot;12-fache Abbuchung&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;6&quot;,&quot;TariffLevelIntern&quot;:&quot;80&quot;,&quot;Price&quot;:&quot;141900&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;1300&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;400&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;1330&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;minVVF&quot;:&quot;01.01.2020&quot;,&quot;minNKF&quot;:&quot;01.01.2020&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Jahresabos_persoenlich&quot;,&quot;KartentypAnzeigename&quot;:&quot;JahresAbos persönlich&quot;,&quot;KAProduktnummer&quot;:&quot;10755&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-SRTE-KLASSE_1=Ja|ATTR-SRTE-NACHWEIS-REDUZ=65-plus|ATTR-VTRB-Ausgabeart=eTicket|ATTR-VTRB-Frg=3|ATTR-VTRB-minNKF=2|ATTR-VTRB-minVVF=5&quot;}}"
+                            cur="EUR" price="141900"/>
+                    <ticket name="Zuschlag zur Jahreskarte 1. Kl. persönlich einmalige Abbuchung" desc="Erw. und Kinder"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;Zuschlagkarte Jahr&quot;,&quot;TextShort&quot;:&quot;Zuschlag Jahr&quot;,&quot;Remark&quot;:&quot;einmalige Abbuchung&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;6&quot;,&quot;TariffLevelIntern&quot;:&quot;80&quot;,&quot;Price&quot;:&quot;102610&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;1300&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;400&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;1101&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;minVVF&quot;:&quot;01.01.2020&quot;,&quot;minNKF&quot;:&quot;01.01.2020&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Jahresabos_persoenlich&quot;,&quot;KartentypAnzeigename&quot;:&quot;JahresAbos persönlich&quot;,&quot;KAProduktnummer&quot;:&quot;10066&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-SRTE-KLASSE_1=Ja|ATTR-VTRB-Ausgabeart=eTicket|ATTR-VTRB-Frg=3|ATTR-VTRB-minNKF=2|ATTR-VTRB-minVVF=5&quot;}}"
+                            cur="EUR" price="102610"/>
+                    <ticket name="Zuschlag zur Jahreskarte 1. Kl. persönlich 12-fache Abbuchung" desc="Erwachsene"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;Zuschlagkarte Jahr&quot;,&quot;TextShort&quot;:&quot;Zuschlag Jahr&quot;,&quot;Remark&quot;:&quot;12-fache Abbuchung&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;6&quot;,&quot;TariffLevelIntern&quot;:&quot;80&quot;,&quot;Price&quot;:&quot;104700&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;1300&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;400&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;1110&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;minVVF&quot;:&quot;01.01.2020&quot;,&quot;minNKF&quot;:&quot;01.01.2020&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Jahresabos_persoenlich&quot;,&quot;KartentypAnzeigename&quot;:&quot;JahresAbos persönlich&quot;,&quot;KAProduktnummer&quot;:&quot;10754&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-SRTE-KLASSE_1=Ja|ATTR-VTRB-Ausgabeart=eTicket|ATTR-VTRB-Frg=3|ATTR-VTRB-minNKF=2|ATTR-VTRB-minVVF=5&quot;}}"
+                            cur="EUR" price="104700"/>
+                    <ticket name="Schülerticket Hessen einmalige Abbuchung" desc="Auszubildende"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;Schülerticket Hessen&quot;,&quot;TextShort&quot;:&quot;Schülerticket Hessen&quot;,&quot;Remark&quot;:&quot;einmalige Abbuchung&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;50&quot;,&quot;TariffLevelIntern&quot;:&quot;95&quot;,&quot;Price&quot;:&quot;36500&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;9990&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;9990&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;77401&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;minVVF&quot;:&quot;01.01.2020&quot;,&quot;minNKF&quot;:&quot;01.01.2020&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Jahresabos_persoenlich&quot;,&quot;KartentypAnzeigename&quot;:&quot;JahresAbos persönlich&quot;,&quot;KAProduktnummer&quot;:&quot;10548&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-SRTE-NACHWEIS-REDUZ=Schueler_Azubi_Jaka|ATTR-VTRB-Ausgabeart=eTicket|ATTR-VTRB-Frg=3|ATTR-VTRB-minNKF=2|ATTR-VTRB-minVVF=5&quot;}}"
+                            cur="EUR" price="36500"/>
+                    <ticket name="Schülerticket Hessen 12-fache Abbuchung" desc="Auszubildende"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;Schülerticket Hessen&quot;,&quot;TextShort&quot;:&quot;Schülerticket Hessen&quot;,&quot;Remark&quot;:&quot;12-fache Abbuchung&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;50&quot;,&quot;TariffLevelIntern&quot;:&quot;95&quot;,&quot;Price&quot;:&quot;37200&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;9990&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;9990&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;77402&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;minVVF&quot;:&quot;01.01.2020&quot;,&quot;minNKF&quot;:&quot;01.01.2020&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Jahresabos_persoenlich&quot;,&quot;KartentypAnzeigename&quot;:&quot;JahresAbos persönlich&quot;,&quot;KAProduktnummer&quot;:&quot;10552&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-SRTE-NACHWEIS-REDUZ=Schueler_Azubi_Jaka|ATTR-VTRB-Ausgabeart=eTicket|ATTR-VTRB-Frg=3|ATTR-VTRB-minNKF=2|ATTR-VTRB-minVVF=5&quot;}}"
+                            cur="EUR" price="37200"/>
+                </fareItem>
+            </fareSetItem>
+            <fareSetItem name="JahresAbos übertragbar">
+                <fareItem name="0" desc="ohne Umweg" shpCtx="" price="0">
+                    <ticket name="Jahreskarte übertragbar einmalige Abbuchung" desc="Erwachsene"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;Jahreskarte&quot;,&quot;TextShort&quot;:&quot;Jahreskarte&quot;,&quot;Remark&quot;:&quot;einmalige Abbuchung&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;6&quot;,&quot;TariffLevelIntern&quot;:&quot;80&quot;,&quot;Price&quot;:&quot;228030&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;1300&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;400&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;400&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;minVVF&quot;:&quot;01.01.2020&quot;,&quot;minNKF&quot;:&quot;01.01.2020&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Jahresabos_uebertragbar&quot;,&quot;KartentypAnzeigename&quot;:&quot;JahresAbos übertragbar&quot;,&quot;KAProduktnummer&quot;:&quot;6663&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-VTRB-Ausgabeart=eTicket_und_Papier_N|ATTR-VTRB-Frg=3|ATTR-VTRB-minNKF=2|ATTR-VTRB-minVVF=5&quot;}}"
+                            cur="EUR" price="228030"/>
+                    <ticket name="Jahreskarte übertragbar 12-fache Abbuchung" desc="Erwachsene"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;Jahreskarte&quot;,&quot;TextShort&quot;:&quot;Jahreskarte&quot;,&quot;Remark&quot;:&quot;12-fache Abbuchung&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;6&quot;,&quot;TariffLevelIntern&quot;:&quot;80&quot;,&quot;Price&quot;:&quot;232680&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;1300&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;400&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;230&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;minVVF&quot;:&quot;01.01.2020&quot;,&quot;minNKF&quot;:&quot;01.01.2020&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Jahresabos_uebertragbar&quot;,&quot;KartentypAnzeigename&quot;:&quot;JahresAbos übertragbar&quot;,&quot;KAProduktnummer&quot;:&quot;10770&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-VTRB-Ausgabeart=eTicket_und_Papier_N|ATTR-VTRB-Frg=3|ATTR-VTRB-minNKF=2|ATTR-VTRB-minVVF=5&quot;}}"
+                            cur="EUR" price="232680"/>
+                    <ticket name="9-Uhr-Jahreskarte übertragbar einmalige Abbuchung" desc="Erwachsene"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;9-Uhr-Jahreskarte&quot;,&quot;TextShort&quot;:&quot;9-Uhr-Jahr&quot;,&quot;Remark&quot;:&quot;einmalige Abbuchung&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;6&quot;,&quot;TariffLevelIntern&quot;:&quot;80&quot;,&quot;Price&quot;:&quot;170990&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;1300&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;400&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;450&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;minVVF&quot;:&quot;01.01.2020&quot;,&quot;minNKF&quot;:&quot;01.01.2020&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Jahresabos_uebertragbar&quot;,&quot;KartentypAnzeigename&quot;:&quot;JahresAbos übertragbar&quot;,&quot;KAProduktnummer&quot;:&quot;6665&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-VTRB-Ausgabeart=eTicket_und_Papier_N|ATTR-VTRB-Frg=3|ATTR-VTRB-minNKF=2|ATTR-VTRB-minVVF=5&quot;}}"
+                            cur="EUR" price="170990"/>
+                    <ticket name="9-Uhr-Jahreskarte übertragbar 12-fache Abbuchung" desc="Erwachsene"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;9-Uhr-Jahreskarte&quot;,&quot;TextShort&quot;:&quot;9-Uhr-Jahr&quot;,&quot;Remark&quot;:&quot;12-fache Abbuchung&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;6&quot;,&quot;TariffLevelIntern&quot;:&quot;80&quot;,&quot;Price&quot;:&quot;174480&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;1300&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;400&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;270&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;minVVF&quot;:&quot;01.01.2020&quot;,&quot;minNKF&quot;:&quot;01.01.2020&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Jahresabos_uebertragbar&quot;,&quot;KartentypAnzeigename&quot;:&quot;JahresAbos übertragbar&quot;,&quot;KAProduktnummer&quot;:&quot;10771&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-VTRB-Ausgabeart=eTicket_und_Papier_N|ATTR-VTRB-Frg=3|ATTR-VTRB-minNKF=2|ATTR-VTRB-minVVF=5&quot;}}"
+                            cur="EUR" price="174480"/>
+                    <ticket name="Zuschlag zur Jahreskarte 1. Kl. übertragbar einmalige Abbuchung"
+                            desc="Erw. und Kinder"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;Zuschlagkarte Jahr&quot;,&quot;TextShort&quot;:&quot;Zuschlag Jahr&quot;,&quot;Remark&quot;:&quot;einmalige Abbuchung&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;6&quot;,&quot;TariffLevelIntern&quot;:&quot;80&quot;,&quot;Price&quot;:&quot;102610&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;1300&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;400&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;1100&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;minVVF&quot;:&quot;01.01.2020&quot;,&quot;minNKF&quot;:&quot;01.01.2020&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Jahresabos_uebertragbar&quot;,&quot;KartentypAnzeigename&quot;:&quot;JahresAbos übertragbar&quot;,&quot;KAProduktnummer&quot;:&quot;6669&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-SRTE-KLASSE_1=Ja|ATTR-VTRB-Ausgabeart=eTicket_und_Papier_N|ATTR-VTRB-Frg=3|ATTR-VTRB-minNKF=2|ATTR-VTRB-minVVF=5&quot;}}"
+                            cur="EUR" price="102610"/>
+                    <ticket name="Zuschlag zur Jahreskarte 1. Kl. übertragbar 12-fache Abbuchung" desc="Erwachsene"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;Zuschlagkarte Jahr&quot;,&quot;TextShort&quot;:&quot;Zuschlag Jahr&quot;,&quot;Remark&quot;:&quot;12-fache Abbuchung&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;6&quot;,&quot;TariffLevelIntern&quot;:&quot;80&quot;,&quot;Price&quot;:&quot;104700&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;1300&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;400&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;1010&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;minVVF&quot;:&quot;01.01.2020&quot;,&quot;minNKF&quot;:&quot;01.01.2020&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Jahresabos_uebertragbar&quot;,&quot;KartentypAnzeigename&quot;:&quot;JahresAbos übertragbar&quot;,&quot;KAProduktnummer&quot;:&quot;10758&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-SRTE-KLASSE_1=Ja|ATTR-VTRB-Ausgabeart=eTicket_und_Papier_N|ATTR-VTRB-Frg=3|ATTR-VTRB-minNKF=2|ATTR-VTRB-minVVF=5&quot;}}"
+                            cur="EUR" price="104700"/>
+                </fareItem>
+            </fareSetItem>
+        </TariffResult>
+    </Trip>
+    <Trip idx="3"
+          ctxRecon="¶HKI¶T$A=1@O=Ulrichstein Wiesenhof@L=3027290@a=128@$A=1@O=Ulrichstein Lindenplatz@L=3019060@a=128@$201912071755$201912071757$ALTVB-65$$1$$$§T$A=1@O=Ulrichstein Lindenplatz@L=3019060@a=128@$A=1@O=Mücke-Flensungen Mücke Bahnhof@L=3011210@a=128@$201912080912$201912080934$ALTVB-76$$1$$$§T$A=1@O=Mücke-Flensungen Mücke Bahnhof@L=3011210@a=128@$A=1@O=Gießen Bahnhof@L=3011016@a=128@$201912080947$201912081018$    RB45$$1$$$§T$A=1@O=Gießen Bahnhof@L=3011016@a=128@$A=1@O=Marburg Südbahnhof@L=3011323@a=128@$201912081039$201912081101$    RB41$$1$$$§W$A=1@O=Marburg Südbahnhof@L=3011323@a=128@$A=1@O=Marburg Südbahnhof-West@L=3010097@a=128@$201912081101$201912081105$$$1$$$§T$A=1@O=Marburg Südbahnhof-West@L=3010097@a=128@$A=1@O=Bad Endbach Sportzentrum@L=3010296@a=128@$201912081118$201912081213$Bus 383 $$1$$$"
+          checksum="a075641c_3" tripId="C-3" duration="PT18H18M">
+        <ServiceDays sDaysR="Sa"
+                     sDaysB="000000020408102040810204081020408102040810204081020408102040810204081020408102040810204081020400"
+                     planningPeriodBegin="2019-09-05" planningPeriodEnd="2020-09-17"/>
+        <LegList>
+            <Leg type="JNY" idx="0" name="ALTVB-65" number="2982" category="ALT" reachable="true"
+                 direction="Ulrichstein Lindenplatz">
+                <Origin id="A=1@O=Ulrichstein Wiesenhof@X=9211076@Y=50558812@U=80@L=3027290@" extId="3027290"
+                        name="Ulrichstein Wiesenhof" type="ST" routeIdx="6" lon="9.211076" lat="50.558812"
+                        date="2019-12-07" time="17:55:00" prognosisType="PROGNOSED"/>
+                <Destination id="A=1@O=Ulrichstein Lindenplatz@X=9194401@Y=50574382@U=80@L=3019060@" extId="3019060"
+                             name="Ulrichstein Lindenplatz" type="ST" routeIdx="8" lon="9.194401" lat="50.574382"
+                             date="2019-12-07" time="17:57:00" prognosisType="PROGNOSED"/>
+                <Notes>
+                    <Note routeIdxFrom="6" routeIdxTo="8" key="_s" priority="1" type="A">Anruf-Linien-Taxi: Anmeldung
+                        bis 60 Min. vor Abfahrt, Tel. 06044 2244 (Hans Sachs Reisen). Erreichbar tägl. 7-19 Uhr, Fahrten
+                        vor 8 Uhr am Vortag anmelden. Keine Innerortsbedienung!
+                    </Note>
+                    <Note routeIdxFrom="6" routeIdxTo="8" key="FD" type="I">326</Note>
+                </Notes>
+                <JourneyDetailRef ref="1|53504|0|80|7122019"/>
+                <Messages>
+                    <Message id="2114467-1" act="true" head="Vogelsbergkreis: Bus VB-65 - Verspätungen möglich"
+                             lead="Es muss mit Verspätungen gerechnet werden. Grund dafür ist eine Baustelle mit halbseitiger Straßensperrung.&lt;br />(Stand 05.12.2019, 10:36 Uhr)"
+                             text="Es muss mit Verspätungen gerechnet werden. Grund dafür ist eine Baustelle mit halbseitiger Straßensperrung.&lt;br />&lt;br />(Stand 05.12.2019, 10:36 Uhr)"
+                             priority="100" category="2" products="65535" altStart="" altEnd="" sTime="04:00:00"
+                             sDate="2019-04-29" eTime="23:59:00" eDate="2019-12-20" company="RMVU"/>
+                </Messages>
+                <JourneyStatus>P</JourneyStatus>
+                <Product catCode="9" catIn="ALT" catOut="ALT     " catOutL="ALT" catOutS="ALT" line="VB-65"
+                         name="ALTVB-65" num="2982" operator="VGO Alsfeld" operatorCode="VGO" admin="VBBUS_"/>
+            </Leg>
+            <Leg type="JNY" idx="1" name="ALTVB-76" number="1176" category="ALT" reachable="true"
+                 direction="Mücke-Merlau Heegstraße">
+                <Origin id="A=1@O=Ulrichstein Lindenplatz@X=9194401@Y=50574382@U=80@L=3019060@" extId="3019060"
+                        name="Ulrichstein Lindenplatz" type="ST" routeIdx="0" lon="9.194401" lat="50.574382"
+                        date="2019-12-08" time="09:12:00" prognosisType="PROGNOSED"/>
+                <Destination id="A=1@O=Mücke-Flensungen Mücke Bahnhof@X=9029233@Y=50617305@U=80@L=3011210@"
+                             extId="3011210" name="Mücke-Flensungen Mücke Bahnhof" type="ST" routeIdx="13"
+                             lon="9.029233" lat="50.617305" date="2019-12-08" time="09:34:00"
+                             prognosisType="PROGNOSED"/>
+                <Notes>
+                    <Note routeIdxFrom="0" routeIdxTo="13" key="pe" priority="1" type="A">Anruf-Linien-Taxi: Anmeldung
+                        bis 60 Min. vor Abfahrt, Tel. 06400 9050524 (Philippi Nahverkehr). Erreichbar tägl. 7-19 Uhr,
+                        Fahrten vor 8 Uhr am Vortag anmelden. Keine Innerortsbedienung!
+                    </Note>
+                    <Note routeIdxFrom="0" routeIdxTo="13" key="FD" type="I">331</Note>
+                </Notes>
+                <JourneyDetailRef ref="1|52353|0|80|8122019"/>
+                <JourneyStatus>P</JourneyStatus>
+                <Product catCode="9" catIn="ALT" catOut="ALT     " catOutL="ALT" catOutS="ALT" line="VB-76"
+                         name="ALTVB-76" num="1176" operator="VGO Alsfeld" operatorCode="VGO" admin="VBBUS_"/>
+            </Leg>
+            <Leg type="JNY" idx="2" name="    RB45" number="904" category="Cn1" reachable="true"
+                 direction="Limburg (Lahn) Bahnhof">
+                <Origin id="A=1@O=Mücke-Flensungen Mücke Bahnhof@X=9029233@Y=50617305@U=80@L=3011210@" extId="3011210"
+                        name="Mücke-Flensungen Mücke Bahnhof" type="ST" routeIdx="11" lon="9.029233" lat="50.617305"
+                        date="2019-12-08" time="09:47:00" track="1" prognosisType="PROGNOSED"/>
+                <Destination id="A=1@O=Gießen Bahnhof@X=8663803@Y=50579883@U=80@L=3011016@" extId="3011016"
+                             name="Gießen Bahnhof" type="ST" routeIdx="19" lon="8.663803" lat="50.579883"
+                             date="2019-12-08" time="10:18:00" track="11" prognosisType="PROGNOSED"/>
+                <Notes>
+                    <Note routeIdxFrom="11" routeIdxTo="19" key="FD" type="I">24802</Note>
+                </Notes>
+                <JourneyDetailRef ref="1|241997|0|80|8122019"/>
+                <JourneyStatus>P</JourneyStatus>
+                <Product catCode="2" catIn="Cn1" catOut="RB      " catOutL="RB" catOutS="Cn1" line="RB45"
+                         name="    RB45" num="904" operator="Hessische Landesbahn GmbH" operatorCode="HLB"
+                         admin="K4RB__"/>
+            </Leg>
+            <Leg type="JNY" idx="3" name="    RB41" number="7" category="BT1" reachable="true"
+                 direction="Stadtallendorf Bahnhof">
+                <Origin id="A=1@O=Gießen Bahnhof@X=8663803@Y=50579883@U=80@L=3011016@" extId="3011016"
+                        name="Gießen Bahnhof" type="ST" routeIdx="5" lon="8.663803" lat="50.579883" date="2019-12-08"
+                        time="10:39:00" track="2" prognosisType="PROGNOSED"/>
+                <Destination id="A=1@O=Marburg Südbahnhof@X=8763548@Y=50794869@U=80@L=3011323@" extId="3011323"
+                             name="Marburg Südbahnhof" type="ST" routeIdx="12" lon="8.763548" lat="50.794869"
+                             date="2019-12-08" time="11:01:00" track="2" prognosisType="PROGNOSED"/>
+                <Notes>
+                    <Note routeIdxFrom="5" routeIdxTo="12" key="bE" priority="560" type="A">Fahrzeuggebundene
+                        Einstiegshilfe vorhanden
+                    </Note>
+                    <Note routeIdxFrom="5" routeIdxTo="12" key="aU" priority="610" type="A">Klimaanlage</Note>
+                    <Note routeIdxFrom="5" routeIdxTo="12" key="FD" type="I">15008</Note>
+                </Notes>
+                <JourneyDetailRef ref="1|181669|0|80|8122019"/>
+                <JourneyStatus>P</JourneyStatus>
+                <Product catCode="2" catIn="BT1" catOut="RB      " catOutL="R-Bahn" catOutS="BT1" line="RB41"
+                         name="    RB41" num="7" operator="DB Regio AG Mitte Region Hessen" operatorCode="DB9"
+                         admin="800535"/>
+            </Leg>
+            <Leg type="WALK" idx="4" dist="122" duration="PT4M" name="">
+                <Origin id="A=1@O=Marburg Südbahnhof@X=8763548@Y=50794869@U=80@L=3011323@" extId="3011323"
+                        name="Marburg Südbahnhof" type="ST" lon="8.763548" lat="50.794869" date="2019-12-08"
+                        time="11:01:00"/>
+                <Destination id="A=1@O=Marburg Südbahnhof-West@X=8761813@Y=50794968@U=80@L=3010097@" extId="3010097"
+                             name="Marburg Südbahnhof-West" type="ST" lon="8.761813" lat="50.794968" date="2019-12-08"
+                             time="11:05:00"/>
+                <GisRef ref="H|1|W$A=1@O=Marburg Südbahnhof@L=3011323@a=128@$A=1@O=Marburg Südbahnhof-West@L=3010097@a=128@$201912081101$201912081105$$$1$$$"/>
+            </Leg>
+            <Leg type="JNY" idx="5" name="Bus 383 " number="141" category="BB1" reachable="true"
+                 direction="Bad Endbach-Schlierbach Brunnenstraße">
+                <Origin id="A=1@O=Marburg Südbahnhof-West@X=8761813@Y=50794968@U=80@L=3010097@" extId="3010097"
+                        name="Marburg Südbahnhof-West" type="ST" routeIdx="6" lon="8.761813" lat="50.794968"
+                        date="2019-12-08" time="11:18:00" track="2" prognosisType="PROGNOSED"/>
+                <Destination id="A=1@O=Bad Endbach Sportzentrum@X=8479300@Y=50756602@U=80@L=3010296@" extId="3010296"
+                             name="Bad Endbach Sportzentrum" type="ST" routeIdx="36" lon="8.4793" lat="50.756602"
+                             date="2019-12-08" time="12:13:00" prognosisType="PROGNOSED"/>
+                <Notes>
+                    <Note routeIdxFrom="6" routeIdxTo="36" key="FD" type="I">708</Note>
+                </Notes>
+                <JourneyDetailRef ref="1|65835|3|80|8122019"/>
+                <JourneyStatus>P</JourneyStatus>
+                <Product catCode="6" catIn="BB1" catOut="Bus     " catOutL="Niederflurbus" catOutS="BB1" line="383"
+                         name="Bus 383 " num="141" operator="Becker und Bender Busverkehr GbR" operatorCode="BEC"
+                         admin="BUBBUS"/>
+            </Leg>
+        </LegList>
+    </Trip>
+    <Trip idx="4"
+          ctxRecon="¶HKI¶T$A=1@O=Ulrichstein Wiesenhof@L=3027290@a=128@$A=1@O=Lauterbach (Hessen) Nordbahnhof@L=3011203@a=128@$201912080935$201912080955$ALTVB-65$$1$$$§T$A=1@O=Lauterbach (Hessen) Nordbahnhof@L=3011203@a=128@$A=1@O=Gießen Bahnhof@L=3011016@a=128@$201912081005$201912081115$    RB45$$1$$$§T$A=1@O=Gießen Bahnhof@L=3011016@a=128@$A=1@O=Marburg Südbahnhof@L=3011323@a=128@$201912081139$201912081201$    RB41$$1$$$§W$A=1@O=Marburg Südbahnhof@L=3011323@a=128@$A=1@O=Marburg Südbahnhof-West@L=3010097@a=128@$201912081201$201912081205$$$1$$$§T$A=1@O=Marburg Südbahnhof-West@L=3010097@a=128@$A=1@O=Bad Endbach Sportzentrum@L=3010296@a=128@$201912081218$201912081313$Bus 383 $$1$$$"
+          checksum="80fd0813_3" tripId="C-4" duration="PT3H38M">
+        <ServiceDays sDaysR="So" sDaysI="auch 25., 26. Dez, 1. Jan, 10., 13. Apr, 1., 21. Mai, 1., 11. Jun"
+                     sDaysB="0000000902040810204081020409922040810204081020408102042C1021408112060890204081020408102040810200"
+                     planningPeriodBegin="2019-09-05" planningPeriodEnd="2020-09-17"/>
+        <LegList>
+            <Leg type="JNY" idx="0" name="ALTVB-65" number="2978" category="ALT" reachable="true"
+                 direction="Lauterbach (Hessen) Nordbahnhof">
+                <Origin id="A=1@O=Ulrichstein Wiesenhof@X=9211076@Y=50558812@U=80@L=3027290@" extId="3027290"
+                        name="Ulrichstein Wiesenhof" type="ST" routeIdx="6" lon="9.211076" lat="50.558812"
+                        date="2019-12-08" time="09:35:00" prognosisType="PROGNOSED"/>
+                <Destination id="A=1@O=Lauterbach (Hessen) Nordbahnhof@X=9406214@Y=50644138@U=80@L=3011203@"
+                             extId="3011203" name="Lauterbach (Hessen) Nordbahnhof" type="ST" routeIdx="25"
+                             lon="9.406214" lat="50.644138" date="2019-12-08" time="09:55:00"
+                             prognosisType="PROGNOSED"/>
+                <Notes>
+                    <Note routeIdxFrom="6" routeIdxTo="25" key="_s" priority="1" type="A">Anruf-Linien-Taxi: Anmeldung
+                        bis 60 Min. vor Abfahrt, Tel. 06044 2244 (Hans Sachs Reisen). Erreichbar tägl. 7-19 Uhr, Fahrten
+                        vor 8 Uhr am Vortag anmelden. Keine Innerortsbedienung!
+                    </Note>
+                    <Note routeIdxFrom="6" routeIdxTo="25" key="FD" type="I">328</Note>
+                </Notes>
+                <JourneyDetailRef ref="1|53503|0|80|8122019"/>
+                <Messages>
+                    <Message id="2114467-1" act="true" head="Vogelsbergkreis: Bus VB-65 - Verspätungen möglich"
+                             lead="Es muss mit Verspätungen gerechnet werden. Grund dafür ist eine Baustelle mit halbseitiger Straßensperrung.&lt;br />(Stand 05.12.2019, 10:36 Uhr)"
+                             text="Es muss mit Verspätungen gerechnet werden. Grund dafür ist eine Baustelle mit halbseitiger Straßensperrung.&lt;br />&lt;br />(Stand 05.12.2019, 10:36 Uhr)"
+                             priority="100" category="2" products="65535" altStart="" altEnd="" sTime="04:00:00"
+                             sDate="2019-04-29" eTime="23:59:00" eDate="2019-12-20" company="RMVU"/>
+                </Messages>
+                <JourneyStatus>P</JourneyStatus>
+                <Product catCode="9" catIn="ALT" catOut="ALT     " catOutL="ALT" catOutS="ALT" line="VB-65"
+                         name="ALTVB-65" num="2978" operator="VGO Alsfeld" operatorCode="VGO" admin="VBBUS_"/>
+            </Leg>
+            <Leg type="JNY" idx="1" name="    RB45" number="881" category="Cn1" reachable="true"
+                 direction="Gießen Bahnhof">
+                <Origin id="A=1@O=Lauterbach (Hessen) Nordbahnhof@X=9406214@Y=50644138@U=80@L=3011203@" extId="3011203"
+                        name="Lauterbach (Hessen) Nordbahnhof" type="ST" routeIdx="5" lon="9.406214" lat="50.644138"
+                        date="2019-12-08" time="10:05:00" track="2" prognosisType="PROGNOSED"/>
+                <Destination id="A=1@O=Gießen Bahnhof@X=8663803@Y=50579883@U=80@L=3011016@" extId="3011016"
+                             name="Gießen Bahnhof" type="ST" routeIdx="15" lon="8.663803" lat="50.579883"
+                             date="2019-12-08" time="11:15:00" track="11" prognosisType="PROGNOSED"/>
+                <Notes>
+                    <Note routeIdxFrom="5" routeIdxTo="15" key="FD" type="I">24804</Note>
+                </Notes>
+                <JourneyDetailRef ref="1|241976|0|80|8122019"/>
+                <JourneyStatus>P</JourneyStatus>
+                <Product catCode="2" catIn="Cn1" catOut="RB      " catOutL="RB" catOutS="Cn1" line="RB45"
+                         name="    RB45" num="881" operator="Hessische Landesbahn GmbH" operatorCode="HLB"
+                         admin="K4RB__"/>
+            </Leg>
+            <Leg type="JNY" idx="2" name="    RB41" number="141" category="BT1" reachable="true"
+                 direction="Marburg Hauptbahnhof">
+                <Origin id="A=1@O=Gießen Bahnhof@X=8663803@Y=50579883@U=80@L=3011016@" extId="3011016"
+                        name="Gießen Bahnhof" type="ST" routeIdx="10" lon="8.663803" lat="50.579883" date="2019-12-08"
+                        time="11:39:00" track="1" prognosisType="PROGNOSED"/>
+                <Destination id="A=1@O=Marburg Südbahnhof@X=8763548@Y=50794869@U=80@L=3011323@" extId="3011323"
+                             name="Marburg Südbahnhof" type="ST" routeIdx="17" lon="8.763548" lat="50.794869"
+                             date="2019-12-08" time="12:01:00" track="2" prognosisType="PROGNOSED"/>
+                <Notes>
+                    <Note routeIdxFrom="10" routeIdxTo="17" key="bE" priority="560" type="A">Fahrzeuggebundene
+                        Einstiegshilfe vorhanden
+                    </Note>
+                    <Note routeIdxFrom="10" routeIdxTo="17" key="aU" priority="610" type="A">Klimaanlage</Note>
+                    <Note routeIdxFrom="10" routeIdxTo="17" key="FD" type="I">15010</Note>
+                </Notes>
+                <JourneyDetailRef ref="1|181684|0|80|8122019"/>
+                <JourneyStatus>P</JourneyStatus>
+                <Product catCode="2" catIn="BT1" catOut="RB      " catOutL="R-Bahn" catOutS="BT1" line="RB41"
+                         name="    RB41" num="141" operator="DB Regio AG Mitte Region Hessen" operatorCode="DB9"
+                         admin="800535"/>
+            </Leg>
+            <Leg type="WALK" idx="3" dist="122" duration="PT4M" name="">
+                <Origin id="A=1@O=Marburg Südbahnhof@X=8763548@Y=50794869@U=80@L=3011323@" extId="3011323"
+                        name="Marburg Südbahnhof" type="ST" lon="8.763548" lat="50.794869" date="2019-12-08"
+                        time="12:01:00"/>
+                <Destination id="A=1@O=Marburg Südbahnhof-West@X=8761813@Y=50794968@U=80@L=3010097@" extId="3010097"
+                             name="Marburg Südbahnhof-West" type="ST" lon="8.761813" lat="50.794968" date="2019-12-08"
+                             time="12:05:00"/>
+                <GisRef ref="H|1|W$A=1@O=Marburg Südbahnhof@L=3011323@a=128@$A=1@O=Marburg Südbahnhof-West@L=3010097@a=128@$201912081201$201912081205$$$1$$$"/>
+            </Leg>
+            <Leg type="JNY" idx="4" name="Bus 383 " number="140" category="BB1" reachable="true"
+                 direction="Bad Endbach-Schlierbach Brunnenstraße">
+                <Origin id="A=1@O=Marburg Südbahnhof-West@X=8761813@Y=50794968@U=80@L=3010097@" extId="3010097"
+                        name="Marburg Südbahnhof-West" type="ST" routeIdx="6" lon="8.761813" lat="50.794968"
+                        date="2019-12-08" time="12:18:00" track="2" prognosisType="PROGNOSED"/>
+                <Destination id="A=1@O=Bad Endbach Sportzentrum@X=8479300@Y=50756602@U=80@L=3010296@" extId="3010296"
+                             name="Bad Endbach Sportzentrum" type="ST" routeIdx="36" lon="8.4793" lat="50.756602"
+                             date="2019-12-08" time="13:13:00" prognosisType="PROGNOSED"/>
+                <Notes>
+                    <Note routeIdxFrom="6" routeIdxTo="36" key="FD" type="I">710</Note>
+                </Notes>
+                <JourneyDetailRef ref="1|65835|4|80|8122019"/>
+                <JourneyStatus>P</JourneyStatus>
+                <Product catCode="6" catIn="BB1" catOut="Bus     " catOutL="Niederflurbus" catOutS="BB1" line="383"
+                         name="Bus 383 " num="140" operator="Becker und Bender Busverkehr GbR" operatorCode="BEC"
+                         admin="BUBBUS"/>
+            </Leg>
+        </LegList>
+        <TariffResult>
+            <fareSetItem name="Tageskarten">
+                <fareItem name="0" desc="ohne Umweg" shpCtx="" price="0">
+                    <ticket name="Hessenticket (bis 5 Pers.)" desc="Erw. und Kinder"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;Hessenticket bis 5 Personen&quot;,&quot;TextMiddle&quot;:&quot;Hessenticket bis 5 Pers.&quot;,&quot;TextShort&quot;:&quot;Hessenticket 5P&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;50&quot;,&quot;TariffLevelIntern&quot;:&quot;95&quot;,&quot;Price&quot;:&quot;3600&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;9970&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;9970&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;1750&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Tageskarte&quot;,&quot;KartentypAnzeigename&quot;:&quot;Tageskarten&quot;,&quot;KAProduktnummer&quot;:&quot;10181&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-VTRB-Ausgabeart=Papier|ATTR-VTRB-Frg=2&quot;}}"
+                            cur="EUR" price="3600"/>
+                </fareItem>
+            </fareSetItem>
+            <fareSetItem name="Monatskarten">
+                <fareItem name="0" desc="ohne Umweg" shpCtx="" price="0">
+                    <ticket name="65-plus-Monatskarte" desc="Senioren"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;65-plus-Monatskarte&quot;,&quot;TextMiddle&quot;:&quot;65-plus-Monatskarte&quot;,&quot;TextShort&quot;:&quot;65-plus-Monatskarte&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;6&quot;,&quot;TariffLevelIntern&quot;:&quot;80&quot;,&quot;Price&quot;:&quot;14190&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;1300&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;400&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;120&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;minVVF&quot;:&quot;13.12.2019&quot;,&quot;minNKF&quot;:&quot;09.12.2019&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Monatskarte&quot;,&quot;KartentypAnzeigename&quot;:&quot;Monatskarten&quot;,&quot;KAProduktnummer&quot;:&quot;10238&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-SRTE-NACHWEIS-REDUZ=65-plus|ATTR-VTRB-Ausgabeart=eTicket|ATTR-VTRB-Frg=3|ATTR-VTRB-minNKF=2|ATTR-VTRB-minVVF=5&quot;}}"
+                            cur="EUR" price="14190"/>
+                </fareItem>
+            </fareSetItem>
+            <fareSetItem name="Jahreskarten">
+                <fareItem name="0" desc="ohne Umweg" shpCtx="" price="0">
+                    <ticket name="65-plus-Jahreskarte einmalige Zahlung" desc="Senioren"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;65-plus-Jahreskarte&quot;,&quot;TextShort&quot;:&quot;65-plus-Jahreskarte&quot;,&quot;Remark&quot;:&quot;einmalige Zahlung&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;6&quot;,&quot;TariffLevelIntern&quot;:&quot;80&quot;,&quot;Price&quot;:&quot;139060&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;1300&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;400&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;820&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Jahreskarte&quot;,&quot;KartentypAnzeigename&quot;:&quot;Jahreskarten&quot;,&quot;KAProduktnummer&quot;:&quot;10683&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-SRTE-KLASSE_1=Ja|ATTR-SRTE-NACHWEIS-REDUZ=65-plus|ATTR-VTRB-Ausgabeart=eTicket|ATTR-VTRB-Frg=3|ATTR-VTRB-minNKF=2|ATTR-VTRB-minVVF=5&quot;}}"
+                            cur="EUR" price="139060"/>
+                    <ticket name="Schülerticket Hessen einmalige Zahlung" desc="Auszubildende"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;Schülerticket Hessen&quot;,&quot;TextShort&quot;:&quot;Schülerticket Hessen&quot;,&quot;Remark&quot;:&quot;einmalige Zahlung&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;50&quot;,&quot;TariffLevelIntern&quot;:&quot;95&quot;,&quot;Price&quot;:&quot;36500&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;9990&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;9990&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;77400&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Jahreskarte&quot;,&quot;KartentypAnzeigename&quot;:&quot;Jahreskarten&quot;,&quot;KAProduktnummer&quot;:&quot;10547&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-SRTE-NACHWEIS-REDUZ=Schueler_Azubi|ATTR-VTRB-Ausgabeart=eTicket|ATTR-VTRB-Frg=3|ATTR-VTRB-minNKF=2|ATTR-VTRB-minVVF=5&quot;}}"
+                            cur="EUR" price="36500"/>
+                </fareItem>
+            </fareSetItem>
+            <fareSetItem name="JahresAbos persönlich">
+                <fareItem name="0" desc="ohne Umweg" shpCtx="" price="0">
+                    <ticket name="65-plus-Jahreskarte einmalige Abbuchung" desc="Senioren"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;65-plus-Jahreskarte&quot;,&quot;TextShort&quot;:&quot;65-plus-Jahreskarte&quot;,&quot;Remark&quot;:&quot;einmalige Abbuchung&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;6&quot;,&quot;TariffLevelIntern&quot;:&quot;80&quot;,&quot;Price&quot;:&quot;139060&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;1300&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;400&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;1420&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;minVVF&quot;:&quot;01.01.2020&quot;,&quot;minNKF&quot;:&quot;01.01.2020&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Jahresabos_persoenlich&quot;,&quot;KartentypAnzeigename&quot;:&quot;JahresAbos persönlich&quot;,&quot;KAProduktnummer&quot;:&quot;10097&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-SRTE-KLASSE_1=Ja|ATTR-SRTE-NACHWEIS-REDUZ=65-plus|ATTR-VTRB-Ausgabeart=eTicket|ATTR-VTRB-Frg=3|ATTR-VTRB-minNKF=2|ATTR-VTRB-minVVF=5&quot;}}"
+                            cur="EUR" price="139060"/>
+                    <ticket name="65-plus-Jahreskarte 12-fache Abbuchung" desc="Senioren"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;65-plus-Jahreskarte&quot;,&quot;TextShort&quot;:&quot;65-plus-Jahreskarte&quot;,&quot;Remark&quot;:&quot;12-fache Abbuchung&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;6&quot;,&quot;TariffLevelIntern&quot;:&quot;80&quot;,&quot;Price&quot;:&quot;141900&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;1300&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;400&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;1330&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;minVVF&quot;:&quot;01.01.2020&quot;,&quot;minNKF&quot;:&quot;01.01.2020&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Jahresabos_persoenlich&quot;,&quot;KartentypAnzeigename&quot;:&quot;JahresAbos persönlich&quot;,&quot;KAProduktnummer&quot;:&quot;10755&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-SRTE-KLASSE_1=Ja|ATTR-SRTE-NACHWEIS-REDUZ=65-plus|ATTR-VTRB-Ausgabeart=eTicket|ATTR-VTRB-Frg=3|ATTR-VTRB-minNKF=2|ATTR-VTRB-minVVF=5&quot;}}"
+                            cur="EUR" price="141900"/>
+                    <ticket name="Schülerticket Hessen einmalige Abbuchung" desc="Auszubildende"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;Schülerticket Hessen&quot;,&quot;TextShort&quot;:&quot;Schülerticket Hessen&quot;,&quot;Remark&quot;:&quot;einmalige Abbuchung&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;50&quot;,&quot;TariffLevelIntern&quot;:&quot;95&quot;,&quot;Price&quot;:&quot;36500&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;9990&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;9990&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;77401&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;minVVF&quot;:&quot;01.01.2020&quot;,&quot;minNKF&quot;:&quot;01.01.2020&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Jahresabos_persoenlich&quot;,&quot;KartentypAnzeigename&quot;:&quot;JahresAbos persönlich&quot;,&quot;KAProduktnummer&quot;:&quot;10548&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-SRTE-NACHWEIS-REDUZ=Schueler_Azubi_Jaka|ATTR-VTRB-Ausgabeart=eTicket|ATTR-VTRB-Frg=3|ATTR-VTRB-minNKF=2|ATTR-VTRB-minVVF=5&quot;}}"
+                            cur="EUR" price="36500"/>
+                    <ticket name="Schülerticket Hessen 12-fache Abbuchung" desc="Auszubildende"
+                            shpCtx="{&quot;RMVTicket&quot;:{&quot;TextLong&quot;:&quot;Schülerticket Hessen&quot;,&quot;TextShort&quot;:&quot;Schülerticket Hessen&quot;,&quot;Remark&quot;:&quot;12-fache Abbuchung&quot;,&quot;ValidFrom&quot;:&quot;07.12.2019&quot;,&quot;TariffLevelPrint&quot;:&quot;50&quot;,&quot;TariffLevelIntern&quot;:&quot;95&quot;,&quot;Price&quot;:&quot;37200&quot;,&quot;TZCodeStartReq&quot;:&quot;1357&quot;,&quot;TZCodeStartRes&quot;:&quot;9990&quot;,&quot;TZNameStart&quot;:&quot;Ulrichstein Wiesenhof&quot;,&quot;ViaId&quot;:&quot;0&quot;,&quot;ViaText&quot;:&quot;ohne Umweg&quot;,&quot;TZCodeDestReq&quot;:&quot;410&quot;,&quot;TZCodeDestRes&quot;:&quot;9990&quot;,&quot;TZNameDest&quot;:&quot;Bad Endbach Sportzentrum&quot;,&quot;TypeKey&quot;:&quot;77402&quot;,&quot;Subvention&quot;:&quot;0&quot;,&quot;TariffVersion&quot;:&quot;38&quot;,&quot;minVVF&quot;:&quot;01.01.2020&quot;,&quot;minNKF&quot;:&quot;01.01.2020&quot;,&quot;Kartentyp&quot;:&quot;KTYP-Jahresabos_persoenlich&quot;,&quot;KartentypAnzeigename&quot;:&quot;JahresAbos persönlich&quot;,&quot;KAProduktnummer&quot;:&quot;10552&quot;,&quot;KAInfoText&quot;:&quot;&quot;,&quot;Verantwortlicher&quot;:&quot;RMV&quot;,&quot;Verbuende&quot;:&quot;RMV&quot;,&quot;ExportAttribute&quot;:&quot;ATTR-SRTE-NACHWEIS-REDUZ=Schueler_Azubi_Jaka|ATTR-VTRB-Ausgabeart=eTicket|ATTR-VTRB-Frg=3|ATTR-VTRB-minNKF=2|ATTR-VTRB-minVVF=5&quot;}}"
+                            cur="EUR" price="37200"/>
+                </fareItem>
+            </fareSetItem>
+        </TariffResult>
+    </Trip>
+</TripList>

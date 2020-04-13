@@ -1,0 +1,609 @@
+{
+  "ver": "1.16",
+  "ext": "VBB.1",
+  "lang": "deu",
+  "id": "db6axp9kgxcdhm44",
+  "svcResL": [
+    {
+      "meth": "TripSearch",
+      "err": "OK",
+      "res": {
+        "common": {
+          "locL": [
+            {
+              "lid": "A=1@O=S Potsdam Hauptbahnhof@X=13067187@Y=52390931@U=86@L=900230999@",
+              "type": "S",
+              "name": "S Potsdam Hauptbahnhof",
+              "icoX": 0,
+              "extId": "900230999",
+              "state": "F",
+              "crd": {
+                "x": 13067187,
+                "y": 52390931,
+                "type": "WGS84",
+                "layerX": 0,
+                "crdSysX": 0
+              },
+              "pCls": 109
+            },
+            {
+              "lid": "A=1@O=S+U Berlin Hauptbahnhof@X=13368928@Y=52525850@U=86@L=900003201@",
+              "type": "S",
+              "name": "S+U Berlin Hauptbahnhof",
+              "icoX": 0,
+              "extId": "900003201",
+              "state": "F",
+              "crd": {
+                "x": 13368928,
+                "y": 52525850,
+                "type": "WGS84",
+                "layerX": 0,
+                "crdSysX": 0
+              },
+              "pCls": 111
+            },
+            {
+              "lid": "A=1@O=S Wannsee Bhf (Berlin)@X=13179103@Y=52421458@U=86@L=900053301@",
+              "type": "S",
+              "name": "S Wannsee Bhf (Berlin)",
+              "icoX": 0,
+              "extId": "900053301",
+              "state": "F",
+              "crd": {
+                "x": 13179103,
+                "y": 52421458,
+                "type": "WGS84",
+                "layerX": 0,
+                "crdSysX": 0
+              },
+              "pCls": 121
+            },
+            {
+              "lid": "A=1@O=S Charlottenburg Bhf (Berlin)@X=13303846@Y=52504806@U=86@L=900024101@",
+              "type": "S",
+              "name": "S Charlottenburg Bhf (Berlin)",
+              "icoX": 0,
+              "extId": "900024101",
+              "state": "F",
+              "crd": {
+                "x": 13303846,
+                "y": 52504806,
+                "type": "WGS84",
+                "layerX": 0,
+                "crdSysX": 0
+              },
+              "pCls": 105
+            },
+            {
+              "lid": "A=1@O=S+U Zoologischer Garten Bhf (Berlin)@X=13332711@Y=52506919@U=86@L=900023201@",
+              "type": "S",
+              "name": "S+U Zoologischer Garten Bhf (Berlin)",
+              "icoX": 0,
+              "extId": "900023201",
+              "state": "F",
+              "crd": {
+                "x": 13332711,
+                "y": 52506919,
+                "type": "WGS84",
+                "layerX": 0,
+                "crdSysX": 0
+              },
+              "pCls": 107
+            }
+          ],
+          "prodL": [
+            {
+              "pid": "L::6::RE::B0002373722::RE_0002373722_RE1::*",
+              "name": "RE1",
+              "nameS": "RE1",
+              "number": "RE1",
+              "icoX": 1,
+              "cls": 64,
+              "oprX": 0,
+              "prodCtx": {
+                "name": "     RE1",
+                "num": "1344",
+                "line": "RE1",
+                "matchId": "3115",
+                "catOut": "RE",
+                "catOutS": "RE",
+                "catOutL": "RE",
+                "catIn": "RE",
+                "catCode": "6",
+                "admin": "800154"
+              },
+              "himIdL": [
+                "HIM_FREETEXT_76994",
+                "HIM_FREETEXT_80434"
+              ]
+            }
+          ],
+          "polyL": [],
+          "layerL": [
+            {
+              "id": "standard",
+              "name": "standard",
+              "index": 0,
+              "annoCnt": 0
+            }
+          ],
+          "crdSysL": [
+            {
+              "id": "standard",
+              "index": 0,
+              "type": "WGS84",
+              "dim": 2
+            }
+          ],
+          "opL": [
+            {
+              "name": "DB Regio AG",
+              "icoX": 2,
+              "id": "DB Regio AG"
+            }
+          ],
+          "remL": [
+            {
+              "type": "A",
+              "code": "FB",
+              "prio": 350,
+              "icoX": 3,
+              "txtN": "Fahrradmitnahme möglich"
+            },
+            {
+              "type": "A",
+              "code": "SN",
+              "prio": 450,
+              "icoX": 4,
+              "txtN": "SnackPoint/Imbiss im Zug"
+            },
+            {
+              "type": "A",
+              "code": "ZM",
+              "prio": 560,
+              "icoX": 4,
+              "txtN": "Fahrzeuggebundene Einstiegshilfe in der Zugmitte"
+            },
+            {
+              "type": "H",
+              "code": "wagenstand_v2",
+              "prio": 2,
+              "icoX": 4,
+              "txtN": "Weitere Infos siehe Fahrtdetails"
+            }
+          ],
+          "icoL": [
+            {
+              "res": "prod_ic",
+              "fg": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 255
+              },
+              "bg": {
+                "r": 125,
+                "g": 129,
+                "b": 133,
+                "a": 255
+              }
+            },
+            {
+              "res": "prod_reg",
+              "fg": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 255
+              },
+              "bg": {
+                "r": 226,
+                "g": 0,
+                "b": 25,
+                "a": 255
+              }
+            },
+            {
+              "res": "DB",
+              "txt": "DB Regio AG"
+            },
+            {
+              "res": "attr_bike"
+            },
+            {
+              "res": "INFO"
+            }
+          ]
+        },
+        "outConL": [
+          {
+            "cid": "C-0",
+            "date": "20200418",
+            "dur": "002400",
+            "chg": 0,
+            "sDays": {
+              "sDaysR": "täglich",
+              "sDaysI": "nicht 4., 5. Apr",
+              "sDaysB": "FFFFFFE7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"
+            },
+            "dep": {
+              "locX": 0,
+              "idx": 17,
+              "dPlatfS": "4",
+              "dInR": true,
+              "dTimeS": "122500",
+              "dProgType": "PROGNOSED",
+              "type": "N"
+            },
+            "arr": {
+              "locX": 1,
+              "idx": 22,
+              "aPlatfS": "12",
+              "aOutR": true,
+              "aTimeS": "124900",
+              "aProgType": "PROGNOSED",
+              "type": "N"
+            },
+            "secL": [
+              {
+                "type": "JNY",
+                "icoX": 1,
+                "dep": {
+                  "locX": 0,
+                  "idx": 17,
+                  "dPlatfS": "4",
+                  "dInR": true,
+                  "dTimeS": "122500",
+                  "dProgType": "PROGNOSED",
+                  "type": "N"
+                },
+                "arr": {
+                  "locX": 1,
+                  "idx": 22,
+                  "aPlatfS": "12",
+                  "aOutR": true,
+                  "aTimeS": "124900",
+                  "aProgType": "PROGNOSED",
+                  "type": "N"
+                },
+                "jny": {
+                  "jid": "1|642|4|86|18042020",
+                  "prodX": 0,
+                  "dirTxt": "S Ostkreuz Bhf (Berlin)",
+                  "status": "P",
+                  "isRchbl": true,
+                  "stopL": [
+                    {
+                      "locX": 0,
+                      "idx": 9,
+                      "dProdX": 0,
+                      "dInR": true,
+                      "dTimeS": "122500",
+                      "dDirTxt": "S Ostkreuz Bhf (Berlin)",
+                      "dDirFlg": "1",
+                      "type": "N"
+                    },
+                    {
+                      "locX": 2,
+                      "idx": 10,
+                      "aProdX": 0,
+                      "aOutR": true,
+                      "aTimeS": "123100",
+                      "dProdX": 0,
+                      "dInR": true,
+                      "dTimeS": "123200",
+                      "type": "N"
+                    },
+                    {
+                      "locX": 3,
+                      "idx": 11,
+                      "aProdX": 0,
+                      "aOutR": true,
+                      "aTimeS": "124000",
+                      "dProdX": 0,
+                      "dInR": true,
+                      "dTimeS": "124100",
+                      "type": "N"
+                    },
+                    {
+                      "locX": 4,
+                      "idx": 12,
+                      "aProdX": 0,
+                      "aOutR": true,
+                      "aTimeS": "124400",
+                      "dProdX": 0,
+                      "dInR": true,
+                      "dTimeS": "124500",
+                      "type": "N"
+                    },
+                    {
+                      "locX": 1,
+                      "idx": 13,
+                      "aProdX": 0,
+                      "aOutR": true,
+                      "aTimeS": "124900",
+                      "type": "N"
+                    }
+                  ],
+                  "freq": {
+                    "minC": 30,
+                    "maxC": 30,
+                    "numC": 5
+                  },
+                  "ctxRecon": "T$A=1@O=S Potsdam Hauptbahnhof@L=900230999@a=128@$A=1@O=S+U Berlin Hauptbahnhof@L=900003201@a=128@$202004181225$202004181249$     RE1$$1$",
+                  "msgL": [
+                    {
+                      "type": "REM",
+                      "remX": 0,
+                      "fLocX": 0,
+                      "tLocX": 1,
+                      "tagL": [
+                        "RES_JNY_DTL"
+                      ]
+                    },
+                    {
+                      "type": "REM",
+                      "remX": 1,
+                      "fLocX": 0,
+                      "tLocX": 1,
+                      "tagL": [
+                        "RES_JNY_DTL"
+                      ]
+                    },
+                    {
+                      "type": "REM",
+                      "remX": 2,
+                      "fLocX": 0,
+                      "tLocX": 1,
+                      "tagL": [
+                        "RES_JNY_DTL"
+                      ]
+                    },
+                    {
+                      "type": "REM",
+                      "remX": 3,
+                      "tagL": [
+                        "RES_JNY_H3"
+                      ]
+                    }
+                  ],
+                  "subscr": "F"
+                }
+              }
+            ],
+            "ctxRecon": "¶HKI¶T$A=1@O=S Potsdam Hauptbahnhof@L=900230999@a=128@$A=1@O=S+U Berlin Hauptbahnhof@L=900003201@a=128@$202004181225$202004181249$     RE1$$1$",
+            "freq": {
+              "minC": 30
+            },
+            "trfRes": {
+              "fareSetL": [
+                {
+                  "desc": "Tickets für die Verbindung S Potsdam Hauptbahnhof (5750) - S+U Berlin Hauptbahnhof (5555)",
+                  "fareL": [
+                    {
+                      "name": "Berlin Tarifgebiet A-B-C: Einzelfahrausweis",
+                      "prc": 0,
+                      "shpCtx": "",
+                      "ticketL": [
+                        {
+                          "name": "Regeltarif",
+                          "prc": 360,
+                          "cur": "EUR",
+                          "shpCtx": "{\"FV\":\"VBB-1\",\"TC\":\"Bartarif\",\"SW\":\"5750\",\"ZW\":\"5555\",\"TLS\":\"B3\",\"VT\":\"Berlin ABC\"}"
+                        },
+                        {
+                          "name": "Ermäßigungstarif",
+                          "prc": 260,
+                          "cur": "EUR",
+                          "shpCtx": "{\"FV\":\"VBB-1\",\"TC\":\"Bartarif\",\"SW\":\"5750\",\"ZW\":\"5555\",\"TLS\":\"B3E\",\"VT\":\"Berlin ABC\"}"
+                        },
+                        {
+                          "name": "Fahrrad",
+                          "prc": 260,
+                          "cur": "EUR",
+                          "shpCtx": "{\"FV\":\"VBB-1\",\"TC\":\"Bartarif\",\"SW\":\"5750\",\"ZW\":\"5555\",\"TLS\":\"B3F\",\"VT\":\"Berlin ABC\"}"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Berlin Tarifgebiet A-B-C: Tageskarte",
+                      "prc": 0,
+                      "shpCtx": "",
+                      "ticketL": [
+                        {
+                          "name": "Regeltarif",
+                          "prc": 960,
+                          "cur": "EUR",
+                          "shpCtx": "{\"FV\":\"VBB-1\",\"TC\":\"Bartarif\",\"SW\":\"5750\",\"ZW\":\"5555\",\"TLS\":\"B3T\",\"VT\":\"Berlin ABC\"}"
+                        },
+                        {
+                          "name": "Ermäßigungstarif",
+                          "prc": 600,
+                          "cur": "EUR",
+                          "shpCtx": "{\"FV\":\"VBB-1\",\"TC\":\"Bartarif\",\"SW\":\"5750\",\"ZW\":\"5555\",\"TLS\":\"B3TE\",\"VT\":\"Berlin ABC\"}"
+                        },
+                        {
+                          "name": "Fahrrad",
+                          "prc": 550,
+                          "cur": "EUR",
+                          "shpCtx": "{\"FV\":\"VBB-1\",\"TC\":\"Bartarif\",\"SW\":\"5750\",\"ZW\":\"5555\",\"TLS\":\"B3TF\",\"VT\":\"Berlin ABC\"}"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Berlin Tarifgebiet A-B-C: Kleingruppen-",
+                      "prc": 0,
+                      "shpCtx": "",
+                      "ticketL": [
+                        {
+                          "name": "Tageskarte",
+                          "prc": 2490,
+                          "cur": "EUR",
+                          "shpCtx": "{\"FV\":\"VBB-1\",\"TC\":\"Bartarif\",\"SW\":\"5750\",\"ZW\":\"5555\",\"TLS\":\"B3TK\",\"VT\":\"Berlin ABC\"}"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Berlin Tarifgebiet A-B-C: Gruppentageskarte",
+                      "prc": 0,
+                      "shpCtx": "",
+                      "ticketL": [
+                        {
+                          "name": "Schüler",
+                          "prc": 340,
+                          "cur": "EUR",
+                          "shpCtx": "{\"FV\":\"VBB-1\",\"TC\":\"Bartarif\",\"SW\":\"5750\",\"ZW\":\"5555\",\"TLS\":\"B3SG\",\"VT\":\"Berlin ABC\"}"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Berlin Tarifgebiet A-B-C: 4-Fahrten-Karte",
+                      "prc": 0,
+                      "shpCtx": "",
+                      "ticketL": [
+                        {
+                          "name": "Regeltarif",
+                          "prc": 1320,
+                          "cur": "EUR",
+                          "shpCtx": "{\"FV\":\"VBB-1\",\"TC\":\"Bartarif\",\"SW\":\"5750\",\"ZW\":\"5555\",\"TLS\":\"B3M\",\"VT\":\"Berlin ABC\"}"
+                        },
+                        {
+                          "name": "Ermäßigungstarif",
+                          "prc": 960,
+                          "cur": "EUR",
+                          "shpCtx": "{\"FV\":\"VBB-1\",\"TC\":\"Bartarif\",\"SW\":\"5750\",\"ZW\":\"5555\",\"TLS\":\"B3ME\",\"VT\":\"Berlin ABC\"}"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Zeitkarte Berlin Tarifgebiet A-B-C: 7-Tage-Karte",
+                      "prc": 0,
+                      "shpCtx": "",
+                      "ticketL": [
+                        {
+                          "name": "VBB-Umweltkarte",
+                          "prc": 4100,
+                          "cur": "EUR",
+                          "shpCtx": "{\"FV\":\"VBB-1\",\"TC\":\"Zeittarif\",\"SW\":\"5750\",\"ZW\":\"5555\",\"TLS\":\"BCW\",\"VT\":\"Berlin ABC\"}"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Zeitkarte Berlin Tarifgebiet A-B-C: Monatskarte",
+                      "prc": 0,
+                      "shpCtx": "",
+                      "ticketL": [
+                        {
+                          "name": "VBB-Umweltkarte",
+                          "prc": 10400,
+                          "cur": "EUR",
+                          "shpCtx": "{\"FV\":\"VBB-1\",\"TC\":\"Zeittarif\",\"SW\":\"5750\",\"ZW\":\"5555\",\"TLS\":\"BC\",\"VT\":\"Berlin ABC\"}"
+                        },
+                        {
+                          "name": "Azubi/Schüler",
+                          "prc": 7610,
+                          "cur": "EUR",
+                          "shpCtx": "{\"FV\":\"VBB-1\",\"TC\":\"Zeittarif\",\"SW\":\"5750\",\"ZW\":\"5555\",\"TLS\":\"BCE\",\"VT\":\"Berlin ABC\"}"
+                        },
+                        {
+                          "name": "10-Uhr-Karte",
+                          "prc": 7600,
+                          "cur": "EUR",
+                          "shpCtx": "{\"FV\":\"VBB-1\",\"TC\":\"Zeittarif\",\"SW\":\"5750\",\"ZW\":\"5555\",\"TLS\":\"BCL\",\"VT\":\"Berlin ABC\"}"
+                        },
+                        {
+                          "name": "Fahrrad",
+                          "prc": 1390,
+                          "cur": "EUR",
+                          "shpCtx": "{\"FV\":\"VBB-1\",\"TC\":\"Zeittarif\",\"SW\":\"5750\",\"ZW\":\"5555\",\"TLS\":\"BCI\",\"VT\":\"Berlin ABC\"}"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Zeitkarte Berlin Tarifgebiet A-B-C: Abonnement (monatliche Abbuchung)",
+                      "prc": 0,
+                      "shpCtx": "",
+                      "ticketL": [
+                        {
+                          "name": "VBB-Umweltkarte",
+                          "prc": 100800,
+                          "cur": "EUR",
+                          "shpCtx": "{\"FV\":\"VBB-1\",\"TC\":\"Zeittarif\",\"SW\":\"5750\",\"ZW\":\"5555\",\"TLS\":\"BCR\",\"VT\":\"Berlin ABC\"}"
+                        },
+                        {
+                          "name": "Azubi/Schüler",
+                          "prc": 76000,
+                          "cur": "EUR",
+                          "shpCtx": "{\"FV\":\"VBB-1\",\"TC\":\"Zeittarif\",\"SW\":\"5750\",\"ZW\":\"5555\",\"TLS\":\"BCRE\",\"VT\":\"Berlin ABC\"}"
+                        },
+                        {
+                          "name": "10-Uhr-Karte",
+                          "prc": 72600,
+                          "cur": "EUR",
+                          "shpCtx": "{\"FV\":\"VBB-1\",\"TC\":\"Zeittarif\",\"SW\":\"5750\",\"ZW\":\"5555\",\"TLS\":\"BCRL\",\"VT\":\"Berlin ABC\"}"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Zeitkarte Berlin Tarifgebiet A-B-C: Jahreskarte",
+                      "prc": 0,
+                      "shpCtx": "",
+                      "ticketL": [
+                        {
+                          "name": "VBB-Umweltkarte",
+                          "prc": 109200,
+                          "cur": "EUR",
+                          "shpCtx": "{\"FV\":\"VBB-1\",\"TC\":\"Zeittarif\",\"SW\":\"5750\",\"ZW\":\"5555\",\"TLS\":\"BCJ\",\"VT\":\"Berlin ABC\"}"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Zeitkarte Berlin Tarifgebiet A-B-C: Abonnement (jährliche Abbuchung)",
+                      "prc": 0,
+                      "shpCtx": "",
+                      "ticketL": [
+                        {
+                          "name": "VBB-Umweltkarte",
+                          "prc": 97800,
+                          "cur": "EUR",
+                          "shpCtx": "{\"FV\":\"VBB-1\",\"TC\":\"Zeittarif\",\"SW\":\"5750\",\"ZW\":\"5555\",\"TLS\":\"BCK\",\"VT\":\"Berlin ABC\"}"
+                        },
+                        {
+                          "name": "10-Uhr-Karte",
+                          "prc": 70800,
+                          "cur": "EUR",
+                          "shpCtx": "{\"FV\":\"VBB-1\",\"TC\":\"Zeittarif\",\"SW\":\"5750\",\"ZW\":\"5555\",\"TLS\":\"BCKL\",\"VT\":\"Berlin ABC\"}"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "ovwTrfRefL": [
+              {
+                "type": "T",
+                "fareSetX": 0,
+                "fareX": 0,
+                "ticketX": 0
+              },
+              {
+                "type": "T",
+                "fareSetX": 0,
+                "fareX": 0,
+                "ticketX": 1
+              }
+            ],
+            "conSubscr": "U",
+            "cksum": "dd53f6a0_3"
+          }
+        ],
+        "outCtxScrB": "1|OB|MT#11#62665#62665#62689#62689#0#0#165#62660#1#-2147483638#0#1#2|PDH#5f87979a087aa480e2f11ae366abfd69|RD#18042020|RT#122000",
+        "outCtxScrF": "1|OF|MT#11#62665#62665#62689#62689#0#0#165#62660#1#-2147483638#0#1#2|PDH#5f87979a087aa480e2f11ae366abfd69|RD#18042020|RT#122000",
+        "fpB": "20200308",
+        "fpE": "20201212",
+        "planrtTS": "1584462401"
+      }
+    }
+  ]
+}

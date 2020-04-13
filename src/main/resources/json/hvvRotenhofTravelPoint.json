@@ -1,0 +1,20 @@
+{
+  "returnCode": "OK",
+  "results": [
+    {
+      "name": "Rosenhof",
+      "city": "Ahrensburg",
+      "combinedName": "Ahrensburg, Rosenhof",
+      "id": "Master:35009",
+      "type": "STATION",
+      "coordinate": {
+        "x": 10.240903,
+        "y": 53.68308
+      },
+      "serviceTypes": [
+        "bus"
+      ],
+      "hasStationInformation": false
+    }
+  ]
+}

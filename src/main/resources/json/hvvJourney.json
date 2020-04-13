@@ -1,0 +1,224 @@
+{
+  "returnCode": "OK",
+  "realtimeSchedules": [
+    {
+      "routeId": 0,
+      "start": {
+        "name": "Rosenhof",
+        "city": "Ahrensburg",
+        "combinedName": "Ahrensburg, Rosenhof",
+        "id": "Master:35009",
+        "type": "STATION",
+        "coordinate": {
+          "x": 10.240903,
+          "y": 53.68308
+        },
+        "serviceTypes": [
+          "bus"
+        ],
+        "hasStationInformation": false
+      },
+      "dest": {
+        "name": "Stadthausbrücke",
+        "city": "Hamburg",
+        "combinedName": "Stadthausbrücke",
+        "id": "Master:11952",
+        "type": "STATION",
+        "coordinate": {
+          "x": 9.984914,
+          "y": 53.549465
+        },
+        "serviceTypes": [
+          "s"
+        ],
+        "hasStationInformation": true
+      },
+      "time": 62,
+      "footpathTime": 5,
+      "tariffInfos": [
+        {
+          "tariffName": "HVV",
+          "tariffRegions": [
+            {
+              "regionType": "ZONE",
+              "alternatives": [
+                {
+                  "regions": [
+                    "505",
+                    "405",
+                    "305",
+                    "205",
+                    "105",
+                    "000"
+                  ]
+                }
+              ]
+            }
+          ],
+          "extraFareType": "POSSIBLE",
+          "ticketInfos": [
+            {
+              "tariffKindID": 1,
+              "tariffKindLabel": "Einzelkarte",
+              "tariffLevelID": 14,
+              "tariffLevelLabel": "Hamburg AB",
+              "tariffGroupID": 1,
+              "tariffGroupLabel": "Einzelkarten",
+              "basePrice": 3.4,
+              "extraFarePrice": 2.1,
+              "reducedBasePrice": 3.3,
+              "reducedExtraFarePrice": 2.04,
+              "notRecommended": false,
+              "shopLinkRegular": "https://shop.hvv.de/index.php/generic/culture/de?return=https%3A%2F%2Fshop.hvv.de%2Findex.php%2Ffahrplanauskunft%3Fkarte%3DEinzelkarte%26bereich%3DHamburg+AB%26start%3DAhrensburg%252C%2BRosenhof%26gueltig%3D2020-01-01",
+              "shopLinkExtraFare": "https://shop.hvv.de/index.php/generic/culture/de?return=https%3A%2F%2Fshop.hvv.de%2Findex.php%2Ffahrplanauskunft%3Fkarte%3DEinzelkarte%26bereich%3DHamburg+AB%26start%3DAhrensburg%252C%2BRosenhof%26gueltig%3D2020-01-01https%3A%2F%2Fshop.hvv.de%2Findex.php%2Ffahrplanauskunft%3Fkarte%3DEinzelkarte%26bereich%3DHamburg+AB%26start%3DAhrensburg%252C%2BRosenhof%26gueltig%3D2020-01-01%26zuschlag%3DSchnellBus+%2F+1.+Klasse"
+            },
+            {
+              "tariffKindID": 2,
+              "tariffKindLabel": "Einzelkarte Kind",
+              "tariffLevelID": 14,
+              "tariffLevelLabel": "Hamburg AB",
+              "tariffGroupID": 1,
+              "tariffGroupLabel": "Einzelkarten",
+              "basePrice": 1.3,
+              "extraFarePrice": 2.1,
+              "reducedBasePrice": 1.26,
+              "reducedExtraFarePrice": 2.04,
+              "notRecommended": false,
+              "shopLinkRegular": "https://shop.hvv.de/index.php/generic/culture/de?return=https%3A%2F%2Fshop.hvv.de%2Findex.php%2Ffahrplanauskunft%3Fkarte%3DEinzelkarte+Kind%26bereich%3DHamburg+AB%26start%3DAhrensburg%252C%2BRosenhof%26gueltig%3D2020-01-01",
+              "shopLinkExtraFare": "https://shop.hvv.de/index.php/generic/culture/de?return=https%3A%2F%2Fshop.hvv.de%2Findex.php%2Ffahrplanauskunft%3Fkarte%3DEinzelkarte+Kind%26bereich%3DHamburg+AB%26start%3DAhrensburg%252C%2BRosenhof%26gueltig%3D2020-01-01https%3A%2F%2Fshop.hvv.de%2Findex.php%2Ffahrplanauskunft%3Fkarte%3DEinzelkarte+Kind%26bereich%3DHamburg+AB%26start%3DAhrensburg%252C%2BRosenhof%26gueltig%3D2020-01-01%26zuschlag%3DSchnellBus+%2F+1.+Klasse"
+            }
+          ]
+        }
+      ],
+      "scheduleElements": [
+        {
+          "from": {
+            "name": "Hasselbrook",
+            "city": "Hamburg",
+            "combinedName": "Hasselbrook",
+            "id": "Master:60950",
+            "type": "STATION",
+            "coordinate": {
+              "x": 10.05656,
+              "y": 53.564947
+            },
+            "serviceTypes": [
+              "bus",
+              "r",
+              "s"
+            ],
+            "hasStationInformation": true,
+            "depTime": {
+              "date": "01.01.2020",
+              "time": "14:11"
+            },
+            "platform": "Gleis 1",
+            "realtimePlatform": "Gleis 1"
+          },
+          "to": {
+            "name": "Stadthausbrücke",
+            "city": "Hamburg",
+            "combinedName": "Stadthausbrücke",
+            "id": "Master:11952",
+            "type": "STATION",
+            "coordinate": {
+              "x": 9.984914,
+              "y": 53.549465
+            },
+            "serviceTypes": [
+              "s"
+            ],
+            "hasStationInformation": true,
+            "arrTime": {
+              "date": "01.01.2020",
+              "time": "14:23"
+            }
+          },
+          "line": {
+            "name": "S1",
+            "direction": "Wedel",
+            "directionId": 6,
+            "origin": "Poppenbüttel / Hamburg Airport (Flughafen)",
+            "type": {
+              "simpleType": "TRAIN",
+              "shortInfo": "S",
+              "longInfo": "S-Bahn",
+              "model": "S-Bahn"
+            },
+            "id": "ZVU-DB:S1_ZVU-DB_S-ZVU"
+          },
+          "paths": [
+            {
+              "track": [
+                {
+                  "x": 10.05656,
+                  "y": 53.564947
+                },
+                {
+                  "x": 9.984524,
+                  "y": 53.549576
+                }
+              ]
+            }
+          ],
+          "intermediateStops": [
+            {
+              "name": "Landwehr",
+              "city": "Hamburg",
+              "combinedName": "Landwehr",
+              "id": "Master:10953",
+              "type": "STATION",
+              "coordinate": {
+                "x": 10.037905,
+                "y": 53.561282
+              },
+              "depTime": {
+                "date": "01.01.2020",
+                "time": "14:13"
+              }
+            },
+            {
+              "name": "Berliner Tor",
+              "city": "Hamburg",
+              "combinedName": "Berliner Tor",
+              "id": "Master:10952",
+              "type": "STATION",
+              "coordinate": {
+                "x": 10.024621,
+                "y": 53.553031
+              },
+              "depTime": {
+                "date": "01.01.2020",
+                "time": "14:15"
+              }
+            }
+          ],
+          "serviceId": 74880
+        }
+      ],
+      "contSearchBefore": {
+        "serviceId": 74880,
+        "lineKey": "ZVU-DB:S1_ZVU-DB_S-ZVU",
+        "plannedDepArrTime": {
+          "date": "01.01.2020",
+          "time": "14:23"
+        },
+        "additionalOffset": 0
+      },
+      "contSearchAfter": {
+        "serviceId": 53030,
+        "lineKey": "VHH:569_VHH",
+        "plannedDepArrTime": {
+          "date": "01.01.2020",
+          "time": "13:21"
+        },
+        "additionalOffset": 0
+      }
+    }
+  ],
+  "individualTrack": {
+    "time": 372,
+    "length": 25433,
+    "type": "FOOTPATH"
+  }
+}

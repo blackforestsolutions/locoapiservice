@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LocationList serverVersion="1.9" dialectVersion="1.23" requestId="1575430968943" xmlns="hafas_rest">
+    <StopLocation
+            id="A=1@O=Frankfurt (Main) Hauptbahnhof@X=8662653@Y=50106808@U=80@L=003000010@B=1@V=6.9,@p=1575313337@"
+            extId="003000010" name="Frankfurt (Main) Hauptbahnhof" lon="8.662653" lat="50.106808" weight="22982"
+            products="255"/>
+    <StopLocation
+            id="A=1@O=Frankfurt (Main) Hauptbahnhof Südseite@X=8664046@Y=50105720@U=80@L=003007011@B=1@V=6.9,@p=1575313337@"
+            extId="003007011" name="Frankfurt (Main) Hauptbahnhof Südseite" lon="8.664046" lat="50.10572" weight="1036"
+            products="224"/>
+    <StopLocation
+            id="A=1@O=Frankfurt (Main) Hauptbahnhof/Münchener Straße@X=8666222@Y=50106907@U=80@L=003000008@B=1@V=6.9,@p=1575313337@"
+            extId="003000008" name="Frankfurt (Main) Hauptbahnhof/Münchener Straße" lon="8.666222" lat="50.106907"
+            weight="3287" products="96"/>
+    <StopLocation
+            id="A=1@O=Frankfurt (Main) Hauptbahnhof/Karlstraße@X=8663651@Y=50108696@U=80@L=003060767@B=1@V=6.9,@p=1575313337@"
+            extId="003060767" name="Frankfurt (Main) Hauptbahnhof/Karlstraße" lon="8.663651" lat="50.108696"
+            weight="133" products="64"/>
+    <CoordLocation name="Frankfurt (Main) Touristeninformation Hbf" type="POI"
+                   id="A%3D4%40O%3DFrankfurt+%28Main%29+Touristeninformation+Hbf%40X%3D8664487%40Y%3D50107500%40U%3D104%40L%3D009000339%40B%3D1%40V%3D6.9%2C%40p%3D1575316171%40"
+                   lon="8.664487" lat="50.1075"/>
+    <StopLocation id="A=1@O=Frankfurt (Main) Südbahnhof@X=8686438@Y=50099329@U=80@L=003000912@B=1@V=6.9,@p=1575313337@"
+                  extId="003000912" name="Frankfurt (Main) Südbahnhof" lon="8.686438" lat="50.099329" weight="25970"
+                  products="255"/>
+    <StopLocation id="A=1@O=Frankfurt (Main) Westbahnhof@X=8639452@Y=50119447@U=80@L=003001204@B=1@V=6.9,@p=1575313337@"
+                  extId="003001204" name="Frankfurt (Main) Westbahnhof" lon="8.639452" lat="50.119447" weight="13938"
+                  products="239"/>
+    <StopLocation id="A=1@O=Frankfurt (Main) Ostbahnhof@X=8707761@Y=50112723@U=80@L=003000526@B=1@V=6.9,@p=1575313337@"
+                  extId="003000526" name="Frankfurt (Main) Ostbahnhof" lon="8.707761" lat="50.112723" weight="5023"
+                  products="148"/>
+    <StopLocation
+            id="A=1@O=Frankfurt (Main) Lokalbahnhof@X=8692128@Y=50101954@U=80@L=003000907@B=1@V=6.9,@p=1575313337@"
+            extId="003000907" name="Frankfurt (Main) Lokalbahnhof" lon="8.692128" lat="50.101954" weight="10947"
+            products="40"/>
+    <StopLocation
+            id="A=1@O=Frankfurt (Main) Höchst Bahnhof@X=8542368@Y=50102214@U=80@L=003001008@B=1@V=6.9,@p=1575313337@"
+            extId="003001008" name="Frankfurt (Main) Höchst Bahnhof" lon="8.542368" lat="50.102214" weight="11001"
+            products="716"/>
+</LocationList>

@@ -1,0 +1,82 @@
+{
+  "FlightsResponse": {
+    "Flight": [
+      {
+        "MarketingCarrierCode": "BA",
+        "FlightNumber": "0117",
+        "Sector": {
+          "DepartureStatus": "Planned",
+          "ArrivalStatus": "Planned",
+          "DepartureAirport": "LHR",
+          "ArrivalAirport": "JFK",
+          "DepartureTerminal": 5,
+          "ArrivalTerminal": 7,
+          "ScheduledDepartureDateTime": "2020-01-11T08:25:00",
+          "ScheduledArrivalDateTime": "2020-01-11T11:25:00",
+          "ReportedDepartureDateTime": "2020-01-11T08:25:00",
+          "ReportedArrivalDateTime": "2020-01-11T11:25:00",
+          "OperatingCarrierCode": "BA",
+          "AircraftTypeCode": 744,
+          "MatchesRequest": true
+        }
+      },
+      {
+        "MarketingCarrierCode": "BA",
+        "FlightNumber": 1516,
+        "Sector": {
+          "DepartureStatus": "Planned",
+          "ArrivalStatus": "Planned",
+          "DepartureAirport": "LHR",
+          "ArrivalAirport": "JFK",
+          "DepartureTerminal": 3,
+          "ArrivalTerminal": 8,
+          "ScheduledDepartureDateTime": "2020-01-11T10:10:00",
+          "ScheduledArrivalDateTime": "2020-01-11T13:25:00",
+          "ReportedDepartureDateTime": "2020-01-11T10:10:00",
+          "ReportedArrivalDateTime": "2020-01-11T13:25:00",
+          "OperatingCarrierCode": "AA",
+          "AircraftTypeCode": 772,
+          "MatchesRequest": true
+        }
+      },
+      {
+        "MarketingCarrierCode": "BA",
+        "FlightNumber": "0173",
+        "Sector": {
+          "DepartureStatus": "Planned",
+          "ArrivalStatus": "Planned",
+          "DepartureAirport": "LHR",
+          "ArrivalAirport": "JFK",
+          "DepartureTerminal": 5,
+          "ArrivalTerminal": 7,
+          "ScheduledDepartureDateTime": "2020-01-11T11:25:00",
+          "ScheduledArrivalDateTime": "2020-01-11T14:25:00",
+          "ReportedDepartureDateTime": "2020-01-11T11:25:00",
+          "ReportedArrivalDateTime": "2020-01-11T14:25:00",
+          "OperatingCarrierCode": "BA",
+          "AircraftTypeCode": 744,
+          "MatchesRequest": true
+        }
+      },
+      {
+        "MarketingCarrierCode": "BA",
+        "FlightNumber": 1506,
+        "Sector": {
+          "DepartureStatus": "Planned",
+          "ArrivalStatus": "Planned",
+          "DepartureAirport": "LHR",
+          "ArrivalAirport": "JFK",
+          "ArrivalTerminal": 8,
+          "ScheduledDepartureDateTime": "2020-01-11T14:45:00",
+          "ScheduledArrivalDateTime": "2020-01-11T18:10:00",
+          "ReportedDepartureDateTime": "2020-01-11T14:45:00",
+          "ReportedArrivalDateTime": "2020-01-11T18:10:00",
+          "OperatingCarrierCode": "AA",
+          "AircraftTypeCode": 772,
+          "MatchesRequest": true
+        }
+      }
+    ],
+    "DataLastUpdated": "2019-12-30T07:26:59"
+  }
+}

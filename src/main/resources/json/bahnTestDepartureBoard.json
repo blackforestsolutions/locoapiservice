@@ -1,0 +1,202 @@
+[
+  {
+    "name": "ICE 275",
+    "type": "ICE",
+    "boardId": 8011160,
+    "stopId": 8011160,
+    "stopName": "Berlin Hbf",
+    "dateTime": "2019-07-25T03:57",
+    "track": "13",
+    "detailsId": "570648%2F205143%2F448324%2F33946%2F80%3fstation_evaId%3D8011160"
+  },
+  {
+    "name": "ICE 501",
+    "type": "ICE",
+    "boardId": 8011160,
+    "stopId": 8098160,
+    "stopName": "Berlin Hbf &#x0028;tief&#x0029;",
+    "dateTime": "2019-07-25T04:28",
+    "track": "2",
+    "detailsId": "283161%2F102776%2F604710%2F207968%2F80%3fstation_evaId%3D8098160"
+  },
+  {
+    "name": "ICE 656",
+    "type": "ICE",
+    "boardId": 8011160,
+    "stopId": 8098160,
+    "stopName": "Berlin Hbf &#x0028;tief&#x0029;",
+    "dateTime": "2019-07-25T04:30",
+    "track": "4",
+    "detailsId": "568812%2F200033%2F326462%2F26373%2F80%3fstation_evaId%3D8098160"
+  },
+  {
+    "name": "ICE 593",
+    "type": "ICE",
+    "boardId": 8011160,
+    "stopId": 8098160,
+    "stopName": "Berlin Hbf &#x0028;tief&#x0029;",
+    "dateTime": "2019-07-25T05:28",
+    "track": "2",
+    "detailsId": "957000%2F328532%2F429304%2F104348%2F80%3fstation_evaId%3D8098160"
+  },
+  {
+    "name": "ICE 908",
+    "type": "ICE",
+    "boardId": 8011160,
+    "stopId": 8098160,
+    "stopName": "Berlin Hbf &#x0028;tief&#x0029;",
+    "dateTime": "2019-07-25T05:28",
+    "track": "8",
+    "detailsId": "52512%2F29858%2F873896%2F419444%2F80%3fstation_evaId%3D8098160"
+  },
+  {
+    "name": "ICE 1701",
+    "type": "ICE",
+    "boardId": 8011160,
+    "stopId": 8098160,
+    "stopName": "Berlin Hbf &#x0028;tief&#x0029;",
+    "dateTime": "2019-07-25T05:34",
+    "track": "1",
+    "detailsId": "261357%2F90100%2F416122%2F120942%2F80%3fstation_evaId%3D8098160"
+  },
+  {
+    "name": "ICE 946",
+    "type": "ICE",
+    "boardId": 8011160,
+    "stopId": 8098160,
+    "stopName": "Berlin Hbf &#x0028;tief&#x0029;",
+    "dateTime": "2019-07-25T05:40",
+    "track": "2",
+    "detailsId": "52653%2F30174%2F414030%2F189464%2F80%3fstation_evaId%3D8098160"
+  },
+  {
+    "name": "EC 41",
+    "type": "EC",
+    "boardId": 8011160,
+    "stopId": 8011160,
+    "stopName": "Berlin Hbf",
+    "dateTime": "2019-07-25T05:43",
+    "track": "12",
+    "detailsId": "595356%2F213921%2F685836%2F144466%2F80%3fstation_evaId%3D8011160"
+  },
+  {
+    "name": "ICE 299",
+    "type": "ICE",
+    "boardId": 8011160,
+    "stopId": 8011160,
+    "stopName": "Berlin Hbf",
+    "dateTime": "2019-07-25T05:57",
+    "track": "13",
+    "detailsId": "892290%2F305489%2F84272%2F255294%2F80%3fstation_evaId%3D8011160"
+  },
+  {
+    "name": "ICE 1001",
+    "type": "ICE",
+    "boardId": 8011160,
+    "stopId": 8098160,
+    "stopName": "Berlin Hbf &#x0028;tief&#x0029;",
+    "dateTime": "2019-07-25T06:01",
+    "track": "1 A - C",
+    "detailsId": "332169%2F111337%2F723102%2F250828%2F80%3fstation_evaId%3D8098160"
+  },
+  {
+    "name": "ICE 1638",
+    "type": "ICE",
+    "boardId": 8011160,
+    "stopId": 8098160,
+    "stopName": "Berlin Hbf &#x0028;tief&#x0029;",
+    "dateTime": "2019-07-25T06:01",
+    "track": "1 D - G",
+    "detailsId": "675246%2F227656%2F805306%2F177571%2F80%3fstation_evaId%3D8098160"
+  },
+  {
+    "name": "ICE 503",
+    "type": "ICE",
+    "boardId": 8011160,
+    "stopId": 8098160,
+    "stopName": "Berlin Hbf &#x0028;tief&#x0029;",
+    "dateTime": "2019-07-25T06:30",
+    "track": "1",
+    "detailsId": "547353%2F190902%2F961004%2F298051%2F80%3fstation_evaId%3D8098160"
+  },
+  {
+    "name": "IC 240",
+    "type": "IC",
+    "boardId": 8011160,
+    "stopId": 8011160,
+    "stopName": "Berlin Hbf",
+    "dateTime": "2019-07-25T06:34",
+    "track": "14",
+    "detailsId": "163434%2F69212%2F812482%2F351763%2F80%3fstation_evaId%3D8011160"
+  },
+  {
+    "name": "ICE 808",
+    "type": "ICE",
+    "boardId": 8011160,
+    "stopId": 8098160,
+    "stopName": "Berlin Hbf &#x0028;tief&#x0029;",
+    "dateTime": "2019-07-25T06:38",
+    "track": "8",
+    "detailsId": "567327%2F200715%2F803256%2F212519%2F80%3fstation_evaId%3D8098160"
+  },
+  {
+    "name": "ICE 1691",
+    "type": "ICE",
+    "boardId": 8011160,
+    "stopId": 8011160,
+    "stopName": "Berlin Hbf",
+    "dateTime": "2019-07-25T06:50",
+    "track": "13",
+    "detailsId": "182715%2F63802%2F82070%2F19870%2F80%3fstation_evaId%3D8011160"
+  },
+  {
+    "name": "ICE 654",
+    "type": "ICE",
+    "boardId": 8011160,
+    "stopId": 8098160,
+    "stopName": "Berlin Hbf &#x0028;tief&#x0029;",
+    "dateTime": "2019-07-25T06:50",
+    "track": "4",
+    "detailsId": "654045%2F228381%2F505700%2F34835%2F80%3fstation_evaId%3D8098160"
+  },
+  {
+    "name": "EC 171",
+    "type": "EC",
+    "boardId": 8011160,
+    "stopId": 8098160,
+    "stopName": "Berlin Hbf &#x0028;tief&#x0029;",
+    "dateTime": "2019-07-25T06:59",
+    "track": "1",
+    "detailsId": "290049%2F110963%2F320424%2F63529%2F80%3fstation_evaId%3D8098160"
+  },
+  {
+    "name": "ICE 1636",
+    "type": "ICE",
+    "boardId": 8011160,
+    "stopId": 8098160,
+    "stopName": "Berlin Hbf &#x0028;tief&#x0029;",
+    "dateTime": "2019-07-25T07:04",
+    "track": "2",
+    "detailsId": "160239%2F55973%2F604520%2F248847%2F80%3fstation_evaId%3D8098160"
+  },
+  {
+    "name": "IC 2070",
+    "type": "IC",
+    "boardId": 8011160,
+    "stopId": 8098160,
+    "stopName": "Berlin Hbf &#x0028;tief&#x0029;",
+    "dateTime": "2019-07-25T07:06",
+    "track": "8",
+    "detailsId": "468282%2F160931%2F775308%2F231560%2F80%3fstation_evaId%3D8098160"
+  },
+  {
+    "name": "ICE 595",
+    "type": "ICE",
+    "boardId": 8011160,
+    "stopId": 8098160,
+    "stopName": "Berlin Hbf &#x0028;tief&#x0029;",
+    "dateTime": "2019-07-25T07:28",
+    "track": "2",
+    "detailsId": "44634%2F24457%2F42536%2F6390%2F80%3fstation_evaId%3D8098160"
+  }
+]

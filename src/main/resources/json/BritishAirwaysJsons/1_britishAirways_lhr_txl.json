@@ -1,0 +1,79 @@
+{
+  "FlightsResponse": {
+    "Flight": [
+      {
+        "MarketingCarrierCode": "BA",
+        "FlightNumber": "0982",
+        "Sector": {
+          "DepartureStatus": "Actual",
+          "ArrivalStatus": "Actual",
+          "DepartureAirport": "LHR",
+          "ArrivalAirport": "TXL",
+          "DepartureTerminal": 5,
+          "ScheduledDepartureDateTime": "2019-10-20T08:45:00",
+          "ScheduledArrivalDateTime": "2019-10-20T11:35:00",
+          "ReportedDepartureDateTime": "2019-10-20T08:56:00",
+          "ReportedArrivalDateTime": "2019-10-20T11:32:00",
+          "OperatingCarrierCode": "BA",
+          "AircraftTypeCode": 319,
+          "MatchesRequest": true
+        }
+      },
+      {
+        "MarketingCarrierCode": "BA",
+        "FlightNumber": "0992",
+        "Sector": {
+          "DepartureStatus": "Actual",
+          "ArrivalStatus": "Actual",
+          "DepartureAirport": "LHR",
+          "ArrivalAirport": "TXL",
+          "DepartureTerminal": 5,
+          "ScheduledDepartureDateTime": "2019-10-20T10:50:00",
+          "ScheduledArrivalDateTime": "2019-10-20T13:45:00",
+          "ReportedDepartureDateTime": "2019-10-20T10:47:00",
+          "ReportedArrivalDateTime": "2019-10-20T13:36:00",
+          "OperatingCarrierCode": "BA",
+          "AircraftTypeCode": 319,
+          "MatchesRequest": true
+        }
+      },
+      {
+        "MarketingCarrierCode": "BA",
+        "FlightNumber": "0984",
+        "Sector": {
+          "DepartureStatus": "Actual",
+          "ArrivalStatus": "Actual",
+          "DepartureAirport": "LHR",
+          "ArrivalAirport": "TXL",
+          "DepartureTerminal": 5,
+          "ScheduledDepartureDateTime": "2019-10-20T12:55:00",
+          "ScheduledArrivalDateTime": "2019-10-20T15:50:00",
+          "ReportedDepartureDateTime": "2019-10-20T12:54:00",
+          "ReportedArrivalDateTime": "2019-10-20T15:39:00",
+          "OperatingCarrierCode": "BA",
+          "AircraftTypeCode": 321,
+          "MatchesRequest": true
+        }
+      },
+      {
+        "MarketingCarrierCode": "BA",
+        "FlightNumber": "0986",
+        "Sector": {
+          "DepartureStatus": "Actual",
+          "ArrivalStatus": "Actual",
+          "DepartureAirport": "LHR",
+          "ArrivalAirport": "TXL",
+          "DepartureTerminal": 5,
+          "ScheduledDepartureDateTime": "2019-10-20T15:30:00",
+          "ScheduledArrivalDateTime": "2019-10-20T18:25:00",
+          "ReportedDepartureDateTime": "2019-10-20T15:28:00",
+          "ReportedArrivalDateTime": "2019-10-20T18:13:00",
+          "OperatingCarrierCode": "BA",
+          "AircraftTypeCode": "32A",
+          "MatchesRequest": true
+        }
+      }
+    ],
+    "DataLastUpdated": "2019-10-21T13:16:44"
+  }
+}

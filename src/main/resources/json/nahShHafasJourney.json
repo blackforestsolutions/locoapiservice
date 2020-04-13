@@ -1,0 +1,796 @@
+{
+  "ver": "1.16",
+  "lang": "deu",
+  "id": "x4wxhrrm2k4ggm44",
+  "svcResL": [
+    {
+      "meth": "TripSearch",
+      "err": "OK",
+      "res": {
+        "common": {
+          "locL": [
+            {
+              "lid": "A=1@O=Rendsburg, Eiderstraße@X=9651304@Y=54293246@U=101@L=981068999@",
+              "type": "S",
+              "name": "Rendsburg, Eiderstraße",
+              "icoX": 0,
+              "extId": "981067408",
+              "state": "F",
+              "crd": {
+                "x": 9651304,
+                "y": 54293246,
+                "type": "WGS84",
+                "layerX": 0,
+                "crdSysX": 0
+              },
+              "pCls": 0
+            },
+            {
+              "lid": "A=1@O=Rendsburg@X=9671135@Y=54302262@U=100@L=9076697@",
+              "type": "S",
+              "name": "Rendsburg",
+              "icoX": 1,
+              "extId": "8000312",
+              "state": "F",
+              "crd": {
+                "x": 9670577,
+                "y": 54302712,
+                "type": "WGS84",
+                "layerX": 0,
+                "crdSysX": 0
+              },
+              "meta": true,
+              "pCls": 11,
+              "isMainMast": true
+            },
+            {
+              "lid": "A=1@O=Rendsburg Gartenstraße@X=9652743@Y=54292581@U=100@L=707647@",
+              "type": "S",
+              "name": "Gartenstraße, Rendsburg",
+              "icoX": 2,
+              "extId": "699076",
+              "state": "F",
+              "crd": {
+                "x": 9652743,
+                "y": 54292581,
+                "type": "WGS84",
+                "layerX": 0,
+                "crdSysX": 0
+              },
+              "pCls": 32,
+              "entry": true,
+              "mMastLocX": 3
+            },
+            {
+              "lid": "A=1@O=Rendsburg Gartenstraße@X=9652743@Y=54292581@U=100@L=9076728@",
+              "type": "S",
+              "name": "Gartenstraße, Rendsburg",
+              "icoX": 0,
+              "extId": "699076",
+              "state": "F",
+              "crd": {
+                "x": 9652743,
+                "y": 54292581,
+                "type": "WGS84",
+                "layerX": 0,
+                "crdSysX": 0
+              },
+              "meta": true,
+              "pCls": 32,
+              "isMainMast": true
+            },
+            {
+              "lid": "A=1@O=Rendsburg Bahnhofstraße/ZOB@X=9668869@Y=54303269@U=100@L=9911966@",
+              "type": "S",
+              "name": "Bahnhofstraße/ZOB, Rendsburg",
+              "icoX": 2,
+              "extId": "698776",
+              "state": "F",
+              "crd": {
+                "x": 9668132,
+                "y": 54302883,
+                "type": "WGS84",
+                "layerX": 0,
+                "crdSysX": 0
+              },
+              "pCls": 544,
+              "entry": true,
+              "mMastLocX": 5
+            },
+            {
+              "lid": "A=1@O=Rendsburg Bahnhofstraße/ZOB@X=9668132@Y=54302883@U=100@L=9076704@",
+              "type": "S",
+              "name": "Bahnhofstraße/ZOB, Rendsburg",
+              "icoX": 0,
+              "extId": "698776",
+              "state": "F",
+              "crd": {
+                "x": 9668132,
+                "y": 54302883,
+                "type": "WGS84",
+                "layerX": 0,
+                "crdSysX": 0
+              },
+              "meta": true,
+              "pCls": 544,
+              "isMainMast": true
+            },
+            {
+              "lid": "A=1@O=Rendsburg Martinshaus@X=9653489@Y=54289686@U=100@L=707646@",
+              "type": "S",
+              "name": "Martinshaus, Rendsburg",
+              "icoX": 2,
+              "extId": "699086",
+              "state": "F",
+              "crd": {
+                "x": 9653489,
+                "y": 54289686,
+                "type": "WGS84",
+                "layerX": 0,
+                "crdSysX": 0
+              },
+              "pCls": 32,
+              "entry": true,
+              "mMastLocX": 7
+            },
+            {
+              "lid": "A=1@O=Rendsburg Martinshaus@X=9653489@Y=54289686@U=100@L=9076747@",
+              "type": "S",
+              "name": "Martinshaus, Rendsburg",
+              "icoX": 0,
+              "extId": "699086",
+              "state": "F",
+              "crd": {
+                "x": 9653489,
+                "y": 54289686,
+                "type": "WGS84",
+                "layerX": 0,
+                "crdSysX": 0
+              },
+              "meta": true,
+              "pCls": 32,
+              "isMainMast": true
+            },
+            {
+              "lid": "A=1@O=Rendsburg Friedhof Neuwerk@X=9658451@Y=54290486@U=100@L=707645@",
+              "type": "S",
+              "name": "Friedhof Neuwerk, Rendsburg",
+              "icoX": 2,
+              "extId": "703077",
+              "state": "F",
+              "crd": {
+                "x": 9658451,
+                "y": 54290486,
+                "type": "WGS84",
+                "layerX": 0,
+                "crdSysX": 0
+              },
+              "pCls": 32,
+              "entry": true,
+              "mMastLocX": 9
+            },
+            {
+              "lid": "A=1@O=Rendsburg Friedhof Neuwerk@X=9658451@Y=54290486@U=100@L=9076724@",
+              "type": "S",
+              "name": "Rendsburg Friedhof Neuwerk",
+              "icoX": 0,
+              "extId": "703077",
+              "state": "F",
+              "crd": {
+                "x": 9658451,
+                "y": 54290486,
+                "type": "WGS84",
+                "layerX": 0,
+                "crdSysX": 0
+              },
+              "meta": true,
+              "pCls": 32,
+              "isMainMast": true
+            },
+            {
+              "lid": "A=1@O=Rendsburg Fußgängertunnel Nord@X=9660357@Y=54291358@U=100@L=707644@",
+              "type": "S",
+              "name": "Fußgängertunnel Nord, Rendsburg",
+              "icoX": 2,
+              "extId": "699066",
+              "state": "F",
+              "crd": {
+                "x": 9664698,
+                "y": 54291421,
+                "type": "WGS84",
+                "layerX": 0,
+                "crdSysX": 0
+              },
+              "pCls": 32,
+              "entry": true,
+              "mMastLocX": 11
+            },
+            {
+              "lid": "A=1@O=Rendsburg Fußgängertunnel Nord@X=9660357@Y=54291358@U=100@L=9076725@",
+              "type": "S",
+              "name": "Fußgängertunnel Nord, Rendsburg",
+              "icoX": 0,
+              "extId": "699066",
+              "state": "F",
+              "crd": {
+                "x": 9664698,
+                "y": 54291421,
+                "type": "WGS84",
+                "layerX": 0,
+                "crdSysX": 0
+              },
+              "meta": true,
+              "pCls": 32,
+              "isMainMast": true
+            },
+            {
+              "lid": "A=1@O=Rendsburg Musikschule@X=9664447@Y=54296392@U=100@L=9912273@",
+              "type": "S",
+              "name": "Musikschule, Rendsburg",
+              "icoX": 2,
+              "extId": "698784",
+              "state": "F",
+              "crd": {
+                "x": 9664258,
+                "y": 54296168,
+                "type": "WGS84",
+                "layerX": 0,
+                "crdSysX": 0
+              },
+              "pCls": 32,
+              "entry": true,
+              "mMastLocX": 13
+            },
+            {
+              "lid": "A=1@O=Rendsburg Musikschule@X=9664258@Y=54296168@U=100@L=9076748@",
+              "type": "S",
+              "name": "Musikschule, Rendsburg",
+              "icoX": 0,
+              "extId": "698784",
+              "state": "F",
+              "crd": {
+                "x": 9664258,
+                "y": 54296168,
+                "type": "WGS84",
+                "layerX": 0,
+                "crdSysX": 0
+              },
+              "meta": true,
+              "pCls": 32,
+              "isMainMast": true
+            },
+            {
+              "lid": "A=1@O=Rendsburg Grafenstraße@X=9665022@Y=54297759@U=100@L=9911984@",
+              "type": "S",
+              "name": "Grafenstraße, Rendsburg",
+              "icoX": 2,
+              "extId": "699109",
+              "state": "F",
+              "crd": {
+                "x": 9665022,
+                "y": 54297759,
+                "type": "WGS84",
+                "layerX": 0,
+                "crdSysX": 0
+              },
+              "pCls": 32,
+              "entry": true,
+              "mMastLocX": 15
+            },
+            {
+              "lid": "A=1@O=Rendsburg Grafenstraße@X=9665022@Y=54297759@U=100@L=9076730@",
+              "type": "S",
+              "name": "Grafenstraße, Rendsburg",
+              "icoX": 0,
+              "extId": "9076730",
+              "state": "F",
+              "crd": {
+                "x": 9665022,
+                "y": 54297759,
+                "type": "WGS84",
+                "layerX": 0,
+                "crdSysX": 0
+              },
+              "meta": true,
+              "pCls": 32,
+              "isMainMast": true
+            }
+          ],
+          "prodL": [
+            {
+              "name": "Fußweg",
+              "icoX": 3,
+              "cls": 0,
+              "prodCtx": {
+                "name": "Fußweg",
+                "matchId": ""
+              }
+            },
+            {
+              "name": "Bus 11",
+              "number": "11",
+              "icoX": 2,
+              "cls": 32,
+              "oprX": 0,
+              "prodCtx": {
+                "name": "Bus   11",
+                "num": "461",
+                "line": "11",
+                "matchId": "11",
+                "catOut": "Bus",
+                "catOutS": "Bus",
+                "catOutL": "Bus",
+                "catIn": "Bus",
+                "catCode": "5",
+                "admin": "TRANSD"
+              }
+            },
+            {
+              "name": "Bus 11",
+              "number": "11",
+              "icoX": 2,
+              "cls": 32,
+              "oprX": 1,
+              "prodCtx": {
+                "name": "Bus   11",
+                "num": "461",
+                "line": "11",
+                "matchId": "11",
+                "catOut": "Bus",
+                "catOutS": "Bus",
+                "catOutL": "Bus",
+                "catIn": "Bus",
+                "catCode": "5",
+                "admin": "TRANSD"
+              }
+            }
+          ],
+          "polyL": [],
+          "layerL": [
+            {
+              "id": "standard",
+              "name": "standard",
+              "index": 0,
+              "annoCnt": 0
+            }
+          ],
+          "crdSysL": [
+            {
+              "id": "standard",
+              "index": 0,
+              "type": "WGS84",
+              "dim": 3
+            }
+          ],
+          "opL": [
+            {
+              "name": "Transdev Nord GmbH",
+              "icoX": 4
+            },
+            {
+              "name": "Transdev Nord GmbH",
+              "icoX": 4,
+              "id": "Transdev Nord GmbH"
+            }
+          ],
+          "remL": [
+            {
+              "type": "A",
+              "code": "cz",
+              "prio": 899,
+              "icoX": 5,
+              "txtN": "Linie der NVB Norddeutsche Verkehrsbetriebe, Info: <a href=\"tel:043315096\">04331 5096</a>"
+            },
+            {
+              "type": "A",
+              "code": "BE",
+              "prio": 950,
+              "icoX": 5,
+              "txtN": "behindertengerechtes Fahrzeug"
+            }
+          ],
+          "icoL": [
+            {
+              "res": "STA"
+            },
+            {
+              "res": "PROD_ICE",
+              "fg": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 255
+              },
+              "bg": {
+                "r": 194,
+                "g": 10,
+                "b": 29,
+                "a": 255
+              }
+            },
+            {
+              "res": "PROD_BUS",
+              "fg": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 255
+              },
+              "bg": {
+                "r": 255,
+                "g": 120,
+                "b": 0,
+                "a": 255
+              }
+            },
+            {
+              "res": "walk",
+              "fg": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 255
+              },
+              "bg": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 255
+              }
+            },
+            {
+              "res": "TRA",
+              "txt": "Transdev Nord GmbH"
+            },
+            {
+              "res": "INFO"
+            }
+          ]
+        },
+        "outConL": [
+          {
+            "cid": "C-0",
+            "date": "20200328",
+            "dur": "001700",
+            "chg": 0,
+            "sDays": {
+              "sDaysR": "täglich",
+              "sDaysB": "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0"
+            },
+            "dep": {
+              "locX": 0,
+              "dInR": true,
+              "dTimeS": "123500",
+              "type": "N"
+            },
+            "arr": {
+              "locX": 1,
+              "aOutR": true,
+              "aTimeS": "125100",
+              "type": "N"
+            },
+            "secL": [
+              {
+                "type": "WALK",
+                "icoX": 3,
+                "dep": {
+                  "locX": 0,
+                  "dInR": true,
+                  "dTimeS": "123500",
+                  "type": "N"
+                },
+                "arr": {
+                  "locX": 2,
+                  "aOutR": true,
+                  "aTimeS": "123700",
+                  "type": "N"
+                },
+                "gis": {
+                  "dist": 165,
+                  "durS": "000200",
+                  "ctx": "G|1|G@F|A=1@O=Rendsburg, Eiderstraße@X=9651304@Y=54293246@U=101@L=981068999@|A=1@O=Rendsburg Gartenstraße@X=9652743@Y=54292581@U=100@L=707647@|18042020|183400|183700|bf|ft@0@1000@120@-1@100@1@1000@0@@@@@false@0@-1@$f@$f@$f@$f@$f@$§bt@0@1000@120@-1@100@1@1000@0@@@@@false@0@-1@$f@$f@$f@$f@$f@$§tt@0@5000@120@0@100@1@2500@0@@@@@false@0@-1@$f@$f@$f@$f@$f@$§|"
+                }
+              },
+              {
+                "type": "JNY",
+                "icoX": 2,
+                "dep": {
+                  "locX": 2,
+                  "idx": 3,
+                  "dProdX": 1,
+                  "dInR": true,
+                  "dTimeS": "123700",
+                  "dProgType": "PROGNOSED",
+                  "type": "N"
+                },
+                "arr": {
+                  "locX": 4,
+                  "idx": 9,
+                  "aOutR": true,
+                  "aTimeS": "124600",
+                  "aProgType": "PROGNOSED",
+                  "type": "N"
+                },
+                "jny": {
+                  "jid": "1|35367|6|80|28032020",
+                  "prodX": 2,
+                  "dirTxt": "Stadion, Büdelsdorf",
+                  "status": "P",
+                  "isRchbl": true,
+                  "stopL": [
+                    {
+                      "locX": 2,
+                      "idx": 3,
+                      "dProdX": 2,
+                      "dInR": true,
+                      "dTimeS": "123700",
+                      "dDirTxt": "Stadion, Büdelsdorf",
+                      "dDirFlg": "1",
+                      "type": "N"
+                    },
+                    {
+                      "locX": 6,
+                      "idx": 4,
+                      "aProdX": 2,
+                      "aOutR": true,
+                      "aTimeS": "123800",
+                      "dProdX": 2,
+                      "dInR": true,
+                      "dTimeS": "123800",
+                      "type": "N"
+                    },
+                    {
+                      "locX": 8,
+                      "idx": 5,
+                      "aProdX": 2,
+                      "aOutR": true,
+                      "aTimeS": "123900",
+                      "dProdX": 2,
+                      "dInR": true,
+                      "dTimeS": "123900",
+                      "type": "N"
+                    },
+                    {
+                      "locX": 10,
+                      "idx": 6,
+                      "aProdX": 2,
+                      "aOutR": true,
+                      "aTimeS": "124000",
+                      "dProdX": 2,
+                      "dInR": true,
+                      "dTimeS": "124000",
+                      "type": "N"
+                    },
+                    {
+                      "locX": 12,
+                      "idx": 7,
+                      "aProdX": 2,
+                      "aOutR": true,
+                      "aTimeS": "124200",
+                      "dProdX": 2,
+                      "dInR": true,
+                      "dTimeS": "124200",
+                      "type": "N"
+                    },
+                    {
+                      "locX": 14,
+                      "idx": 8,
+                      "aProdX": 2,
+                      "aOutR": true,
+                      "aTimeS": "124400",
+                      "dProdX": 2,
+                      "dInR": true,
+                      "dTimeS": "124400",
+                      "type": "N"
+                    },
+                    {
+                      "locX": 4,
+                      "idx": 9,
+                      "aProdX": 2,
+                      "aOutR": true,
+                      "aTimeS": "124600",
+                      "type": "N"
+                    }
+                  ],
+                  "freq": {
+                    "minC": 60,
+                    "maxC": 60,
+                    "numC": 3
+                  },
+                  "ctxRecon": "T$A=1@O=Rendsburg Gartenstraße@L=707647@a=128@$A=1@O=Rendsburg Bahnhofstraße/ZOB@L=9911966@a=128@$202004181837$202004181846$Bus   11$$1$$$",
+                  "msgL": [
+                    {
+                      "type": "REM",
+                      "remX": 0,
+                      "fLocX": 2,
+                      "tLocX": 4,
+                      "tagL": [
+                        "RES_JNY_DTL"
+                      ]
+                    },
+                    {
+                      "type": "REM",
+                      "remX": 1,
+                      "fLocX": 2,
+                      "tLocX": 4,
+                      "tagL": [
+                        "RES_JNY_DTL"
+                      ]
+                    }
+                  ],
+                  "subscr": "F"
+                },
+                "minChg": "000500"
+              },
+              {
+                "type": "WALK",
+                "icoX": 3,
+                "dep": {
+                  "locX": 4,
+                  "dInR": true,
+                  "dTimeS": "124600",
+                  "type": "N"
+                },
+                "arr": {
+                  "locX": 1,
+                  "aOutR": true,
+                  "aTimeS": "125100",
+                  "type": "N"
+                },
+                "gis": {
+                  "dist": 207,
+                  "durS": "000500",
+                  "ctx": "G|1|G@F|A=1@O=Rendsburg Bahnhofstraße/ZOB@X=9668869@Y=54303269@U=100@L=9911966@|A=1@O=Rendsburg@X=9671135@Y=54302262@U=100@L=9076697@|18042020|184600|185100|fb|ft@0@1000@120@-1@100@1@1000@0@@@@@false@0@-1@$f@$f@$f@$f@$f@$§bt@0@1000@120@-1@100@1@1000@0@@@@@false@0@-1@$f@$f@$f@$f@$f@$§tt@0@5000@120@0@100@1@2500@0@@@@@false@0@-1@$f@$f@$f@$f@$f@$§|"
+                }
+              }
+            ],
+            "ctxRecon": "¶HKI¶G@F$A=1@O=Rendsburg, Eiderstraße@L=981068999@a=128@$A=1@O=Rendsburg Gartenstraße@L=707647@a=128@$202004181834$202004181837$$$1$$$§T$A=1@O=Rendsburg Gartenstraße@L=707647@a=128@$A=1@O=Rendsburg Bahnhofstraße/ZOB@L=9911966@a=128@$202004181837$202004181846$Bus   11$$1$$$§G@F$A=1@O=Rendsburg Bahnhofstraße/ZOB@L=9911966@a=128@$A=1@O=Rendsburg@L=9076697@a=128@$202004181846$202004181851$$$1$$$¶GP¶ft@0@1000@120@-1@100@1@1000@0@@@@@false@0@-1@$f@$f@$f@$f@$f@$§bt@0@1000@120@-1@100@1@1000@0@@@@@false@0@-1@$f@$f@$f@$f@$f@$§tt@0@5000@120@0@100@1@2500@0@@@@@false@0@-1@$f@$f@$f@$f@$f@$§",
+            "freq": {
+              "minC": 60
+            },
+            "trfRes": {
+              "fareSetL": [
+                {
+                  "name": "Normalpreis",
+                  "desc": "Preisstufe 1r mit/über: Stadtverkehr",
+                  "fareL": [
+                    {
+                      "name": "Einzelkarte 2.Kl",
+                      "prc": 220,
+                      "cur": "EUR"
+                    },
+                    {
+                      "name": "Einzelkarte Kind 2.Kl",
+                      "prc": 135,
+                      "cur": "EUR"
+                    },
+                    {
+                      "name": "Einzelkarte BahnCard 2.Kl",
+                      "prc": 165,
+                      "cur": "EUR"
+                    },
+                    {
+                      "name": "Einzelkarte Kind BahnCard 2.Kl",
+                      "prc": 100,
+                      "cur": "EUR"
+                    },
+                    {
+                      "name": "Einzelkarte SH-Card 2.Kl",
+                      "prc": 165,
+                      "cur": "EUR"
+                    },
+                    {
+                      "name": "Einzelkarte Kind SH-Card 2.Kl",
+                      "prc": 100,
+                      "cur": "EUR"
+                    },
+                    {
+                      "name": "Fahrradeinzelkarte [nur Bus]",
+                      "prc": 220,
+                      "cur": "EUR"
+                    },
+                    {
+                      "name": "Tageskarte 2.Kl",
+                      "prc": 550,
+                      "cur": "EUR"
+                    },
+                    {
+                      "name": "Kleingruppenkarte 2 Pers. 2.Kl",
+                      "prc": 1040,
+                      "cur": "EUR"
+                    },
+                    {
+                      "name": "Wochenkarte 2.Kl",
+                      "prc": 1600,
+                      "cur": "EUR"
+                    },
+                    {
+                      "name": "Wochenk. Schüler/Azubi 2.Kl",
+                      "prc": 1300,
+                      "cur": "EUR"
+                    },
+                    {
+                      "name": "Monatskarte 2.Kl",
+                      "prc": 4750,
+                      "cur": "EUR"
+                    },
+                    {
+                      "name": "Monatskarte Abo 2.Kl",
+                      "prc": 3958,
+                      "cur": "EUR"
+                    },
+                    {
+                      "name": "Monatsk. Schüler/Azubi 2.Kl",
+                      "prc": 3860,
+                      "cur": "EUR"
+                    },
+                    {
+                      "name": "MoKa Abo Schüler/Azubi 2.Kl",
+                      "prc": 3398,
+                      "cur": "EUR"
+                    },
+                    {
+                      "name": "Fahrradtageskarte",
+                      "prc": 450,
+                      "cur": "EUR"
+                    },
+                    {
+                      "name": "4er-Karte [nur Bus]",
+                      "prc": 780,
+                      "cur": "EUR"
+                    },
+                    {
+                      "name": "4er-Karte Kind [nur Bus]",
+                      "prc": 490,
+                      "cur": "EUR"
+                    },
+                    {
+                      "name": "RD-ECK Monatsk. Senioren [Bus]",
+                      "prc": 4060,
+                      "cur": "EUR"
+                    },
+                    {
+                      "name": "Kleingruppenkarte 3 Pers. 2.Kl",
+                      "prc": 1040,
+                      "cur": "EUR"
+                    },
+                    {
+                      "name": "Kleingruppenkarte 4 Pers. 2.Kl",
+                      "prc": 1040,
+                      "cur": "EUR"
+                    },
+                    {
+                      "name": "Kleingruppenkarte 5 Pers. 2.Kl",
+                      "prc": 1040,
+                      "cur": "EUR"
+                    }
+                  ]
+                }
+              ]
+            },
+            "ovwTrfRefL": [
+              {
+                "type": "F",
+                "fareSetX": 0,
+                "fareX": 0
+              },
+              {
+                "type": "F",
+                "fareSetX": 0,
+                "fareX": 7
+              }
+            ],
+            "conSubscr": "P",
+            "cksum": "d3b30886_3"
+          }
+        ],
+        "outCtxScrB": "2|OB|MT#11#183994#183994#184011#184011#0#0#5#183935#1#-2147483645#0#1#2|PDH#a088918350442d9bdfadb4880c495304|RD#18042020|RT#173500|US#1",
+        "outCtxScrF": "2|OF|MT#11#183994#183994#184011#184011#0#0#5#183935#1#-2147483645#0#1#2|PDH#a088918350442d9bdfadb4880c495304|RD#18042020|RT#173500|US#1",
+        "retCtxScrF": "2|OF|MT#11#183994#183994#184011#184011#0#0#5#183935#1#-2147483645#0#1#2|PDH#a088918350442d9bdfadb4880c495304|RD#18042020|RT#173500|US#1",
+        "fpB": "20191215",
+        "fpE": "20201212",
+        "planrtTS": "1584547745"
+      }
+    }
+  ]
+}
