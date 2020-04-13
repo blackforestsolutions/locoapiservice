@@ -1,0 +1,33 @@
+[
+  {
+    "place_id": 97718736,
+    "licence": "Data © OpenStreetMap contributors, ODbL 1.0. https://osm.org/copyright",
+    "osm_type": "way",
+    "osm_id": 47122101,
+    "boundingbox": [
+      "48.8053987",
+      "48.8055904",
+      "9.2284299",
+      "9.2287082"
+    ],
+    "lat": "48.80549925",
+    "lon": "9.228576954173775",
+    "display_name": "84, Waiblinger Straße, Seelberg, Bad Cannstatt, Stuttgart, Baden-Württemberg, 70372, Deutschland",
+    "class": "building",
+    "type": "yes",
+    "importance": 0.42099999999999993,
+    "address": {
+      "house_number": "84",
+      "road": "Waiblinger Straße",
+      "neighbourhood": "Seelberg",
+      "suburb": "Bad Cannstatt",
+      "city_district": "Bad Cannstatt",
+      "city": "Stuttgart",
+      "county": "Stuttgart",
+      "state": "Baden-Württemberg",
+      "postcode": "70372",
+      "country": "Deutschland",
+      "country_code": "de"
+    }
+  }
+]

@@ -1,0 +1,42 @@
+{
+  "returnCode": "OK",
+  "dataReleaseID": "32.09.01",
+  "stations": [
+    {
+      "id": "Master:99969",
+      "name": "Richard-Köhn-Straße/Jahnhalle",
+      "city": "Pinneberg",
+      "vehicleTypes": [
+        "REGIONALBUS"
+      ]
+    },
+    {
+      "id": "Master:9910910",
+      "name": "Hauptbahnhof",
+      "city": "Hamburg",
+      "combinedName": "Hauptbahnhof",
+      "shortcuts": [
+        "hbf"
+      ],
+      "aliasses": [
+        "Central Station",
+        "central station",
+        "main station"
+      ],
+      "vehicleTypes": [
+        "REGIONALBUS",
+        "NACHTBUS",
+        "SCHNELLBUS",
+        "U_BAHN",
+        "S_BAHN",
+        "R_BAHN",
+        "F_BAHN"
+      ],
+      "coordinate": {
+        "x": 53.34432432,
+        "y": 32.3432
+      },
+      "exists": true
+    }
+  ]
+}

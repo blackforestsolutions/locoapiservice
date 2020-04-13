@@ -1,0 +1,61 @@
+{
+  "ver": "1.16",
+  "lang": "deu",
+  "id": "fyga3py82m658k88",
+  "svcResL": [
+    {
+      "meth": "LocMatch",
+      "err": "OK",
+      "res": {
+        "common": {
+          "locL": [],
+          "prodL": [],
+          "polyL": [],
+          "layerL": [
+            {
+              "id": "standard",
+              "name": "standard",
+              "index": 0,
+              "annoCnt": 0
+            }
+          ],
+          "crdSysL": [
+            {
+              "id": "standard",
+              "index": 0,
+              "type": "WGS84",
+              "dim": 2
+            }
+          ],
+          "opL": [],
+          "remL": [],
+          "icoL": [
+            {
+              "res": "ADR"
+            }
+          ]
+        },
+        "match": {
+          "field": "S",
+          "state": "F",
+          "locL": [
+            {
+              "lid": "A=2@O=Rendsburg, Eiderstraße 87@X=9648410@Y=54293255@U=101@L=981068999@B=1@V=14.9,@p=1566898558@",
+              "type": "A",
+              "name": "Rendsburg, Eiderstraße 87",
+              "icoX": 0,
+              "extId": "981068999",
+              "state": "F",
+              "crd": {
+                "x": 9648410,
+                "y": 54293255,
+                "layerX": 0,
+                "crdSysX": 0
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

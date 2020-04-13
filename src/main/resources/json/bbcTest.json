@@ -1,0 +1,165 @@
+{
+  "links": {
+    "_self": "https://api.blablacar.com/api/v2/trips",
+    "_front": "https://www.blablacar.co.uk/search?fn=ZRH&fc=47.4582165%2C8.5554755&tn=FRA&tc=50.0379326%2C8.5621518&db=30/11/2019"
+  },
+  "pager": {
+    "page": 1,
+    "pages": 1,
+    "total": 1,
+    "limit": 10
+  },
+  "trips": [
+    {
+      "links": {
+        "_self": "http://api.blablacar.com:443/api/v2/trips/1802963307-zuerich-frankfurt-am-main",
+        "_front": "https://www.blablacar.co.uk/trip/carpooling/1802963307-zuerich-frankfurt-am-main/?_force_https=1"
+      },
+      "departure_date": "30/11/2019 18:45:00",
+      "departure_place": {
+        "city_name": "Zürich",
+        "address": "Zürich HB, Zürich",
+        "latitude": 47.377866,
+        "longitude": 8.540345,
+        "country_code": "CH"
+      },
+      "arrival_place": {
+        "city_name": "Frankfurt",
+        "address": "Hauptbahnhof, Frankfurt am Main",
+        "latitude": 50.107684,
+        "longitude": 8.664606,
+        "country_code": "DE"
+      },
+      "price": {
+        "value": 17,
+        "currency": "GBP",
+        "symbol": "£",
+        "string_value": "£17",
+        "price_color": "BLACK"
+      },
+      "price_with_commission": {
+        "value": 19.5,
+        "currency": "GBP",
+        "symbol": "£",
+        "string_value": "£19.50",
+        "price_color": "BLACK"
+      },
+      "price_without_commission": {
+        "value": 17,
+        "currency": "GBP",
+        "symbol": "£",
+        "string_value": "£17",
+        "price_color": "BLACK"
+      },
+      "commission": {
+        "value": 2.5,
+        "currency": "GBP",
+        "symbol": "£",
+        "string_value": "£2.50"
+      },
+      "seats_left": 3,
+      "seats": 3,
+      "duration": {
+        "value": 16800,
+        "unity": "s"
+      },
+      "distance": {
+        "value": 409,
+        "unity": "km"
+      },
+      "permanent_id": "1802963307-zuerich-frankfurt-am-main",
+      "car": {
+        "id": "126279917",
+        "model": "Arona",
+        "make": "SEAT",
+        "comfort": "Normal",
+        "comfort_nb_star": 2,
+        "category": "CATEGORY_TOURISM"
+      },
+      "multimodal_id": {
+        "source": "CARPOOLING",
+        "id": "1802963307-zuerich-frankfurt-am-main"
+      },
+      "viaggio_rosa": false,
+      "is_comfort": true,
+      "freeway": true,
+      "answer_delay": 0,
+      "booking_mode": "auto",
+      "booking_type": "online",
+      "locations_to_display": [
+        "Zürich",
+        "Frankfurt"
+      ],
+      "departure_passenger_routing": {
+        "proximity": "MIDDLE",
+        "routes": [
+          {
+            "distance_in_meters": 9007,
+            "type": "AS_THE_CROW_FLIES"
+          }
+        ]
+      },
+      "arrival_passenger_routing": {
+        "proximity": "MIDDLE",
+        "routes": [
+          {
+            "distance_in_meters": 10659,
+            "type": "AS_THE_CROW_FLIES"
+          }
+        ]
+      },
+      "corridoring_type": "PLANNED",
+      "vehicle_pictures": []
+    }
+  ],
+  "top_trips": [],
+  "facets": [
+    {
+      "name": "hour",
+      "type": "custom",
+      "items": [
+        {
+          "value": 18,
+          "count": 1,
+          "is_selected": true
+        },
+        {
+          "value": 19,
+          "count": 1,
+          "is_selected": true
+        }
+      ]
+    },
+    {
+      "name": "price",
+      "type": "custom",
+      "items": [
+        {
+          "value": 19,
+          "count": 1,
+          "is_selected": true
+        },
+        {
+          "value": 20,
+          "count": 1,
+          "is_selected": true
+        }
+      ]
+    }
+  ],
+  "distance": 398,
+  "duration": 16800,
+  "recommended_price": 27,
+  "savings": 81,
+  "lowest_price": 19,
+  "lowest_price_object": {
+    "value": 19.5,
+    "currency": "GBP",
+    "symbol": "£",
+    "string_value": "£20"
+  },
+  "full_trips_count": 0,
+  "total_trip_count_to_display": 1,
+  "sorting_algorithm": "trip_date",
+  "has_bus": false
+}

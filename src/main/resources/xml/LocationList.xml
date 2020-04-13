@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LocationList serverVersion="1.9" dialectVersion="1.23" requestId="1574849692025" xmlns="hafas_rest">
+    <StopLocation id="A=1@O=Lorch-Lorchhausen Bahnhof@X=7779822@Y=50055165@U=80@L=003011037@B=1@V=6.9,@p=1574794859@"
+                  extId="003011037" name="Lorch-Lorchhausen Bahnhof" lon="7.779822" lat="50.055165" weight="1702"
+                  products="4"/>
+    <StopLocation id="A=1@O=Lorch-Lorchhausen Rheinallee@X=7785027@Y=50051362@U=80@L=003018590@B=1@V=6.9,@p=1574794859@"
+                  extId="003018590" name="Lorch-Lorchhausen Rheinallee" lon="7.785027" lat="50.051362" weight="8"
+                  products="64"/>
+    <CoordLocation name="Lorch - Lorchhausen, Rheinallee" type="ADR"
+                   id="A%3D2%40O%3DLorch+-+Lorchhausen%2C+Rheinallee%40X%3D7783930%40Y%3D50052297%40U%3D103%40b%3D990117422%40B%3D1%40V%3D6.9%2C%40p%3D1530862110%40"
+                   lon="7.78393" lat="50.052297" refinable="true">
+        <links>
+            <link rel="refine"
+                  href="//www.rmv.de/hapi/location.name?input=Lorch+-+Lorchhausen%2C+Rheinallee&amp;refineId=A%3D2%40O%3DLorch+-+Lorchhausen%2C+Rheinallee%40X%3D7783930%40Y%3D50052297%40U%3D103%40b%3D990117422%40B%3D1%40V%3D6.9%2C%40p%3D1530862110%40&amp;type=A"/>
+        </links>
+    </CoordLocation>
+    <CoordLocation name="Lorch - Lorchhausen, Oberflecken" type="ADR"
+                   id="A%3D2%40O%3DLorch+-+Lorchhausen%2C+Oberflecken%40X%3D7785108%40Y%3D50053277%40U%3D103%40b%3D990117421%40B%3D1%40V%3D6.9%2C%40p%3D1530862110%40"
+                   lon="7.785108" lat="50.053277" refinable="true">
+        <links>
+            <link rel="refine"
+                  href="//www.rmv.de/hapi/location.name?input=Lorch+-+Lorchhausen%2C+Oberflecken&amp;refineId=A%3D2%40O%3DLorch+-+Lorchhausen%2C+Oberflecken%40X%3D7785108%40Y%3D50053277%40U%3D103%40b%3D990117421%40B%3D1%40V%3D6.9%2C%40p%3D1530862110%40&amp;type=A"/>
+        </links>
+    </CoordLocation>
+    <CoordLocation name="Lorch - Lorchhausen, Am Rebenhang" type="ADR"
+                   id="A%3D2%40O%3DLorch+-+Lorchhausen%2C+Am+Rebenhang%40X%3D7788784%40Y%3D50050266%40U%3D103%40b%3D990117417%40B%3D1%40V%3D6.9%2C%40p%3D1530862110%40"
+                   lon="7.788784" lat="50.050266" refinable="true">
+        <links>
+            <link rel="refine"
+                  href="//www.rmv.de/hapi/location.name?input=Lorch+-+Lorchhausen%2C+Am+Rebenhang&amp;refineId=A%3D2%40O%3DLorch+-+Lorchhausen%2C+Am+Rebenhang%40X%3D7788784%40Y%3D50050266%40U%3D103%40b%3D990117417%40B%3D1%40V%3D6.9%2C%40p%3D1530862110%40&amp;type=A"/>
+        </links>
+    </CoordLocation>
+    <CoordLocation name="Lorch - Lorchhausen, Kapellenberg" type="ADR"
+                   id="A%3D2%40O%3DLorch+-+Lorchhausen%2C+Kapellenberg%40X%3D7786645%40Y%3D50053313%40U%3D103%40b%3D990117418%40B%3D1%40V%3D6.9%2C%40p%3D1530862110%40"
+                   lon="7.786645" lat="50.053313" refinable="true">
+        <links>
+            <link rel="refine"
+                  href="//www.rmv.de/hapi/location.name?input=Lorch+-+Lorchhausen%2C+Kapellenberg&amp;refineId=A%3D2%40O%3DLorch+-+Lorchhausen%2C+Kapellenberg%40X%3D7786645%40Y%3D50053313%40U%3D103%40b%3D990117418%40B%3D1%40V%3D6.9%2C%40p%3D1530862110%40&amp;type=A"/>
+        </links>
+    </CoordLocation>
+    <CoordLocation name="Lorch - Lorchhausen, Kauber Straße" type="ADR"
+                   id="A%3D2%40O%3DLorch+-+Lorchhausen%2C+Kauber+Stra%C3%9Fe%40X%3D7782636%40Y%3D50053304%40U%3D103%40b%3D990117419%40B%3D1%40V%3D6.9%2C%40p%3D1530862110%40"
+                   lon="7.782636" lat="50.053304" refinable="true">
+        <links>
+            <link rel="refine"
+                  href="//www.rmv.de/hapi/location.name?input=Lorch+-+Lorchhausen%2C+Kauber+Stra%C3%9Fe&amp;refineId=A%3D2%40O%3DLorch+-+Lorchhausen%2C+Kauber+Stra%C3%9Fe%40X%3D7782636%40Y%3D50053304%40U%3D103%40b%3D990117419%40B%3D1%40V%3D6.9%2C%40p%3D1530862110%40&amp;type=A"/>
+        </links>
+    </CoordLocation>
+    <CoordLocation name="Lorch - Lorchhausen, Lorcher Straße" type="ADR"
+                   id="A%3D2%40O%3DLorch+-+Lorchhausen%2C+Lorcher+Stra%C3%9Fe%40X%3D7786852%40Y%3D50050877%40U%3D103%40b%3D990117420%40B%3D1%40V%3D6.9%2C%40p%3D1530862110%40"
+                   lon="7.786852" lat="50.050877" refinable="true">
+        <links>
+            <link rel="refine"
+                  href="//www.rmv.de/hapi/location.name?input=Lorch+-+Lorchhausen%2C+Lorcher+Stra%C3%9Fe&amp;refineId=A%3D2%40O%3DLorch+-+Lorchhausen%2C+Lorcher+Stra%C3%9Fe%40X%3D7786852%40Y%3D50050877%40U%3D103%40b%3D990117420%40B%3D1%40V%3D6.9%2C%40p%3D1530862110%40&amp;type=A"/>
+        </links>
+    </CoordLocation>
+    <StopLocation id="A=1@O=Lorch-Ransel Altes Rathaus@X=7842594@Y=50101477@U=80@L=003018878@B=1@V=6.9,@p=1574794859@"
+                  extId="003018878" name="Lorch-Ransel Altes Rathaus" lon="7.842594" lat="50.101477" weight="40"
+                  products="64"/>
+    <CoordLocation name="Lorch Rathaus" type="POI"
+                   id="A%3D4%40O%3DLorch+Rathaus%40X%3D7803626%40Y%3D50044189%40U%3D104%40L%3D009000170%40B%3D1%40V%3D6.9%2C%40p%3D1574797871%40"
+                   lon="7.803626" lat="50.044189"/>
+</LocationList>

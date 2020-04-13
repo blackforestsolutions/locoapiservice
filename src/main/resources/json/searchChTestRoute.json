@@ -1,0 +1,140 @@
+{
+  "count": 1,
+  "min_duration": 4680,
+  "rawtime": 4680,
+  "max_duration": 4680,
+  "maxtime": 4680,
+  "connections": [
+    {
+      "from": "Einsiedeln",
+      "departure": "2019-11-04 14:25:00",
+      "to": "Zürich, Förrlibuckstr. 60",
+      "arrival": "2019-11-04 15:43:00",
+      "duration": 4680,
+      "legs": [
+        {
+          "departure": "2019-11-04 14:25:00",
+          "tripid": "T2019_19353_000082_101_b560270_0",
+          "number": "S13 19353",
+          "stopid": "8503283",
+          "x": 699075,
+          "y": 220557,
+          "name": "Einsiedeln",
+          "sbb_name": "Einsiedeln",
+          "type": "strain",
+          "line": "S13",
+          "terminal": "Wädenswil",
+          "fgcolor": "fff",
+          "bgcolor": "039",
+          "*G": "S",
+          "*L": "13",
+          "operator": "SOB-sob",
+          "stops": [
+            {
+              "arrival": "2019-11-04 14:32:00",
+              "departure": "2019-11-04 14:32:00",
+              "name": "Biberbrugg",
+              "stopid": "8503284",
+              "x": 697373,
+              "y": 223619
+            },
+            {
+              "arrival": "2019-11-04 14:36:00",
+              "departure": "2019-11-04 14:36:00",
+              "name": "Schindellegi-Feusisberg",
+              "stopid": "8503285",
+              "x": 696326,
+              "y": 225829
+            },
+            {
+              "arrival": "2019-11-04 14:40:00",
+              "departure": "2019-11-04 14:41:00",
+              "name": "Samstagern",
+              "stopid": "8503286",
+              "x": 694526,
+              "y": 227483
+            }
+          ],
+          "runningtime": 1500,
+          "exit": {
+            "arrival": "2019-11-04 14:50:00",
+            "stopid": "8503206",
+            "x": 693643,
+            "y": 231668,
+            "name": "Wädenswil",
+            "sbb_name": "Wädenswil",
+            "waittime": 600,
+            "track": "1"
+          },
+          "track": "4",
+          "type_name": "S-Bahn"
+        },
+        {
+          "arrival": "2019-11-04 15:17:00",
+          "departure": "2019-11-04 15:17:00",
+          "stopid": "8503000",
+          "x": 683212,
+          "y": 248030,
+          "name": "Zürich HB",
+          "sbb_name": "Zürich HB",
+          "waittime": 0,
+          "normal_time": 420,
+          "stops": null,
+          "runningtime": 420,
+          "exit": {
+            "arrival": "2019-11-04 15:24:00",
+            "stopid": "8591368",
+            "x": 682990,
+            "y": 248252,
+            "name": "Zürich, Sihlquai/HB",
+            "sbb_name": "Zürich, Sihlquai/HB",
+            "waittime": 360
+          },
+          "type": "walk",
+          "type_name": "Fussweg"
+        },
+        {
+          "arrival": "2019-11-04 15:38:00",
+          "stopid": "8591135",
+          "x": 681427,
+          "y": 249602,
+          "name": "Zürich, Förrlibuckstrasse",
+          "sbb_name": "Zürich, Förrlibuckstrasse",
+          "normal_time": 0,
+          "stops": null,
+          "type": "walk",
+          "departure": "2019-11-04 15:38:00",
+          "runningtime": 300,
+          "exit": {
+            "arrival": "2019-11-04 15:43:00",
+            "isaddress": true,
+            "name": "Zürich, Förrlibuckstr. 60"
+          },
+          "type_name": "Fussweg"
+        },
+        {
+          "arrival": "2019-11-04 15:43:00",
+          "isaddress": true,
+          "name": "Zürich, Förrlibuckstr. 60"
+        }
+      ]
+    }
+  ],
+  "url": "https://fahrplan.search.ch/Einsiedeln..Z%C3%BCrich,F%C3%B6rrlibuckstr.60?time=14.00&date=04.11.2019",
+  "points": [
+    {
+      "text": "Einsiedeln",
+      "url": "https://map.search.ch/Einsiedeln",
+      "id": "8503283",
+      "x": "699075",
+      "y": "220557"
+    },
+    {
+      "text": "Zürich, Förrlibuckstr. 60",
+      "url": "https://map.search.ch/Z%C3%BCrich,F%C3%B6rrlibuckstr.60"
+    }
+  ],
+  "description": "Von Einsiedeln nach Zürich, Förrlibuckstr. 60 am Montag 04.11.2019",
+  "request": "route",
+  "eof": 1
+}

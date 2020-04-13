@@ -1,0 +1,1724 @@
+{
+  "ver": "1.16",
+  "ext": "DB.R19.04.a",
+  "lang": "deu",
+  "id": "t9mifrjkgwk894ww",
+  "cInfo": {
+    "code": "OK",
+    "url": "",
+    "msg": ""
+  },
+  "svcResL": [
+    {
+      "meth": "TripSearch",
+      "err": "OK",
+      "res": {
+        "common": {
+          "locL": [
+            {
+              "lid": "A=1@O=Rendsburg, Eiderstraße@X=9651304@Y=54293246@U=103@L=981067408@",
+              "type": "S",
+              "name": "Rendsburg, Eiderstraße",
+              "icoX": 0,
+              "extId": "981067408",
+              "state": "F",
+              "crd": {
+                "x": 9651304,
+                "y": 54293246,
+                "type": "WGS84",
+                "layerX": 0,
+                "crdSysX": 0
+              },
+              "pCls": 0
+            },
+            {
+              "lid": "A=1@O=Karlsruhe Hbf@X=8402181@Y=48993512@U=80@L=8000191@",
+              "type": "S",
+              "name": "Karlsruhe Hbf",
+              "icoX": 1,
+              "extId": "8000191",
+              "state": "F",
+              "crd": {
+                "x": 8401939,
+                "y": 48993530,
+                "z": 0,
+                "type": "WGS84",
+                "layerX": 0,
+                "crdSysX": 0
+              },
+              "pCls": 827
+            },
+            {
+              "lid": "A=1@O=Gartenstraße, Rendsburg@X=9652743@Y=54292581@U=80@L=699076@",
+              "type": "S",
+              "name": "Gartenstraße, Rendsburg",
+              "icoX": 2,
+              "extId": "699076",
+              "state": "F",
+              "crd": {
+                "x": 9652743,
+                "y": 54292581,
+                "type": "WGS84",
+                "layerX": 0,
+                "crdSysX": 0
+              },
+              "pCls": 32
+            },
+            {
+              "lid": "A=1@O=Bahnhofstraße/ZOB, Rendsburg@X=9668132@Y=54302883@U=80@L=698776@",
+              "type": "S",
+              "name": "Bahnhofstraße/ZOB, Rendsburg",
+              "icoX": 2,
+              "extId": "698776",
+              "state": "F",
+              "crd": {
+                "x": 9668132,
+                "y": 54302883,
+                "type": "WGS84",
+                "layerX": 0,
+                "crdSysX": 0
+              },
+              "pCls": 555,
+              "mMastLocX": 4
+            },
+            {
+              "lid": "A=1@O=Rendsburg@X=9671135@Y=54302262@U=80@L=8000312@",
+              "type": "S",
+              "name": "Rendsburg",
+              "icoX": 4,
+              "extId": "8000312",
+              "state": "F",
+              "crd": {
+                "x": 9670577,
+                "y": 54302712,
+                "z": 0,
+                "type": "WGS84",
+                "layerX": 0,
+                "crdSysX": 0
+              },
+              "pCls": 555
+            },
+            {
+              "lid": "A=1@O=Martinshaus, Rendsburg@X=9653489@Y=54289686@U=80@L=699086@",
+              "type": "S",
+              "name": "Martinshaus, Rendsburg",
+              "icoX": 2,
+              "extId": "699086",
+              "state": "F",
+              "crd": {
+                "x": 9653489,
+                "y": 54289686,
+                "type": "WGS84",
+                "layerX": 0,
+                "crdSysX": 0
+              },
+              "pCls": 32
+            },
+            {
+              "lid": "A=1@O=Friedhof Neuwerk, Rendsburg@X=9658451@Y=54290486@U=80@L=703077@",
+              "type": "S",
+              "name": "Friedhof Neuwerk, Rendsburg",
+              "icoX": 2,
+              "extId": "703077",
+              "state": "F",
+              "crd": {
+                "x": 9658451,
+                "y": 54290486,
+                "type": "WGS84",
+                "layerX": 0,
+                "crdSysX": 0
+              },
+              "pCls": 32
+            },
+            {
+              "lid": "A=1@O=Fußgängertunnel Nord, Rendsburg@X=9664698@Y=54291421@U=80@L=699066@",
+              "type": "S",
+              "name": "Fußgängertunnel Nord, Rendsburg",
+              "icoX": 2,
+              "extId": "699066",
+              "state": "F",
+              "crd": {
+                "x": 9664698,
+                "y": 54291421,
+                "type": "WGS84",
+                "layerX": 0,
+                "crdSysX": 0
+              },
+              "pCls": 32
+            },
+            {
+              "lid": "A=1@O=Musikschule, Rendsburg@X=9664258@Y=54296168@U=80@L=698784@",
+              "type": "S",
+              "name": "Musikschule, Rendsburg",
+              "icoX": 2,
+              "extId": "698784",
+              "state": "F",
+              "crd": {
+                "x": 9664258,
+                "y": 54296168,
+                "type": "WGS84",
+                "layerX": 0,
+                "crdSysX": 0
+              },
+              "pCls": 32
+            },
+            {
+              "lid": "A=1@O=Grafenstraße, Rendsburg@X=9665022@Y=54297759@U=80@L=699109@",
+              "type": "S",
+              "name": "Grafenstraße, Rendsburg",
+              "icoX": 2,
+              "extId": "699109",
+              "state": "F",
+              "crd": {
+                "x": 9665022,
+                "y": 54297759,
+                "type": "WGS84",
+                "layerX": 0,
+                "crdSysX": 0
+              },
+              "pCls": 32
+            },
+            {
+              "lid": "A=1@O=Hamburg Hbf@X=10006909@Y=53552733@U=80@L=8002549@",
+              "type": "S",
+              "name": "Hamburg Hbf",
+              "icoX": 4,
+              "extId": "8002549",
+              "state": "F",
+              "crd": {
+                "x": 10006360,
+                "y": 53553533,
+                "z": 0,
+                "type": "WGS84",
+                "layerX": 0,
+                "crdSysX": 0
+              },
+              "pCls": 191
+            },
+            {
+              "lid": "A=1@O=Nortorf@X=9852582@Y=54166633@U=80@L=8004466@",
+              "type": "S",
+              "name": "Nortorf",
+              "icoX": 2,
+              "extId": "8004466",
+              "state": "F",
+              "crd": {
+                "x": 9852591,
+                "y": 54166633,
+                "z": 0,
+                "type": "WGS84",
+                "layerX": 0,
+                "crdSysX": 0
+              },
+              "pCls": 40
+            },
+            {
+              "lid": "A=1@O=Neumünster@X=9979815@Y=54075752@U=80@L=8000271@",
+              "type": "S",
+              "name": "Neumünster",
+              "icoX": 4,
+              "extId": "8000271",
+              "state": "F",
+              "crd": {
+                "x": 9980031,
+                "y": 54076336,
+                "z": 0,
+                "type": "WGS84",
+                "layerX": 0,
+                "crdSysX": 0
+              },
+              "pCls": 555
+            },
+            {
+              "lid": "A=1@O=Elmshorn@X=9659404@Y=53754028@U=80@L=8000092@",
+              "type": "S",
+              "name": "Elmshorn",
+              "icoX": 8,
+              "extId": "8000092",
+              "state": "F",
+              "crd": {
+                "x": 9659053,
+                "y": 53755116,
+                "z": 0,
+                "type": "WGS84",
+                "layerX": 0,
+                "crdSysX": 0
+              },
+              "pCls": 556
+            },
+            {
+              "lid": "A=1@O=Hamburg Dammtor@X=9989569@Y=53560751@U=80@L=8002548@",
+              "type": "S",
+              "name": "Hamburg Dammtor",
+              "icoX": 4,
+              "extId": "8002548",
+              "state": "F",
+              "crd": {
+                "x": 9989533,
+                "y": 53560841,
+                "z": 0,
+                "type": "WGS84",
+                "layerX": 0,
+                "crdSysX": 0
+              },
+              "pCls": 59
+            },
+            {
+              "lid": "A=1@O=Frankfurt(Main)Hbf@X=8663785@Y=50107149@U=80@L=8000105@",
+              "type": "S",
+              "name": "Frankfurt(Main)Hbf",
+              "icoX": 1,
+              "extId": "8000105",
+              "state": "F",
+              "crd": {
+                "x": 8663003,
+                "y": 50106817,
+                "z": 0,
+                "type": "WGS84",
+                "layerX": 0,
+                "crdSysX": 0
+              },
+              "pCls": 443
+            },
+            {
+              "lid": "A=1@O=Hannover Hbf@X=9741017@Y=52376764@U=80@L=8000152@",
+              "type": "S",
+              "name": "Hannover Hbf",
+              "icoX": 4,
+              "extId": "8000152",
+              "state": "F",
+              "crd": {
+                "x": 9741763,
+                "y": 52377079,
+                "z": 0,
+                "type": "WGS84",
+                "layerX": 0,
+                "crdSysX": 0
+              },
+              "pCls": 319
+            },
+            {
+              "lid": "A=1@O=Göttingen@X=9926069@Y=51536812@U=80@L=8000128@",
+              "type": "S",
+              "name": "Göttingen",
+              "icoX": 4,
+              "extId": "8000128",
+              "state": "F",
+              "crd": {
+                "x": 9926257,
+                "y": 51536758,
+                "z": 0,
+                "type": "WGS84",
+                "layerX": 0,
+                "crdSysX": 0
+              },
+              "pCls": 559
+            },
+            {
+              "lid": "A=1@O=Kassel-Wilhelmshöhe@X=9446899@Y=51313115@U=80@L=8003200@",
+              "type": "S",
+              "name": "Kassel-Wilhelmshöhe",
+              "icoX": 4,
+              "extId": "8003200",
+              "state": "F",
+              "crd": {
+                "x": 9446845,
+                "y": 51312998,
+                "z": 0,
+                "type": "WGS84",
+                "layerX": 0,
+                "crdSysX": 0
+              },
+              "pCls": 827
+            },
+            {
+              "lid": "A=1@O=Heidelberg Hbf@X=8675444@Y=49403564@U=80@L=8000156@",
+              "type": "S",
+              "name": "Heidelberg Hbf",
+              "icoX": 4,
+              "extId": "8000156",
+              "state": "F",
+              "crd": {
+                "x": 8675480,
+                "y": 49403582,
+                "z": 0,
+                "type": "WGS84",
+                "layerX": 0,
+                "crdSysX": 0
+              },
+              "pCls": 319
+            },
+            {
+              "lid": "A=1@O=Wiesloch-Walldorf@X=8664145@Y=49291351@U=80@L=8006421@",
+              "type": "S",
+              "name": "Wiesloch-Walldorf",
+              "icoX": 4,
+              "extId": "8006421",
+              "state": "F",
+              "crd": {
+                "x": 8664217,
+                "y": 49291028,
+                "z": 0,
+                "type": "WGS84",
+                "layerX": 0,
+                "crdSysX": 0
+              },
+              "pCls": 571
+            },
+            {
+              "lid": "A=1@O=Bruchsal@X=8589651@Y=49124619@U=80@L=8000055@",
+              "type": "S",
+              "name": "Bruchsal",
+              "icoX": 4,
+              "extId": "8000055",
+              "state": "F",
+              "crd": {
+                "x": 8589687,
+                "y": 49124592,
+                "z": 0,
+                "type": "WGS84",
+                "layerX": 0,
+                "crdSysX": 0
+              },
+              "pCls": 59
+            },
+            {
+              "lid": "A=1@O=Karlsruhe-Durlach@X=8462823@Y=49002330@U=80@L=8003184@",
+              "type": "S",
+              "name": "Karlsruhe-Durlach",
+              "icoX": 4,
+              "extId": "8003184",
+              "state": "F",
+              "crd": {
+                "x": 8462292,
+                "y": 49002025,
+                "z": 0,
+                "type": "WGS84",
+                "layerX": 0,
+                "crdSysX": 0
+              },
+              "pCls": 571
+            }
+          ],
+          "prodL": [
+            {
+              "name": "Fußweg",
+              "icoX": 3,
+              "cls": 0
+            },
+            {
+              "name": "Bus 11",
+              "nameS": "11",
+              "number": "11",
+              "icoX": 2,
+              "cls": 32,
+              "prodCtx": {
+                "name": "Bus   11",
+                "num": "353",
+                "line": "11",
+                "matchId": "11",
+                "catOut": "Bus",
+                "catOutS": "Bus",
+                "catOutL": "Bus",
+                "catIn": "Bus",
+                "catCode": "5",
+                "admin": "akTRAN"
+              }
+            },
+            {
+              "name": "Bus 11",
+              "nameS": "11",
+              "number": "11",
+              "icoX": 2,
+              "cls": 32,
+              "prodCtx": {
+                "name": "Bus   11",
+                "num": "353",
+                "line": "11",
+                "lineId": "5_akTRAN_11",
+                "matchId": "11",
+                "catOut": "Bus",
+                "catOutS": "Bus",
+                "catOutL": "Bus",
+                "catIn": "Bus",
+                "catCode": "5",
+                "admin": "akTRAN"
+              }
+            },
+            {
+              "name": "Bus 10",
+              "nameS": "10",
+              "number": "10",
+              "icoX": 2,
+              "cls": 32,
+              "prodCtx": {
+                "name": "Bus   10",
+                "num": "320",
+                "line": "10",
+                "lineId": "5_akTRAN_10",
+                "matchId": "10",
+                "catOut": "Bus",
+                "catOutS": "Bus",
+                "catOutL": "Bus",
+                "catIn": "Bus",
+                "catCode": "5",
+                "admin": "akTRAN"
+              }
+            },
+            {
+              "name": "Bus 10",
+              "nameS": "10",
+              "number": "10",
+              "icoX": 2,
+              "cls": 32,
+              "prodCtx": {
+                "name": "Bus   10",
+                "num": "323",
+                "line": "10",
+                "lineId": "5_akTRAN_10",
+                "matchId": "10",
+                "catOut": "Bus",
+                "catOutS": "Bus",
+                "catOutL": "Bus",
+                "catIn": "Bus",
+                "catCode": "5",
+                "admin": "akTRAN"
+              }
+            },
+            {
+              "name": "Bus 11",
+              "nameS": "11",
+              "number": "11",
+              "icoX": 2,
+              "cls": 32,
+              "prodCtx": {
+                "name": "Bus   11",
+                "num": "350",
+                "line": "11",
+                "lineId": "5_akTRAN_11",
+                "matchId": "11",
+                "catOut": "Bus",
+                "catOutS": "Bus",
+                "catOutL": "Bus",
+                "catIn": "Bus",
+                "catCode": "5",
+                "admin": "akTRAN"
+              }
+            },
+            {
+              "name": "RE 21071",
+              "nameS": "RE",
+              "number": "21071",
+              "icoX": 6,
+              "cls": 8,
+              "oprX": 0,
+              "prodCtx": {
+                "name": "RE 21071",
+                "num": "21071",
+                "matchId": "7",
+                "catOut": "RE",
+                "catOutS": "RE",
+                "catOutL": "Regional-Express",
+                "catIn": "RE",
+                "catCode": "3",
+                "admin": "800201",
+                "addName": "RE     7"
+              },
+              "addName": "RE 7"
+            },
+            {
+              "name": "ICE 771",
+              "number": "771",
+              "icoX": 4,
+              "cls": 1,
+              "oprX": 1,
+              "prodCtx": {
+                "name": "ICE  771",
+                "num": "771",
+                "matchId": "22",
+                "catOut": "ICE",
+                "catOutS": "ICE",
+                "catOutL": "Intercity-Express",
+                "catIn": "ICE",
+                "catCode": "0",
+                "admin": "80____"
+              }
+            },
+            {
+              "name": "IC 2371",
+              "number": "2371",
+              "icoX": 12,
+              "cls": 2,
+              "oprX": 1,
+              "prodCtx": {
+                "name": "IC  2371",
+                "num": "2371",
+                "matchId": "26",
+                "catOut": "IC",
+                "catOutS": "IC",
+                "catOutL": "Intercity",
+                "catIn": "IC",
+                "catCode": "1",
+                "admin": "80____"
+              }
+            }
+          ],
+          "polyL": [],
+          "layerL": [
+            {
+              "id": "standard",
+              "name": "standard",
+              "index": 0,
+              "annoCnt": 0
+            }
+          ],
+          "crdSysL": [
+            {
+              "id": "standard",
+              "index": 0,
+              "type": "WGS84",
+              "dim": 3
+            }
+          ],
+          "opL": [
+            {
+              "name": "DB Regio AG Nord",
+              "icoX": 7
+            },
+            {
+              "name": "DB Fernverkehr AG",
+              "icoX": 10
+            }
+          ],
+          "remL": [
+            {
+              "type": "A",
+              "code": "bg",
+              "prio": 560,
+              "icoX": 5,
+              "txtN": "Behindertengerechtes Fahrzeug"
+            },
+            {
+              "type": "A",
+              "code": "FB",
+              "prio": 260,
+              "icoX": 9,
+              "txtN": "Fahrradmitnahme begrenzt möglich"
+            },
+            {
+              "type": "A",
+              "code": "EH",
+              "prio": 560,
+              "icoX": 5,
+              "txtN": "Fahrzeuggebundene Einstiegshilfe vorhanden"
+            },
+            {
+              "type": "A",
+              "code": "SI",
+              "prio": 561,
+              "icoX": 5,
+              "txtN": "Barrierefreier Zustieg an geeigneten Stationen möglich"
+            },
+            {
+              "type": "A",
+              "code": "SM",
+              "prio": 561,
+              "icoX": 5,
+              "txtN": "Info www.bahn.de/sh-barrierefrei"
+            },
+            {
+              "type": "A",
+              "code": "CK",
+              "prio": 200,
+              "icoX": 5,
+              "txtN": "Komfort Check-in möglich (Infos unter bahn.de/kci)"
+            },
+            {
+              "type": "A",
+              "code": "BR",
+              "prio": 450,
+              "icoX": 11,
+              "txtN": "Bordrestaurant"
+            },
+            {
+              "type": "A",
+              "code": "FR",
+              "prio": 260,
+              "icoX": 13,
+              "txtN": "Fahrradmitnahme reservierungspflichtig"
+            },
+            {
+              "type": "A",
+              "code": "BT",
+              "prio": 450,
+              "icoX": 14,
+              "txtN": "Bordbistro"
+            }
+          ],
+          "icoL": [
+            {
+              "res": "STA"
+            },
+            {
+              "res": "ECE"
+            },
+            {
+              "res": "Bus"
+            },
+            {
+              "res": "WALK"
+            },
+            {
+              "res": "ICE"
+            },
+            {
+              "res": "attr_info"
+            },
+            {
+              "res": "RE"
+            },
+            {
+              "res": "RE",
+              "txt": "DB Regio AG Nord"
+            },
+            {
+              "res": "DPF"
+            },
+            {
+              "res": "attr_bike"
+            },
+            {
+              "res": "D",
+              "txt": "DB Fernverkehr AG"
+            },
+            {
+              "res": "attr_resto"
+            },
+            {
+              "res": "IC"
+            },
+            {
+              "res": "attr_bike_r"
+            },
+            {
+              "res": "attr_bistro"
+            }
+          ],
+          "tcocL": [
+            {
+              "c": "FIRST",
+              "r": 2
+            },
+            {
+              "c": "SECOND",
+              "r": 2
+            },
+            {
+              "c": "FIRST",
+              "r": 1
+            },
+            {
+              "c": "SECOND",
+              "r": 1
+            }
+          ]
+        },
+        "outConL": [
+          {
+            "cid": "C-0",
+            "date": "20200328",
+            "dur": "081700",
+            "chg": 3,
+            "sDays": {
+              "sDaysR": "nicht täglich",
+              "sDaysI": "23. Mär bis 30. Apr 2020 Mo - Fr; nicht 20. bis 24. Apr 2020; auch 28., 29. Mär, 12. Apr",
+              "sDaysB": "0000000000000000000000001FFE7DF803C000000000000000000000000000000000000000000000000000000000"
+            },
+            "dep": {
+              "locX": 0,
+              "dInR": true,
+              "dTimeS": "123500",
+              "dTZOffset": 60,
+              "type": "N"
+            },
+            "arr": {
+              "locX": 1,
+              "idx": 13,
+              "aPlatfS": "5",
+              "aOutR": true,
+              "aTimeS": "205200",
+              "aProgType": "PROGNOSED",
+              "aTZOffset": 60,
+              "type": "N"
+            },
+            "secL": [
+              {
+                "type": "WALK",
+                "icoX": 3,
+                "dep": {
+                  "locX": 0,
+                  "dInR": true,
+                  "dTimeS": "123500",
+                  "dTZOffset": 60,
+                  "type": "N"
+                },
+                "arr": {
+                  "locX": 2,
+                  "aOutR": true,
+                  "aTimeS": "123700",
+                  "aTZOffset": 60,
+                  "type": "N"
+                },
+                "gis": {
+                  "dist": 165,
+                  "durS": "000200",
+                  "ctx": "G|1|G@F|A=1@O=Rendsburg, Eiderstraße@X=9651304@Y=54293246@U=103@L=981067408@|A=1@O=Gartenstraße, Rendsburg@X=9652743@Y=54292581@U=80@L=699076@|28032020|123500|123700|bf|ft@0@2000@120@0@100@1@1000@0@@@@@false@0@-1@$f@$f@$f@$f@$f@$§bt@0@2000@120@0@100@1@1000@0@@@@@false@0@-1@$f@$f@$f@$f@$f@$§tf@$f@$f@$f@$f@$f@$§|"
+                },
+                "resState": "N",
+                "resRecommendation": "N"
+              },
+              {
+                "type": "JNY",
+                "icoX": 2,
+                "dep": {
+                  "locX": 2,
+                  "idx": 3,
+                  "dProdX": 1,
+                  "dInR": true,
+                  "dTimeS": "123700",
+                  "dTZOffset": 60,
+                  "type": "N"
+                },
+                "arr": {
+                  "locX": 3,
+                  "idx": 9,
+                  "aOutR": true,
+                  "aTimeS": "124600",
+                  "aTZOffset": 60,
+                  "type": "N"
+                },
+                "jny": {
+                  "jid": "1|35367|6|80|28032020",
+                  "prodX": 2,
+                  "dirTxt": "Stadion, Büdelsdorf",
+                  "status": "P",
+                  "isRchbl": true,
+                  "stopL": [
+                    {
+                      "locX": 2,
+                      "idx": 3,
+                      "dProdX": 2,
+                      "dInR": true,
+                      "dTimeS": "123700",
+                      "dDirTxt": "Stadion, Büdelsdorf",
+                      "dDirFlg": "1",
+                      "dTZOffset": 60,
+                      "type": "N"
+                    },
+                    {
+                      "locX": 5,
+                      "idx": 4,
+                      "aProdX": 2,
+                      "aOutR": true,
+                      "aTimeS": "123800",
+                      "aTZOffset": 60,
+                      "dProdX": 2,
+                      "dInR": true,
+                      "dTimeS": "123800",
+                      "dTZOffset": 60,
+                      "type": "N"
+                    },
+                    {
+                      "locX": 6,
+                      "idx": 5,
+                      "aProdX": 2,
+                      "aOutR": true,
+                      "aTimeS": "123900",
+                      "aTZOffset": 60,
+                      "dProdX": 2,
+                      "dInR": true,
+                      "dTimeS": "123900",
+                      "dTZOffset": 60,
+                      "type": "N"
+                    },
+                    {
+                      "locX": 7,
+                      "idx": 6,
+                      "aProdX": 2,
+                      "aOutR": true,
+                      "aTimeS": "124000",
+                      "aTZOffset": 60,
+                      "dProdX": 2,
+                      "dInR": true,
+                      "dTimeS": "124000",
+                      "dTZOffset": 60,
+                      "type": "N"
+                    },
+                    {
+                      "locX": 8,
+                      "idx": 7,
+                      "aProdX": 2,
+                      "aOutR": true,
+                      "aTimeS": "124200",
+                      "aTZOffset": 60,
+                      "dProdX": 2,
+                      "dInR": true,
+                      "dTimeS": "124200",
+                      "dTZOffset": 60,
+                      "type": "N"
+                    },
+                    {
+                      "locX": 9,
+                      "idx": 8,
+                      "aProdX": 2,
+                      "aOutR": true,
+                      "aTimeS": "124400",
+                      "aTZOffset": 60,
+                      "dProdX": 2,
+                      "dInR": true,
+                      "dTimeS": "124400",
+                      "dTZOffset": 60,
+                      "type": "N"
+                    },
+                    {
+                      "locX": 3,
+                      "idx": 9,
+                      "aProdX": 2,
+                      "aOutR": true,
+                      "aTimeS": "124600",
+                      "aTZOffset": 60,
+                      "type": "N"
+                    }
+                  ],
+                  "freq": {
+                    "minC": 30,
+                    "maxC": 60,
+                    "numC": 5,
+                    "jnyL": [
+                      {
+                        "jid": "1|34727|7|80|28032020",
+                        "prodX": 3,
+                        "dirTxt": "Rosenweg, Büdelsdorf",
+                        "stopL": [
+                          {
+                            "locX": 2,
+                            "idx": 3,
+                            "dProdX": 3,
+                            "dTimeS": "130700",
+                            "dDirTxt": "Rosenweg, Büdelsdorf",
+                            "dDirFlg": "1",
+                            "dTZOffset": 60,
+                            "type": "N"
+                          },
+                          {
+                            "locX": 3,
+                            "idx": 9,
+                            "aProdX": 3,
+                            "aTimeS": "131600",
+                            "aTZOffset": 60,
+                            "type": "N"
+                          }
+                        ],
+                        "ctxRecon": "T$A=1@O=Gartenstraße, Rendsburg@L=699076@a=128@$A=1@O=Bahnhofstraße/ZOB, Rendsburg@L=698776@a=128@$202003281307$202003281316$Bus   10$$1$",
+                        "msgL": [
+                          {
+                            "type": "REM",
+                            "remX": 0,
+                            "fLocX": 2,
+                            "tLocX": 3,
+                            "fIdx": 3,
+                            "tIdx": 9,
+                            "tagL": [
+                              "RES_JNY_DTL"
+                            ]
+                          }
+                        ],
+                        "subscr": "F"
+                      },
+                      {
+                        "jid": "1|35367|7|80|28032020",
+                        "prodX": 2,
+                        "dirTxt": "Stadion, Büdelsdorf",
+                        "stopL": [
+                          {
+                            "locX": 2,
+                            "idx": 3,
+                            "dProdX": 2,
+                            "dTimeS": "133700",
+                            "dDirTxt": "Stadion, Büdelsdorf",
+                            "dDirFlg": "1",
+                            "dTZOffset": 60,
+                            "type": "N"
+                          },
+                          {
+                            "locX": 3,
+                            "idx": 9,
+                            "aProdX": 2,
+                            "aTimeS": "134600",
+                            "aTZOffset": 60,
+                            "type": "N"
+                          }
+                        ],
+                        "ctxRecon": "T$A=1@O=Gartenstraße, Rendsburg@L=699076@a=128@$A=1@O=Bahnhofstraße/ZOB, Rendsburg@L=698776@a=128@$202003281337$202003281346$Bus   11$$1$",
+                        "msgL": [
+                          {
+                            "type": "REM",
+                            "remX": 0,
+                            "fLocX": 2,
+                            "tLocX": 3,
+                            "fIdx": 3,
+                            "tIdx": 9,
+                            "tagL": [
+                              "RES_JNY_DTL"
+                            ]
+                          }
+                        ],
+                        "subscr": "F"
+                      },
+                      {
+                        "jid": "1|34776|0|80|28032020",
+                        "prodX": 4,
+                        "dirTxt": "Bahnhofstraße/ZOB, Rendsburg",
+                        "stopL": [
+                          {
+                            "locX": 2,
+                            "idx": 3,
+                            "dProdX": 4,
+                            "dTimeS": "140700",
+                            "dDirTxt": "Bahnhofstraße/ZOB, Rendsburg",
+                            "dDirFlg": "1",
+                            "dTZOffset": 60,
+                            "type": "N"
+                          },
+                          {
+                            "locX": 3,
+                            "idx": 9,
+                            "aProdX": 4,
+                            "aTimeS": "141600",
+                            "aTZOffset": 60,
+                            "type": "N"
+                          }
+                        ],
+                        "ctxRecon": "T$A=1@O=Gartenstraße, Rendsburg@L=699076@a=128@$A=1@O=Bahnhofstraße/ZOB, Rendsburg@L=698776@a=128@$202003281407$202003281416$Bus   10$$1$",
+                        "msgL": [
+                          {
+                            "type": "REM",
+                            "remX": 0,
+                            "fLocX": 2,
+                            "tLocX": 3,
+                            "fIdx": 3,
+                            "tIdx": 9,
+                            "tagL": [
+                              "RES_JNY_DTL"
+                            ]
+                          }
+                        ],
+                        "subscr": "F"
+                      },
+                      {
+                        "jid": "1|35300|0|80|28032020",
+                        "prodX": 5,
+                        "dirTxt": "Stadion, Büdelsdorf",
+                        "stopL": [
+                          {
+                            "locX": 2,
+                            "idx": 3,
+                            "dProdX": 5,
+                            "dTimeS": "143700",
+                            "dDirTxt": "Stadion, Büdelsdorf",
+                            "dDirFlg": "1",
+                            "dTZOffset": 60,
+                            "type": "N"
+                          },
+                          {
+                            "locX": 3,
+                            "idx": 9,
+                            "aProdX": 5,
+                            "aTimeS": "144600",
+                            "aTZOffset": 60,
+                            "type": "N"
+                          }
+                        ],
+                        "ctxRecon": "T$A=1@O=Gartenstraße, Rendsburg@L=699076@a=128@$A=1@O=Bahnhofstraße/ZOB, Rendsburg@L=698776@a=128@$202003281437$202003281446$Bus   11$$1$",
+                        "msgL": [
+                          {
+                            "type": "REM",
+                            "remX": 0,
+                            "fLocX": 2,
+                            "tLocX": 3,
+                            "fIdx": 3,
+                            "tIdx": 9,
+                            "tagL": [
+                              "RES_JNY_DTL"
+                            ]
+                          }
+                        ],
+                        "subscr": "F"
+                      },
+                      {
+                        "jid": "1|35300|1|80|28032020",
+                        "prodX": 5,
+                        "dirTxt": "Stadion, Büdelsdorf",
+                        "stopL": [
+                          {
+                            "locX": 2,
+                            "idx": 3,
+                            "dProdX": 5,
+                            "dTimeS": "153700",
+                            "dDirTxt": "Stadion, Büdelsdorf",
+                            "dDirFlg": "1",
+                            "dTZOffset": 60,
+                            "type": "N"
+                          },
+                          {
+                            "locX": 3,
+                            "idx": 9,
+                            "aProdX": 5,
+                            "aTimeS": "154600",
+                            "aTZOffset": 60,
+                            "type": "N"
+                          }
+                        ],
+                        "ctxRecon": "T$A=1@O=Gartenstraße, Rendsburg@L=699076@a=128@$A=1@O=Bahnhofstraße/ZOB, Rendsburg@L=698776@a=128@$202003281537$202003281546$Bus   11$$1$",
+                        "msgL": [
+                          {
+                            "type": "REM",
+                            "remX": 0,
+                            "fLocX": 2,
+                            "tLocX": 3,
+                            "fIdx": 3,
+                            "tIdx": 9,
+                            "tagL": [
+                              "RES_JNY_DTL"
+                            ]
+                          }
+                        ],
+                        "subscr": "F"
+                      }
+                    ]
+                  },
+                  "ctxRecon": "T$A=1@O=Gartenstraße, Rendsburg@L=699076@a=128@$A=1@O=Bahnhofstraße/ZOB, Rendsburg@L=698776@a=128@$202003281237$202003281246$Bus   11$$1$",
+                  "msgL": [
+                    {
+                      "type": "REM",
+                      "remX": 0,
+                      "fLocX": 2,
+                      "tLocX": 3,
+                      "fIdx": 3,
+                      "tIdx": 9,
+                      "tagL": [
+                        "RES_JNY_DTL"
+                      ]
+                    }
+                  ],
+                  "subscr": "F",
+                  "chgDurR": 10
+                },
+                "minChg": "000500",
+                "resState": "N",
+                "resRecommendation": "N"
+              },
+              {
+                "type": "WALK",
+                "icoX": 3,
+                "dep": {
+                  "locX": 3,
+                  "dInR": true,
+                  "dTimeS": "124600",
+                  "dTZOffset": 60,
+                  "type": "N"
+                },
+                "arr": {
+                  "locX": 4,
+                  "aOutR": true,
+                  "aTimeS": "125100",
+                  "aTZOffset": 60,
+                  "type": "N"
+                },
+                "gis": {
+                  "dist": 207,
+                  "durS": "000500",
+                  "dirGeo": 30,
+                  "ctx": "H|1|W$A=1@O=Bahnhofstraße/ZOB, Rendsburg@L=698776@a=128@$A=1@O=Rendsburg@L=8000312@a=128@$202003281246$202003281251$$$1$",
+                  "gisPrvr": "H"
+                },
+                "resState": "N",
+                "resRecommendation": "N"
+              },
+              {
+                "type": "JNY",
+                "icoX": 6,
+                "dep": {
+                  "locX": 4,
+                  "idx": 5,
+                  "dProdX": 6,
+                  "dPlatfS": "1",
+                  "dInR": true,
+                  "dTimeS": "125600",
+                  "dTZOffset": 60,
+                  "type": "N"
+                },
+                "arr": {
+                  "locX": 10,
+                  "idx": 10,
+                  "aProdX": 6,
+                  "aPlatfS": "12C-F",
+                  "aOutR": true,
+                  "aTimeS": "141500",
+                  "aProgType": "PROGNOSED",
+                  "aTZOffset": 60,
+                  "type": "N"
+                },
+                "jny": {
+                  "jid": "1|250984|1|80|28032020",
+                  "prodX": 6,
+                  "dirTxt": "Hamburg Hbf",
+                  "status": "P",
+                  "isRchbl": true,
+                  "stopL": [
+                    {
+                      "locX": 4,
+                      "idx": 5,
+                      "dProdX": 6,
+                      "dPlatfS": "1",
+                      "dInR": true,
+                      "dTimeS": "125600",
+                      "dDirTxt": "Hamburg Hbf",
+                      "dTZOffset": 60,
+                      "type": "N"
+                    },
+                    {
+                      "locX": 11,
+                      "idx": 6,
+                      "aProdX": 6,
+                      "aPlatfS": "2",
+                      "aOutR": true,
+                      "aTimeS": "131100",
+                      "aTZOffset": 60,
+                      "dProdX": 6,
+                      "dPlatfS": "2",
+                      "dInR": true,
+                      "dTimeS": "131200",
+                      "dTZOffset": 60,
+                      "type": "N"
+                    },
+                    {
+                      "locX": 12,
+                      "idx": 7,
+                      "aProdX": 6,
+                      "aPlatfS": "5",
+                      "aOutR": true,
+                      "aTimeS": "132200",
+                      "aTZOffset": 60,
+                      "dProdX": 6,
+                      "dPlatfS": "5",
+                      "dInR": true,
+                      "dTimeS": "132800",
+                      "dTZOffset": 60,
+                      "type": "N"
+                    },
+                    {
+                      "locX": 13,
+                      "idx": 8,
+                      "aProdX": 6,
+                      "aPlatfS": "2",
+                      "aOutR": true,
+                      "aTimeS": "134800",
+                      "aTZOffset": 60,
+                      "dProdX": 6,
+                      "dPlatfS": "2",
+                      "dInR": true,
+                      "dTimeS": "134900",
+                      "dTZOffset": 60,
+                      "type": "N"
+                    },
+                    {
+                      "locX": 14,
+                      "idx": 9,
+                      "aProdX": 6,
+                      "aPlatfS": "4",
+                      "aOutR": true,
+                      "aTimeS": "140900",
+                      "aTZOffset": 60,
+                      "dProdX": 6,
+                      "dInS": false,
+                      "dInR": false,
+                      "dTZOffset": 60,
+                      "type": "N"
+                    },
+                    {
+                      "locX": 10,
+                      "idx": 10,
+                      "aProdX": 6,
+                      "aPlatfS": "12C-F",
+                      "aOutR": true,
+                      "aTimeS": "141500",
+                      "aProgType": "PROGNOSED",
+                      "aTZOffset": 60,
+                      "type": "N"
+                    }
+                  ],
+                  "ctxRecon": "T$A=1@O=Rendsburg@L=8000312@a=128@$A=1@O=Hamburg Hbf@L=8002549@a=128@$202003281256$202003281415$RE 21071$$1$",
+                  "msgL": [
+                    {
+                      "type": "REM",
+                      "remX": 1,
+                      "fLocX": 4,
+                      "tLocX": 10,
+                      "fIdx": 5,
+                      "tIdx": 10,
+                      "tagL": [
+                        "RES_JNY_DTL_L"
+                      ]
+                    },
+                    {
+                      "type": "REM",
+                      "remX": 2,
+                      "fLocX": 4,
+                      "tLocX": 10,
+                      "fIdx": 5,
+                      "tIdx": 10,
+                      "tagL": [
+                        "RES_JNY_DTL"
+                      ]
+                    },
+                    {
+                      "type": "REM",
+                      "remX": 3,
+                      "fLocX": 4,
+                      "tLocX": 10,
+                      "fIdx": 5,
+                      "tIdx": 10,
+                      "tagL": [
+                        "RES_JNY_DTL"
+                      ]
+                    },
+                    {
+                      "type": "REM",
+                      "remX": 4,
+                      "fLocX": 4,
+                      "tLocX": 10,
+                      "fIdx": 5,
+                      "tIdx": 10,
+                      "tagL": [
+                        "RES_JNY_DTL"
+                      ]
+                    }
+                  ],
+                  "subscr": "F",
+                  "chgDurR": 46
+                },
+                "minChg": "000800",
+                "resState": "N",
+                "resRecommendation": "N"
+              },
+              {
+                "type": "JNY",
+                "icoX": 4,
+                "dep": {
+                  "locX": 10,
+                  "idx": 2,
+                  "dProdX": 7,
+                  "dPlatfS": "14",
+                  "dInR": true,
+                  "dTimeS": "150100",
+                  "dTrnCmpSX": {
+                    "tcocX": [
+                      0,
+                      1
+                    ]
+                  },
+                  "dTZOffset": 60,
+                  "type": "N"
+                },
+                "arr": {
+                  "locX": 15,
+                  "idx": 6,
+                  "aProdX": 7,
+                  "aPlatfS": "6",
+                  "aOutR": true,
+                  "aTimeS": "190000",
+                  "aTZOffset": 60,
+                  "type": "N"
+                },
+                "jny": {
+                  "jid": "1|245683|0|80|28032020",
+                  "prodX": 7,
+                  "dirTxt": "Stuttgart Hbf",
+                  "status": "P",
+                  "isRchbl": true,
+                  "stopL": [
+                    {
+                      "locX": 10,
+                      "idx": 2,
+                      "dProdX": 7,
+                      "dPlatfS": "14",
+                      "dInR": true,
+                      "dTimeS": "150100",
+                      "dDirTxt": "Stuttgart Hbf",
+                      "dTrnCmpSX": {
+                        "tcocX": [
+                          0,
+                          1
+                        ]
+                      },
+                      "dTZOffset": 60,
+                      "type": "N"
+                    },
+                    {
+                      "locX": 16,
+                      "idx": 3,
+                      "aProdX": 7,
+                      "aOutR": true,
+                      "aTimeS": "163400",
+                      "aTZOffset": 60,
+                      "dProdX": 7,
+                      "dInR": true,
+                      "dTimeS": "164100",
+                      "dTrnCmpSX": {
+                        "tcocX": [
+                          0,
+                          1
+                        ]
+                      },
+                      "dTZOffset": 60,
+                      "type": "N"
+                    },
+                    {
+                      "locX": 17,
+                      "idx": 4,
+                      "aProdX": 7,
+                      "aPlatfS": "10",
+                      "aOutR": true,
+                      "aTimeS": "171500",
+                      "aTZOffset": 60,
+                      "dProdX": 7,
+                      "dPlatfS": "10",
+                      "dInR": true,
+                      "dTimeS": "171600",
+                      "dTrnCmpSX": {
+                        "tcocX": [
+                          0,
+                          1
+                        ]
+                      },
+                      "dTZOffset": 60,
+                      "type": "N"
+                    },
+                    {
+                      "locX": 18,
+                      "idx": 5,
+                      "aProdX": 7,
+                      "aPlatfS": "2",
+                      "aOutR": true,
+                      "aTimeS": "173500",
+                      "aTZOffset": 60,
+                      "dProdX": 7,
+                      "dPlatfS": "2",
+                      "dInR": true,
+                      "dTimeS": "173700",
+                      "dTrnCmpSX": {
+                        "tcocX": [
+                          0,
+                          1
+                        ]
+                      },
+                      "dTZOffset": 60,
+                      "type": "N"
+                    },
+                    {
+                      "locX": 15,
+                      "idx": 6,
+                      "aProdX": 7,
+                      "aPlatfS": "6",
+                      "aOutR": true,
+                      "aTimeS": "190000",
+                      "aTZOffset": 60,
+                      "type": "N"
+                    }
+                  ],
+                  "ctxRecon": "T$A=1@O=Hamburg Hbf@L=8002549@a=128@$A=1@O=Frankfurt(Main)Hbf@L=8000105@a=128@$202003281501$202003281900$ICE  771$$1$",
+                  "msgL": [
+                    {
+                      "type": "REM",
+                      "remX": 5,
+                      "fLocX": 10,
+                      "tLocX": 15,
+                      "fIdx": 2,
+                      "tIdx": 6,
+                      "tagL": [
+                        "RES_JNY_DTL"
+                      ]
+                    },
+                    {
+                      "type": "REM",
+                      "remX": 6,
+                      "fLocX": 10,
+                      "tLocX": 15,
+                      "fIdx": 2,
+                      "tIdx": 6,
+                      "tagL": [
+                        "RES_JNY_DTL_L"
+                      ]
+                    }
+                  ],
+                  "subscr": "F",
+                  "chgDurR": 20,
+                  "dTrnCmpSX": {
+                    "tcocX": [
+                      0,
+                      1
+                    ]
+                  }
+                },
+                "minChg": "000800",
+                "resState": "N",
+                "resRecommendation": "N"
+              },
+              {
+                "type": "JNY",
+                "icoX": 12,
+                "dep": {
+                  "locX": 15,
+                  "idx": 8,
+                  "dProdX": 8,
+                  "dPlatfS": "13",
+                  "dInR": true,
+                  "dTimeS": "192000",
+                  "dTrnCmpSX": {
+                    "tcocX": [
+                      2,
+                      3
+                    ]
+                  },
+                  "dTZOffset": 60,
+                  "type": "N"
+                },
+                "arr": {
+                  "locX": 1,
+                  "idx": 13,
+                  "aProdX": 8,
+                  "aPlatfS": "5",
+                  "aOutR": true,
+                  "aTimeS": "205200",
+                  "aProgType": "PROGNOSED",
+                  "aTZOffset": 60,
+                  "type": "N"
+                },
+                "jny": {
+                  "jid": "1|242498|0|80|28032020",
+                  "prodX": 8,
+                  "dirTxt": "Karlsruhe Hbf",
+                  "status": "P",
+                  "isRchbl": true,
+                  "stopL": [
+                    {
+                      "locX": 15,
+                      "idx": 8,
+                      "dProdX": 8,
+                      "dPlatfS": "13",
+                      "dInR": true,
+                      "dTimeS": "192000",
+                      "dDirTxt": "Karlsruhe Hbf",
+                      "dTrnCmpSX": {
+                        "tcocX": [
+                          2,
+                          3
+                        ]
+                      },
+                      "dTZOffset": 60,
+                      "type": "N"
+                    },
+                    {
+                      "locX": 19,
+                      "idx": 9,
+                      "aProdX": 8,
+                      "aPlatfS": "9",
+                      "aOutR": true,
+                      "aTimeS": "200800",
+                      "aTZOffset": 60,
+                      "dProdX": 8,
+                      "dPlatfS": "9",
+                      "dInR": true,
+                      "dTimeS": "201500",
+                      "dTrnCmpSX": {
+                        "tcocX": [
+                          2,
+                          3
+                        ]
+                      },
+                      "dTZOffset": 60,
+                      "type": "N"
+                    },
+                    {
+                      "locX": 20,
+                      "idx": 10,
+                      "aProdX": 8,
+                      "aPlatfS": "2",
+                      "aOutR": true,
+                      "aTimeS": "202200",
+                      "aTZOffset": 60,
+                      "dProdX": 8,
+                      "dPlatfS": "2",
+                      "dInR": true,
+                      "dTimeS": "202300",
+                      "dTrnCmpSX": {
+                        "tcocX": [
+                          2,
+                          3
+                        ]
+                      },
+                      "dTZOffset": 60,
+                      "type": "N"
+                    },
+                    {
+                      "locX": 21,
+                      "idx": 11,
+                      "aProdX": 8,
+                      "aPlatfS": "4",
+                      "aOutR": true,
+                      "aTimeS": "203400",
+                      "aTZOffset": 60,
+                      "dProdX": 8,
+                      "dPlatfS": "4",
+                      "dInR": true,
+                      "dTimeS": "203500",
+                      "dTrnCmpSX": {
+                        "tcocX": [
+                          2,
+                          3
+                        ]
+                      },
+                      "dTZOffset": 60,
+                      "type": "N"
+                    },
+                    {
+                      "locX": 22,
+                      "idx": 12,
+                      "aProdX": 8,
+                      "aPlatfS": "6",
+                      "aOutR": true,
+                      "aTimeS": "204500",
+                      "aTZOffset": 60,
+                      "dProdX": 8,
+                      "dInS": false,
+                      "dInR": false,
+                      "dTZOffset": 60,
+                      "type": "N"
+                    },
+                    {
+                      "locX": 1,
+                      "idx": 13,
+                      "aProdX": 8,
+                      "aPlatfS": "5",
+                      "aOutR": true,
+                      "aTimeS": "205200",
+                      "aProgType": "PROGNOSED",
+                      "aTZOffset": 60,
+                      "type": "N"
+                    }
+                  ],
+                  "ctxRecon": "T$A=1@O=Frankfurt(Main)Hbf@L=8000105@a=128@$A=1@O=Karlsruhe Hbf@L=8000191@a=128@$202003281920$202003282052$IC  2371$$1$",
+                  "msgL": [
+                    {
+                      "type": "REM",
+                      "remX": 7,
+                      "fLocX": 15,
+                      "tLocX": 1,
+                      "fIdx": 8,
+                      "tIdx": 13,
+                      "tagL": [
+                        "RES_JNY_DTL_L"
+                      ]
+                    },
+                    {
+                      "type": "REM",
+                      "remX": 1,
+                      "fLocX": 15,
+                      "tLocX": 1,
+                      "fIdx": 8,
+                      "tIdx": 13,
+                      "tagL": [
+                        "RES_JNY_DTL_L"
+                      ]
+                    },
+                    {
+                      "type": "REM",
+                      "remX": 8,
+                      "fLocX": 15,
+                      "tLocX": 1,
+                      "fIdx": 8,
+                      "tIdx": 13,
+                      "tagL": [
+                        "RES_JNY_DTL_L"
+                      ]
+                    }
+                  ],
+                  "subscr": "F",
+                  "dTrnCmpSX": {
+                    "tcocX": [
+                      2,
+                      3
+                    ]
+                  }
+                },
+                "resState": "N",
+                "resRecommendation": "N"
+              }
+            ],
+            "ctxRecon": "¶HKI¶G@F$A=1@O=Rendsburg, Eiderstraße@L=981067408@a=128@$A=1@O=Gartenstraße, Rendsburg@L=699076@a=128@$202003281235$202003281237$$$1$§T$A=1@O=Gartenstraße, Rendsburg@L=699076@a=128@$A=1@O=Bahnhofstraße/ZOB, Rendsburg@L=698776@a=128@$202003281237$202003281246$Bus   11$$1$§W$A=1@O=Bahnhofstraße/ZOB, Rendsburg@L=698776@a=128@$A=1@O=Rendsburg@L=8000312@a=128@$202003281246$202003281251$$$1$§T$A=1@O=Rendsburg@L=8000312@a=128@$A=1@O=Hamburg Hbf@L=8002549@a=128@$202003281256$202003281415$RE 21071$$1$§T$A=1@O=Hamburg Hbf@L=8002549@a=128@$A=1@O=Frankfurt(Main)Hbf@L=8000105@a=128@$202003281501$202003281900$ICE  771$$1$§T$A=1@O=Frankfurt(Main)Hbf@L=8000105@a=128@$A=1@O=Karlsruhe Hbf@L=8000191@a=128@$202003281920$202003282052$IC  2371$$1$¶GP¶ft@0@2000@120@0@100@1@1000@0@@@@@false@0@-1@$f@$f@$f@$f@$f@$§bt@0@2000@120@0@100@1@1000@0@@@@@false@0@-1@$f@$f@$f@$f@$f@$§tf@$f@$f@$f@$f@$f@$§",
+            "freq": {
+              "minC": 30
+            },
+            "trfRes": {
+              "statusCode": "OK",
+              "fareSetL": [
+                {
+                  "fareL": [
+                    {
+                      "prc": 6590,
+                      "isFromPrice": true,
+                      "isBookable": true,
+                      "isUpsell": false,
+                      "targetCtx": "D",
+                      "addHint": "(Teilstreckenpreis)",
+                      "buttonText": "Weiter zur Buchung"
+                    }
+                  ]
+                }
+              ]
+            },
+            "conSubscr": "F",
+            "resState": "N",
+            "resRecommendation": "N",
+            "recState": "U",
+            "sotRating": 0,
+            "isSotCon": false,
+            "showARSLink": false,
+            "sotCtxt": {
+              "calcDate": "20200229",
+              "locMode": "FROM_START",
+              "reqMode": "UNKNOWN",
+              "calcTime": "185400"
+            },
+            "cksum": "c0365f30_3",
+            "dTrnCmpSX": {
+              "tcocX": [
+                0,
+                1
+              ]
+            }
+          }
+        ],
+        "outCtxScrB": "1|OB|MT#11#153395#153395#153892#153892#0#0#565#153376#1#-2147483622#0#1#2|PDH#661ce03d22f58281731a3a8fb6b76ed8|RD#28032020|RT#121600",
+        "outCtxScrF": "1|OF|MT#11#153395#153395#153892#153892#0#0#565#153376#1#-2147483622#0#1#2|PDH#661ce03d22f58281731a3a8fb6b76ed8|RD#28032020|RT#121600",
+        "retCtxScrF": "1|OF|MT#11#153395#153395#153892#153892#0#0#565#153376#1#-2147483622#0#1#2|PDH#661ce03d22f58281731a3a8fb6b76ed8|RD#28032020|RT#121600",
+        "fpB": "20191215",
+        "fpE": "20201212",
+        "bfATS": -1,
+        "bfIOSTS": -1,
+        "planrtTS": "1582998753"
+      }
+    }
+  ]
+}

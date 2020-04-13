@@ -1,0 +1,85 @@
+[
+  {
+    "stopId": 8002549,
+    "stopName": "Hamburg Hbf",
+    "lat": "53.552733",
+    "lon": "10.006909",
+    "depTime": "10:53",
+    "train": "IC 386",
+    "type": "IC",
+    "operator": "DB",
+    "notes": [
+      {
+        "key": "FK",
+        "priority": "260",
+        "text": "Number of bicycles conveyed limited"
+      },
+      {
+        "key": "FR",
+        "priority": "260",
+        "text": "Bicycles conveyed - subject to reservation"
+      },
+      {
+        "key": "KG",
+        "priority": "640",
+        "text": "No food or beverages"
+      }
+    ]
+  },
+  {
+    "stopId": 8002548,
+    "stopName": "Hamburg Dammtor",
+    "lat": "53.560751",
+    "lon": "9.989569",
+    "arrTime": "10:56",
+    "depTime": "10:58",
+    "train": "IC 386",
+    "type": "IC",
+    "operator": "DB",
+    "notes": [
+      {
+        "key": "FK",
+        "priority": "260",
+        "text": "Number of bicycles conveyed limited"
+      },
+      {
+        "key": "FR",
+        "priority": "260",
+        "text": "Bicycles conveyed - subject to reservation"
+      },
+      {
+        "key": "KG",
+        "priority": "640",
+        "text": "No food or beverages"
+      }
+    ]
+  },
+  {
+    "stopId": 8000312,
+    "stopName": "Rendsburg",
+    "lat": "54.302262",
+    "lon": "9.671135",
+    "arrTime": "12:11",
+    "depTime": "12:13",
+    "train": "IC 386",
+    "type": "IC",
+    "operator": "DB",
+    "notes": [
+      {
+        "key": "FK",
+        "priority": "260",
+        "text": "Number of bicycles conveyed limited"
+      },
+      {
+        "key": "FR",
+        "priority": "260",
+        "text": "Bicycles conveyed - subject to reservation"
+      },
+      {
+        "key": "KG",
+        "priority": "640",
+        "text": "No food or beverages"
+      }
+    ]
+  }
+]

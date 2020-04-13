@@ -1,0 +1,15 @@
+[
+  {
+    "label": "Luzern",
+    "id": "8505000",
+    "x": "666223",
+    "y": "211383",
+    "iconclass": "sl-icon-type-train",
+    "html": "<span class=\"sl-keyword\">Lu</span>zern"
+  },
+  {
+    "label": "Zürich, Förrlibuckstr. 60/62 ",
+    "iconclass": "sl-icon-type-adr",
+    "html": "<span class=\"sl-keyword\">Zürich</span>, <span class=\"sl-keyword\">Förrlibuckstr</span>. <span class=\"sl-keyword\">60</span>/62 "
+  }
+]

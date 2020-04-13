@@ -1,0 +1,422 @@
+{
+  "links": {
+    "_self": "https://api.blablacar.com/api/v2/trips",
+    "_front": "https://www.blablacar.co.uk/search?fn=ZRH&fc=47.4582165%2C8.5554755&tn=FRA&tc=50.0379326%2C8.5621518&db=29/12/2019"
+  },
+  "pager": {
+    "page": 1,
+    "pages": 1,
+    "total": 3,
+    "limit": 10
+  },
+  "trips": [
+    {
+      "links": {
+        "_self": "http://api.blablacar.com:443/api/v2/trips/1848602173-zuerich-frankfurt-am-main",
+        "_front": "https://www.blablacar.co.uk/trip/carpooling/1848602173-zuerich-frankfurt-am-main/?_force_https=1"
+      },
+      "departure_date": "29/12/2019 12:00:00",
+      "departure_place": {
+        "city_name": "Zürich",
+        "address": "Bahnhof Zürich HB, Zürich",
+        "latitude": 47.377735138,
+        "longitude": 8.54072094,
+        "country_code": "CH"
+      },
+      "arrival_place": {
+        "city_name": "Frankfurt",
+        "address": "Frankfurt (Main) Hauptbahnhof, Frankfurt am Main",
+        "latitude": 50.106528,
+        "longitude": 8.662161,
+        "country_code": "DE"
+      },
+      "price": {
+        "value": 21,
+        "currency": "GBP",
+        "symbol": "£",
+        "string_value": "£21",
+        "price_color": "BLACK"
+      },
+      "price_with_commission": {
+        "value": 23.5,
+        "currency": "GBP",
+        "symbol": "£",
+        "string_value": "£23.50",
+        "price_color": "BLACK"
+      },
+      "price_without_commission": {
+        "value": 21,
+        "currency": "GBP",
+        "symbol": "£",
+        "string_value": "£21",
+        "price_color": "BLACK"
+      },
+      "commission": {
+        "value": 2.5,
+        "currency": "GBP",
+        "symbol": "£",
+        "string_value": "£2.50"
+      },
+      "seats_left": 2,
+      "seats": 3,
+      "duration": {
+        "value": 17400,
+        "unity": "s"
+      },
+      "distance": {
+        "value": 407,
+        "unity": "km"
+      },
+      "permanent_id": "1848602173-zuerich-frankfurt-am-main",
+      "car": {
+        "id": "60346540",
+        "model": "530",
+        "make": "BMW",
+        "comfort": "Normal",
+        "comfort_nb_star": 2,
+        "category": "CATEGORY_BERLINE"
+      },
+      "multimodal_id": {
+        "source": "CARPOOLING",
+        "id": "1848602173-zuerich-frankfurt-am-main"
+      },
+      "viaggio_rosa": false,
+      "is_comfort": false,
+      "freeway": true,
+      "answer_delay": 0,
+      "booking_mode": "auto",
+      "booking_type": "online",
+      "locations_to_display": [
+        "Zürich",
+        "Frankfurt"
+      ],
+      "departure_passenger_routing": {
+        "proximity": "MIDDLE",
+        "routes": [
+          {
+            "distance_in_meters": 9018,
+            "type": "AS_THE_CROW_FLIES"
+          }
+        ]
+      },
+      "arrival_passenger_routing": {
+        "proximity": "MIDDLE",
+        "routes": [
+          {
+            "distance_in_meters": 10446,
+            "type": "AS_THE_CROW_FLIES"
+          }
+        ]
+      },
+      "corridoring_type": "PLANNED",
+      "vehicle_pictures": []
+    },
+    {
+      "links": {
+        "_self": "https://api.blablacar.com/api/v2/trips/1819468110-zuerich-frankfurt-am-main",
+        "_front": "https://www.blablacar.co.uk/trip/carpooling/1819468110-zuerich-frankfurt-am-main/?_force_https=1"
+      },
+      "departure_date": "29/12/2019 16:30:00",
+      "departure_place": {
+        "city_name": "Zürich",
+        "address": "Bahnhof Altstetten, Zürich",
+        "latitude": 47.391076,
+        "longitude": 8.488055,
+        "country_code": "CH"
+      },
+      "arrival_place": {
+        "city_name": "Frankfurt",
+        "address": "Burgstraße 84, Frankfurt am Main",
+        "latitude": 50.125793,
+        "longitude": 8.700921,
+        "country_code": "DE"
+      },
+      "price": {
+        "value": 17,
+        "currency": "GBP",
+        "symbol": "£",
+        "string_value": "£17",
+        "price_color": "BLACK"
+      },
+      "price_with_commission": {
+        "value": 19.5,
+        "currency": "GBP",
+        "symbol": "£",
+        "string_value": "£19.50",
+        "price_color": "BLACK"
+      },
+      "price_without_commission": {
+        "value": 17,
+        "currency": "GBP",
+        "symbol": "£",
+        "string_value": "£17",
+        "price_color": "BLACK"
+      },
+      "commission": {
+        "value": 2.5,
+        "currency": "GBP",
+        "symbol": "£",
+        "string_value": "£2.50"
+      },
+      "seats_left": 2,
+      "seats": 3,
+      "duration": {
+        "value": 16800,
+        "unity": "s"
+      },
+      "distance": {
+        "value": 413,
+        "unity": "km"
+      },
+      "permanent_id": "1819468110-zuerich-frankfurt-am-main",
+      "car": {
+        "id": "90081710",
+        "model": "POLO",
+        "make": "VOLKSWAGEN",
+        "comfort": "Normal",
+        "comfort_nb_star": 2,
+        "category": "CATEGORY_BERLINE"
+      },
+      "multimodal_id": {
+        "source": "CARPOOLING",
+        "id": "1819468110-zuerich-frankfurt-am-main"
+      },
+      "viaggio_rosa": false,
+      "is_comfort": true,
+      "freeway": true,
+      "answer_delay": 3,
+      "booking_mode": "manual",
+      "booking_type": "online",
+      "locations_to_display": [
+        "Zürich",
+        "Frankfurt"
+      ],
+      "departure_passenger_routing": {
+        "proximity": "MIDDLE",
+        "routes": [
+          {
+            "distance_in_meters": 9026,
+            "type": "AS_THE_CROW_FLIES"
+          }
+        ]
+      },
+      "arrival_passenger_routing": {
+        "proximity": "MIDDLE",
+        "routes": [
+          {
+            "distance_in_meters": 13910,
+            "type": "AS_THE_CROW_FLIES"
+          }
+        ]
+      },
+      "corridoring_type": "PLANNED",
+      "vehicle_pictures": []
+    },
+    {
+      "links": {
+        "_self": "https://api.blablacar.com/api/v2/trips/1849864385-zurigo-francoforte-sul-meno",
+        "_front": "https://www.blablacar.co.uk/trip/carpooling/1849864385-zurigo-francoforte-sul-meno/?_force_https=1"
+      },
+      "departure_date": "29/12/2019 17:30:00",
+      "departure_place": {
+        "city_name": "Zürich",
+        "address": "Gartenstrasse, Zürich",
+        "latitude": 47.368251,
+        "longitude": 8.533183,
+        "country_code": "CH"
+      },
+      "arrival_place": {
+        "city_name": "Frankfurt",
+        "address": "AGAPLESION MARKUS KRANKENHAUS, Frankfurt am Main",
+        "latitude": 50.135628,
+        "longitude": 8.647349,
+        "country_code": "DE"
+      },
+      "price": {
+        "value": 23,
+        "currency": "GBP",
+        "symbol": "£",
+        "string_value": "£23",
+        "price_color": "BLACK"
+      },
+      "price_with_commission": {
+        "value": 26.5,
+        "currency": "GBP",
+        "symbol": "£",
+        "string_value": "£26.50",
+        "price_color": "BLACK"
+      },
+      "price_without_commission": {
+        "value": 23,
+        "currency": "GBP",
+        "symbol": "£",
+        "string_value": "£23",
+        "price_color": "BLACK"
+      },
+      "commission": {
+        "value": 3.5,
+        "currency": "GBP",
+        "symbol": "£",
+        "string_value": "£3.50"
+      },
+      "seats_left": 3,
+      "seats": 3,
+      "duration": {
+        "value": 18000,
+        "unity": "s"
+      },
+      "distance": {
+        "value": 403,
+        "unity": "km"
+      },
+      "permanent_id": "1849864385-zurigo-francoforte-sul-meno",
+      "car": {
+        "id": "88772792",
+        "model": "Q3",
+        "make": "AUDI",
+        "comfort": "Normal",
+        "comfort_nb_star": 2,
+        "category": "CATEGORY_44"
+      },
+      "multimodal_id": {
+        "source": "CARPOOLING",
+        "id": "1849864385-zurigo-francoforte-sul-meno"
+      },
+      "viaggio_rosa": false,
+      "is_comfort": false,
+      "freeway": true,
+      "answer_delay": 3,
+      "booking_mode": "manual",
+      "booking_type": "online",
+      "locations_to_display": [
+        "Zürich",
+        "Frankfurt"
+      ],
+      "departure_passenger_routing": {
+        "proximity": "MIDDLE",
+        "routes": [
+          {
+            "distance_in_meters": 10143,
+            "type": "AS_THE_CROW_FLIES"
+          }
+        ]
+      },
+      "arrival_passenger_routing": {
+        "proximity": "MIDDLE",
+        "routes": [
+          {
+            "distance_in_meters": 12448,
+            "type": "AS_THE_CROW_FLIES"
+          }
+        ]
+      },
+      "corridoring_type": "PLANNED",
+      "vehicle_pictures": []
+    }
+  ],
+  "top_trips": [],
+  "facets": [
+    {
+      "name": "hour",
+      "type": "custom",
+      "items": [
+        {
+          "value": 12,
+          "count": 1,
+          "is_selected": true
+        },
+        {
+          "value": 13,
+          "count": 1,
+          "is_selected": false
+        },
+        {
+          "value": 14,
+          "count": 1,
+          "is_selected": false
+        },
+        {
+          "value": 15,
+          "count": 1,
+          "is_selected": false
+        },
+        {
+          "value": 16,
+          "count": 1,
+          "is_selected": false
+        },
+        {
+          "value": 17,
+          "count": 1,
+          "is_selected": true
+        }
+      ]
+    },
+    {
+      "name": "price",
+      "type": "custom",
+      "items": [
+        {
+          "value": 19,
+          "count": 1,
+          "is_selected": true
+        },
+        {
+          "value": 20,
+          "count": 1,
+          "is_selected": false
+        },
+        {
+          "value": 21,
+          "count": 1,
+          "is_selected": false
+        },
+        {
+          "value": 22,
+          "count": 1,
+          "is_selected": false
+        },
+        {
+          "value": 23,
+          "count": 1,
+          "is_selected": false
+        },
+        {
+          "value": 24,
+          "count": 1,
+          "is_selected": false
+        },
+        {
+          "value": 25,
+          "count": 1,
+          "is_selected": false
+        },
+        {
+          "value": 26,
+          "count": 1,
+          "is_selected": false
+        },
+        {
+          "value": 27,
+          "count": 1,
+          "is_selected": true
+        }
+      ]
+    }
+  ],
+  "distance": 398,
+  "duration": 16800,
+  "recommended_price": 27,
+  "savings": 81,
+  "lowest_price": 19,
+  "lowest_price_object": {
+    "value": 19.5,
+    "currency": "GBP",
+    "symbol": "£",
+    "string_value": "£20"
+  },
+  "full_trips_count": 2,
+  "total_trip_count_to_display": 3,
+  "sorting_algorithm": "trip_date",
+  "has_bus": false
+}
