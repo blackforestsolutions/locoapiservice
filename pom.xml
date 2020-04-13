@@ -259,27 +259,6 @@
                     </execution>
                 </executions>
             </plugin>
-            <!-- Put Everything in docker container
-            <plugin>
-                <groupId>com.spotify</groupId>
-                <artifactId>dockerfile-maven-plugin</artifactId>
-                <version>${maven.dockerfile.plugin.version}</version>
-                <configuration>
-                    <repository>${project.artifactId}</repository>
-                    <buildArgs>
-                        <JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
-                    </buildArgs>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>build</goal>
-                        </goals>
-                        <phase>install</phase>
-                    </execution>
-                </executions>
-            </plugin>
--->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -335,7 +314,7 @@
                                 <configuration>
                                     <executable>${basedir}/deployment.bat</executable>
                                     <arguments>
-                                        <argument>${version}</argument>
+                                        <argument>${project.version}</argument>
                                     </arguments>
                                 </configuration>
                             </execution>
