@@ -12,7 +12,7 @@ docker login
 
 docker build --build-arg DOCKER_TAG=$DOCKER_TAG -f $DOCKERFILE_PATH -t $IMAGE_NAME .
 
-$sourceId= docker images --filter=reference=locoapiservice --format "{{.ID}}";
+$sourceId= docker images --filter=reference=$IMAGE_NAME --format "{{.ID}}";
 
 echo "sourceId is $sourceId"
 

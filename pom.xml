@@ -6,6 +6,7 @@
     <groupId>org.springframework</groupId>
     <artifactId>locoapiservice</artifactId>
     <version>0.0.2-SNAPSHOT</version>
+    <name>locoapiservice</name>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -307,7 +308,7 @@
                         <executions>
                             <execution><!-- Automated Docker Push -->
                                 <id>Docker Push</id>
-                                <phase>generate-sources</phase>
+                                <phase>verify</phase>
                                 <goals>
                                     <goal>exec</goal>
                                 </goals>

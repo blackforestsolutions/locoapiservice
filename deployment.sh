@@ -8,13 +8,15 @@ targetImage=$DOCKER_REPO/$IMAGE_NAME
 targetImageTagged=$targetImage:$DOCKER_TAG
 
 echo "docker tag is $DOCKER_TAG"
+echo "targetImageTagged is $targetImageTagged"
 
-docker login
+#docker login
 
-docker build --build-arg DOCKER_TAG=$DOCKER_TAG -f $DOCKERFILE_PATH -t $IMAGE_NAME .
+#docker build --build-arg DOCKER_TAG=$DOCKER_TAG -f $DOCKERFILE_PATH -t $IMAGE_NAME .
 
-sourceId=$(docker images --filter=reference=IMAGE_NAME --format "{{.ID}}")
+sourceId=$(docker images --filter=reference=$IMAGE_NAME --format "{{.ID}}")
+echo "sourceId is $sourceId"
 
-docker tag $sourceId $targetImageTagged
+#docker tag $sourceId $targetImageTagged
 
 docker push $targetImageTagged
