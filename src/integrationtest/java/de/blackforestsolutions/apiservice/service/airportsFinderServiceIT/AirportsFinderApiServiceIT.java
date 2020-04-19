@@ -1,8 +1,8 @@
-package de.blackforestsolutions.crawler.service.airportsFinderServiceIT;
+package de.blackforestsolutions.apiservice.service.airportsFinderServiceIT;
 
-import de.blackforestsolutions.crawler.objectmothers.ApiTokenAndUrlInformationObjectMother;
-import de.blackforestsolutions.crawler.service.communicationservice.restcalls.AirportsFinderCallService;
-import de.blackforestsolutions.crawler.service.supportservice.AirportsFinderHttpCallBuilderService;
+import de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother;
+import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.AirportsFinderCallService;
+import de.blackforestsolutions.apiservice.service.supportservice.AirportsFinderHttpCallBuilderService;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;

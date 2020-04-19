@@ -35,8 +35,7 @@ public class AirportsFinderHttpCallBuilderServiceImpl implements AirportsFinderH
                 .concat(longitude)
                 .concat("&")
                 .concat("lat=")
-                .concat(latitude)
-                ;
+                .concat(latitude);
     }
 
     @SuppressWarnings("rawtypes")

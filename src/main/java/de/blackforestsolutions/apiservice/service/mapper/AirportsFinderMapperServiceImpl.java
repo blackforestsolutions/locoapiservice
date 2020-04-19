@@ -21,6 +21,7 @@ public class AirportsFinderMapperServiceImpl implements AirportsFinderMapperServ
         this.airports = airports;
     }
 
+
     @Override
     public Set<TravelPoint> map(String jsonString) {
         ObjectMapper mapper = new ObjectMapper();
@@ -31,7 +32,11 @@ public class AirportsFinderMapperServiceImpl implements AirportsFinderMapperServ
         } catch (JsonProcessingException e) {
             log.error("Error during mapping json to Object: {}", jsonString, e);
         }
-        return mapAirportFindingsToTravelPointList(airportsFindingList);
+        if (airportsFindingList != null) {
+            return mapAirportFindingsToTravelPointList(airportsFindingList);
+        } else {
+            return null; // todo findbugs error bc null could be passed through
+        }
     }
 
 
@@ -50,11 +55,12 @@ public class AirportsFinderMapperServiceImpl implements AirportsFinderMapperServ
         if (airports.get(airportCode) != null) {
             TravelPoint.TravelPointBuilder travelPoint = airports.get(airportCode);
             return travelPoint.build();
-        } /*else if (airportCode != null) {
+        } else {
+            return null; // todo error Handling
+        /*else if (airportCode != null) {
             //return buildTravelPointManually(airportsFinding);
 
-        }*/ else {
-            return null; // todo error Handling
+        }*/
         }
     }
 }
