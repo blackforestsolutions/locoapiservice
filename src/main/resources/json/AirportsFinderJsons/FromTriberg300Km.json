@@ -1,0 +1,1221 @@
+[
+  {
+    "airportId": "17b055f6-95af-4959-935c-c08ce3f230d9",
+    "code": "VTL",
+    "name": "Vittel Champ De Course Airport",
+    "location": {
+      "longitude": 6.381111,
+      "latitude": 47.8168409
+    },
+    "cityId": "bae3d168-6816-48e6-96db-7e7bd1225db8",
+    "city": "Luxeuil-les-Bains",
+    "countryCode": "FR",
+    "themes": [],
+    "pointsOfSale": [
+      "FR"
+    ]
+  },
+  {
+    "airportId": "4e75336f-2c5e-44dc-92df-e13f6476c0d9",
+    "code": "QFB",
+    "name": "Freiburg i. Br. Airport",
+    "location": {
+      "longitude": 7.842104299999999,
+      "latitude": 47.9990077
+    },
+    "cityId": "7ba2f19e-c16f-4451-8079-3e611e5e1285",
+    "city": "Freiburg",
+    "countryCode": "DE",
+    "themes": [],
+    "pointsOfSale": [
+      "DE"
+    ]
+  },
+  {
+    "airportId": "7aa70ade-5ee4-4adc-ab2d-6cff643b6e6b",
+    "code": "DLE",
+    "name": "Dole-Tavaux Airport",
+    "location": {
+      "longitude": 5.4212699,
+      "latitude": 47.0436856
+    },
+    "cityId": "a924710b-fb09-482e-a88f-795989dc3d15",
+    "city": "Tavaux",
+    "countryCode": "FR",
+    "themes": [],
+    "pointsOfSale": [
+      "FR"
+    ]
+  },
+  {
+    "airportId": "86da9145-ccbc-4de2-906c-0c52809be093",
+    "code": "PLG",
+    "name": "La Plagne Airport",
+    "location": {
+      "longitude": 5.728435,
+      "latitude": 46.19221899999999
+    },
+    "cityId": "993aa118-3ce9-4f7e-85ba-292ab7da776b",
+    "city": "Plagne",
+    "countryCode": "FR",
+    "themes": [],
+    "pointsOfSale": [
+      "FR"
+    ]
+  },
+  {
+    "airportId": "b1734828-5647-4554-97bc-345a15981470",
+    "code": "SXB",
+    "name": "Strasbourg",
+    "location": {
+      "longitude": 7.633333,
+      "latitude": 48.541389
+    },
+    "cityId": "364f96a7-1f9d-4c03-a4d7-86a1263ab87a",
+    "city": "Strasbourg",
+    "countryCode": "FR",
+    "themes": [],
+    "pointsOfSale": [
+      "FR"
+    ]
+  },
+  {
+    "airportId": "b23fbb3a-7cce-4114-a988-d9b4d52c3864",
+    "code": "XWG",
+    "name": "Railway Station",
+    "location": {
+      "longitude": 7.78,
+      "latitude": 48.598333333333336
+    },
+    "cityId": "364f96a7-1f9d-4c03-a4d7-86a1263ab87a",
+    "city": "Strasbourg",
+    "countryCode": "FR",
+    "themes": [],
+    "pointsOfSale": [
+      "FR"
+    ]
+  },
+  {
+    "airportId": "d8c08a02-140d-4ade-a8ba-0cb656fd9b18",
+    "code": "ZQW",
+    "name": "Zweibruecken",
+    "location": {
+      "longitude": 7.400555555555556,
+      "latitude": 49.20944444444445
+    },
+    "cityId": "cf7a51d8-740a-480f-98d8-d3924eea9bd3",
+    "city": "Saarbruecken",
+    "countryCode": "DE",
+    "themes": [],
+    "pointsOfSale": [
+      "DE"
+    ]
+  },
+  {
+    "airportId": "f119fe21-3294-4ca6-8a2b-d2ed4fb9b5fc",
+    "code": "QNC",
+    "name": "Neuchatel Airport",
+    "location": {
+      "longitude": 6.8651135,
+      "latitude": 46.9573995
+    },
+    "cityId": "a4e0f139-e0f8-474c-9f0d-c0933e05fa19",
+    "city": "Boudry",
+    "countryCode": "CH",
+    "themes": [],
+    "pointsOfSale": [
+      "DE",
+      "NO",
+      "BE",
+      "RU",
+      "PT",
+      "IN",
+      "DK",
+      "GR",
+      "IT",
+      "FR",
+      "ES",
+      "SE",
+      "TH",
+      "GB",
+      "CA",
+      "TR",
+      "NL"
+    ]
+  },
+  {
+    "airportId": "0df51a46-dc1a-40fc-8511-084becc2c0f3",
+    "code": "SCN",
+    "name": "Saarbrucken",
+    "location": {
+      "longitude": 7.110278,
+      "latitude": 49.215556
+    },
+    "cityId": "cf7a51d8-740a-480f-98d8-d3924eea9bd3",
+    "city": "Saarbruecken",
+    "countryCode": "DE",
+    "themes": [
+      "HISTORIC",
+      "SHOPPING"
+    ],
+    "pointsOfSale": [
+      "DE"
+    ]
+  },
+  {
+    "airportId": "17267c5a-1d4c-4f28-85de-c808a78fb59b",
+    "code": "SIR",
+    "name": "Sion",
+    "location": {
+      "longitude": 7.328056,
+      "latitude": 46.220556
+    },
+    "cityId": "2f7ef763-1f4e-4690-a425-afac0d6d3959",
+    "city": "Sion",
+    "countryCode": "CH",
+    "themes": [],
+    "pointsOfSale": [
+      "DE",
+      "NO",
+      "BE",
+      "RU",
+      "PT",
+      "IN",
+      "DK",
+      "GR",
+      "IT",
+      "FR",
+      "ES",
+      "SE",
+      "TH",
+      "GB",
+      "CA",
+      "TR",
+      "NL"
+    ]
+  },
+  {
+    "airportId": "4f1f8d2f-9cc3-4bdb-83f4-ec292c1e9085",
+    "code": "ZRH",
+    "name": "Zurich",
+    "location": {
+      "longitude": 8.549167,
+      "latitude": 47.459444
+    },
+    "cityId": "6b0f115f-5bd0-4813-86ef-22b7ec622cba",
+    "city": "Zurich",
+    "countryCode": "CH",
+    "themes": [],
+    "pointsOfSale": [
+      "DE",
+      "NO",
+      "BE",
+      "RU",
+      "PT",
+      "IN",
+      "DK",
+      "GR",
+      "IT",
+      "FR",
+      "ES",
+      "SE",
+      "TH",
+      "GB",
+      "CA",
+      "TR",
+      "NL"
+    ]
+  },
+  {
+    "airportId": "5060e6aa-47bd-48ea-b133-bb3d9330471a",
+    "code": "AGB",
+    "name": "Augsburg",
+    "location": {
+      "longitude": 10.933056,
+      "latitude": 48.426111
+    },
+    "cityId": "88bf4a66-8147-4eb7-9738-0ec08505ec89",
+    "city": "Munich",
+    "countryCode": "DE",
+    "themes": [],
+    "pointsOfSale": [
+      "DE"
+    ]
+  },
+  {
+    "airportId": "526e8b86-cb48-44a1-aae6-8c1ae37349dd",
+    "code": "IGS",
+    "name": "Manching Airport",
+    "location": {
+      "longitude": 11.533888888888889,
+      "latitude": 48.71555555555556
+    },
+    "cityId": "9d01d897-7a01-4f9a-acd6-741e88cb93a2",
+    "city": "Ingolstadt",
+    "countryCode": "DE",
+    "themes": [],
+    "pointsOfSale": [
+      "DE"
+    ]
+  },
+  {
+    "airportId": "96cc68c7-eb8e-4d78-8648-47e462e2705d",
+    "code": "FDH",
+    "name": "Friedrichshafen",
+    "location": {
+      "longitude": 9.513056,
+      "latitude": 47.6725
+    },
+    "cityId": "e8cf8ae3-0789-45e1-9a09-9b9bf9862eb2",
+    "city": "Friedrichshafen",
+    "countryCode": "DE",
+    "themes": [
+      "OUTDOORS"
+    ],
+    "pointsOfSale": [
+      "DE"
+    ]
+  },
+  {
+    "airportId": "a38a9270-051f-4128-86d7-fff844a5ce2b",
+    "code": "ENC",
+    "name": "Nancy",
+    "location": {
+      "longitude": 6.231667,
+      "latitude": 48.691667
+    },
+    "cityId": "fc9cb299-9b29-4bd2-b903-62fc49910d22",
+    "city": "Metz/Nancy",
+    "countryCode": "FR",
+    "themes": [],
+    "pointsOfSale": [
+      "FR"
+    ]
+  },
+  {
+    "airportId": "b6212c47-42da-471a-bed5-3f8903f40fe2",
+    "code": "MHG",
+    "name": "Mannheim",
+    "location": {
+      "longitude": 8.483333,
+      "latitude": 49.483333
+    },
+    "cityId": "bd23e27b-3afb-4da4-86c5-129f0a8e7740",
+    "city": "Mannheim",
+    "countryCode": "DE",
+    "themes": [],
+    "pointsOfSale": [
+      "DE"
+    ]
+  },
+  {
+    "airportId": "b9428e4b-1802-4021-805c-459725625302",
+    "code": "QGV",
+    "name": "Neu Isenburg Rail Station",
+    "location": {
+      "longitude": 8.7,
+      "latitude": 50.05
+    },
+    "cityId": "47e06962-f8a9-4a13-8ba7-bb687ee24deb",
+    "city": "Frankfurt",
+    "countryCode": "DE",
+    "themes": [],
+    "pointsOfSale": [
+      "DE"
+    ]
+  },
+  {
+    "airportId": "da02cf4b-900b-47a3-9728-6fe75bb124e2",
+    "code": "KLT",
+    "name": "Kaiserslautern Airport",
+    "location": {
+      "longitude": 7.7491265,
+      "latitude": 49.4400657
+    },
+    "cityId": "efe4293b-1d80-492e-a176-d2993ec88cfe",
+    "city": "Kaiserslautern",
+    "countryCode": "DE",
+    "themes": [],
+    "pointsOfSale": [
+      "DE"
+    ]
+  },
+  {
+    "airportId": "eef79f1d-d14a-4f90-bb53-ec73554bb08e",
+    "code": "LUX",
+    "name": "Luxembourg",
+    "location": {
+      "longitude": 6.205,
+      "latitude": 49.623333
+    },
+    "cityId": "43e3036c-e61d-4faa-9656-4f9c032e7f15",
+    "city": "Luxembourg",
+    "countryCode": "LU",
+    "themes": [],
+    "pointsOfSale": [
+      "DE",
+      "BE",
+      "RU",
+      "PT",
+      "DK",
+      "GB",
+      "GR",
+      "FR",
+      "ES"
+    ]
+  },
+  {
+    "airportId": "1a24418e-689f-4e6c-9fba-453f0b222bae",
+    "code": "ZJI",
+    "name": "Locarno Airport",
+    "location": {
+      "longitude": 8.7942643,
+      "latitude": 46.16699879999999
+    },
+    "cityId": "2414f59d-ed40-4653-a012-3806df3dc51e",
+    "city": "Locarno",
+    "countryCode": "CH",
+    "themes": [],
+    "pointsOfSale": [
+      "DE",
+      "NO",
+      "BE",
+      "RU",
+      "PT",
+      "IN",
+      "DK",
+      "GR",
+      "IT",
+      "FR",
+      "ES",
+      "SE",
+      "TH",
+      "GB",
+      "CA",
+      "TR",
+      "NL"
+    ]
+  },
+  {
+    "airportId": "1b2d69d8-49e5-4ada-bbb5-b7581315b9f4",
+    "code": "NCY",
+    "name": "Annecy",
+    "location": {
+      "longitude": 6.100833,
+      "latitude": 45.930556
+    },
+    "cityId": "8f20adb7-295a-4078-9b96-e853a415f2a4",
+    "city": "Annecy",
+    "countryCode": "FR",
+    "themes": [],
+    "pointsOfSale": [
+      "FR"
+    ]
+  },
+  {
+    "airportId": "1bb60389-e2bd-43ae-bd70-ac96068ce37c",
+    "code": "INN",
+    "name": "Innsbruck",
+    "location": {
+      "longitude": 11.344444,
+      "latitude": 47.260833
+    },
+    "cityId": "fa2e9cb6-0a54-4198-891b-dbfb19862643",
+    "city": "Innsbruck",
+    "countryCode": "AT",
+    "themes": [],
+    "pointsOfSale": [
+      "DE",
+      "NO",
+      "BE",
+      "RU",
+      "IN",
+      "DK",
+      "GR",
+      "IT",
+      "FR",
+      "ES",
+      "SE",
+      "GB",
+      "CA",
+      "TR",
+      "NL"
+    ]
+  },
+  {
+    "airportId": "34a1124e-22d1-49f3-8261-8f0ca05b97db",
+    "code": "QLX",
+    "name": "Lauterach Airport",
+    "location": {
+      "longitude": 9.7302279,
+      "latitude": 47.4744377
+    },
+    "cityId": "2e7c506f-9281-4b3d-acd4-c408fd08d35a",
+    "city": "Lauterach",
+    "countryCode": "AT",
+    "themes": [],
+    "pointsOfSale": [
+      "DE",
+      "NO",
+      "BE",
+      "RU",
+      "IN",
+      "DK",
+      "GR",
+      "IT",
+      "FR",
+      "ES",
+      "SE",
+      "GB",
+      "CA",
+      "TR",
+      "NL"
+    ]
+  },
+  {
+    "airportId": "4b3b6139-9f29-48d1-a655-bb9510785771",
+    "code": "ZQL",
+    "name": "Donaueschingen-Villingen Airport",
+    "location": {
+      "longitude": 8.4979461,
+      "latitude": 47.95215229999999
+    },
+    "cityId": "4558b44f-779e-4a6f-9165-84ad73fbd104",
+    "city": "Donaueschingen",
+    "countryCode": "DE",
+    "themes": [],
+    "pointsOfSale": [
+      "DE"
+    ]
+  },
+  {
+    "airportId": "4f712b1d-4d9d-4910-aa1d-1de99205bd8c",
+    "code": "MZM",
+    "name": "Metz",
+    "location": {
+      "longitude": 6.134444,
+      "latitude": 49.075556
+    },
+    "cityId": "fc9cb299-9b29-4bd2-b903-62fc49910d22",
+    "city": "Metz/Nancy",
+    "countryCode": "FR",
+    "themes": [],
+    "pointsOfSale": [
+      "FR"
+    ]
+  },
+  {
+    "airportId": "5e60fa85-cddd-4b8a-b2ad-00100e5959e4",
+    "code": "XVN",
+    "name": "Verdun-Le Rozelier Airport",
+    "location": {
+      "longitude": 5.469047199999999,
+      "latitude": 49.1223556
+    },
+    "cityId": "20914933-53ff-4a3b-93e6-bfcae536c48c",
+    "city": "Sommedieue",
+    "countryCode": "FR",
+    "themes": [],
+    "pointsOfSale": [
+      "FR"
+    ]
+  },
+  {
+    "airportId": "6eefd765-a477-46be-97c6-fe42c868322b",
+    "code": "QNJ",
+    "name": "Annemasse Airport",
+    "location": {
+      "longitude": 6.234158,
+      "latitude": 46.19325300000001
+    },
+    "cityId": "b5a163b3-2f92-4b67-baa0-6b10ec9f9119",
+    "city": "Annemasse",
+    "countryCode": "FR",
+    "themes": [],
+    "pointsOfSale": [
+      "FR"
+    ]
+  },
+  {
+    "airportId": "705b2f2f-b0a4-42c4-9dbe-aa7c4b2d2e96",
+    "code": "RMS",
+    "name": "Ramstein Air Base Airport",
+    "location": {
+      "longitude": 7.554540399999999,
+      "latitude": 49.445759
+    },
+    "cityId": "b4bf7a8e-6698-4cee-8888-a85ee9392096",
+    "city": "Ramstein-Miesenbach",
+    "countryCode": "DE",
+    "themes": [],
+    "pointsOfSale": [
+      "DE"
+    ]
+  },
+  {
+    "airportId": "8a096865-9f05-4819-9343-6a797b59b26a",
+    "code": "QMZ",
+    "name": "Mainz-Finthen Airport",
+    "location": {
+      "longitude": 8.2472526,
+      "latitude": 49.9928617
+    },
+    "cityId": "42a2ad57-7d57-4632-8628-b09242fb6afe",
+    "city": "Mainz",
+    "countryCode": "DE",
+    "themes": [],
+    "pointsOfSale": [
+      "DE"
+    ]
+  },
+  {
+    "airportId": "a0e65861-ea68-47bd-be8d-d33b8a30d092",
+    "code": "LUG",
+    "name": "Lugano",
+    "location": {
+      "longitude": 8.911389,
+      "latitude": 46.004722
+    },
+    "cityId": "3a8755a3-9032-41ba-a35e-4964e2bd1f74",
+    "city": "Lugano",
+    "countryCode": "CH",
+    "themes": [],
+    "pointsOfSale": [
+      "DE",
+      "NO",
+      "BE",
+      "RU",
+      "PT",
+      "IN",
+      "DK",
+      "GR",
+      "IT",
+      "FR",
+      "ES",
+      "SE",
+      "TH",
+      "GB",
+      "CA",
+      "TR",
+      "NL"
+    ]
+  },
+  {
+    "airportId": "c5d3303b-8fa0-4418-96d7-9176e8d1f575",
+    "code": "ZCD",
+    "name": "Bamberg-Breitenau Airport",
+    "location": {
+      "longitude": 10.9027636,
+      "latitude": 49.8988135
+    },
+    "cityId": "963591ca-e6f6-4bab-bf17-adaed3f992b6",
+    "city": "Bamberg",
+    "countryCode": "DE",
+    "themes": [],
+    "pointsOfSale": [
+      "DE"
+    ]
+  },
+  {
+    "airportId": "def129de-4104-4723-95c4-1a34e1f06b9b",
+    "code": "ZHS",
+    "name": "Railway Station",
+    "location": {
+      "longitude": 9.866666666666667,
+      "latitude": 46.88333333333333
+    },
+    "cityId": "1bee96ee-4dfa-4680-b5fd-265d540c2dc7",
+    "city": "Klosters",
+    "countryCode": "CH",
+    "themes": [],
+    "pointsOfSale": [
+      "DE",
+      "NO",
+      "BE",
+      "RU",
+      "PT",
+      "IN",
+      "DK",
+      "GR",
+      "IT",
+      "FR",
+      "ES",
+      "SE",
+      "TH",
+      "GB",
+      "CA",
+      "TR",
+      "NL"
+    ]
+  },
+  {
+    "airportId": "ebb7e002-185a-43e7-9183-730ab922d533",
+    "code": "MLH",
+    "name": "Mulhouse",
+    "location": {
+      "longitude": 7.53,
+      "latitude": 47.59
+    },
+    "cityId": "0a5b819a-17c2-43b0-8d6a-5b2e82c03d65",
+    "city": "Mulhouse/Basel",
+    "countryCode": "FR",
+    "themes": [],
+    "pointsOfSale": [
+      "FR"
+    ]
+  },
+  {
+    "airportId": "ef8fbb89-8007-468b-bb78-f59756bfba96",
+    "code": "EAP",
+    "name": "Basel/Mulhouse Metropolitan Area",
+    "location": {
+      "longitude": 8.235422,
+      "latitude": 46.801807
+    },
+    "cityId": "8266080b-075d-427e-bb6a-4cb234afb694",
+    "city": "Basel/Mulhouse",
+    "countryCode": "CH",
+    "themes": [],
+    "pointsOfSale": [
+      "DE",
+      "NO",
+      "BE",
+      "RU",
+      "PT",
+      "IN",
+      "DK",
+      "GR",
+      "IT",
+      "FR",
+      "ES",
+      "SE",
+      "TH",
+      "GB",
+      "CA",
+      "TR",
+      "NL"
+    ]
+  },
+  {
+    "airportId": "f2348215-0c7c-46e0-9100-b8e38146e81e",
+    "code": "MXP",
+    "name": "Milan, Italy - Malpenda Apt",
+    "location": {
+      "longitude": 8.730833,
+      "latitude": 45.633611
+    },
+    "cityId": "2db85dba-aaf2-4fb0-824a-40bf2e40cd4a",
+    "city": "Milan",
+    "countryCode": "IT",
+    "themes": [
+      "HISTORIC",
+      "SHOPPING"
+    ],
+    "pointsOfSale": [
+      "IT"
+    ]
+  },
+  {
+    "airportId": "2e057a7a-919b-439b-807c-49b6cf0b285f",
+    "code": "ETZ",
+    "name": "Metz/Nancy/Lorraine",
+    "location": {
+      "longitude": 6.247778,
+      "latitude": 48.979167
+    },
+    "cityId": "fc9cb299-9b29-4bd2-b903-62fc49910d22",
+    "city": "Metz/Nancy",
+    "countryCode": "FR",
+    "themes": [],
+    "pointsOfSale": [
+      "FR"
+    ]
+  },
+  {
+    "airportId": "37835120-5b58-4f71-a154-31c64dffaad5",
+    "code": "BRN",
+    "name": "Berne",
+    "location": {
+      "longitude": 7.499167,
+      "latitude": 46.915278
+    },
+    "cityId": "049b246b-ed8f-49a1-8b4d-1071a241961f",
+    "city": "Bern",
+    "countryCode": "CH",
+    "themes": [],
+    "pointsOfSale": [
+      "DE",
+      "NO",
+      "BE",
+      "RU",
+      "PT",
+      "IN",
+      "DK",
+      "GR",
+      "IT",
+      "FR",
+      "ES",
+      "SE",
+      "TH",
+      "GB",
+      "CA",
+      "TR",
+      "NL"
+    ]
+  },
+  {
+    "airportId": "6998fdfb-5a66-43f5-a9ca-6df87fe5490c",
+    "code": "FKB",
+    "name": "Karlsruhe/Baden-Baden",
+    "location": {
+      "longitude": 8.079722,
+      "latitude": 48.778333
+    },
+    "cityId": "655d26cc-43a9-4c60-96fa-7bb63c82ae7a",
+    "city": "Karlsruhe/Baden-Baden",
+    "countryCode": "DE",
+    "themes": [],
+    "pointsOfSale": [
+      "DE"
+    ]
+  },
+  {
+    "airportId": "7618aff0-2ee9-4792-8294-a7431cbdfb6d",
+    "code": "BGY",
+    "name": "Bergamo",
+    "location": {
+      "longitude": 9.700556,
+      "latitude": 45.668333
+    },
+    "cityId": "2db85dba-aaf2-4fb0-824a-40bf2e40cd4a",
+    "city": "Milan",
+    "countryCode": "IT",
+    "themes": [
+      "HISTORIC",
+      "SHOPPING"
+    ],
+    "pointsOfSale": [
+      "IT"
+    ]
+  },
+  {
+    "airportId": "85114b6e-e423-4d09-b91b-4fa5f99c85f1",
+    "code": "HHN",
+    "name": "Hahn AB, Wiesbaden",
+    "location": {
+      "longitude": 7.265,
+      "latitude": 49.95
+    },
+    "cityId": "47e06962-f8a9-4a13-8ba7-bb687ee24deb",
+    "city": "Frankfurt",
+    "countryCode": "DE",
+    "themes": [],
+    "pointsOfSale": [
+      "DE"
+    ]
+  },
+  {
+    "airportId": "905724e4-ae1a-4888-9840-33f125f259ec",
+    "code": "QLH",
+    "name": "Off-Line Point",
+    "location": {
+      "longitude": 8.516666666666667,
+      "latitude": 50.05
+    },
+    "cityId": "02023575-2c04-4193-a66b-28c8371310c5",
+    "city": "Kelsterbach",
+    "countryCode": "DE",
+    "themes": [],
+    "pointsOfSale": [
+      "DE"
+    ]
+  },
+  {
+    "airportId": "93e58d34-dfb3-4b70-ad08-35330cb2f77a",
+    "code": "DIJ",
+    "name": "Dijon",
+    "location": {
+      "longitude": 5.096389,
+      "latitude": 47.266389
+    },
+    "cityId": "9b294a14-2af4-4848-9234-41e04898915d",
+    "city": "Dijon",
+    "countryCode": "FR",
+    "themes": [],
+    "pointsOfSale": [
+      "FR"
+    ]
+  },
+  {
+    "airportId": "9744dc25-4e56-4c63-8416-ddb96ba1d102",
+    "code": "XVO",
+    "name": "Vesoul-Frotey Airport",
+    "location": {
+      "longitude": 6.181883,
+      "latitude": 47.620971
+    },
+    "cityId": "d9eefcaa-777c-458c-9dca-2c30deac413c",
+    "city": "Frotey-lès-Vesoul",
+    "countryCode": "FR",
+    "themes": [],
+    "pointsOfSale": [
+      "FR"
+    ]
+  },
+  {
+    "airportId": "b033a441-4678-4305-b6dc-9e1a1b86ec4e",
+    "code": "SPM",
+    "name": "Spangdahlem Air Base Airport",
+    "location": {
+      "longitude": 6.6371433,
+      "latitude": 49.749992
+    },
+    "cityId": "1ee6e74e-5030-4c04-8f1f-2500f1c665f4",
+    "city": "Trier",
+    "countryCode": "DE",
+    "themes": [],
+    "pointsOfSale": [
+      "DE"
+    ]
+  },
+  {
+    "airportId": "c6a688b0-6162-495d-8796-b1b03ae47e31",
+    "code": "FMM",
+    "name": "Allgaeu Airport",
+    "location": {
+      "longitude": 10.243611111111111,
+      "latitude": 47.9925
+    },
+    "cityId": "f01f853e-2f3a-4b09-84ab-8a371d973de9",
+    "city": "Memmingen",
+    "countryCode": "DE",
+    "themes": [],
+    "pointsOfSale": [
+      "DE"
+    ]
+  },
+  {
+    "airportId": "d46d0972-8a68-4a0b-ba3b-9b9283441e6b",
+    "code": "BZO",
+    "name": "Bolzano",
+    "location": {
+      "longitude": 11.333333,
+      "latitude": 46.466667
+    },
+    "cityId": "05433a19-6f6f-41f5-9e23-ce9ba1f88215",
+    "city": "Bolzano/Bozen",
+    "countryCode": "IT",
+    "themes": [],
+    "pointsOfSale": [
+      "IT"
+    ]
+  },
+  {
+    "airportId": "d553d744-afbf-4da5-9fc8-354395380b65",
+    "code": "HOH",
+    "name": "Hohenems",
+    "location": {
+      "longitude": 9.75,
+      "latitude": 47.25
+    },
+    "cityId": "ce35d660-ee0d-4e9e-8d06-467996918723",
+    "city": "Hohenems/Dornbirn",
+    "countryCode": "AT",
+    "themes": [],
+    "pointsOfSale": [
+      "DE",
+      "NO",
+      "BE",
+      "RU",
+      "IN",
+      "DK",
+      "GR",
+      "IT",
+      "FR",
+      "ES",
+      "SE",
+      "GB",
+      "CA",
+      "TR",
+      "NL"
+    ]
+  },
+  {
+    "airportId": "d913625e-2c7e-4e28-ab1e-24649bac7e2b",
+    "code": "AOT",
+    "name": "Corrado Gex Airport",
+    "location": {
+      "longitude": 7.3625,
+      "latitude": 45.73861111111111
+    },
+    "cityId": "07b888f2-2cdb-4826-aee1-e3480288c1b5",
+    "city": "Aosta",
+    "countryCode": "IT",
+    "themes": [],
+    "pointsOfSale": [
+      "IT"
+    ]
+  },
+  {
+    "airportId": "075b5900-987a-43a8-99b0-3c826c62d909",
+    "code": "GVA",
+    "name": "Geneva",
+    "location": {
+      "longitude": 6.110278,
+      "latitude": 46.239722
+    },
+    "cityId": "fd104ec7-f4f5-4b26-a43f-fa5cf14a8c1c",
+    "city": "Geneva",
+    "countryCode": "CH",
+    "themes": [],
+    "pointsOfSale": [
+      "DE",
+      "NO",
+      "BE",
+      "RU",
+      "PT",
+      "IN",
+      "DK",
+      "GR",
+      "IT",
+      "FR",
+      "ES",
+      "SE",
+      "TH",
+      "GB",
+      "CA",
+      "TR",
+      "NL"
+    ]
+  },
+  {
+    "airportId": "1b87f17c-3453-4613-a54e-ef1b7b79cd7e",
+    "code": "NUE",
+    "name": "Nuremberg",
+    "location": {
+      "longitude": 11.079167,
+      "latitude": 49.499722
+    },
+    "cityId": "17c001af-ffe6-49fa-a7ea-41cd66b992a9",
+    "city": "Nuremberg",
+    "countryCode": "DE",
+    "themes": [],
+    "pointsOfSale": [
+      "DE"
+    ]
+  },
+  {
+    "airportId": "1f6fbdd8-70d4-4a79-8578-b3bd36aa7323",
+    "code": "HDB",
+    "name": "Heidelberg  AAF",
+    "location": {
+      "longitude": 8.651667,
+      "latitude": 49.393333
+    },
+    "cityId": "7efddd53-54bb-4b90-b404-f6e9d1399f30",
+    "city": "Heidelberg",
+    "countryCode": "DE",
+    "themes": [],
+    "pointsOfSale": [
+      "DE"
+    ]
+  },
+  {
+    "airportId": "221ef3f4-606c-4c6c-96df-6d093e9fe254",
+    "code": "BSL",
+    "name": "Basle",
+    "location": {
+      "longitude": 7.530556,
+      "latitude": 47.585278
+    },
+    "cityId": "8266080b-075d-427e-bb6a-4cb234afb694",
+    "city": "Basel/Mulhouse",
+    "countryCode": "CH",
+    "themes": [],
+    "pointsOfSale": [
+      "DE",
+      "NO",
+      "BE",
+      "RU",
+      "PT",
+      "IN",
+      "DK",
+      "GR",
+      "IT",
+      "FR",
+      "ES",
+      "SE",
+      "TH",
+      "GB",
+      "CA",
+      "TR",
+      "NL"
+    ]
+  },
+  {
+    "airportId": "3bcdc5ff-00c3-4132-82ed-1d1b2a4c7ba4",
+    "code": "STR",
+    "name": "Stuttgart",
+    "location": {
+      "longitude": 9.210833,
+      "latitude": 48.688611
+    },
+    "cityId": "da7796c6-e786-4ee7-ba89-8247e25cd9e3",
+    "city": "Stuttgart",
+    "countryCode": "DE",
+    "themes": [
+      "HISTORIC",
+      "SHOPPING"
+    ],
+    "pointsOfSale": [
+      "DE"
+    ]
+  },
+  {
+    "airportId": "6b3b2b14-faa1-4250-9b45-0c3a99fa5a25",
+    "code": "MUC",
+    "name": "Muenchen/Munich",
+    "location": {
+      "longitude": 11.7875,
+      "latitude": 48.354722
+    },
+    "cityId": "88bf4a66-8147-4eb7-9738-0ec08505ec89",
+    "city": "Munich",
+    "countryCode": "DE",
+    "themes": [
+      "HISTORIC",
+      "SHOPPING"
+    ],
+    "pointsOfSale": [
+      "DE"
+    ]
+  },
+  {
+    "airportId": "7887bb78-3704-493b-b7f2-0df7bf141414",
+    "code": "ZIN",
+    "name": "Interlaken Air Base Airport",
+    "location": {
+      "longitude": 7.863204899999999,
+      "latitude": 46.6863481
+    },
+    "cityId": "9b7b8e55-c644-4536-98c0-534f32a2ac03",
+    "city": "Interlaken",
+    "countryCode": "CH",
+    "themes": [],
+    "pointsOfSale": [
+      "DE",
+      "NO",
+      "BE",
+      "RU",
+      "PT",
+      "IN",
+      "DK",
+      "GR",
+      "IT",
+      "FR",
+      "ES",
+      "SE",
+      "TH",
+      "GB",
+      "CA",
+      "TR",
+      "NL"
+    ]
+  },
+  {
+    "airportId": "900d77a4-b98c-45be-8e56-0a77f1b55aea",
+    "code": "LHA",
+    "name": "Lahr Airport",
+    "location": {
+      "longitude": 7.8781487,
+      "latitude": 48.33915
+    },
+    "cityId": "788c5445-f16a-49e2-a7b3-8f459510b7a8",
+    "city": "Lahr",
+    "countryCode": "DE",
+    "themes": [],
+    "pointsOfSale": [
+      "DE"
+    ]
+  },
+  {
+    "airportId": "9fb3c059-a0fd-4c5e-95ed-8b5da8c47465",
+    "code": "QLS",
+    "name": "Lausanne-la Blecherette Airport",
+    "location": {
+      "longitude": 6.6322734,
+      "latitude": 46.5196535
+    },
+    "cityId": "ac28d5e8-55f2-4aa2-8ced-9be2f1b8a1fa",
+    "city": "Lausanne",
+    "countryCode": "CH",
+    "themes": [],
+    "pointsOfSale": [
+      "DE",
+      "NO",
+      "BE",
+      "RU",
+      "PT",
+      "IN",
+      "DK",
+      "GR",
+      "IT",
+      "FR",
+      "ES",
+      "SE",
+      "TH",
+      "GB",
+      "CA",
+      "TR",
+      "NL"
+    ]
+  },
+  {
+    "airportId": "a190e555-3518-4b20-a8cb-19ff0638d4d2",
+    "code": "QEF",
+    "name": "Frankfurt-Egelsbach Airport",
+    "location": {
+      "longitude": 8.6633158,
+      "latitude": 49.9663895
+    },
+    "cityId": "550178ff-a922-4e65-8cc3-4901870efd8a",
+    "city": "Egelsbach",
+    "countryCode": "DE",
+    "themes": [],
+    "pointsOfSale": [
+      "DE"
+    ]
+  },
+  {
+    "airportId": "a74423b1-b00f-4375-9ddf-37d1e2d64013",
+    "code": "QON",
+    "name": "Sterpenich Airport",
+    "location": {
+      "longitude": 5.810480399999999,
+      "latitude": 49.6851364
+    },
+    "cityId": "4b90f7b4-78ba-4df0-a6b3-4e26ea7e9ffd",
+    "city": "Arlon",
+    "countryCode": "BE",
+    "themes": [],
+    "pointsOfSale": [
+      "BE"
+    ]
+  },
+  {
+    "airportId": "aad3f5ed-756c-424b-b9d7-9c900c42fc3c",
+    "code": "WIE",
+    "name": "Wiesbaden Army Airfield Airport",
+    "location": {
+      "longitude": 8.239760799999999,
+      "latitude": 50.0782184
+    },
+    "cityId": "9735ce55-320c-4dcd-a0a4-e40712b9c5d1",
+    "city": "Wiesbaden",
+    "countryCode": "DE",
+    "themes": [],
+    "pointsOfSale": [
+      "DE"
+    ]
+  }
+]

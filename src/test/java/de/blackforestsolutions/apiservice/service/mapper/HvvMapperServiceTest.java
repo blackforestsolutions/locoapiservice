@@ -1,6 +1,6 @@
 package de.blackforestsolutions.apiservice.service.mapper;
 
-import de.blackforestsolutions.apiservice.objectmothers.TravelpointObjectMother;
+import de.blackforestsolutions.apiservice.objectmothers.TravelPointObjectMother;
 import de.blackforestsolutions.apiservice.service.supportservice.UuidService;
 import de.blackforestsolutions.datamodel.Journey;
 import de.blackforestsolutions.datamodel.JourneyStatus;
@@ -38,8 +38,8 @@ class HvvMapperServiceTest {
     @Test
     void test_getStationListFrom_json_return_list_with_travelpoints() throws IOException {
         String jsonTravelPoints = getResourceFileAsString("json/hvvStationList.json");
-        TravelPoint firstExpectedResult = TravelpointObjectMother.getPinnebergRichardKoehnHvvTravelPoint();
-        TravelPoint secondExpectedResult = TravelpointObjectMother.getHvvHauptbahnhofTravelPoint();
+        TravelPoint firstExpectedResult = TravelPointObjectMother.getPinnebergRichardKoehnHvvTravelPoint();
+        TravelPoint secondExpectedResult = TravelPointObjectMother.getHvvHauptbahnhofTravelPoint();
 
         List<TravelPoint> result = classUnderTest.getStationListFrom(jsonTravelPoints);
 

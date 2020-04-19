@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import de.blackforestsolutions.apiservice.configuration.AdditionalHttpHeadersConfiguration;
 import de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother;
 import de.blackforestsolutions.apiservice.objectmothers.HttpBodyObjectMother;
-import de.blackforestsolutions.apiservice.objectmothers.TravelpointObjectMother;
+import de.blackforestsolutions.apiservice.objectmothers.TravelPointObjectMother;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import de.blackforestsolutions.generatedcontent.hvv.request.HvvStation;
 import org.assertj.core.api.Assertions;
@@ -21,8 +21,8 @@ class HvvJourneyHttpCallBuilderServiceImplTest {
     @Test
     void test_buildJourneyHttpEntityForHvv_with_apiToken_start_destination_and_HttpBody_returns_correct_header_and_body() {
         ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getHvvJourneyTokenAndUrl();
-        HvvStation start = TravelpointObjectMother.getRosenhofHvvStation();
-        HvvStation destination = TravelpointObjectMother.getStadthausbrueckeHvvStation();
+        HvvStation start = TravelPointObjectMother.getRosenhofHvvStation();
+        HvvStation destination = TravelPointObjectMother.getStadthausbrueckeHvvStation();
 
         //noinspection rawtypes (justification: not known until runtime)
         HttpEntity result = classUnderTest.buildJourneyHttpEntityForHvv(testData, start, destination);
@@ -43,8 +43,8 @@ class HvvJourneyHttpCallBuilderServiceImplTest {
         ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getHvvJourneyTokenAndUrl();
         ObjectMapper mapper = new ObjectMapper();
         String testBody = mapper.writeValueAsString(HttpBodyObjectMother.getHvvJourneyBodyObject());
-        HvvStation start = TravelpointObjectMother.getRosenhofHvvStation();
-        HvvStation destination = TravelpointObjectMother.getStadthausbrueckeHvvStation();
+        HvvStation start = TravelPointObjectMother.getRosenhofHvvStation();
+        HvvStation destination = TravelPointObjectMother.getStadthausbrueckeHvvStation();
 
         //noinspection rawtypes (justification: not known until runtime)
         HttpEntity result = classUnderTest.buildJourneyHttpEntityForHvv(testData, start, destination);
