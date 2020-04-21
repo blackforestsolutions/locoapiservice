@@ -51,8 +51,18 @@ public class RMVMapperServiceImpl implements RMVMapperService {
             log.error("Error during unmarshalling of XML Objects: {}", readerResultBody, e);
             return new CallStatus(null, Status.FAILED, e);
         }
-        StopLocation stopLocation = (StopLocation) locationList.getStopLocationOrCoordLocation().get(0);
-        return new CallStatus(stopLocation.getId(), Status.SUCCESS, null);
+        try {
+            StopLocation stopLocation = (StopLocation) locationList.getStopLocationOrCoordLocation().get(0);
+            return new CallStatus(stopLocation.getId(), Status.SUCCESS, null);
+        } catch (ClassCastException e) {
+            try {
+                CoordLocation coordLocation = (CoordLocation) locationList.getStopLocationOrCoordLocation().get(0);
+                return new CallStatus(coordLocation.getId(), Status.SUCCESS, null);
+            } catch (ClassCastException ex) {
+                log.error("Error during mapping xml to station type. Type not found.");
+                return new CallStatus(null, Status.FAILED, ex);
+            }
+        }
     }
 
     @Override

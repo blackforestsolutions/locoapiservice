@@ -287,16 +287,16 @@ public class ApiTokenAndUrlInformationObjectMother {
         return builder.build();
     }
 
-    public static ApiTokenAndUrlInformation getRMVTokenAndUrl() {
+    public static ApiTokenAndUrlInformation getRMVTokenAndUrl(String departure, String arrival) {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
         builder.setProtocol("https");
         builder.setHost("www.rmv.de");
-        builder.setPath("hapi/location.name?");
+        builder.setLocationPath("hapi/location.name?");
         builder.setGermanRailJourneyDeatilsPath("hapi/trip?");
         builder.setAuthorizationKey("Authorization");
         builder.setAuthorization("1a4fbca8-ce2b-40fc-a1ed-333bcf5aed6e");
-        builder.setArrival("frankfurt hauptbahnhof");
-        builder.setDeparture("Lorch-Lorchhausen Bahnhof");
+        builder.setArrival(arrival);
+        builder.setDeparture(departure);
         return builder.build();
     }
 
