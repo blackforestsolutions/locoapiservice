@@ -9,6 +9,8 @@ import de.blackforestsolutions.apiservice.service.supportservice.AirportsFinderH
 import de.blackforestsolutions.apiservice.service.supportservice.AirportsFinderHttpCallBuilderServiceImpl;
 import de.blackforestsolutions.apiservice.stubs.RestTemplateBuilderStub;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
+import de.blackforestsolutions.datamodel.CallStatus;
+import de.blackforestsolutions.datamodel.Status;
 import de.blackforestsolutions.datamodel.TravelPoint;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -25,7 +27,6 @@ import java.util.Set;
 import static de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother.getAirportsFinderTokenAndUrlIT;
 import static de.blackforestsolutions.apiservice.objectmothers.TravelPointObjectMother.getTravelPointsForAirportsFinder;
 import static de.blackforestsolutions.apiservice.testutils.TestUtils.getResourceFileAsString;
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doReturn;
@@ -62,12 +63,17 @@ public class AirportsFinderApiServiceTest {
 
         ResponseEntity<String> testResult = new ResponseEntity<>(airportsFinderResource, HttpStatus.OK);
         doReturn(testResult).when(restTemplate).exchange(anyString(), any(), Mockito.any(), any(Class.class));
-        Set<TravelPoint> resultSet = classUnderTest.getAirportsWith(apiTokenAndUrlInformation);
+        Set<CallStatus> resultSet = classUnderTest.getAirportsWith(apiTokenAndUrlInformation);
 
-        ArrayList<TravelPoint> resultArrayList = convertSetToArrayListFortestingPurpose(resultSet);
-        assertThat(resultSet.size()).isEqualTo(2);
+        ArrayList<CallStatus> resultArrayList = convertSetToArrayListForTestingPurpose(resultSet);
 
-        Assertions.assertThat(resultArrayList.get(0).getAirportId()).isEqualTo(testDataArrayList.get(0).getAirportId());
+        Assertions.assertThat(resultArrayList.get(0).getStatus()).isEqualTo(Status.SUCCESS);
+        Assertions.assertThat(resultArrayList.get(0).getStatus()).isEqualTo(Status.FAILED);
+        Assertions.assertThat(resultSet.size()).isEqualTo(2);
+        Assertions.assertThat(resultArrayList.get(0).getCalledObject()).isEqualToComparingFieldByField(testDataArrayList.get(0));
+        Assertions.assertThat(resultArrayList.get(1).getCalledObject()).isEqualToComparingFieldByField(testDataArrayList.get(1));
+
+        /*Assertions.assertThat(resultArrayList.get(0).getAirportId()).isEqualTo(testDataArrayList.get(0).getAirportId());
         Assertions.assertThat(resultArrayList.get(0).getAirportId()).isEqualTo(testDataArrayList.get(0).getAirportId());
         Assertions.assertThat(resultArrayList.get(0).getCity()).isEqualTo(testDataArrayList.get(0).getCity());
         Assertions.assertThat(resultArrayList.get(0).getAirportName()).isEqualTo(testDataArrayList.get(0).getAirportName());
@@ -82,10 +88,10 @@ public class AirportsFinderApiServiceTest {
         Assertions.assertThat(Double.toString(resultArrayList.get(1).getGpsCoordinates().getLongitude())).isEqualTo(Double.toString(testDataArrayList.get(1).getGpsCoordinates().getLongitude()));
         Assertions.assertThat(Double.toString(resultArrayList.get(1).getGpsCoordinates().getLatitude())).isEqualTo(Double.toString(testDataArrayList.get(1).getGpsCoordinates().getLatitude()));
         Assertions.assertThat(resultArrayList.get(1).getCountry()).isEqualTo(testDataArrayList.get(1).getCountry());
-        Assertions.assertThat(resultArrayList.get(1).getAirportId()).isEqualTo(testDataArrayList.get(1).getAirportId());
+        Assertions.assertThat(resultArrayList.get(1).getAirportId()).isEqualTo(testDataArrayList.get(1).getAirportId());*/
     }
 
-    private ArrayList<TravelPoint> convertSetToArrayListFortestingPurpose(Set<TravelPoint> set) {
+    private ArrayList<CallStatus> convertSetToArrayListForTestingPurpose(Set<CallStatus> set) {
         return new ArrayList<>(set);
     }
 }

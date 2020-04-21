@@ -34,7 +34,7 @@ public class AirportsFindingMapper {
         return airportsFinding;
     }
 
-// error handling here - what if something can't be mapped to AirportsFinding
+    // error handling here - what if something can't be mapped to AirportsFinding
     private static void setAirportFindingsCodeWith(LinkedHashMap<String, Object> airportFindingsLinkedHashmap, AirportsFinding airportsFinding) {
         if (airportFindingsLinkedHashmap.get(CODE) != null) {
             airportsFinding.setCode((String) airportFindingsLinkedHashmap.get(CODE));

@@ -11,7 +11,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -25,7 +29,7 @@ public class AirportsFinderMapperServiceImpl implements AirportsFinderMapperServ
 
 
     @Override
-    public Set<TravelPoint> map(String jsonString) {
+    public Set<CallStatus> map(String jsonString) {
         return mapAirportFindingsToTravelPointList(retrieveAirportsFinding(jsonString));
     }
 
@@ -41,31 +45,32 @@ public class AirportsFinderMapperServiceImpl implements AirportsFinderMapperServ
     }
 
 
-    private Set<TravelPoint> mapAirportFindingsToTravelPointList(CallStatus airportsFindingStatus) {
+    private Set<CallStatus> mapAirportFindingsToTravelPointList(CallStatus airportsFindingStatus) {
         if (airportsFindingStatus.getCalledObject() != null) {
             List<LinkedHashMap<String, Object>> airportsFindingList = (List<LinkedHashMap<String, Object>>) airportsFindingStatus.getCalledObject();
-            Set<TravelPoint> nearestAirportTravelPointList = new HashSet<>();
             List<AirportsFinding> airportsFindings = AirportsFindingMapper.map(airportsFindingList);
-            for (AirportsFinding entry : airportsFindings) {
-                nearestAirportTravelPointList.add(buildTravelPointWith(entry));
-            }
-            return nearestAirportTravelPointList;
+            return airportsFindings
+                    .stream()
+                    .map(airportsFinding -> buildTravelPointWith(airportsFinding))
+                    .collect(Collectors.toSet());
         }
         return null;
     }
 
-    private TravelPoint buildTravelPointWith(AirportsFinding airportsFinding) {
-        // to check if the station has an airportcode, if not it won't be mapped
-        String airportCode = airportsFinding.getCode();
-        if (airports.get(airportCode) != null) {
-            TravelPoint.TravelPointBuilder travelPoint = airports.get(airportCode);
-            return travelPoint.build();
-        } else {
-            return null;
-        /*else if (airportCode != null) {
-            //return buildTravelPointManually(airportsFinding);
+    private CallStatus buildTravelPointWith(AirportsFinding airportsFinding) {
+        // to check if the station has an airport code, if not it won't be mapped and null will be returned
+        // when an exception occurs it will be caught with a failed status in CallStatus object
+        try {
+            String airportCode = airportsFinding.getCode();
+            if (airports.get(airportCode) != null) {
+                TravelPoint.TravelPointBuilder travelPoint = airports.get(airportCode);
+                return new CallStatus(travelPoint.build(), Status.SUCCESS, null);
+            } else {
+                return null;
+            }
 
-        }*/
+        } catch (NullPointerException e) {
+            return new CallStatus(null, Status.FAILED, e);
         }
     }
 }
