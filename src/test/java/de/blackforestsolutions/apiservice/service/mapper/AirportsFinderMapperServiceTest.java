@@ -32,25 +32,8 @@ public class AirportsFinderMapperServiceTest {
         ArrayList<TravelPoint> resultArrayList = convertSetToArrayListFortestingPurpose(result);
         Assertions.assertThat(result.size()).isEqualTo(2);
 
-        Assertions.assertThat(resultArrayList.get(0).getAirportId()).isEqualTo(testDataArrayList.get(0).getAirportId());
-        Assertions.assertThat(resultArrayList.get(0).getAirportId()).isEqualTo(testDataArrayList.get(0).getAirportId());
-        Assertions.assertThat(resultArrayList.get(0).getCity()).isEqualTo(testDataArrayList.get(0).getCity());
-        Assertions.assertThat(resultArrayList.get(0).getAirportName()).isEqualTo(testDataArrayList.get(0).getAirportName());
-        Assertions.assertThat(Double.toString(resultArrayList.get(0).getGpsCoordinates().getLongitude())).isEqualTo(Double.toString(testDataArrayList.get(0).getGpsCoordinates().getLongitude()));
-        Assertions.assertThat(Double.toString(resultArrayList.get(0).getGpsCoordinates().getLatitude())).isEqualTo(Double.toString(testDataArrayList.get(0).getGpsCoordinates().getLatitude()));
-        Assertions.assertThat(resultArrayList.get(0).getCountry()).isEqualTo(testDataArrayList.get(0).getCountry());
-        Assertions.assertThat(resultArrayList.get(0).getAirportId()).isEqualTo(testDataArrayList.get(0).getAirportId());
-
-        Assertions.assertThat(resultArrayList.get(1).getAirportId()).isEqualTo(testDataArrayList.get(1).getAirportId());
-        Assertions.assertThat(resultArrayList.get(1).getCity()).isEqualTo(testDataArrayList.get(1).getCity());
-        Assertions.assertThat(resultArrayList.get(1).getAirportName()).isEqualTo(testDataArrayList.get(1).getAirportName());
-        Assertions.assertThat(Double.toString(resultArrayList.get(1).getGpsCoordinates().getLongitude())).isEqualTo(Double.toString(testDataArrayList.get(1).getGpsCoordinates().getLongitude()));
-        Assertions.assertThat(Double.toString(resultArrayList.get(1).getGpsCoordinates().getLatitude())).isEqualTo(Double.toString(testDataArrayList.get(1).getGpsCoordinates().getLatitude()));
-        Assertions.assertThat(resultArrayList.get(1).getCountry()).isEqualTo(testDataArrayList.get(1).getCountry());
-        Assertions.assertThat(resultArrayList.get(1).getAirportId()).isEqualTo(testDataArrayList.get(1).getAirportId());
-
-
-        // wenn kracht dann gibt es eine Methode assertj api
+        Assertions.assertThat(resultArrayList.get(0)).isEqualToComparingFieldByField(testDataArrayList.get(0));
+        Assertions.assertThat(resultArrayList.get(1)).isEqualToComparingFieldByField(testDataArrayList.get(1));
     }
 
     private ArrayList<TravelPoint> convertSetToArrayListFortestingPurpose(Set<TravelPoint> set) {
