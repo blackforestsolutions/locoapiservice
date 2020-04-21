@@ -12,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.net.URL;
-import java.util.Set;
+import java.util.LinkedHashSet;
 
 @Service
 @Slf4j
@@ -30,7 +30,7 @@ public class AirportsFinderApiServiceImpl implements AirportsFinderApiService {
     }
 
     @Override
-    public Set<CallStatus> getAirportsWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
+    public LinkedHashSet<CallStatus> getAirportsWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
         String url = getAirportsFinderRequestString(apiTokenAndUrlInformation);
         ResponseEntity<String> result = airportsFinderCallService.getNearestAirports(url, airportsFinderHttpCallBuilderService.buildHttpEntityAirportsFinder(apiTokenAndUrlInformation));
         return this.airportsFinderMapperService.map(result.getBody());

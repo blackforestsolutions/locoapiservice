@@ -22,7 +22,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Set;
+import java.util.LinkedHashSet;
 
 import static de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother.getAirportsFinderTokenAndUrlIT;
 import static de.blackforestsolutions.apiservice.objectmothers.TravelPointObjectMother.getTravelPointsForAirportsFinder;
@@ -52,8 +52,8 @@ public class AirportsFinderApiServiceTest {
     }
 
     @Test
-    public void test_getAirportsAsTravelPoints_with_mocked_rest_service_is_executed_correctly_and_maps_correctly_returns_map() {
-        String airportsFinderResource = getResourceFileAsString("json/AirportsFinderJsons/fromTriberg300KmOnlyTwo.json");
+    public void test_getAirportsAsTravelPoints_with_mocked_rest_service_is_executed_correctly_and_maps_correctly_returns_linkedHashSet() {
+        String airportsFinderResource = getResourceFileAsString("json/AirportsFinderJsons/fromTriberg300KmOnlyThree.json");
         ArrayList<TravelPoint> testDataArrayList = getTravelPointsForAirportsFinder();
 
         ApiTokenAndUrlInformation apiTokenAndUrlInformation = getAirportsFinderTokenAndUrlIT();
@@ -63,35 +63,23 @@ public class AirportsFinderApiServiceTest {
 
         ResponseEntity<String> testResult = new ResponseEntity<>(airportsFinderResource, HttpStatus.OK);
         doReturn(testResult).when(restTemplate).exchange(anyString(), any(), Mockito.any(), any(Class.class));
-        Set<CallStatus> resultSet = classUnderTest.getAirportsWith(apiTokenAndUrlInformation);
+        LinkedHashSet<CallStatus> resultLinkedHashSet = classUnderTest.getAirportsWith(apiTokenAndUrlInformation);
 
-        ArrayList<CallStatus> resultArrayList = convertSetToArrayListForTestingPurpose(resultSet);
+        ArrayList<CallStatus> resultArrayList = convertSetToArrayListForTestingPurpose(resultLinkedHashSet);
 
+        Assertions.assertThat(resultLinkedHashSet.size()).isEqualTo(3);
         Assertions.assertThat(resultArrayList.get(0).getStatus()).isEqualTo(Status.SUCCESS);
-        Assertions.assertThat(resultArrayList.get(0).getStatus()).isEqualTo(Status.FAILED);
-        Assertions.assertThat(resultSet.size()).isEqualTo(2);
+        Assertions.assertThat(resultArrayList.get(1).getStatus()).isEqualTo(Status.SUCCESS);
         Assertions.assertThat(resultArrayList.get(0).getCalledObject()).isEqualToComparingFieldByField(testDataArrayList.get(0));
         Assertions.assertThat(resultArrayList.get(1).getCalledObject()).isEqualToComparingFieldByField(testDataArrayList.get(1));
+        Assertions.assertThat(resultArrayList.get(2).getCalledObject()).isEqualTo(null);
+        Assertions.assertThat(resultArrayList.get(2).getStatus()).isEqualTo(Status.FAILED);
+        Assertions.assertThat(resultArrayList.get(2).getException().getMessage()).isEqualTo("The provided AirportFinding object is not mapped because the airport code is not provided in the airports.dat");
 
-        /*Assertions.assertThat(resultArrayList.get(0).getAirportId()).isEqualTo(testDataArrayList.get(0).getAirportId());
-        Assertions.assertThat(resultArrayList.get(0).getAirportId()).isEqualTo(testDataArrayList.get(0).getAirportId());
-        Assertions.assertThat(resultArrayList.get(0).getCity()).isEqualTo(testDataArrayList.get(0).getCity());
-        Assertions.assertThat(resultArrayList.get(0).getAirportName()).isEqualTo(testDataArrayList.get(0).getAirportName());
-        Assertions.assertThat(Double.toString(resultArrayList.get(0).getGpsCoordinates().getLongitude())).isEqualTo(Double.toString(testDataArrayList.get(0).getGpsCoordinates().getLongitude()));
-        Assertions.assertThat(Double.toString(resultArrayList.get(0).getGpsCoordinates().getLatitude())).isEqualTo(Double.toString(testDataArrayList.get(0).getGpsCoordinates().getLatitude()));
-        Assertions.assertThat(resultArrayList.get(0).getCountry()).isEqualTo(testDataArrayList.get(0).getCountry());
-        Assertions.assertThat(resultArrayList.get(0).getAirportId()).isEqualTo(testDataArrayList.get(0).getAirportId());
 
-        Assertions.assertThat(resultArrayList.get(1).getAirportId()).isEqualTo(testDataArrayList.get(1).getAirportId());
-        Assertions.assertThat(resultArrayList.get(1).getCity()).isEqualTo(testDataArrayList.get(1).getCity());
-        Assertions.assertThat(resultArrayList.get(1).getAirportName()).isEqualTo(testDataArrayList.get(1).getAirportName());
-        Assertions.assertThat(Double.toString(resultArrayList.get(1).getGpsCoordinates().getLongitude())).isEqualTo(Double.toString(testDataArrayList.get(1).getGpsCoordinates().getLongitude()));
-        Assertions.assertThat(Double.toString(resultArrayList.get(1).getGpsCoordinates().getLatitude())).isEqualTo(Double.toString(testDataArrayList.get(1).getGpsCoordinates().getLatitude()));
-        Assertions.assertThat(resultArrayList.get(1).getCountry()).isEqualTo(testDataArrayList.get(1).getCountry());
-        Assertions.assertThat(resultArrayList.get(1).getAirportId()).isEqualTo(testDataArrayList.get(1).getAirportId());*/
     }
 
-    private ArrayList<CallStatus> convertSetToArrayListForTestingPurpose(Set<CallStatus> set) {
-        return new ArrayList<>(set);
+    private ArrayList<CallStatus> convertSetToArrayListForTestingPurpose(LinkedHashSet<CallStatus> linkedHashSet) {
+        return new ArrayList<>(linkedHashSet);
     }
 }

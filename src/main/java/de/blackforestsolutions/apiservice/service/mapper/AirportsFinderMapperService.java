@@ -2,8 +2,8 @@ package de.blackforestsolutions.apiservice.service.mapper;
 
 import de.blackforestsolutions.datamodel.CallStatus;
 
-import java.util.Set;
+import java.util.LinkedHashSet;
 
 public interface AirportsFinderMapperService {
-    Set<CallStatus> map(String jsonString);
+    LinkedHashSet<CallStatus> map(String jsonString);
 }

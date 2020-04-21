@@ -143,39 +143,4 @@ public class AirportFinderHttpCallBuilderServiceTest {
 
         Assertions.assertThat(result).isEqualTo("/api/airports/by-radius?radius=300&lng=8.2324351&lat=48.1301564");
     }
-
-// todo can't check this bc value ist 0.0 which is actually valid
-    /*@Test
-    public void test_buildPathWith_apiVersion_pathVariable_longitude_as_null_latitude_throws_NullPointerException() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getAirportsFinderTokenAndUrl();
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder = builder.buildFrom(testData);
-        Coordinates.CoordinatesBuilder departureCoordinates = new Coordinates.CoordinatesBuilder();
-        departureCoordinates.setLatitude(48.1301564);
-        builder.setDepartureCoordinates(departureCoordinates.build());
-
-        testData = builder.build();
-
-        ApiTokenAndUrlInformation finalTestData = testData;
-        classUnderTest.buildPathWith(finalTestData);
-        org.junit.jupiter.api.Assertions.assertThrows(NullPointerException.class, () -> classUnderTest.buildPathWith(finalTestData));
-    }*/
-
-    /*@Test
-    public void test_buildPathWith_apiVersion_pathVariable_longitude_latidude_as_null_throws_NullPointerException() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getAirportsFinderTokenAndUrl();
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder = builder.buildFrom(testData);
-        Coordinates.CoordinatesBuilder departureCoordinates = new Coordinates.CoordinatesBuilder();
-        //departureCoordinates.setLatitude(null);
-        departureCoordinates.setLongitude(8.2324351);
-        builder.setDepartureCoordinates(departureCoordinates.build());
-
-        testData = builder.build();
-
-        ApiTokenAndUrlInformation finalTestData = testData;
-        org.junit.jupiter.api.Assertions.assertThrows(NullPointerException.class, () -> classUnderTest.buildPathWith(finalTestData));
-    }*/
-
-
 }

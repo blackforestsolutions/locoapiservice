@@ -19,9 +19,6 @@ public class AirportsFinderHttpCallBuilderServiceImpl implements AirportsFinderH
 
     @Override
     public String buildPathWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
-        // todo error handling
-        Objects.requireNonNull(apiTokenAndUrlInformation.getDepartureCoordinates().getLongitude(), "Longitude is not allowed to be null");
-        Objects.requireNonNull(apiTokenAndUrlInformation.getDepartureCoordinates().getLongitude(), "Latitude is not allowed to be null");
         String longitude = String.valueOf(apiTokenAndUrlInformation.getDepartureCoordinates().getLongitude());
         String latitude = String.valueOf(apiTokenAndUrlInformation.getDepartureCoordinates().getLatitude());
         Objects.requireNonNull(apiTokenAndUrlInformation.getPathVariable(), "Path Variable is not allowed to be null");

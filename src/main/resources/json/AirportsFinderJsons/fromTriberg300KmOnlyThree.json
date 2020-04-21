@@ -46,5 +46,21 @@
     "pointsOfSale": [
       "DE"
     ]
+  },
+  {
+    "airportId": "b23fbb3a-7cce-4114-a988-d9b4d52c3864",
+    "code": "XWG",
+    "name": "Railway Station",
+    "location": {
+      "longitude": 7.78,
+      "latitude": 48.598333333333336
+    },
+    "cityId": "364f96a7-1f9d-4c03-a4d7-86a1263ab87a",
+    "city": "Strasbourg",
+    "countryCode": "FR",
+    "themes": [],
+    "pointsOfSale": [
+      "FR"
+    ]
   }
 ]

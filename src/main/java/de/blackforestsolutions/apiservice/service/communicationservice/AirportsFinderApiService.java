@@ -3,8 +3,8 @@ package de.blackforestsolutions.apiservice.service.communicationservice;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import de.blackforestsolutions.datamodel.CallStatus;
 
-import java.util.Set;
+import java.util.LinkedHashSet;
 
 public interface AirportsFinderApiService {
-    Set<CallStatus> getAirportsWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation);
+    LinkedHashSet<CallStatus> getAirportsWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation);
 }
