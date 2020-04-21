@@ -1,4 +1,4 @@
-package de.blackforestsolutions.apiservice.service.airportsFinderServiceIT;
+package de.blackforestsolutions.apiservice.service;
 
 import de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother;
 import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.AirportsFinderCallService;

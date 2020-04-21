@@ -52,7 +52,7 @@ public class AirportsFinderApiServiceTest {
 
     @Test
     public void test_getAirportsAsTravelPoints_with_mocked_rest_service_is_executed_correctly_and_maps_correctly_returns_map() {
-        String airportsFinderResource = getResourceFileAsString("json/AirportsFinderJsons/FromTriberg300KmOnlyTwo.json");
+        String airportsFinderResource = getResourceFileAsString("json/AirportsFinderJsons/fromTriberg300KmOnlyTwo.json");
         ArrayList<TravelPoint> testDataArrayList = getTravelPointsForAirportsFinder();
 
         ApiTokenAndUrlInformation apiTokenAndUrlInformation = getAirportsFinderTokenAndUrlIT();

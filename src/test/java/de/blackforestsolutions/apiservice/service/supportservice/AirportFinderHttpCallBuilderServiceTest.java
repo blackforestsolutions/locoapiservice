@@ -1,9 +1,7 @@
-package de.blackforestsolutions.apiservice.service.supportservice.airportsFinderHttpCallBuilderServiceTest;
+package de.blackforestsolutions.apiservice.service.supportservice;
 
 
 import de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother;
-import de.blackforestsolutions.apiservice.service.supportservice.AirportsFinderHttpCallBuilderService;
-import de.blackforestsolutions.apiservice.service.supportservice.AirportsFinderHttpCallBuilderServiceImpl;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
