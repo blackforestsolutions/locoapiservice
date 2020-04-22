@@ -40,16 +40,6 @@ public class AirportsFinderMapperServiceTest {
     }
 
     @Test
-    public void test_map_jsonObject_with_airportCode_as_null_and_return_callStatus_with_nullPointerException() {
-        String airportsFinderResource = getResourceFileAsString("json/AirportsFinderJsons/callStatusFailedWithExceptions.json");
-        LinkedHashSet<CallStatus> resultLinkedHashSet = classUnderTest.map(airportsFinderResource);
-        ArrayList<CallStatus> resultArrayList = convertSetToArrayListForTestingPurpose(resultLinkedHashSet);
-
-        resultArrayList.get(0).getException();
-        // todo can't get npe
-    }
-
-    @Test
     public void test_map_jsonObject_with_airportCode_as_null_and_return_callStatus_with_null() {
         String airportsFinderResource = getResourceFileAsString("json/AirportsFinderJsons/callStatusFailedWithExceptions.json");
         LinkedHashSet<CallStatus> resultLinkedHashSet = classUnderTest.map(airportsFinderResource);
