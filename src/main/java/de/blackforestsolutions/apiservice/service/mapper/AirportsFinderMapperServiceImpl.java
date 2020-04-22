@@ -65,9 +65,8 @@ public class AirportsFinderMapperServiceImpl implements AirportsFinderMapperServ
             } else {
                 return new CallStatus(null, Status.FAILED, checkForKindOfException(airportCode));
             }
-        } catch (NullPointerException e) {
-            return new CallStatus(null, Status.FAILED, e);
-            // todo try to get a npe
+        } catch (Exception e) {
+            return new CallStatus(null, Status.FAILED, new Exception("The try and catch to map AirportsFindings to a TravelPoint has failed"));
         }
     }
 
