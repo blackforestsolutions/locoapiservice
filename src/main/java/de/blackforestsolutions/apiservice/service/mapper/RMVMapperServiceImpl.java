@@ -52,11 +52,11 @@ public class RMVMapperServiceImpl implements RMVMapperService {
             return new CallStatus(null, Status.FAILED, e);
         }
         try {
-            StopLocation stopLocation = (StopLocation) locationList.getStopLocationOrCoordLocation().get(0);
+            StopLocation stopLocation = (StopLocation) locationList.getStopLocationOrCoordLocation().get(START_INDEX);
             return new CallStatus(stopLocation.getId(), Status.SUCCESS, null);
         } catch (ClassCastException e) {
             try {
-                CoordLocation coordLocation = (CoordLocation) locationList.getStopLocationOrCoordLocation().get(0);
+                CoordLocation coordLocation = (CoordLocation) locationList.getStopLocationOrCoordLocation().get(START_INDEX);
                 return new CallStatus(coordLocation.getId(), Status.SUCCESS, null);
             } catch (ClassCastException ex) {
                 log.error("Error during mapping xml to station type. Type not found.");
