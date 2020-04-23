@@ -9,15 +9,15 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 
-public class AirportFindingMapperTest {
+public class AirportsFinderAirportFindingMapperTest {
 
-    private final AirportsFindingMapper classUnderTest = new AirportsFindingMapper();
+    private final AirportsFinderAirportsFindingMapper classUnderTest = new AirportsFinderAirportsFindingMapper();
 
     @Test
     public void test_map_List_Of_LinkedHashMaps_To_List_Of_AirportsFindings() {
         List<LinkedHashMap<String, Object>> testData = MapperObjectMother.getAirportsFinderListOfLinkedHashMaps();
 
-        List<AirportsFinding> result = AirportsFindingMapper.map(testData);
+        List<AirportsFinding> result = AirportsFinderAirportsFindingMapper.map(testData);
 
         Assertions.assertThat(result.size()).isEqualTo(3);
         Assertions.assertThat("VTL").isEqualTo(result.get(0).getCode());

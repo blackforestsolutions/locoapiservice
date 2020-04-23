@@ -8,7 +8,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class AirportsFindingMapper {
+public class AirportsFinderAirportsFindingMapper {
     private static final String CODE = "code";
     private static final String NAME = "name";
     private static final String LOCATION = "location";
@@ -19,7 +19,7 @@ public class AirportsFindingMapper {
     public static List<AirportsFinding> map(List<LinkedHashMap<String, Object>> airportsFindindingLinkedHashMaps) {
         return airportsFindindingLinkedHashMaps
                 .stream() // to stream
-                .map(AirportsFindingMapper::map) // for loop
+                .map(AirportsFinderAirportsFindingMapper::map) // for loop
                 .collect(Collectors.toList()); // collects the data from the for loop and returns as List
     }
 

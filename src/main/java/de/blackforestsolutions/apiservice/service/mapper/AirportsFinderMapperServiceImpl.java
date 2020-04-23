@@ -47,7 +47,7 @@ public class AirportsFinderMapperServiceImpl implements AirportsFinderMapperServ
     private LinkedHashSet<CallStatus> mapAirportFindingsToTravelPointList(CallStatus airportsFindingStatus) {
         if (airportsFindingStatus.getCalledObject() != null) {
             List<LinkedHashMap<String, Object>> airportsFindingList = (List<LinkedHashMap<String, Object>>) airportsFindingStatus.getCalledObject();
-            List<AirportsFinding> airportsFindings = AirportsFindingMapper.map(airportsFindingList);
+            List<AirportsFinding> airportsFindings = AirportsFinderAirportsFindingMapper.map(airportsFindingList);
             return airportsFindings
                     .stream()
                     .map(this::buildTravelPointWith)

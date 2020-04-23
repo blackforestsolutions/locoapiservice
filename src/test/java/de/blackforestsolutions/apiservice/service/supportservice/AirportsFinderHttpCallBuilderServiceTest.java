@@ -10,7 +10,7 @@ import org.springframework.http.HttpHeaders;
 import java.io.UncheckedIOException;
 import java.net.URL;
 
-public class AirportFinderHttpCallBuilderServiceTest {
+public class AirportsFinderHttpCallBuilderServiceTest {
     private final AirportsFinderHttpCallBuilderService classUnderTest = new AirportsFinderHttpCallBuilderServiceImpl();
 
     @Test
