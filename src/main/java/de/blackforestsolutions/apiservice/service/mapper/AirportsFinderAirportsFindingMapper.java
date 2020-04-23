@@ -30,19 +30,17 @@ public class AirportsFinderAirportsFindingMapper {
         Optional.ofNullable(airportFindingsLinkedHashmap.get(CODE)).ifPresent(code -> airportsFinding.setCode((String) airportFindingsLinkedHashmap.get(CODE)));
         Optional.ofNullable(airportFindingsLinkedHashmap.get(NAME)).ifPresent(name -> airportsFinding.setName((String) airportFindingsLinkedHashmap.get(NAME)));
         Optional.ofNullable(airportFindingsLinkedHashmap.get(CITY)).ifPresent(city -> airportsFinding.setCity((String) airportFindingsLinkedHashmap.get(CITY)));
-        Optional.ofNullable(airportFindingsLinkedHashmap.get(COUNTRY_CODE)).ifPresent(code -> airportsFinding.setCountryCode((String) airportFindingsLinkedHashmap.get(COUNTRY_CODE)));
-        setAirportFindingsGpsCoordinatesWith(airportFindingsLinkedHashmap, airportsFinding);
+        Optional.ofNullable(airportFindingsLinkedHashmap.get(COUNTRY_CODE)).ifPresent(countryCode -> airportsFinding.setCountryCode((String) airportFindingsLinkedHashmap.get(COUNTRY_CODE)));
+        Optional.ofNullable(airportFindingsLinkedHashmap.get(LOCATION)).ifPresent(loc -> airportsFinding.setLocation(setAirportFindingsGpsCoordinatesWith(airportFindingsLinkedHashmap)));
         return airportsFinding;
     }
 
     @SuppressWarnings("unchecked")
-    private static void setAirportFindingsGpsCoordinatesWith(LinkedHashMap<String, Object> airportFindingsLinkedHashmap, AirportsFinding airportsFinding) {
+    private static Location setAirportFindingsGpsCoordinatesWith(LinkedHashMap<String, Object> airportFindingsLinkedHashmap) {
         Location loc = new Location();
-        if (airportFindingsLinkedHashmap.containsKey(LOCATION)) {
-            loc.setLongitude(extractFrom("longitude", (LinkedHashMap<String, Double>) airportFindingsLinkedHashmap.get(LOCATION)));
-            loc.setLatitude(extractFrom("latitude", (LinkedHashMap<String, Double>) airportFindingsLinkedHashmap.get(LOCATION)));
-            airportsFinding.setLocation(loc);
-        }
+        loc.setLongitude(extractFrom("longitude", (LinkedHashMap<String, Double>) airportFindingsLinkedHashmap.get(LOCATION)));
+        loc.setLatitude(extractFrom("latitude", (LinkedHashMap<String, Double>) airportFindingsLinkedHashmap.get(LOCATION)));
+        return loc;
     }
 
     private static Double extractFrom(String key, LinkedHashMap<String, Double> coordinates) {
