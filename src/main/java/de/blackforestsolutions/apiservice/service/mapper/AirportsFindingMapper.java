@@ -59,15 +59,14 @@ public class AirportsFindingMapper {
         }
     }
 
+    @SuppressWarnings("unchecked")
     private static void setAirportFindingsGpsCoordinatesWith(LinkedHashMap<String, Object> airportFindingsLinkedHashmap, AirportsFinding airportsFinding) {
-        Location loc = new Location(); // null check
+        Location loc = new Location();
         if (airportFindingsLinkedHashmap.containsKey(LOCATION)) {
             loc.setLongitude(extractFrom("longitude", (LinkedHashMap<String, Double>) airportFindingsLinkedHashmap.get(LOCATION)));
             loc.setLatitude(extractFrom("latitude", (LinkedHashMap<String, Double>) airportFindingsLinkedHashmap.get(LOCATION)));
             airportsFinding.setLocation(loc);
         }
-
-
     }
 
     private static Double extractFrom(String key, LinkedHashMap<String, Double> coordinates) {

@@ -57,13 +57,13 @@ public class AirportsFinderMapperServiceImpl implements AirportsFinderMapperServ
     }
 
     private CallStatus buildTravelPointWith(AirportsFinding airportsFinding) {
-            String airportCode = airportsFinding.getCode();
-            if (airports.get(airportCode) != null) {
-                TravelPoint.TravelPointBuilder travelPoint = airports.get(airportCode);
-                return new CallStatus(travelPoint.build(), Status.SUCCESS, null);
-            } else {
-                return new CallStatus(null, Status.FAILED, checkForKindOfException(airportCode));
-            }
+        String airportCode = airportsFinding.getCode();
+        if (airports.get(airportCode) != null) {
+            TravelPoint.TravelPointBuilder travelPoint = airports.get(airportCode);
+            return new CallStatus(travelPoint.build(), Status.SUCCESS, null);
+        } else {
+            return new CallStatus(null, Status.FAILED, checkForKindOfException(airportCode));
+        }
     }
 
     private Exception checkForKindOfException(String airportCode) {
