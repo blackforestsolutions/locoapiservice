@@ -11,6 +11,15 @@ import java.util.Objects;
 @Service
 public class AirportsFinderHttpCallBuilderServiceImpl implements AirportsFinderHttpCallBuilderService {
 
+    private static final String QUESTIONMARK = "?";
+    private static final String RADIUS = "radius";
+    private static final String EQUALS = "=";
+    private static final String RADIUS_IN_KM = "300";
+    private static final String AND_SYMBOL = "&";
+    private static final String LNG = "lng";
+    private static final String LAT = "lat";
+    private static final String SLASH = "/";
+
 
     @Override
     public URL buildUrlWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
@@ -25,16 +34,19 @@ public class AirportsFinderHttpCallBuilderServiceImpl implements AirportsFinderH
         Objects.requireNonNull(longitude, "Longitude is not allowed to be null");
         Objects.requireNonNull(latitude, "Latitude is not allowed to be null");
 
-        return "/"
+        return SLASH
                 .concat(apiTokenAndUrlInformation.getPathVariable())
-                .concat("?")
-                .concat("radius=")
-                .concat("300")
-                .concat("&")
-                .concat("lng=")
+                .concat(QUESTIONMARK)
+                .concat(RADIUS)
+                .concat(EQUALS)
+                .concat(RADIUS_IN_KM)
+                .concat(AND_SYMBOL)
+                .concat(LNG)
+                .concat(EQUALS)
                 .concat(longitude)
-                .concat("&")
-                .concat("lat=")
+                .concat(AND_SYMBOL)
+                .concat(LAT)
+                .concat(EQUALS)
                 .concat(latitude);
     }
 

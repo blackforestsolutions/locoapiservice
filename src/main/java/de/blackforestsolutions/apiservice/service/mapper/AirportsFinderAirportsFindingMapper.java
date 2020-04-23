@@ -6,6 +6,7 @@ import de.blackforestsolutions.generatedcontent.airportsfinder.Location;
 
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class AirportsFinderAirportsFindingMapper {
@@ -26,37 +27,12 @@ public class AirportsFinderAirportsFindingMapper {
 
     private static AirportsFinding map(LinkedHashMap<String, Object> airportFindingsLinkedHashmap) {
         AirportsFinding airportsFinding = new AirportsFinding();
-        setAirportFindingsCodeWith(airportFindingsLinkedHashmap, airportsFinding);
-        setAirportFindingsNameWith(airportFindingsLinkedHashmap, airportsFinding);
-        setAirportFindingsCityWith(airportFindingsLinkedHashmap, airportsFinding);
-        setAirportFindingsCountryCodeWith(airportFindingsLinkedHashmap, airportsFinding);
+        Optional.ofNullable(airportFindingsLinkedHashmap.get(CODE)).ifPresent(code -> airportsFinding.setCode((String) airportFindingsLinkedHashmap.get(CODE)));
+        Optional.ofNullable(airportFindingsLinkedHashmap.get(NAME)).ifPresent(name -> airportsFinding.setName((String) airportFindingsLinkedHashmap.get(NAME)));
+        Optional.ofNullable(airportFindingsLinkedHashmap.get(CITY)).ifPresent(city -> airportsFinding.setCity((String) airportFindingsLinkedHashmap.get(CITY)));
+        Optional.ofNullable(airportFindingsLinkedHashmap.get(COUNTRY_CODE)).ifPresent(code -> airportsFinding.setCountryCode((String) airportFindingsLinkedHashmap.get(COUNTRY_CODE)));
         setAirportFindingsGpsCoordinatesWith(airportFindingsLinkedHashmap, airportsFinding);
         return airportsFinding;
-    }
-
-    // error handling here - what if something can't be mapped to AirportsFinding
-    private static void setAirportFindingsCodeWith(LinkedHashMap<String, Object> airportFindingsLinkedHashmap, AirportsFinding airportsFinding) {
-        if (airportFindingsLinkedHashmap.get(CODE) != null) {
-            airportsFinding.setCode((String) airportFindingsLinkedHashmap.get(CODE));
-        }
-    }
-
-    private static void setAirportFindingsNameWith(LinkedHashMap<String, Object> airportFindingsLinkedHashmap, AirportsFinding airportsFinding) {
-        if (airportFindingsLinkedHashmap.get(NAME) != null) {
-            airportsFinding.setName((String) airportFindingsLinkedHashmap.get(NAME));
-        }
-    }
-
-    private static void setAirportFindingsCityWith(LinkedHashMap<String, Object> airportFindingsLinkedHashmap, AirportsFinding airportsFinding) {
-        if (airportFindingsLinkedHashmap.get(CITY) != null) {
-            airportsFinding.setCity((String) airportFindingsLinkedHashmap.get(CITY));
-        }
-    }
-
-    private static void setAirportFindingsCountryCodeWith(LinkedHashMap<String, Object> airportFindingsLinkedHashmap, AirportsFinding airportsFinding) {
-        if (airportFindingsLinkedHashmap.get(COUNTRY_CODE) != null) {
-            airportsFinding.setCountryCode((String) airportFindingsLinkedHashmap.get(COUNTRY_CODE));
-        }
     }
 
     @SuppressWarnings("unchecked")
