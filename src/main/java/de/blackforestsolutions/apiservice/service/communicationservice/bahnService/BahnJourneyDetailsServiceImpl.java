@@ -97,8 +97,16 @@ public class BahnJourneyDetailsServiceImpl implements BahnJourneyDetailsService 
     }
 
     private Journey buildJourneyWith(List<JourneyDetail> journeyDetailsStop) {
-        Journey.JourneyBuilder journey = new Journey.JourneyBuilder();
-        journey.setId(uuidService.createUUID());
+        Journey.JourneyBuilder journey = new Journey.JourneyBuilder(uuidService.createUUID());
+        LinkedHashMap<UUID, Leg> legs = new LinkedHashMap();
+        Leg leg = buildLegWith(journeyDetailsStop);
+        legs.put(leg.getId(), leg);
+        journey.setLegs(legs);
+        return journey.build();
+    }
+
+    private Leg buildLegWith(List<JourneyDetail> journeyDetailsStop) {
+        Leg.LegBuilder journey = new Leg.LegBuilder(uuidService.createUUID());
         journey.setStart(buildTravelPointWith(journeyDetailsStop.get(START)));
         journey.setDestination(buildTravelPointWith(journeyDetailsStop.get(DESTINATION)));
         journey.setTravelProvider(TravelProvider.DB);
@@ -119,7 +127,6 @@ public class BahnJourneyDetailsServiceImpl implements BahnJourneyDetailsService 
                 .collect(Collectors.toList());
 
         journey.setTravelLine(buildTravelLine(betweenHolds));
-
         return journey.build();
     }
 
@@ -142,8 +149,8 @@ public class BahnJourneyDetailsServiceImpl implements BahnJourneyDetailsService 
         return travelPoint.build();
     }
 
-    private Map<Integer, TravelPoint> convertBetweenHoldsListToMap(List<JourneyDetail> journeyDetails) {
-        Map<Integer, TravelPoint> holdsBetween = new HashMap<>();
+    private HashMap<Integer, TravelPoint> convertBetweenHoldsListToMap(List<JourneyDetail> journeyDetails) {
+        HashMap<Integer, TravelPoint> holdsBetween = new HashMap<>();
         int counter = 0;
         for (JourneyDetail journeyDetail : journeyDetails) {
             holdsBetween.put(counter++, buildTravelPointWith(journeyDetail));

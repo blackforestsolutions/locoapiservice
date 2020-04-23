@@ -57,9 +57,7 @@ public class BahnArrivalBoardServiceImpl implements BahnArrivalBoardService {
 
     private Map<String, ArrivalBoard> mapArrivalBoardListToMap(List<ArrivalBoard> arrivalBoards) {
         Map<String, ArrivalBoard> arrivalBoardMap = new HashMap<>();
-        arrivalBoards
-                .forEach(
-                        arrivalBoard -> arrivalBoardMap.put(arrivalBoard.getDetailsId(), arrivalBoard));
+        arrivalBoards.forEach(arrivalBoard -> arrivalBoardMap.put(arrivalBoard.getDetailsId(), arrivalBoard));
         return arrivalBoardMap;
     }
 }

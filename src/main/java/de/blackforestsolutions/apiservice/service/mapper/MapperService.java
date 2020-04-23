@@ -1,11 +1,14 @@
 package de.blackforestsolutions.apiservice.service.mapper;
 
 import de.blackforestsolutions.datamodel.Price;
+import de.blackforestsolutions.datamodel.PriceCategory;
 import de.blackforestsolutions.generatedcontent.hafas.response.journey.TrfRes;
 
-import java.util.Currency;
-import java.util.Locale;
-import java.util.Optional;
+import java.math.BigDecimal;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.*;
 
 public class MapperService {
 
@@ -16,18 +19,24 @@ public class MapperService {
         return optionalJsonProperty.orElse("");
     }
 
+    static Duration generateDurationFromStartToDestination(Date start, Date destination) {
+        return Duration.between(LocalDateTime.ofInstant(start.toInstant(), ZoneId.systemDefault()), LocalDateTime.ofInstant(destination.toInstant(), ZoneId.systemDefault()));
+    }
+
     public static Price mapPriceForHafas(TrfRes trfRes) {
         Price.PriceBuilder price = new Price.PriceBuilder();
         price.setSymbol("€");
         price.setCurrency(Currency.getInstance(Locale.GERMANY));
-        price.setValue(convertPriceToPriceWithComma(trfRes.getFareSetL().get(FIRST_INDEX).getFareL().get(FIRST_INDEX).getPrc()));
+        price.setValues(convertPriceToPriceWithComma(trfRes.getFareSetL().get(FIRST_INDEX).getFareL().get(FIRST_INDEX).getPrc()));
         return price.build();
     }
 
-    private static double convertPriceToPriceWithComma(int price) {
+    private static EnumMap<PriceCategory, BigDecimal> convertPriceToPriceWithComma(int price) {
+        EnumMap<PriceCategory, BigDecimal> values = new EnumMap<>(PriceCategory.class);
         StringBuilder sb = new StringBuilder(String.valueOf(price));
         int length = (int) Math.log10(price) + 1;
         sb.insert(length - 2, ".");
-        return Double.parseDouble(sb.toString());
+        values.put(PriceCategory.ADULT, new BigDecimal(sb.toString()));
+        return values;
     }
 }

@@ -98,8 +98,7 @@ public class HafasMapperServiceImpl implements HafasMapperService {
 
     private Journey getJourneyFrom(OutConL hafasJourney, TravelProvider travelProvider, HafasPriceMapper priceMapper) {
         date = hafasJourney.getDate();
-        Journey.JourneyBuilder journey = new Journey.JourneyBuilder();
-        journey.setId(uuidService.createUUID());
+        Journey.JourneyBuilder journey = new Journey.JourneyBuilder(uuidService.createUUID());
         Dep departure = hafasJourney.getDep();
         journey.setStart(buildTravelPointWith(locations.get(departure.getLocX()), null, null, departure.getDPlatfS()));
         journey.setStartTime(buildDateWith(hafasJourney.getDate(), departure.getDTimeS()));

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.geo.Distance;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -88,17 +89,13 @@ public class BBCMapperServiceImpl implements BBCMapperService {
 
     private static Price buildPriceWith(Trip trip) {
         Price.PriceBuilder price = new Price.PriceBuilder();
-        price.setValue(trip.getPrice().getValue());
+        EnumMap<PriceCategory, BigDecimal> values = new EnumMap<>(PriceCategory.class);
+        // todo price is int value in generated content
+        values.put(PriceCategory.ADULT_REDUCED, new BigDecimal(trip.getPrice().getValue()));
+        values.put(PriceCategory.ADULT, new BigDecimal(trip.getPriceWithCommission().getValue()));
+        price.setValues(values);
         price.setCurrency(Currency.getInstance(String.valueOf(trip.getPrice().getCurrency())));
         price.setSymbol(trip.getPrice().getSymbol());
-        return price.build();
-    }
-
-    private static Price buildPriceWithCommission(Trip trip) {
-        Price.PriceBuilder price = new Price.PriceBuilder();
-        price.setValue(trip.getPriceWithCommission().getValue());
-        price.setCurrency(Currency.getInstance(String.valueOf(trip.getPriceWithCommission().getCurrency())));
-        price.setSymbol(trip.getPriceWithCommission().getSymbol());
         return price.build();
     }
 
@@ -123,10 +120,10 @@ public class BBCMapperServiceImpl implements BBCMapperService {
 
     @Override
     public Map<UUID, JourneyStatus> map(String jsonString) {
-        return mapTripsToJourneyList(retrieveRidesStatusFrom(jsonString));
+        return mapTripsToJourney(retrieveRidesStatusFrom(jsonString));
     }
 
-    private Map<UUID, JourneyStatus> mapTripsToJourneyList(CallStatus callStatus) {
+    private Map<UUID, JourneyStatus> mapTripsToJourney(CallStatus callStatus) {
         if (callStatus.getCalledObject() != null) {
             Rides ridesStatus = (Rides) callStatus.getCalledObject();
             return ridesStatus
@@ -142,17 +139,24 @@ public class BBCMapperServiceImpl implements BBCMapperService {
     }
 
     private Journey buildJourneyWith(Trip trip) {
-        Journey.JourneyBuilder journey = new Journey.JourneyBuilder();
-        journey.setId(uuidService.createUUID());
-        journey.setStartTime(buildDateFrom(trip));
-        journey.setStart(buildTravelPointWith(trip, true));
-        journey.setDestination(buildTravelPointWith(trip, false));
-        journey.setPrice(buildPriceWith(trip));
-        journey.setPriceWithCommision(buildPriceWithCommission(trip));
-        journey.setDistance(buildDistanceWith(trip));
-        journey.setProviderId(trip.getPermanentId());
-        journey.setVehicleNumber(trip.getCar().getId());
-        journey.setVehicleName(trip.getCar().getMake().concat(trip.getCar().getModel()));
+        Journey.JourneyBuilder journey = new Journey.JourneyBuilder(uuidService.createUUID());
+        LinkedHashMap<UUID, Leg> legs = new LinkedHashMap<>();
+        Leg leg = buildLegWith(trip);
+        legs.put(leg.getId(), leg);
+        journey.setLegs(legs);
         return journey.build();
+    }
+
+    private Leg buildLegWith(Trip trip) {
+        Leg.LegBuilder leg = new Leg.LegBuilder(uuidService.createUUID());
+        leg.setStartTime(buildDateFrom(trip));
+        leg.setStart(buildTravelPointWith(trip, true));
+        leg.setDestination(buildTravelPointWith(trip, false));
+        leg.setPrice(buildPriceWith(trip));
+        leg.setDistance(buildDistanceWith(trip));
+        leg.setProviderId(trip.getPermanentId());
+        leg.setVehicleNumber(trip.getCar().getId());
+        leg.setVehicleName(trip.getCar().getMake().concat(trip.getCar().getModel()));
+        return leg.build();
     }
 }

@@ -4,10 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.blackforestsolutions.apiservice.service.supportservice.UuidService;
-import de.blackforestsolutions.datamodel.Journey;
-import de.blackforestsolutions.datamodel.JourneyStatus;
-import de.blackforestsolutions.datamodel.TravelPoint;
-import de.blackforestsolutions.datamodel.TravelProvider;
+import de.blackforestsolutions.datamodel.*;
 import de.blackforestsolutions.generatedcontent.lufthansa.Flight;
 import de.blackforestsolutions.generatedcontent.lufthansa.ScheduleResource;
 import lombok.extern.slf4j.Slf4j;
@@ -59,17 +56,25 @@ public class LufthansaMapperServiceImpl implements LufthansaMapperService {
     }
 
     private Journey buildJourneyWith(Flight flight) {
-        Journey.JourneyBuilder journey = new Journey.JourneyBuilder();
-        journey.setId(uuidService.createUUID());
-        journey.setStart(buildTravelPointWith(flight, flight.getDeparture().getAirportCode(), true));
-        journey.setDestination(buildTravelPointWith(flight, flight.getArrival().getAirportCode(), false));
-        journey.setStartTime(buildDateFrom(flight.getDeparture().getScheduledTimeLocal().getDateTime()));
-        journey.setArrivalTime(buildDateFrom(flight.getArrival().getScheduledTimeLocal().getDateTime()));
-        journey.setDuration(Duration.between(convertToLocalDateTime(journey.getStartTime()), convertToLocalDateTime(journey.getArrivalTime())));
-        journey.setVehicleNumber(flight.getEquipment().getAircraftCode());
-        journey.setTravelProvider(TravelProvider.map(flight.getMarketingCarrier().getAirlineID()));
-        journey.setProviderId(flight.getMarketingCarrier().getAirlineID().concat(flight.getMarketingCarrier().getFlightNumber().toString()));
+        Journey.JourneyBuilder journey = new Journey.JourneyBuilder(uuidService.createUUID());
+        LinkedHashMap<UUID, Leg> legs = new LinkedHashMap<>();
+        Leg leg = buildLegWith(flight);
+        legs.put(leg.getId(), leg);
+        journey.setLegs(legs);
         return journey.build();
+    }
+
+    private Leg buildLegWith(Flight flight) {
+        Leg.LegBuilder leg = new Leg.LegBuilder(uuidService.createUUID());
+        leg.setStart(buildTravelPointWith(flight, flight.getDeparture().getAirportCode(), true));
+        leg.setDestination(buildTravelPointWith(flight, flight.getArrival().getAirportCode(), false));
+        leg.setStartTime(buildDateFrom(flight.getDeparture().getScheduledTimeLocal().getDateTime()));
+        leg.setArrivalTime(buildDateFrom(flight.getArrival().getScheduledTimeLocal().getDateTime()));
+        leg.setDuration(Duration.between(convertToLocalDateTime(leg.getStartTime()), convertToLocalDateTime(leg.getArrivalTime())));
+        leg.setVehicleNumber(flight.getEquipment().getAircraftCode());
+        leg.setTravelProvider(TravelProvider.map(flight.getMarketingCarrier().getAirlineID()));
+        leg.setProviderId(flight.getMarketingCarrier().getAirlineID().concat(flight.getMarketingCarrier().getFlightNumber().toString()));
+        return leg.build();
     }
 
     private TravelPoint buildTravelPointWith(Flight flight, String airportCode, boolean departure) {
