@@ -1,0 +1,65 @@
+[
+  {
+    "airportId": "4f1f8d2f-9cc3-4bdb-83f4-ec292c1e9085",
+    "name": "Zurich",
+    "location": {
+      "longitude": 8.549167,
+      "latitude": 47.459444
+    },
+    "cityId": "6b0f115f-5bd0-4813-86ef-22b7ec622cba",
+    "city": "Zurich",
+    "countryCode": "CH",
+    "themes": [],
+    "pointsOfSale": [
+      "DE",
+      "NO",
+      "BE",
+      "RU",
+      "PT",
+      "IN",
+      "DK",
+      "GR",
+      "IT",
+      "FR",
+      "ES",
+      "SE",
+      "TH",
+      "GB",
+      "CA",
+      "TR",
+      "NL"
+    ]
+  },
+  {
+    "airportId": "6998fdfb-5a66-43f5-a9ca-6df87fe5490c",
+    "code": "FKB",
+    "name": "Karlsruhe/Baden-Baden",
+    "location": {
+      "longitude": 8.079722,
+      "latitude": 48.778333
+    },
+    "cityId": "655d26cc-43a9-4c60-96fa-7bb63c82ae7a",
+    "city": "Karlsruhe/Baden-Baden",
+    "countryCode": "DE",
+    "themes": [],
+    "pointsOfSale": [
+      "DE"
+    ]
+  },
+  {
+    "airportId": "b23fbb3a-7cce-4114-a988-d9b4d52c3864",
+    "code": "XWG",
+    "name": "Railway Station",
+    "location": {
+      "longitude": 7.78,
+      "latitude": 48.598333333333336
+    },
+    "cityId": "364f96a7-1f9d-4c03-a4d7-86a1263ab87a",
+    "city": "Strasbourg",
+    "countryCode": "FR",
+    "themes": [],
+    "pointsOfSale": [
+      "FR"
+    ]
+  }
+]

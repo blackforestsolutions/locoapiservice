@@ -13,8 +13,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static de.blackforestsolutions.apiservice.objectmothers.TravelpointObjectMother.getRosenhofHvvStation;
-import static de.blackforestsolutions.apiservice.objectmothers.TravelpointObjectMother.getStadthausbrueckeHvvStation;
+import static de.blackforestsolutions.apiservice.objectmothers.TravelPointObjectMother.getRosenhofHvvStation;
+import static de.blackforestsolutions.apiservice.objectmothers.TravelPointObjectMother.getStadthausbrueckeHvvStation;
 
 public class HttpBodyObjectMother {
 

@@ -11,7 +11,7 @@ import java.util.*;
 
 import static de.blackforestsolutions.apiservice.objectmothers.PriceObjectMother.*;
 import static de.blackforestsolutions.apiservice.objectmothers.TravelLineObjectMother.*;
-import static de.blackforestsolutions.apiservice.objectmothers.TravelpointObjectMother.*;
+import static de.blackforestsolutions.apiservice.objectmothers.TravelPointObjectMother.*;
 import static de.blackforestsolutions.apiservice.objectmothers.UUIDObjectMother.*;
 import static de.blackforestsolutions.apiservice.testutils.TestUtils.*;
 
