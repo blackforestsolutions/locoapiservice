@@ -2,7 +2,7 @@ package de.blackforestsolutions.apiservice.service.communicationservice;
 
 import de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother;
 import de.blackforestsolutions.apiservice.objectmothers.JourneyObjectMother;
-import de.blackforestsolutions.apiservice.objectmothers.TravelpointObjectMother;
+import de.blackforestsolutions.apiservice.objectmothers.TravelPointObjectMother;
 import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.HvvCallService;
 import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.HvvCallServiceImpl;
 import de.blackforestsolutions.apiservice.service.mapper.HvvMapperService;
@@ -86,16 +86,16 @@ class HvvApiServiceTest {
         //noinspection unchecked
         doReturn(testResult).when(REST_TEMPLATE).exchange(anyString(), any(), any(), any(Class.class));
         List<TravelPoint> mockedTravelPointsList = Arrays.asList(
-                TravelpointObjectMother.getHvvHauptbahnhofTravelPoint(),
-                TravelpointObjectMother.getPinnebergRichardKoehnHvvTravelPoint()
+                TravelPointObjectMother.getHvvHauptbahnhofTravelPoint(),
+                TravelPointObjectMother.getPinnebergRichardKoehnHvvTravelPoint()
         );
         when(mapperService.getStationListFrom(any())).thenReturn(mockedTravelPointsList);
         List<TravelPoint> result = classUnderTest.getStationListFromHvvApiWith(apiTokenAndUrlInformation);
 
         Assertions.assertThat(result).isNotEmpty();
         Assertions.assertThat(result.size()).isEqualTo(2);
-        Assertions.assertThat(result.get(0)).isEqualToComparingFieldByField(TravelpointObjectMother.getHvvHauptbahnhofTravelPoint());
-        Assertions.assertThat(result.get(1)).isEqualToComparingFieldByField(TravelpointObjectMother.getPinnebergRichardKoehnHvvTravelPoint());
+        Assertions.assertThat(result.get(0)).isEqualToComparingFieldByField(TravelPointObjectMother.getHvvHauptbahnhofTravelPoint());
+        Assertions.assertThat(result.get(1)).isEqualToComparingFieldByField(TravelPointObjectMother.getPinnebergRichardKoehnHvvTravelPoint());
         verify(mapperService, times(1)).getStationListFrom(stationListJson);
     }
 
