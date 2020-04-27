@@ -31,12 +31,12 @@ public class MapperService {
         return price.build();
     }
 
-    private static EnumMap<PriceCategory, BigDecimal> convertPriceToPriceWithComma(int price) {
-        EnumMap<PriceCategory, BigDecimal> values = new EnumMap<>(PriceCategory.class);
+    private static Map<PriceCategory, BigDecimal> convertPriceToPriceWithComma(int price) {
         StringBuilder sb = new StringBuilder(String.valueOf(price));
         int length = (int) Math.log10(price) + 1;
         sb.insert(length - 2, ".");
-        values.put(PriceCategory.ADULT, new BigDecimal(sb.toString()));
-        return values;
+        return Map.of(
+                PriceCategory.ADULT, new BigDecimal(sb.toString())
+        );
     }
 }

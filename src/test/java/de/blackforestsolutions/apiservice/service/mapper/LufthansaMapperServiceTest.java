@@ -4,6 +4,7 @@ import de.blackforestsolutions.apiservice.configuration.AirportConfiguration;
 import de.blackforestsolutions.apiservice.service.supportservice.UuidService;
 import de.blackforestsolutions.datamodel.JourneyStatus;
 import de.blackforestsolutions.datamodel.TravelProvider;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -27,17 +28,27 @@ class LufthansaMapperServiceTest {
     LufthansaMapperServiceTest() throws IOException {
     }
 
+    @BeforeEach
+    void init() {
+        when(uuidService.createUUID())
+                .thenReturn(TEST_UUID_1)
+                .thenReturn(TEST_UUID_2)
+                .thenReturn(TEST_UUID_3)
+                .thenReturn(TEST_UUID_4)
+                .thenReturn(TEST_UUID_5)
+                .thenReturn(TEST_UUID_6)
+                .thenReturn(TEST_UUID_7)
+                .thenReturn(TEST_UUID_8)
+                .thenReturn(TEST_UUID_9)
+                .thenReturn(TEST_UUID_10)
+                .thenReturn(TEST_UUID_11)
+                .thenReturn(TEST_UUID_12);
+    }
+
     @SuppressWarnings("OptionalGetWithoutIsPresent")
     @Test
     void test_map_jsonObject_and_return_Map_with_journeys() {
         String scheduledResourcesJson = getResourceFileAsString("json/lufthansatest.json");
-        when(uuidService.createUUID())
-                .thenReturn(TEST_UUID_1).thenReturn(TEST_UUID_2)
-                .thenReturn(TEST_UUID_3).thenReturn(TEST_UUID_4)
-                .thenReturn(TEST_UUID_5).thenReturn(TEST_UUID_6)
-                .thenReturn(TEST_UUID_7).thenReturn(TEST_UUID_8)
-                .thenReturn(TEST_UUID_9).thenReturn(TEST_UUID_10)
-                .thenReturn(TEST_UUID_11).thenReturn(TEST_UUID_12);
 
         Map<UUID, JourneyStatus> result = classUnderTest.map(scheduledResourcesJson);
 

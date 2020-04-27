@@ -13,6 +13,7 @@ import de.blackforestsolutions.apiservice.stubs.RestTemplateBuilderStub;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import de.blackforestsolutions.datamodel.Journey;
 import de.blackforestsolutions.datamodel.JourneyStatus;
+import de.blackforestsolutions.datamodel.Leg;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -68,6 +69,18 @@ class NahShApiServiceTest {
     }
 
     @Test
+    void test_getJourneysForRouteWith_with_mocked_json_and_apiToken_returns_correct_price() {
+        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getNahShTokenAndUrl("", "");
+        Leg expectedJourney = JourneyObjectMother.getEiderstrasseRendsburgToRendsburgJourney();
+
+        Map<UUID, JourneyStatus> result = classUnderTest.getJourneysForRouteWith(testData);
+        //noinspection OptionalGetWithoutIsPresent
+        Leg legResult = result.get(TEST_UUID_1).getJourney().get().getLegs();
+
+        Assertions.assertThat(legResult.getPrice()).isEqualToComparingFieldByField(expectedJourney.getPrice());
+    }
+
+    @Test
     void test_getJourneysForRouteWith_with_mocked_json_and_apiToken_returns_correct_journey() {
         ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getNahShTokenAndUrl("", "");
         Journey expectedJourney = JourneyObjectMother.getEiderstrasseRendsburgToRendsburgJourney();
@@ -77,6 +90,8 @@ class NahShApiServiceTest {
         Journey journeyResult = result.get(TEST_UUID_1).getJourney().get();
 
         Assertions.assertThat(result.size()).isEqualTo(1);
+        Assertions.assertThat(journeyResult).isEqualToComparingFieldByField(expectedJourney);
+        Assertions.assertThat()
         Assertions.assertThat(journeyResult.getBetweenTrips().size()).isEqualTo(3);
         Assertions.assertThat(journeyResult.getStartTime()).isEqualTo(expectedJourney.getStartTime());
         Assertions.assertThat(journeyResult.getArrivalTime()).isEqualTo(expectedJourney.getArrivalTime());
@@ -98,17 +113,6 @@ class NahShApiServiceTest {
         Assertions.assertThat(journeyResult.getDestination()).isEqualToComparingFieldByField(expectedJourney.getDestination());
     }
 
-    @Test
-    void test_getJourneysForRouteWith_with_mocked_json_and_apiToken_returns_correct_price() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getNahShTokenAndUrl("", "");
-        Journey expectedJourney = JourneyObjectMother.getEiderstrasseRendsburgToRendsburgJourney();
-
-        Map<UUID, JourneyStatus> result = classUnderTest.getJourneysForRouteWith(testData);
-        //noinspection OptionalGetWithoutIsPresent
-        Journey journeyResult = result.get(TEST_UUID_1).getJourney().get();
-
-        Assertions.assertThat(journeyResult.getPrice()).isEqualToComparingFieldByField(expectedJourney.getPrice());
-    }
 
     @Test
     void test_getJourneysFrom_with_jsonBody_travelProvider_and_mocked_priceMapper_returns_correct_trip_between_eiderstrasse_and_gartenstrasse() {

@@ -113,7 +113,7 @@ public class SearchChMapperServiceImpl implements SearchChMapperService {
                 .orElse(Collections.emptyList())
                 .stream()
                 .map(SearchChMapperServiceImpl::buildTravelPointWith)
-                .collect(Collectors.collectingAndThen(Collectors.toMap(travelpoint -> counter.getAndIncrement(), travelPoint -> travelPoint, (prev, next) -> next, HashMap::new), betweenHolds -> {
+                .collect(Collectors.collectingAndThen(Collectors.toMap(travelpoint -> counter.getAndIncrement(), travelPoint -> travelPoint), betweenHolds -> {
                     TravelLine.TravelLineBuilder travelLine = new TravelLine.TravelLineBuilder();
                     travelLine.setBetweenHolds(betweenHolds);
                     return travelLine.build();

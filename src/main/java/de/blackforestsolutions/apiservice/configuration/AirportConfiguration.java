@@ -53,9 +53,9 @@ public class AirportConfiguration {
 
     private void fillTravelPointAttribute(List<String> columnEntries, Map<String, TravelPoint.TravelPointBuilder> airports, int lineCorrection) {
         TravelPoint.TravelPointBuilder travelPoint = new TravelPoint.TravelPointBuilder();
-        travelPoint.setAirportName(columnEntries.get(ONE + lineCorrection).replace("\"", ""));
+        travelPoint.setStationName(columnEntries.get(ONE + lineCorrection).replace("\"", ""));
         travelPoint.setCity(columnEntries.get(TWO + lineCorrection).replace("\"", ""));
-        travelPoint.setAirportId(columnEntries.get(FOUR + lineCorrection).replace("\"", ""));
+        travelPoint.setStationId(columnEntries.get(FOUR + lineCorrection).replace("\"", ""));
         travelPoint.setCountry(new Locale("", columnEntries.get(THREE + lineCorrection).replace("\"", "")));
         travelPoint.setGpsCoordinates(new Coordinates.CoordinatesBuilder(
                         Double.parseDouble(columnEntries.get(SIX + lineCorrection).replace("\"", "")),

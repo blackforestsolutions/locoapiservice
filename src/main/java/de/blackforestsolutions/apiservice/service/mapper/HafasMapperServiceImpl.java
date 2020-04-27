@@ -20,6 +20,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 import static de.blackforestsolutions.apiservice.util.CoordinatesUtil.convertWGS84ToCoordinatesWith;
+import static org.apache.commons.lang.StringUtils.deleteWhitespace;
+import static org.apache.commons.lang.StringUtils.isNumeric;
 
 @Slf4j
 @Service
@@ -28,10 +30,25 @@ public class HafasMapperServiceImpl implements HafasMapperService {
     private static final int FIRST_INDEX = 0;
     private static final int TIME_LENGTH = 8;
     private static final int INDEX_SUBTRACTION = 1;
+
     private static final String JOURNEY = "JNY";
     private static final String TELE_TAXI = "TETA";
     private static final String WALK = "WALK";
     private static final String TRANSFER = "TRSF";
+
+    private static final String BUS = "Bus";
+    private static final String REGIONAL_TRAIN_RE = "RE";
+    private static final String REGIONAL_TRAIN_IC = "IC";
+    private static final String REGIONAL_TRAIN_R = "R";
+    private static final String REGIONAL_TRAIN_RB = "RB";
+    private static final String TRAIN_ICE = "ICE";
+    private static final String TRAIN_CJX = "CJX";
+    private static final String TRAIN_RJX = "RJX";
+    private static final String TAXI = "AST";
+    private static final String SBAHN_S = "S";
+    private static final String SBAHN_STR = "STR";
+    private static final String UBAHN = "U";
+    private static final String TRAM = "RT";
 
     private final UuidService uuidService;
 
@@ -91,69 +108,50 @@ public class HafasMapperServiceImpl implements HafasMapperService {
         return response
                 .getOutConL()
                 .stream()
-                .map(journey -> getJourneyFrom(journey, travelProvider, priceMapper))
+                .map(journey -> getLegFrom(journey, travelProvider, priceMapper))
                 .map(JourneyStatusBuilder::createJourneyStatusWith)
                 .collect(Collectors.toMap(JourneyStatusBuilder::extractJourneyUuidFrom, journeyStatus -> journeyStatus));
     }
 
-    private Journey getJourneyFrom(OutConL hafasJourney, TravelProvider travelProvider, HafasPriceMapper priceMapper) {
+    private Journey getLegFrom(OutConL hafasJourney, TravelProvider travelProvider, HafasPriceMapper priceMapper) {
         date = hafasJourney.getDate();
         Journey.JourneyBuilder journey = new Journey.JourneyBuilder(uuidService.createUUID());
-        Dep departure = hafasJourney.getDep();
-        journey.setStart(buildTravelPointWith(locations.get(departure.getLocX()), null, null, departure.getDPlatfS()));
-        journey.setStartTime(buildDateWith(hafasJourney.getDate(), departure.getDTimeS()));
-        Arr arrival = hafasJourney.getArr();
-        journey.setDestination(buildTravelPointWith(locations.get(arrival.getLocX()), null, null, arrival.getAPlatfS()));
-        journey.setArrivalTime(buildDateWith(hafasJourney.getDate(), arrival.getATimeS()));
-        journey.setDuration(generateDurationBetween(journey.getStartTime(), journey.getArrivalTime()));
-        Optional.ofNullable(arrival.getATimeR()).ifPresent(prognosedArrivalTime -> journey.setDelay(generateDurationBetween(journey.getArrivalTime(), buildDateWith(hafasJourney.getDate(), prognosedArrivalTime))));
         journey.setPrice(priceMapper.map(hafasJourney.getTrfRes()));
-        if (hafasJourney.getSecL().size() != 1) {
-            journey.setBetweenTrips(buildBetweenTripsWith(hafasJourney.getSecL()));
-        } else {
-            SecL leg = hafasJourney.getSecL().get(FIRST_INDEX);
-            setJourneyPropertiesByTransportType(leg, journey);
-        }
-        journey.setTravelProvider(travelProvider);
+        journey.setLegs(getLegsFrom(hafasJourney.getSecL(), travelProvider));
         return journey.build();
     }
 
-    private List<Journey> buildBetweenTripsWith(List<SecL> betweenTrips) {
+    private LinkedHashMap<UUID, Leg> getLegsFrom(List<SecL> betweenTrips, TravelProvider travelProvider) {
         return betweenTrips
                 .stream()
-                .map(this::getJourneyFrom)
-                .collect(Collectors.toList());
+                .map(secL -> getLegFrom(secL, travelProvider))
+                .collect(Collectors.toMap(leg -> leg.getId(), leg -> leg, (prev, next) -> next, LinkedHashMap::new));
     }
 
-    private Journey getJourneyFrom(SecL betweenTrip) {
-        Journey.JourneyBuilder journey = new Journey.JourneyBuilder();
-        journey.setId(uuidService.createUUID());
-        Dep departure = betweenTrip.getDep();
-        journey.setStart(buildTravelPointWith(locations.get(departure.getLocX()), null, null, departure.getDPlatfS()));
-        Arr arrival = betweenTrip.getArr();
-        journey.setDestination(buildTravelPointWith(locations.get(betweenTrip.getArr().getLocX()), null, null, arrival.getAPlatfS()));
-        journey.setStartTime(buildDateWith(date, departure.getDTimeS()));
-        journey.setArrivalTime(buildDateWith(date, arrival.getATimeS()));
-        Optional.ofNullable(betweenTrip.getArr().getATimeR()).ifPresent(prognosedArrivalTime -> journey.setDelay(generateDurationBetween(journey.getArrivalTime(), buildDateWith(date, prognosedArrivalTime))));
-        setJourneyPropertiesByTransportType(betweenTrip, journey);
-        return journey.build();
-    }
-
-    private void setJourneyPropertiesByTransportType(SecL betweenTrip, Journey.JourneyBuilder journey) {
+    private Leg getLegFrom(SecL betweenTrip, TravelProvider travelProvider) {
+        Leg.LegBuilder leg = new Leg.LegBuilder(uuidService.createUUID());
+        leg.setStart(buildTravelPointWith(locations.get(betweenTrip.getDep().getLocX()), null, null, betweenTrip.getDep().getDPlatfS()));
+        leg.setDestination(buildTravelPointWith(locations.get(betweenTrip.getArr().getLocX()), null, null, betweenTrip.getArr().getAPlatfS()));
+        leg.setStartTime(buildDateWith(date, betweenTrip.getDep().getDTimeS()));
+        leg.setArrivalTime(buildDateWith(date, betweenTrip.getArr().getATimeS()));
+        leg.setDuration(generateDurationBetween(leg.getStartTime(), leg.getArrivalTime()));
+        Optional.ofNullable(betweenTrip.getArr().getATimeR()).ifPresent(prognosedArrivalTime -> leg.setDelay(generateDurationBetween(leg.getArrivalTime(), buildDateWith(date, prognosedArrivalTime))));
         if (betweenTrip.getType().equals(WALK) || betweenTrip.getType().equals(TRANSFER)) {
-            journey.setDistance(new Distance(betweenTrip.getGis().getDist()));
-            journey.setVehicleType(WALK);
+            leg.setDistance(new Distance(betweenTrip.getGis().getDist()));
+            leg.setVehicleType(VehicleType.WALK);
         } else if (betweenTrip.getType().equals(JOURNEY) || betweenTrip.getType().equals(TELE_TAXI)) {
             Jny hafasLeg = betweenTrip.getJny();
-            journey.setProviderId(hafasLeg.getJid());
-            journey.setTravelLine(buildTravelLineWith(hafasLeg));
+            leg.setProviderId(hafasLeg.getJid());
+            leg.setTravelProvider(travelProvider);
+            leg.setTravelLine(buildTravelLineWith(hafasLeg));
             ProdL vehicle = vehicles.get(hafasLeg.getProdX());
-            journey.setVehicleType(vehicle.getProdCtx().getCatOut());
-            journey.setVehicleName(vehicle.getProdCtx().getCatOutL());
-            journey.setVehicleNumber(vehicle.getName());
+            leg.setVehicleType(getVehicleType(vehicle.getProdCtx().getCatOut()));
+            leg.setVehicleName(vehicle.getProdCtx().getCatOutL());
+            leg.setVehicleNumber(vehicle.getName());
         } else {
             log.info("No valid type for leg found in: ".concat(HafasMapperService.class.getName()));
         }
+        return leg.build();
     }
 
     private TravelLine buildTravelLineWith(Jny betweenHolds) {
@@ -231,6 +229,16 @@ public class HafasMapperServiceImpl implements HafasMapperService {
 
     private Date convertToDate(LocalDateTime dateTime) {
         return Date.from(dateTime.atZone(ZoneId.systemDefault()).toInstant());
+    }
+
+    private VehicleType getVehicleType(String vehicleType) {
+        return switch (deleteWhitespace(vehicleType)) {
+            case BUS -> VehicleType.BUS;
+            case REGIONAL_TRAIN_RE, REGIONAL_TRAIN_IC, REGIONAL_TRAIN_R, REGIONAL_TRAIN_RB,
+                    TRAIN_ICE, TRAIN_CJX, TRAIN_RJX, SBAHN_S, SBAHN_STR, UBAHN, TRAM -> VehicleType.TRAIN;
+            case TAXI -> VehicleType.CAR;
+            default -> null;
+        };
     }
 
 }

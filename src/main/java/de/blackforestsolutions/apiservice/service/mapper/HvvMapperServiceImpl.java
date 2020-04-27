@@ -91,12 +91,12 @@ public class HvvMapperServiceImpl implements HvvMapperService {
         return travelPoint.build();
     }
 
-    private static HashMap<Integer, TravelPoint> buildBetweenHoldsForBetweenTrip(List<From> intermediateStops) {
+    private static Map<Integer, TravelPoint> buildBetweenHoldsForBetweenTrip(List<From> intermediateStops) {
         AtomicInteger counter = new AtomicInteger(0);
         return intermediateStops
                 .stream()
                 .map(intermediateStop -> buildTravelPointWith(intermediateStop).build())
-                .collect(Collectors.toMap(travelPoint -> counter.getAndIncrement(), travelPoint -> travelPoint, (prev, next) -> next, HashMap::new));
+                .collect(Collectors.toMap(travelPoint -> counter.getAndIncrement(), travelPoint -> travelPoint));
     }
 
     private static Date generateDateFromDateAndTime(String date, String time) {
@@ -115,14 +115,14 @@ public class HvvMapperServiceImpl implements HvvMapperService {
         Price.PriceBuilder price = new Price.PriceBuilder();
         price.setCurrency(Currency.getInstance(Locale.GERMANY));
         price.setSymbol("€");
-        EnumMap<PriceCategory, BigDecimal> values = new EnumMap<>(PriceCategory.class);
-        values.put(PriceCategory.ADULT, new BigDecimal(ticketInfo.getBasePrice()));
-        values.put(PriceCategory.ADULT_REDUCED, new BigDecimal(ticketInfo.getReducedBasePrice()));
-        price.setValues(values);
-        EnumMap<PriceCategory, String> affiliateLinks = new EnumMap<>(PriceCategory.class);
-        affiliateLinks.put(PriceCategory.ADULT, ticketInfo.getShopLinkRegular());
-        affiliateLinks.put(PriceCategory.ADULT_REDUCED, ticketInfo.getShopLinkRegular());
-        price.setAffiliateLinks(affiliateLinks);
+        price.setValues(Map.of(
+                PriceCategory.ADULT, new BigDecimal(ticketInfo.getBasePrice()),
+                PriceCategory.ADULT_REDUCED, new BigDecimal(ticketInfo.getReducedBasePrice())
+        ));
+        price.setAffiliateLinks(Map.of(
+                PriceCategory.ADULT, ticketInfo.getShopLinkRegular(),
+                PriceCategory.ADULT_REDUCED, ticketInfo.getShopLinkRegular()
+        ));
         return price.build();
     }
 
@@ -187,8 +187,6 @@ public class HvvMapperServiceImpl implements HvvMapperService {
 
     private Journey mapRealtimeScheduleToJourney(RealtimeSchedule realtimeSchedule) {
         Journey.JourneyBuilder journey = new Journey.JourneyBuilder(uuidService.createUUID());
-        journey.setPrice(buildPriceFrom(realtimeSchedule.getTariffInfos().get(FIRST_INDEX).getTicketInfos().get(FIRST_INDEX)));
-        journey.setChildPrice(buildPriceFrom(realtimeSchedule.getTariffInfos().get(FIRST_INDEX).getTicketInfos().get(SECOND_INDEX)));
         journey.setLegs(buildTripsBetweenWith(realtimeSchedule.getScheduleElements()));
         return journey.build();
     }
@@ -196,12 +194,14 @@ public class HvvMapperServiceImpl implements HvvMapperService {
     private LinkedHashMap<UUID, Leg> buildTripsBetweenWith(List<ScheduleElement> legs) {
         return legs
                 .stream()
-                .map(this::buildLegWith)
+                .map(leg -> buildLegWith(leg))
                 .collect(Collectors.toMap(leg -> leg.getId(), leg -> leg, (prev, next) -> next, LinkedHashMap::new));
     }
 
     private Leg buildLegWith(ScheduleElement scheduleElement) {
         Leg.LegBuilder leg = new Leg.LegBuilder(uuidService.createUUID());
+        journey.setPrice(buildPriceFrom(realtimeSchedule.getTariffInfos().get(FIRST_INDEX).getTicketInfos().get(FIRST_INDEX)));
+        journey.setChildPrice(buildPriceFrom(realtimeSchedule.getTariffInfos().get(FIRST_INDEX).getTicketInfos().get(SECOND_INDEX)));
         leg.setStart(buildTravelPointWith(scheduleElement.getFrom()).build());
         leg.setDestination(buildTravelPointWith(scheduleElement.getTo()).build());
         leg.setStartTime(generateDateFromDateAndTime(
@@ -215,10 +215,9 @@ public class HvvMapperServiceImpl implements HvvMapperService {
         leg.setDuration(generateDurationFromStartToDestination(leg.getStartTime(), leg.getArrivalTime()));
         leg.setProviderId(scheduleElement.getLine().getId());
         leg.setTravelProvider(TravelProvider.HVV);
-        leg.setVehicleName(scheduleElement.getLine().getType().getLongInfo());
+        leg.setVehicleName(scheduleElement.getLine().getName());
         String vehicleType = scheduleElement.getLine().getType().getSimpleType();
         leg.setVehicleType(getVehicleType(vehicleType));
-        leg.setVehicleNumber(scheduleElement.getLine().getName());
         leg.setTravelLine(buildTravelLineWith(scheduleElement));
         return leg.build();
     }

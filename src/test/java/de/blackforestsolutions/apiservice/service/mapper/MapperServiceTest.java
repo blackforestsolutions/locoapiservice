@@ -16,7 +16,6 @@ class MapperServiceTest {
         String result = checkIfStringPropertyExists(testData);
 
         Assertions.assertThat(result).isEqualTo(testData);
-
     }
 
     @Test

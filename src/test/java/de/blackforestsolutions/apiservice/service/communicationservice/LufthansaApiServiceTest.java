@@ -12,6 +12,7 @@ import de.blackforestsolutions.apiservice.stubs.RestTemplateBuilderStub;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import de.blackforestsolutions.datamodel.JourneyStatus;
 import de.blackforestsolutions.datamodel.TravelProvider;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpStatus;
@@ -51,6 +52,23 @@ class LufthansaApiServiceTest {
     LufthansaApiServiceTest() throws IOException {
     }
 
+    @BeforeEach
+    void init() {
+        when(uuidService.createUUID())
+                .thenReturn(TEST_UUID_1).thenReturn(TEST_UUID_2)
+                .thenReturn(TEST_UUID_3).thenReturn(TEST_UUID_4)
+                .thenReturn(TEST_UUID_5).thenReturn(TEST_UUID_6)
+                .thenReturn(TEST_UUID_7).thenReturn(TEST_UUID_8)
+                .thenReturn(TEST_UUID_9).thenReturn(TEST_UUID_10)
+                .thenReturn(TEST_UUID_11).thenReturn(TEST_UUID_12);
+
+        String scheduledResourcesJson = getResourceFileAsString("json/lufthansatest.json");
+        ResponseEntity<String> testResult = new ResponseEntity<>(scheduledResourcesJson, HttpStatus.OK);
+
+        //noinspection unchecked (justification: no type known for runtime therefore)
+        doReturn(testResult).when(restTemplate).exchange(anyString(), any(), any(), any(Class.class));
+    }
+
     @SuppressWarnings("OptionalGetWithoutIsPresent")
     @Test
     void test_getJourneysForRouteFromApiWith_with_mocked_rest_service_is_executed_correctly_and_maps_correctly_returns_map() throws Exception {
@@ -61,18 +79,6 @@ class LufthansaApiServiceTest {
         builder.setArrivalDate(now);
         builder.setDepartureDate(now);
         apiTokenAndUrlInformation = builder.build();
-        String scheduledResourcesJson = getResourceFileAsString("json/lufthansatest.json");
-        ResponseEntity<String> testResult = new ResponseEntity<>(scheduledResourcesJson, HttpStatus.OK);
-        when(uuidService.createUUID())
-                .thenReturn(TEST_UUID_1).thenReturn(TEST_UUID_2)
-                .thenReturn(TEST_UUID_3).thenReturn(TEST_UUID_4)
-                .thenReturn(TEST_UUID_5).thenReturn(TEST_UUID_6)
-                .thenReturn(TEST_UUID_7).thenReturn(TEST_UUID_8)
-                .thenReturn(TEST_UUID_9).thenReturn(TEST_UUID_10)
-                .thenReturn(TEST_UUID_11).thenReturn(TEST_UUID_12);
-
-        //noinspection unchecked (justification: no type known for runtime therefore)
-        doReturn(testResult).when(restTemplate).exchange(anyString(), any(), any(), any(Class.class));
 
         Map<UUID, JourneyStatus> result = classUnderTest.getJourneysForRouteWith(apiTokenAndUrlInformation);
 

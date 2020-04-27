@@ -90,7 +90,8 @@ class HvvApiServiceTest {
                 TravelpointObjectMother.getPinnebergRichardKoehnHvvTravelPoint()
         );
         when(mapperService.getStationListFrom(any())).thenReturn(mockedTravelPointsList);
-        List<TravelPoint> result = classUnderTest.getStationListFromHvvApiWith(apiTokenAndUrlInformation);
+
+        List<TravelPoint> result = (List<TravelPoint>) classUnderTest.getStationListFromHvvApiWith(apiTokenAndUrlInformation).getCalledObject();
 
         Assertions.assertThat(result).isNotEmpty();
         Assertions.assertThat(result.size()).isEqualTo(2);

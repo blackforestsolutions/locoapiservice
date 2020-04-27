@@ -2,6 +2,7 @@ package de.blackforestsolutions.apiservice.service.communicationservice;
 
 import de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother;
 import de.blackforestsolutions.apiservice.objectmothers.JourneyObjectMother;
+import de.blackforestsolutions.apiservice.objectmothers.LegObjectMother;
 import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.HafasCallService;
 import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.HafasCallServiceImpl;
 import de.blackforestsolutions.apiservice.service.mapper.HafasMapperService;
@@ -19,10 +20,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.UUID;
 
 import static de.blackforestsolutions.apiservice.objectmothers.UUIDObjectMother.TEST_UUID_1;
+import static de.blackforestsolutions.apiservice.objectmothers.UUIDObjectMother.TEST_UUID_2;
 import static de.blackforestsolutions.apiservice.testutils.TestUtils.getResourceFileAsString;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -71,57 +74,32 @@ class VBBApiServiceTest {
         Journey journeyResult = result.get(TEST_UUID_1).getJourney().get();
 
         Assertions.assertThat(result.size()).isEqualTo(1);
-        Assertions.assertThat(journeyResult.getStartTime()).isEqualTo(expectedJourney.getStartTime());
-        Assertions.assertThat(journeyResult.getArrivalTime()).isEqualTo(expectedJourney.getArrivalTime());
-        Assertions.assertThat(journeyResult.getDuration()).isEqualTo(expectedJourney.getDuration());
-        Assertions.assertThat(journeyResult.getTravelProvider()).isEqualTo(expectedJourney.getTravelProvider());
-        Assertions.assertThat(journeyResult.getProviderId()).isEqualTo(expectedJourney.getProviderId());
-        Assertions.assertThat(journeyResult.getVehicleType()).isEqualTo(expectedJourney.getVehicleType());
-        Assertions.assertThat(journeyResult.getVehicleName()).isEqualTo(expectedJourney.getVehicleName());
-        Assertions.assertThat(journeyResult.getVehicleNumber()).isEqualTo(expectedJourney.getVehicleNumber());
-        Assertions.assertThat(journeyResult)
-                .isEqualToIgnoringGivenFields(expectedJourney, "start", "destination", "price", "travelLine");
+        Assertions.assertThat(journeyResult).isEqualToComparingFieldByField(expectedJourney);
     }
 
     @Test
-    void test_getJourneysForRouteWith_with_mocked_json_and_apiToken_returns_correct_start_and_destination() {
+    void test_getJourneysForRouteWith_with_mocked_json_and_apiToken_returns_correct_leg() {
         ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getVBBTokenAndUrl("900230999", "900140006");
-        Journey expectedJourney = JourneyObjectMother.getPotsdamBerlinJourney();
+        Leg expectedLeg = LegObjectMother.getPotsdamBerlinLeg();
 
         Map<UUID, JourneyStatus> result = classUnderTest.getJourneysForRouteWith(testData);
         //noinspection OptionalGetWithoutIsPresent
-        Journey journeyResult = result.get(TEST_UUID_1).getJourney().get();
+        LinkedHashMap<UUID, Leg> legsResult = result.get(TEST_UUID_1).getJourney().get().getLegs();
 
-        Assertions.assertThat(journeyResult.getStart()).isEqualToComparingFieldByField(expectedJourney.getStart());
-        Assertions.assertThat(journeyResult.getDestination()).isEqualToComparingFieldByField(expectedJourney.getDestination());
+        Assertions.assertThat(legsResult.size()).isEqualTo(1);
+        Assertions.assertThat(legsResult.get(TEST_UUID_2)).isEqualToComparingFieldByField(expectedLeg);
+        Assertions.assertThat(legsResult.get(TEST_UUID_2).getStartTime()).isEqualTo(expectedLeg.getStartTime());
+        Assertions.assertThat(legsResult.get(TEST_UUID_2).getArrivalTime()).isEqualTo(expectedLeg.getArrivalTime());
+        Assertions.assertThat(legsResult.get(TEST_UUID_2).getDuration()).isEqualTo(expectedLeg.getDuration());
+        Assertions.assertThat(legsResult.get(TEST_UUID_2).getTravelProvider()).isEqualTo(expectedLeg.getTravelProvider());
+        Assertions.assertThat(legsResult.get(TEST_UUID_2).getProviderId()).isEqualTo(expectedLeg.getProviderId());
+        Assertions.assertThat(legsResult.get(TEST_UUID_2).getVehicleType()).isEqualTo(expectedLeg.getVehicleType());
+        Assertions.assertThat(legsResult.get(TEST_UUID_2).getVehicleName()).isEqualTo(expectedLeg.getVehicleName());
+        Assertions.assertThat(legsResult.get(TEST_UUID_2).getVehicleNumber()).isEqualTo(expectedLeg.getVehicleNumber());
+        Assertions.assertThat(legsResult.get(TEST_UUID_2).getStart()).isEqualToComparingFieldByField(expectedLeg.getStart());
+        Assertions.assertThat(legsResult.get(TEST_UUID_2).getDestination()).isEqualToComparingFieldByField(expectedLeg.getDestination());
+        Assertions.assertThat(legsResult.get(TEST_UUID_2).getPrice()).isEqualToComparingFieldByField(expectedLeg.getPrice());
+        Assertions.assertThat(legsResult.get(TEST_UUID_2).getTravelLine()).isEqualToComparingFieldByField(expectedLeg.getTravelLine());
+        Assertions.assertThat(legsResult).isEqualToIgnoringGivenFields(expectedLeg);
     }
-
-    @Test
-    void test_getJourneysForRouteWith_with_mocked_json_and_apiToken_returns_correct_price() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getVBBTokenAndUrl("900230999", "900140006");
-        Price expectedPrice = JourneyObjectMother.getPotsdamBerlinJourney().getPrice();
-
-        Map<UUID, JourneyStatus> result = classUnderTest.getJourneysForRouteWith(testData);
-        //noinspection OptionalGetWithoutIsPresent
-        Journey journeyResult = result.get(TEST_UUID_1).getJourney().get();
-
-        Assertions.assertThat(journeyResult.getPrice()).isEqualToComparingFieldByField(expectedPrice);
-    }
-
-    @Test
-    void test_getJourneysForRouteWith_with_mocked_json_and_apiToken_returns_correct_travelLine() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getVBBTokenAndUrl("900230999", "900140006");
-        TravelLine expectedTravelLine = JourneyObjectMother.getPotsdamBerlinJourney().getTravelLine();
-
-        Map<UUID, JourneyStatus> result = classUnderTest.getJourneysForRouteWith(testData);
-        //noinspection OptionalGetWithoutIsPresent
-        TravelLine travelLineResult = result.get(TEST_UUID_1).getJourney().get().getTravelLine();
-
-        Assertions.assertThat(travelLineResult.getDirection()).isEqualToComparingFieldByField(expectedTravelLine.getDirection());
-        Assertions.assertThat(travelLineResult.getBetweenHolds().size()).isEqualToComparingFieldByField(expectedTravelLine.getBetweenHolds().size());
-        Assertions.assertThat(travelLineResult.getBetweenHolds().get(0)).isEqualToComparingFieldByField(expectedTravelLine.getBetweenHolds().get(0));
-        Assertions.assertThat(travelLineResult.getBetweenHolds().get(1)).isEqualToComparingFieldByField(expectedTravelLine.getBetweenHolds().get(1));
-        Assertions.assertThat(travelLineResult.getBetweenHolds().get(2)).isEqualToComparingFieldByField(expectedTravelLine.getBetweenHolds().get(2));
-    }
-
 }

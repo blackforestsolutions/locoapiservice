@@ -87,17 +87,11 @@ public class BritishAirwaysMapperServiceImpl implements BritishAirwaysMapperServ
 
     private Journey createJourneysWith(LinkedHashMap singleFlight) {
         Journey.JourneyBuilder journey = new Journey.JourneyBuilder(uuidService.createUUID());
-        setLegTravelProvider(journey, singleFlight);
-        getLegProviderId(singleFlight, journey);
-        LinkedHashMap sector = (LinkedHashMap) singleFlight.get("Sector");
-        setLegScheduledDepartureDateTime(journey, sector);
-        setLegScheduledArrivalDateTime(journey, sector);
-        setLegReportedDepartureDateTime(journey, sector);
-        setLegReportedArrivalDateTime(journey, sector);
-        setLegUnknownTravelProvider(journey, sector);
-        setLegVehicleNumber(sector, journey);
-        setLegDestination(sector, journey);
-        setLegStart(sector, journey);
+        LinkedHashMap<UUID, Leg> legs = new LinkedHashMap<>();
+        Leg leg = createLegWith(singleFlight);
+        legs.put(leg.getId(), leg);
+        journey.setLegs(legs);
+        return journey.build();
     }
 
     private Leg createLegWith(LinkedHashMap singleFlight) {
@@ -105,15 +99,14 @@ public class BritishAirwaysMapperServiceImpl implements BritishAirwaysMapperServ
         leg.setTravelProvider(TravelProvider.map((String) singleFlight.get("MarketingCarrierCode")));
         leg.setProviderId(getLegProviderId(singleFlight));
         LinkedHashMap sector = (LinkedHashMap) singleFlight.get("Sector");
-        setLegScheduledDepartureDateTime(leg, sector);
-        setLegScheduledArrivalDateTime(leg, sector);
         setLegReportedDepartureDateTime(leg, sector);
         setLegReportedArrivalDateTime(leg, sector);
+        setLegTravelProvider(leg, sector);
         setLegUnknownTravelProvider(leg, sector);
         setLegVehicleNumber(sector, leg);
         setLegDestination(sector, leg);
         setLegStart(sector, leg);
-
+        return leg.build();
     }
 
     private void setLegVehicleNumber(LinkedHashMap sector, Leg.LegBuilder leg) {
@@ -208,22 +201,22 @@ public class BritishAirwaysMapperServiceImpl implements BritishAirwaysMapperServ
 
     private void setLegReportedArrivalDateTime(Leg.LegBuilder leg, LinkedHashMap sector) {
         String reportedArrivalDateTime = (String) sector.get("ReportedArrivalDateTime");
-        leg.setArrivalTimeUpdated(buildDateFrom(reportedArrivalDateTime));
+        leg.setArrivalTime(buildDateFrom(reportedArrivalDateTime));
+        Optional.ofNullable(leg.getArrivalTime()).orElseGet(() -> {
+            String scheduledArrivalDateTime = (String) sector.get("ScheduledArrivalDateTime");
+            leg.setArrivalTime(buildDateFrom(scheduledArrivalDateTime));
+            return null;
+        });
     }
 
     private void setLegReportedDepartureDateTime(Leg.LegBuilder leg, LinkedHashMap sector) {
         String reportedDepartureDateTime = (String) sector.get("ReportedDepartureDateTime");
-        leg.setStartTimeUpdated(buildDateFrom(reportedDepartureDateTime));
-    }
-
-    private void setLegScheduledArrivalDateTime(Leg.LegBuilder leg, LinkedHashMap sector) {
-        String scheduledArrivalDateTime = (String) sector.get("ScheduledArrivalDateTime");
-        leg.setArrivalTime(buildDateFrom(scheduledArrivalDateTime));
-    }
-
-    private void setLegScheduledDepartureDateTime(Leg.LegBuilder leg, LinkedHashMap sector) {
-        String scheduledDepartureDateTime = (String) sector.get("ScheduledDepartureDateTime");
-        leg.setStartTime(buildDateFrom(scheduledDepartureDateTime));
+        leg.setStartTime(buildDateFrom(reportedDepartureDateTime));
+        Optional.ofNullable(leg.getStartTime()).orElseGet(() -> {
+            String scheduledDepartureDateTime = (String) sector.get("ScheduledDepartureDateTime");
+            leg.setStartTime(buildDateFrom(scheduledDepartureDateTime));
+            return null;
+        });
     }
 
     private Date buildDateFrom(String dateTime) {

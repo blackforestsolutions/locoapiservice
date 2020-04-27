@@ -89,11 +89,12 @@ public class BBCMapperServiceImpl implements BBCMapperService {
 
     private static Price buildPriceWith(Trip trip) {
         Price.PriceBuilder price = new Price.PriceBuilder();
-        EnumMap<PriceCategory, BigDecimal> values = new EnumMap<>(PriceCategory.class);
         // todo price is int value in generated content
-        values.put(PriceCategory.ADULT_REDUCED, new BigDecimal(trip.getPrice().getValue()));
-        values.put(PriceCategory.ADULT, new BigDecimal(trip.getPriceWithCommission().getValue()));
-        price.setValues(values);
+        // todo affiliate links
+        price.setValues(Map.of(
+                PriceCategory.ADULT_REDUCED, new BigDecimal(trip.getPrice().getValue()),
+                PriceCategory.ADULT, new BigDecimal(trip.getPriceWithCommission().getValue())
+        ));
         price.setCurrency(Currency.getInstance(String.valueOf(trip.getPrice().getCurrency())));
         price.setSymbol(trip.getPrice().getSymbol());
         return price.build();
@@ -155,8 +156,9 @@ public class BBCMapperServiceImpl implements BBCMapperService {
         leg.setPrice(buildPriceWith(trip));
         leg.setDistance(buildDistanceWith(trip));
         leg.setProviderId(trip.getPermanentId());
-        leg.setVehicleNumber(trip.getCar().getId());
+        leg.setVehicleType(VehicleType.CAR);
         leg.setVehicleName(trip.getCar().getMake().concat(trip.getCar().getModel()));
+        leg.setVehicleNumber(trip.getCar().getId());
         return leg.build();
     }
 }

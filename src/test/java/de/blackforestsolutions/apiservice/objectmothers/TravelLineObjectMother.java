@@ -58,4 +58,20 @@ public class TravelLineObjectMother {
         travelLine.setBetweenHolds(Collections.singletonMap(0, getHannoverTravelPoint()));
         return travelLine.build();
     }
+
+    static TravelLine getElmshornHamburgAltonaTravelLine() throws ParseException {
+        TravelLine.TravelLineBuilder travelLine = new TravelLine.TravelLineBuilder();
+        travelLine.setOrigin(getWristTravelPoint());
+        travelLine.setDirection(getHamburgAltonaDirectionTravelPoint());
+        travelLine.setBetweenHolds(Map.of(
+                0, getPinnebergTravelPoint()
+        ));
+        return travelLine.build();
+    }
+
+    static TravelLine getHamburgDammtorUniversityTravelLine() {
+        TravelLine.TravelLineBuilder travelLine = new TravelLine.TravelLineBuilder();
+        travelLine.setOrigin();
+        travelLine.setDirection(new TravelPoint.TravelPointBuilder().set);
+    }
 }

@@ -117,7 +117,7 @@ public class RMVMapperServiceImpl implements RMVMapperService {
                 Stream.of(leg.getStops().getStop())
                         .flatMap(stopTypes -> stopTypes.stream())
                         .map(this::buildTravelPointWith)
-                        .collect(Collectors.toMap(travelPoint -> counter.getAndIncrement(), travelPoint -> travelPoint, (prev, next) -> next, HashMap::new))
+                        .collect(Collectors.toMap(travelPoint -> counter.getAndIncrement(), travelPoint -> travelPoint))
         );
         return travelLine.build();
     }
@@ -125,10 +125,10 @@ public class RMVMapperServiceImpl implements RMVMapperService {
     private Price extractPriceFrom(Trip trip) {
         Price.PriceBuilder price = new Price.PriceBuilder();
         if (trip.getTariffResult() != null) {
-            EnumMap<PriceCategory, BigDecimal> values = new EnumMap<>(PriceCategory.class);
-            values.put(PriceCategory.ADULT, new BigDecimal(trip.getTariffResult().getFareSetItem().get(START_INDEX).getFareItem().get(START_INDEX).getTicket().get(START_INDEX).getPrice()));
-            values.put(PriceCategory.CHILD, new BigDecimal(trip.getTariffResult().getFareSetItem().get(START_INDEX).getFareItem().get(START_INDEX).getTicket().get(SECOND_INDEX).getPrice()));
-            price.setValues(values);
+            price.setValues(Map.of(
+                    PriceCategory.ADULT, new BigDecimal(trip.getTariffResult().getFareSetItem().get(START_INDEX).getFareItem().get(START_INDEX).getTicket().get(START_INDEX).getPrice()),
+                    PriceCategory.CHILD, new BigDecimal(trip.getTariffResult().getFareSetItem().get(START_INDEX).getFareItem().get(START_INDEX).getTicket().get(SECOND_INDEX).getPrice())
+            ));
             price.setCurrency(Currency.getInstance(trip.getTariffResult().getFareSetItem().get(START_INDEX).getFareItem().get(START_INDEX).getTicket().get(START_INDEX).getCur()));
             price.setSymbol(price.getCurrency().getSymbol());
         }
