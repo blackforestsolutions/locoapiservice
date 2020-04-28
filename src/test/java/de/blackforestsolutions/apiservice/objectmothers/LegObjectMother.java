@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static de.blackforestsolutions.apiservice.objectmothers.PriceObjectMother.getDBPrice;
 import static de.blackforestsolutions.apiservice.objectmothers.PriceObjectMother.getVBBPrice;
 import static de.blackforestsolutions.apiservice.objectmothers.TravelLineObjectMother.*;
 import static de.blackforestsolutions.apiservice.objectmothers.TravelpointObjectMother.*;
@@ -17,33 +18,34 @@ import static de.blackforestsolutions.apiservice.testutils.TestUtils.*;
 
 public class LegObjectMother {
 
-    public static Leg getEiderstrasseRendsburgGartenstrasseRendsburgLeg() {
-        Leg.LegBuilder journey = new Leg.LegBuilder(TEST_UUID_2);
-        journey.setStart(getRendsburgEiderstrasseTravelPoint());
-        journey.setDestination(getGartenstrasseTravelPoint());
-        journey.setStartTime(generateDateFrom("yyyyMMdd", "20200328", "HHmmss", "123500"));
-        journey.setArrivalTime(generateDateFrom("yyyyMMdd", "20200328", "HHmmss", "123700"));
-        journey.setDuration(generateDurationFromStartToDestination(journey.getStartTime(), journey.getArrivalTime()));
-        journey.setDistance(new Distance(165));
-        journey.setVehicleType(VehicleType.WALK);
-        journey.setTravelProvider(TravelProvider.NAHSH);
-        return journey.build();
+    public static Leg getEiderstrasseRendsburgGartenstrasseRendsburgLeg(Price price) {
+        Leg.LegBuilder leg = new Leg.LegBuilder(TEST_UUID_2);
+        leg.setStart(getRendsburgEiderstrasseTravelPoint());
+        leg.setDestination(getGartenstrasseTravelPoint());
+        leg.setStartTime(generateDateFrom("yyyyMMdd", "20200328", "HHmmss", "123500"));
+        leg.setArrivalTime(generateDateFrom("yyyyMMdd", "20200328", "HHmmss", "123700"));
+        leg.setDuration(generateDurationFromStartToDestination(leg.getStartTime(), leg.getArrivalTime()));
+        leg.setDistance(new Distance(165));
+        leg.setVehicleType(VehicleType.WALK);
+        leg.setTravelProvider(TravelProvider.NAHSH);
+        leg.setPrice(price);
+        return leg.build();
     }
 
     public static Leg getGartenstrasseRendsburgLeg() {
-        Leg.LegBuilder journey = new Leg.LegBuilder(TEST_UUID_3);
-        journey.setStart(getGartenstrasseTravelPoint());
-        journey.setDestination(getRendsburgZOBTravelPoint());
-        journey.setStartTime(generateDateFrom("yyyyMMdd", "20200328", "HHmmss", "123700"));
-        journey.setArrivalTime(generateDateFrom("yyyyMMdd", "20200328", "HHmmss", "124600"));
-        journey.setDuration(generateDurationFromStartToDestination(journey.getStartTime(), journey.getArrivalTime()));
-        journey.setProviderId("1|35367|6|80|28032020");
-        journey.setTravelLine(getGartenstrasseRendsburgTravelLine());
-        journey.setVehicleType(VehicleType.BUS);
-        journey.setVehicleName("Bus");
-        journey.setVehicleNumber("Bus 11");
-        journey.setTravelProvider(TravelProvider.NAHSH);
-        return journey.build();
+        Leg.LegBuilder leg = new Leg.LegBuilder(TEST_UUID_3);
+        leg.setStart(getGartenstrasseTravelPoint());
+        leg.setDestination(getRendsburgZOBTravelPoint());
+        leg.setStartTime(generateDateFrom("yyyyMMdd", "20200328", "HHmmss", "123700"));
+        leg.setArrivalTime(generateDateFrom("yyyyMMdd", "20200328", "HHmmss", "124600"));
+        leg.setDuration(generateDurationFromStartToDestination(leg.getStartTime(), leg.getArrivalTime()));
+        leg.setProviderId("1|35367|6|80|28032020");
+        leg.setTravelLine(getGartenstrasseRendsburgTravelLine());
+        leg.setVehicleType(VehicleType.BUS);
+        leg.setVehicleName("Bus");
+        leg.setVehicleNumber("Bus 11");
+        leg.setTravelProvider(TravelProvider.NAHSH);
+        return leg.build();
     }
 
     public static Leg getRendsburgZobToRendsburgLeg() {

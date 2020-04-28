@@ -16,9 +16,8 @@ public class JourneyObjectMother {
 
     public static Journey getEiderstrasseRendsburgToRendsburgJourney() {
         Journey.JourneyBuilder journey = new Journey.JourneyBuilder(TEST_UUID_1);
-        journey.setPrice(getNahShPrice());
         LinkedHashMap<UUID, Leg> legs = new LinkedHashMap<>();
-        legs.put(getEiderstrasseRendsburgGartenstrasseRendsburgLeg().getId(), getEiderstrasseRendsburgGartenstrasseRendsburgLeg());
+        legs.put(getEiderstrasseRendsburgGartenstrasseRendsburgLeg(getNahShPrice()).getId(), getEiderstrasseRendsburgGartenstrasseRendsburgLeg());
         legs.put(getGartenstrasseRendsburgLeg().getId(), getGartenstrasseRendsburgLeg());
         legs.put(getRendsburgZobToRendsburgLeg().getId(), getRendsburgZobToRendsburgLeg());
         journey.setLegs(legs);
@@ -41,7 +40,6 @@ public class JourneyObjectMother {
         legs.put(getRendsburgHamburgLeg().getId(), getRendsburgHamburgLeg());
         legs.put(getHamburgHbfFrankfurtHbfLeg().getId(), getHamburgHbfFrankfurtHbfLeg());
         journey.setLegs(legs);
-        journey.setPrice(getDBPrice());
         return journey.build();
     }
 
