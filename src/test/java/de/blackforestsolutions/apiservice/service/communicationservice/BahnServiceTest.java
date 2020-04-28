@@ -145,6 +145,8 @@ class BahnServiceTest {
                 result.get(testUUID1)
                         .getJourney()
                         .get()
+                        .getLegs()
+                        .get(TEST_UU)
                         .getTravelLine()
                         .getBetweenHolds()
                         .values()

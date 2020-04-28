@@ -16,12 +16,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.time.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static de.blackforestsolutions.apiservice.service.mapper.MapperService.checkIfStringPropertyExists;
 import static de.blackforestsolutions.apiservice.service.mapper.MapperService.generateDurationFromStartToDestination;
@@ -187,21 +189,20 @@ public class HvvMapperServiceImpl implements HvvMapperService {
 
     private Journey mapRealtimeScheduleToJourney(RealtimeSchedule realtimeSchedule) {
         Journey.JourneyBuilder journey = new Journey.JourneyBuilder(uuidService.createUUID());
-        journey.setLegs(buildTripsBetweenWith(realtimeSchedule.getScheduleElements()));
+        journey.setLegs(buildLegsWith(realtimeSchedule.getScheduleElements(), buildPriceFrom(realtimeSchedule.getTariffInfos().get(FIRST_INDEX).getTicketInfos().get(FIRST_INDEX))));
         return journey.build();
     }
 
-    private LinkedHashMap<UUID, Leg> buildTripsBetweenWith(List<ScheduleElement> legs) {
+    private LinkedHashMap<UUID, Leg> buildLegsWith(List<ScheduleElement> legs, Price price) {
+        AtomicInteger counter = new AtomicInteger(0);
         return legs
                 .stream()
-                .map(leg -> buildLegWith(leg))
+                .map(leg -> buildLegWith(leg, price, counter.getAndIncrement()))
                 .collect(Collectors.toMap(leg -> leg.getId(), leg -> leg, (prev, next) -> next, LinkedHashMap::new));
     }
 
-    private Leg buildLegWith(ScheduleElement scheduleElement) {
+    private Leg buildLegWith(ScheduleElement scheduleElement, Price price, int index) {
         Leg.LegBuilder leg = new Leg.LegBuilder(uuidService.createUUID());
-        journey.setPrice(buildPriceFrom(realtimeSchedule.getTariffInfos().get(FIRST_INDEX).getTicketInfos().get(FIRST_INDEX)));
-        journey.setChildPrice(buildPriceFrom(realtimeSchedule.getTariffInfos().get(FIRST_INDEX).getTicketInfos().get(SECOND_INDEX)));
         leg.setStart(buildTravelPointWith(scheduleElement.getFrom()).build());
         leg.setDestination(buildTravelPointWith(scheduleElement.getTo()).build());
         leg.setStartTime(generateDateFromDateAndTime(
@@ -219,6 +220,9 @@ public class HvvMapperServiceImpl implements HvvMapperService {
         String vehicleType = scheduleElement.getLine().getType().getSimpleType();
         leg.setVehicleType(getVehicleType(vehicleType));
         leg.setTravelLine(buildTravelLineWith(scheduleElement));
+        if (index == 0) {
+            leg.setPrice(price);
+        }
         return leg.build();
     }
 

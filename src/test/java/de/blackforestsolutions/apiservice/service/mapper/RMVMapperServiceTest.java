@@ -83,6 +83,8 @@ class RMVMapperServiceTest {
         assertThat(result.get(TEST_UUID_1).getJourney().get().getTravelLine().getBetweenHolds().size()).isEqualTo(2);
     }
 
+
+
     @SuppressWarnings("OptionalGetWithoutIsPresent")
     @Test
     void test_getJourneyFrom_with_xml_stub_and_return_Journey_Ulrichstein_Endbach() {

@@ -21,7 +21,6 @@ import java.util.stream.Collectors;
 
 import static de.blackforestsolutions.apiservice.util.CoordinatesUtil.convertWGS84ToCoordinatesWith;
 import static org.apache.commons.lang.StringUtils.deleteWhitespace;
-import static org.apache.commons.lang.StringUtils.isNumeric;
 
 @Slf4j
 @Service
@@ -116,19 +115,19 @@ public class HafasMapperServiceImpl implements HafasMapperService {
     private Journey getLegFrom(OutConL hafasJourney, TravelProvider travelProvider, HafasPriceMapper priceMapper) {
         date = hafasJourney.getDate();
         Journey.JourneyBuilder journey = new Journey.JourneyBuilder(uuidService.createUUID());
-        journey.setPrice(priceMapper.map(hafasJourney.getTrfRes()));
-        journey.setLegs(getLegsFrom(hafasJourney.getSecL(), travelProvider));
+        journey.setLegs(getLegsFrom(hafasJourney.getSecL(), travelProvider, priceMapper));
         return journey.build();
     }
 
-    private LinkedHashMap<UUID, Leg> getLegsFrom(List<SecL> betweenTrips, TravelProvider travelProvider) {
+    private LinkedHashMap<UUID, Leg> getLegsFrom(List<SecL> betweenTrips, TravelProvider travelProvider, HafasPriceMapper mapper) {
+        AtomicInteger counter = new AtomicInteger(0);
         return betweenTrips
                 .stream()
-                .map(secL -> getLegFrom(secL, travelProvider))
+                .map(secL -> getLegFrom(secL, travelProvider, counter.getAndIncrement()))
                 .collect(Collectors.toMap(leg -> leg.getId(), leg -> leg, (prev, next) -> next, LinkedHashMap::new));
     }
 
-    private Leg getLegFrom(SecL betweenTrip, TravelProvider travelProvider) {
+    private Leg getLegFrom(SecL betweenTrip, TravelProvider travelProvider, HafasPriceMapper priceMapper, int index) {
         Leg.LegBuilder leg = new Leg.LegBuilder(uuidService.createUUID());
         leg.setStart(buildTravelPointWith(locations.get(betweenTrip.getDep().getLocX()), null, null, betweenTrip.getDep().getDPlatfS()));
         leg.setDestination(buildTravelPointWith(locations.get(betweenTrip.getArr().getLocX()), null, null, betweenTrip.getArr().getAPlatfS()));
@@ -150,6 +149,9 @@ public class HafasMapperServiceImpl implements HafasMapperService {
             leg.setVehicleNumber(vehicle.getName());
         } else {
             log.info("No valid type for leg found in: ".concat(HafasMapperService.class.getName()));
+        }
+        if (index == 0) {
+            // .setPrice(priceMapper.map(hafasJourney.getTrfRes()));
         }
         return leg.build();
     }
