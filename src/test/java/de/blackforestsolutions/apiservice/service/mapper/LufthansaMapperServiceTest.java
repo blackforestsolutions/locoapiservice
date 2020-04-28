@@ -53,8 +53,8 @@ class LufthansaMapperServiceTest {
         Map<UUID, JourneyStatus> result = classUnderTest.map(scheduledResourcesJson);
 
         assertThat(result.size()).isEqualTo(12);
-        assertThat("E90").isEqualTo(result.get(TEST_UUID_6).getJourney().get().getVehicleNumber());
-        assertThat(TravelProvider.LUFTHANSA).isEqualTo(result.get(TEST_UUID_6).getJourney().get().getTravelProvider());
-        assertThat("LH1191").isEqualTo(result.get(TEST_UUID_6).getJourney().get().getProviderId());
+        assertThat("E90").isEqualTo(result.get(TEST_UUID_6).getJourney().get().getLegs().get(TEST_UUID_7).getVehicleNumber());
+        assertThat(TravelProvider.LUFTHANSA).isEqualTo(result.get(TEST_UUID_6).getJourney().get().getLegs().get(TEST_UUID_7).getTravelProvider());
+        assertThat("LH1191").isEqualTo(result.get(TEST_UUID_6).getJourney().get().getLegs().get(TEST_UUID_7).getProviderId());
     }
 }
