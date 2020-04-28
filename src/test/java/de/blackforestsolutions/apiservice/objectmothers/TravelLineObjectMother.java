@@ -71,7 +71,8 @@ public class TravelLineObjectMother {
 
     static TravelLine getHamburgDammtorUniversityTravelLine() {
         TravelLine.TravelLineBuilder travelLine = new TravelLine.TravelLineBuilder();
-        travelLine.setOrigin();
-        travelLine.setDirection(new TravelPoint.TravelPointBuilder().set);
+        travelLine.setOrigin(getBurgwedelTravelPoint());
+        travelLine.setDirection(getHamburgHauptbahnhofDirectionTravelPoint());
+        return travelLine.build();
     }
 }

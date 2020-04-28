@@ -23,6 +23,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import static org.mockito.Mockito.*;
+import static de.blackforestsolutions.apiservice.objectmothers.UUIDObjectMother.*;
 
 class HazelcastApiServiceTest {
 
@@ -76,17 +77,14 @@ class HazelcastApiServiceTest {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Accept", MediaType.APPLICATION_XML_VALUE);
         headers.setContentType(MediaType.APPLICATION_XML);
-        UUID testId = UUID.randomUUID();
-        Journey.JourneyBuilder journey = new Journey.JourneyBuilder();
-        journey.setVehicleName(testvalue);
-        journey.setId(testId);
+        Journey.JourneyBuilder journey = new Journey.JourneyBuilder(TEST_UUID_1);
         String url = testBaseUrl.concat(MessageFormat.format(KEY_PARAM, testKey).concat(MessageFormat.format(VALUE_PARAM, testvalue)));
         when(restTemplate.postForObject(url, headers, String.class, testKey, testvalue)).thenReturn("test successful");
-        String assertUrl = testBaseUrl.concat(KEY_PARAM + testId.toString()).concat(VALUE_PARAM + new LocoJsonMapper().map(journey.build()));
+        String assertUrl = testBaseUrl.concat(KEY_PARAM + TEST_UUID_1.toString()).concat(VALUE_PARAM + new LocoJsonMapper().map(journey.build()));
 
         classUnderTest.writeAllToHazelcast(Collections.singletonMap(UUID.randomUUID(), journey.build()), testData);
 
-        verify(restTemplate, times(1)).postForObject(assertUrl, headers, String.class, testId.toString(), new LocoJsonMapper().map(journey.build()));
+        verify(restTemplate, times(1)).postForObject(assertUrl, headers, String.class, TEST_UUID_1.toString(), new LocoJsonMapper().map(journey.build()));
     }
 
 

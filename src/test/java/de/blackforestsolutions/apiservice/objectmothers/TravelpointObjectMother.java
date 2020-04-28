@@ -468,6 +468,18 @@ public class TravelpointObjectMother {
         return travelPoint.build();
     }
 
+    public static TravelPoint getBurgwedelTravelPoint() {
+        TravelPoint.TravelPointBuilder travelPoint = new TravelPoint.TravelPointBuilder();
+        travelPoint.setStationName("A Burgwedel");
+        return travelPoint.build();
+    }
+
+    public static TravelPoint getHamburgHauptbahnhofDirectionTravelPoint() {
+        TravelPoint.TravelPointBuilder travelPoint = new TravelPoint.TravelPointBuilder();
+        travelPoint.setStationName("Hauptbahnhof/ZOB");
+        return travelPoint.build();
+    }
+
 
 
     public static TravelPoint getBerlinerTorHvvTravelPoint() throws ParseException {
