@@ -2,10 +2,7 @@ package de.blackforestsolutions.apiservice.service.mapper;
 
 import de.blackforestsolutions.apiservice.objectmothers.JourneyObjectMother;
 import de.blackforestsolutions.apiservice.service.supportservice.UuidService;
-import de.blackforestsolutions.datamodel.Journey;
-import de.blackforestsolutions.datamodel.JourneyStatus;
-import de.blackforestsolutions.datamodel.TravelLine;
-import de.blackforestsolutions.datamodel.TravelPoint;
+import de.blackforestsolutions.datamodel.*;
 import org.assertj.core.api.Assertions;
 import org.assertj.core.groups.Tuple;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,11 +12,12 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.text.ParseException;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import static de.blackforestsolutions.apiservice.objectmothers.UUIDObjectMother.TEST_UUID_1;
+import static de.blackforestsolutions.apiservice.objectmothers.UUIDObjectMother.*;
 import static de.blackforestsolutions.apiservice.testutils.TestUtils.getResourceFileAsString;
 
 class SearchChMapperServiceTest {
@@ -53,67 +51,26 @@ class SearchChMapperServiceTest {
 
         Map<UUID, JourneyStatus> result = classUnderTest.getJourneysFrom(journeyJson);
 
-        Assertions.assertThat(result.get(TEST_UUID_1).getJourney().get()).extracting(
-                Journey::getStartTime,
-                Journey::getArrivalTime,
-                Journey::getDuration
-        ).contains(
-                testJourneyData.getStartTime(),
-                testJourneyData.getArrivalTime(),
-                testJourneyData.getDuration()
-        );
-        Assertions.assertThat(result.get(TEST_UUID_1).getJourney().get().getStart()).isEqualToIgnoringGivenFields(testJourneyData.getStart(), "platform", "terminal", "city");
-        Assertions.assertThat(result.get(TEST_UUID_1).getJourney().get().getDestination()).isEqualToIgnoringGivenFields(testJourneyData.getDestination());
+        Assertions.assertThat(result.get(TEST_UUID_1).getJourney().get()).isEqualToComparingFieldByField(testJourneyData);
     }
 
     @SuppressWarnings("OptionalGetWithoutIsPresent")
     @Test
-    void test_getJourneysFrom_with_json_and_return_correct_trips_between() throws ParseException {
+    void test_getJourneysFrom_with_json_and_return_correct_legs() throws ParseException {
         String journeyJson = getResourceFileAsString("json/searchChTestRoute.json");
-        List<Journey> testBetweenTrips = JourneyObjectMother.getEinsiedeln_to_Zuerich_Foerlibuckstreet60_Journey().getBetweenTrips();
+        LinkedHashMap<UUID, Leg> testLegs = JourneyObjectMother.getEinsiedeln_to_Zuerich_Foerlibuckstreet60_Journey().getLegs();
 
         Map<UUID, JourneyStatus> result = classUnderTest.getJourneysFrom(journeyJson);
 
-        Assertions.assertThat(result.get(TEST_UUID_1).getJourney().get().getBetweenTrips()).extracting(
-                Journey::getStartTime,
-                Journey::getArrivalTime,
-                Journey::getDuration,
-                Journey::getUnknownTravelProvider,
-                Journey::getVehicleType,
-                Journey::getVehicleNumber
-        ).contains(
-                Tuple.tuple(
-                        testBetweenTrips.get(0).getStartTime(),
-                        testBetweenTrips.get(0).getArrivalTime(),
-                        testBetweenTrips.get(0).getDuration(),
-                        testBetweenTrips.get(0).getUnknownTravelProvider(),
-                        testBetweenTrips.get(0).getVehicleType(),
-                        testBetweenTrips.get(0).getVehicleNumber()
-                ),
-                Tuple.tuple(
-                        testBetweenTrips.get(1).getStartTime(),
-                        testBetweenTrips.get(1).getArrivalTime(),
-                        testBetweenTrips.get(1).getDuration(),
-                        testBetweenTrips.get(1).getUnknownTravelProvider(),
-                        testBetweenTrips.get(1).getVehicleType(),
-                        testBetweenTrips.get(1).getVehicleNumber()
-                ),
-                Tuple.tuple(
-                        testBetweenTrips.get(2).getStartTime(),
-                        testBetweenTrips.get(2).getArrivalTime(),
-                        testBetweenTrips.get(2).getDuration(),
-                        testBetweenTrips.get(2).getUnknownTravelProvider(),
-                        testBetweenTrips.get(2).getVehicleType(),
-                        testBetweenTrips.get(2).getVehicleNumber()
-                )
-        );
-
-        Assertions.assertThat(result.get(TEST_UUID_1).getJourney().get().getBetweenTrips().get(0).getStart()).isEqualToIgnoringGivenFields(testBetweenTrips.get(0).getStart());
-        Assertions.assertThat(result.get(TEST_UUID_1).getJourney().get().getBetweenTrips().get(0).getDestination()).isEqualToIgnoringGivenFields(testBetweenTrips.get(0).getDestination());
-        Assertions.assertThat(result.get(TEST_UUID_1).getJourney().get().getBetweenTrips().get(1).getStart()).isEqualToIgnoringGivenFields(testBetweenTrips.get(1).getStart());
-        Assertions.assertThat(result.get(TEST_UUID_1).getJourney().get().getBetweenTrips().get(1).getDestination()).isEqualToIgnoringGivenFields(testBetweenTrips.get(1).getDestination());
-        Assertions.assertThat(result.get(TEST_UUID_1).getJourney().get().getBetweenTrips().get(2).getStart()).isEqualToIgnoringGivenFields(testBetweenTrips.get(2).getStart());
-        Assertions.assertThat(result.get(TEST_UUID_1).getJourney().get().getBetweenTrips().get(2).getDestination()).isEqualToIgnoringGivenFields(testBetweenTrips.get(2).getDestination());
+        Assertions.assertThat(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2)).isEqualToComparingFieldByField(testLegs.get(TEST_UUID_2));
+        Assertions.assertThat(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_3)).isEqualToComparingFieldByField(testLegs.get(TEST_UUID_3));
+        Assertions.assertThat(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_4)).isEqualToComparingFieldByField(testLegs.get(TEST_UUID_4));
+        Assertions.assertThat(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getStart()).isEqualToComparingFieldByField(testLegs.get(TEST_UUID_2).getStart());
+        Assertions.assertThat(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getDestination()).isEqualToComparingFieldByField(testLegs.get(TEST_UUID_2).getDestination());
+        Assertions.assertThat(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_3).getStart()).isEqualToComparingFieldByField(testLegs.get(TEST_UUID_3).getStart());
+        Assertions.assertThat(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_3).getDestination()).isEqualToComparingFieldByField(testLegs.get(TEST_UUID_3).getDestination());
+        Assertions.assertThat(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_4).getStart()).isEqualToComparingFieldByField(testLegs.get(TEST_UUID_4).getStart());
+        Assertions.assertThat(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_4).getDestination()).isEqualToComparingFieldByField(testLegs.get(TEST_UUID_4).getDestination());
     }
 
 
@@ -121,15 +78,14 @@ class SearchChMapperServiceTest {
     @Test
     void test_getJourneysFrom_with_json_and_return_correct_between_holds() throws ParseException {
         String journeyJson = getResourceFileAsString("json/searchChTestRoute.json");
-        TravelLine testTravelLine = JourneyObjectMother.getEinsiedeln_to_Zuerich_Foerlibuckstreet60_Journey().getBetweenTrips().get(0).getTravelLine();
+        TravelLine testTravelLine = JourneyObjectMother.getEinsiedeln_to_Zuerich_Foerlibuckstreet60_Journey().getLegs().get(TEST_UUID_2).getTravelLine();
 
         Map<UUID, JourneyStatus> result = classUnderTest.getJourneysFrom(journeyJson);
 
-        Assertions.assertThat(result.get(TEST_UUID_1).getJourney().get().getBetweenTrips().get(0).getTravelLine().getBetweenHolds().size()).isEqualTo(3);
-
-        Assertions.assertThat(result.get(TEST_UUID_1).getJourney().get().getBetweenTrips().get(0).getTravelLine().getBetweenHolds().get(0)).isEqualToIgnoringGivenFields(testTravelLine.getBetweenHolds().get(0));
-        Assertions.assertThat(result.get(TEST_UUID_1).getJourney().get().getBetweenTrips().get(0).getTravelLine().getBetweenHolds().get(1)).isEqualToIgnoringGivenFields(testTravelLine.getBetweenHolds().get(1), "country");
-        Assertions.assertThat(result.get(TEST_UUID_1).getJourney().get().getBetweenTrips().get(0).getTravelLine().getBetweenHolds().get(2)).isEqualToIgnoringGivenFields(testTravelLine.getBetweenHolds().get(2));
+        Assertions.assertThat(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getTravelLine().getBetweenHolds().size()).isEqualTo(3);
+        Assertions.assertThat(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getTravelLine().getBetweenHolds().get(0)).isEqualToIgnoringGivenFields(testTravelLine.getBetweenHolds().get(0));
+        Assertions.assertThat(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getTravelLine().getBetweenHolds().get(1)).isEqualToIgnoringGivenFields(testTravelLine.getBetweenHolds().get(1), "country");
+        Assertions.assertThat(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getTravelLine().getBetweenHolds().get(2)).isEqualToIgnoringGivenFields(testTravelLine.getBetweenHolds().get(2));
     }
 
     @Test
