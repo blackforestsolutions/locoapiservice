@@ -84,19 +84,19 @@ public class RMVMapperServiceImpl implements RMVMapperService {
 
     private Journey getJourneyFrom(Trip trip) {
         Journey.JourneyBuilder journey = new Journey.JourneyBuilder(uuidService.createUUID());
-        journey.setLegs(getLegsFrom(trip.getLegList()));
-        journey.setPrice(extractPriceFrom(trip));
+        journey.setLegs(getLegsFrom(trip.getLegList(), extractPriceFrom(trip)));
         return journey.build();
     }
 
-    private LinkedHashMap<UUID, Leg> getLegsFrom(LegList legList) {
+    private LinkedHashMap<UUID, Leg> getLegsFrom(LegList legList, Price price) {
+        AtomicInteger counter = new AtomicInteger(0);
         return legList.getLeg()
                 .stream()
-                .map(this::getLegFrom)
+                .map(leg -> getLegFrom(leg, price, counter.getAndIncrement()))
                 .collect(Collectors.toMap(leg -> leg.getId(), leg -> leg, (prev, next) -> next, LinkedHashMap::new));
     }
 
-    private Leg getLegFrom(de.blackforestsolutions.generatedcontent.rmv.hafas_rest.Leg leg) {
+    private Leg getLegFrom(de.blackforestsolutions.generatedcontent.rmv.hafas_rest.Leg leg, Price price, int index) {
         Leg.LegBuilder newLeg = new Leg.LegBuilder(uuidService.createUUID());
         newLeg.setStart(buildTravelPointWith(leg.getOrigin()));
         newLeg.setDestination(buildTravelPointWith(leg.getDestination()));
@@ -106,6 +106,9 @@ public class RMVMapperServiceImpl implements RMVMapperService {
         newLeg.setTravelProvider(TravelProvider.RMV);
         newLeg.setVehicleName(leg.getProduct().getName());
         newLeg.setTravelLine(buildTravelLine(leg));
+        if (index == 0) {
+            newLeg.setPrice(price);
+        }
         return newLeg.build();
     }
 
