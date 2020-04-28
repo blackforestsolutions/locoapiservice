@@ -8,11 +8,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static de.blackforestsolutions.apiservice.objectmothers.PriceObjectMother.getDBPrice;
 import static de.blackforestsolutions.apiservice.objectmothers.PriceObjectMother.getVBBPrice;
 import static de.blackforestsolutions.apiservice.objectmothers.TravelLineObjectMother.*;
 import static de.blackforestsolutions.apiservice.objectmothers.TravelpointObjectMother.*;
-import static de.blackforestsolutions.apiservice.objectmothers.TravelpointObjectMother.getGartenstrasseTravelPoint;
 import static de.blackforestsolutions.apiservice.objectmothers.UUIDObjectMother.*;
 import static de.blackforestsolutions.apiservice.testutils.TestUtils.*;
 
