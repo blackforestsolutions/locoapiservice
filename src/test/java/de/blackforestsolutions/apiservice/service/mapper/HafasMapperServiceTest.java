@@ -68,12 +68,12 @@ class HafasMapperServiceTest {
         Map<UUID, JourneyStatus> result = classUnderTest.getJourneysFrom(testResult.getBody(), TravelProvider.DB, priceMapper);
 
         //noinspection OptionalGetWithoutIsPresent
-        Assertions.assertThat(result.get(TEST_UUID_1).getJourney().get()).isEqualToIgnoringGivenFields(expectedValue, "betweenTrips", "price");
+        Assertions.assertThat(result.get(TEST_UUID_1).getJourney().get()).isEqualToIgnoringGivenFields(expectedValue, "price");
         Assertions.assertThat(result.size()).isEqualTo(1);
     }
 
     @Test
-    void test_getJourneysFrom_with_jsonBody_travelProvider_and_mocked_priceMapper_returns_correct_betweenTrips_length() {
+    void test_getJourneysFrom_with_jsonBody_travelProvider_and_mocked_priceMapper_returns_correct_leg_length() {
         String scheduledResourceJson = getResourceFileAsString("json/dbHafasJourney.json");
         ResponseEntity<String> testResult = new ResponseEntity<>(scheduledResourceJson, HttpStatus.OK);
         HafasPriceMapper priceMapper = Mockito.mock(HafasPriceMapper.class);
@@ -82,76 +82,76 @@ class HafasMapperServiceTest {
         Map<UUID, JourneyStatus> result = classUnderTest.getJourneysFrom(testResult.getBody(), TravelProvider.DB, priceMapper);
 
         //noinspection OptionalGetWithoutIsPresent
-        Assertions.assertThat(result.get(TEST_UUID_1).getJourney().get().getBetweenTrips().size()).isEqualTo(6);
+        Assertions.assertThat(result.get(TEST_UUID_1).getJourney().get().getLegs().size()).isEqualTo(6);
     }
 
     @Test
-    void test_getJourneysFrom_with_jsonBody_travelProvider_and_mocked_priceMapper_returns_correct_trip_between_eiderstrasse_and_gartenstrasse() {
+    void test_getJourneysFrom_with_jsonBody_travelProvider_and_mocked_priceMapper_returns_correct_leg_between_eiderstrasse_and_gartenstrasse() {
         String scheduledResourceJson = getResourceFileAsString("json/dbHafasJourney.json");
         ResponseEntity<String> testResult = new ResponseEntity<>(scheduledResourceJson, HttpStatus.OK);
-        Journey expectedBetweenTrip = JourneyObjectMother.getEiderstrasseRendsburgToKarlsruheJourney().getBetweenTrips().get(0);
+        Leg expectedLeg = JourneyObjectMother.getEiderstrasseRendsburgToKarlsruheJourney().getLegs().get(TEST_UUID_2);
         HafasPriceMapper priceMapper = Mockito.mock(HafasPriceMapper.class);
         Mockito.when(priceMapper.map(Mockito.any())).thenReturn(new Price.PriceBuilder().build());
 
         Map<UUID, JourneyStatus> result = classUnderTest.getJourneysFrom(testResult.getBody(), TravelProvider.DB, priceMapper);
         //noinspection OptionalGetWithoutIsPresent
-        Journey betweenTripResult = result.get(TEST_UUID_1).getJourney().get().getBetweenTrips().get(0);
+        Leg betweenTripResult = result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2);
 
-        Assertions.assertThat(betweenTripResult).isEqualToComparingFieldByField(expectedBetweenTrip);
+        Assertions.assertThat(betweenTripResult).isEqualToComparingFieldByField(expectedLeg);
         Assertions.assertThat(betweenTripResult.getTravelLine()).isNull();
     }
 
     @Test
-    void test_getJourneysFrom_with_jsonBody_travelProvider_and_mocked_priceMapper_returns_correct_trip_between_gartenstrasse_and_rendsburg_zob() {
+    void test_getJourneysFrom_with_jsonBody_travelProvider_and_mocked_priceMapper_returns_correct_leg_between_gartenstrasse_and_rendsburg_zob() {
         String scheduledResourceJson = getResourceFileAsString("json/dbHafasJourney.json");
         ResponseEntity<String> testResult = new ResponseEntity<>(scheduledResourceJson, HttpStatus.OK);
-        Journey expectedBetweenTrip = JourneyObjectMother.getEiderstrasseRendsburgToKarlsruheJourney().getBetweenTrips().get(1);
+        Leg expectedLeg = JourneyObjectMother.getEiderstrasseRendsburgToKarlsruheJourney().getLegs().get(TEST_UUID_3);
         HafasPriceMapper priceMapper = Mockito.mock(HafasPriceMapper.class);
         Mockito.when(priceMapper.map(Mockito.any())).thenReturn(new Price.PriceBuilder().build());
 
         Map<UUID, JourneyStatus> result = classUnderTest.getJourneysFrom(testResult.getBody(), TravelProvider.DB, priceMapper);
         //noinspection OptionalGetWithoutIsPresent
-        Journey betweenTripResult = result.get(TEST_UUID_1).getJourney().get().getBetweenTrips().get(1);
+        Leg legResult = result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_3);
 
-        Assertions.assertThat(betweenTripResult.getTravelLine()).isEqualToIgnoringGivenFields(expectedBetweenTrip.getTravelLine(), "betweenHolds");
-        Assertions.assertThat(betweenTripResult.getTravelLine().getBetweenHolds().size()).isEqualTo(5);
-        Assertions.assertThat(betweenTripResult.getTravelLine().getBetweenHolds().get(0)).isEqualToComparingFieldByField(expectedBetweenTrip.getTravelLine().getBetweenHolds().get(0));
-        Assertions.assertThat(betweenTripResult).isEqualToIgnoringGivenFields(expectedBetweenTrip, "travelLine");
+        Assertions.assertThat(legResult.getTravelLine()).isEqualToIgnoringGivenFields(expectedLeg.getTravelLine(), "betweenHolds");
+        Assertions.assertThat(legResult.getTravelLine().getBetweenHolds().size()).isEqualTo(5);
+        Assertions.assertThat(legResult.getTravelLine().getBetweenHolds().get(0)).isEqualToComparingFieldByField(expectedLeg.getTravelLine().getBetweenHolds().get(0));
+        Assertions.assertThat(legResult).isEqualToIgnoringGivenFields(expectedLeg, "travelLine");
     }
 
     @Test
-    void test_getJourneysFrom_with_jsonBody_travelProvider_and_mocked_priceMapper_returns_correct_trip_between_rendsburg_and_hamburgHbf() {
+    void test_getJourneysFrom_with_jsonBody_travelProvider_and_mocked_priceMapper_returns_correct_leg_between_rendsburg_and_hamburgHbf() {
         String scheduledResourceJson = getResourceFileAsString("json/dbHafasJourney.json");
         ResponseEntity<String> testResult = new ResponseEntity<>(scheduledResourceJson, HttpStatus.OK);
-        Journey expectedBetweenTrip = JourneyObjectMother.getEiderstrasseRendsburgToKarlsruheJourney().getBetweenTrips().get(2);
+        Leg expectedLeg = JourneyObjectMother.getEiderstrasseRendsburgToKarlsruheJourney().getLegs().get(TEST_UUID_4);
         HafasPriceMapper priceMapper = Mockito.mock(HafasPriceMapper.class);
         Mockito.when(priceMapper.map(Mockito.any())).thenReturn(new Price.PriceBuilder().build());
 
         Map<UUID, JourneyStatus> result = classUnderTest.getJourneysFrom(testResult.getBody(), TravelProvider.DB, priceMapper);
         //noinspection OptionalGetWithoutIsPresent
-        Journey betweenTripResult = result.get(TEST_UUID_1).getJourney().get().getBetweenTrips().get(3);
+        Leg legResult = result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_4);
 
-        Assertions.assertThat(betweenTripResult).isEqualToIgnoringGivenFields(expectedBetweenTrip, "travelLine");
-        Assertions.assertThat(betweenTripResult.getTravelLine()).isEqualToIgnoringGivenFields(expectedBetweenTrip.getTravelLine(), "betweenHolds");
-        Assertions.assertThat(betweenTripResult.getTravelLine().getBetweenHolds().size()).isEqualTo(4);
-        Assertions.assertThat(betweenTripResult.getTravelLine().getBetweenHolds().get(2)).isEqualToComparingFieldByField(expectedBetweenTrip.getTravelLine().getBetweenHolds().get(2));
+        Assertions.assertThat(legResult).isEqualToIgnoringGivenFields(expectedLeg, "travelLine");
+        Assertions.assertThat(legResult.getTravelLine()).isEqualToIgnoringGivenFields(expectedLeg.getTravelLine(), "betweenHolds");
+        Assertions.assertThat(legResult.getTravelLine().getBetweenHolds().size()).isEqualTo(4);
+        Assertions.assertThat(legResult.getTravelLine().getBetweenHolds().get(2)).isEqualToComparingFieldByField(expectedLeg.getTravelLine().getBetweenHolds().get(2));
     }
 
     @Test
-    void test_getJourneysFrom_with_jsonBody_travelProvider_and_mocked_priceMapper_returns_correct_trip_between_hamburgHbf_and_frankfurtHbf() {
+    void test_getJourneysFrom_with_jsonBody_travelProvider_and_mocked_priceMapper_returns_correct_leg_between_hamburgHbf_and_frankfurtHbf() {
         String scheduledResourceJson = getResourceFileAsString("json/dbHafasJourney.json");
         ResponseEntity<String> testResult = new ResponseEntity<>(scheduledResourceJson, HttpStatus.OK);
-        Journey expectedBetweenTrip = JourneyObjectMother.getEiderstrasseRendsburgToKarlsruheJourney().getBetweenTrips().get(3);
+        Leg expectedLeg = JourneyObjectMother.getEiderstrasseRendsburgToKarlsruheJourney().getLegs().get(TEST_UUID_5);
         HafasPriceMapper priceMapper = Mockito.mock(HafasPriceMapper.class);
         Mockito.when(priceMapper.map(Mockito.any())).thenReturn(new Price.PriceBuilder().build());
 
         Map<UUID, JourneyStatus> result = classUnderTest.getJourneysFrom(testResult.getBody(), TravelProvider.DB, priceMapper);
         //noinspection OptionalGetWithoutIsPresent
-        Journey betweenTripResult = result.get(TEST_UUID_1).getJourney().get().getBetweenTrips().get(4);
+        Leg legResult = result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_5);
 
-        Assertions.assertThat(betweenTripResult).isEqualToIgnoringGivenFields(expectedBetweenTrip, "travelLine");
-        Assertions.assertThat(betweenTripResult.getTravelLine()).isEqualToIgnoringGivenFields(expectedBetweenTrip.getTravelLine(), "betweenHolds");
-        Assertions.assertThat(betweenTripResult.getTravelLine().getBetweenHolds().size()).isEqualTo(3);
-        Assertions.assertThat(betweenTripResult.getTravelLine().getBetweenHolds().get(0)).isEqualToComparingFieldByField(expectedBetweenTrip.getTravelLine().getBetweenHolds().get(0));
+        Assertions.assertThat(legResult).isEqualToIgnoringGivenFields(expectedLeg, "travelLine");
+        Assertions.assertThat(legResult.getTravelLine()).isEqualToIgnoringGivenFields(expectedLeg.getTravelLine(), "betweenHolds");
+        Assertions.assertThat(legResult.getTravelLine().getBetweenHolds().size()).isEqualTo(3);
+        Assertions.assertThat(legResult.getTravelLine().getBetweenHolds().get(0)).isEqualToComparingFieldByField(expectedLeg.getTravelLine().getBetweenHolds().get(0));
     }
 }
