@@ -8,7 +8,7 @@ import java.util.*;
 
 public class PriceObjectMother {
 
-    static Price getNahShPrice() {
+    public static Price getNahShPrice() {
         Price.PriceBuilder price = new Price.PriceBuilder();
         price.setValues(Map.of(PriceCategory.ADULT, new BigDecimal(2.2d)));
         price.setCurrency(Currency.getInstance(Locale.GERMANY));
@@ -39,7 +39,7 @@ public class PriceObjectMother {
         return price.build();
     }
 
-    static Price getDBPrice() {
+    public static Price getDBPrice() {
         Price.PriceBuilder price = new Price.PriceBuilder();
         price.setSymbol("€");
         price.setCurrency(Currency.getInstance(Locale.GERMANY));
