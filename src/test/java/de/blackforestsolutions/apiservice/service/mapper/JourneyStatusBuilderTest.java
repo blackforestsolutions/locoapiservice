@@ -15,7 +15,7 @@ class JourneyStatusBuilderTest {
     @Test
     void test_createJourneyStatusWith_journey_returns_status_with_journey() throws ParseException {
         //arrange
-        Journey testData = JourneyObjectMother.getRosenhofToHHStadthausbrueckeJourney();
+        Journey testData = JourneyObjectMother.getGustavHeinemannStreetToUniversityJourney();
         //act
         JourneyStatus result = JourneyStatusBuilder.createJourneyStatusWith(testData);
         //assert
@@ -38,7 +38,7 @@ class JourneyStatusBuilderTest {
     @Test
     void extractJourneyUuidFrom() throws ParseException {
         //arrange
-        Journey testJourney = JourneyObjectMother.getRosenhofToHHStadthausbrueckeJourney();
+        Journey testJourney = JourneyObjectMother.getGustavHeinemannStreetToUniversityJourney();
         JourneyStatus testJourneyStatus = JourneyStatusBuilder.createJourneyStatusWith(testJourney);
         //act
         UUID result = JourneyStatusBuilder.extractJourneyUuidFrom(testJourneyStatus);

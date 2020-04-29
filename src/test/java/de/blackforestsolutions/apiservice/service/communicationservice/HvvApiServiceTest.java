@@ -64,7 +64,7 @@ class HvvApiServiceTest {
         //noinspection unchecked (justification: no type known for runtime therefore)
         when(REST_TEMPLATE.exchange(anyString(), any(), any(), any(Class.class))).thenReturn(rotenhofTravelPointResult).thenReturn(stadthausbrueckeTravelPointResult).thenReturn(journeyTestResult);
         HashMap<UUID, JourneyStatus> mockedJourneys = new HashMap<>();
-        Journey mockedJourney = JourneyObjectMother.getRosenhofToHHStadthausbrueckeJourney();
+        Journey mockedJourney = JourneyObjectMother.getGustavHeinemannStreetToUniversityJourney();
         JourneyStatus journeyStatus = new JourneyStatus();
         journeyStatus.setJourney(Optional.of(mockedJourney));
         mockedJourneys.put(mockedJourney.getId(), journeyStatus);
