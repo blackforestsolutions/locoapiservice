@@ -11,6 +11,7 @@ import de.blackforestsolutions.apiservice.service.supportservice.UuidService;
 import de.blackforestsolutions.apiservice.stubs.RestTemplateBuilderStub;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import de.blackforestsolutions.datamodel.JourneyStatus;
+import de.blackforestsolutions.datamodel.PriceCategory;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -20,6 +21,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.Map;
@@ -48,7 +50,7 @@ class BBCApiServiceImplTest {
         ResponseEntity<String> journeyTestResult = new ResponseEntity<>(tripsJson, HttpStatus.OK);
         //noinspection unchecked (justification: no type known for runtime therefore)
         when(REST_TEMPLATE.exchange(anyString(), any(), any(), any(Class.class))).thenReturn(journeyTestResult);
-        when(mockedUuidService.createUUID()).thenReturn(TEST_UUID_1).thenReturn(TEST_UUID_2).thenReturn(TEST_UUID_3);
+        when(mockedUuidService.createUUID()).thenReturn(TEST_UUID_1).thenReturn(TEST_UUID_2).thenReturn(TEST_UUID_3).thenReturn(TEST_UUID_4).thenReturn(TEST_UUID_5).thenReturn(TEST_UUID_6);
 
         Map<UUID, JourneyStatus> result = classUnderTest.getJourneysForRouteWith(testToken);
 
@@ -72,12 +74,12 @@ class BBCApiServiceImplTest {
 
         Map<UUID, JourneyStatus> result = classUnderTest.getJourneysForRouteWith(apiTokenAndUrlInformation);
 
-        // todo fix the commented lines bc there has been a change in the datamodel - see bbc mapper
+
         Assertions.assertThat("1848602173-zuerich-frankfurt-am-main").isEqualTo(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getProviderId());
         Assertions.assertThat("Zürich").isEqualTo(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getStart().getCity());
         Assertions.assertThat("Frankfurt").isEqualTo(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getDestination().getCity());
-        //Assertions.assertThat(21.0).isEqualTo(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getPrice().getValue());
-        //Assertions.assertThat(23.5).isEqualTo(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getPriceWithCommision().getValue());
+        Assertions.assertThat(new BigDecimal(21)).isEqualTo(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getPrice().getValues().get(PriceCategory.ADULT_REDUCED));
+        Assertions.assertThat(new BigDecimal(23.5)).isEqualTo(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getPrice().getValues().get(PriceCategory.ADULT));
         Assertions.assertThat(407.0).isEqualTo(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getDistance().getValue());
         Assertions.assertThat(buildDateFrom("29/12/2019 12:00:00")).isEqualTo(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getStartTime());
         Assertions.assertThat("60346540").isEqualTo(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getVehicleNumber());
@@ -86,8 +88,8 @@ class BBCApiServiceImplTest {
         Assertions.assertThat("1819468110-zuerich-frankfurt-am-main").isEqualTo(result.get(TEST_UUID_3).getJourney().get().getLegs().get(TEST_UUID_4).getProviderId());
         Assertions.assertThat("Zürich").isEqualTo(result.get(TEST_UUID_3).getJourney().get().getLegs().get(TEST_UUID_4).getStart().getCity());
         Assertions.assertThat("Frankfurt").isEqualTo(result.get(TEST_UUID_3).getJourney().get().getLegs().get(TEST_UUID_4).getDestination().getCity());
-        //Assertions.assertThat(17.0).isEqualTo(result.get(TEST_UUID_3).getJourney().get().getLegs().get(TEST_UUID_4).getPrice().getValue());
-        //Assertions.assertThat(19.5).isEqualTo(result.get(TEST_UUID_3).getJourney().get().getLegs().get(TEST_UUID_4).getPriceWithCommision().getValue());
+        Assertions.assertThat(new BigDecimal(17)).isEqualTo(result.get(TEST_UUID_3).getJourney().get().getLegs().get(TEST_UUID_4).getPrice().getValues().get(PriceCategory.ADULT_REDUCED));
+        Assertions.assertThat(new BigDecimal(19.5)).isEqualTo(result.get(TEST_UUID_3).getJourney().get().getLegs().get(TEST_UUID_4).getPrice().getValues().get(PriceCategory.ADULT));
         Assertions.assertThat(413.0).isEqualTo(result.get(TEST_UUID_3).getJourney().get().getLegs().get(TEST_UUID_4).getDistance().getValue());
         Assertions.assertThat(buildDateFrom("29/12/2019 16:30:00")).isEqualTo(result.get(TEST_UUID_3).getJourney().get().getLegs().get(TEST_UUID_4).getStartTime());
         Assertions.assertThat("90081710").isEqualTo(result.get(TEST_UUID_3).getJourney().get().getLegs().get(TEST_UUID_4).getVehicleNumber());
@@ -96,8 +98,8 @@ class BBCApiServiceImplTest {
         Assertions.assertThat("1849864385-zurigo-francoforte-sul-meno").isEqualTo(result.get(TEST_UUID_5).getJourney().get().getLegs().get(TEST_UUID_6).getProviderId());
         Assertions.assertThat("Zürich").isEqualTo(result.get(TEST_UUID_5).getJourney().get().getLegs().get(TEST_UUID_6).getStart().getCity());
         Assertions.assertThat("Frankfurt").isEqualTo(result.get(TEST_UUID_5).getJourney().get().getLegs().get(TEST_UUID_6).getDestination().getCity());
-        //Assertions.assertThat(23.0).isEqualTo(result.get(TEST_UUID_5).getJourney().get().getLegs().get(TEST_UUID_6).getPrice().getValues());
-        //Assertions.assertThat(26.5).isEqualTo(result.get(TEST_UUID_5).getJourney().get().getLegs().get(TEST_UUID_6).getPriceWithCommision().getValue());
+        Assertions.assertThat(new BigDecimal(23.0)).isEqualTo(result.get(TEST_UUID_5).getJourney().get().getLegs().get(TEST_UUID_6).getPrice().getValues().get(PriceCategory.ADULT_REDUCED));
+        Assertions.assertThat(new BigDecimal(26.5)).isEqualTo(result.get(TEST_UUID_5).getJourney().get().getLegs().get(TEST_UUID_6).getPrice().getValues().get(PriceCategory.ADULT));
         Assertions.assertThat(403.0).isEqualTo(result.get(TEST_UUID_5).getJourney().get().getLegs().get(TEST_UUID_6).getDistance().getValue());
         Assertions.assertThat(buildDateFrom("29/12/2019 17:30:00")).isEqualTo(result.get(TEST_UUID_5).getJourney().get().getLegs().get(TEST_UUID_6).getStartTime());
         Assertions.assertThat("88772792").isEqualTo(result.get(TEST_UUID_5).getJourney().get().getLegs().get(TEST_UUID_6).getVehicleNumber());
