@@ -101,7 +101,7 @@ public class BritishAirwaysMapperServiceImpl implements BritishAirwaysMapperServ
         LinkedHashMap sector = (LinkedHashMap) singleFlight.get("Sector");
         setLegReportedDepartureDateTime(leg, sector);
         setLegReportedArrivalDateTime(leg, sector);
-        setLegTravelProvider(leg, sector);
+        setLegTravelProvider(leg, singleFlight);
         setLegUnknownTravelProvider(leg, sector);
         setLegVehicleNumber(sector, leg);
         setLegDestination(sector, leg);
