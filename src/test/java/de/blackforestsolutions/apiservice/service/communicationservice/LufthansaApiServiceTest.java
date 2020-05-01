@@ -60,7 +60,12 @@ class LufthansaApiServiceTest {
                 .thenReturn(TEST_UUID_5).thenReturn(TEST_UUID_6)
                 .thenReturn(TEST_UUID_7).thenReturn(TEST_UUID_8)
                 .thenReturn(TEST_UUID_9).thenReturn(TEST_UUID_10)
-                .thenReturn(TEST_UUID_11).thenReturn(TEST_UUID_12);
+                .thenReturn(TEST_UUID_11).thenReturn(TEST_UUID_12)
+                .thenReturn(TEST_UUID_13).thenReturn(TEST_UUID_14)
+                .thenReturn(TEST_UUID_15).thenReturn(TEST_UUID_16)
+                .thenReturn(TEST_UUID_17).thenReturn(TEST_UUID_18)
+                .thenReturn(TEST_UUID_19).thenReturn(TEST_UUID_20)
+                .thenReturn(TEST_UUID_21).thenReturn(TEST_UUID_22);
 
         String scheduledResourcesJson = getResourceFileAsString("json/lufthansatest.json");
         ResponseEntity<String> testResult = new ResponseEntity<>(scheduledResourcesJson, HttpStatus.OK);
@@ -82,9 +87,9 @@ class LufthansaApiServiceTest {
 
         Map<UUID, JourneyStatus> result = classUnderTest.getJourneysForRouteWith(apiTokenAndUrlInformation);
 
-        assertThat("E90").isEqualTo(result.get(TEST_UUID_6).getJourney().get().getLegs().get(TEST_UUID_7).getVehicleNumber());
-        assertThat(TravelProvider.LUFTHANSA).isEqualTo(result.get(TEST_UUID_6).getJourney().get().getLegs().get(TEST_UUID_7).getTravelProvider());
-        assertThat("LH1191").isEqualTo(result.get(TEST_UUID_6).getJourney().get().getLegs().get(TEST_UUID_7).getProviderId());
+        assertThat("E90").isEqualTo(result.get(TEST_UUID_11).getJourney().get().getLegs().get(TEST_UUID_12).getVehicleNumber());
+        assertThat(TravelProvider.LUFTHANSA).isEqualTo(result.get(TEST_UUID_11).getJourney().get().getLegs().get(TEST_UUID_12).getTravelProvider());
+        assertThat("LH1191").isEqualTo(result.get(TEST_UUID_11).getJourney().get().getLegs().get(TEST_UUID_12).getProviderId());
     }
 }
 

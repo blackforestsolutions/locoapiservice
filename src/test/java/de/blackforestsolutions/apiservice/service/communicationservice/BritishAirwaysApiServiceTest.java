@@ -117,17 +117,17 @@ class BritishAirwaysApiServiceTest {
         Assertions.assertThat("BA").isEqualTo(result.get(TEST_UUID_5).getJourney().get().getLegs().get(TEST_UUID_6).getUnknownTravelProvider());
         Assertions.assertThat("321").isEqualTo(result.get(TEST_UUID_5).getJourney().get().getLegs().get(TEST_UUID_6).getVehicleNumber());
 
-        Assertions.assertThat(TravelProvider.BRITISHAIRWAYS).isEqualTo(result.get(TEST_UUID_7).getJourney().get().getLegs().get(TEST_UUID_6).getTravelProvider());
-        Assertions.assertThat("0986").isEqualTo(result.get(TEST_UUID_7).getJourney().get().getLegs().get(TEST_UUID_6).getProviderId());
-        Assertions.assertThat("LHR").isEqualTo(result.get(TEST_UUID_7).getJourney().get().getLegs().get(TEST_UUID_6).getStart().getStationId());
-        Assertions.assertThat("London").isEqualTo(result.get(TEST_UUID_7).getJourney().get().getLegs().get(TEST_UUID_6).getStart().getCity());
-        Assertions.assertThat("TXL").isEqualTo(result.get(TEST_UUID_7).getJourney().get().getLegs().get(TEST_UUID_6).getDestination().getStationId());
-        Assertions.assertThat("Berlin").isEqualTo(result.get(TEST_UUID_7).getJourney().get().getLegs().get(TEST_UUID_6).getDestination().getCity());
-        Assertions.assertThat("5").isEqualTo(result.get(TEST_UUID_7).getJourney().get().getLegs().get(TEST_UUID_6).getStart().getTerminal());
-        Assertions.assertThat(buildDateFrom("2019-10-20T15:28:00")).isEqualTo(result.get(TEST_UUID_7).getJourney().get().getLegs().get(TEST_UUID_6).getStartTime());
-        Assertions.assertThat(buildDateFrom("2019-10-20T18:13:00")).isEqualTo(result.get(TEST_UUID_7).getJourney().get().getLegs().get(TEST_UUID_6).getArrivalTime());
-        Assertions.assertThat("BA").isEqualTo(result.get(TEST_UUID_7).getJourney().get().getLegs().get(TEST_UUID_6).getUnknownTravelProvider());
-        Assertions.assertThat("32A").isEqualTo(result.get(TEST_UUID_7).getJourney().get().getLegs().get(TEST_UUID_6).getVehicleNumber());
+        Assertions.assertThat(TravelProvider.BRITISHAIRWAYS).isEqualTo(result.get(TEST_UUID_7).getJourney().get().getLegs().get(TEST_UUID_8).getTravelProvider());
+        Assertions.assertThat("0986").isEqualTo(result.get(TEST_UUID_7).getJourney().get().getLegs().get(TEST_UUID_8).getProviderId());
+        Assertions.assertThat("LHR").isEqualTo(result.get(TEST_UUID_7).getJourney().get().getLegs().get(TEST_UUID_8).getStart().getStationId());
+        Assertions.assertThat("London").isEqualTo(result.get(TEST_UUID_7).getJourney().get().getLegs().get(TEST_UUID_8).getStart().getCity());
+        Assertions.assertThat("TXL").isEqualTo(result.get(TEST_UUID_7).getJourney().get().getLegs().get(TEST_UUID_8).getDestination().getStationId());
+        Assertions.assertThat("Berlin").isEqualTo(result.get(TEST_UUID_7).getJourney().get().getLegs().get(TEST_UUID_8).getDestination().getCity());
+        Assertions.assertThat("5").isEqualTo(result.get(TEST_UUID_7).getJourney().get().getLegs().get(TEST_UUID_8).getStart().getTerminal());
+        Assertions.assertThat(buildDateFrom("2019-10-20T15:28:00")).isEqualTo(result.get(TEST_UUID_7).getJourney().get().getLegs().get(TEST_UUID_8).getStartTime());
+        Assertions.assertThat(buildDateFrom("2019-10-20T18:13:00")).isEqualTo(result.get(TEST_UUID_7).getJourney().get().getLegs().get(TEST_UUID_8).getArrivalTime());
+        Assertions.assertThat("BA").isEqualTo(result.get(TEST_UUID_7).getJourney().get().getLegs().get(TEST_UUID_8).getUnknownTravelProvider());
+        Assertions.assertThat("32A").isEqualTo(result.get(TEST_UUID_7).getJourney().get().getLegs().get(TEST_UUID_8).getVehicleNumber());
     }
 
 
