@@ -16,6 +16,25 @@ import static de.blackforestsolutions.apiservice.testutils.TestUtils.generateDat
 public class ApiTokenAndUrlInformationObjectMother {
 
 
+    public static ApiTokenAndUrlInformation getFlinksterJourneyDetailsTokenAndUrl() {
+        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
+        builder.setProtocol("https");
+        builder.setHost("api.deutschebahn.com");
+        builder.setPathVariable("flinkster-api-ng");
+        builder.setApiVersion("v1");
+        builder.setAuthorization("Bearer 4d3c7b35a42c7ecadeb41b905e0007f8");
+        builder.setDistanceFromTravelPoint(10000);
+        builder.setCliendId("1");
+        builder.setDepartureCoordinates(new Coordinates.CoordinatesBuilder(50.776518d, 6.97679d).build());
+        try {
+            builder.setDepartureDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2020-05-07 12:02:00"));
+            builder.setArrivalDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2020-05-05 12:02:00"));
+        } catch (ParseException e) {
+            log.error("Error While parsing Date", e);
+        }
+        builder.setPath("/flinkster-api-ng/v1/bookingproposals?lat=50.776518&lon=6.97679&radius=10000&providernetwork=1&begin=2020-05-07T12%3A02%3A00%2B02%3A00&expand=rentalobject%2Carea%2Cprice");
+        return builder.build();
+    }
     public static ApiTokenAndUrlInformation getOSMApiTokenAndUrlIT() {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
         builder.setProtocol("https");
