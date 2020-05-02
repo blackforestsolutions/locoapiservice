@@ -107,12 +107,12 @@ public class HafasMapperServiceImpl implements HafasMapperService {
         return response
                 .getOutConL()
                 .stream()
-                .map(journey -> getLegFrom(journey, travelProvider, priceMapper))
+                .map(journey -> getJourneyFrom(journey, travelProvider, priceMapper))
                 .map(JourneyStatusBuilder::createJourneyStatusWith)
                 .collect(Collectors.toMap(JourneyStatusBuilder::extractJourneyUuidFrom, journeyStatus -> journeyStatus));
     }
 
-    private Journey getLegFrom(OutConL hafasJourney, TravelProvider travelProvider, HafasPriceMapper priceMapper) {
+    private Journey getJourneyFrom(OutConL hafasJourney, TravelProvider travelProvider, HafasPriceMapper priceMapper) {
         date = hafasJourney.getDate();
         Journey.JourneyBuilder journey = new Journey.JourneyBuilder(uuidService.createUUID());
         journey.setLegs(getLegsFrom(hafasJourney.getSecL(), travelProvider, priceMapper.map(hafasJourney.getTrfRes())));

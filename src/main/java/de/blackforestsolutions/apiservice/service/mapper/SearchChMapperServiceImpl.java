@@ -87,6 +87,7 @@ public class SearchChMapperServiceImpl implements SearchChMapperService {
     private LinkedHashMap<UUID, de.blackforestsolutions.datamodel.Leg> buildLegsWith(List<Leg> legs) {
         return legs
                 .stream()
+                .limit(legs.size() - 1)
                 .map(this::buildLegWith)
                 .collect(Collectors.toMap(leg -> leg.getId(), leg -> leg, (prev, next) -> next, LinkedHashMap::new));
     }
@@ -98,7 +99,8 @@ public class SearchChMapperServiceImpl implements SearchChMapperService {
         leg.setStartTime(buildDateFrom(betweenTrip.getDeparture()));
         leg.setArrivalTime(buildDateFrom(betweenTrip.getExit().getArrival()));
         leg.setDuration(buildDurationBetween(leg.getStartTime(), leg.getArrivalTime()));
-        leg.setTravelLine(buildTravelLineWith(betweenTrip.getStops()));
+        Optional.ofNullable(betweenTrip.getStops()).ifPresent(stops -> leg.setTravelLine(buildTravelLineWith(stops)));
+        Optional.ofNullable(betweenTrip.getTripid()).ifPresent(leg::setProviderId);
         buildTravelProviderWith(betweenTrip, leg);
         leg.setVehicleType(getVehicleType(betweenTrip.getType()));
         if (Optional.ofNullable(betweenTrip.getLine()).isPresent()) {

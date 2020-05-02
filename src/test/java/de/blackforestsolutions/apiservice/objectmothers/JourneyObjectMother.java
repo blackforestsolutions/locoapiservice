@@ -2,6 +2,7 @@ package de.blackforestsolutions.apiservice.objectmothers;
 
 import de.blackforestsolutions.datamodel.Journey;
 import de.blackforestsolutions.datamodel.Leg;
+import de.blackforestsolutions.datamodel.TravelProvider;
 
 import java.text.ParseException;
 import java.util.LinkedHashMap;
@@ -18,7 +19,7 @@ public class JourneyObjectMother {
         Journey.JourneyBuilder journey = new Journey.JourneyBuilder(TEST_UUID_1);
         LinkedHashMap<UUID, Leg> legs = new LinkedHashMap<>();
         legs.put(getEiderstrasseRendsburgGartenstrasseRendsburgLeg(getNahShPrice()).getId(), getEiderstrasseRendsburgGartenstrasseRendsburgLeg(getNahShPrice()));
-        legs.put(getGartenstrasseRendsburgLeg().getId(), getGartenstrasseRendsburgLeg());
+        legs.put(getGartenstrasseRendsburgLeg(TravelProvider.NAHSH).getId(), getGartenstrasseRendsburgLeg(TravelProvider.NAHSH));
         legs.put(getRendsburgZobToRendsburgLeg().getId(), getRendsburgZobToRendsburgLeg());
         journey.setLegs(legs);
         return journey.build();
@@ -36,7 +37,7 @@ public class JourneyObjectMother {
         Journey.JourneyBuilder journey = new Journey.JourneyBuilder(TEST_UUID_1);
         LinkedHashMap<UUID, Leg> legs = new LinkedHashMap<>();
         legs.put(getEiderstrasseRendsburgGartenstrasseRendsburgLeg(getDBPrice()).getId(), getEiderstrasseRendsburgGartenstrasseRendsburgLeg(getDBPrice()));
-        legs.put(getGartenstrasseRendsburgLeg().getId(), getGartenstrasseRendsburgLeg());
+        legs.put(getGartenstrasseRendsburgLeg(TravelProvider.DB).getId(), getGartenstrasseRendsburgLeg(TravelProvider.DB));
         legs.put(getRendsburgHamburgLeg().getId(), getRendsburgHamburgLeg());
         legs.put(getHamburgHbfFrankfurtHbfLeg().getId(), getHamburgHbfFrankfurtHbfLeg());
         journey.setLegs(legs);

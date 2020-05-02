@@ -30,7 +30,11 @@ class HvvMapperServiceTest {
     @BeforeEach
     void init() {
         Mockito.when(uuidGenerator.createUUID())
-                .thenReturn(TEST_UUID_1);
+                .thenReturn(TEST_UUID_1)
+                .thenReturn(TEST_UUID_2)
+                .thenReturn(TEST_UUID_3)
+                .thenReturn(TEST_UUID_4)
+                .thenReturn(TEST_UUID_5);
     }
 
     @Test
@@ -55,7 +59,7 @@ class HvvMapperServiceTest {
         Map<UUID, JourneyStatus> result = classUnderTest.getJourneyMapFrom(jsonJourneys);
 
         Assertions.assertThat(result.size()).isEqualTo(1);
-        Assertions.assertThat(result.get(TEST_UUID_1).getJourney().get()).isEqualToComparingFieldByField(testData);
+        Assertions.assertThat(result.get(TEST_UUID_1).getJourney().get()).isEqualToIgnoringGivenFields(testData, "legs");
     }
 
     @Test
@@ -66,11 +70,16 @@ class HvvMapperServiceTest {
         LinkedHashMap<UUID, Leg> result = classUnderTest.getJourneyMapFrom(jsonJourneys).get(TEST_UUID_1).getJourney().get().getLegs();
 
         Assertions.assertThat(result.size()).isEqualTo(4);
-        Assertions.assertThat(result.get(TEST_UUID_2)).isEqualToComparingFieldByField(testData.get(TEST_UUID_2));
-        Assertions.assertThat(result.get(TEST_UUID_3)).isEqualToComparingFieldByField(testData.get(TEST_UUID_3));
+        Assertions.assertThat(result.get(TEST_UUID_2)).isEqualToIgnoringGivenFields(testData.get(TEST_UUID_2), "price");
+        Assertions.assertThat(result.get(TEST_UUID_2).getPrice()).isEqualToComparingFieldByField(testData.get(TEST_UUID_2).getPrice());
+        Assertions.assertThat(result.get(TEST_UUID_3)).isEqualToIgnoringGivenFields(testData.get(TEST_UUID_3), "travelLine");
+        Assertions.assertThat(result.get(TEST_UUID_3).getTravelLine()).isEqualToComparingFieldByField(testData.get(TEST_UUID_3).getTravelLine());
+        Assertions.assertThat(result.get(TEST_UUID_3).getPrice()).isNull();
         Assertions.assertThat(result.get(TEST_UUID_4)).isEqualToComparingFieldByField(testData.get(TEST_UUID_4));
-        Assertions.assertThat(result.get(TEST_UUID_5)).isEqualToComparingFieldByField(testData.get(TEST_UUID_5));
-        Assertions.assertThat(result).isEqualToComparingFieldByField(testData);
+        Assertions.assertThat(result.get(TEST_UUID_4).getPrice()).isNull();
+        Assertions.assertThat(result.get(TEST_UUID_5)).isEqualToIgnoringGivenFields(testData.get(TEST_UUID_5), "travelLine");
+        Assertions.assertThat(result.get(TEST_UUID_5).getTravelLine()).isEqualToComparingFieldByField(testData.get(TEST_UUID_5).getTravelLine());
+        Assertions.assertThat(result.get(TEST_UUID_5).getPrice()).isNull();
     }
 }
 

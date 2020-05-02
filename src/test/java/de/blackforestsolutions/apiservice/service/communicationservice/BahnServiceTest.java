@@ -120,7 +120,9 @@ class BahnServiceTest {
                 .thenReturn(TEST_UUID_1)
                 .thenReturn(TEST_UUID_2)
                 .thenReturn(TEST_UUID_3)
-                .thenReturn(TEST_UUID_4);
+                .thenReturn(TEST_UUID_4)
+                .thenReturn(TEST_UUID_5)
+                .thenReturn(TEST_UUID_6);
 
         Map<UUID, JourneyStatus> result = classUnderTestBahnJourneyDetailsService.getJourneysForRouteWith(apiTokenAndUrlInformation);
 
@@ -142,7 +144,7 @@ class BahnServiceTest {
 
         Assertions.assertThat(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getTravelLine().getBetweenHolds().values().size()).isEqualTo(0);
 
-        Assertions.assertThat(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_3)).extracting(
+        Assertions.assertThat(result.get(TEST_UUID_3).getJourney().get().getLegs().get(TEST_UUID_4)).extracting(
                 Leg::getTravelProvider,
                 Leg::getStartTime,
                 Leg::getArrivalTime,
@@ -158,7 +160,7 @@ class BahnServiceTest {
                         "IC 386"
                 );
 
-        Assertions.assertThat(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_3)).extracting(
+        Assertions.assertThat(result.get(TEST_UUID_5).getJourney().get().getLegs().get(TEST_UUID_6)).extracting(
                 Leg::getTravelProvider,
                 Leg::getStartTime,
                 Leg::getArrivalTime,
@@ -174,7 +176,7 @@ class BahnServiceTest {
                         "IC 386"
                 );
 
-        Assertions.assertThat(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_3).getTravelLine().getBetweenHolds().values().size()).isEqualTo(0);
+        Assertions.assertThat(result.get(TEST_UUID_3).getJourney().get().getLegs().get(TEST_UUID_4).getTravelLine().getBetweenHolds().values().size()).isEqualTo(0);
 
         Assertions.assertThat(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getStart()).extracting(
                 TravelPoint::getStationId,
@@ -196,7 +198,7 @@ class BahnServiceTest {
                         generateCoordinatesFrom("53.560751", "9.989569")
                 );
 
-        Assertions.assertThat(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_3).getStart()).extracting(
+        Assertions.assertThat(result.get(TEST_UUID_3).getJourney().get().getLegs().get(TEST_UUID_4).getStart()).extracting(
                 TravelPoint::getStationId,
                 TravelPoint::getStationName,
                 TravelPoint::getGpsCoordinates)
@@ -206,7 +208,7 @@ class BahnServiceTest {
                         generateCoordinatesFrom("53.552733", "10.006909")
                 );
 
-        Assertions.assertThat(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_3).getDestination()).extracting(
+        Assertions.assertThat(result.get(TEST_UUID_3).getJourney().get().getLegs().get(TEST_UUID_4).getDestination()).extracting(
                 TravelPoint::getStationId,
                 TravelPoint::getStationName,
                 TravelPoint::getGpsCoordinates)
@@ -216,7 +218,7 @@ class BahnServiceTest {
                         generateCoordinatesFrom("54.302262", "9.671135")
                 );
 
-        Assertions.assertThat(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_4).getStart()).extracting(
+        Assertions.assertThat(result.get(TEST_UUID_5).getJourney().get().getLegs().get(TEST_UUID_6).getStart()).extracting(
                 TravelPoint::getStationId,
                 TravelPoint::getStationName,
                 TravelPoint::getGpsCoordinates)
@@ -226,7 +228,7 @@ class BahnServiceTest {
                         generateCoordinatesFrom("53.560751", "9.989569")
                 );
 
-        Assertions.assertThat(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_4).getDestination()).extracting(
+        Assertions.assertThat(result.get(TEST_UUID_5).getJourney().get().getLegs().get(TEST_UUID_6).getDestination()).extracting(
                 TravelPoint::getStationId,
                 TravelPoint::getStationName,
                 TravelPoint::getGpsCoordinates)

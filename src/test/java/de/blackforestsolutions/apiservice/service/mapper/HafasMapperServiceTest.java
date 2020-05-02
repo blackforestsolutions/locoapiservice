@@ -1,6 +1,7 @@
 package de.blackforestsolutions.apiservice.service.mapper;
 
 import de.blackforestsolutions.apiservice.objectmothers.JourneyObjectMother;
+import de.blackforestsolutions.apiservice.objectmothers.PriceObjectMother;
 import de.blackforestsolutions.apiservice.service.supportservice.UuidService;
 import de.blackforestsolutions.datamodel.*;
 import org.assertj.core.api.Assertions;
@@ -30,9 +31,10 @@ class HafasMapperServiceTest {
                 .thenReturn(TEST_UUID_1)
                 .thenReturn(TEST_UUID_2)
                 .thenReturn(TEST_UUID_3)
-                .thenReturn(UUID.randomUUID())
                 .thenReturn(TEST_UUID_4)
-                .thenReturn(TEST_UUID_5);
+                .thenReturn(TEST_UUID_5)
+                .thenReturn(TEST_UUID_6)
+                .thenReturn(TEST_UUID_7);
     }
 
     @Test
@@ -61,14 +63,14 @@ class HafasMapperServiceTest {
     void test_getJourneysFrom_with_json_body_travelProvider_and_mocked_priceMapper_return_correct_journey() {
         String scheduledResourcesJson = getResourceFileAsString("json/dbHafasJourney.json");
         ResponseEntity<String> testResult = new ResponseEntity<>(scheduledResourcesJson, HttpStatus.OK);
-        Journey expectedValue = JourneyObjectMother.getEiderstrasseRendsburgToKarlsruheJourney();
+        Journey expectedJourney = JourneyObjectMother.getEiderstrasseRendsburgToKarlsruheJourney();
         HafasPriceMapper priceMapper = Mockito.mock(HafasPriceMapper.class);
         Mockito.when(priceMapper.map(Mockito.any())).thenReturn(new Price.PriceBuilder().build());
 
         Map<UUID, JourneyStatus> result = classUnderTest.getJourneysFrom(testResult.getBody(), TravelProvider.DB, priceMapper);
 
         //noinspection OptionalGetWithoutIsPresent
-        Assertions.assertThat(result.get(TEST_UUID_1).getJourney().get()).isEqualToIgnoringGivenFields(expectedValue, "price");
+        Assertions.assertThat(result.get(TEST_UUID_1).getJourney().get()).isEqualToIgnoringGivenFields(expectedJourney, "price", "legs");
         Assertions.assertThat(result.size()).isEqualTo(1);
     }
 
@@ -91,14 +93,15 @@ class HafasMapperServiceTest {
         ResponseEntity<String> testResult = new ResponseEntity<>(scheduledResourceJson, HttpStatus.OK);
         Leg expectedLeg = JourneyObjectMother.getEiderstrasseRendsburgToKarlsruheJourney().getLegs().get(TEST_UUID_2);
         HafasPriceMapper priceMapper = Mockito.mock(HafasPriceMapper.class);
-        Mockito.when(priceMapper.map(Mockito.any())).thenReturn(new Price.PriceBuilder().build());
+        Mockito.when(priceMapper.map(Mockito.any())).thenReturn(PriceObjectMother.getDBPrice());
 
         Map<UUID, JourneyStatus> result = classUnderTest.getJourneysFrom(testResult.getBody(), TravelProvider.DB, priceMapper);
         //noinspection OptionalGetWithoutIsPresent
-        Leg betweenTripResult = result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2);
+        Leg legResult = result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2);
 
-        Assertions.assertThat(betweenTripResult).isEqualToComparingFieldByField(expectedLeg);
-        Assertions.assertThat(betweenTripResult.getTravelLine()).isNull();
+        Assertions.assertThat(legResult).isEqualToIgnoringGivenFields(expectedLeg, "price");
+        Assertions.assertThat(legResult.getPrice()).isEqualToComparingFieldByField(expectedLeg.getPrice());
+        Assertions.assertThat(legResult.getTravelLine()).isNull();
     }
 
     @Test
@@ -107,7 +110,6 @@ class HafasMapperServiceTest {
         ResponseEntity<String> testResult = new ResponseEntity<>(scheduledResourceJson, HttpStatus.OK);
         Leg expectedLeg = JourneyObjectMother.getEiderstrasseRendsburgToKarlsruheJourney().getLegs().get(TEST_UUID_3);
         HafasPriceMapper priceMapper = Mockito.mock(HafasPriceMapper.class);
-        Mockito.when(priceMapper.map(Mockito.any())).thenReturn(new Price.PriceBuilder().build());
 
         Map<UUID, JourneyStatus> result = classUnderTest.getJourneysFrom(testResult.getBody(), TravelProvider.DB, priceMapper);
         //noinspection OptionalGetWithoutIsPresent
@@ -123,13 +125,13 @@ class HafasMapperServiceTest {
     void test_getJourneysFrom_with_jsonBody_travelProvider_and_mocked_priceMapper_returns_correct_leg_between_rendsburg_and_hamburgHbf() {
         String scheduledResourceJson = getResourceFileAsString("json/dbHafasJourney.json");
         ResponseEntity<String> testResult = new ResponseEntity<>(scheduledResourceJson, HttpStatus.OK);
-        Leg expectedLeg = JourneyObjectMother.getEiderstrasseRendsburgToKarlsruheJourney().getLegs().get(TEST_UUID_4);
+        Leg expectedLeg = JourneyObjectMother.getEiderstrasseRendsburgToKarlsruheJourney().getLegs().get(TEST_UUID_5);
         HafasPriceMapper priceMapper = Mockito.mock(HafasPriceMapper.class);
         Mockito.when(priceMapper.map(Mockito.any())).thenReturn(new Price.PriceBuilder().build());
 
         Map<UUID, JourneyStatus> result = classUnderTest.getJourneysFrom(testResult.getBody(), TravelProvider.DB, priceMapper);
         //noinspection OptionalGetWithoutIsPresent
-        Leg legResult = result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_4);
+        Leg legResult = result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_5);
 
         Assertions.assertThat(legResult).isEqualToIgnoringGivenFields(expectedLeg, "travelLine");
         Assertions.assertThat(legResult.getTravelLine()).isEqualToIgnoringGivenFields(expectedLeg.getTravelLine(), "betweenHolds");
@@ -141,13 +143,13 @@ class HafasMapperServiceTest {
     void test_getJourneysFrom_with_jsonBody_travelProvider_and_mocked_priceMapper_returns_correct_leg_between_hamburgHbf_and_frankfurtHbf() {
         String scheduledResourceJson = getResourceFileAsString("json/dbHafasJourney.json");
         ResponseEntity<String> testResult = new ResponseEntity<>(scheduledResourceJson, HttpStatus.OK);
-        Leg expectedLeg = JourneyObjectMother.getEiderstrasseRendsburgToKarlsruheJourney().getLegs().get(TEST_UUID_5);
+        Leg expectedLeg = JourneyObjectMother.getEiderstrasseRendsburgToKarlsruheJourney().getLegs().get(TEST_UUID_6);
         HafasPriceMapper priceMapper = Mockito.mock(HafasPriceMapper.class);
         Mockito.when(priceMapper.map(Mockito.any())).thenReturn(new Price.PriceBuilder().build());
 
         Map<UUID, JourneyStatus> result = classUnderTest.getJourneysFrom(testResult.getBody(), TravelProvider.DB, priceMapper);
         //noinspection OptionalGetWithoutIsPresent
-        Leg legResult = result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_5);
+        Leg legResult = result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_6);
 
         Assertions.assertThat(legResult).isEqualToIgnoringGivenFields(expectedLeg, "travelLine");
         Assertions.assertThat(legResult.getTravelLine()).isEqualToIgnoringGivenFields(expectedLeg.getTravelLine(), "betweenHolds");

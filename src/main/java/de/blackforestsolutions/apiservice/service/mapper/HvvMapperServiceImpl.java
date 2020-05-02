@@ -97,7 +97,10 @@ public class HvvMapperServiceImpl implements HvvMapperService {
         AtomicInteger counter = new AtomicInteger(0);
         return intermediateStops
                 .stream()
-                .map(intermediateStop -> buildTravelPointWith(intermediateStop).build())
+                .map(intermediateStop -> {
+                    TravelPoint.TravelPointBuilder travelPoint = buildTravelPointWith(intermediateStop);
+                    return extendTravelPointWithArrDepTime(travelPoint, intermediateStop);
+                })
                 .collect(Collectors.toMap(travelPoint -> counter.getAndIncrement(), travelPoint -> travelPoint));
     }
 
@@ -113,41 +116,44 @@ public class HvvMapperServiceImpl implements HvvMapperService {
         return Date.from(dateTime.atZone(ZoneId.systemDefault()).toInstant());
     }
 
-    private static Price buildPriceFrom(TicketInfo ticketInfo) {
+    private static Price buildPriceFrom(List<TicketInfo> ticketInfos) {
         Price.PriceBuilder price = new Price.PriceBuilder();
         price.setCurrency(Currency.getInstance(Locale.GERMANY));
         price.setSymbol("€");
         price.setValues(Map.of(
-                PriceCategory.ADULT, new BigDecimal(ticketInfo.getBasePrice()),
-                PriceCategory.ADULT_REDUCED, new BigDecimal(ticketInfo.getReducedBasePrice())
+                PriceCategory.ADULT, BigDecimal.valueOf(ticketInfos.get(FIRST_INDEX).getBasePrice()),
+                PriceCategory.ADULT_REDUCED, BigDecimal.valueOf(ticketInfos.get(FIRST_INDEX).getReducedBasePrice()),
+                PriceCategory.CHILD, BigDecimal.valueOf(ticketInfos.get(SECOND_INDEX).getBasePrice()),
+                PriceCategory.CHILD_REDUCED, BigDecimal.valueOf(ticketInfos.get(SECOND_INDEX).getReducedBasePrice())
         ));
         price.setAffiliateLinks(Map.of(
-                PriceCategory.ADULT, ticketInfo.getShopLinkRegular(),
-                PriceCategory.ADULT_REDUCED, ticketInfo.getShopLinkRegular()
+                PriceCategory.ADULT, ticketInfos.get(FIRST_INDEX).getShopLinkRegular(),
+                PriceCategory.ADULT_REDUCED, ticketInfos.get(FIRST_INDEX).getShopLinkRegular(),
+                PriceCategory.CHILD, ticketInfos.get(SECOND_INDEX).getShopLinkRegular(),
+                PriceCategory.CHILD_REDUCED, ticketInfos.get(SECOND_INDEX).getShopLinkRegular()
         ));
         return price.build();
     }
 
     private static TravelPoint.TravelPointBuilder buildTravelPointWith(From hvvStation) {
-        TravelPoint.TravelPointBuilder travelPoint = buildTravelPointWith(hvvStation.getId(), hvvStation.getCombinedName(), hvvStation.getName(), hvvStation.getCity(), hvvStation.getCoordinate(), hvvStation.getServiceTypes());
+        TravelPoint.TravelPointBuilder travelPoint = new TravelPoint.TravelPointBuilder();
+        travelPoint.setPlatform(checkIfStringPropertyExists(hvvStation.getPlatform()));
+        travelPoint.setStationId(hvvStation.getId());
+        Optional.ofNullable(hvvStation.getCombinedName()).ifPresentOrElse(travelPoint::setStationName, () -> travelPoint.setStationName(hvvStation.getName()));
+        travelPoint.setCity(hvvStation.getCity());
+        travelPoint.setCountry(Locale.GERMANY);
+        Optional.ofNullable(hvvStation.getCoordinate()).ifPresent(coord -> travelPoint.setGpsCoordinates(mapHvvCoordinatesToBsCoordinates(coord)));
+        return travelPoint;
+    }
+
+    private static TravelPoint extendTravelPointWithArrDepTime(TravelPoint.TravelPointBuilder travelPoint, From hvvStation) {
         Optional.ofNullable(hvvStation.getArrTime()).ifPresent(arrTime -> travelPoint.setArrivalTime(
                 generateDateFromDateAndTime(arrTime.getDate(), arrTime.getTime())
         ));
         Optional.ofNullable(hvvStation.getDepTime()).ifPresent(depTime -> travelPoint.setDepartureTime(
                 generateDateFromDateAndTime(depTime.getDate(), depTime.getTime())
         ));
-        travelPoint.setPlatform(checkIfStringPropertyExists(hvvStation.getPlatform()));
-        return travelPoint;
-    }
-
-    private static TravelPoint.TravelPointBuilder buildTravelPointWith(String id, String combinedName, String name, String city, Coordinate coordinate, List<String> vehicleTypes) {
-        TravelPoint.TravelPointBuilder travelPoint = new TravelPoint.TravelPointBuilder();
-        travelPoint.setStationId(id);
-        Optional.ofNullable(combinedName).ifPresentOrElse(travelPoint::setStationName, () -> travelPoint.setStationName(name));
-        travelPoint.setCity(city);
-        travelPoint.setCountry(Locale.GERMANY);
-        Optional.ofNullable(coordinate).ifPresent(coord -> travelPoint.setGpsCoordinates(mapHvvCoordinatesToBsCoordinates(coord)));
-        return travelPoint;
+        return travelPoint.build();
     }
 
     private static Coordinates mapHvvCoordinatesToBsCoordinates(Coordinate coordinate) {
@@ -183,13 +189,13 @@ public class HvvMapperServiceImpl implements HvvMapperService {
                     .map(this::mapRealtimeScheduleToJourney)
                     .collect(Collectors.toMap(Journey::getId, JourneyStatusBuilder::createJourneyStatusWith));
         } else {
-            return Map.of(UUID.randomUUID(), JourneyStatusBuilder.createJourneyStatusProblemWith(callStatus.getException()));
+            return Map.of(uuidService.createUUID(), JourneyStatusBuilder.createJourneyStatusProblemWith(callStatus.getException()));
         }
     }
 
     private Journey mapRealtimeScheduleToJourney(RealtimeSchedule realtimeSchedule) {
         Journey.JourneyBuilder journey = new Journey.JourneyBuilder(uuidService.createUUID());
-        journey.setLegs(buildLegsWith(realtimeSchedule.getScheduleElements(), buildPriceFrom(realtimeSchedule.getTariffInfos().get(FIRST_INDEX).getTicketInfos().get(FIRST_INDEX))));
+        journey.setLegs(buildLegsWith(realtimeSchedule.getScheduleElements(), buildPriceFrom(realtimeSchedule.getTariffInfos().get(FIRST_INDEX).getTicketInfos())));
         return journey.build();
     }
 
@@ -214,12 +220,17 @@ public class HvvMapperServiceImpl implements HvvMapperService {
                 scheduleElement.getTo().getArrTime().getTime())
         );
         leg.setDuration(generateDurationFromStartToDestination(leg.getStartTime(), leg.getArrivalTime()));
-        leg.setProviderId(scheduleElement.getLine().getId());
         leg.setTravelProvider(TravelProvider.HVV);
         leg.setVehicleName(scheduleElement.getLine().getName());
         String vehicleType = scheduleElement.getLine().getType().getSimpleType();
         leg.setVehicleType(getVehicleType(vehicleType));
-        leg.setTravelLine(buildTravelLineWith(scheduleElement));
+        leg.setIncidents(scheduleElement.getAttributes().stream()
+                .map(Attribute::getValue)
+                .collect(Collectors.toList()));
+        if (!vehicleType.equals(WALK) && !vehicleType.equals(BICYCLE) && !vehicleType.equals(TRANSFER) && !vehicleType.equals(TRANSFER_SAME_PLATFORM)) {
+            leg.setTravelLine(buildTravelLineWith(scheduleElement));
+            leg.setProviderId(scheduleElement.getLine().getId());
+        }
         if (index == 0) {
             leg.setPrice(price);
         }
@@ -229,7 +240,11 @@ public class HvvMapperServiceImpl implements HvvMapperService {
     private List<TravelPoint> mapHvvStationListToTravelPointList(HvvStationList hvvStationList) {
         return hvvStationList.getStations()
                 .stream()
-                .map(station -> buildTravelPointWith(station.getId(), station.getCombinedName(), station.getName(), station.getCity(), station.getCoordinate(), station.getVehicleTypes()).build())
+                .map(station -> {
+                    From hvvStation = new From();
+                    BeanUtils.copyProperties(station, hvvStation);
+                    return buildTravelPointWith(hvvStation).build();
+                })
                 .collect(Collectors.toList());
     }
 

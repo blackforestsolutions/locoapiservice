@@ -48,7 +48,7 @@ public class TravelLineObjectMother {
     static TravelLine getRendsburgHamburgHbfTravelLine() {
         TravelLine.TravelLineBuilder travelLine = new TravelLine.TravelLineBuilder();
         travelLine.setDirection(getHamburgHbfTravelPointShort());
-        travelLine.setBetweenHolds(Collections.singletonMap(2, getElmshornTravelPoint()));
+        travelLine.setBetweenHolds(Collections.singletonMap(2, getHafasElmshornTravelPoint()));
         return travelLine.build();
     }
 
@@ -71,8 +71,8 @@ public class TravelLineObjectMother {
 
     static TravelLine getHamburgDammtorUniversityTravelLine() {
         TravelLine.TravelLineBuilder travelLine = new TravelLine.TravelLineBuilder();
-        travelLine.setOrigin(getBurgwedelTravelPoint());
-        travelLine.setDirection(getHamburgHauptbahnhofDirectionTravelPoint());
+        travelLine.setOrigin(getHamburgHauptbahnhofDirectionTravelPoint());
+        travelLine.setDirection(getBurgwedelTravelPoint());
         return travelLine.build();
     }
 }

@@ -61,7 +61,9 @@ class VBBApiServiceTest {
                 .thenReturn(travelPointResult)
                 .thenReturn(travelPointResult)
                 .thenReturn(testResult);
-        when(uuidGenerator.createUUID()).thenReturn(TEST_UUID_1);
+        when(uuidGenerator.createUUID())
+                .thenReturn(TEST_UUID_1)
+                .thenReturn(TEST_UUID_2);
     }
 
     @Test
@@ -74,7 +76,7 @@ class VBBApiServiceTest {
         Journey journeyResult = result.get(TEST_UUID_1).getJourney().get();
 
         Assertions.assertThat(result.size()).isEqualTo(1);
-        Assertions.assertThat(journeyResult).isEqualToComparingFieldByField(expectedJourney);
+        Assertions.assertThat(journeyResult).isEqualToIgnoringGivenFields(expectedJourney, "legs");
     }
 
     @Test
@@ -87,7 +89,6 @@ class VBBApiServiceTest {
         LinkedHashMap<UUID, Leg> legsResult = result.get(TEST_UUID_1).getJourney().get().getLegs();
 
         Assertions.assertThat(legsResult.size()).isEqualTo(1);
-        Assertions.assertThat(legsResult.get(TEST_UUID_2)).isEqualToComparingFieldByField(expectedLeg);
         Assertions.assertThat(legsResult.get(TEST_UUID_2).getStartTime()).isEqualTo(expectedLeg.getStartTime());
         Assertions.assertThat(legsResult.get(TEST_UUID_2).getArrivalTime()).isEqualTo(expectedLeg.getArrivalTime());
         Assertions.assertThat(legsResult.get(TEST_UUID_2).getDuration()).isEqualTo(expectedLeg.getDuration());
@@ -100,6 +101,6 @@ class VBBApiServiceTest {
         Assertions.assertThat(legsResult.get(TEST_UUID_2).getDestination()).isEqualToComparingFieldByField(expectedLeg.getDestination());
         Assertions.assertThat(legsResult.get(TEST_UUID_2).getPrice()).isEqualToComparingFieldByField(expectedLeg.getPrice());
         Assertions.assertThat(legsResult.get(TEST_UUID_2).getTravelLine()).isEqualToComparingFieldByField(expectedLeg.getTravelLine());
-        Assertions.assertThat(legsResult).isEqualToIgnoringGivenFields(expectedLeg);
+        Assertions.assertThat(legsResult.get(TEST_UUID_2)).isEqualToIgnoringGivenFields(expectedLeg, "price", "travelLine");
     }
 }

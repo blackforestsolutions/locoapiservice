@@ -11,10 +11,7 @@ import de.blackforestsolutions.apiservice.service.supportservice.UuidService;
 import de.blackforestsolutions.apiservice.service.supportservice.hafas.HafasHttpCallBuilderService;
 import de.blackforestsolutions.apiservice.service.supportservice.hafas.HafasHttpCallBuilderServiceImpl;
 import de.blackforestsolutions.apiservice.stubs.RestTemplateBuilderStub;
-import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
-import de.blackforestsolutions.datamodel.Journey;
-import de.blackforestsolutions.datamodel.JourneyStatus;
-import de.blackforestsolutions.datamodel.Leg;
+import de.blackforestsolutions.datamodel.*;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -92,9 +89,8 @@ class NahShApiServiceTest {
         Journey journeyResult = result.get(TEST_UUID_1).getJourney().get();
 
         Assertions.assertThat(result.size()).isEqualTo(1);
-        Assertions.assertThat(journeyResult).isEqualToComparingFieldByField(expectedJourney);
+        Assertions.assertThat(journeyResult).isEqualToIgnoringGivenFields(expectedJourney, "legs");
         Assertions.assertThat(journeyResult.getLegs().size()).isEqualTo(3);
-        Assertions.assertThat(journeyResult).isEqualToIgnoringGivenFields(expectedJourney, "start", "destination", "price");
     }
 
     @Test
@@ -104,16 +100,17 @@ class NahShApiServiceTest {
 
         Map<UUID, JourneyStatus> result = classUnderTest.getJourneysForRouteWith(testData);
         //noinspection OptionalGetWithoutIsPresent
-        Leg betweenTripResult = result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2);
+        Leg legResult = result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2);
 
-        Assertions.assertThat(betweenTripResult).isEqualToComparingFieldByField(expectedLeg);
-        Assertions.assertThat(betweenTripResult.getTravelLine()).isNull();
+        Assertions.assertThat(legResult).isEqualToIgnoringGivenFields(expectedLeg, "price");
+        Assertions.assertThat(legResult.getPrice()).isEqualToComparingFieldByField(expectedLeg.getPrice());
+        Assertions.assertThat(legResult.getTravelLine()).isNull();
     }
 
     @Test
     void test_getJourneysFrom_with_jsonBody_travelProvider_and_mocked_priceMapper_returns_correct_leg_between_gartenstrasse_and_rendsburg_zob() {
         ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getNahShTokenAndUrl("", "");
-        Leg expectedLeg = LegObjectMother.getGartenstrasseRendsburgLeg();
+        Leg expectedLeg = LegObjectMother.getGartenstrasseRendsburgLeg(TravelProvider.NAHSH);
 
         Map<UUID, JourneyStatus> result = classUnderTest.getJourneysForRouteWith(testData);
         //noinspection OptionalGetWithoutIsPresent

@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static de.blackforestsolutions.apiservice.objectmothers.PriceObjectMother.getVBBPrice;
+import static de.blackforestsolutions.apiservice.objectmothers.PriceObjectMother.*;
 import static de.blackforestsolutions.apiservice.objectmothers.TravelLineObjectMother.*;
 import static de.blackforestsolutions.apiservice.objectmothers.TravelpointObjectMother.*;
 import static de.blackforestsolutions.apiservice.objectmothers.UUIDObjectMother.*;
@@ -25,12 +25,11 @@ public class LegObjectMother {
         leg.setDuration(generateDurationFromStartToDestination(leg.getStartTime(), leg.getArrivalTime()));
         leg.setDistance(new Distance(165));
         leg.setVehicleType(VehicleType.WALK);
-        leg.setTravelProvider(TravelProvider.NAHSH);
         leg.setPrice(price);
         return leg.build();
     }
 
-    public static Leg getGartenstrasseRendsburgLeg() {
+    public static Leg getGartenstrasseRendsburgLeg(TravelProvider travelProvider) {
         Leg.LegBuilder leg = new Leg.LegBuilder(TEST_UUID_3);
         leg.setStart(getGartenstrasseTravelPoint());
         leg.setDestination(getRendsburgZOBTravelPoint());
@@ -42,7 +41,7 @@ public class LegObjectMother {
         leg.setVehicleType(VehicleType.BUS);
         leg.setVehicleName("Bus");
         leg.setVehicleNumber("Bus 11");
-        leg.setTravelProvider(TravelProvider.NAHSH);
+        leg.setTravelProvider(travelProvider);
         return leg.build();
     }
 
@@ -77,7 +76,7 @@ public class LegObjectMother {
     }
 
     public static Leg getRendsburgHamburgLeg() {
-        Leg.LegBuilder leg = new Leg.LegBuilder(TEST_UUID_4);
+        Leg.LegBuilder leg = new Leg.LegBuilder(TEST_UUID_5);
         leg.setStart(getRendsburgTravelPoint("1"));
         leg.setDestination(getHamburgHbfTravelPoint("12C-F"));
         leg.setStartTime(generateDateFrom("yyyyMMdd", "20200328", "HHmmss", "125600"));
@@ -93,7 +92,7 @@ public class LegObjectMother {
     }
 
     public static Leg getHamburgHbfFrankfurtHbfLeg() {
-        Leg.LegBuilder leg = new Leg.LegBuilder(TEST_UUID_5);
+        Leg.LegBuilder leg = new Leg.LegBuilder(TEST_UUID_6);
         leg.setStart(getHamburgHbfTravelPoint("14"));
         leg.setDestination(getFrankfurtHbfTravelPoint());
         leg.setStartTime(generateDateFrom("yyyyMMdd", "20200328", "HHmmss", "150100"));
@@ -120,7 +119,7 @@ public class LegObjectMother {
         leg.setDestination(getWaedenswilExitTravelPoint());
         leg.setProviderId("T2019_19353_000082_101_b560270_0");
         leg.setUnknownTravelProvider("SOB-sob");
-        leg.setVehicleNumber("S13");
+        leg.setVehicleName("S13");
         leg.setVehicleType(VehicleType.TRAIN);
         TravelLine.TravelLineBuilder travelLine = new TravelLine.TravelLineBuilder();
         Map<Integer, TravelPoint> betweenHolds = new HashMap<>();
@@ -172,12 +171,14 @@ public class LegObjectMother {
         ));
         leg.setTravelProvider(TravelProvider.HVV);
         leg.setVehicleType(VehicleType.WALK);
+        leg.setVehicleName("Fußweg");
+        leg.setPrice(getHvvPrice());
         return leg.build();
     }
 
     public static Leg getElmshornToHamburgAltonaHbfLeg() throws ParseException {
         Leg.LegBuilder leg = new Leg.LegBuilder(TEST_UUID_3);
-        leg.setStart(getElmshornTravelPoint());
+        leg.setStart(getHvvElmshornTravelPoint());
         leg.setStartTime(generateDateFromPatternAndString("dd.MM.yyyy HH:mm", "05.05.2020 13:40"));
         leg.setDestination(getHamburgAltonaBfTravelPoint());
         leg.setArrivalTime(generateDateFromPatternAndString("dd.MM.yyyy HH:mm", "05.05.2020 14:04"));
@@ -191,7 +192,6 @@ public class LegObjectMother {
         leg.setProviderId("DB-EFZ:RB71_DB-EFZ_Z");
         leg.setTravelLine(getElmshornHamburgAltonaTravelLine());
         leg.setIncidents(List.of(
-                "Maskenpflicht im HVV",
                 "Bitte beachten Sie:\nIn allen Verkehrsmitteln des HVV und auf den Haltestellen ist ein Mund-Nasen-Schutz zu tragen.\n"
         ));
         return leg.build();
@@ -208,6 +208,7 @@ public class LegObjectMother {
                 leg.getArrivalTime()
         ));
         leg.setTravelProvider(TravelProvider.HVV);
+        leg.setVehicleName("Umstiegsfußweg");
         leg.setVehicleType(VehicleType.WALK);
         return leg.build();
     }
@@ -224,11 +225,10 @@ public class LegObjectMother {
         ));
         leg.setTravelProvider(TravelProvider.HVV);
         leg.setVehicleType(VehicleType.BUS);
-        leg.setVehicleName("Niederflur Metrobus");
+        leg.setVehicleName("5");
         leg.setProviderId("HHA-B:5_HHA-B");
-        leg.setTravelLine(getElmshornHamburgAltonaTravelLine());
+        leg.setTravelLine(getHamburgDammtorUniversityTravelLine());
         leg.setIncidents(List.of(
-                "Maskenpflicht im HVV",
                 "Bitte beachten Sie:\nIn allen Verkehrsmitteln des HVV und auf den Haltestellen ist ein Mund-Nasen-Schutz zu tragen.\n"
         ));
         return leg.build();
