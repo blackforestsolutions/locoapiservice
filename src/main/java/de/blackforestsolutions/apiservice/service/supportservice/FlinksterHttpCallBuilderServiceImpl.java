@@ -8,8 +8,6 @@ import org.springframework.stereotype.Service;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.Date;
 import java.util.Objects;
 
@@ -79,7 +77,6 @@ public class FlinksterHttpCallBuilderServiceImpl implements FlinksterHttpCallBui
     }
 
 
-
     @Override
     public HttpEntity buildHttpEntityForFlinkster(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
         return new HttpEntity<>(this.buildHttpHeadersForFlinksterWith(apiTokenAndUrlInformation));
@@ -95,8 +92,6 @@ public class FlinksterHttpCallBuilderServiceImpl implements FlinksterHttpCallBui
         Objects.requireNonNull(apiTokenAndUrlInformation.getAuthorization(), "authorization is not allowed to be null");
         httpHeaders.add(HttpHeaders.AUTHORIZATION, apiTokenAndUrlInformation.getAuthorization());
         httpHeaders.add(HttpHeaders.HOST, apiTokenAndUrlInformation.getHost());
-//        httpHeaders.add(HttpHeaders.ACCEPT, "application/json");
-//        httpHeaders.add(HttpHeaders.CONTENT_ENCODING, "UTF-8");
     }
 
 
@@ -105,9 +100,9 @@ public class FlinksterHttpCallBuilderServiceImpl implements FlinksterHttpCallBui
         return dateFormat.format(date).replaceAll(":", "%3A").replaceAll("\\+", "%2B");
     }
 
-    private static LocalDateTime convertToLocalDateTime(Date dateToConvert) {
+/*    private static LocalDateTime convertToLocalDateTime(Date dateToConvert) {
         return LocalDateTime.ofInstant(
                 dateToConvert.toInstant(),
                 ZoneId.systemDefault());
-    }
+    }*/
 }

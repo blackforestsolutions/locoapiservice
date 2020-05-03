@@ -1,3 +1,4 @@
+/*
 package de.blackforestsolutions.apiservice.service.mapper;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -28,7 +29,9 @@ public class FlinksterMapperServiceImpl {
     private final UuidService uuidService;
 
     @Autowired
-    public FlinksterMapperServiceImpl(UuidService uuidService) { this.uuidService = uuidService; }
+    public FlinksterMapperServiceImpl(UuidService uuidService) {
+        this.uuidService = uuidService;
+    }
 
     private static CallStatus retrieveRidesStatusFrom(String jsonString) {
         ObjectMapper mapper = new ObjectMapper();
@@ -45,6 +48,7 @@ public class FlinksterMapperServiceImpl {
     public Map<UUID, JourneyStatus> map(String jsonString) {
         return mapTripsToJourneyList(retrieveRidesStatusFrom(jsonString));
     }
+
     private Map<UUID, JourneyStatus> mapTripsToJourneyList(CallStatus callStatus) {
         if (callStatus.getCalledObject() != null) {
             Rides ridesStatus = (Rides) callStatus.getCalledObject();
@@ -80,3 +84,4 @@ public class FlinksterMapperServiceImpl {
     }
 
 }
+*/
