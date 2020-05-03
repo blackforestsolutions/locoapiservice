@@ -3,11 +3,13 @@ package de.blackforestsolutions.apiservice.service.mapper;
 import de.blackforestsolutions.apiservice.service.supportservice.UuidService;
 import de.blackforestsolutions.datamodel.CallStatus;
 import de.blackforestsolutions.datamodel.JourneyStatus;
+import de.blackforestsolutions.datamodel.PriceCategory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mockito;
 
+import java.math.BigDecimal;
 import java.util.Map;
 import java.util.UUID;
 
@@ -35,7 +37,9 @@ class RMVMapperServiceTest {
                 .thenReturn(TEST_UUID_7)
                 .thenReturn(TEST_UUID_8)
                 .thenReturn(TEST_UUID_9)
-                .thenReturn(TEST_UUID_10);
+                .thenReturn(TEST_UUID_10)
+                .thenReturn(TEST_UUID_11).thenReturn(TEST_UUID_12).thenReturn(TEST_UUID_13).thenReturn(TEST_UUID_14).thenReturn(TEST_UUID_15).thenReturn(TEST_UUID_16).thenReturn(TEST_UUID_17).thenReturn(TEST_UUID_18).thenReturn(TEST_UUID_19)
+                .thenReturn(TEST_UUID_20).thenReturn(TEST_UUID_21).thenReturn(TEST_UUID_22);
     }
 
     @Test
@@ -64,28 +68,34 @@ class RMVMapperServiceTest {
         String tripListXml = getResourceFileAsString("xml/TripList.xml");
 
         Map<UUID, JourneyStatus> result = classUnderTest.getJourneysFrom(tripListXml);
-        // todo adjust assert of price bc of change in datamodel and mapper - commented out for now
         assertThat(result.size()).isEqualTo(5);
         assertThat(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getStart().getStationName()).isEqualTo("Frankfurt (Main) Hauptbahnhof");
         assertThat(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getDestination().getStationName()).isEqualTo("Lorch-Lorchhausen Bahnhof");
-        assertThat(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getTravelLine().getBetweenHolds().size()).isEqualTo(2);
-        //assertThat(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getPrice().getValue()).isEqualTo(1235.0);
+        assertThat(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getPrice().getValues().get(PriceCategory.ADULT)).isEqualTo(new BigDecimal(1235));
+        assertThat(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getPrice().getValues().get(PriceCategory.CHILD)).isEqualTo(new BigDecimal(730));
+        assertThat(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).isHasPrice()).isEqualTo(true);
+
         assertThat(result.get(TEST_UUID_3).getJourney().get().getLegs().get(TEST_UUID_4).getStart().getStationName()).isEqualTo("Frankfurt (Main) Hauptbahnhof");
         assertThat(result.get(TEST_UUID_3).getJourney().get().getLegs().get(TEST_UUID_4).getDestination().getStationName()).isEqualTo("Lorch-Lorchhausen Bahnhof");
-        // assertThat(result.get(TEST_UUID_3).getJourney().get().getLegs().get(TEST_UUID_4).getPrice().getValue()).isEqualTo(1235.0);
-        assertThat(result.get(TEST_UUID_3).getJourney().get().getLegs().get(TEST_UUID_4).getTravelLine().getBetweenHolds().size()).isEqualTo(2);
+        assertThat(result.get(TEST_UUID_3).getJourney().get().getLegs().get(TEST_UUID_4).getPrice().getValues().get(PriceCategory.ADULT)).isEqualTo(new BigDecimal(1235));
+        assertThat(result.get(TEST_UUID_3).getJourney().get().getLegs().get(TEST_UUID_4).getPrice().getValues().get(PriceCategory.CHILD)).isEqualTo(new BigDecimal(730));
+
         assertThat(result.get(TEST_UUID_5).getJourney().get().getLegs().get(TEST_UUID_6).getStart().getStationName()).isEqualTo("Frankfurt (Main) Hauptbahnhof");
         assertThat(result.get(TEST_UUID_5).getJourney().get().getLegs().get(TEST_UUID_6).getDestination().getStationName()).isEqualTo("Lorch-Lorchhausen Bahnhof");
-        // assertThat(result.get(TEST_UUID_5).getJourney().get().getLegs().get(TEST_UUID_6).getPrice().getValue()).isEqualTo(1235.0);
-        assertThat(result.get(TEST_UUID_5).getJourney().get().getLegs().get(TEST_UUID_6).getTravelLine().getBetweenHolds().size()).isEqualTo(2);
-        assertThat(result.get(TEST_UUID_7).getJourney().get().getLegs().get(TEST_UUID_4).getStart().getStationName()).isEqualTo("Frankfurt (Main) Hauptbahnhof");
+        assertThat(result.get(TEST_UUID_5).getJourney().get().getLegs().get(TEST_UUID_6).getPrice().getValues().get(PriceCategory.ADULT)).isEqualTo(new BigDecimal(1235));
+        assertThat(result.get(TEST_UUID_5).getJourney().get().getLegs().get(TEST_UUID_6).getPrice().getValues().get(PriceCategory.CHILD)).isEqualTo(new BigDecimal(730));
+
+        assertThat(result.get(TEST_UUID_7).getJourney().get().getLegs().get(TEST_UUID_8).getStart().getStationName()).isEqualTo("Frankfurt (Main) Hauptbahnhof");
         assertThat(result.get(TEST_UUID_7).getJourney().get().getLegs().get(TEST_UUID_8).getDestination().getStationName()).isEqualTo("Lorch-Lorchhausen Bahnhof");
-        // assertThat(result.get(TEST_UUID_7).getJourney().get().getLegs().get(TEST_UUID_8).getPrice().getValue()).isEqualTo(1235.0);
-        assertThat(result.get(TEST_UUID_7).getJourney().get().getLegs().get(TEST_UUID_8).getTravelLine().getBetweenHolds().size()).isEqualTo(2);
-        assertThat(result.get(TEST_UUID_9).getJourney().get().getLegs().get(TEST_UUID_9).getStart().getStationName()).isEqualTo("Frankfurt (Main) Hauptbahnhof tief");
-        assertThat(result.get(TEST_UUID_9).getJourney().get().getLegs().get(TEST_UUID_9).getDestination().getStationName()).isEqualTo("Lorch-Lorchhausen Bahnhof");
-        // assertThat(result.get(TEST_UUID_9).getJourney().get().getLegs().get(TEST_UUID_9).getPrice().getValue()).isEqualTo(1235.0);
-        assertThat(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getTravelLine().getBetweenHolds().size()).isEqualTo(2);
+        assertThat(result.get(TEST_UUID_7).getJourney().get().getLegs().get(TEST_UUID_8).getPrice().getValues().get(PriceCategory.ADULT)).isEqualTo(new BigDecimal(1235));
+        assertThat(result.get(TEST_UUID_7).getJourney().get().getLegs().get(TEST_UUID_8).getPrice().getValues().get(PriceCategory.CHILD)).isEqualTo(new BigDecimal(730));
+
+        assertThat(result.get(TEST_UUID_9).getJourney().get().getLegs().get(TEST_UUID_10).getStart().getStationName()).isEqualTo("Frankfurt (Main) Hauptbahnhof tief");
+        assertThat(result.get(TEST_UUID_9).getJourney().get().getLegs().get(TEST_UUID_10).getDestination().getStationName()).isEqualTo("Wiesbaden Hauptbahnhof");
+        assertThat(result.get(TEST_UUID_9).getJourney().get().getLegs().get(TEST_UUID_10).getPrice().getValues().get(PriceCategory.ADULT)).isEqualTo(new BigDecimal(1235));
+        assertThat(result.get(TEST_UUID_9).getJourney().get().getLegs().get(TEST_UUID_10).getPrice().getValues().get(PriceCategory.CHILD)).isEqualTo(new BigDecimal(730));
+        assertThat(result.get(TEST_UUID_9).getJourney().get().getLegs().get(TEST_UUID_11).getStart().getStationName()).isEqualTo("Wiesbaden Hauptbahnhof");
+        assertThat(result.get(TEST_UUID_9).getJourney().get().getLegs().get(TEST_UUID_11).getDestination().getStationName()).isEqualTo("Lorch-Lorchhausen Bahnhof");
     }
 
 
@@ -98,97 +108,46 @@ class RMVMapperServiceTest {
 
         assertThat(result.size()).isEqualTo(5);
         assertThat(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getStart().getStationName()).isEqualTo("Ulrichstein Wiesenhof");
-        assertThat(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getDestination().getStationName()).isEqualTo("Bad Endbach Sportzentrum");
-        assertThat(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getTravelLine().getBetweenHolds().size()).isEqualTo(6);
-        //assertThat(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getPrice().getValue()).isEqualTo(3600.0);
-
-        assertThat(result.get(TEST_UUID_3).getJourney().get().getLegs().get(TEST_UUID_4).getStart().getStationName()).isEqualTo("Ulrichstein Wiesenhof");
-        assertThat(result.get(TEST_UUID_3).getJourney().get().getLegs().get(TEST_UUID_4).getDestination().getStationName()).isEqualTo("Bad Endbach Sportzentrum");
-        //assertThat(result.get(TEST_UUID_3).getJourney().get().getLegs().get(TEST_UUID_4).getPrice().getValue()).isEqualTo(3600.0);
-        assertThat(result.get(TEST_UUID_3).getJourney().get().getLegs().get(TEST_UUID_4).getTravelLine().getBetweenHolds().size()).isEqualTo(6);
-
-        assertThat(result.get(TEST_UUID_5).getJourney().get().getLegs().get(TEST_UUID_6).getStart().getStationName()).isEqualTo("Ulrichstein Wiesenhof");
-        assertThat(result.get(TEST_UUID_5).getJourney().get().getLegs().get(TEST_UUID_6).getDestination().getStationName()).isEqualTo("Bad Endbach Sportzentrum");
-        //assertThat(result.get(TEST_UUID_5).getJourney().get().getLegs().get(TEST_UUID_6).getPrice().getValue()).isEqualTo(1235.0);
-        assertThat(result.get(TEST_UUID_5).getJourney().get().getLegs().get(TEST_UUID_6).getTravelLine().getBetweenHolds().size()).isEqualTo(7);
+        assertThat(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getDestination().getStationName()).isEqualTo("Lauterbach (Hessen) Nordbahnhof");
+        assertThat(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getPrice().getValues().get(PriceCategory.ADULT)).isEqualTo(new BigDecimal(3600));
+        assertThat(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_6).getDestination().getStationName()).isEqualTo("Bad Endbach Sportzentrum");
+        assertThat(result.get(TEST_UUID_1).getJourney().get().getLegs().size()).isEqualTo(5);
 
         assertThat(result.get(TEST_UUID_7).getJourney().get().getLegs().get(TEST_UUID_8).getStart().getStationName()).isEqualTo("Ulrichstein Wiesenhof");
-        assertThat(result.get(TEST_UUID_7).getJourney().get().getLegs().get(TEST_UUID_8).getDestination().getStationName()).isEqualTo("Bad Endbach Sportzentrum");
-        //assertThat(result.get(TEST_UUID_7).getJourney().get().getLegs().get(TEST_UUID_8).getPrice().getValue()).isEqualTo(0.0);
-        assertThat(result.get(TEST_UUID_7).getJourney().get().getLegs().get(TEST_UUID_8).getTravelLine().getBetweenHolds().size()).isEqualTo(7);
+        assertThat(result.get(TEST_UUID_7).getJourney().get().getLegs().get(TEST_UUID_8).getDestination().getStationName()).isEqualTo("Lauterbach (Hessen) Nordbahnhof");
+        assertThat(result.get(TEST_UUID_7).getJourney().get().getLegs().get(TEST_UUID_8).getPrice().getValues().get(PriceCategory.ADULT)).isEqualTo(new BigDecimal(3600));
+        assertThat(result.get(TEST_UUID_7).getJourney().get().getLegs().get(TEST_UUID_12).getDestination().getStationName()).isEqualTo("Bad Endbach Sportzentrum");
+        assertThat(result.get(TEST_UUID_7).getJourney().get().getLegs().size()).isEqualTo(5);
 
-        assertThat(result.get(TEST_UUID_9).getJourney().get().getLegs().get(TEST_UUID_10).getStart().getStationName()).isEqualTo("Ulrichstein Wiesenhof");
-        assertThat(result.get(TEST_UUID_9).getJourney().get().getLegs().get(TEST_UUID_10).getDestination().getStationName()).isEqualTo("Bad Endbach Sportzentrum");
-        //assertThat(result.get(TEST_UUID_9).getJourney().get().getLegs().get(TEST_UUID_10).getPrice().getValue()).isEqualTo(3600.0);
-
-        assertThat(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getTravelLine().getBetweenHolds().size()).isEqualTo(6); // why 1?
-    }
-
-// this is for checking in with Henni
-/*
-    @Test
-    void test_getJourneyFrom_with_xml_stub_and_return_Journey_Frankfurt_Lorch() {
-        String tripListXml = getResourceFileAsString("xml/TripList.xml");
-
-        Map<UUID, JourneyStatus> result = classUnderTest.getJourneysFrom(tripListXml);
-
-        assertThat(result.size()).isEqualTo(5);
-        assertThat(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getStart().getStationName()).isEqualTo("Frankfurt (Main) Hauptbahnhof");
-        assertThat(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getDestination().getStationName()).isEqualTo("Lorch-Lorchhausen Bahnhof");
-        assertThat(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getTravelLine().getBetweenHolds().size()).isEqualTo(2);
-        assertThat(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getPrice().getValue()).isEqualTo(1235.0);
-
-        assertThat(result.get(TEST_UUID_3).getJourney().get().getLegs().get(TEST_UUID_3).getStart().getStationName()).isEqualTo("Frankfurt (Main) Hauptbahnhof");
-        assertThat(result.get(TEST_UUID_3).getJourney().get().getLegs().get(TEST_UUID_3).getDestination().getStationName()).isEqualTo("Lorch-Lorchhausen Bahnhof");
-        assertThat(result.get(TEST_UUID_3).getJourney().get().getLegs().get(TEST_UUID_3).getPrice().getValue()).isEqualTo(1235.0);
-        assertThat(result.get(TEST_UUID_3).getJourney().get().getLegs().get(TEST_UUID_3).getTravelLine().getBetweenHolds().size()).isEqualTo(2);
-
-        assertThat(result.get(TEST_UUID_3).getJourney().get().getStart().getStationName()).isEqualTo("Frankfurt (Main) Hauptbahnhof");
-        assertThat(result.get(TEST_UUID_3).getJourney().get().getDestination().getStationName()).isEqualTo("Lorch-Lorchhausen Bahnhof");
-        assertThat(result.get(TEST_UUID_3).getJourney().get().getPrice().getValue()).isEqualTo(1235.0);
-        assertThat(result.get(TEST_UUID_3).getJourney().get().getTravelLine().getBetweenHolds().size()).isEqualTo(2);
-
-        assertThat(result.get(TEST_UUID_4).getJourney().get().getStart().getStationName()).isEqualTo("Frankfurt (Main) Hauptbahnhof");
-        assertThat(result.get(TEST_UUID_4).getJourney().get().getDestination().getStationName()).isEqualTo("Lorch-Lorchhausen Bahnhof");
-        assertThat(result.get(TEST_UUID_4).getJourney().get().getPrice().getValue()).isEqualTo(1235.0);
-        assertThat(result.get(TEST_UUID_4).getJourney().get().getTravelLine().getBetweenHolds().size()).isEqualTo(2);
-
-        assertThat(result.get(TEST_UUID_5).getJourney().get().getStart().getStationName()).isEqualTo("Frankfurt (Main) Hauptbahnhof tief");
-        assertThat(result.get(TEST_UUID_5).getJourney().get().getDestination().getStationName()).isEqualTo("Lorch-Lorchhausen Bahnhof");
-        assertThat(result.get(TEST_UUID_5).getJourney().get().getPrice().getValue()).isEqualTo(1235.0);
-
-        assertThat(result.get(TEST_UUID_1).getJourney().get().getTravelLine().getBetweenHolds().size()).isEqualTo(2);
+        assertThat(result.get(TEST_UUID_13).getJourney().get().getLegs().get(TEST_UUID_14).getStart().getStationName()).isEqualTo("Ulrichstein Wiesenhof");
+        assertThat(result.get(TEST_UUID_13).getJourney().get().getLegs().get(TEST_UUID_14).getDestination().getStationName()).isEqualTo("Schotten Vulkaneum");
+        assertThat(result.get(TEST_UUID_13).getJourney().get().getLegs().get(TEST_UUID_14).getPrice().getValues().get(PriceCategory.ADULT)).isEqualTo(new BigDecimal(1235));
+        assertThat(result.get(TEST_UUID_13).getJourney().get().getLegs().get(TEST_UUID_14).getPrice().getValues().get(PriceCategory.CHILD)).isEqualTo(new BigDecimal(730));
+        assertThat(result.get(TEST_UUID_13).getJourney().get().getLegs().get(TEST_UUID_19).getDestination().getStationName()).isEqualTo("Bad Endbach Sportzentrum");
+        assertThat(result.get(TEST_UUID_13).getJourney().get().getLegs().size()).isEqualTo(6);
     }
 
 
     @SuppressWarnings("OptionalGetWithoutIsPresent")
     @Test
-    void test_getJourneyFrom_with_xml_stub_and_return_Journey_Ulrichstein_Endbach() {
-        String tripListXml = getResourceFileAsString("xml/TripList-edge-case.xml");
+    void test_getJourneyFrom_with_xml_stub_and_return_Journey_Frankfurt_Lorch_() {
+        String tripListXml = getResourceFileAsString("xml/RequestWithDate.xml");
 
         Map<UUID, JourneyStatus> result = classUnderTest.getJourneysFrom(tripListXml);
 
         assertThat(result.size()).isEqualTo(5);
-        assertThat(result.get(TEST_UUID_1).getJourney().get().getStart().getStationName()).isEqualTo("Ulrichstein Wiesenhof");
-        assertThat(result.get(TEST_UUID_1).getJourney().get().getDestination().getStationName()).isEqualTo("Bad Endbach Sportzentrum");
-        assertThat(result.get(TEST_UUID_1).getJourney().get().getTravelLine().getBetweenHolds().size()).isEqualTo(6);
-        assertThat(result.get(TEST_UUID_1).getJourney().get().getPrice().getValue()).isEqualTo(3600.0);
-        assertThat(result.get(TEST_UUID_2).getJourney().get().getStart().getStationName()).isEqualTo("Ulrichstein Wiesenhof");
-        assertThat(result.get(TEST_UUID_2).getJourney().get().getDestination().getStationName()).isEqualTo("Bad Endbach Sportzentrum");
-        assertThat(result.get(TEST_UUID_2).getJourney().get().getPrice().getValue()).isEqualTo(3600.0);
-        assertThat(result.get(TEST_UUID_2).getJourney().get().getTravelLine().getBetweenHolds().size()).isEqualTo(6);
-        assertThat(result.get(TEST_UUID_3).getJourney().get().getStart().getStationName()).isEqualTo("Ulrichstein Wiesenhof");
-        assertThat(result.get(TEST_UUID_3).getJourney().get().getDestination().getStationName()).isEqualTo("Bad Endbach Sportzentrum");
-        assertThat(result.get(TEST_UUID_3).getJourney().get().getPrice().getValue()).isEqualTo(1235.0);
-        assertThat(result.get(TEST_UUID_3).getJourney().get().getTravelLine().getBetweenHolds().size()).isEqualTo(7);
-        assertThat(result.get(TEST_UUID_4).getJourney().get().getStart().getStationName()).isEqualTo("Ulrichstein Wiesenhof");
-        assertThat(result.get(TEST_UUID_4).getJourney().get().getDestination().getStationName()).isEqualTo("Bad Endbach Sportzentrum");
-        assertThat(result.get(TEST_UUID_4).getJourney().get().getPrice().getValue()).isEqualTo(0.0);
-        assertThat(result.get(TEST_UUID_4).getJourney().get().getTravelLine().getBetweenHolds().size()).isEqualTo(7);
-        assertThat(result.get(TEST_UUID_5).getJourney().get().getStart().getStationName()).isEqualTo("Ulrichstein Wiesenhof");
-        assertThat(result.get(TEST_UUID_5).getJourney().get().getDestination().getStationName()).isEqualTo("Bad Endbach Sportzentrum");
-        assertThat(result.get(TEST_UUID_5).getJourney().get().getPrice().getValue()).isEqualTo(3600.0);
-        assertThat(result.get(TEST_UUID_1).getJourney().get().getTravelLine().getBetweenHolds().size()).isEqualTo(6);
-    }*/
+        assertThat(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getStart().getStationName()).isEqualTo("Lorch-Lorchhausen Bahnhof");
+        assertThat(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_4).getDestination().getStationName()).isEqualTo("Frankfurt (Main) Flughafen Fernbahnhof");
+        assertThat(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getPrice().getValues().get(PriceCategory.ADULT)).isEqualTo(new BigDecimal(1250));
+        assertThat(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getPrice().getValues().get(PriceCategory.CHILD)).isEqualTo(new BigDecimal(730));
+        assertThat(result.get(TEST_UUID_1).getJourney().get().getLegs().size()).isEqualTo(3);
+
+        assertThat(result.get(TEST_UUID_13).getJourney().get().getLegs().get(TEST_UUID_14).getStart().getStationName()).isEqualTo("Lorch-Lorchhausen Bahnhof");
+        assertThat(result.get(TEST_UUID_13).getJourney().get().getLegs().get(TEST_UUID_16).getDestination().getStationName()).isEqualTo("Frankfurt (Main) Flughafen Fernbahnhof");
+        assertThat(result.get(TEST_UUID_13).getJourney().get().getLegs().get(TEST_UUID_14).getPrice().getValues().get(PriceCategory.ADULT)).isEqualTo(new BigDecimal(870));
+        assertThat(result.get(TEST_UUID_13).getJourney().get().getLegs().get(TEST_UUID_14).getPrice().getValues().get(PriceCategory.CHILD)).isEqualTo(new BigDecimal(510));
+        assertThat(result.get(TEST_UUID_13).getJourney().get().getLegs().size()).isEqualTo(3);
+    }
+
 
 }
