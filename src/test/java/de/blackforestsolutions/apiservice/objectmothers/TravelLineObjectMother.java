@@ -6,7 +6,7 @@ import java.text.ParseException;
 import java.util.Collections;
 import java.util.Map;
 
-import static de.blackforestsolutions.apiservice.objectmothers.TravelpointObjectMother.*;
+import static de.blackforestsolutions.apiservice.objectmothers.TravelPointObjectMother.*;
 
 public class TravelLineObjectMother {
 

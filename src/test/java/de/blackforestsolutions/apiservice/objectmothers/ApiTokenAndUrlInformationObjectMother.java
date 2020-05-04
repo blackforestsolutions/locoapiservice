@@ -1,6 +1,7 @@
 package de.blackforestsolutions.apiservice.objectmothers;
 
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
+import de.blackforestsolutions.datamodel.Coordinates;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 
@@ -608,4 +609,38 @@ public class ApiTokenAndUrlInformationObjectMother {
         return builder.build();
     }
 
+    public static ApiTokenAndUrlInformation getAirportsFinderTokenAndUrl() {
+        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
+
+        builder.setProtocol("https");
+        builder.setHost("cometari-airportsfinder-v1.p.rapidapi.com");
+        builder.setPort(8080);
+        builder.setPathVariable("api/airports/by-radius");
+        Coordinates.CoordinatesBuilder departureCoordinates = new Coordinates.CoordinatesBuilder();
+        departureCoordinates.setLatitude(48.1301564);
+        departureCoordinates.setLongitude(8.2324351);
+        builder.setDepartureCoordinates(departureCoordinates.build());
+
+        builder.setAuthorizationKey("x-rapidapi-key");
+        builder.setAuthorization("b441403e78mshfe074d6ec0c2af2p1be89cjsn04932ccb889e");
+        builder.setPath("/api/airports/by-radius;radius=300;lng=8.2324351;lat=48.1301564");
+        return builder.build();
+    }
+
+    public static ApiTokenAndUrlInformation getAirportsFinderTokenAndUrlIT() {
+        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
+
+        builder.setProtocol("https");
+        builder.setHost("cometari-airportsfinder-v1.p.rapidapi.com");
+        builder.setPathVariable("api/airports/by-radius");
+        Coordinates.CoordinatesBuilder departureCoordinates = new Coordinates.CoordinatesBuilder();
+        departureCoordinates.setLatitude(48.1301564);
+        departureCoordinates.setLongitude(8.2324351);
+        builder.setDepartureCoordinates(departureCoordinates.build());
+
+        builder.setAuthorizationKey("x-rapidapi-key");
+        builder.setAuthorization("b441403e78mshfe074d6ec0c2af2p1be89cjsn04932ccb889e");
+        builder.setPath("/api/airports/by-radius?radius=300&lng=8.2324351&lat=48.1301564");
+        return builder.build();
+    }
 }

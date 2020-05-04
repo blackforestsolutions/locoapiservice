@@ -2,7 +2,7 @@ package de.blackforestsolutions.apiservice.service.communicationservice;
 
 import de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother;
 import de.blackforestsolutions.apiservice.objectmothers.JourneyObjectMother;
-import de.blackforestsolutions.apiservice.objectmothers.TravelpointObjectMother;
+import de.blackforestsolutions.apiservice.objectmothers.TravelPointObjectMother;
 import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.SearchChCallCallServiceImpl;
 import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.SearchChCallService;
 import de.blackforestsolutions.apiservice.service.mapper.JourneyStatusBuilder;
@@ -55,7 +55,7 @@ class SearchChApiServiceTest {
         //noinspection unchecked (justification: no type known for runtime therefore)
         Mockito.doReturn(testResult).when(REST_TEMPLATE).exchange(Mockito.anyString(), Mockito.any(), Mockito.any(), Mockito.any(Class.class));
         Map<String, TravelPoint> mockedStationMap = new HashMap<>();
-        TravelPoint mockedTravelPoint = TravelpointObjectMother.getEinsiedelnTravelPoint();
+        TravelPoint mockedTravelPoint = TravelPointObjectMother.getEinsiedelnTravelPoint();
         mockedStationMap.put(mockedTravelPoint.getStationId(), mockedTravelPoint);
         Mockito.when(searchChMapperService.getTravelPointFrom(Mockito.anyString())).thenReturn(mockedStationMap);
 
