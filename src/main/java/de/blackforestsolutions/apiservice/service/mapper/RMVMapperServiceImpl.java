@@ -6,8 +6,6 @@ import de.blackforestsolutions.datamodel.Leg;
 import de.blackforestsolutions.datamodel.*;
 import de.blackforestsolutions.generatedcontent.rmv.hafas_rest.*;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,10 +29,8 @@ public class RMVMapperServiceImpl implements RMVMapperService {
 
     private static final int START_INDEX = 0;
     private static final int SECOND_INDEX = 1;
-    private static final Logger LOGGER = LoggerFactory.getLogger(RMVMapperServiceImpl.class);
-    private static final int INDEX_SUBTRACTION = 1;
     private final UuidService uuidService;
-    int counter = 0;
+    private int counter = 0;
     private JAXBContext jaxbContext;
     private Unmarshaller unmarshaller;
 

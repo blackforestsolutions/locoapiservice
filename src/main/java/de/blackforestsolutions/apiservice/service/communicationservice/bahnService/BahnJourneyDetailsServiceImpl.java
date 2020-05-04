@@ -98,7 +98,7 @@ public class BahnJourneyDetailsServiceImpl implements BahnJourneyDetailsService 
 
     private Journey buildJourneyWith(List<JourneyDetail> journeyDetailsStop) {
         Journey.JourneyBuilder journey = new Journey.JourneyBuilder(uuidService.createUUID());
-        LinkedHashMap<UUID, Leg> legs = new LinkedHashMap();
+        LinkedHashMap<UUID, Leg> legs = new LinkedHashMap<>();
         Leg leg = buildLegWith(journeyDetailsStop);
         legs.put(leg.getId(), leg);
         journey.setLegs(legs);

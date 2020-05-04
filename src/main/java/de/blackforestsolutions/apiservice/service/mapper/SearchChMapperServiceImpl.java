@@ -29,13 +29,24 @@ import static de.blackforestsolutions.apiservice.configuration.LocaleConfigurati
 @Service
 public class SearchChMapperServiceImpl implements SearchChMapperService {
 
-    private static final int START_INDEX = 0;
-    private static final String STRAIN = "strain";
-    private static final String WALK = "walk";
-    private static final String TRAM = "tram";
-    private static final String EXPRESS_TRAIN = "express_train";
-    private static final String BUS = "bus";
-    private static final String TRAIN = "train";
+    private enum SearchChVehicleType {
+        STRAIN(VehicleType.TRAIN),
+        WALK(VehicleType.WALK),
+        TRAM(VehicleType.TRAIN),
+        EXPRESS_TRAIN(VehicleType.TRAIN),
+        BUS(VehicleType.BUS),
+        TRAIN(VehicleType.TRAIN);
+
+        private final VehicleType vehicleType;
+
+        SearchChVehicleType(VehicleType vehicleType) {
+            this.vehicleType = vehicleType;
+        }
+
+        VehicleType getVehicleType() {
+            return vehicleType;
+        }
+    }
 
     private final UuidService uuidService;
 
@@ -89,7 +100,7 @@ public class SearchChMapperServiceImpl implements SearchChMapperService {
                 .stream()
                 .limit(legs.size() - 1)
                 .map(this::buildLegWith)
-                .collect(Collectors.toMap(leg -> leg.getId(), leg -> leg, (prev, next) -> next, LinkedHashMap::new));
+                .collect(Collectors.toMap(de.blackforestsolutions.datamodel.Leg::getId, leg -> leg, (prev, next) -> next, LinkedHashMap::new));
     }
 
     private de.blackforestsolutions.datamodel.Leg buildLegWith(Leg betweenTrip) {
@@ -154,24 +165,6 @@ public class SearchChMapperServiceImpl implements SearchChMapperService {
                     Optional.ofNullable(exit.getTrack()).ifPresent(travelPoint::setPlatform);
                     return travelPoint.build();
                 }).orElseGet(() -> new TravelPoint.TravelPointBuilder().build());
-    }
-
-    private static TravelPoint buildTravelPointWith(Connection connection, boolean isStart) {
-        TravelPoint.TravelPointBuilder travelPoint = new TravelPoint.TravelPointBuilder();
-        if (isStart) {
-            travelPoint.setStationName(connection.getFrom());
-            Optional.ofNullable(connection.getLegs().get(START_INDEX).getStopid()).ifPresent(travelPoint::setStationId);
-            Leg start = connection.getLegs().get(START_INDEX);
-            travelPoint.setGpsCoordinates(buildCoordinatesFrom(start.getX(), start.getY()));
-        } else {
-            int destinationIndex = connection.getLegs().size() - 1;
-            travelPoint.setStationName(connection.getTo());
-            Optional.ofNullable(connection.getLegs().get(destinationIndex).getStopid()).ifPresent(travelPoint::setStationId);
-            Leg destination = connection.getLegs().get(destinationIndex);
-            travelPoint.setGpsCoordinates(buildCoordinatesFrom(destination.getX(), destination.getY()));
-        }
-        travelPoint.setCountry(LOCALE_SWITZERLAND);
-        return travelPoint.build();
     }
 
     private static void buildTravelProviderWith(Leg betweenTrip, de.blackforestsolutions.datamodel.Leg.LegBuilder leg) {
@@ -239,11 +232,10 @@ public class SearchChMapperServiceImpl implements SearchChMapperService {
     }
 
     private VehicleType getVehicleType(String vehicleType) {
-        return switch (vehicleType) {
-            case STRAIN, TRAM, EXPRESS_TRAIN, TRAIN -> VehicleType.TRAIN;
-            case WALK -> VehicleType.WALK;
-            case BUS -> VehicleType.BUS;
-            default -> null;
-        };
+        return Arrays.stream(SearchChVehicleType.values())
+                .filter(searchChVehicleType -> searchChVehicleType.name().equals(StringUtils.upperCase(vehicleType)))
+                .findFirst()
+                .map(SearchChVehicleType::getVehicleType)
+                .orElse(null);
     }
 }

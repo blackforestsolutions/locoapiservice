@@ -6,7 +6,10 @@ import de.blackforestsolutions.apiservice.service.mapper.HvvMapperService;
 import de.blackforestsolutions.apiservice.service.supportservice.hvv.HvvJourneyHttpCallBuilderService;
 import de.blackforestsolutions.apiservice.service.supportservice.hvv.HvvStationListHttpCallBuilderService;
 import de.blackforestsolutions.apiservice.service.supportservice.hvv.HvvTravelPointHttpCallBuilderService;
-import de.blackforestsolutions.datamodel.*;
+import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
+import de.blackforestsolutions.datamodel.CallStatus;
+import de.blackforestsolutions.datamodel.JourneyStatus;
+import de.blackforestsolutions.datamodel.Status;
 import de.blackforestsolutions.generatedcontent.hvv.request.HvvStation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +17,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 

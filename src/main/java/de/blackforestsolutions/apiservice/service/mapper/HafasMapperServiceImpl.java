@@ -20,7 +20,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 import static de.blackforestsolutions.apiservice.util.CoordinatesUtil.convertWGS84ToCoordinatesWith;
-import static org.apache.commons.lang.StringUtils.deleteWhitespace;
 
 @Slf4j
 @Service
@@ -35,25 +34,37 @@ public class HafasMapperServiceImpl implements HafasMapperService {
     private static final String WALK = "WALK";
     private static final String TRANSFER = "TRSF";
 
-    private static final String BUS = "Bus";
-    private static final String REGIONAL_TRAIN_RE = "RE";
-    private static final String REGIONAL_TRAIN_IC = "IC";
-    private static final String REGIONAL_TRAIN_R = "R";
-    private static final String REGIONAL_TRAIN_RB = "RB";
-    private static final String TRAIN_ICE = "ICE";
-    private static final String TRAIN_CJX = "CJX";
-    private static final String TRAIN_RJX = "RJX";
-    private static final String TAXI = "AST";
-    private static final String SBAHN_S = "S";
-    private static final String SBAHN_STR = "STR";
-    private static final String UBAHN = "U";
-    private static final String TRAM = "RT";
+    private enum HafasVehicleType {
+        BUS(VehicleType.BUS),
+        RE(VehicleType.TRAIN),
+        IC(VehicleType.TRAIN),
+        R(VehicleType.TRAIN),
+        RB(VehicleType.TRAIN),
+        ICE(VehicleType.TRAIN),
+        CJX(VehicleType.TRAIN),
+        RJX(VehicleType.TRAIN),
+        AST(VehicleType.CAR),
+        S(VehicleType.TRAIN),
+        STR(VehicleType.TRAIN),
+        U(VehicleType.TRAIN),
+        RT(VehicleType.TRAIN);
 
-    private final UuidService uuidService;
+        private final VehicleType vehicleType;
+
+        HafasVehicleType(VehicleType vehicleType) {
+            this.vehicleType = vehicleType;
+        }
+
+        VehicleType getVehicleType() {
+            return vehicleType;
+        }
+    }
 
     private List<LocL> locations;
     private List<ProdL> vehicles;
     private String date;
+
+    private final UuidService uuidService;
 
     @Autowired
     public HafasMapperServiceImpl(UuidService uuidService) {
@@ -124,7 +135,7 @@ public class HafasMapperServiceImpl implements HafasMapperService {
         return betweenTrips
                 .stream()
                 .map(secL -> getLegFrom(secL, travelProvider, price, counter.getAndIncrement()))
-                .collect(Collectors.toMap(leg -> leg.getId(), leg -> leg, (prev, next) -> next, LinkedHashMap::new));
+                .collect(Collectors.toMap(Leg::getId, leg -> leg, (prev, next) -> next, LinkedHashMap::new));
     }
 
     private Leg getLegFrom(SecL betweenTrip, TravelProvider travelProvider, Price price, int index) {
@@ -234,13 +245,11 @@ public class HafasMapperServiceImpl implements HafasMapperService {
     }
 
     private VehicleType getVehicleType(String vehicleType) {
-        return switch (deleteWhitespace(vehicleType)) {
-            case BUS -> VehicleType.BUS;
-            case REGIONAL_TRAIN_RE, REGIONAL_TRAIN_IC, REGIONAL_TRAIN_R, REGIONAL_TRAIN_RB,
-                    TRAIN_ICE, TRAIN_CJX, TRAIN_RJX, SBAHN_S, SBAHN_STR, UBAHN, TRAM -> VehicleType.TRAIN;
-            case TAXI -> VehicleType.CAR;
-            default -> null;
-        };
+        return Arrays.stream(HafasVehicleType.values())
+                .filter(hafasVehicleTypes -> hafasVehicleTypes.name().equals(StringUtils.upperCase(vehicleType)))
+                .findFirst()
+                .map(HafasVehicleType::getVehicleType)
+                .orElse(null);
     }
 
 }

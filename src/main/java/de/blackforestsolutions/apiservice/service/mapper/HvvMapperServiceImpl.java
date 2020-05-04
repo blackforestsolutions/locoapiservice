@@ -34,14 +34,27 @@ public class HvvMapperServiceImpl implements HvvMapperService {
 
     private static final int FIRST_INDEX = 0;
     private static final int SECOND_INDEX = 1;
-    private static final String BUS = "BUS";
-    private static final String TRAIN = "TRAIN";
-    private static final String SHIP = "SHIP";
-    private static final String WALK = "FOOTPATH";
-    private static final String BICYCLE = "BICYCLE";
-    private static final String AIRPLANE = "AIRPLANE";
-    private static final String TRANSFER = "CHANGE";
-    private static final String TRANSFER_SAME_PLATFORM = "CHANGE_SAME_PLATFORM";
+
+    private enum HvvVehicleType {
+        BUS(VehicleType.BUS),
+        TRAIN(VehicleType.TRAIN),
+        SHIP(VehicleType.FERRY),
+        FOOTPATH(VehicleType.WALK),
+        BICYCLE(VehicleType.BIKE),
+        AIRPLANE(VehicleType.PLANE),
+        CHANGE(VehicleType.WALK),
+        CHANGE_SAME_PLATFORM(VehicleType.WALK);
+
+        private final VehicleType vehicleType;
+
+        HvvVehicleType(VehicleType vehicleType) {
+            this.vehicleType = vehicleType;
+        }
+
+        VehicleType getVehicleType() {
+            return vehicleType;
+        }
+    }
 
     private final UuidService uuidService;
 
@@ -204,7 +217,7 @@ public class HvvMapperServiceImpl implements HvvMapperService {
         return legs
                 .stream()
                 .map(leg -> buildLegWith(leg, price, counter.getAndIncrement()))
-                .collect(Collectors.toMap(leg -> leg.getId(), leg -> leg, (prev, next) -> next, LinkedHashMap::new));
+                .collect(Collectors.toMap(Leg::getId, leg -> leg, (prev, next) -> next, LinkedHashMap::new));
     }
 
     private Leg buildLegWith(ScheduleElement scheduleElement, Price price, int index) {
@@ -227,7 +240,7 @@ public class HvvMapperServiceImpl implements HvvMapperService {
         leg.setIncidents(scheduleElement.getAttributes().stream()
                 .map(Attribute::getValue)
                 .collect(Collectors.toList()));
-        if (!vehicleType.equals(WALK) && !vehicleType.equals(BICYCLE) && !vehicleType.equals(TRANSFER) && !vehicleType.equals(TRANSFER_SAME_PLATFORM)) {
+        if (leg.getVehicleType() != VehicleType.WALK && leg.getVehicleType() != VehicleType.BIKE) {
             leg.setTravelLine(buildTravelLineWith(scheduleElement));
             leg.setProviderId(scheduleElement.getLine().getId());
         }
@@ -249,14 +262,10 @@ public class HvvMapperServiceImpl implements HvvMapperService {
     }
 
     private VehicleType getVehicleType(String vehicleType) {
-        return switch (vehicleType) {
-            case BUS -> VehicleType.BUS;
-            case TRAIN -> VehicleType.TRAIN;
-            case SHIP -> VehicleType.FERRY;
-            case WALK, TRANSFER, TRANSFER_SAME_PLATFORM -> VehicleType.WALK;
-            case BICYCLE -> VehicleType.BIKE;
-            case AIRPLANE -> VehicleType.PLANE;
-            default -> null;
-        };
+        return Arrays.stream(HvvVehicleType.values())
+                .filter(hvvVehicleType -> hvvVehicleType.name().equals(vehicleType))
+                .findFirst()
+                .map(HvvVehicleType::getVehicleType)
+                .orElse(null);
     }
 }

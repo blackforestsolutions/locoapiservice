@@ -19,7 +19,7 @@ import org.springframework.web.client.RestTemplate;
 
 import static de.blackforestsolutions.apiservice.testutils.TestUtils.getResourceFileAsString;
 
-public class OSMApiServiceTest {
+class OSMApiServiceTest {
     private static final RestTemplate restTemplate = Mockito.mock(RestTemplate.class);
 
     private final RestTemplateBuilder restTemplateBuilder = new RestTemplateBuilderStub(restTemplate);
@@ -31,7 +31,7 @@ public class OSMApiServiceTest {
     private final OSMApiService classUnderTest = new OSMApiServiceImpl(osmCallService, osmHttpCallBuilderService);
 
     @Test
-    public void test_getCoordinatesFromTavelpointWith_mocked_json_apiToken_return_correct_departure_coordinates() {
+    void test_getCoordinatesFromTavelpointWith_mocked_json_apiToken_return_correct_departure_coordinates() {
         ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getOSMApiTokenAndUrlIT();
         String departureJson = getResourceFileAsString("json/osmTravelPointDeparture.json");
         ResponseEntity<String> testResultDeparture = new ResponseEntity<>(departureJson, HttpStatus.OK);
@@ -46,7 +46,7 @@ public class OSMApiServiceTest {
     }
 
     @Test
-    public void test_getCoordinatesFromTavelpointWith_mocked_json_apiToken_return_correct_arrival_coordinates() {
+    void test_getCoordinatesFromTavelpointWith_mocked_json_apiToken_return_correct_arrival_coordinates() {
         ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getOSMApiTokenAndUrlIT();
         String arrivalJson = getResourceFileAsString("json/osmTravelPointArrival.json");
         ResponseEntity<String> testResultArrival = new ResponseEntity<>(arrivalJson, HttpStatus.OK);

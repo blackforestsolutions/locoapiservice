@@ -4,7 +4,6 @@ import de.blackforestsolutions.apiservice.objectmothers.JourneyObjectMother;
 import de.blackforestsolutions.apiservice.service.supportservice.UuidService;
 import de.blackforestsolutions.datamodel.*;
 import org.assertj.core.api.Assertions;
-import org.assertj.core.groups.Tuple;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -12,7 +11,9 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.text.ParseException;
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.UUID;
 
 import static de.blackforestsolutions.apiservice.objectmothers.UUIDObjectMother.*;
 import static de.blackforestsolutions.apiservice.testutils.TestUtils.getResourceFileAsString;

@@ -1,11 +1,9 @@
 package de.blackforestsolutions.apiservice.objectmothers;
 
 import de.blackforestsolutions.datamodel.TravelLine;
-import de.blackforestsolutions.datamodel.TravelPoint;
 
 import java.text.ParseException;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
 
 import static de.blackforestsolutions.apiservice.objectmothers.TravelpointObjectMother.*;
@@ -21,21 +19,6 @@ public class TravelLineObjectMother {
                 2, getZoologischerGartenBhfTravelPoint()
         ));
         return travelLine.build();
-    }
-
-    static TravelLine getHvvTravelLine() throws ParseException {
-        TravelLine.TravelLineBuilder travelLine = new TravelLine.TravelLineBuilder();
-        travelLine.setOrigin(getOriginHvvTravelPoint());
-        travelLine.setBetweenHolds(getHvvHoldsBetween());
-        travelLine.setDirection(getDirectionHvvTravelPoint());
-        return travelLine.build();
-    }
-
-    private static Map<Integer, TravelPoint> getHvvHoldsBetween() throws ParseException {
-        Map<Integer, TravelPoint> betweenHolds = new HashMap<>();
-        betweenHolds.put(0, getLandwehrHvvTravelPoint());
-        betweenHolds.put(1, getBerlinerTorHvvTravelPoint());
-        return betweenHolds;
     }
 
     static TravelLine getGartenstrasseRendsburgTravelLine() {
