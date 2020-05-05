@@ -11,7 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -35,8 +34,9 @@ public class AirportsFinderMapperServiceImpl implements AirportsFinderMapperServ
     private CallStatus retrieveAirportsFinding(String jsonString) {
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         try {
-            return new CallStatus(mapper.readValue(jsonString, List.class), Status.SUCCESS, null);
+            return new CallStatus(mapper.readValue(jsonString, mapper.getTypeFactory().constructCollectionType(List.class, AirportsFinding.class)), Status.SUCCESS, null);
         } catch (JsonProcessingException e) {
             log.error("Error during mapping json to Object: {}", jsonString, e);
             return new CallStatus(null, Status.FAILED, e);
@@ -46,9 +46,8 @@ public class AirportsFinderMapperServiceImpl implements AirportsFinderMapperServ
     @SuppressWarnings("unchecked")
     private LinkedHashSet<CallStatus> mapAirportFindingsToTravelPointList(CallStatus airportsFindingStatus) {
         if (airportsFindingStatus.getCalledObject() != null) {
-            List<LinkedHashMap<String, Object>> airportsFindingList = (List<LinkedHashMap<String, Object>>) airportsFindingStatus.getCalledObject();
-            List<AirportsFinding> airportsFindings = AirportsFinderAirportsFindingMapper.map(airportsFindingList);
-            return airportsFindings
+            List<AirportsFinding> airportsFindingList = (List<AirportsFinding>) airportsFindingStatus.getCalledObject();
+            return airportsFindingList
                     .stream()
                     .map(this::buildTravelPointWith)
                     .collect(Collectors.toCollection(LinkedHashSet::new));
