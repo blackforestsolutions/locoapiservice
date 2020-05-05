@@ -28,6 +28,7 @@ import java.util.stream.Collectors;
 
 import static de.blackforestsolutions.apiservice.service.mapper.MapperService.checkIfStringPropertyExists;
 import static de.blackforestsolutions.apiservice.service.mapper.MapperService.generateDurationFromStartToDestination;
+import static de.blackforestsolutions.apiservice.service.mapper.MapperService.setPriceForLegBy;
 
 @Service
 @Slf4j
@@ -241,14 +242,16 @@ public class HvvMapperServiceImpl implements HvvMapperService {
         leg.setIncidents(scheduleElement.getAttributes().stream()
                 .map(Attribute::getValue)
                 .collect(Collectors.toList()));
+        setTravelLineAndProviderId(leg, scheduleElement);
+        setPriceForLegBy(index, leg, price);
+        return leg.build();
+    }
+
+    private void setTravelLineAndProviderId(Leg.LegBuilder leg, ScheduleElement scheduleElement) {
         if (leg.getVehicleType() != VehicleType.WALK && leg.getVehicleType() != VehicleType.BIKE) {
             leg.setTravelLine(buildTravelLineWith(scheduleElement));
             leg.setProviderId(scheduleElement.getLine().getId());
         }
-        if (index == FIRST_INDEX) {
-            leg.setPrice(price);
-        }
-        return leg.build();
     }
 
     private List<TravelPoint> mapHvvStationListToTravelPointList(HvvStationList hvvStationList) {

@@ -1,6 +1,7 @@
 package de.blackforestsolutions.apiservice.service.mapper;
 
 import de.blackforestsolutions.apiservice.configuration.CurrencyConfiguration;
+import de.blackforestsolutions.datamodel.Leg;
 import de.blackforestsolutions.datamodel.Price;
 import de.blackforestsolutions.datamodel.PriceCategory;
 import de.blackforestsolutions.generatedcontent.hafas.response.journey.TrfRes;
@@ -39,5 +40,11 @@ public class MapperService {
         return Map.of(
                 PriceCategory.ADULT, new BigDecimal(sb.toString())
         );
+    }
+
+    static void setPriceForLegBy(int index, Leg.LegBuilder leg, Price price) {
+        if (index == FIRST_INDEX) {
+            leg.setPrice(price);
+        }
     }
 }

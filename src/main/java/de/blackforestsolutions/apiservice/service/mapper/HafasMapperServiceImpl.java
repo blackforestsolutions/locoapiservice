@@ -20,6 +20,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 import static de.blackforestsolutions.apiservice.util.CoordinatesUtil.convertWGS84ToCoordinatesWith;
+import static de.blackforestsolutions.apiservice.service.mapper.MapperService.setPriceForLegBy;
 
 @Slf4j
 @Service
@@ -146,10 +147,22 @@ public class HafasMapperServiceImpl implements HafasMapperService {
         leg.setArrivalTime(buildDateWith(date, betweenTrip.getArr().getATimeS()));
         leg.setDuration(generateDurationBetween(leg.getStartTime(), leg.getArrivalTime()));
         Optional.ofNullable(betweenTrip.getArr().getATimeR()).ifPresent(prognosedArrivalTime -> leg.setDelay(generateDurationBetween(leg.getArrivalTime(), buildDateWith(date, prognosedArrivalTime))));
+        setLegForWalkWith(betweenTrip, leg);
+        setLegForJourneyWith(betweenTrip, travelProvider, leg);
+        logNoValidTypeForJourney(betweenTrip);
+        setPriceForLegBy(index, leg, price);
+        return leg.build();
+    }
+
+    private void setLegForWalkWith(SecL betweenTrip, Leg.LegBuilder leg) {
         if (betweenTrip.getType().equals(WALK) || betweenTrip.getType().equals(TRANSFER)) {
             leg.setDistance(new Distance(betweenTrip.getGis().getDist()));
             leg.setVehicleType(VehicleType.WALK);
-        } else if (betweenTrip.getType().equals(JOURNEY) || betweenTrip.getType().equals(TELE_TAXI)) {
+        }
+    }
+
+    private void setLegForJourneyWith(SecL betweenTrip, TravelProvider travelProvider, Leg.LegBuilder leg) {
+        if (betweenTrip.getType().equals(JOURNEY) || betweenTrip.getType().equals(TELE_TAXI)) {
             Jny hafasLeg = betweenTrip.getJny();
             leg.setProviderId(hafasLeg.getJid());
             leg.setTravelProvider(travelProvider);
@@ -158,13 +171,13 @@ public class HafasMapperServiceImpl implements HafasMapperService {
             leg.setVehicleType(getVehicleType(vehicle.getProdCtx().getCatOut()));
             leg.setVehicleName(vehicle.getProdCtx().getCatOutL());
             leg.setVehicleNumber(vehicle.getName());
-        } else {
+        }
+    }
+
+    private void logNoValidTypeForJourney(SecL betweenTrip) {
+        if (!betweenTrip.getType().equals(WALK) && !betweenTrip.getType().equals(TRANSFER) && !betweenTrip.getType().equals(JOURNEY) && !betweenTrip.getType().equals(TELE_TAXI)) {
             log.info("No valid type for leg found in: ".concat(HafasMapperService.class.getName()));
         }
-        if (index == 0) {
-            leg.setPrice(price);
-        }
-        return leg.build();
     }
 
     private TravelLine buildTravelLineWith(Jny betweenHolds) {
