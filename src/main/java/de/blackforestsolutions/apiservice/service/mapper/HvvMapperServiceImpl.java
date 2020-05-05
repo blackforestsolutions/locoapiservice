@@ -3,6 +3,7 @@ package de.blackforestsolutions.apiservice.service.mapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import de.blackforestsolutions.apiservice.configuration.CurrencyConfiguration;
 import de.blackforestsolutions.apiservice.service.supportservice.UuidService;
 import de.blackforestsolutions.datamodel.*;
 import de.blackforestsolutions.generatedcontent.hvv.request.HvvStation;
@@ -132,7 +133,7 @@ public class HvvMapperServiceImpl implements HvvMapperService {
     private static Price buildPriceFrom(List<TicketInfo> ticketInfos) {
         Price.PriceBuilder price = new Price.PriceBuilder();
         price.setCurrency(Currency.getInstance(Locale.GERMANY));
-        price.setSymbol("€");
+        price.setSymbol(CurrencyConfiguration.EURO);
         price.setValues(Map.of(
                 PriceCategory.ADULT, BigDecimal.valueOf(ticketInfos.get(FIRST_INDEX).getBasePrice()),
                 PriceCategory.ADULT_REDUCED, BigDecimal.valueOf(ticketInfos.get(FIRST_INDEX).getReducedBasePrice()),
@@ -244,7 +245,7 @@ public class HvvMapperServiceImpl implements HvvMapperService {
             leg.setTravelLine(buildTravelLineWith(scheduleElement));
             leg.setProviderId(scheduleElement.getLine().getId());
         }
-        if (index == 0) {
+        if (index == FIRST_INDEX) {
             leg.setPrice(price);
         }
         return leg.build();

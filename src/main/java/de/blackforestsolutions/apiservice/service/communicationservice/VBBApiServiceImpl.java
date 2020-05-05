@@ -1,5 +1,6 @@
 package de.blackforestsolutions.apiservice.service.communicationservice;
 
+import de.blackforestsolutions.apiservice.configuration.CurrencyConfiguration;
 import de.blackforestsolutions.apiservice.service.mapper.HafasPriceMapper;
 import de.blackforestsolutions.datamodel.*;
 import de.blackforestsolutions.generatedcontent.hafas.response.journey.TrfRes;
@@ -29,7 +30,7 @@ public class VBBApiServiceImpl implements VBBApiService {
 
     private static Price mapPrice(TrfRes trfRes) {
         Price.PriceBuilder price = new Price.PriceBuilder();
-        price.setSymbol("€");
+        price.setSymbol(CurrencyConfiguration.EURO);
         price.setCurrency(Currency.getInstance(Locale.GERMANY));
         price.setValues(convertPriceToPriceWithComma(trfRes.getFareSetL().get(FIRST_INDEX).getFareL().get(FIRST_INDEX).getTicketL().get(FIRST_INDEX).getPrc()));
         return price.build();

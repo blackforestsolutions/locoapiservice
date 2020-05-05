@@ -1,5 +1,6 @@
 package de.blackforestsolutions.apiservice.service.mapper;
 
+import de.blackforestsolutions.apiservice.configuration.CurrencyConfiguration;
 import de.blackforestsolutions.datamodel.Price;
 import de.blackforestsolutions.datamodel.PriceCategory;
 import de.blackforestsolutions.generatedcontent.hafas.response.journey.TrfRes;
@@ -25,7 +26,7 @@ public class MapperService {
 
     public static Price mapPriceForHafas(TrfRes trfRes) {
         Price.PriceBuilder price = new Price.PriceBuilder();
-        price.setSymbol("€");
+        price.setSymbol(CurrencyConfiguration.EURO);
         price.setCurrency(Currency.getInstance(Locale.GERMANY));
         price.setValues(convertPriceToPriceWithComma(trfRes.getFareSetL().get(FIRST_INDEX).getFareL().get(FIRST_INDEX).getPrc()));
         return price.build();

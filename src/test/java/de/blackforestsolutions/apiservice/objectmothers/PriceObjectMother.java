@@ -1,5 +1,6 @@
 package de.blackforestsolutions.apiservice.objectmothers;
 
+import de.blackforestsolutions.apiservice.configuration.CurrencyConfiguration;
 import de.blackforestsolutions.datamodel.Price;
 import de.blackforestsolutions.datamodel.PriceCategory;
 
@@ -12,7 +13,7 @@ public class PriceObjectMother {
         Price.PriceBuilder price = new Price.PriceBuilder();
         price.setValues(Map.of(PriceCategory.ADULT, new BigDecimal("2.20")));
         price.setCurrency(Currency.getInstance(Locale.GERMANY));
-        price.setSymbol("€");
+        price.setSymbol(CurrencyConfiguration.EURO);
         return price.build();
     }
 
@@ -20,7 +21,7 @@ public class PriceObjectMother {
         Price.PriceBuilder price = new Price.PriceBuilder();
         price.setValues(Map.of(PriceCategory.ADULT, new BigDecimal("3.60")));
         price.setCurrency(Currency.getInstance(Locale.GERMANY));
-        price.setSymbol("€");
+        price.setSymbol(CurrencyConfiguration.EURO);
         return price.build();
     }
 
@@ -39,13 +40,13 @@ public class PriceObjectMother {
                 PriceCategory.CHILD, "https://shop.hvv.de/index.php/generic/culture/de?return=https%3A%2F%2Fshop.hvv.de%2Findex.php%2Ffahrplanauskunft%3Fkarte%3DEinzelkarte+Kind%26bereich%3D5+Ringe%26start%3DElmshorn%252C%2BHainholz%26gueltig%3D2020-05-05%26zones%3DC%2CA",
                 PriceCategory.CHILD_REDUCED, "https://shop.hvv.de/index.php/generic/culture/de?return=https%3A%2F%2Fshop.hvv.de%2Findex.php%2Ffahrplanauskunft%3Fkarte%3DEinzelkarte+Kind%26bereich%3D5+Ringe%26start%3DElmshorn%252C%2BHainholz%26gueltig%3D2020-05-05%26zones%3DC%2CA"
         ));
-        price.setSymbol("€");
+        price.setSymbol(CurrencyConfiguration.EURO);
         return price.build();
     }
 
     public static Price getDBPrice() {
         Price.PriceBuilder price = new Price.PriceBuilder();
-        price.setSymbol("€");
+        price.setSymbol(CurrencyConfiguration.EURO);
         price.setCurrency(Currency.getInstance(Locale.GERMANY));
         price.setValues(Map.of(PriceCategory.ADULT, new BigDecimal("65.90")));
         return price.build();
