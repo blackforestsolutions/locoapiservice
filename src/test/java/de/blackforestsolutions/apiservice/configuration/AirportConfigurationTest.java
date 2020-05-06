@@ -19,7 +19,7 @@ class AirportConfigurationTest {
 
         Assertions.assertThat(airports.get("LAX").build())
                 .extracting(
-                        TravelPoint::getAirportName,
+                        TravelPoint::getStationName,
                         TravelPoint::getCity,
                         TravelPoint::getCountry)
                 .containsExactly(
@@ -30,7 +30,7 @@ class AirportConfigurationTest {
 
         Assertions.assertThat(airports.get("TXL").build())
                 .extracting(
-                        TravelPoint::getAirportName,
+                        TravelPoint::getStationName,
                         TravelPoint::getCity,
                         TravelPoint::getCountry)
                 .containsExactly(

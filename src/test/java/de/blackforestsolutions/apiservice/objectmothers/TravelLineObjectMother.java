@@ -1,11 +1,9 @@
 package de.blackforestsolutions.apiservice.objectmothers;
 
 import de.blackforestsolutions.datamodel.TravelLine;
-import de.blackforestsolutions.datamodel.TravelPoint;
 
 import java.text.ParseException;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
 
 import static de.blackforestsolutions.apiservice.objectmothers.TravelPointObjectMother.*;
@@ -23,21 +21,6 @@ public class TravelLineObjectMother {
         return travelLine.build();
     }
 
-    static TravelLine getHvvTravelLine() throws ParseException {
-        TravelLine.TravelLineBuilder travelLine = new TravelLine.TravelLineBuilder();
-        travelLine.setOrigin(getOriginHvvTravelPoint());
-        travelLine.setBetweenHolds(getHvvHoldsBetween());
-        travelLine.setDirection(getDirectionHvvTravelPoint());
-        return travelLine.build();
-    }
-
-    private static Map<Integer, TravelPoint> getHvvHoldsBetween() throws ParseException {
-        Map<Integer, TravelPoint> betweenHolds = new HashMap<>();
-        betweenHolds.put(0, getLandwehrHvvTravelPoint());
-        betweenHolds.put(1, getBerlinerTorHvvTravelPoint());
-        return betweenHolds;
-    }
-
     static TravelLine getGartenstrasseRendsburgTravelLine() {
         TravelLine.TravelLineBuilder travelLine = new TravelLine.TravelLineBuilder();
         travelLine.setDirection(getBuedelsdorfStadionTravelPoint());
@@ -48,7 +31,7 @@ public class TravelLineObjectMother {
     static TravelLine getRendsburgHamburgHbfTravelLine() {
         TravelLine.TravelLineBuilder travelLine = new TravelLine.TravelLineBuilder();
         travelLine.setDirection(getHamburgHbfTravelPointShort());
-        travelLine.setBetweenHolds(Collections.singletonMap(2, getElmshornTravelPoint()));
+        travelLine.setBetweenHolds(Collections.singletonMap(2, getHafasElmshornTravelPoint()));
         return travelLine.build();
     }
 
@@ -56,6 +39,23 @@ public class TravelLineObjectMother {
         TravelLine.TravelLineBuilder travelLine = new TravelLine.TravelLineBuilder();
         travelLine.setDirection(getStuttgartTravelPoint());
         travelLine.setBetweenHolds(Collections.singletonMap(0, getHannoverTravelPoint()));
+        return travelLine.build();
+    }
+
+    static TravelLine getElmshornHamburgAltonaTravelLine() throws ParseException {
+        TravelLine.TravelLineBuilder travelLine = new TravelLine.TravelLineBuilder();
+        travelLine.setOrigin(getWristTravelPoint());
+        travelLine.setDirection(getHamburgAltonaDirectionTravelPoint());
+        travelLine.setBetweenHolds(Map.of(
+                0, getPinnebergTravelPoint()
+        ));
+        return travelLine.build();
+    }
+
+    static TravelLine getHamburgDammtorUniversityTravelLine() {
+        TravelLine.TravelLineBuilder travelLine = new TravelLine.TravelLineBuilder();
+        travelLine.setOrigin(getHamburgHauptbahnhofDirectionTravelPoint());
+        travelLine.setDirection(getBurgwedelTravelPoint());
         return travelLine.build();
     }
 }

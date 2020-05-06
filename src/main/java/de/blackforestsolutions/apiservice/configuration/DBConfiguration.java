@@ -52,7 +52,7 @@ public class DBConfiguration {
         hafasStandardConfiguration.setApiName(hafasDbExtension);
         hafasStandardConfiguration.setChecksum(hafasDbChecksum);
         hafasStandardConfiguration.setHafasRtMode(hafasDbRtMode);
-        hafasStandardConfiguration.setCliendId(hafasDbClientId);
+        hafasStandardConfiguration.setClientId(hafasDbClientId);
         hafasStandardConfiguration.setClientVersion(hafasDbClientVersion);
         hafasStandardConfiguration.setClientName(hafasDbClientName);
         hafasStandardConfiguration.setClientType(hafasDbClientType);

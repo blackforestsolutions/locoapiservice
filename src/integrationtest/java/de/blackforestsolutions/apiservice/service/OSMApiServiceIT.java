@@ -17,7 +17,7 @@ import static de.blackforestsolutions.apiservice.service.supportservice.HttpCall
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class OSMApiServiceIT {
+class OSMApiServiceIT {
 
     @Autowired
     OSMCallService osmCallService;
@@ -26,7 +26,7 @@ public class OSMApiServiceIT {
     OSMHttpCallBuilderService osmHttpCallBuilderService;
 
     @Test
-    public void test_getCoordinates() {
+    void test_getCoordinates() {
         ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getOSMApiTokenAndUrlIT();
 
         ResponseEntity<String> result = osmCallService.getTravelPoints(buildUrlWith(testData).toString(), buildEmptyHttpEntity());
