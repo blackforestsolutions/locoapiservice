@@ -33,7 +33,7 @@ class RegionalTrainRidesControllerTest {
     private RegionalTrainRidesController initClassUnderTest() {
         RegionalTrainRidesController classUnderTest = new RegionalTrainRidesController(hvvApiService, rmvApiService, vbbApiService, nahShApiService);
         classUnderTest.setHvvApiTokenAndUrlInformation(ApiTokenAndUrlInformationObjectMother.getHvvJourneyTokenAndUrl());
-        classUnderTest.setRMVApiTokenAndUrlInformation(ApiTokenAndUrlInformationObjectMother.getRMVTokenAndUrl());
+        classUnderTest.setRMVApiTokenAndUrlInformation(ApiTokenAndUrlInformationObjectMother.getRMVTokenAndUrl("", ""));
         classUnderTest.setVbbApiTokenAndUrlInformation(ApiTokenAndUrlInformationObjectMother.getVBBTokenAndUrl("", ""));
         classUnderTest.setNahShApiTokenAndUrlInformation(ApiTokenAndUrlInformationObjectMother.getNahShTokenAndUrl("", ""));
         return classUnderTest;
