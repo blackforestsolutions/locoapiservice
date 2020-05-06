@@ -495,16 +495,16 @@ public class ApiTokenAndUrlInformationObjectMother {
         builder.setDeparture("ZRH");
         builder.setArrival("FRA");
         try {
-            builder.setDepartureDate(new SimpleDateFormat("yyyy-MM-dd").parse("2019-12-28"));
-            builder.setArrivalDate(new SimpleDateFormat("yyyy-MM-dd").parse("2019-12-28"));
+            builder.setDepartureDate(new SimpleDateFormat("yyyy-MM-dd").parse("2020-05-28"));
+            builder.setArrivalDate(new SimpleDateFormat("yyyy-MM-dd").parse("2020-05-28"));
         } catch (ParseException e) {
             log.error("Error While parsing Date", e);
         }
         builder.setAuthorizationKey("Authorization");
         builder.setXOriginationIp("88.66.47.47");
         builder.setXOriginationIpKey("X-Originating-IP");
-        builder.setAuthorization("Bearer n82nfwuh9jnpkmvrf7trbt3j");
-        builder.setPath("/v1/operations/schedules/ZRH/FRA/2019-12-28");
+        builder.setAuthorization("Bearer j4zud4dsm9dzaq8r3bked9s4");
+        builder.setPath("/v1/operations/schedules/ZRH/FRA/2020-05-28");
         return builder.build();
     }
 

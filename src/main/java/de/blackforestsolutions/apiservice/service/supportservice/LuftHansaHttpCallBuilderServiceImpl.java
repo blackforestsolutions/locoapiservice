@@ -1,6 +1,5 @@
 package de.blackforestsolutions.apiservice.service.supportservice;
 
-import de.blackforestsolutions.apiservice.configuration.AdditionalHttpHeadersConfiguration;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -52,7 +51,7 @@ public class LuftHansaHttpCallBuilderServiceImpl extends HttpCallBuilder impleme
 
     private void setLufthansaAuthorisationFor(HttpHeaders httpHeaders, ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
         httpHeaders.add(HttpHeaders.AUTHORIZATION, apiTokenAndUrlInformation.getAuthorization());
-        httpHeaders.add(AdditionalHttpHeadersConfiguration.X_ORIGINATING_IP, apiTokenAndUrlInformation.getXOriginationIp());
+        //httpHeaders.add(AdditionalHttpHeadersConfiguration.X_ORIGINATING_IP, apiTokenAndUrlInformation.getXOriginationIp());
     }
 
 

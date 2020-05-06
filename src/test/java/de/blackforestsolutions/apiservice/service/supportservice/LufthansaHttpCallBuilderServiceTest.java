@@ -5,7 +5,7 @@ import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-class LuftHansaHttpCallBuilderServiceTest {
+class LufthansaHttpCallBuilderServiceTest {
 
     private final LuftHansaHttpCallBuilderService classUnderTest = new LuftHansaHttpCallBuilderServiceImpl();
 
