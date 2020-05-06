@@ -1,3 +1,4 @@
-.idea/
+/.idea
+locoapiservice.iml
+classes/
 target/
-.iml
