@@ -1,7 +1,7 @@
 package de.blackforestsolutions.apiservice.service.communicationservice;
 
 import de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother;
-import de.blackforestsolutions.apiservice.objectmothers.JourneyObjectMother;
+import de.blackforestsolutions.apiservice.objectmothers.LegObjectMother;
 import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.HafasCallService;
 import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.HafasCallServiceImpl;
 import de.blackforestsolutions.apiservice.service.mapper.HafasMapperService;
@@ -11,8 +11,8 @@ import de.blackforestsolutions.apiservice.service.supportservice.hafas.HafasHttp
 import de.blackforestsolutions.apiservice.service.supportservice.hafas.HafasHttpCallBuilderServiceImpl;
 import de.blackforestsolutions.apiservice.stubs.RestTemplateBuilderStub;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
-import de.blackforestsolutions.datamodel.Journey;
 import de.blackforestsolutions.datamodel.JourneyStatus;
+import de.blackforestsolutions.datamodel.Leg;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,6 +26,7 @@ import java.util.UUID;
 
 import static de.blackforestsolutions.apiservice.objectmothers.UUIDObjectMother.*;
 import static de.blackforestsolutions.apiservice.testutils.TestUtils.getResourceFileAsString;
+import static de.blackforestsolutions.apiservice.objectmothers.PriceObjectMother.getDBPrice;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
@@ -67,7 +68,7 @@ class DBApiServiceTest {
         ResponseEntity<String> testResult = new ResponseEntity<>(scheduledResourceJson, HttpStatus.OK);
         String travelPointResourceJson = getResourceFileAsString("json/dbHafasKarlsruheTravelPoint.json");
         ResponseEntity<String> travelPointResult = new ResponseEntity<>(travelPointResourceJson, HttpStatus.OK);
-        Journey expectedJourney = JourneyObjectMother.getEiderstrasseRendsburgToKarlsruheJourney();
+        Leg expectedLeg = LegObjectMother.getEiderstrasseRendsburgGartenstrasseRendsburgLeg(getDBPrice());
         //noinspection unchecked (justification: no type known for runtime therefore)
         when(REST_TEMPLATE.exchange(anyString(), any(), any(), any(Class.class)))
                 .thenReturn(travelPointResult)
@@ -78,7 +79,7 @@ class DBApiServiceTest {
 
         Assertions.assertThat(result.size()).isEqualTo(1);
         //noinspection OptionalGetWithoutIsPresent
-        Assertions.assertThat(result.get(TEST_UUID_1).getJourney().get().getPrice()).isEqualToComparingFieldByField(expectedJourney.getPrice());
+        Assertions.assertThat(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getPrice()).isEqualToComparingFieldByField(expectedLeg.getPrice());
     }
 
 }

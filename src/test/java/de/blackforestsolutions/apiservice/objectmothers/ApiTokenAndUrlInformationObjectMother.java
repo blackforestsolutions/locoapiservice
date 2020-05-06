@@ -43,7 +43,7 @@ public class ApiTokenAndUrlInformationObjectMother {
     public static ApiTokenAndUrlInformation getNahShTokenAndUrl(String departure, String arrival) {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = getHafasStandardTokenAndUrl();
         builder.setHost("nah.sh.hafas.de");
-        builder.setCliendId("NAHSH");
+        builder.setClientId("NAHSH");
         builder.setClientVersion("3000700");
         builder.setClientName("NAHSHPROD");
         builder.setAuthorization("r0Ot9FLFNAFxijLW");
@@ -66,7 +66,7 @@ public class ApiTokenAndUrlInformationObjectMother {
         builder.setApiName("VBB.1");
         builder.setMic("mic");
         builder.setMac("mac");
-        builder.setCliendId("VBB");
+        builder.setClientId("VBB");
         builder.setClientVersion("4010300");
         builder.setClientName("vbbPROD");
         builder.setClientType("IPA");
@@ -95,7 +95,7 @@ public class ApiTokenAndUrlInformationObjectMother {
         builder.setApiName("DB.R19.04.a");
         builder.setChecksum("checksum");
         builder.setHafasRtMode("HYBRID");
-        builder.setCliendId("DB");
+        builder.setClientId("DB");
         builder.setClientVersion("16040000");
         builder.setClientName("DB Navigator");
         builder.setClientType("IPH");

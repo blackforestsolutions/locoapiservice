@@ -24,6 +24,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Map;
 import java.util.UUID;
 
+import static de.blackforestsolutions.apiservice.objectmothers.UUIDObjectMother.*;
 import static de.blackforestsolutions.apiservice.testutils.TestUtils.*;
 import static org.mockito.Mockito.*;
 
@@ -115,23 +116,23 @@ class BahnServiceTest {
         ResponseEntity<String> testResult = new ResponseEntity<>(bahnJourneyDetailsRessourceJson, HttpStatus.OK);
         //noinspection unchecked (justification: no type known for runtime therefore)
         doReturn(testResult).when(REST_TEMPLATE).exchange(anyString(), any(), any(), any(Class.class));
-        UUID testUUID1 = UUID.randomUUID();
-        UUID testUUID2 = UUID.randomUUID();
-        UUID testUUID3 = UUID.randomUUID();
         when(uuidGenerator.createUUID())
-                .thenReturn(testUUID1)
-                .thenReturn(testUUID2)
-                .thenReturn(testUUID3);
+                .thenReturn(TEST_UUID_1)
+                .thenReturn(TEST_UUID_2)
+                .thenReturn(TEST_UUID_3)
+                .thenReturn(TEST_UUID_4)
+                .thenReturn(TEST_UUID_5)
+                .thenReturn(TEST_UUID_6);
 
         Map<UUID, JourneyStatus> result = classUnderTestBahnJourneyDetailsService.getJourneysForRouteWith(apiTokenAndUrlInformation);
 
-        Assertions.assertThat(result.get(testUUID1).getJourney().get()).extracting(
-                Journey::getTravelProvider,
-                Journey::getStartTime,
-                Journey::getArrivalTime,
-                Journey::getDuration,
-                Journey::getVehicleName,
-                Journey::getVehicleNumber)
+        Assertions.assertThat(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2)).extracting(
+                Leg::getTravelProvider,
+                Leg::getStartTime,
+                Leg::getArrivalTime,
+                Leg::getDuration,
+                Leg::getVehicleName,
+                Leg::getVehicleNumber)
                 .containsExactly(
                         TravelProvider.DB,
                         generateTimeFromString("10:53"),
@@ -141,23 +142,15 @@ class BahnServiceTest {
                         "IC 386"
                 );
 
-        Assertions.assertThat(
-                result.get(testUUID1)
-                        .getJourney()
-                        .get()
-                        .getTravelLine()
-                        .getBetweenHolds()
-                        .values()
-                        .size())
-                .isEqualTo(0);
+        Assertions.assertThat(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getTravelLine().getBetweenHolds().values().size()).isEqualTo(0);
 
-        Assertions.assertThat(result.get(testUUID2).getJourney().get()).extracting(
-                Journey::getTravelProvider,
-                Journey::getStartTime,
-                Journey::getArrivalTime,
-                Journey::getDuration,
-                Journey::getVehicleName,
-                Journey::getVehicleNumber)
+        Assertions.assertThat(result.get(TEST_UUID_3).getJourney().get().getLegs().get(TEST_UUID_4)).extracting(
+                Leg::getTravelProvider,
+                Leg::getStartTime,
+                Leg::getArrivalTime,
+                Leg::getDuration,
+                Leg::getVehicleName,
+                Leg::getVehicleNumber)
                 .containsExactly(
                         TravelProvider.DB,
                         generateTimeFromString("10:53"),
@@ -167,13 +160,13 @@ class BahnServiceTest {
                         "IC 386"
                 );
 
-        Assertions.assertThat(result.get(testUUID3).getJourney().get()).extracting(
-                Journey::getTravelProvider,
-                Journey::getStartTime,
-                Journey::getArrivalTime,
-                Journey::getDuration,
-                Journey::getVehicleName,
-                Journey::getVehicleNumber)
+        Assertions.assertThat(result.get(TEST_UUID_5).getJourney().get().getLegs().get(TEST_UUID_6)).extracting(
+                Leg::getTravelProvider,
+                Leg::getStartTime,
+                Leg::getArrivalTime,
+                Leg::getDuration,
+                Leg::getVehicleName,
+                Leg::getVehicleNumber)
                 .containsExactly(
                         TravelProvider.DB,
                         generateTimeFromString("10:58"),
@@ -183,9 +176,9 @@ class BahnServiceTest {
                         "IC 386"
                 );
 
-        Assertions.assertThat(result.get(testUUID3).getJourney().get().getTravelLine().getBetweenHolds().values().size()).isEqualTo(0);
+        Assertions.assertThat(result.get(TEST_UUID_3).getJourney().get().getLegs().get(TEST_UUID_4).getTravelLine().getBetweenHolds().values().size()).isEqualTo(0);
 
-        Assertions.assertThat(result.get(testUUID1).getJourney().get().getStart()).extracting(
+        Assertions.assertThat(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getStart()).extracting(
                 TravelPoint::getStationId,
                 TravelPoint::getStationName,
                 TravelPoint::getGpsCoordinates)
@@ -195,7 +188,7 @@ class BahnServiceTest {
                         generateCoordinatesFrom("53.552733", "10.006909")
                 );
 
-        Assertions.assertThat(result.get(testUUID1).getJourney().get().getDestination()).extracting(
+        Assertions.assertThat(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getDestination()).extracting(
                 TravelPoint::getStationId,
                 TravelPoint::getStationName,
                 TravelPoint::getGpsCoordinates)
@@ -205,7 +198,7 @@ class BahnServiceTest {
                         generateCoordinatesFrom("53.560751", "9.989569")
                 );
 
-        Assertions.assertThat(result.get(testUUID2).getJourney().get().getStart()).extracting(
+        Assertions.assertThat(result.get(TEST_UUID_3).getJourney().get().getLegs().get(TEST_UUID_4).getStart()).extracting(
                 TravelPoint::getStationId,
                 TravelPoint::getStationName,
                 TravelPoint::getGpsCoordinates)
@@ -215,7 +208,7 @@ class BahnServiceTest {
                         generateCoordinatesFrom("53.552733", "10.006909")
                 );
 
-        Assertions.assertThat(result.get(testUUID2).getJourney().get().getDestination()).extracting(
+        Assertions.assertThat(result.get(TEST_UUID_3).getJourney().get().getLegs().get(TEST_UUID_4).getDestination()).extracting(
                 TravelPoint::getStationId,
                 TravelPoint::getStationName,
                 TravelPoint::getGpsCoordinates)
@@ -225,7 +218,7 @@ class BahnServiceTest {
                         generateCoordinatesFrom("54.302262", "9.671135")
                 );
 
-        Assertions.assertThat(result.get(testUUID3).getJourney().get().getStart()).extracting(
+        Assertions.assertThat(result.get(TEST_UUID_5).getJourney().get().getLegs().get(TEST_UUID_6).getStart()).extracting(
                 TravelPoint::getStationId,
                 TravelPoint::getStationName,
                 TravelPoint::getGpsCoordinates)
@@ -235,7 +228,7 @@ class BahnServiceTest {
                         generateCoordinatesFrom("53.560751", "9.989569")
                 );
 
-        Assertions.assertThat(result.get(testUUID3).getJourney().get().getDestination()).extracting(
+        Assertions.assertThat(result.get(TEST_UUID_5).getJourney().get().getLegs().get(TEST_UUID_6).getDestination()).extracting(
                 TravelPoint::getStationId,
                 TravelPoint::getStationName,
                 TravelPoint::getGpsCoordinates)

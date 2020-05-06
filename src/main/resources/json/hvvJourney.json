@@ -4,52 +4,44 @@
     {
       "routeId": 0,
       "start": {
-        "name": "Rosenhof",
-        "city": "Ahrensburg",
-        "combinedName": "Ahrensburg, Rosenhof",
-        "id": "Master:35009",
+        "name": "Gustav-Heinemann-Straße",
+        "city": "Elmshorn",
+        "combinedName": "Gustav-Heinemann-Straße, Elmshorn",
+        "id": "9600",
+        "type": "ADDRESS",
+        "coordinate": {
+          "x": 9.675454,
+          "y": 53.737662
+        }
+      },
+      "dest": {
+        "name": "Universität/Staatsbibliothek",
+        "city": "Hamburg",
+        "combinedName": "Universität/Staatsbibliothek",
+        "id": "Master:11021",
         "type": "STATION",
         "coordinate": {
-          "x": 10.240903,
-          "y": 53.68308
+          "x": 9.984442,
+          "y": 53.564242
         },
         "serviceTypes": [
           "bus"
         ],
         "hasStationInformation": false
       },
-      "dest": {
-        "name": "Stadthausbrücke",
-        "city": "Hamburg",
-        "combinedName": "Stadthausbrücke",
-        "id": "Master:11952",
-        "type": "STATION",
-        "coordinate": {
-          "x": 9.984914,
-          "y": 53.549465
-        },
-        "serviceTypes": [
-          "s"
-        ],
-        "hasStationInformation": true
-      },
-      "time": 62,
-      "footpathTime": 5,
+      "time": 88,
+      "footpathTime": 22,
       "tariffInfos": [
         {
           "tariffName": "HVV",
           "tariffRegions": [
             {
-              "regionType": "ZONE",
+              "regionType": "GH_ZONE",
               "alternatives": [
                 {
                   "regions": [
-                    "505",
-                    "405",
-                    "305",
-                    "205",
-                    "105",
-                    "000"
+                    "602",
+                    "601"
                   ]
                 }
               ]
@@ -60,32 +52,34 @@
             {
               "tariffKindID": 1,
               "tariffKindLabel": "Einzelkarte",
-              "tariffLevelID": 14,
-              "tariffLevelLabel": "Hamburg AB",
+              "tariffLevelID": 23,
+              "tariffLevelLabel": "3 Ringe",
               "tariffGroupID": 1,
               "tariffGroupLabel": "Einzelkarten",
-              "basePrice": 3.4,
+              "basePrice": 5.4,
               "extraFarePrice": 2.1,
-              "reducedBasePrice": 3.3,
+              "reducedBasePrice": 5.24,
               "reducedExtraFarePrice": 2.04,
+              "regionType": "RING",
               "notRecommended": false,
-              "shopLinkRegular": "https://shop.hvv.de/index.php/generic/culture/de?return=https%3A%2F%2Fshop.hvv.de%2Findex.php%2Ffahrplanauskunft%3Fkarte%3DEinzelkarte%26bereich%3DHamburg+AB%26start%3DAhrensburg%252C%2BRosenhof%26gueltig%3D2020-01-01",
-              "shopLinkExtraFare": "https://shop.hvv.de/index.php/generic/culture/de?return=https%3A%2F%2Fshop.hvv.de%2Findex.php%2Ffahrplanauskunft%3Fkarte%3DEinzelkarte%26bereich%3DHamburg+AB%26start%3DAhrensburg%252C%2BRosenhof%26gueltig%3D2020-01-01https%3A%2F%2Fshop.hvv.de%2Findex.php%2Ffahrplanauskunft%3Fkarte%3DEinzelkarte%26bereich%3DHamburg+AB%26start%3DAhrensburg%252C%2BRosenhof%26gueltig%3D2020-01-01%26zuschlag%3DSchnellBus+%2F+1.+Klasse"
+              "shopLinkRegular": "https://shop.hvv.de/index.php/generic/culture/de?return=https%3A%2F%2Fshop.hvv.de%2Findex.php%2Ffahrplanauskunft%3Fkarte%3DEinzelkarte%26bereich%3D3+Ringe%26start%3DElmshorn%252C%2BHainholz%26gueltig%3D2020-05-05%26zones%3DC%2CA",
+              "shopLinkExtraFare": "https://shop.hvv.de/index.php/generic/culture/de?return=https%3A%2F%2Fshop.hvv.de%2Findex.php%2Ffahrplanauskunft%3Fkarte%3DEinzelkarte%26bereich%3D3+Ringe%26start%3DElmshorn%252C%2BHainholz%26gueltig%3D2020-05-05%26zones%3DC%2CAhttps%3A%2F%2Fshop.hvv.de%2Findex.php%2Ffahrplanauskunft%3Fkarte%3DEinzelkarte%26bereich%3D3+Ringe%26start%3DElmshorn%252C%2BHainholz%26gueltig%3D2020-05-05%26zones%3DC%2CA%26zuschlag%3DSchnellBus+%2F+1.+Klasse"
             },
             {
               "tariffKindID": 2,
               "tariffKindLabel": "Einzelkarte Kind",
-              "tariffLevelID": 14,
-              "tariffLevelLabel": "Hamburg AB",
+              "tariffLevelID": 90,
+              "tariffLevelLabel": "5 Ringe",
               "tariffGroupID": 1,
               "tariffGroupLabel": "Einzelkarten",
-              "basePrice": 1.3,
+              "basePrice": 2.6,
               "extraFarePrice": 2.1,
-              "reducedBasePrice": 1.26,
+              "reducedBasePrice": 2.52,
               "reducedExtraFarePrice": 2.04,
+              "regionType": "RING",
               "notRecommended": false,
-              "shopLinkRegular": "https://shop.hvv.de/index.php/generic/culture/de?return=https%3A%2F%2Fshop.hvv.de%2Findex.php%2Ffahrplanauskunft%3Fkarte%3DEinzelkarte+Kind%26bereich%3DHamburg+AB%26start%3DAhrensburg%252C%2BRosenhof%26gueltig%3D2020-01-01",
-              "shopLinkExtraFare": "https://shop.hvv.de/index.php/generic/culture/de?return=https%3A%2F%2Fshop.hvv.de%2Findex.php%2Ffahrplanauskunft%3Fkarte%3DEinzelkarte+Kind%26bereich%3DHamburg+AB%26start%3DAhrensburg%252C%2BRosenhof%26gueltig%3D2020-01-01https%3A%2F%2Fshop.hvv.de%2Findex.php%2Ffahrplanauskunft%3Fkarte%3DEinzelkarte+Kind%26bereich%3DHamburg+AB%26start%3DAhrensburg%252C%2BRosenhof%26gueltig%3D2020-01-01%26zuschlag%3DSchnellBus+%2F+1.+Klasse"
+              "shopLinkRegular": "https://shop.hvv.de/index.php/generic/culture/de?return=https%3A%2F%2Fshop.hvv.de%2Findex.php%2Ffahrplanauskunft%3Fkarte%3DEinzelkarte+Kind%26bereich%3D5+Ringe%26start%3DElmshorn%252C%2BHainholz%26gueltig%3D2020-05-05%26zones%3DC%2CA",
+              "shopLinkExtraFare": "https://shop.hvv.de/index.php/generic/culture/de?return=https%3A%2F%2Fshop.hvv.de%2Findex.php%2Ffahrplanauskunft%3Fkarte%3DEinzelkarte+Kind%26bereich%3D5+Ringe%26start%3DElmshorn%252C%2BHainholz%26gueltig%3D2020-05-05%26zones%3DC%2CAhttps%3A%2F%2Fshop.hvv.de%2Findex.php%2Ffahrplanauskunft%3Fkarte%3DEinzelkarte+Kind%26bereich%3D5+Ringe%26start%3DElmshorn%252C%2BHainholz%26gueltig%3D2020-05-05%26zones%3DC%2CA%26zuschlag%3DSchnellBus+%2F+1.+Klasse"
             }
           ]
         }
@@ -93,132 +87,304 @@
       "scheduleElements": [
         {
           "from": {
-            "name": "Hasselbrook",
-            "city": "Hamburg",
-            "combinedName": "Hasselbrook",
-            "id": "Master:60950",
+            "name": "Gustav-Heinemann-Straße",
+            "city": "Elmshorn",
+            "combinedName": "Gustav-Heinemann-Straße, Elmshorn",
+            "id": "9600",
+            "type": "ADDRESS",
+            "coordinate": {
+              "x": 9.675454,
+              "y": 53.737662
+            },
+            "depTime": {
+              "date": "05.05.2020",
+              "time": "13:05"
+            }
+          },
+          "to": {
+            "name": "Hainholz",
+            "city": "Elmshorn",
+            "combinedName": "Elmshorn, Hainholz",
+            "id": "Master:70096",
             "type": "STATION",
             "coordinate": {
-              "x": 10.05656,
-              "y": 53.564947
+              "x": 9.670171,
+              "y": 53.738052
+            },
+            "serviceTypes": [
+              "bus"
+            ],
+            "hasStationInformation": false,
+            "arrTime": {
+              "date": "05.05.2020",
+              "time": "13:13"
+            }
+          },
+          "line": {
+            "name": "Fußweg",
+            "type": {
+              "simpleType": "FOOTPATH"
+            }
+          },
+          "paths": []
+        },
+        {
+          "from": {
+            "name": "Elmshorn",
+            "city": "Elmshorn",
+            "combinedName": "Elmshorn",
+            "id": "Master:97960",
+            "type": "STATION",
+            "coordinate": {
+              "x": 9.659292,
+              "y": 53.754662
+            },
+            "serviceTypes": [
+              "bus",
+              "a",
+              "r"
+            ],
+            "hasStationInformation": true,
+            "depTime": {
+              "date": "05.05.2020",
+              "time": "13:40"
+            },
+            "platform": "Gleis 2",
+            "realtimePlatform": "Gleis 2"
+          },
+          "to": {
+            "name": "Hamburg-Altona",
+            "city": "Hamburg",
+            "combinedName": "Hamburg-Altona",
+            "id": "Master:8002553",
+            "type": "STATION",
+            "coordinate": {
+              "x": 9.935405,
+              "y": 53.553269
             },
             "serviceTypes": [
               "bus",
               "r",
-              "s"
+              "s",
+              "train"
             ],
-            "hasStationInformation": true,
-            "depTime": {
-              "date": "01.01.2020",
-              "time": "14:11"
-            },
-            "platform": "Gleis 1",
-            "realtimePlatform": "Gleis 1"
-          },
-          "to": {
-            "name": "Stadthausbrücke",
-            "city": "Hamburg",
-            "combinedName": "Stadthausbrücke",
-            "id": "Master:11952",
-            "type": "STATION",
-            "coordinate": {
-              "x": 9.984914,
-              "y": 53.549465
-            },
-            "serviceTypes": [
-              "s"
-            ],
-            "hasStationInformation": true,
+            "hasStationInformation": false,
             "arrTime": {
-              "date": "01.01.2020",
-              "time": "14:23"
-            }
+              "date": "05.05.2020",
+              "time": "14:04"
+            },
+            "platform": "Gleis 9",
+            "realtimePlatform": "Gleis 9"
           },
           "line": {
-            "name": "S1",
-            "direction": "Wedel",
-            "directionId": 6,
-            "origin": "Poppenbüttel / Hamburg Airport (Flughafen)",
+            "name": "RB71",
+            "direction": "Hamburg-Altona",
+            "directionId": 1,
+            "origin": "Wrist",
             "type": {
               "simpleType": "TRAIN",
-              "shortInfo": "S",
-              "longInfo": "S-Bahn",
-              "model": "S-Bahn"
+              "shortInfo": "RB",
+              "longInfo": "RegionalBahn",
+              "model": "RegionalBahn"
             },
-            "id": "ZVU-DB:S1_ZVU-DB_S-ZVU"
+            "id": "DB-EFZ:RB71_DB-EFZ_Z"
           },
-          "paths": [
+          "paths": [],
+          "attributes": [
             {
-              "track": [
-                {
-                  "x": 10.05656,
-                  "y": 53.564947
-                },
-                {
-                  "x": 9.984524,
-                  "y": 53.549576
-                }
+              "title": "Maskenpflicht im HVV",
+              "isPlanned": true,
+              "value": "Bitte beachten Sie:\nIn allen Verkehrsmitteln des HVV und auf den Haltestellen ist ein Mund-Nasen-Schutz zu tragen.\n",
+              "types": [
+                "ANNOUNCEMENT"
               ]
             }
           ],
           "intermediateStops": [
             {
-              "name": "Landwehr",
-              "city": "Hamburg",
-              "combinedName": "Landwehr",
-              "id": "Master:10953",
+              "name": "Pinneberg",
+              "city": "Pinneberg",
+              "combinedName": "Pinneberg",
+              "id": "Master:99951",
               "type": "STATION",
               "coordinate": {
-                "x": 10.037905,
-                "y": 53.561282
+                "x": 9.798367,
+                "y": 53.654943
               },
               "depTime": {
-                "date": "01.01.2020",
-                "time": "14:13"
-              }
-            },
-            {
-              "name": "Berliner Tor",
-              "city": "Hamburg",
-              "combinedName": "Berliner Tor",
-              "id": "Master:10952",
-              "type": "STATION",
-              "coordinate": {
-                "x": 10.024621,
-                "y": 53.553031
-              },
-              "depTime": {
-                "date": "01.01.2020",
-                "time": "14:15"
+                "date": "05.05.2020",
+                "time": "13:52"
               }
             }
           ],
-          "serviceId": 74880
+          "serviceId": 9472
+        },
+        {
+          "from": {
+            "name": "Hamburg-Altona",
+            "city": "Hamburg",
+            "combinedName": "Hamburg-Altona",
+            "id": "Master:8002553",
+            "type": "STATION",
+            "coordinate": {
+              "x": 9.935405,
+              "y": 53.553269
+            },
+            "serviceTypes": [
+              "bus",
+              "r",
+              "s",
+              "train"
+            ],
+            "hasStationInformation": false,
+            "depTime": {
+              "date": "05.05.2020",
+              "time": "14:04"
+            },
+            "platform": "Gleis 9",
+            "realtimePlatform": "Gleis 9"
+          },
+          "to": {
+            "name": "Altona",
+            "city": "Hamburg",
+            "combinedName": "Altona",
+            "id": "Master:80953",
+            "type": "STATION",
+            "coordinate": {
+              "x": 9.934365,
+              "y": 53.551992
+            },
+            "serviceTypes": [
+              "bus",
+              "r",
+              "s",
+              "train"
+            ],
+            "hasStationInformation": true,
+            "arrTime": {
+              "date": "05.05.2020",
+              "time": "14:12"
+            },
+            "platform": "Gleis 2",
+            "realtimePlatform": "Gleis 2"
+          },
+          "line": {
+            "name": "Umstiegsfußweg",
+            "type": {
+              "simpleType": "CHANGE"
+            }
+          },
+          "paths": [
+            {
+              "track": [
+                {
+                  "x": 9.934613,
+                  "y": 53.551604
+                },
+                {
+                  "x": 9.934571,
+                  "y": 53.551739
+                }
+              ],
+              "attributes": [
+                "SURFACE_UNKNOWN",
+                "STAIRS_YES"
+              ]
+            }
+          ]
+        },
+        {
+          "from": {
+            "name": "Bf. Dammtor",
+            "city": "Hamburg",
+            "combinedName": "Bf. Dammtor",
+            "id": "Master:11022",
+            "type": "STATION",
+            "coordinate": {
+              "x": 9.990315,
+              "y": 53.561066
+            },
+            "serviceTypes": [
+              "bus",
+              "r",
+              "s",
+              "train"
+            ],
+            "hasStationInformation": false,
+            "depTime": {
+              "date": "05.05.2020",
+              "time": "14:32"
+            }
+          },
+          "to": {
+            "name": "Universität/Staatsbibliothek",
+            "city": "Hamburg",
+            "combinedName": "Universität/Staatsbibliothek",
+            "id": "Master:11021",
+            "type": "STATION",
+            "coordinate": {
+              "x": 9.984442,
+              "y": 53.564242
+            },
+            "serviceTypes": [
+              "bus"
+            ],
+            "hasStationInformation": false,
+            "arrTime": {
+              "date": "05.05.2020",
+              "time": "14:33"
+            }
+          },
+          "line": {
+            "name": "5",
+            "direction": "A Burgwedel",
+            "directionId": 6,
+            "origin": "Hauptbahnhof/ZOB",
+            "type": {
+              "simpleType": "BUS",
+              "shortInfo": "Bus",
+              "longInfo": "Niederflur Metrobus",
+              "model": "Niederflur Metrobus"
+            },
+            "id": "HHA-B:5_HHA-B"
+          },
+          "paths": [],
+          "attributes": [
+            {
+              "title": "Maskenpflicht im HVV",
+              "isPlanned": true,
+              "value": "Bitte beachten Sie:\nIn allen Verkehrsmitteln des HVV und auf den Haltestellen ist ein Mund-Nasen-Schutz zu tragen.\n",
+              "types": [
+                "ANNOUNCEMENT"
+              ]
+            }
+          ],
+          "serviceId": 18260
         }
       ],
       "contSearchBefore": {
-        "serviceId": 74880,
-        "lineKey": "ZVU-DB:S1_ZVU-DB_S-ZVU",
+        "serviceId": 18260,
+        "lineKey": "HHA-B:5_HHA-B",
         "plannedDepArrTime": {
-          "date": "01.01.2020",
-          "time": "14:23"
+          "date": "05.05.2020",
+          "time": "14:33"
         },
         "additionalOffset": 0
       },
       "contSearchAfter": {
-        "serviceId": 53030,
-        "lineKey": "VHH:569_VHH",
+        "serviceId": 28955,
+        "lineKey": "VHH:6501_VHH_KVIPVH",
         "plannedDepArrTime": {
-          "date": "01.01.2020",
-          "time": "13:21"
+          "date": "05.05.2020",
+          "time": "13:13"
         },
-        "additionalOffset": 0
+        "additionalOffset": -8
       }
     }
   ],
   "individualTrack": {
-    "time": 372,
-    "length": 25433,
+    "time": 471,
+    "length": 32800,
     "type": "FOOTPATH"
   }
 }

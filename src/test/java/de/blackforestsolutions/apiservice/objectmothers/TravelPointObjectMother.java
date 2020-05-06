@@ -9,8 +9,6 @@ import de.blackforestsolutions.generatedcontent.hvv.request.SDType;
 
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Locale;
 
 import static de.blackforestsolutions.apiservice.testutils.TestUtils.generateDateFrom;
@@ -122,15 +120,6 @@ public class TravelPointObjectMother {
         return travelPoint.build();
     }
 
-    public static TravelPoint getKarlsruheHbfTravelPoint() {
-        TravelPoint.TravelPointBuilder travelPoint = new TravelPoint.TravelPointBuilder();
-        travelPoint.setStationName("Karlsruhe Hbf");
-        travelPoint.setStationId("8000191");
-        travelPoint.setGpsCoordinates(convertWGS84ToCoordinatesWith(8401939, 48993530));
-        travelPoint.setPlatform("5");
-        return travelPoint.build();
-    }
-
     public static TravelPoint getGartenstrasseTravelPoint() {
         TravelPoint.TravelPointBuilder travelPoint = new TravelPoint.TravelPointBuilder();
         travelPoint.setStationName("Gartenstraße, Rendsburg");
@@ -187,17 +176,6 @@ public class TravelPointObjectMother {
         return travelPoint.build();
     }
 
-    public static TravelPoint getElmshornTravelPoint() {
-        TravelPoint.TravelPointBuilder travelPoint = new TravelPoint.TravelPointBuilder();
-        travelPoint.setStationName("Elmshorn");
-        travelPoint.setStationId("8000092");
-        travelPoint.setGpsCoordinates(convertWGS84ToCoordinatesWith(9659053, 53755116));
-        travelPoint.setPlatform("2");
-        travelPoint.setDepartureTime(generateDateFrom("yyyyMMdd", "20200328", "HHmmss", "134900"));
-        travelPoint.setArrivalTime(generateDateFrom("yyyyMMdd", "20200328", "HHmmss", "134800"));
-        return travelPoint.build();
-    }
-
     public static TravelPoint getFrankfurtHbfTravelPoint() {
         TravelPoint.TravelPointBuilder travelPoint = new TravelPoint.TravelPointBuilder();
         travelPoint.setStationName("Frankfurt(Main)Hbf");
@@ -223,52 +201,6 @@ public class TravelPointObjectMother {
         return travelPoint.build();
     }
 
-    static TravelPoint getLandwehrHvvTravelPoint() throws ParseException {
-        TravelPoint.TravelPointBuilder travelPoint = new TravelPoint.TravelPointBuilder();
-        travelPoint.setStationId("Master:10953");
-        travelPoint.setStationName("Landwehr");
-        travelPoint.setCity("Hamburg");
-        travelPoint.setCountry(Locale.GERMANY);
-        Coordinates.CoordinatesBuilder coordinates = new Coordinates.CoordinatesBuilder(53.561282, 10.037905);
-        travelPoint.setGpsCoordinates(coordinates.build());
-        travelPoint.setDepartureTime(generateDateFromPatternAndString("yyyy-MM-dd HH:mm", "2020-01-01 14:13"));
-        return travelPoint.build();
-    }
-
-    public static TravelPoint getRosenhofHvvTravelPoint() {
-        TravelPoint.TravelPointBuilder travelPoint = new TravelPoint.TravelPointBuilder();
-        travelPoint.setStationId("Master:35009");
-        travelPoint.setStationName("Ahrensburg, Rosenhof");
-        travelPoint.setCity("Ahrensburg");
-        travelPoint.setCountry(Locale.GERMANY);
-        travelPoint.setVehicleTypes(Collections.singletonList(
-                "bus"
-        ));
-        Coordinates.CoordinatesBuilder coordinates = new Coordinates.CoordinatesBuilder();
-        coordinates.setLongitude(10.240903);
-        coordinates.setLatitude(53.68308);
-        travelPoint.setGpsCoordinates(coordinates.build());
-        return travelPoint.build();
-    }
-
-    public static TravelPoint getStadthausbrueckeHvvTravelPoint() throws ParseException {
-        TravelPoint.TravelPointBuilder travelPoint = new TravelPoint.TravelPointBuilder();
-        travelPoint.setStationId("Master:11952");
-        travelPoint.setStationName("Stadthausbrücke");
-        travelPoint.setCity("Hamburg");
-        travelPoint.setCountry(Locale.GERMANY);
-        travelPoint.setVehicleTypes(Collections.singletonList(
-                "s"
-        ));
-        Coordinates.CoordinatesBuilder coordinates = new Coordinates.CoordinatesBuilder();
-        coordinates.setLongitude(9.984914);
-        coordinates.setLatitude(53.549465);
-        travelPoint.setGpsCoordinates(coordinates.build());
-        travelPoint.setArrivalTime(generateDateFromPatternAndString("yyyy-MM-dd HH:mm", "2020-01-01 14:23"));
-
-        return travelPoint.build();
-    }
-
     public static TravelPoint getPinnebergRichardKoehnHvvTravelPoint() {
         TravelPoint.TravelPointBuilder travelPoint = new TravelPoint.TravelPointBuilder();
 
@@ -276,32 +208,6 @@ public class TravelPointObjectMother {
         travelPoint.setStationName("Richard-Köhn-Straße/Jahnhalle");
         travelPoint.setCity("Pinneberg");
         travelPoint.setCountry(Locale.GERMANY);
-        travelPoint.setVehicleTypes(Collections.singletonList(
-                "REGIONALBUS"
-        ));
-
-        return travelPoint.build();
-    }
-
-    public static TravelPoint getHasselbrookHvvTravelPoint() throws ParseException {
-        TravelPoint.TravelPointBuilder travelPoint = new TravelPoint.TravelPointBuilder();
-
-        travelPoint.setStationId("Master:60950");
-        travelPoint.setStationName("Hasselbrook");
-        travelPoint.setCity("Hamburg");
-        travelPoint.setCountry(Locale.GERMANY);
-        travelPoint.setVehicleTypes(Arrays.asList(
-                "bus",
-                "r",
-                "s"
-        ));
-        Coordinates.CoordinatesBuilder coordinates = new Coordinates.CoordinatesBuilder();
-        coordinates.setLongitude(10.05656);
-        coordinates.setLatitude(53.564947);
-        travelPoint.setGpsCoordinates(coordinates.build());
-        travelPoint.setDepartureTime(generateDateFromPatternAndString("yyyy-MM-dd HH:mm", "2020-01-01 14:11"));
-        travelPoint.setPlatform("Gleis 1");
-
         return travelPoint.build();
     }
 
@@ -312,34 +218,11 @@ public class TravelPointObjectMother {
         travelPoint.setStationName("Hauptbahnhof");
         travelPoint.setCity("Hamburg");
         travelPoint.setCountry(Locale.GERMANY);
-        travelPoint.setVehicleTypes(Arrays.asList(
-                "REGIONALBUS",
-                "NACHTBUS",
-                "SCHNELLBUS",
-                "U_BAHN",
-                "S_BAHN",
-                "R_BAHN",
-                "F_BAHN"
-        ));
         Coordinates.CoordinatesBuilder coordinates = new Coordinates.CoordinatesBuilder();
         coordinates.setLatitude(32.3432);
         coordinates.setLongitude(53.34432432);
         travelPoint.setGpsCoordinates(coordinates.build());
 
-        return travelPoint.build();
-    }
-
-    public static TravelPoint getOriginHvvTravelPoint() {
-        TravelPoint.TravelPointBuilder travelPoint = new TravelPoint.TravelPointBuilder();
-        travelPoint.setStationName("Poppenbüttel / Hamburg Airport (Flughafen)");
-        travelPoint.setCountry(Locale.GERMANY);
-        return travelPoint.build();
-    }
-
-    public static TravelPoint getDirectionHvvTravelPoint() {
-        TravelPoint.TravelPointBuilder travelPoint = new TravelPoint.TravelPointBuilder();
-        travelPoint.setStationName("Wedel");
-        travelPoint.setCountry(Locale.GERMANY);
         return travelPoint.build();
     }
 
@@ -408,17 +291,127 @@ public class TravelPointObjectMother {
         return travelPoint.build();
     }
 
-    public static TravelPoint getBerlinerTorHvvTravelPoint() throws ParseException {
+    public static TravelPoint getGustavHeinemannStraßeTravelPoint() {
         TravelPoint.TravelPointBuilder travelPoint = new TravelPoint.TravelPointBuilder();
-        travelPoint.setStationId("Master:10952");
-        travelPoint.setStationName("Berliner Tor");
+        travelPoint.setStationId("9600");
+        travelPoint.setStationName("Gustav-Heinemann-Straße, Elmshorn");
+        travelPoint.setCity("Elmshorn");
+        travelPoint.setCountry(Locale.GERMANY);
+        travelPoint.setGpsCoordinates(new Coordinates.CoordinatesBuilder(53.737662, 9.675454).build());
+        return travelPoint.build();
+    }
+
+    public static TravelPoint getHainholzTravelPoint() {
+        TravelPoint.TravelPointBuilder travelPoint = new TravelPoint.TravelPointBuilder();
+        travelPoint.setStationId("Master:70096");
+        travelPoint.setStationName("Elmshorn, Hainholz");
+        travelPoint.setCity("Elmshorn");
+        travelPoint.setCountry(Locale.GERMANY);
+        travelPoint.setGpsCoordinates(new Coordinates.CoordinatesBuilder(53.738052,9.670171).build());
+        return travelPoint.build();
+    }
+
+    public static TravelPoint getHafasElmshornTravelPoint() {
+        TravelPoint.TravelPointBuilder travelPoint = new TravelPoint.TravelPointBuilder();
+        travelPoint.setStationName("Elmshorn");
+        travelPoint.setStationId("8000092");
+        travelPoint.setGpsCoordinates(convertWGS84ToCoordinatesWith(9659053, 53755116));
+        travelPoint.setPlatform("2");
+        travelPoint.setDepartureTime(generateDateFrom("yyyyMMdd", "20200328", "HHmmss", "134900"));
+        travelPoint.setArrivalTime(generateDateFrom("yyyyMMdd", "20200328", "HHmmss", "134800"));
+        return travelPoint.build();
+    }
+
+
+    public static TravelPoint getHvvElmshornTravelPoint() {
+        TravelPoint.TravelPointBuilder travelPoint = new TravelPoint.TravelPointBuilder();
+        travelPoint.setStationId("Master:97960");
+        travelPoint.setStationName("Elmshorn");
+        travelPoint.setCity("Elmshorn");
+        travelPoint.setCountry(Locale.GERMANY);
+        travelPoint.setGpsCoordinates(new Coordinates.CoordinatesBuilder(53.754662,9.659292).build());
+        travelPoint.setPlatform("Gleis 2");
+        return travelPoint.build();
+    }
+
+    public static TravelPoint getHamburgAltonaBfTravelPoint() {
+        TravelPoint.TravelPointBuilder travelPoint = new TravelPoint.TravelPointBuilder();
+        travelPoint.setStationId("Master:8002553");
+        travelPoint.setStationName("Hamburg-Altona");
         travelPoint.setCity("Hamburg");
         travelPoint.setCountry(Locale.GERMANY);
-        Coordinates.CoordinatesBuilder coordinates = new Coordinates.CoordinatesBuilder();
-        coordinates.setLongitude(10.024621);
-        coordinates.setLatitude(53.553031);
-        travelPoint.setGpsCoordinates(coordinates.build());
-        travelPoint.setDepartureTime(generateDateFromPatternAndString("yyyy-MM-dd HH:mm", "2020-01-01 14:15"));
+        travelPoint.setGpsCoordinates(new Coordinates.CoordinatesBuilder(53.553269,9.935405).build());
+        travelPoint.setPlatform("Gleis 9");
+        return travelPoint.build();
+    }
+
+    public static TravelPoint getPinnebergTravelPoint() throws ParseException {
+        TravelPoint.TravelPointBuilder travelPoint = new TravelPoint.TravelPointBuilder();
+        travelPoint.setStationId("Master:99951");
+        travelPoint.setStationName("Pinneberg");
+        travelPoint.setCity("Pinneberg");
+        travelPoint.setCountry(Locale.GERMANY);
+        travelPoint.setGpsCoordinates(new Coordinates.CoordinatesBuilder(53.654943,9.798367).build());
+        travelPoint.setDepartureTime(generateDateFromPatternAndString("yyyy-MM-dd HH:mm", "2020-05-05 13:52"));
+        return travelPoint.build();
+    }
+
+    public static TravelPoint getHamburgAltonaTravelPoint() {
+        TravelPoint.TravelPointBuilder travelPoint = new TravelPoint.TravelPointBuilder();
+        travelPoint.setStationId("Master:80953");
+        travelPoint.setStationName("Altona");
+        travelPoint.setCity("Hamburg");
+        travelPoint.setCountry(Locale.GERMANY);
+        travelPoint.setGpsCoordinates(new Coordinates.CoordinatesBuilder(53.551992, 9.934365).build());
+        travelPoint.setPlatform("Gleis 2");
+        return travelPoint.build();
+    }
+
+    public static TravelPoint getDammtorTravelPoint() {
+        TravelPoint.TravelPointBuilder travelPoint = new TravelPoint.TravelPointBuilder();
+        travelPoint.setStationId("Master:11022");
+        travelPoint.setStationName("Bf. Dammtor");
+        travelPoint.setCity("Hamburg");
+        travelPoint.setCountry(Locale.GERMANY);
+        travelPoint.setGpsCoordinates(new Coordinates.CoordinatesBuilder(53.561066, 9.990315).build());
+        return travelPoint.build();
+    }
+
+    public static TravelPoint getUniversityHamburgTravelPoint() {
+        TravelPoint.TravelPointBuilder travelPoint = new TravelPoint.TravelPointBuilder();
+        travelPoint.setStationId("Master:11021");
+        travelPoint.setStationName("Universität/Staatsbibliothek");
+        travelPoint.setCity("Hamburg");
+        travelPoint.setCountry(Locale.GERMANY);
+        travelPoint.setGpsCoordinates(new Coordinates.CoordinatesBuilder(53.564242, 9.984442).build());
+        return travelPoint.build();
+    }
+
+    public static TravelPoint getWristTravelPoint() {
+        TravelPoint.TravelPointBuilder travelPoint = new TravelPoint.TravelPointBuilder();
+        travelPoint.setStationName("Wrist");
+        travelPoint.setCountry(Locale.GERMANY);
+        return travelPoint.build();
+    }
+
+    public static TravelPoint getHamburgAltonaDirectionTravelPoint() {
+        TravelPoint.TravelPointBuilder travelPoint = new TravelPoint.TravelPointBuilder();
+        travelPoint.setStationName("Hamburg-Altona");
+        travelPoint.setCountry(Locale.GERMANY);
+        return travelPoint.build();
+    }
+
+    public static TravelPoint getBurgwedelTravelPoint() {
+        TravelPoint.TravelPointBuilder travelPoint = new TravelPoint.TravelPointBuilder();
+        travelPoint.setCountry(Locale.GERMANY);
+        travelPoint.setStationName("A Burgwedel");
+        return travelPoint.build();
+    }
+
+    public static TravelPoint getHamburgHauptbahnhofDirectionTravelPoint() {
+        TravelPoint.TravelPointBuilder travelPoint = new TravelPoint.TravelPointBuilder();
+        travelPoint.setStationName("Hauptbahnhof/ZOB");
+        travelPoint.setCountry(Locale.GERMANY);
         return travelPoint.build();
     }
 
@@ -446,8 +439,8 @@ public class TravelPointObjectMother {
     public static ArrayList<TravelPoint> getTravelPointsForAirportsFinder() {
         ArrayList<TravelPoint> testDataArrayList = new ArrayList<>();
         TravelPoint.TravelPointBuilder zrhTravelPoint = new TravelPoint.TravelPointBuilder();
-        zrhTravelPoint.setAirportId("ZRH");
-        zrhTravelPoint.setAirportName("Zürich Airport");
+        zrhTravelPoint.setStationId("ZRH");
+        zrhTravelPoint.setStationName("Zürich Airport");
         Locale zrhCountry = new Locale("", "switzerland");
         zrhTravelPoint.setCountry(zrhCountry);
         Coordinates.CoordinatesBuilder zrhCoordinates = new Coordinates.CoordinatesBuilder();
@@ -457,8 +450,8 @@ public class TravelPointObjectMother {
         zrhTravelPoint.setGpsCoordinates(zrhCoordinates.build());
 
         TravelPoint.TravelPointBuilder fkbTravelPoint = new TravelPoint.TravelPointBuilder();
-        fkbTravelPoint.setAirportId("FKB");
-        fkbTravelPoint.setAirportName("Karlsruhe Baden-Baden Airport");
+        fkbTravelPoint.setStationId("FKB");
+        fkbTravelPoint.setStationName("Karlsruhe Baden-Baden Airport");
         Locale fkbCountry = new Locale("", "germany");
         fkbTravelPoint.setCity("Karlsruhe/Baden-Baden");
         fkbTravelPoint.setCountry(fkbCountry);

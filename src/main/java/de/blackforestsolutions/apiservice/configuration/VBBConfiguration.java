@@ -52,7 +52,7 @@ public class VBBConfiguration {
         hafasStandardConfiguration.setApiName(hafasVbbExtension);
         hafasStandardConfiguration.setMic(hafasVbbMic);
         hafasStandardConfiguration.setMac(hafasVbbMac);
-        hafasStandardConfiguration.setCliendId(hafasVbbClientId);
+        hafasStandardConfiguration.setClientId(hafasVbbClientId);
         hafasStandardConfiguration.setClientVersion(hafasVbbClientVersion);
         hafasStandardConfiguration.setClientName(hafasVbbClientName);
         hafasStandardConfiguration.setClientType(hafasVbbClientType);

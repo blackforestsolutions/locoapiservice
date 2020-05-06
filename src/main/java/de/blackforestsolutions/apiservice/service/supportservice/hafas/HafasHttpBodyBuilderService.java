@@ -189,11 +189,11 @@ class HafasHttpBodyBuilderService {
     }
 
     private static Client buildClientBodywith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
-        Objects.requireNonNull(apiTokenAndUrlInformation.getCliendId(), "client id is not allowed to be null");
+        Objects.requireNonNull(apiTokenAndUrlInformation.getClientId(), "client id is not allowed to be null");
         Objects.requireNonNull(apiTokenAndUrlInformation.getClientVersion(), "client version is not allowed to be null");
         Objects.requireNonNull(apiTokenAndUrlInformation.getClientName(), "client name is not allowed to be null");
         Client client = new Client();
-        client.setId(apiTokenAndUrlInformation.getCliendId());
+        client.setId(apiTokenAndUrlInformation.getClientId());
         client.setV(apiTokenAndUrlInformation.getClientVersion());
         Optional.ofNullable(apiTokenAndUrlInformation.getClientType()).ifPresent(client::setType);
         client.setName(apiTokenAndUrlInformation.getClientName());

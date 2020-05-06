@@ -5,12 +5,12 @@ import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class OSMHttpCallBuilderServiceTest {
+class OSMHttpCallBuilderServiceTest {
 
     private final OSMHttpCallBuilderService classUnderTest = new OSMHttpCallBuilderServiceImpl();
 
     @Test
-    public void test_buildOSMPathWith_pathvariable_outputformat_departure_arrival_returns_correct_departure_url() {
+    void test_buildOSMPathWith_pathvariable_outputformat_departure_arrival_returns_correct_departure_url() {
         // Arrange
         ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getOSMApiTokenAndUrl();
 
@@ -22,7 +22,7 @@ public class OSMHttpCallBuilderServiceTest {
     }
 
     @Test
-    public void test_buildOSMPathWith_pathvariable_outputformat_departure_arrival_returns_correct_arrival_url() {
+    void test_buildOSMPathWith_pathvariable_outputformat_departure_arrival_returns_correct_arrival_url() {
         // Arrange
         ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getOSMApiTokenAndUrl();
 

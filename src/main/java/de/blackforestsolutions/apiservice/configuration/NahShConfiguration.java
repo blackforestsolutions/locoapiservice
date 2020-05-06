@@ -35,7 +35,7 @@ public class NahShConfiguration {
     @Bean(name = "nahShApiTokenAndUrlInformation")
     public ApiTokenAndUrlInformation apiTokenAndUrlInformation() {
         hafasStandardConfiguration.setHost(hafasNahShHost);
-        hafasStandardConfiguration.setCliendId(hafasNahShClientId);
+        hafasStandardConfiguration.setClientId(hafasNahShClientId);
         hafasStandardConfiguration.setClientVersion(hafasNahShClientVersion);
         hafasStandardConfiguration.setClientName(hafasNahShClientName);
         hafasStandardConfiguration.setAuthorization(hafasNahShAuthorization);

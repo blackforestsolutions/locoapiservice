@@ -2,6 +2,7 @@ package de.blackforestsolutions.apiservice.service.communicationservice;
 
 import de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother;
 import de.blackforestsolutions.apiservice.objectmothers.JourneyObjectMother;
+import de.blackforestsolutions.apiservice.objectmothers.LegObjectMother;
 import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.HafasCallService;
 import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.HafasCallServiceImpl;
 import de.blackforestsolutions.apiservice.service.mapper.HafasMapperService;
@@ -10,9 +11,7 @@ import de.blackforestsolutions.apiservice.service.supportservice.UuidService;
 import de.blackforestsolutions.apiservice.service.supportservice.hafas.HafasHttpCallBuilderService;
 import de.blackforestsolutions.apiservice.service.supportservice.hafas.HafasHttpCallBuilderServiceImpl;
 import de.blackforestsolutions.apiservice.stubs.RestTemplateBuilderStub;
-import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
-import de.blackforestsolutions.datamodel.Journey;
-import de.blackforestsolutions.datamodel.JourneyStatus;
+import de.blackforestsolutions.datamodel.*;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,6 +24,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import static de.blackforestsolutions.apiservice.objectmothers.UUIDObjectMother.*;
+import static de.blackforestsolutions.apiservice.objectmothers.PriceObjectMother.getNahShPrice;
 import static de.blackforestsolutions.apiservice.testutils.TestUtils.getResourceFileAsString;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -68,6 +68,18 @@ class NahShApiServiceTest {
     }
 
     @Test
+    void test_getJourneysForRouteWith_with_mocked_json_and_apiToken_returns_correct_price() {
+        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getNahShTokenAndUrl("", "");
+        Leg expectedJourney = LegObjectMother.getEiderstrasseRendsburgGartenstrasseRendsburgLeg(getNahShPrice());
+
+        Map<UUID, JourneyStatus> result = classUnderTest.getJourneysForRouteWith(testData);
+        //noinspection OptionalGetWithoutIsPresent
+        Leg legResult = result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2);
+
+        Assertions.assertThat(legResult.getPrice()).isEqualToComparingFieldByField(expectedJourney.getPrice());
+    }
+
+    @Test
     void test_getJourneysForRouteWith_with_mocked_json_and_apiToken_returns_correct_journey() {
         ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getNahShTokenAndUrl("", "");
         Journey expectedJourney = JourneyObjectMother.getEiderstrasseRendsburgToRendsburgJourney();
@@ -77,77 +89,49 @@ class NahShApiServiceTest {
         Journey journeyResult = result.get(TEST_UUID_1).getJourney().get();
 
         Assertions.assertThat(result.size()).isEqualTo(1);
-        Assertions.assertThat(journeyResult.getBetweenTrips().size()).isEqualTo(3);
-        Assertions.assertThat(journeyResult.getStartTime()).isEqualTo(expectedJourney.getStartTime());
-        Assertions.assertThat(journeyResult.getArrivalTime()).isEqualTo(expectedJourney.getArrivalTime());
-        Assertions.assertThat(journeyResult.getDuration()).isEqualTo(expectedJourney.getDuration());
-        Assertions.assertThat(journeyResult.getTravelProvider()).isEqualTo(expectedJourney.getTravelProvider());
-        Assertions.assertThat(journeyResult).isEqualToIgnoringGivenFields(expectedJourney, "start", "destination", "price", "betweenTrips");
+        Assertions.assertThat(journeyResult).isEqualToIgnoringGivenFields(expectedJourney, "legs");
+        Assertions.assertThat(journeyResult.getLegs().size()).isEqualTo(3);
     }
 
     @Test
-    void test_getJourneysForRouteWith_with_mocked_json_and_apiToken_returns_correct_start_and_destination() {
+    void test_getJourneysFrom_with_jsonBody_travelProvider_and_mocked_priceMapper_returns_correct_leg_between_eiderstrasse_and_gartenstrasse() {
         ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getNahShTokenAndUrl("", "");
-        Journey expectedJourney = JourneyObjectMother.getEiderstrasseRendsburgToRendsburgJourney();
-
-        Map<UUID, JourneyStatus> result = classUnderTest.getJourneysForRouteWith(testData);
-        //noinspection OptionalGetWithoutIsPresent,OptionalGetWithoutIsPresent
-        Journey journeyResult = result.get(TEST_UUID_1).getJourney().get();
-
-        Assertions.assertThat(journeyResult.getStart()).isEqualToComparingFieldByField(expectedJourney.getStart());
-        Assertions.assertThat(journeyResult.getDestination()).isEqualToComparingFieldByField(expectedJourney.getDestination());
-    }
-
-    @Test
-    void test_getJourneysForRouteWith_with_mocked_json_and_apiToken_returns_correct_price() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getNahShTokenAndUrl("", "");
-        Journey expectedJourney = JourneyObjectMother.getEiderstrasseRendsburgToRendsburgJourney();
+        Leg expectedLeg = LegObjectMother.getEiderstrasseRendsburgGartenstrasseRendsburgLeg(getNahShPrice());
 
         Map<UUID, JourneyStatus> result = classUnderTest.getJourneysForRouteWith(testData);
         //noinspection OptionalGetWithoutIsPresent
-        Journey journeyResult = result.get(TEST_UUID_1).getJourney().get();
+        Leg legResult = result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2);
 
-        Assertions.assertThat(journeyResult.getPrice()).isEqualToComparingFieldByField(expectedJourney.getPrice());
+        Assertions.assertThat(legResult).isEqualToIgnoringGivenFields(expectedLeg, "price");
+        Assertions.assertThat(legResult.getPrice()).isEqualToComparingFieldByField(expectedLeg.getPrice());
+        Assertions.assertThat(legResult.getTravelLine()).isNull();
     }
 
     @Test
-    void test_getJourneysFrom_with_jsonBody_travelProvider_and_mocked_priceMapper_returns_correct_trip_between_eiderstrasse_and_gartenstrasse() {
+    void test_getJourneysFrom_with_jsonBody_travelProvider_and_mocked_priceMapper_returns_correct_leg_between_gartenstrasse_and_rendsburg_zob() {
         ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getNahShTokenAndUrl("", "");
-        Journey expectedBetweenTrip = JourneyObjectMother.getEiderstrasseRendsburgToRendsburgJourney().getBetweenTrips().get(0);
+        Leg expectedLeg = LegObjectMother.getGartenstrasseRendsburgLeg(TravelProvider.NAHSH);
 
         Map<UUID, JourneyStatus> result = classUnderTest.getJourneysForRouteWith(testData);
         //noinspection OptionalGetWithoutIsPresent
-        Journey betweenTripResult = result.get(TEST_UUID_1).getJourney().get().getBetweenTrips().get(0);
+        Leg legResult = result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_3);
 
-        Assertions.assertThat(betweenTripResult).isEqualToComparingFieldByField(expectedBetweenTrip);
-        Assertions.assertThat(betweenTripResult.getTravelLine()).isNull();
+        Assertions.assertThat(legResult).isEqualToIgnoringGivenFields(expectedLeg, "travelLine");
+        Assertions.assertThat(legResult.getTravelLine()).isEqualToIgnoringGivenFields(expectedLeg.getTravelLine(), "betweenHolds");
+        Assertions.assertThat(legResult.getTravelLine().getBetweenHolds().size()).isEqualTo(5);
+        Assertions.assertThat(legResult.getTravelLine().getBetweenHolds().get(0)).isEqualToComparingFieldByField(expectedLeg.getTravelLine().getBetweenHolds().get(0));
     }
 
     @Test
-    void test_getJourneysFrom_with_jsonBody_travelProvider_and_mocked_priceMapper_returns_correct_trip_between_gartenstrasse_and_rendsburg_zob() {
+    void test_getJourneysFrom_with_jsonBody_travelProvider_and_mocked_priceMapper_returns_correct_leg_between_rendsburg_zob_and_rendsburg() {
         ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getNahShTokenAndUrl("", "");
-        Journey expectedBetweenTrip = JourneyObjectMother.getEiderstrasseRendsburgToRendsburgJourney().getBetweenTrips().get(1);
+        Leg expectedLeg = LegObjectMother.getRendsburgZobToRendsburgLeg();
 
         Map<UUID, JourneyStatus> result = classUnderTest.getJourneysForRouteWith(testData);
         //noinspection OptionalGetWithoutIsPresent
-        Journey betweenTripResult = result.get(TEST_UUID_1).getJourney().get().getBetweenTrips().get(1);
+        Leg legResult = result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_4);
 
-        Assertions.assertThat(betweenTripResult).isEqualToIgnoringGivenFields(expectedBetweenTrip, "travelLine");
-        Assertions.assertThat(betweenTripResult.getTravelLine()).isEqualToIgnoringGivenFields(expectedBetweenTrip.getTravelLine(), "betweenHolds");
-        Assertions.assertThat(betweenTripResult.getTravelLine().getBetweenHolds().size()).isEqualTo(5);
-        Assertions.assertThat(betweenTripResult.getTravelLine().getBetweenHolds().get(0)).isEqualToComparingFieldByField(expectedBetweenTrip.getTravelLine().getBetweenHolds().get(0));
-    }
-
-    @Test
-    void test_getJourneysFrom_with_jsonBody_travelProvider_and_mocked_priceMapper_returns_correct_trip_between_rendsburg_zob_and_rendsburg() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getNahShTokenAndUrl("", "");
-        Journey expectedBetweenTrip = JourneyObjectMother.getEiderstrasseRendsburgToRendsburgJourney().getBetweenTrips().get(2);
-
-        Map<UUID, JourneyStatus> result = classUnderTest.getJourneysForRouteWith(testData);
-        //noinspection OptionalGetWithoutIsPresent
-        Journey betweenTripResult = result.get(TEST_UUID_1).getJourney().get().getBetweenTrips().get(2);
-
-        Assertions.assertThat(betweenTripResult).isEqualToComparingFieldByField(expectedBetweenTrip);
-        Assertions.assertThat(betweenTripResult.getTravelLine()).isNull();
+        Assertions.assertThat(legResult).isEqualToComparingFieldByField(expectedLeg);
+        Assertions.assertThat(legResult.getTravelLine()).isNull();
     }
 }
