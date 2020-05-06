@@ -25,7 +25,7 @@ class RMVApiServiceIT {
 
     @Test
     void test_getStationId() {
-        ApiTokenAndUrlInformation testData = getRMVTokenAndUrl();
+        ApiTokenAndUrlInformation testData = getRMVTokenAndUrl("Lorch-Lorchhausen Bahnhof", "frankfurt hauptbahnhof");
 
         ResponseEntity<String> result = rmvCallService.getStationId(testData.getProtocol().concat("://").concat(testData.getHost().concat(httpCallBuilderService.buildLocationPathWith(testData, testData.getArrival()))), httpCallBuilderService.buildHttpEntityStationForRMV(testData, testData.getArrival()));
 
@@ -34,7 +34,7 @@ class RMVApiServiceIT {
 
     @Test
     void test_getTrip() {
-        ApiTokenAndUrlInformation testData = getRMVTokenAndUrl();
+        ApiTokenAndUrlInformation testData = getRMVTokenAndUrl("003011037", "003000010");
 
         ResponseEntity<String> result = rmvCallService.getTrip(testData.getProtocol().concat("://").concat(testData.getHost().concat(httpCallBuilderService.buildTripPathWith(testData))), httpCallBuilderService.buildHttpEntityTripForRMV(testData));
 
