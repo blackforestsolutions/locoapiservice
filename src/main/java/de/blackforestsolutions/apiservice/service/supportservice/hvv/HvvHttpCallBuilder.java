@@ -2,7 +2,7 @@ package de.blackforestsolutions.apiservice.service.supportservice.hvv;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import de.blackforestsolutions.apiservice.configuration.AdditionalHttpHeadersConfiguration;
+import de.blackforestsolutions.apiservice.configuration.AdditionalHttpConfiguration;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import de.blackforestsolutions.generatedcontent.hvv.request.FilterType;
 import de.blackforestsolutions.generatedcontent.hvv.request.HvvBaseBody;
@@ -26,9 +26,9 @@ class HvvHttpCallBuilder {
 
     static void setBaseHttpHeaderFor(HttpHeaders httpHeaders, ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
         httpHeaders.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
-        httpHeaders.add(AdditionalHttpHeadersConfiguration.GEO_FEX_AUTH_TYPE, apiTokenAndUrlInformation.getAuthentificationType());
-        httpHeaders.add(AdditionalHttpHeadersConfiguration.GEO_FEX_AUTH_USER, apiTokenAndUrlInformation.getAuthentificationUser());
-        httpHeaders.add(AdditionalHttpHeadersConfiguration.X_TRACE_ID, UUID.randomUUID().toString());
+        httpHeaders.add(AdditionalHttpConfiguration.GEO_FEX_AUTH_TYPE, apiTokenAndUrlInformation.getAuthentificationType());
+        httpHeaders.add(AdditionalHttpConfiguration.GEO_FEX_AUTH_USER, apiTokenAndUrlInformation.getAuthentificationUser());
+        httpHeaders.add(AdditionalHttpConfiguration.X_TRACE_ID, UUID.randomUUID().toString());
     }
 
     static <T> String combineBaseHttpBodyWithApiCallBody(T specificApiBody, ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
@@ -45,7 +45,7 @@ class HvvHttpCallBuilder {
         Mac mac = createMacWith(apiTokenAndUrlInformation);
         initMac(mac, keySpec);
         byte[] signature = mac.doFinal(requestBody);
-        httpHeaders.add(AdditionalHttpHeadersConfiguration.GEO_FEX_AUTH_SIGNATURE, DatatypeConverter.printBase64Binary(signature));
+        httpHeaders.add(AdditionalHttpConfiguration.GEO_FEX_AUTH_SIGNATURE, DatatypeConverter.printBase64Binary(signature));
     }
 
     private static void initMac(Mac mac, SecretKeySpec keySpec) {

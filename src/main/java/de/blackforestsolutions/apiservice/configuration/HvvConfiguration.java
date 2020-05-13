@@ -16,7 +16,7 @@ public class HvvConfiguration {
     private String hvvStationsPathVariable;
     @Value("${hvvJourneyPathVariable}")
     private String hvvJourneyPathVariable;
-    @Value("${hvvPathVariable}")
+    @Value("${hvvTravelPointPathVariable}")
     private String hvvTravelPointPathVariable;
     @Value("${hvvAuthentificationType}")
     private String hvvAuthentificationType;
@@ -31,7 +31,7 @@ public class HvvConfiguration {
     @Value("${hvvTarif}")
     private String hvvTarif;
     @Value("${hvvAccessProtocol}")
-    private String hvvAccesProtocol;
+    private String hvvAccessProtocol;
     @Value("${hvvFilterEquivalent}")
     private boolean hvvFilterEquivalent;
     @Value("${hvvAllowTypeSwitch}")
@@ -44,6 +44,10 @@ public class HvvConfiguration {
     private boolean allowIntermediateStops;
     @Value(("${hvvReturnContSearchData}"))
     private boolean hvvReturnContSearchData;
+    @Value("${hvvResultLength}")
+    private int hvvResultLength;
+    @Value("${hvvMaxDistanceFromCoordinate}")
+    private int hvvMaxDistanceFromCoordinate;
 
     @Bean(name = "hvvApiTokenAndUrlInformation")
     public ApiTokenAndUrlInformation apiTokenAndUrlInformation() {
@@ -59,13 +63,15 @@ public class HvvConfiguration {
         builder.setApiVersion(hvvApiVersion);
         builder.setLanguage(hvvLanguage);
         builder.setTariff(hvvTarif);
-        builder.setProtocol(hvvAccesProtocol);
+        builder.setProtocol(hvvAccessProtocol);
         builder.setHvvFilterEquivalent(hvvFilterEquivalent);
         builder.setHvvAllowTypeSwitch(hvvAllowTypeSwitch);
         builder.setAllowTariffDetails(allowTariffDetails);
         builder.setAllowReducedPrice(allowReducedPrice);
         builder.setAllowIntermediateStops(allowIntermediateStops);
         builder.setHvvReturnContSearchData(hvvReturnContSearchData);
+        builder.setResultLength(hvvResultLength);
+        builder.setDistanceFromTravelPoint(hvvMaxDistanceFromCoordinate);
         return builder.build();
     }
 }

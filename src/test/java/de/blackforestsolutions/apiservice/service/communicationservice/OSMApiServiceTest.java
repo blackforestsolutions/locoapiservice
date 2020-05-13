@@ -1,8 +1,8 @@
 package de.blackforestsolutions.apiservice.service.communicationservice;
 
 import de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother;
-import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.OSMCallService;
-import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.OSMCallServiceImpl;
+import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallService;
+import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallServiceImpl;
 import de.blackforestsolutions.apiservice.service.supportservice.OSMHttpCallBuilderService;
 import de.blackforestsolutions.apiservice.service.supportservice.OSMHttpCallBuilderServiceImpl;
 import de.blackforestsolutions.apiservice.stubs.RestTemplateBuilderStub;
@@ -24,11 +24,11 @@ class OSMApiServiceTest {
 
     private final RestTemplateBuilder restTemplateBuilder = new RestTemplateBuilderStub(restTemplate);
 
-    private final OSMCallService osmCallService = new OSMCallServiceImpl(restTemplateBuilder);
+    private final CallService callService = new CallServiceImpl(restTemplateBuilder);
 
     private final OSMHttpCallBuilderService osmHttpCallBuilderService = new OSMHttpCallBuilderServiceImpl();
 
-    private final OSMApiService classUnderTest = new OSMApiServiceImpl(osmCallService, osmHttpCallBuilderService);
+    private final OSMApiService classUnderTest = new OSMApiServiceImpl(callService, osmHttpCallBuilderService);
 
     @Test
     void test_getCoordinatesFromTavelpointWith_mocked_json_apiToken_return_correct_departure_coordinates() {

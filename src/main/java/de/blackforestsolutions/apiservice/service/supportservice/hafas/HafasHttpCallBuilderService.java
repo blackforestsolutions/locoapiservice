@@ -7,8 +7,6 @@ import java.net.URL;
 
 public interface HafasHttpCallBuilderService {
 
-    URL buildHafasUrlWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation);
-
     @SuppressWarnings("rawtypes")
     HttpEntity buildHttpEntityStationForHafas(ApiTokenAndUrlInformation apiTokenAndUrlInformation, String station);
 

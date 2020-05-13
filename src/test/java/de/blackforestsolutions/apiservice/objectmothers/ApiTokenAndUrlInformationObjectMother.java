@@ -113,6 +113,7 @@ public class ApiTokenAndUrlInformationObjectMother {
         builder.setResultLengthAfterDepartureTime(1);
         builder.setTimeIsDeparture(true);
         builder.setAllowReducedPrice(true);
+        builder.setPath("/bin/mgate.exe?checksum=6d0c117c5a7f98d00582bc4a9be5dad1");
         return builder.build();
     }
 
@@ -268,7 +269,6 @@ public class ApiTokenAndUrlInformationObjectMother {
         builder.setAuthentificationPassword("R!7aP2YUK3yD");
         builder.setApiVersion("37.3");
         builder.setLanguage("de");
-        builder.setPath("/gti/public/getRoute");
         builder.setResultLength(1);
         builder.setDistanceFromTravelPoint(2500);
         builder.setDeparture("Ahrensburg");
@@ -285,6 +285,7 @@ public class ApiTokenAndUrlInformationObjectMother {
         builder.setTariff("all");
         builder.setTimeIsDeparture(true);
         builder.setAllowReducedPrice(true);
+        builder.setPath("/gti/public/getRoute");
         return builder.build();
     }
 
@@ -469,7 +470,8 @@ public class ApiTokenAndUrlInformationObjectMother {
         builder.setHost("api.lufthansa.com");
         builder.setPort(8080);
         builder.setApiVersion("v1");
-        builder.setPathVariable("operations/schedules");
+        builder.setPathVariable("oauth/token");
+        builder.setJourneyPathVariable("operations/schedules");
         builder.setDeparture("ZRH");
         builder.setArrival("FRA");
         try {
@@ -478,10 +480,11 @@ public class ApiTokenAndUrlInformationObjectMother {
         } catch (ParseException e) {
             log.error("Error While parsing Date", e);
         }
-        builder.setAuthorizationKey("Authorization");
         builder.setXOriginationIp("88.66.47.47");
         builder.setXOriginationIpKey("X-Originating-IP");
-        builder.setAuthorization("Bearer guuryzmgpftrnum76twe3y7k");
+        builder.setClientId("v6tqqk92k2a6zzaharpz56x6");
+        builder.setClientSecret("c9kUKEuT3k");
+        builder.setClientType("client_credentials");
         builder.setPath("/v1/operations/schedules/ZRH/FRA/2019-12-28");
         return builder.build();
     }
@@ -491,7 +494,8 @@ public class ApiTokenAndUrlInformationObjectMother {
         builder.setProtocol("https");
         builder.setHost("api.lufthansa.com");
         builder.setApiVersion("v1");
-        builder.setPathVariable("operations/schedules");
+        builder.setPathVariable("oauth/token");
+        builder.setJourneyPathVariable("operations/schedules");
         builder.setDeparture("ZRH");
         builder.setArrival("FRA");
         try {
@@ -500,10 +504,11 @@ public class ApiTokenAndUrlInformationObjectMother {
         } catch (ParseException e) {
             log.error("Error While parsing Date", e);
         }
-        builder.setAuthorizationKey("Authorization");
         builder.setXOriginationIp("88.66.47.47");
         builder.setXOriginationIpKey("X-Originating-IP");
-        builder.setAuthorization("Bearer n82nfwuh9jnpkmvrf7trbt3j");
+        builder.setClientId("v6tqqk92k2a6zzaharpz56x6");
+        builder.setClientSecret("c9kUKEuT3k");
+        builder.setClientType("client_credentials");
         builder.setPath("/v1/operations/schedules/ZRH/FRA/2019-12-28");
         return builder.build();
     }
@@ -540,7 +545,7 @@ public class ApiTokenAndUrlInformationObjectMother {
         }
         builder.setAuthorizationKey("client-key");
         builder.setAuthorization("64x9epryst4b4g2aaks4b3yn");
-        builder.setPath("/rest-v1/v1/flights;departureLocation=lhr;arrivalLocation=txl;scheduledDepartureDate=2019-10-20");
+        builder.setPath("/rest-v1/v1/flights;departureLocation=lhr;arrivalLocation=txl;scheduledDepartureDate=2020-10-20");
         return builder.build();
     }
 
@@ -583,7 +588,7 @@ public class ApiTokenAndUrlInformationObjectMother {
         builder.setXOriginationIp("88.66.47.47");
         builder.setXOriginationIpKey("X-Originating-IP");
         builder.setAuthorization("7f529ec36ab542b78e63f5270a621837");
-        builder.setPath("/api/v2/trips");
+        builder.setPath("/api/v2/trips?fn=ZRH&tn=FRA&db=2019-10-20\"");
         return builder.build();
     }
 
@@ -605,22 +610,17 @@ public class ApiTokenAndUrlInformationObjectMother {
         builder.setXOriginationIp("88.66.47.47");
         builder.setXOriginationIpKey("X-Originating-IP");
         builder.setAuthorization("7f529ec36ab542b78e63f5270a621837");
-        builder.setPath("/api/v2/trips");
+        builder.setPath("/api/v2/trips?fn=ZRH&tn=FRA&db=2019-10-20\"");
         return builder.build();
     }
 
     public static ApiTokenAndUrlInformation getAirportsFinderTokenAndUrl() {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-
         builder.setProtocol("https");
         builder.setHost("cometari-airportsfinder-v1.p.rapidapi.com");
         builder.setPort(8080);
         builder.setPathVariable("api/airports/by-radius");
-        Coordinates.CoordinatesBuilder departureCoordinates = new Coordinates.CoordinatesBuilder();
-        departureCoordinates.setLatitude(48.1301564);
-        departureCoordinates.setLongitude(8.2324351);
-        builder.setDepartureCoordinates(departureCoordinates.build());
-
+        builder.setDepartureCoordinates(new Coordinates.CoordinatesBuilder(48.1301564, 8.2324351).build());
         builder.setAuthorizationKey("x-rapidapi-key");
         builder.setAuthorization("b441403e78mshfe074d6ec0c2af2p1be89cjsn04932ccb889e");
         builder.setPath("/api/airports/by-radius;radius=300;lng=8.2324351;lat=48.1301564");
@@ -629,15 +629,10 @@ public class ApiTokenAndUrlInformationObjectMother {
 
     public static ApiTokenAndUrlInformation getAirportsFinderTokenAndUrlIT() {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-
         builder.setProtocol("https");
         builder.setHost("cometari-airportsfinder-v1.p.rapidapi.com");
         builder.setPathVariable("api/airports/by-radius");
-        Coordinates.CoordinatesBuilder departureCoordinates = new Coordinates.CoordinatesBuilder();
-        departureCoordinates.setLatitude(48.1301564);
-        departureCoordinates.setLongitude(8.2324351);
-        builder.setDepartureCoordinates(departureCoordinates.build());
-
+        builder.setDepartureCoordinates(new Coordinates.CoordinatesBuilder(48.1301564, 8.2324351).build());
         builder.setAuthorizationKey("x-rapidapi-key");
         builder.setAuthorization("b441403e78mshfe074d6ec0c2af2p1be89cjsn04932ccb889e");
         builder.setPath("/api/airports/by-radius?radius=300&lng=8.2324351&lat=48.1301564");

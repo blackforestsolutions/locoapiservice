@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
-import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.BahnCallService;
+import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallService;
 import de.blackforestsolutions.apiservice.service.mapper.JourneyStatusBuilder;
 import de.blackforestsolutions.apiservice.service.supportservice.BahnHttpCallBuilderService;
 import de.blackforestsolutions.apiservice.service.supportservice.UuidService;
@@ -24,6 +24,8 @@ import java.time.ZoneId;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.buildUrlWith;
+
 @Service
 @Slf4j
 public class BahnJourneyDetailsServiceImpl implements BahnJourneyDetailsService {
@@ -32,14 +34,14 @@ public class BahnJourneyDetailsServiceImpl implements BahnJourneyDetailsService 
     private static final int START = 0;
     private static final int DESTINATION = 1;
 
-    private final BahnCallService bahnCallService;
+    private final CallService callService;
     private final BahnHttpCallBuilderService bahnHttpCallBuilderService;
     private final UuidService uuidService;
 
     @Autowired
-    public BahnJourneyDetailsServiceImpl(BahnCallService bahnCallService, BahnHttpCallBuilderService bahnHttpCallBuilderService, UuidService uuidService) {
+    public BahnJourneyDetailsServiceImpl(CallService callService, BahnHttpCallBuilderService bahnHttpCallBuilderService, UuidService uuidService) {
         this.bahnHttpCallBuilderService = bahnHttpCallBuilderService;
-        this.bahnCallService = bahnCallService;
+        this.callService = callService;
         this.uuidService = uuidService;
     }
 
@@ -48,7 +50,7 @@ public class BahnJourneyDetailsServiceImpl implements BahnJourneyDetailsService 
         String url;
         try {
             url = getBahnJourneyDetailsRequestString(apiTokenAndUrlInformation);
-            ResponseEntity<String> result = bahnCallService.getRequestAnswer(url, bahnHttpCallBuilderService.buildHttpEntityForBahn(apiTokenAndUrlInformation));
+            ResponseEntity<String> result = callService.get(url, bahnHttpCallBuilderService.buildHttpEntityForBahn(apiTokenAndUrlInformation));
             return map(result.getBody());
         } catch (IOException e) {
             return Collections.singletonMap(uuidService.createUUID(), JourneyStatusBuilder.createJourneyStatusProblemWith(e));
@@ -64,7 +66,7 @@ public class BahnJourneyDetailsServiceImpl implements BahnJourneyDetailsService 
         builder.setGermanRailJourneyDeatilsPath(apiTokenAndUrlInformation.getGermanRailJourneyDeatilsPath());
         builder.setJourneyDetailsId(apiTokenAndUrlInformation.getJourneyDetailsId());
         builder.setPath(bahnHttpCallBuilderService.buildBahnJourneyDetailsPath(builder.build()));
-        return bahnHttpCallBuilderService.buildBahnUrlWith(builder.build()).toString();
+        return buildUrlWith(builder.build()).toString();
     }
 
     private Map<UUID, JourneyStatus> map(String jsonString) throws IOException {

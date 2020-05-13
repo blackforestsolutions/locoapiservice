@@ -4,6 +4,7 @@ import de.blackforestsolutions.apiservice.configuration.AirportConfiguration;
 import de.blackforestsolutions.apiservice.service.supportservice.UuidService;
 import de.blackforestsolutions.datamodel.JourneyStatus;
 import de.blackforestsolutions.datamodel.TravelProvider;
+import de.blackforestsolutions.generatedcontent.lufthansa.LufthansaAuthorization;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -42,18 +43,24 @@ class LufthansaMapperServiceTest {
                 .thenReturn(TEST_UUID_9)
                 .thenReturn(TEST_UUID_10)
                 .thenReturn(TEST_UUID_11)
-                .thenReturn(TEST_UUID_12).thenReturn(TEST_UUID_13).thenReturn(TEST_UUID_14)
-                .thenReturn(TEST_UUID_15).thenReturn(TEST_UUID_16)
-                .thenReturn(TEST_UUID_17).thenReturn(TEST_UUID_18)
-                .thenReturn(TEST_UUID_19).thenReturn(TEST_UUID_20)
-                .thenReturn(TEST_UUID_21).thenReturn(TEST_UUID_22);
+                .thenReturn(TEST_UUID_12)
+                .thenReturn(TEST_UUID_13)
+                .thenReturn(TEST_UUID_14)
+                .thenReturn(TEST_UUID_15)
+                .thenReturn(TEST_UUID_16)
+                .thenReturn(TEST_UUID_17)
+                .thenReturn(TEST_UUID_18)
+                .thenReturn(TEST_UUID_19)
+                .thenReturn(TEST_UUID_20)
+                .thenReturn(TEST_UUID_21)
+                .thenReturn(TEST_UUID_22);
 
     }
 
     @SuppressWarnings("OptionalGetWithoutIsPresent")
     @Test
     void test_map_jsonObject_and_return_Map_with_journeys() {
-        String scheduledResourcesJson = getResourceFileAsString("json/lufthansatest.json");
+        String scheduledResourcesJson = getResourceFileAsString("json/lufthansaJourneyTest.json");
 
         Map<UUID, JourneyStatus> result = classUnderTest.map(scheduledResourcesJson);
 
@@ -61,5 +68,16 @@ class LufthansaMapperServiceTest {
         assertThat("E90").isEqualTo(result.get(TEST_UUID_11).getJourney().get().getLegs().get(TEST_UUID_12).getVehicleNumber());
         assertThat(TravelProvider.LUFTHANSA).isEqualTo(result.get(TEST_UUID_11).getJourney().get().getLegs().get(TEST_UUID_12).getTravelProvider());
         assertThat("LH1191").isEqualTo(result.get(TEST_UUID_11).getJourney().get().getLegs().get(TEST_UUID_12).getProviderId());
+    }
+
+    @Test
+    void test_mapToAuthorization_with_json_return_correct_pojo() {
+        String authorizationResourceJson = getResourceFileAsString("json/lufthansaAuthorizationTest.json");
+
+        LufthansaAuthorization result =  (LufthansaAuthorization) classUnderTest.mapToAuthorization(authorizationResourceJson).getCalledObject();
+
+        assertThat(result.getAccessToken()).isEqualTo("6rgpt9j3u6k7befb2eea4fqx");
+        assertThat(result.getExpiresIn()).isEqualTo(129600);
+        assertThat(result.getTokenType()).isEqualTo("bearer");
     }
 }

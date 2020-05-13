@@ -4,10 +4,7 @@ import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import java.net.URL;
 import java.util.Objects;
-
-import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.buildUrlWith;
 
 @Service
 public class OSMHttpCallBuilderServiceImpl implements OSMHttpCallBuilderService {
@@ -16,12 +13,6 @@ public class OSMHttpCallBuilderServiceImpl implements OSMHttpCallBuilderService 
     private static final String QUERY = "q";
     private static final String ADDRESS_DETAILS = "addressdetails";
     private static final String LIMIT = "limit";
-
-
-    @Override
-    public URL buildOSMUrlWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
-        return buildUrlWith(apiTokenAndUrlInformation);
-    }
 
     @Override
     public String buildOSMPathWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation, String address) {

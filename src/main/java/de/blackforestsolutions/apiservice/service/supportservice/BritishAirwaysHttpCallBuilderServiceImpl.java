@@ -1,12 +1,11 @@
 package de.blackforestsolutions.apiservice.service.supportservice;
 
-import de.blackforestsolutions.apiservice.configuration.AdditionalHttpHeadersConfiguration;
+import de.blackforestsolutions.apiservice.configuration.AdditionalHttpConfiguration;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 
-import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -19,11 +18,6 @@ public class BritishAirwaysHttpCallBuilderServiceImpl implements BritishAirwaysH
     private static final String DEPARTURE_LOCATION = ";departureLocation=";
     private static final String ARRIVAL_LOCATION = ";arrivalLocation=";
     private static final String SCHEDULED_DEPARTURE_DATE = ";scheduledDepartureDate=";
-
-    @Override
-    public URL buildUrlWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
-        return HttpCallBuilder.buildUrlWith(apiTokenAndUrlInformation);
-    }
 
     @Override
     public String buildPathWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
@@ -53,7 +47,7 @@ public class BritishAirwaysHttpCallBuilderServiceImpl implements BritishAirwaysH
 
     @SuppressWarnings("rawtypes")
     @Override
-    public HttpEntity buildHttpEntityBritishAirways(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
+    public HttpEntity<String> buildHttpEntityBritishAirways(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
         return new HttpEntity<>(buildHttpHeadersForBritishAirwaysWith(apiTokenAndUrlInformation));
     }
 
@@ -62,7 +56,7 @@ public class BritishAirwaysHttpCallBuilderServiceImpl implements BritishAirwaysH
     }
 
     private void setBritishAirwaysApplicationAndClientKeyFor(HttpHeaders httpHeaders, ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
-        httpHeaders.add(AdditionalHttpHeadersConfiguration.BA_APPLICATION, AdditionalHttpHeadersConfiguration.BA_APPLICATION_VALUE);
+        httpHeaders.add(AdditionalHttpConfiguration.BA_APPLICATION, AdditionalHttpConfiguration.BA_APPLICATION_VALUE);
         httpHeaders.add(apiTokenAndUrlInformation.getAuthorizationKey(), apiTokenAndUrlInformation.getAuthorization());
     }
 

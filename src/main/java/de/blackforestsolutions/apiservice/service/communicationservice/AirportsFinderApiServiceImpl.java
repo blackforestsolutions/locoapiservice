@@ -1,6 +1,6 @@
 package de.blackforestsolutions.apiservice.service.communicationservice;
 
-import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.AirportsFinderCallService;
+import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallService;
 import de.blackforestsolutions.apiservice.service.mapper.AirportsFinderMapperService;
 import de.blackforestsolutions.apiservice.service.supportservice.AirportsFinderHttpCallBuilderService;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
@@ -14,17 +14,19 @@ import org.springframework.stereotype.Service;
 import java.net.URL;
 import java.util.LinkedHashSet;
 
+import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.buildUrlWith;
+
 @Service
 @Slf4j
 public class AirportsFinderApiServiceImpl implements AirportsFinderApiService {
-    private final AirportsFinderCallService airportsFinderCallService;
+    private final CallService callService;
     private final AirportsFinderHttpCallBuilderService airportsFinderHttpCallBuilderService;
     private final AirportsFinderMapperService airportsFinderMapperService;
 
 
     @Autowired
-    public AirportsFinderApiServiceImpl(AirportsFinderCallService airportsFinderCallService, AirportsFinderHttpCallBuilderService airportsFinderHttpCallBuilderService, AirportsFinderMapperService airportsFinderMapperService) {
-        this.airportsFinderCallService = airportsFinderCallService;
+    public AirportsFinderApiServiceImpl(CallService callService, AirportsFinderHttpCallBuilderService airportsFinderHttpCallBuilderService, AirportsFinderMapperService airportsFinderMapperService) {
+        this.callService = callService;
         this.airportsFinderHttpCallBuilderService = airportsFinderHttpCallBuilderService;
         this.airportsFinderMapperService = airportsFinderMapperService;
     }
@@ -32,7 +34,7 @@ public class AirportsFinderApiServiceImpl implements AirportsFinderApiService {
     @Override
     public LinkedHashSet<CallStatus> getAirportsWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
         String url = getAirportsFinderRequestString(apiTokenAndUrlInformation);
-        ResponseEntity<String> result = airportsFinderCallService.getNearestAirports(url, airportsFinderHttpCallBuilderService.buildHttpEntityAirportsFinder(apiTokenAndUrlInformation));
+        ResponseEntity<String> result = callService.get(url, airportsFinderHttpCallBuilderService.buildHttpEntityAirportsFinder(apiTokenAndUrlInformation));
         return this.airportsFinderMapperService.map(result.getBody());
     }
 
@@ -43,7 +45,7 @@ public class AirportsFinderApiServiceImpl implements AirportsFinderApiService {
         builder.setPath(apiTokenAndUrlInformation.getHazelcastPath());
         builder.setDepartureCoordinates(getBuilderDepartureCoordinates(apiTokenAndUrlInformation));
         builder.setPath(airportsFinderHttpCallBuilderService.buildPathWith(builder.build()));
-        URL requestUrl = airportsFinderHttpCallBuilderService.buildUrlWith(builder.build());
+        URL requestUrl = buildUrlWith(builder.build());
         return requestUrl.toString();
     }
 

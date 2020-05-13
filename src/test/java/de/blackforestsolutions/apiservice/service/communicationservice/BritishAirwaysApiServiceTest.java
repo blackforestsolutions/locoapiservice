@@ -2,8 +2,8 @@ package de.blackforestsolutions.apiservice.service.communicationservice;
 
 import de.blackforestsolutions.apiservice.configuration.AirportConfiguration;
 import de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother;
-import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.BritishAirwaysCallService;
-import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.BritishAirwaysCallServiceImpl;
+import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallService;
+import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallServiceImpl;
 import de.blackforestsolutions.apiservice.service.mapper.BritishAirwaysMapperService;
 import de.blackforestsolutions.apiservice.service.mapper.BritishAirwaysMapperServiceImpl;
 import de.blackforestsolutions.apiservice.service.supportservice.BritishAirwaysHttpCallBuilderService;
@@ -41,7 +41,7 @@ class BritishAirwaysApiServiceTest {
 
     private final RestTemplateBuilder restTemplateBuilder = new RestTemplateBuilderStub(restTemplate);
 
-    private final BritishAirwaysCallService britishAirwaysCallService = new BritishAirwaysCallServiceImpl(restTemplateBuilder);
+    private final CallService callService = new CallServiceImpl(restTemplateBuilder);
 
     private final AirportConfiguration airportConfiguration = new AirportConfiguration();
 
@@ -52,7 +52,7 @@ class BritishAirwaysApiServiceTest {
     private final BritishAirwaysMapperService britishAirwaysMapperService = new BritishAirwaysMapperServiceImpl(airportConfiguration.airports(), mockedUuidService);
 
     @InjectMocks
-    private final BritishAirwaysApiService classUnderTest = new BritishAirwaysApiServiceImpl(britishAirwaysCallService, britishAirwaysHttpCallBuilderService, britishAirwaysMapperService);
+    private final BritishAirwaysApiService classUnderTest = new BritishAirwaysApiServiceImpl(callService, britishAirwaysHttpCallBuilderService, britishAirwaysMapperService);
 
     BritishAirwaysApiServiceTest() throws IOException {
     }

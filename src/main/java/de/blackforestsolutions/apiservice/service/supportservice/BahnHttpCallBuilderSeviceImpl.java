@@ -5,16 +5,10 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 
-import java.net.URL;
 import java.util.Objects;
 
 @Service
 public class BahnHttpCallBuilderSeviceImpl extends HttpCallBuilder implements BahnHttpCallBuilderService {
-
-    @Override
-    public URL buildBahnUrlWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
-        return buildUrlWith(apiTokenAndUrlInformation);
-    }
 
     @Override
     public HttpHeaders buildHttpHeadersForBahnWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
@@ -26,11 +20,11 @@ public class BahnHttpCallBuilderSeviceImpl extends HttpCallBuilder implements Ba
     @SuppressWarnings("rawtypes")
     @Override
     public HttpEntity buildHttpEntityForBahn(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
-        return new HttpEntity<>(this.buildHttpHeadersForBahnWith(apiTokenAndUrlInformation));
+        return new HttpEntity<>(buildHttpHeadersForBahnWith(apiTokenAndUrlInformation));
     }
 
     private void setBahnFor(HttpHeaders httpHeaders, ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
-        httpHeaders.add("Authorization", apiTokenAndUrlInformation.getAuthorization());
+        httpHeaders.add(HttpHeaders.AUTHORIZATION, apiTokenAndUrlInformation.getAuthorization());
     }
 
     @Override

@@ -9,9 +9,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 
-import java.io.UncheckedIOException;
-import java.net.URL;
-
 @Service
 class BahnJourneyDetailsHttpCallBuilderServiceTest {
 
@@ -22,103 +19,6 @@ class BahnJourneyDetailsHttpCallBuilderServiceTest {
         ApiTokenAndUrlInformation apiTokenAndUrlInformation = ApiTokenAndUrlInformationObjectMother.getBahnJourneyDetailsTokenAndUrl();
         HttpHeaders result = classUnderTest.buildHttpHeadersForBahnWith(apiTokenAndUrlInformation);
         Assertions.assertThat(result.get(apiTokenAndUrlInformation.getAuthorizationKey())).contains(apiTokenAndUrlInformation.getAuthorization());
-    }
-
-    @Test
-    void test_buildUrlWith_protocol_host_port_path_apiVersion_journeyDetailsPath_detailsID_returns_correctUrl() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getBahnJourneyDetailsTokenAndUrl();
-
-        URL result = classUnderTest.buildBahnUrlWith(testData);
-
-        Assertions.assertThat(result.getProtocol()).isEqualToIgnoringCase(testData.getProtocol());
-        Assertions.assertThat(result.getPort()).isEqualTo(testData.getPort());
-        Assertions.assertThat(result.getHost()).isEqualToIgnoringCase(testData.getHost());
-        Assertions.assertThat(result.getPath()).contains(testData.getApiVersion());
-        Assertions.assertThat(result.getPath()).contains(testData.getGermanRailJourneyDeatilsPath());
-        Assertions.assertThat(result.getPath().replaceAll("%25", "%")).contains(testData.getJourneyDetailsId());
-    }
-
-    @Test
-    void test_buildUrlWith_protocolte_host_port_path_apiVersion_journeyDetailsPath_detailsID_returns_correctUrl() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getBahnJourneyDetailsTokenAndUrl();
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder = builder.buildFrom(testData);
-        builder.setProtocol("https");
-        testData = builder.build();
-
-
-        URL result = classUnderTest.buildBahnUrlWith(testData);
-
-        Assertions.assertThat(result.getProtocol()).isEqualToIgnoringCase(testData.getProtocol());
-        Assertions.assertThat(result.getPort()).isEqualTo(testData.getPort());
-        Assertions.assertThat(result.getHost()).isEqualToIgnoringCase(testData.getHost());
-        Assertions.assertThat(result.getPath()).contains(testData.getApiVersion());
-        Assertions.assertThat(result.getPath()).contains(testData.getGermanRailJourneyDeatilsPath());
-        Assertions.assertThat(result.getPath().replaceAll("%25", "%")).contains(testData.getJourneyDetailsId());
-    }
-
-    @Test
-    void test_buildUrlWith_protocolte_host_port_path_apiVersion_journeyDetailsPath_detailsID_throws_MalformedException() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getBahnJourneyDetailsTokenAndUrl();
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder = builder.buildFrom(testData);
-        builder.setProtocol("falseProtcol");
-        testData = builder.build();
-
-        ApiTokenAndUrlInformation finalTestData = testData;
-        org.junit.jupiter.api.Assertions.assertThrows(UncheckedIOException.class, () -> classUnderTest.buildBahnUrlWith(finalTestData));
-    }
-
-    @Test
-    void test_buildUrlWith_protocol_host_port_path_apiVersion_journeyDetailsPath_detailsID() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getBahnJourneyDetailsTokenAndUrl();
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder = builder.buildFrom(testData);
-        builder.setPort(-1);
-        testData = builder.build();
-
-
-        URL result = classUnderTest.buildBahnUrlWith(testData);
-
-        Assertions.assertThat(result.getProtocol()).isEqualToIgnoringCase(testData.getProtocol());
-        Assertions.assertThat(result.getPort()).isEqualTo(testData.getPort());
-        Assertions.assertThat(result.getHost()).isEqualToIgnoringCase(testData.getHost());
-        Assertions.assertThat(result.getPath()).contains(testData.getApiVersion());
-        Assertions.assertThat(result.getPath()).contains(testData.getGermanRailJourneyDeatilsPath());
-        Assertions.assertThat(result.getPath().replaceAll("%25", "%")).contains(testData.getJourneyDetailsId());
-    }
-
-    @Test
-    void test_buildUrlWith_protocol_host_port_path_apiVersion_journeyDetailsPath_detailsID_return_correcturl() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getBahnJourneyDetailsTokenAndUrl();
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder = builder.buildFrom(testData);
-        builder.setProtocol("https");
-        builder.setPort(-1);
-        testData = builder.build();
-
-
-        URL result = classUnderTest.buildBahnUrlWith(testData);
-
-        Assertions.assertThat(result.getProtocol()).isEqualToIgnoringCase(testData.getProtocol());
-        Assertions.assertThat(result.getPort()).isEqualTo(testData.getPort());
-        Assertions.assertThat(result.getHost()).isEqualToIgnoringCase(testData.getHost());
-        Assertions.assertThat(result.getPath()).contains(testData.getApiVersion());
-        Assertions.assertThat(result.getPath()).contains(testData.getGermanRailJourneyDeatilsPath());
-        Assertions.assertThat(result.getPath().replaceAll("%25", "%")).contains(testData.getJourneyDetailsId());
-    }
-
-    @Test
-    void test_buildUrlWith_protocolte_host_port_path_apiVersion_journeyDetailsPath_detailsID_throws_MalformedException2() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getBahnJourneyDetailsTokenAndUrl();
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder = builder.buildFrom(testData);
-        builder.setProtocol("falseProtcol");
-        builder.setPort(-1);
-        testData = builder.build();
-
-        ApiTokenAndUrlInformation finalTestData = testData;
-        org.junit.jupiter.api.Assertions.assertThrows(UncheckedIOException.class, () -> classUnderTest.buildBahnUrlWith(finalTestData));
     }
 
     @Test

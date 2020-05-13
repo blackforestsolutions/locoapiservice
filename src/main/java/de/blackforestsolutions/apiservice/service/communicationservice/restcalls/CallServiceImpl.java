@@ -9,17 +9,23 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 @Service
-public class AirportsFinderCallServiceImpl implements AirportsFinderCallService {
+public class CallServiceImpl implements CallService {
 
     private final RestTemplate restTemplate;
 
     @Autowired
-    public AirportsFinderCallServiceImpl(RestTemplateBuilder restTemplateBuilder) {
+    public CallServiceImpl(RestTemplateBuilder restTemplateBuilder) {
         this.restTemplate = restTemplateBuilder.build();
     }
 
     @Override
-    public ResponseEntity<String> getNearestAirports(String url, HttpEntity<?> requestEntity) {
+    public ResponseEntity<String> get(String url, HttpEntity<?> requestEntity) {
         return restTemplate.exchange(url, HttpMethod.GET, requestEntity, String.class);
     }
+
+    @Override
+    public ResponseEntity<String> post(String url, HttpEntity<?> requestEntity) {
+        return restTemplate.exchange(url, HttpMethod.POST, requestEntity, String.class);
+    }
+
 }

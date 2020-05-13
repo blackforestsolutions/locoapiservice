@@ -5,6 +5,7 @@ import de.blackforestsolutions.apiservice.service.communicationservice.HvvApiSer
 import de.blackforestsolutions.apiservice.service.communicationservice.NahShApiService;
 import de.blackforestsolutions.apiservice.service.communicationservice.RMVApiService;
 import de.blackforestsolutions.apiservice.service.communicationservice.VBBApiService;
+
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

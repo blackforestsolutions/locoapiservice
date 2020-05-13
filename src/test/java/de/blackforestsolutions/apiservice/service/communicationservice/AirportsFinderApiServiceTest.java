@@ -1,8 +1,8 @@
 package de.blackforestsolutions.apiservice.service.communicationservice;
 
 import de.blackforestsolutions.apiservice.configuration.AirportConfiguration;
-import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.AirportsFinderCallService;
-import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.AirportsFinderCallServiceImpl;
+import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallService;
+import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallServiceImpl;
 import de.blackforestsolutions.apiservice.service.mapper.AirportsFinderMapperService;
 import de.blackforestsolutions.apiservice.service.mapper.AirportsFinderMapperServiceImpl;
 import de.blackforestsolutions.apiservice.service.supportservice.AirportsFinderHttpCallBuilderService;
@@ -38,7 +38,7 @@ public class AirportsFinderApiServiceTest {
 
     private final RestTemplateBuilder restTemplateBuilder = new RestTemplateBuilderStub(restTemplate);
 
-    private final AirportsFinderCallService lufthansaCallService = new AirportsFinderCallServiceImpl(restTemplateBuilder);
+    private final CallService callService = new CallServiceImpl(restTemplateBuilder);
 
     private final AirportConfiguration airportConfiguration = new AirportConfiguration();
 
@@ -46,7 +46,7 @@ public class AirportsFinderApiServiceTest {
 
     private final AirportsFinderHttpCallBuilderService httpCallBuilderService = new AirportsFinderHttpCallBuilderServiceImpl();
 
-    private final AirportsFinderApiService classUnderTest = new AirportsFinderApiServiceImpl(lufthansaCallService, httpCallBuilderService, mapper);
+    private final AirportsFinderApiService classUnderTest = new AirportsFinderApiServiceImpl(callService, httpCallBuilderService, mapper);
 
     public AirportsFinderApiServiceTest() throws IOException {
     }

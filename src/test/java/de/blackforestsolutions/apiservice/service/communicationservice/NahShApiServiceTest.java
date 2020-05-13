@@ -3,8 +3,8 @@ package de.blackforestsolutions.apiservice.service.communicationservice;
 import de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother;
 import de.blackforestsolutions.apiservice.objectmothers.JourneyObjectMother;
 import de.blackforestsolutions.apiservice.objectmothers.LegObjectMother;
-import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.HafasCallService;
-import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.HafasCallServiceImpl;
+import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallService;
+import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallServiceImpl;
 import de.blackforestsolutions.apiservice.service.mapper.HafasMapperService;
 import de.blackforestsolutions.apiservice.service.mapper.HafasMapperServiceImpl;
 import de.blackforestsolutions.apiservice.service.supportservice.UuidService;
@@ -37,7 +37,7 @@ class NahShApiServiceTest {
 
     private final RestTemplateBuilder restTemplateBuilder = new RestTemplateBuilderStub(REST_TEMPLATE);
 
-    private final HafasCallService hafasCallService = new HafasCallServiceImpl(restTemplateBuilder);
+    private final CallService callService = new CallServiceImpl(restTemplateBuilder);
 
     private final HafasHttpCallBuilderService hafasHttpCallBuilderService = new HafasHttpCallBuilderServiceImpl();
 
@@ -45,7 +45,7 @@ class NahShApiServiceTest {
 
     private final HafasMapperService hafasMapperService = new HafasMapperServiceImpl(uuidGenerator);
 
-    private final HafasApiService hafasApiService = new HafasApiServiceImpl(hafasCallService, hafasHttpCallBuilderService, hafasMapperService);
+    private final HafasApiService hafasApiService = new HafasApiServiceImpl(callService, hafasHttpCallBuilderService, hafasMapperService);
 
     private final NahShApiService classUnderTest = new NahShApiServiceImpl(hafasApiService);
 

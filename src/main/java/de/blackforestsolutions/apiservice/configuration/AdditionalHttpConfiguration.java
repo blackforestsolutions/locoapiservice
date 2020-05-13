@@ -1,6 +1,6 @@
 package de.blackforestsolutions.apiservice.configuration;
 
-public final class AdditionalHttpHeadersConfiguration {
+public final class AdditionalHttpConfiguration {
 
     public static final String X_ORIGINATING_IP = "X-Originating-IP";
     public static final String BA_APPLICATION = "application";
@@ -24,4 +24,10 @@ public final class AdditionalHttpHeadersConfiguration {
     public static final String X_TRACE_ID = "X-TraceId";
 
     public static final String KEY = "key";
+
+    public static final String CLIENT_ID = "client_id";
+
+    public static final String CLIENT_SECRET = "client_secret";
+
+    public static final String GRANT_TYPE = "grant_type";
 }

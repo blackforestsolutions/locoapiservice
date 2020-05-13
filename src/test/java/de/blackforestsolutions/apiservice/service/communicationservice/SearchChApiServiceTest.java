@@ -3,8 +3,8 @@ package de.blackforestsolutions.apiservice.service.communicationservice;
 import de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother;
 import de.blackforestsolutions.apiservice.objectmothers.JourneyObjectMother;
 import de.blackforestsolutions.apiservice.objectmothers.TravelPointObjectMother;
-import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.SearchChCallCallServiceImpl;
-import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.SearchChCallService;
+import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallService;
+import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallServiceImpl;
 import de.blackforestsolutions.apiservice.service.mapper.JourneyStatusBuilder;
 import de.blackforestsolutions.apiservice.service.mapper.SearchChMapperService;
 import de.blackforestsolutions.apiservice.service.supportservice.SearchChHttpCallBuilderService;
@@ -39,13 +39,13 @@ class SearchChApiServiceTest {
 
     private final SearchChHttpCallBuilderService searchChHttpCallBuilderService = new SearchChHttpCallBuilderServiceImpl();
 
-    private final SearchChCallService searchChCallService = new SearchChCallCallServiceImpl(restTemplateBuilder);
+    private final CallService callService = new CallServiceImpl(restTemplateBuilder);
 
     @Mock
     private SearchChMapperService searchChMapperService = Mockito.mock(SearchChMapperService.class);
 
     @InjectMocks
-    private SearchChApiService classUnderTest = new SearchChApiServiceImpl(searchChCallService, searchChHttpCallBuilderService, searchChMapperService);
+    private SearchChApiService classUnderTest = new SearchChApiServiceImpl(callService, searchChHttpCallBuilderService, searchChMapperService);
 
     @Test
     void test_getTravelPointForRouteFromApiWith_mocked_mapper_returns_hashMap() throws IOException {

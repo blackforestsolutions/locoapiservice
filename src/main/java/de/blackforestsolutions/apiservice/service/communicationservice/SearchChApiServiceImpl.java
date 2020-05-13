@@ -1,6 +1,6 @@
 package de.blackforestsolutions.apiservice.service.communicationservice;
 
-import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.SearchChCallService;
+import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallService;
 import de.blackforestsolutions.apiservice.service.mapper.SearchChMapperService;
 import de.blackforestsolutions.apiservice.service.supportservice.SearchChHttpCallBuilderService;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
@@ -22,13 +22,13 @@ import static de.blackforestsolutions.apiservice.service.supportservice.HttpCall
 @Service
 public class SearchChApiServiceImpl implements SearchChApiService {
 
-    private final SearchChCallService searchChCallService;
+    private final CallService callService;
     private final SearchChHttpCallBuilderService searchChHttpCallBuilderService;
     private final SearchChMapperService searchChMapperService;
 
     @Autowired
-    public SearchChApiServiceImpl(SearchChCallService searchChCallService, SearchChHttpCallBuilderService searchChHttpCallBuilderService, SearchChMapperService searchChMapperService) {
-        this.searchChCallService = searchChCallService;
+    public SearchChApiServiceImpl(CallService callService, SearchChHttpCallBuilderService searchChHttpCallBuilderService, SearchChMapperService searchChMapperService) {
+        this.callService = callService;
         this.searchChHttpCallBuilderService = searchChHttpCallBuilderService;
         this.searchChMapperService = searchChMapperService;
     }
@@ -36,14 +36,14 @@ public class SearchChApiServiceImpl implements SearchChApiService {
     @Override
     public Map<String, TravelPoint> getTravelPointForRouteFromApiWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) throws IOException {
         String url = getTravelPointRequestString(apiTokenAndUrlInformation);
-        ResponseEntity<String> result = searchChCallService.getRequestAnswer(url, buildEmptyHttpEntity());
+        ResponseEntity<String> result = callService.get(url, buildEmptyHttpEntity());
         return searchChMapperService.getTravelPointFrom(result.getBody());
     }
 
     @Override
     public Map<UUID, JourneyStatus> getJourneysForRouteWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
         String url = getRouteRequestString(apiTokenAndUrlInformation);
-        ResponseEntity<String> result = searchChCallService.getRequestAnswer(url, buildEmptyHttpEntity());
+        ResponseEntity<String> result = callService.get(url, buildEmptyHttpEntity());
         String body = nullsaveResponseBodyMapping(result);
         return searchChMapperService.getJourneysFrom(body);
     }

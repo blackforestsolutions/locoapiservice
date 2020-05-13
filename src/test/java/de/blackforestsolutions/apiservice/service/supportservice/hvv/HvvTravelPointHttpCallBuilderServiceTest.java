@@ -1,7 +1,7 @@
 package de.blackforestsolutions.apiservice.service.supportservice.hvv;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import de.blackforestsolutions.apiservice.configuration.AdditionalHttpHeadersConfiguration;
+import de.blackforestsolutions.apiservice.configuration.AdditionalHttpConfiguration;
 import de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother;
 import de.blackforestsolutions.apiservice.objectmothers.HttpBodyObjectMother;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
@@ -25,11 +25,11 @@ class HvvTravelPointHttpCallBuilderServiceTest {
 
         Assertions.assertEquals(headerResult.getFirst(HttpHeaders.ACCEPT), MediaType.APPLICATION_JSON_VALUE);
         Assertions.assertEquals(headerResult.getFirst(HttpHeaders.CONTENT_TYPE), MediaType.APPLICATION_JSON_VALUE);
-        Assertions.assertEquals(headerResult.getFirst(AdditionalHttpHeadersConfiguration.GEO_FEX_AUTH_TYPE), "HmacSHA1");
-        Assertions.assertEquals(headerResult.getFirst(AdditionalHttpHeadersConfiguration.GEO_FEX_AUTH_USER), "janhendrikhausner");
-        Assertions.assertEquals(headerResult.getFirst(AdditionalHttpHeadersConfiguration.GEO_FEX_AUTH_SIGNATURE), "YCixqJ8OE8mXlQeeDy1njayI5O0=");
+        Assertions.assertEquals(headerResult.getFirst(AdditionalHttpConfiguration.GEO_FEX_AUTH_TYPE), "HmacSHA1");
+        Assertions.assertEquals(headerResult.getFirst(AdditionalHttpConfiguration.GEO_FEX_AUTH_USER), "janhendrikhausner");
+        Assertions.assertEquals(headerResult.getFirst(AdditionalHttpConfiguration.GEO_FEX_AUTH_SIGNATURE), "YCixqJ8OE8mXlQeeDy1njayI5O0=");
 
-        Assertions.assertNotNull(headerResult.getFirst(AdditionalHttpHeadersConfiguration.X_TRACE_ID));
+        Assertions.assertNotNull(headerResult.getFirst(AdditionalHttpConfiguration.X_TRACE_ID));
         Assertions.assertEquals(6, headerResult.values().size());
     }
 

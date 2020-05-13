@@ -1,15 +1,18 @@
 package de.blackforestsolutions.apiservice.configuration;
 
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.annotation.Resource;
+
 @Configuration
 public class DBConfiguration {
 
-    private final ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder hafasStandardConfiguration;
+    @Resource(name = "hafasStandardConfiguration")
+    private ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder hafasStandardConfiguration;
+
     @Value("${hafasDbChecksum}")
     private String hafasDbChecksum;
     @Value("${hafasDbHost}")
@@ -40,11 +43,6 @@ public class DBConfiguration {
     private boolean hafasDbTimeIsDeparture;
     @Value("${hafasDbAllowReduced}")
     private boolean hafasDbAllowReduced;
-
-    @Autowired
-    public DBConfiguration(ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder hafasStandardConfiguration) {
-        this.hafasStandardConfiguration = hafasStandardConfiguration;
-    }
 
     @Bean(name = "dbApiTokenAndUrlInformation")
     public ApiTokenAndUrlInformation apiTokenAndUrlInformation() {

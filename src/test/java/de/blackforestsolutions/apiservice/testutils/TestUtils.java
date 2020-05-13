@@ -1,15 +1,22 @@
 package de.blackforestsolutions.apiservice.testutils;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.http.ResponseEntity;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.StringReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
@@ -91,4 +98,25 @@ public class TestUtils {
                 convertToLocalDateTime(arrival)
         );
     }
+
+    public static <T> T retrieveJsonPojoFromResponse(ResponseEntity<String> response, Class<T> pojo) throws JsonProcessingException {
+        Objects.requireNonNull(response.getBody(), "response body is not allowed to be null");
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.readValue(response.getBody(), pojo);
+    }
+
+    public static <T> List<T> retrieveListJsonPojoFromResponse(ResponseEntity<String> response, Class<T> pojo) throws JsonProcessingException {
+        Objects.requireNonNull(response.getBody(), "response body is not allowed to be null");
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.readValue(response.getBody(), mapper.getTypeFactory().constructCollectionType(List.class, pojo));
+    }
+
+    public static <T> T retrieveXmlPojoFromResponse(ResponseEntity<String> response, Class<T> pojo) throws JAXBException {
+        Objects.requireNonNull(response.getBody(), "response body is not allowed to be null");
+        StringReader readerResultBody = new StringReader(response.getBody());
+        JAXBContext jaxbContext = JAXBContext.newInstance(pojo);
+        Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+        return (T) unmarshaller.unmarshal(readerResultBody);
+    }
+
 }

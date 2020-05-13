@@ -58,11 +58,6 @@ public class HafasHttpCallBuilderServiceImpl implements HafasHttpCallBuilderServ
     }
 
     @Override
-    public URL buildHafasUrlWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
-        return buildUrlWith(apiTokenAndUrlInformation);
-    }
-
-    @Override
     @SuppressWarnings("rawtypes")
     public HttpEntity buildHttpEntityStationForHafas(ApiTokenAndUrlInformation apiTokenAndUrlInformation, String station) {
         return new HttpEntity<>(buildLocationHttpBodyWith(apiTokenAndUrlInformation, station));

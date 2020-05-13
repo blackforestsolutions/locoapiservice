@@ -2,8 +2,8 @@ package de.blackforestsolutions.apiservice.service.communicationservice;
 
 import de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother;
 import de.blackforestsolutions.apiservice.service.communicationservice.bahnService.*;
-import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.BahnCallService;
-import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.BahnCallServiceImpl;
+import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallService;
+import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallServiceImpl;
 import de.blackforestsolutions.apiservice.service.supportservice.BahnHttpCallBuilderService;
 import de.blackforestsolutions.apiservice.service.supportservice.BahnHttpCallBuilderSeviceImpl;
 import de.blackforestsolutions.apiservice.service.supportservice.UuidService;
@@ -35,19 +35,19 @@ class BahnServiceTest {
 
     private final BahnHttpCallBuilderService bahnHttpCallBuilderService = new BahnHttpCallBuilderSeviceImpl();
 
-    private final BahnCallService bahnCallService = new BahnCallServiceImpl(restTemplateBuilder);
+    private final CallService callService = new CallServiceImpl(restTemplateBuilder);
 
-    private final BahnRailwayStationService classUnderTestBahnRailwayStationService = new BahnRailwayStationServiceImpl(bahnCallService, bahnHttpCallBuilderService);
+    private final BahnRailwayStationService classUnderTestBahnRailwayStationService = new BahnRailwayStationServiceImpl(callService, bahnHttpCallBuilderService);
 
-    private final BahnArrivalBoardService classUnderTestBahnArrivalBoardService = new BahnArrivalBoardServiceImpl(bahnCallService, bahnHttpCallBuilderService);
+    private final BahnArrivalBoardService classUnderTestBahnArrivalBoardService = new BahnArrivalBoardServiceImpl(callService, bahnHttpCallBuilderService);
 
-    private final BahnDepartureBoardService classUnderTestBahnDepartureBoardService = new BahnDepartureBoardServiceImpl(bahnCallService, bahnHttpCallBuilderService);
+    private final BahnDepartureBoardService classUnderTestBahnDepartureBoardService = new BahnDepartureBoardServiceImpl(callService, bahnHttpCallBuilderService);
 
     @Mock
     private UuidService uuidGenerator = mock(UuidServiceImpl.class);
 
     @InjectMocks
-    private BahnJourneyDetailsService classUnderTestBahnJourneyDetailsService = new BahnJourneyDetailsServiceImpl(bahnCallService, bahnHttpCallBuilderService, uuidGenerator);
+    private BahnJourneyDetailsService classUnderTestBahnJourneyDetailsService = new BahnJourneyDetailsServiceImpl(callService, bahnHttpCallBuilderService, uuidGenerator);
 
     @Test
     void test_getTravelPointsForRouteFromApiWith_mocked_rest_service_is_excuted_correctly_and_maps_correctly_returns_map() throws Exception {

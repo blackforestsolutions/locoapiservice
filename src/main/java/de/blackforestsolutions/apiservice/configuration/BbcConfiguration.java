@@ -27,7 +27,7 @@ public class BbcConfiguration {
         builder.setPort(CONFIGURED_BASE_PORT);
         builder.setApiVersion(bbcApiVersion);
         builder.setPathVariable(bbcPathVariable);
-        builder.setAuthorizationKey(AdditionalHttpHeadersConfiguration.KEY);
+        builder.setAuthorizationKey(AdditionalHttpConfiguration.KEY);
         builder.setAuthorization(authorization);
         return builder.build();
     }

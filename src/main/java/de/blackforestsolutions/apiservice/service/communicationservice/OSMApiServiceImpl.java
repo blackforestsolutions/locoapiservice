@@ -2,7 +2,7 @@ package de.blackforestsolutions.apiservice.service.communicationservice;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.OSMCallService;
+import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallService;
 import de.blackforestsolutions.apiservice.service.supportservice.OSMHttpCallBuilderService;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import de.blackforestsolutions.datamodel.CallStatus;
@@ -17,18 +17,19 @@ import java.net.URL;
 import java.util.List;
 
 import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.buildEmptyHttpEntity;
+import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.buildUrlWith;
 
 @Service
 public class OSMApiServiceImpl implements OSMApiService {
 
     private static final int FIRST_INDEX = 0;
 
-    private final OSMCallService osmCallService;
+    private final CallService callService;
     private final OSMHttpCallBuilderService osmHttpCallBuilderService;
 
     @Autowired
-    public OSMApiServiceImpl(OSMCallService osmCallService, OSMHttpCallBuilderService osmHttpCallBuilderService) {
-        this.osmCallService = osmCallService;
+    public OSMApiServiceImpl(CallService callService, OSMHttpCallBuilderService osmHttpCallBuilderService) {
+        this.callService = callService;
         this.osmHttpCallBuilderService = osmHttpCallBuilderService;
     }
 
@@ -48,7 +49,7 @@ public class OSMApiServiceImpl implements OSMApiService {
     @Override
     public CallStatus getCoordinatesFromTravelPointWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation, String address) {
         String url = getOSMRequestString(apiTokenAndUrlInformation, address);
-        ResponseEntity<String> result = osmCallService.getTravelPoints(url, buildEmptyHttpEntity());
+        ResponseEntity<String> result = callService.get(url, buildEmptyHttpEntity());
         try {
             return new CallStatus(
                     map(result.getBody()),
@@ -68,7 +69,7 @@ public class OSMApiServiceImpl implements OSMApiService {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(apiTokenAndUrlInformation);
         builder = builder.buildFrom(apiTokenAndUrlInformation);
         builder.setPath(osmHttpCallBuilderService.buildOSMPathWith(builder.build(), address));
-        URL requestUrl = osmHttpCallBuilderService.buildOSMUrlWith(builder.build());
+        URL requestUrl = buildUrlWith(builder.build());
         return requestUrl.toString();
     }
 

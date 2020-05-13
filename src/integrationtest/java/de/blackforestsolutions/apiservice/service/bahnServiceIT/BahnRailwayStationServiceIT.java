@@ -1,7 +1,7 @@
-package de.blackforestsolutions.apiservice.service.bahnServiceIT;
+package java.de.blackforestsolutions.apiservice.service.bahnServiceIT;
 
 import de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother;
-import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.BahnCallService;
+import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallService;
 import de.blackforestsolutions.apiservice.service.supportservice.BahnHttpCallBuilderService;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import org.assertj.core.api.Assertions;
@@ -12,22 +12,24 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.buildUrlWith;
+
 
 @SpringBootTest
 @AutoConfigureMockMvc
 class BahnRailwayStationServiceIT {
 
     @Autowired
-    private BahnCallService bahnCallService;
+    private CallService callService;
 
     @Autowired
     private BahnHttpCallBuilderService bahnHttpCallBuilderService;
 
     @Test
-    void test_RailwayStation_() {
+    void test_RailwayStation() {
         ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getBahnRailwayStationTokenAndUrlIT();
 
-        ResponseEntity<String> result = bahnCallService.getRequestAnswer(bahnHttpCallBuilderService.buildBahnUrlWith(testData).toString(), bahnHttpCallBuilderService.buildHttpEntityForBahn(testData));
+        ResponseEntity<String> result = callService.get(buildUrlWith(testData).toString(), bahnHttpCallBuilderService.buildHttpEntityForBahn(testData));
 
         Assertions.assertThat(HttpStatus.OK).isEqualTo(result.getStatusCode());
     }
