@@ -51,7 +51,6 @@ public class LuftHansaHttpCallBuilderServiceImpl extends HttpCallBuilder impleme
 
     private void setLufthansaAuthorisationFor(HttpHeaders httpHeaders, ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
         httpHeaders.add(HttpHeaders.AUTHORIZATION, apiTokenAndUrlInformation.getAuthorization());
-        //httpHeaders.add(AdditionalHttpHeadersConfiguration.X_ORIGINATING_IP, apiTokenAndUrlInformation.getXOriginationIp());
     }
 
 

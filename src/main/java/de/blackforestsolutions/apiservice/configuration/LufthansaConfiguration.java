@@ -30,7 +30,6 @@ public class LufthansaConfiguration {
         builder.setPort(0);
         builder.setApiVersion(lufthansaApiVersion);
         builder.setPathVariable(lufthansaPathVariable);
-        builder.setXOriginationIpKey(AdditionalHttpHeadersConfiguration.X_ORIGINATING_IP);
         builder.setXOriginationIp(xOriginationIp);
         builder.setAuthorizationKey(HttpHeaders.AUTHORIZATION);
         builder.setAuthorization(authorization);
