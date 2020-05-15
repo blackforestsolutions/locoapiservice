@@ -28,19 +28,19 @@ public class BahnHttpCallBuilderSeviceImpl extends HttpCallBuilder implements Ba
     }
 
     @Override
-    public String buildBahnRailwayStationPathWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
+    public String buildBahnRailwayStationPathWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation, String location) {
         Objects.requireNonNull(apiTokenAndUrlInformation.getPathVariable(), "pathvariable is not allowed to be null");
         Objects.requireNonNull(apiTokenAndUrlInformation.getApiVersion(), "apiVersion is not allowed to be null");
-        Objects.requireNonNull(apiTokenAndUrlInformation.getGermanRailLocationPath(), "location path is not allowed to be null");
-        Objects.requireNonNull(apiTokenAndUrlInformation.getBahnLocation(), "location is not allowed to be null");
+        Objects.requireNonNull(apiTokenAndUrlInformation.getLocationPath(), "location path is not allowed to be null");
+        Objects.requireNonNull(location, "location is not allowed to be null");
         return "/"
                 .concat(apiTokenAndUrlInformation.getPathVariable())
                 .concat("/")
                 .concat(apiTokenAndUrlInformation.getApiVersion())
                 .concat("/")
-                .concat(apiTokenAndUrlInformation.getGermanRailLocationPath())
+                .concat(apiTokenAndUrlInformation.getLocationPath())
                 .concat("/")
-                .concat(apiTokenAndUrlInformation.getBahnLocation());
+                .concat(location);
     }
 
     @Override
@@ -49,7 +49,7 @@ public class BahnHttpCallBuilderSeviceImpl extends HttpCallBuilder implements Ba
         Objects.requireNonNull(apiTokenAndUrlInformation.getApiVersion(), "apiVersion is not allowed to be null");
         Objects.requireNonNull(apiTokenAndUrlInformation.getGermanRailArrivalBoardPath(), "arrival Board path is not allowed to be null");
         Objects.requireNonNull(apiTokenAndUrlInformation.getStationId(), "stationID is not allowed to be null");
-        Objects.requireNonNull(apiTokenAndUrlInformation.getGermanRailDatePathVariable(), "german rail date path varaible is not allowed to be null");
+        Objects.requireNonNull(apiTokenAndUrlInformation.getDepartureDate(), "departure date is not allowed to be null");
         return "/"
                 .concat(apiTokenAndUrlInformation.getPathVariable())
                 .concat("/")
@@ -59,7 +59,7 @@ public class BahnHttpCallBuilderSeviceImpl extends HttpCallBuilder implements Ba
                 .concat("/")
                 .concat(apiTokenAndUrlInformation.getStationId())
                 .concat("?date=")
-                .concat(transformDateToString(apiTokenAndUrlInformation.getGermanRailDatePathVariable()));
+                .concat(transformDateToString(apiTokenAndUrlInformation.getDepartureDate()));
     }
 
     @Override
@@ -92,8 +92,8 @@ public class BahnHttpCallBuilderSeviceImpl extends HttpCallBuilder implements Ba
                 .concat("/")
                 .concat(apiTokenAndUrlInformation.getApiVersion())
                 .concat("/")
-                .concat(apiTokenAndUrlInformation.getGermanRailJourneyDeatilsPath()
-                        .concat("/")
-                        .concat(apiTokenAndUrlInformation.getJourneyDetailsId().replaceAll("%", "%25")));
+                .concat(apiTokenAndUrlInformation.getGermanRailJourneyDeatilsPath())
+                .concat("/")
+                .concat(apiTokenAndUrlInformation.getJourneyDetailsId().replaceAll("%", "%25"));
     }
 }

@@ -3,7 +3,6 @@ package de.blackforestsolutions.apiservice.service.communicationservice;
 import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallService;
 import de.blackforestsolutions.apiservice.service.mapper.HafasMapperService;
 import de.blackforestsolutions.apiservice.service.mapper.HafasPriceMapper;
-import de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder;
 import de.blackforestsolutions.apiservice.service.supportservice.hafas.HafasHttpCallBuilderService;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import de.blackforestsolutions.datamodel.JourneyStatus;

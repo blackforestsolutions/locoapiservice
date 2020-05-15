@@ -5,7 +5,7 @@ import org.springframework.http.HttpEntity;
 
 public interface HvvTravelPointHttpCallBuilderService {
     @SuppressWarnings("rawtypes")
-    HttpEntity buildTravelPointHttpEntityForHvv(ApiTokenAndUrlInformation apiTokenAndUrlInformation, String station);
+    HttpEntity<String> buildTravelPointHttpEntityForHvv(ApiTokenAndUrlInformation apiTokenAndUrlInformation, String station);
 
     String buildTravelPointPathWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation);
 }

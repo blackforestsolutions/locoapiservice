@@ -26,7 +26,7 @@ public class NearestStationFinderControllerTest {
 
     private NearestStationFinderController initClassUnderTest() {
         NearestStationFinderController classUnderTest = new NearestStationFinderController(airportsFinderApiService);
-        classUnderTest.setAirportsFinderApiTokenAndUrlInformation(ApiTokenAndUrlInformationObjectMother.getAirportsFinderTokenAndUrlIT());
+        classUnderTest.setAirportsFinderApiTokenAndUrlInformation(ApiTokenAndUrlInformationObjectMother.getAirportsFinderTokenAndUrl());
         return classUnderTest;
     }
 

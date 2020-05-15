@@ -60,7 +60,7 @@ class BBCApiServiceImplTest {
     @SuppressWarnings("OptionalGetWithoutIsPresent")
     @Test
     void test_getJournesForRouteFromApiWith_with_mocked_rest_service_is_executed_correctly_and_maps_correctly_returns_map() throws ParseException {
-        ApiTokenAndUrlInformation apiTokenAndUrlInformation = ApiTokenAndUrlInformationObjectMother.getBbcTokenAndUrlIT();
+        ApiTokenAndUrlInformation apiTokenAndUrlInformation = ApiTokenAndUrlInformationObjectMother.getBbcTokenAndUrl();
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder apiTokenAndUrlInformationBuilder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
         apiTokenAndUrlInformationBuilder = apiTokenAndUrlInformationBuilder.buildFrom(apiTokenAndUrlInformation);
         Date dateNow = formatDate(new Date());

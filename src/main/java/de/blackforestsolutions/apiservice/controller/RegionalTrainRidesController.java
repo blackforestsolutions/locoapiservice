@@ -26,8 +26,8 @@ public class RegionalTrainRidesController {
 
     @Resource(name = "hvvApiTokenAndUrlInformation")
     private ApiTokenAndUrlInformation hvvApiTokenAndUrlInformation;
-    @Resource(name = "rMVApiTokenAndUrlInformation")
-    private ApiTokenAndUrlInformation rMVApiTokenAndUrlInformation;
+    @Resource(name = "rmvApiTokenAndUrlInformation")
+    private ApiTokenAndUrlInformation rmvApiTokenAndUrlInformation;
     @Resource(name = "vbbApiTokenAndUrlInformation")
     private ApiTokenAndUrlInformation vbbApiTokenAndUrlInformation;
     @Resource(name = "nahShApiTokenAndUrlInformation")
@@ -56,7 +56,7 @@ public class RegionalTrainRidesController {
     }
 
     private ApiTokenAndUrlInformation getRMVApiTokenAndUrlInformation(ApiTokenAndUrlInformation request) {
-        return RequestTokenHandler.getRequestApiTokenWith(request, rMVApiTokenAndUrlInformation);
+        return RequestTokenHandler.getRequestApiTokenWith(request, rmvApiTokenAndUrlInformation);
     }
 
     private ApiTokenAndUrlInformation getVbbApiTokenAndUrlInformation(ApiTokenAndUrlInformation request) {
@@ -74,7 +74,7 @@ public class RegionalTrainRidesController {
 
     @VisibleForTesting
     void setRMVApiTokenAndUrlInformation(ApiTokenAndUrlInformation rMVApiTokenAndUrlInformation) {
-        this.rMVApiTokenAndUrlInformation = rMVApiTokenAndUrlInformation;
+        this.rmvApiTokenAndUrlInformation = rMVApiTokenAndUrlInformation;
     }
 
     @VisibleForTesting

@@ -54,7 +54,7 @@ class HvvApiServiceTest {
 
     @Test
     void test_getJourneysForRouteFromHvvApiWith_with_mocked_rest_and_json_is_excuted_correctly_and_returns_map() throws Exception {
-        ApiTokenAndUrlInformation apiTokenAndUrlInformation = ApiTokenAndUrlInformationObjectMother.getHvvJourneyTokenAndUrl();
+        ApiTokenAndUrlInformation apiTokenAndUrlInformation = ApiTokenAndUrlInformationObjectMother.getHvvTokenAndUrl();
         String rotenhofTravelPointJson = TestUtils.getResourceFileAsString("json/hvvRotenhofTravelPoint.json");
         ResponseEntity<String> rotenhofTravelPointResult = new ResponseEntity<>(rotenhofTravelPointJson, HttpStatus.OK);
         String stadthausbrueckeTravelPointJson = TestUtils.getResourceFileAsString("json/hvvStadthausbrueckeTravelPoint.json");
@@ -80,7 +80,7 @@ class HvvApiServiceTest {
 
     @Test
     void test_getStationListFromHvvApiWith_with_mocked_rest_is_excuted_correctly_and_returns_map() throws Exception {
-        ApiTokenAndUrlInformation apiTokenAndUrlInformation = ApiTokenAndUrlInformationObjectMother.getHvvStationListTokenAndUrl();
+        ApiTokenAndUrlInformation apiTokenAndUrlInformation = ApiTokenAndUrlInformationObjectMother.getHvvTokenAndUrl();
         String stationListJson = TestUtils.getResourceFileAsString("json/hvvStationList.json");
         ResponseEntity<String> testResult = new ResponseEntity<>(stationListJson, HttpStatus.OK);
         //noinspection unchecked

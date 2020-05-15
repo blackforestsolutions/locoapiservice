@@ -21,7 +21,6 @@ import java.util.Objects;
 public class HttpCallBuilder {
 
     public static URL buildUrlWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
-        Objects.requireNonNull(apiTokenAndUrlInformation.getPort(), "port is not allowed to be null");
         Objects.requireNonNull(apiTokenAndUrlInformation.getProtocol(), "protocol is not allowed to be null");
         Objects.requireNonNull(apiTokenAndUrlInformation.getHost(), "host is not allowed to be null");
         Objects.requireNonNull(apiTokenAndUrlInformation.getPath(), "path is not allowed to be null");

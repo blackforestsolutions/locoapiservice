@@ -32,7 +32,7 @@ class OSMApiServiceTest {
 
     @Test
     void test_getCoordinatesFromTavelpointWith_mocked_json_apiToken_return_correct_departure_coordinates() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getOSMApiTokenAndUrlIT();
+        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getOSMApiTokenAndUrl();
         String departureJson = getResourceFileAsString("json/osmTravelPointDeparture.json");
         ResponseEntity<String> testResultDeparture = new ResponseEntity<>(departureJson, HttpStatus.OK);
         //noinspection unchecked (justification: no type known for runtime therefore)
@@ -47,7 +47,7 @@ class OSMApiServiceTest {
 
     @Test
     void test_getCoordinatesFromTavelpointWith_mocked_json_apiToken_return_correct_arrival_coordinates() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getOSMApiTokenAndUrlIT();
+        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getOSMApiTokenAndUrl();
         String arrivalJson = getResourceFileAsString("json/osmTravelPointArrival.json");
         ResponseEntity<String> testResultArrival = new ResponseEntity<>(arrivalJson, HttpStatus.OK);
         //noinspection unchecked (justification: no type known for runtime therefore)

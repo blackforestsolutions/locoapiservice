@@ -20,7 +20,7 @@ class HvvJourneyHttpCallBuilderServiceImplTest {
 
     @Test
     void test_buildJourneyHttpEntityForHvv_with_apiToken_start_destination_and_HttpBody_returns_correct_header_and_body() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getHvvJourneyTokenAndUrl();
+        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getHvvTokenAndUrl();
         HvvStation start = TravelPointObjectMother.getRosenhofHvvStation();
         HvvStation destination = TravelPointObjectMother.getStadthausbrueckeHvvStation();
 
@@ -40,7 +40,7 @@ class HvvJourneyHttpCallBuilderServiceImplTest {
 
     @Test
     void test_buildJourneyHttpEntityForHvv_returns_correct_http_body() throws Exception {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getHvvJourneyTokenAndUrl();
+        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getHvvTokenAndUrl();
         ObjectMapper mapper = new ObjectMapper();
         String testBody = mapper.writeValueAsString(HttpBodyObjectMother.getHvvJourneyBodyObject());
         HvvStation start = TravelPointObjectMother.getRosenhofHvvStation();
@@ -55,7 +55,7 @@ class HvvJourneyHttpCallBuilderServiceImplTest {
 
     @Test
     void test_buildJourneyPathWith_pathvariable_journeyPathVariable_returns_valid_path_string() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getHvvJourneyTokenAndUrl();
+        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getHvvTokenAndUrl();
 
         String result = classUnderTest.buildJourneyPathWith(testData);
 
@@ -64,7 +64,7 @@ class HvvJourneyHttpCallBuilderServiceImplTest {
 
     @Test
     void test_buildJourneyPathWith_pathvariable_as_null_journeyPathVariable_throws_NullPointerException() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getHvvJourneyTokenAndUrl();
+        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getHvvTokenAndUrl();
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
         builder = builder.buildFrom(testData);
         builder.setPathVariable(null);
@@ -76,7 +76,7 @@ class HvvJourneyHttpCallBuilderServiceImplTest {
 
     @Test
     void test_buildTravelPointPathWith_pathvariable_journeyPathVariable_as_null_throws_NullPointerException() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getHvvJourneyTokenAndUrl();
+        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getHvvTokenAndUrl();
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
         builder = builder.buildFrom(testData);
         builder.setJourneyPathVariable(null);

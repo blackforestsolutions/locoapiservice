@@ -18,7 +18,7 @@ public class BahnConfiguration {
     private String germanRailApiVersion;
     @Value("${germanRailLocationPath}")
     private String germanRailLocationPath;
-    @Value("$germanRailAccessProtocol")
+    @Value("${accessProtocol}")
     private String accessProtocol;
     @Value("${germanRailArrivalBoardPath}")
     private String germanRailArrivalBoardVariable;
@@ -36,7 +36,7 @@ public class BahnConfiguration {
         builder.setApiVersion(germanRailApiVersion);
         builder.setHost(germanRailHost);
         builder.setPathVariable(germanRailTimetablePathVariable);
-        builder.setGermanRailLocationPath(germanRailLocationPath);
+        builder.setLocationPath(germanRailLocationPath);
         builder.setGermanRailDepartureBoardPath(germanRailDepartureBoardVariable);
         builder.setGermanRailArrivalBoardPath(germanRailArrivalBoardVariable);
         builder.setGermanRailJourneyDeatilsPath(germanRailJourneyDetailsVariable);

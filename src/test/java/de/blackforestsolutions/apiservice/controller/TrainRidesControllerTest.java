@@ -28,7 +28,7 @@ class TrainRidesControllerTest {
 
     private TrainRidesController initClassUnderTest() {
         TrainRidesController classUnderTest = new TrainRidesController(bahnJourneyDetailsService, dbApiService);
-        classUnderTest.setBahnApiTokenAndUrlInformation(ApiTokenAndUrlInformationObjectMother.getBahnJourneyDetailsTokenAndUrl());
+        classUnderTest.setBahnApiTokenAndUrlInformation(ApiTokenAndUrlInformationObjectMother.getBahnTokenAndUrl());
         classUnderTest.setDbApiTokenAndUrlInformation(ApiTokenAndUrlInformationObjectMother.getDBTokenAndUrl("", ""));
         return classUnderTest;
     }

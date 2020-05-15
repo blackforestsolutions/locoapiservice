@@ -17,7 +17,7 @@ public class HvvTravelPointHttpCallBuilderServiceImpl implements HvvTravelPointH
 
     @SuppressWarnings("rawtypes")
     @Override
-    public HttpEntity buildTravelPointHttpEntityForHvv(ApiTokenAndUrlInformation apiTokenAndUrlInformation, String station) {
+    public HttpEntity<String> buildTravelPointHttpEntityForHvv(ApiTokenAndUrlInformation apiTokenAndUrlInformation, String station) {
         return new HttpEntity<>(
                 buildTravelPointHttpBodyForHvv(apiTokenAndUrlInformation, station),
                 buildHttpHeadersForHvvTravelPointWith(apiTokenAndUrlInformation, station)

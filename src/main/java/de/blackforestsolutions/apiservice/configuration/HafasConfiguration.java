@@ -37,7 +37,7 @@ public class HafasConfiguration {
 
 
     @Bean(name = "hafasStandardConfiguration")
-    public ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder setHafasStandardConfiguration() {
+    public ApiTokenAndUrlInformation setHafasStandardConfiguration() {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
         builder.setProtocol(accessProtocol);
         builder.setLanguage(hafasLanguage);
@@ -52,6 +52,6 @@ public class HafasConfiguration {
         builder.setAllowTariffDetails(hafasAllowTariffDetails);
         builder.setAllowCoordinates(hafasAllowCoordinates);
         builder.setJourneyPathVariable(hafasJourneyMethod);
-        return builder;
+        return builder.build();
     }
 }

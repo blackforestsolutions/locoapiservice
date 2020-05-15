@@ -1,7 +1,8 @@
-package java.de.blackforestsolutions.apiservice.service;
+package de.blackforestsolutions.apiservice.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallService;
+import de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder;
 import de.blackforestsolutions.apiservice.service.supportservice.hafas.HafasHttpCallBuilderService;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import de.blackforestsolutions.generatedcontent.hafas.response.journey.HafasJourneyResponse;
@@ -14,7 +15,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import javax.annotation.Resource;
+
+import java.util.Date;
+
 import static de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother.getVBBTokenAndUrl;
+import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.buildUrlWith;
 import static de.blackforestsolutions.apiservice.testutils.TestUtils.retrieveJsonPojoFromResponse;
 
 @SpringBootTest
@@ -24,16 +30,21 @@ class VBBApiServiceIT {
     @Autowired
     private CallService callService;
 
+    @Resource(name = "vbbApiTokenAndUrlInformation")
+    private ApiTokenAndUrlInformation vbbApiTokenAndUrlInformation;
+
     @Autowired
     private HafasHttpCallBuilderService httpCallBuilderService;
 
     @Test
     void test_getStationId() throws JsonProcessingException {
-        ApiTokenAndUrlInformation testData = getVBBTokenAndUrl("Eiderstraße 87", null);
+        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder testData = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(vbbApiTokenAndUrlInformation);
+        testData.setPath(httpCallBuilderService.buildPathWith(testData.build(), "Eiderstraße 87"));
 
         ResponseEntity<String> result = callService.post(
-                testData.getProtocol().concat("://").concat(testData.getHost().concat(httpCallBuilderService.buildPathWith(testData, testData.getDeparture()))),
-                httpCallBuilderService.buildHttpEntityStationForHafas(testData, "Eiderstraße 87"));
+                buildUrlWith(testData.build()).toString(),
+                httpCallBuilderService.buildHttpEntityStationForHafas(testData.build(), "Eiderstraße 87")
+        );
 
         Assertions.assertThat(HttpStatus.OK).isEqualTo(result.getStatusCode());
         Assertions.assertThat(result.getBody()).isNotEmpty();
@@ -42,11 +53,15 @@ class VBBApiServiceIT {
 
     @Test
     void test_getJourney() throws JsonProcessingException {
-        ApiTokenAndUrlInformation testData = getVBBTokenAndUrl("770000350", "900985256");
+        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder testData = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(vbbApiTokenAndUrlInformation);
+        testData.setDeparture("770000350");
+        testData.setDepartureDate(new Date());
+        testData.setArrival("900985256");
+        testData.setPath(httpCallBuilderService.buildPathWith(testData.build(), null));
 
         ResponseEntity<String> result = callService.post(
-                testData.getProtocol().concat("://").concat(testData.getHost().concat(httpCallBuilderService.buildPathWith(testData, null))),
-                httpCallBuilderService.buildHttpEntityJourneyForHafas(testData)
+                buildUrlWith(testData.build()).toString(),
+                httpCallBuilderService.buildHttpEntityJourneyForHafas(testData.build())
         );
 
         Assertions.assertThat(HttpStatus.OK).isEqualTo(result.getStatusCode());

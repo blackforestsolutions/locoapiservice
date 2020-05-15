@@ -54,11 +54,11 @@ class LuftHansaHttpCallBuilderServiceTest {
     }
 
     @Test
-    void test_buildPathWith_apiVersion_pathvariable_as_null_departure_arrival_departureDate_throws_NullPointerException() {
+    void test_buildPathWith_apiVersion_journeyPathVariable_as_null_departure_arrival_departureDate_throws_NullPointerException() {
         ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getLufthansaTokenAndUrl();
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
         builder = builder.buildFrom(testData);
-        builder.setPathVariable(null);
+        builder.setJourneyPathVariable(null);
         testData = builder.build();
 
         ApiTokenAndUrlInformation finalTestData = testData;

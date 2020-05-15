@@ -36,7 +36,7 @@ class OSMApiServiceIT {
     @Test
     void test_getCoordinates() throws JsonProcessingException {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder testData = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(osmApiTokenAndUrlInformation);
-        testData.setPath(osmHttpCallBuilderService.buildOSMPathWith(testData.build(), ));
+        testData.setPath(osmHttpCallBuilderService.buildOSMPathWith(testData.build(), "Stuttgart, Waiblinger Str. 84"));
 
         ResponseEntity<String> result = callService.get(buildUrlWith(testData.build()).toString(), buildEmptyHttpEntity());
 

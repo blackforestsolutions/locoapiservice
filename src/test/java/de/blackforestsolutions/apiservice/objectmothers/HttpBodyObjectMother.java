@@ -49,7 +49,7 @@ public class HttpBodyObjectMother {
         body.setLanguage("de");
         body.setVersion(37.3);
         body.setFilterType(FilterType.NO_FILTER);
-        body.setTheName(new HvvStation("Große Bleichen 25"));
+        body.setTheName(new HvvStation("Ahrensburg"));
         body.setMaxList(1);
         body.setMaxDistance(2500);
         body.setTariffDetails(true);

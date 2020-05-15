@@ -17,7 +17,7 @@ class HvvStationListHttpCallBuilderServiceImplTest {
 
     @Test
     void test_buildStationListHttpEntityForHvv_with_apiToken_andHttpBody_returns_correct_header_and_body() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getHvvStationListTokenAndUrl();
+        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getHvvTokenAndUrl();
 
         //noinspection rawtypes (justification: not known until runtime)
         HttpEntity result = classUnderTest.buildStationListHttpEntityForHvv(testData);
@@ -34,7 +34,7 @@ class HvvStationListHttpCallBuilderServiceImplTest {
 
     @Test
     void test_buildStationListHttpEntityForHvv_with_jsonBody_is_equal_to_http_body() throws Exception {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getHvvStationListTokenAndUrl();
+        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getHvvTokenAndUrl();
         ObjectMapper mapper = new ObjectMapper();
         String testBody = mapper.writeValueAsString(HttpBodyObjectMother.getStationListHttpBodyObject());
 
@@ -46,7 +46,7 @@ class HvvStationListHttpCallBuilderServiceImplTest {
 
     @Test
     void test_buildStationListPathWith_pathvariable_stationListPathVariable_returns_valid_path_string() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getHvvStationListTokenAndUrl();
+        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getHvvTokenAndUrl();
 
         String result = classUnderTest.buildStationListPathWith(testData);
 
@@ -55,7 +55,7 @@ class HvvStationListHttpCallBuilderServiceImplTest {
 
     @Test
     void test_buildStationListPathWith_pathvariable_as_null_stationListPathVariable_throws_NullPointerException() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getHvvStationListTokenAndUrl();
+        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getHvvTokenAndUrl();
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
         builder = builder.buildFrom(testData);
         builder.setPathVariable(null);
@@ -67,7 +67,7 @@ class HvvStationListHttpCallBuilderServiceImplTest {
 
     @Test
     void test_buildStationListPathWith_pathvariable_stationListPathVariable_as_null_throws_NullPointerException() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getHvvStationListTokenAndUrl();
+        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getHvvTokenAndUrl();
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
         builder = builder.buildFrom(testData);
         builder.setStationListPathVariable(null);

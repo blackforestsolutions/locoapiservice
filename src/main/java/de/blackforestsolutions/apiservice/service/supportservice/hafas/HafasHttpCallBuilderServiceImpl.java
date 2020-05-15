@@ -8,12 +8,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
 import javax.xml.bind.DatatypeConverter;
-import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 import java.util.Optional;
 
-import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.buildUrlWith;
 import static de.blackforestsolutions.apiservice.service.supportservice.hafas.HafasHttpBodyBuilderService.buildJourneyHttpBodyWith;
 import static de.blackforestsolutions.apiservice.service.supportservice.hafas.HafasHttpBodyBuilderService.buildLocationHttpBodyWith;
 

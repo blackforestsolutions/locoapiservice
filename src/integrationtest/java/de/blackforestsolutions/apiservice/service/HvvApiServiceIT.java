@@ -23,7 +23,7 @@ import javax.annotation.Resource;
 
 import java.util.Date;
 
-import static de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother.getHvvTravelpointTokenAndUrl;
+import static de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother.getHvvTokenAndUrl;
 import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.buildUrlWith;
 import static de.blackforestsolutions.apiservice.testutils.TestUtils.retrieveJsonPojoFromResponse;
 
@@ -61,7 +61,7 @@ class HvvApiServiceIT {
     @Test
     void test_getTravelPoint() throws JsonProcessingException {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder testData = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(hvvApiTokenAndUrlInformation);
-        testData.setDeparture(getHvvTravelpointTokenAndUrl().getDeparture());
+        testData.setDeparture(getHvvTokenAndUrl().getDeparture());
         testData.setPath(travelPointCallBuilder.buildTravelPointPathWith(testData.build()));
 
         ResponseEntity<String> result = callService.post(buildUrlWith(testData.build()).toString(), travelPointCallBuilder.buildTravelPointHttpEntityForHvv(testData.build(), testData.getDeparture()));

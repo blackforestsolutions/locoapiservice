@@ -8,7 +8,7 @@ public interface BahnHttpCallBuilderService {
 
     String buildBahnArrivalBoardPathWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation);
 
-    String buildBahnRailwayStationPathWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation);
+    String buildBahnRailwayStationPathWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation, String station);
 
     String buildBahnDepartureBoardPathWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation);
 

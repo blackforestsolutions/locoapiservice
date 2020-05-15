@@ -2,7 +2,6 @@ package de.blackforestsolutions.apiservice.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallService;
-import de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder;
 import de.blackforestsolutions.apiservice.service.supportservice.hafas.HafasHttpCallBuilderService;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import de.blackforestsolutions.generatedcontent.hafas.response.journey.HafasJourneyResponse;
@@ -16,10 +15,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import javax.annotation.Resource;
-
 import java.util.Date;
 
-import static de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother.getNahShTokenAndUrl;
 import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.buildUrlWith;
 import static de.blackforestsolutions.apiservice.testutils.TestUtils.retrieveJsonPojoFromResponse;
 

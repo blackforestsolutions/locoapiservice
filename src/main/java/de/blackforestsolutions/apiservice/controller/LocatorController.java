@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -27,7 +28,7 @@ public class LocatorController {
     }
 
     @GetMapping("/locate")
-    public Map<UUID, JourneyStatus> retrieveLocatorJourneys(ApiTokenAndUrlInformation request) {
+    public Map<UUID, JourneyStatus> retrieveLocatorJourneys(ApiTokenAndUrlInformation request) throws IOException {
         return new HashMap<>(searchChApiService.getJourneysForRouteWith(getSearchApiTokenAndUrlInformation(request)));
     }
 

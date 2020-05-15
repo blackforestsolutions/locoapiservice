@@ -38,9 +38,9 @@ public class RMVApiServiceImpl implements RMVApiService {
     private ResponseEntity<String> buildAndExecuteCall(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
         String urlDeparture = getRMVRequestString(apiTokenAndUrlInformation, apiTokenAndUrlInformation.getDeparture());
         String urlArrival = getRMVRequestString(apiTokenAndUrlInformation, apiTokenAndUrlInformation.getArrival());
-        ResponseEntity<String> departureIdJson = callService.get(urlDeparture, httpCallBuilderService.buildHttpEntityStationForRMV(apiTokenAndUrlInformation, apiTokenAndUrlInformation.getDeparture()));
+        ResponseEntity<String> departureIdJson = callService.get(urlDeparture, httpCallBuilderService.buildHttpEntityStationForRMV(apiTokenAndUrlInformation));
         String departureId = (String) rmvMapperService.getIdFrom(departureIdJson.getBody()).getCalledObject();
-        ResponseEntity<String> arrivalIdJson = callService.get(urlArrival, httpCallBuilderService.buildHttpEntityStationForRMV(apiTokenAndUrlInformation, apiTokenAndUrlInformation.getArrival()));
+        ResponseEntity<String> arrivalIdJson = callService.get(urlArrival, httpCallBuilderService.buildHttpEntityStationForRMV(apiTokenAndUrlInformation));
         String arrivalId = (String) rmvMapperService.getIdFrom(arrivalIdJson.getBody()).getCalledObject();
         ApiTokenAndUrlInformation callToken = replaceStartAndDestinationIn(apiTokenAndUrlInformation, departureId, arrivalId);
         String urlTrip = getRMVRequestString(callToken, null);

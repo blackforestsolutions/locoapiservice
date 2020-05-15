@@ -33,21 +33,21 @@ public class BahnRailwayStationServiceImpl implements BahnRailwayStationService 
         this.bahnRailwayStationHttpCallBuilderService = bahnRailwayStationHttpCallBuilderService;
     }
 
-    public Map<String, TravelPoint> getTravelPointsForRouteFromApiWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) throws Exception {
-        String url = getBahnRailwayStationsRequestString(apiTokenAndUrlInformation);
+    @Override
+    public Map<String, TravelPoint> getTravelPointsForRouteFromApiWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation, String location) throws Exception {
+        String url = getBahnRailwayStationsRequestString(apiTokenAndUrlInformation, location);
         ResponseEntity<String> result = callService.get(url, bahnRailwayStationHttpCallBuilderService.buildHttpEntityForBahn(apiTokenAndUrlInformation));
         return map(result.getBody());
     }
 
-    private String getBahnRailwayStationsRequestString(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
+    private String getBahnRailwayStationsRequestString(ApiTokenAndUrlInformation apiTokenAndUrlInformation, String location) {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
         builder = builder.buildFrom(apiTokenAndUrlInformation);
         builder.setHost(apiTokenAndUrlInformation.getHost());
         builder.setPathVariable(apiTokenAndUrlInformation.getPathVariable());
         builder.setApiVersion(apiTokenAndUrlInformation.getApiVersion());
         builder.setGermanRailLocationPath(apiTokenAndUrlInformation.getGermanRailLocationPath());
-        builder.setBahnLocation(apiTokenAndUrlInformation.getBahnLocation());
-        builder.setPath(bahnRailwayStationHttpCallBuilderService.buildBahnRailwayStationPathWith(builder.build()));
+        builder.setPath(bahnRailwayStationHttpCallBuilderService.buildBahnRailwayStationPathWith(builder.build(), location));
         URL requestUrl = buildUrlWith(builder.build());
         return requestUrl.toString();
     }

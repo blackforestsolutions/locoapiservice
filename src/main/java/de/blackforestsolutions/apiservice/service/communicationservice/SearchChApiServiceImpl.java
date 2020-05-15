@@ -3,6 +3,7 @@ package de.blackforestsolutions.apiservice.service.communicationservice;
 import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallService;
 import de.blackforestsolutions.apiservice.service.mapper.SearchChMapperService;
 import de.blackforestsolutions.apiservice.service.supportservice.SearchChHttpCallBuilderService;
+import de.blackforestsolutions.apiservice.util.CombinationUtil;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import de.blackforestsolutions.datamodel.JourneyStatus;
 import de.blackforestsolutions.datamodel.TravelPoint;
@@ -12,9 +13,8 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Map;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.buildEmptyHttpEntity;
 import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.buildUrlWith;
@@ -34,21 +34,35 @@ public class SearchChApiServiceImpl implements SearchChApiService {
     }
 
     @Override
-    public Map<String, TravelPoint> getTravelPointForRouteFromApiWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) throws IOException {
-        String url = getTravelPointRequestString(apiTokenAndUrlInformation);
+    public Map<String, TravelPoint> getTravelPointForRouteFromApiWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation, String station) throws IOException {
+        String url = getTravelPointRequestString(apiTokenAndUrlInformation, station);
         ResponseEntity<String> result = callService.get(url, buildEmptyHttpEntity());
         return searchChMapperService.getTravelPointFrom(result.getBody());
     }
 
     @Override
-    public Map<UUID, JourneyStatus> getJourneysForRouteWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
-        String url = getRouteRequestString(apiTokenAndUrlInformation);
-        ResponseEntity<String> result = callService.get(url, buildEmptyHttpEntity());
-        String body = nullsaveResponseBodyMapping(result);
-        return searchChMapperService.getJourneysFrom(body);
+    public Map<UUID, JourneyStatus> getJourneysForRouteWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) throws IOException {
+        Set<TravelPoint> departures = new HashSet<>(getTravelPointForRouteFromApiWith(
+                apiTokenAndUrlInformation,
+                apiTokenAndUrlInformation.getDeparture()
+        ).values());
+        Set<TravelPoint> arrivals = new HashSet<>(getTravelPointForRouteFromApiWith(
+                apiTokenAndUrlInformation,
+                apiTokenAndUrlInformation.getArrival()
+        ).values());
+        return CombinationUtil.buildCombinationsPairsBy(departures, arrivals)
+                .stream()
+                .map(pair -> {
+                    String url = getRouteRequestString(apiTokenAndUrlInformation, pair.getFirst().getStationId(), pair.getSecond().getStationId());
+                    ResponseEntity<String> result = callService.get(url, buildEmptyHttpEntity());
+                    String body = nullsaveResponseBodyMapping(result);
+                    return searchChMapperService.getJourneysFrom(body);
+                })
+                .flatMap(results -> results.entrySet().stream())
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
-    private String getTravelPointRequestString(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
+    private String getTravelPointRequestString(ApiTokenAndUrlInformation apiTokenAndUrlInformation, String location) {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
         builder = builder.buildFrom(apiTokenAndUrlInformation);
         builder.setHost(apiTokenAndUrlInformation.getHost());
@@ -56,15 +70,14 @@ public class SearchChApiServiceImpl implements SearchChApiService {
         builder.setPathVariable(apiTokenAndUrlInformation.getPathVariable());
         builder.setLocationPath(apiTokenAndUrlInformation.getLocationPath());
         builder.setSearchChTermParameter(apiTokenAndUrlInformation.getSearchChTermParameter());
-        builder.setLocationSearchTerm(apiTokenAndUrlInformation.getLocationSearchTerm());
         builder.setSearchChStationId(apiTokenAndUrlInformation.getSearchChStationId());
         builder.setSearchChStationCoordinateParameter(apiTokenAndUrlInformation.getSearchChStationCoordinateParameter());
-        builder.setPath(searchChHttpCallBuilderService.buildSearchChLocationPath(builder.build()));
+        builder.setPath(searchChHttpCallBuilderService.buildSearchChLocationPath(builder.build(), location));
         URL requestUrl = buildUrlWith(builder.build());
         return requestUrl.toString();
     }
 
-    private String getRouteRequestString(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
+    private String getRouteRequestString(ApiTokenAndUrlInformation apiTokenAndUrlInformation, String departure, String arrival) {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
 
         builder = builder.buildFrom(apiTokenAndUrlInformation);
@@ -73,9 +86,9 @@ public class SearchChApiServiceImpl implements SearchChApiService {
         builder.setPort(apiTokenAndUrlInformation.getPort());
         builder.setPathVariable(apiTokenAndUrlInformation.getPathVariable());
         builder.setSearchChRoutePathVariable(apiTokenAndUrlInformation.getSearchChRoutePathVariable());
-        builder.setDeparture(apiTokenAndUrlInformation.getDeparture());
+        builder.setDeparture(departure);
         builder.setStartLocation(apiTokenAndUrlInformation.getStartLocation());
-        builder.setArrival(apiTokenAndUrlInformation.getArrival());
+        builder.setArrival(arrival);
         builder.setDestinationLocation(apiTokenAndUrlInformation.getDestinationLocation());
         builder.setDatePathVariable(apiTokenAndUrlInformation.getDatePathVariable());
         builder.setDepartureDate(apiTokenAndUrlInformation.getDepartureDate());

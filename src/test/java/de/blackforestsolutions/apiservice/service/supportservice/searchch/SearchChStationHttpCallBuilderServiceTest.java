@@ -14,14 +14,14 @@ class SearchChStationHttpCallBuilderServiceTest {
 
     @Test
     void test_buildPathWith_pathVariable_locationPath_termParameter_searchTerm_stationIdParameter_coordinateParameter_returns_valid_string() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getSearchChStationTokenAndUrl();
-        String result = classUnderTest.buildSearchChLocationPath(testData);
+        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getSearchChTokenAndUrl();
+        String result = classUnderTest.buildSearchChLocationPath(testData, "lu");
         Assertions.assertThat(result).isEqualTo("/api/completion.json?term=lu&show_ids=1&show_coordinates=1");
     }
 
     @Test
     void test_buildPathWith_pathVariable_as_null_locationPath_termParameter_searchTerm_stationIdParameter_coordinateParameter_throws_NullpointerException() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getSearchChStationTokenAndUrl();
+        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getSearchChTokenAndUrl();
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
         builder = builder.buildFrom(testData);
         builder.setPathVariable(null);
@@ -30,13 +30,13 @@ class SearchChStationHttpCallBuilderServiceTest {
         ApiTokenAndUrlInformation finalTestData = testData;
         org.junit.jupiter.api.Assertions.assertThrows(
                 NullPointerException.class,
-                () -> classUnderTest.buildSearchChLocationPath(finalTestData)
+                () -> classUnderTest.buildSearchChLocationPath(finalTestData, "lu")
         );
     }
 
     @Test
     void test_buildPathWith_pathVariable_locationPath_as_null_termParameter_searchTerm_stationIdParameter_coordinateParameter_throws_NullpointerException() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getSearchChStationTokenAndUrl();
+        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getSearchChTokenAndUrl();
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
         builder = builder.buildFrom(testData);
         builder.setLocationPath(null);
@@ -45,13 +45,13 @@ class SearchChStationHttpCallBuilderServiceTest {
         ApiTokenAndUrlInformation finalTestData = testData;
         org.junit.jupiter.api.Assertions.assertThrows(
                 NullPointerException.class,
-                () -> classUnderTest.buildSearchChLocationPath(finalTestData)
+                () -> classUnderTest.buildSearchChLocationPath(finalTestData, "lu")
         );
     }
 
     @Test
     void test_buildPathWith_pathVariable_locationPath_termParameter_as_null_searchTerm_stationIdParameter_coordinateParameter_throws_NullpointerException() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getSearchChStationTokenAndUrl();
+        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getSearchChTokenAndUrl();
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
         builder = builder.buildFrom(testData);
         builder.setSearchChTermParameter(null);
@@ -60,28 +60,13 @@ class SearchChStationHttpCallBuilderServiceTest {
         ApiTokenAndUrlInformation finalTestData = testData;
         org.junit.jupiter.api.Assertions.assertThrows(
                 NullPointerException.class,
-                () -> classUnderTest.buildSearchChLocationPath(finalTestData)
-        );
-    }
-
-    @Test
-    void test_buildPathWith_pathVariable_locationPath_termParameter_searchTerm_as_null_stationIdParameter_coordinateParameter_throws_NullpointerException() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getSearchChStationTokenAndUrl();
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder = builder.buildFrom(testData);
-        builder.setLocationSearchTerm(null);
-        testData = builder.build();
-
-        ApiTokenAndUrlInformation finalTestData = testData;
-        org.junit.jupiter.api.Assertions.assertThrows(
-                NullPointerException.class,
-                () -> classUnderTest.buildSearchChLocationPath(finalTestData)
+                () -> classUnderTest.buildSearchChLocationPath(finalTestData, "lu")
         );
     }
 
     @Test
     void test_buildPathWith_pathVariable_locationPath_termParameter_searchTerm_stationIdParameter_as_null_coordinateParameter_throws_NullpointerException() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getSearchChStationTokenAndUrl();
+        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getSearchChTokenAndUrl();
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
         builder = builder.buildFrom(testData);
         builder.setSearchChStationId(null);
@@ -90,13 +75,13 @@ class SearchChStationHttpCallBuilderServiceTest {
         ApiTokenAndUrlInformation finalTestData = testData;
         org.junit.jupiter.api.Assertions.assertThrows(
                 NullPointerException.class,
-                () -> classUnderTest.buildSearchChLocationPath(finalTestData)
+                () -> classUnderTest.buildSearchChLocationPath(finalTestData, "lu")
         );
     }
 
     @Test
     void test_buildPathWith_pathVariable_locationPath_termParameter_searchTerm_stationIdParameter_coordinateParameter_as_null_throws_NullpointerException() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getSearchChStationTokenAndUrl();
+        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getSearchChTokenAndUrl();
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
         builder = builder.buildFrom(testData);
         builder.setSearchChStationCoordinateParameter(null);
@@ -105,7 +90,7 @@ class SearchChStationHttpCallBuilderServiceTest {
         ApiTokenAndUrlInformation finalTestData = testData;
         org.junit.jupiter.api.Assertions.assertThrows(
                 NullPointerException.class,
-                () -> classUnderTest.buildSearchChLocationPath(finalTestData)
+                () -> classUnderTest.buildSearchChLocationPath(finalTestData, "lu")
         );
     }
 }

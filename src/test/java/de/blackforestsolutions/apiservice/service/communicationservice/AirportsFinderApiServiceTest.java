@@ -1,6 +1,7 @@
 package de.blackforestsolutions.apiservice.service.communicationservice;
 
 import de.blackforestsolutions.apiservice.configuration.AirportConfiguration;
+import de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother;
 import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallService;
 import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallServiceImpl;
 import de.blackforestsolutions.apiservice.service.mapper.AirportsFinderMapperService;
@@ -24,7 +25,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 
-import static de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother.getAirportsFinderTokenAndUrlIT;
+import static de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother.getAirportsFinderTokenAndUrl;
 import static de.blackforestsolutions.apiservice.objectmothers.TravelPointObjectMother.getTravelPointsForAirportsFinder;
 import static de.blackforestsolutions.apiservice.testutils.TestUtils.getResourceFileAsString;
 import static org.mockito.ArgumentMatchers.any;
@@ -55,12 +56,10 @@ public class AirportsFinderApiServiceTest {
     public void test_getAirportsAsTravelPoints_with_mocked_rest_service_is_executed_correctly_and_maps_correctly_returns_linkedHashSet() {
         String airportsFinderResource = getResourceFileAsString("json/AirportsFinderJsons/fromTriberg300KmOnlyThree.json");
         ArrayList<TravelPoint> testDataArrayList = getTravelPointsForAirportsFinder();
-
-        ApiTokenAndUrlInformation apiTokenAndUrlInformation = getAirportsFinderTokenAndUrlIT();
+        ApiTokenAndUrlInformation apiTokenAndUrlInformation = getAirportsFinderTokenAndUrl();
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
         builder = builder.buildFrom(apiTokenAndUrlInformation);
         apiTokenAndUrlInformation = builder.build();
-
         ResponseEntity<String> testResult = new ResponseEntity<>(airportsFinderResource, HttpStatus.OK);
         doReturn(testResult).when(restTemplate).exchange(anyString(), any(), Mockito.any(), any(Class.class));
         LinkedHashSet<CallStatus> resultLinkedHashSet = classUnderTest.getAirportsWith(apiTokenAndUrlInformation);
@@ -75,8 +74,6 @@ public class AirportsFinderApiServiceTest {
         Assertions.assertThat(resultArrayList.get(2).getCalledObject()).isEqualTo(null);
         Assertions.assertThat(resultArrayList.get(2).getStatus()).isEqualTo(Status.FAILED);
         Assertions.assertThat(resultArrayList.get(2).getException().getMessage()).isEqualTo("The provided AirportFinding object is not mapped because the airport code is not provided in the airports.dat");
-
-
     }
 
     private ArrayList<CallStatus> convertSetToArrayListForTestingPurpose(LinkedHashSet<CallStatus> linkedHashSet) {

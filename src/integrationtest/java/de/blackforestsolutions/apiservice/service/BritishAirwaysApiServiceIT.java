@@ -1,4 +1,4 @@
-package java.de.blackforestsolutions.apiservice.service;
+package de.blackforestsolutions.apiservice.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
@@ -18,7 +18,7 @@ import javax.annotation.Resource;
 
 import java.util.Date;
 
-import static de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother.getBritishAirwaysTokenAndUrlIT;
+import static de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother.getBritishAirwaysTokenAndUrl;
 import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.buildUrlWith;
 import static de.blackforestsolutions.apiservice.testutils.TestUtils.retrieveJsonPojoFromResponse;
 
@@ -38,12 +38,15 @@ class BritishAirwaysApiServiceIT {
     @Test
     void test() throws JsonProcessingException {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder testData = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(britishAirwaysApiTokenAndUrlInformation);
-        testData.setDeparture(getBritishAirwaysTokenAndUrlIT().getDeparture());
-        testData.setArrival(getBritishAirwaysTokenAndUrlIT().getArrival());
+        testData.setDeparture(getBritishAirwaysTokenAndUrl().getDeparture());
+        testData.setArrival(getBritishAirwaysTokenAndUrl().getArrival());
         testData.setDepartureDate(new Date());
         testData.setPath(httpCallBuilderService.buildPathWith(testData.build()));
 
-        ResponseEntity<String> result = callService.get(buildUrlWith(testData.build()).toString(), httpCallBuilderService.buildHttpEntityBritishAirways(testData.build()));
+        ResponseEntity<String> result = callService.get(
+                buildUrlWith(testData.build()).toString(),
+                httpCallBuilderService.buildHttpEntityBritishAirways(testData.build())
+        );
 
         Assertions.assertThat(HttpStatus.OK).isEqualTo(result.getStatusCode());
         Assertions.assertThat(result.getBody()).isNotEmpty();

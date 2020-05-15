@@ -96,6 +96,6 @@ class SearchChMapperServiceTest {
         Assertions.assertThat(51.016962568215476).isEqualTo(result.get("8505000").getGpsCoordinates().getLatitude());
         Assertions.assertThat(1.9118631730189604).isEqualTo(result.get("8505000").getGpsCoordinates().getLongitude());
 
-        Assertions.assertThat("Zürich, Förrlibuckstr. 60/62 ").isEqualTo(result.get(TEST_UUID_1.toString()).getStreet());
+        Assertions.assertThat("Zürich, Förrlibuckstr. 60/62 ").isEqualTo(result.get("Zürich, Förrlibuckstr. 60/62 ").getStreet());
     }
 }

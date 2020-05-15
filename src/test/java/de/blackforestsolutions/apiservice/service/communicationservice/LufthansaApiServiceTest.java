@@ -26,7 +26,7 @@ import java.util.Date;
 import java.util.Map;
 import java.util.UUID;
 
-import static de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother.getLufthansaTokenAndUrlIT;
+import static de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother.getLufthansaTokenAndUrl;
 import static de.blackforestsolutions.apiservice.objectmothers.UUIDObjectMother.*;
 import static de.blackforestsolutions.apiservice.testutils.TestUtils.formatDate;
 import static de.blackforestsolutions.apiservice.testutils.TestUtils.getResourceFileAsString;
@@ -84,7 +84,7 @@ class LufthansaApiServiceTest {
     @SuppressWarnings("OptionalGetWithoutIsPresent")
     @Test
     void test_getJourneysForRouteFromApiWith_with_mocked_rest_service_is_executed_correctly_and_maps_correctly_returns_map() throws Exception {
-        ApiTokenAndUrlInformation apiTokenAndUrlInformation = getLufthansaTokenAndUrlIT();
+        ApiTokenAndUrlInformation apiTokenAndUrlInformation = getLufthansaTokenAndUrl();
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
         builder = builder.buildFrom(apiTokenAndUrlInformation);
         Date now = formatDate(new Date());
@@ -105,7 +105,7 @@ class LufthansaApiServiceTest {
 
     @Test
     void test_getLufthansaAuthorization_with_json_return_correct_pojo() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getLufthansaTokenAndUrlIT();
+        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getLufthansaTokenAndUrl();
         String authorizationResourceJson = getResourceFileAsString("json/lufthansaAuthorizationTest.json");
         ResponseEntity<String> testResult = new ResponseEntity<>(authorizationResourceJson, HttpStatus.OK);
         // noinspection unchecked (justification: no type known for runtime therefore)

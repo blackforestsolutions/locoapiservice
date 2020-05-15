@@ -51,14 +51,14 @@ class BahnServiceTest {
 
     @Test
     void test_getTravelPointsForRouteFromApiWith_mocked_rest_service_is_excuted_correctly_and_maps_correctly_returns_map() throws Exception {
-        ApiTokenAndUrlInformation apiTokenAndUrlInformation = ApiTokenAndUrlInformationObjectMother.getBahnRailwayStationTokenAndUrlIT();
+        ApiTokenAndUrlInformation apiTokenAndUrlInformation = ApiTokenAndUrlInformationObjectMother.getBahnTokenAndUrl();
         String bahnRailwayStationRessourcesJson = getResourceFileAsString("json/bahnTestLocation.json");
         ResponseEntity<String> testResult = new ResponseEntity<>(bahnRailwayStationRessourcesJson, HttpStatus.OK);
 
         //noinspection unchecked (justification: no type known for runtime therefore)
         doReturn(testResult).when(REST_TEMPLATE).exchange(anyString(), any(), any(), any(Class.class));
 
-        Map<String, TravelPoint> result = classUnderTestBahnRailwayStationService.getTravelPointsForRouteFromApiWith(apiTokenAndUrlInformation);
+        Map<String, TravelPoint> result = classUnderTestBahnRailwayStationService.getTravelPointsForRouteFromApiWith(apiTokenAndUrlInformation, "Berlin");
 
         Assertions.assertThat("8096003").isEqualTo(result.get("8096003").getStationId());
         Assertions.assertThat("BERLIN").isEqualTo(result.get("8096003").getStationName());
@@ -68,7 +68,7 @@ class BahnServiceTest {
 
     @Test
     void test_getArrivalBoardForRouteFromApiWith_mocked_rest_service_is_executed_corectly_and_maps_correctly_returns_map() throws Exception {
-        ApiTokenAndUrlInformation apiTokenAndUrlInformation = ApiTokenAndUrlInformationObjectMother.getBahnArrivalBoardTokenAndUrlIT();
+        ApiTokenAndUrlInformation apiTokenAndUrlInformation = ApiTokenAndUrlInformationObjectMother.getBahnTokenAndUrl();
         String bahnArrivalBoardRessourcesJson = getResourceFileAsString("json/bahnTestArrivalBoard.json");
         ResponseEntity<String> testResult = new ResponseEntity<>(bahnArrivalBoardRessourcesJson, HttpStatus.OK);
 
@@ -89,7 +89,7 @@ class BahnServiceTest {
 
     @Test
     void test_getDepartureBoardForRouteFromApiWith_mocked_rest_service_is_executed_correctly_and_maps_correctly_returns_map() throws Exception {
-        ApiTokenAndUrlInformation apiTokenAndUrlInformation = ApiTokenAndUrlInformationObjectMother.getBahnDepartureBoardTokenAndUrlIT();
+        ApiTokenAndUrlInformation apiTokenAndUrlInformation = ApiTokenAndUrlInformationObjectMother.getBahnTokenAndUrl();
         String bahnDepartureBoardRessourceJson = getResourceFileAsString("json/bahnTestDepartureBoard.json");
         ResponseEntity<String> testResult = new ResponseEntity<>(bahnDepartureBoardRessourceJson, HttpStatus.OK);
 
@@ -111,7 +111,7 @@ class BahnServiceTest {
     @SuppressWarnings("OptionalGetWithoutIsPresent")
     @Test
     void test_getJourneyDetailsForRouteFromApiWith_mocked_rest_service_is_excceuted_correctly_and_maps_correctly_returns_map() throws Exception {
-        ApiTokenAndUrlInformation apiTokenAndUrlInformation = ApiTokenAndUrlInformationObjectMother.getBahnJourneyDetailsTokenAndUrlIT();
+        ApiTokenAndUrlInformation apiTokenAndUrlInformation = ApiTokenAndUrlInformationObjectMother.getBahnTokenAndUrl();
         String bahnJourneyDetailsRessourceJson = getResourceFileAsString("json/bahnTestJourneyDetailsID.json");
         ResponseEntity<String> testResult = new ResponseEntity<>(bahnJourneyDetailsRessourceJson, HttpStatus.OK);
         //noinspection unchecked (justification: no type known for runtime therefore)

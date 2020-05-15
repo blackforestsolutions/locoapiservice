@@ -16,21 +16,23 @@ class BahnJourneyDetailsHttpCallBuilderServiceTest {
 
     @Test
     void test_buildHttpHeadersForBahnJourneyDetailsWithBahnArrivalAndTokenUrlInfo_return_correct_header() {
-        ApiTokenAndUrlInformation apiTokenAndUrlInformation = ApiTokenAndUrlInformationObjectMother.getBahnJourneyDetailsTokenAndUrl();
+        ApiTokenAndUrlInformation apiTokenAndUrlInformation = ApiTokenAndUrlInformationObjectMother.getBahnTokenAndUrl();
         HttpHeaders result = classUnderTest.buildHttpHeadersForBahnWith(apiTokenAndUrlInformation);
         Assertions.assertThat(result.get(apiTokenAndUrlInformation.getAuthorizationKey())).contains(apiTokenAndUrlInformation.getAuthorization());
     }
 
     @Test
     void test_buildPathWith_pathvariable_apiVersion_departureJounrneyDetailsVariable_detailsId() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getBahnJourneyDetailsTokenAndUrl();
+        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getBahnTokenAndUrl();
+
         String result = classUnderTest.buildBahnJourneyDetailsPath(testData);
+
         Assertions.assertThat(result).isEqualTo("/fahrplan-plus/v1/journeyDetails/715770%252F254084%252F898562%252F210691%252F80%253fstation_evaId%253D8000312");
     }
 
     @Test
     void test_buildPathWith_pathvariable_as_null_apiVersion_departureJounrneyDetailsVariable_detailsId() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getBahnJourneyDetailsTokenAndUrl();
+        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getBahnTokenAndUrl();
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
         builder = builder.buildFrom(testData);
         builder.setPathVariable(null);
@@ -42,7 +44,7 @@ class BahnJourneyDetailsHttpCallBuilderServiceTest {
 
     @Test
     void test_buildPathWith_pathvariable_apiVersion_as_null_departureJounrneyDetailsVariable_detailsId() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getBahnJourneyDetailsTokenAndUrl();
+        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getBahnTokenAndUrl();
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
         builder = builder.buildFrom(testData);
         builder.setApiVersion(null);
@@ -54,7 +56,7 @@ class BahnJourneyDetailsHttpCallBuilderServiceTest {
 
     @Test
     void test_buildPathWith_pathvariable_apiVersion_departureJounrneyDetailsVariable_as_null_detailsId() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getBahnJourneyDetailsTokenAndUrl();
+        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getBahnTokenAndUrl();
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
         builder = builder.buildFrom(testData);
         builder.setGermanRailJourneyDeatilsPath(null);
@@ -66,7 +68,7 @@ class BahnJourneyDetailsHttpCallBuilderServiceTest {
 
     @Test
     void test_buildPathWith_pathvariable_apiVersion_departureJounrneyDetailsVariable_detailsId_as_null() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getBahnJourneyDetailsTokenAndUrl();
+        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getBahnTokenAndUrl();
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
         builder = builder.buildFrom(testData);
         builder.setJourneyDetailsId(null);
