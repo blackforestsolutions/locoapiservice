@@ -1,7 +1,6 @@
 package de.blackforestsolutions.apiservice.service.communicationservice;
 
 import de.blackforestsolutions.apiservice.configuration.AirportConfiguration;
-import de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother;
 import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallService;
 import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallServiceImpl;
 import de.blackforestsolutions.apiservice.service.mapper.LufthansaMapperService;
@@ -13,7 +12,6 @@ import de.blackforestsolutions.apiservice.stubs.RestTemplateBuilderStub;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import de.blackforestsolutions.datamodel.JourneyStatus;
 import de.blackforestsolutions.datamodel.TravelProvider;
-import de.blackforestsolutions.generatedcontent.lufthansa.LufthansaAuthorization;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -101,21 +99,6 @@ class LufthansaApiServiceTest {
         assertThat("E90").isEqualTo(result.get(TEST_UUID_11).getJourney().get().getLegs().get(TEST_UUID_12).getVehicleNumber());
         assertThat(TravelProvider.LUFTHANSA).isEqualTo(result.get(TEST_UUID_11).getJourney().get().getLegs().get(TEST_UUID_12).getTravelProvider());
         assertThat("LH1191").isEqualTo(result.get(TEST_UUID_11).getJourney().get().getLegs().get(TEST_UUID_12).getProviderId());
-    }
-
-    @Test
-    void test_getLufthansaAuthorization_with_json_return_correct_pojo() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getLufthansaTokenAndUrl();
-        String authorizationResourceJson = getResourceFileAsString("json/lufthansaAuthorizationTest.json");
-        ResponseEntity<String> testResult = new ResponseEntity<>(authorizationResourceJson, HttpStatus.OK);
-        // noinspection unchecked (justification: no type known for runtime therefore)
-        doReturn(testResult).when(restTemplate).exchange(anyString(), any(), any(), any(Class.class));
-
-        LufthansaAuthorization result = (LufthansaAuthorization) classUnderTest.getLufthansaAuthorization(testData).getCalledObject();
-
-        assertThat(result.getTokenType()).isEqualTo("bearer");
-        assertThat(result.getExpiresIn()).isEqualTo(129600);
-        assertThat(result.getAccessToken()).isEqualTo("6rgpt9j3u6k7befb2eea4fqx");
     }
 }
 

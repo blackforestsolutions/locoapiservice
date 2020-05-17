@@ -1,14 +1,8 @@
 package de.blackforestsolutions.apiservice.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother;
 import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallService;
 import de.blackforestsolutions.apiservice.service.supportservice.LuftHansaHttpCallBuilderService;
-
-import de.blackforestsolutions.apiservice.testutils.TestUtils;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
-import de.blackforestsolutions.generatedcontent.lufthansa.LufthansaAuthorization;
-import de.blackforestsolutions.generatedcontent.lufthansa.ScheduleResource;
 import org.assertj.core.api.Assertions;
 import org.awaitility.Awaitility;
 import org.awaitility.Duration;
@@ -18,15 +12,16 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.TestPropertySource;
 
 import javax.annotation.Resource;
-
 import java.util.Date;
+import java.util.concurrent.atomic.AtomicReference;
 
 import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.buildUrlWith;
-import static de.blackforestsolutions.apiservice.testutils.TestUtils.retrieveJsonPojoFromResponse;
 
 @SpringBootTest
+@TestPropertySource(properties = {"lufthansaBearerExpirationTime=8000"})
 @AutoConfigureMockMvc
 class LufthansaApiServiceIT {
 
@@ -40,18 +35,21 @@ class LufthansaApiServiceIT {
     private LuftHansaHttpCallBuilderService httpCallBuilderService;
 
     @Test
-    void test_postAuthorizationKey() throws JsonProcessingException {
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder testData = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(lufthansaApiTokenAndUrlInformation);
-        testData.setPath(httpCallBuilderService.buildLufthansaAuthorizationPathWith(testData.build()));
+    void test_postAuthorizationKey() {
+        AtomicReference<String> authorization = new AtomicReference<>();
+        Awaitility.await()
+                .atMost(Duration.ONE_SECOND)
+                .untilAsserted(() -> {
+                        Assertions.assertThat(lufthansaApiTokenAndUrlInformation.getAuthorization()).isNotNull();
+                        authorization.set(lufthansaApiTokenAndUrlInformation.getAuthorization());
+                });
 
-        ResponseEntity<String> result = callService.post(
-                buildUrlWith(testData.build()).toString(),
-                httpCallBuilderService.buildHttpEntityForLufthansaAuthorization(testData.build())
-        );
-
-        Assertions.assertThat(HttpStatus.OK).isEqualTo(result.getStatusCode());
-        Assertions.assertThat(result.getBody()).isNotEmpty();
-        Assertions.assertThat(retrieveJsonPojoFromResponse(result, LufthansaAuthorization.class).getAccessToken()).isNotNull();
+        Awaitility.await()
+                .atMost(Duration.TEN_SECONDS)
+                .untilAsserted(() -> {
+                    Assertions.assertThat(lufthansaApiTokenAndUrlInformation.getAuthorization()).isNotNull();
+                    Assertions.assertThat(lufthansaApiTokenAndUrlInformation.getAuthorization()).isNotEqualTo(authorization.get());
+                });
     }
 
     @Test
