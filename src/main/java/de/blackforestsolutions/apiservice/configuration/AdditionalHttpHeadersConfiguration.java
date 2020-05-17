@@ -2,7 +2,6 @@ package de.blackforestsolutions.apiservice.configuration;
 
 public final class AdditionalHttpHeadersConfiguration {
 
-    public static final String X_ORIGINATING_IP = "X-Originating-IP";
     public static final String BA_APPLICATION = "application";
     public static final String BA_APPLICATION_VALUE = "loco";
     public static final String BA_CLIENT_KEY = "client-key";
