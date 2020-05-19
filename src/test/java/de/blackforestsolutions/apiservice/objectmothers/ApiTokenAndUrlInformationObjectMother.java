@@ -272,6 +272,11 @@ public class ApiTokenAndUrlInformationObjectMother {
         builder.setClientType("client_credentials");
         builder.setAuthorization("fhfdds7fskppmt6xn2z423a9");
         builder.setPath("/v1/operations/schedules/ZRH/FRA/2019-12-28");
+        builder.setAuthorizationKey("Authorization");
+        builder.setXOriginationIp("88.66.47.47");
+        builder.setXOriginationIpKey("X-Originating-IP");
+        builder.setAuthorization("Bearer guuryzmgpftrnum76twe3y7k");
+        builder.setPath("/v1/operations/schedules/ZRH/FRA/2019-12-28");
         return builder.build();
     }
 

@@ -40,7 +40,6 @@ public class LufthansaConfiguration {
         builder.setApiVersion(lufthansaApiVersion);
         builder.setPathVariable(lufthansaAuthorizationPathVariable);
         builder.setJourneyPathVariable(lufthansaJourneyPathVariable);
-        builder.setXOriginationIpKey(de.blackforestsolutions.apiservice.configuration.AdditionalHttpConfiguration.X_ORIGINATING_IP);
         builder.setXOriginationIp(xOriginationIp);
         builder.setClientId(lufthansaClientId);
         builder.setClientSecret(lufthansaClientSecret);

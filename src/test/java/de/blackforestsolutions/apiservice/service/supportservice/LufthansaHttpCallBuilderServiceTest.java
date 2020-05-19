@@ -9,7 +9,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.util.MultiValueMap;
 
-class LuftHansaHttpCallBuilderServiceTest {
+class LufthansaHttpCallBuilderServiceTest {
 
     private final LuftHansaHttpCallBuilderService classUnderTest = new LufthansaHttpCallBuilderServiceImpl();
 
