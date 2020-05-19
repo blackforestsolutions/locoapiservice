@@ -78,7 +78,6 @@ public class LufthansaHttpCallBuilderServiceImpl implements LuftHansaHttpCallBui
         Objects.requireNonNull(apiTokenAndUrlInformation.getAuthorization(), "authorization is not allowed to be null");
         Objects.requireNonNull(apiTokenAndUrlInformation.getXOriginationIp(), "x-origination ip is not allowed to be null");
         httpHeaders.add(HttpHeaders.AUTHORIZATION, apiTokenAndUrlInformation.getAuthorization());
-        httpHeaders.add(AdditionalHttpConfiguration.X_ORIGINATING_IP, apiTokenAndUrlInformation.getXOriginationIp());
     }
 
 

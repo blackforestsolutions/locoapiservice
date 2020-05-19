@@ -45,7 +45,7 @@ public class LufthansaApiServiceImpl implements LufthansaApiService {
     }
 
     @Scheduled(fixedRateString = "${lufthansaBearerExpirationTime}")
-    private void updateBearerTokenEveryDay() {
+    public void updateBearerTokenEveryDay() {
         CallStatus callStatus = getLufthansaAuthorization(lufthansaApiTokenAndUrlInformation);
         if (callStatus.getStatus().equals(Status.SUCCESS)) {
             LufthansaAuthorization lufthansaAuthorization = (LufthansaAuthorization) callStatus.getCalledObject();
