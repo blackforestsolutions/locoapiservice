@@ -20,7 +20,7 @@ public class RMVConfiguration {
     @Value("${accessProtocol}")
     private String accesProtocol;
 
-    @Bean(name = "rMVApiTokenAndUrlInformation")
+    @Bean(name = "rmvApiTokenAndUrlInformation")
     public ApiTokenAndUrlInformation apiTokenAndUrlInformation() {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
         builder.setProtocol(accesProtocol);

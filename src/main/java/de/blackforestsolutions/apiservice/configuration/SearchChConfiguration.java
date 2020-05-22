@@ -20,7 +20,7 @@ public class SearchChConfiguration {
     @Value("${searchChTermParameter}")
     private String searchChTermParameter;
 
-    @Value("$searchChStationIdParameter")
+    @Value("${searchChStationIdParameter}")
     private String searchChStationIdParameter;
 
     @Value("${searchChStationCoordinateParameter}")
@@ -62,7 +62,7 @@ public class SearchChConfiguration {
         builderConfig.setSearchChStationCoordinateParameter(searchChStationCoordinateParameter);
         builderConfig.setSearchChDelayParameter(searchChDelayParameter);
         builderConfig.setSearchChResults(searchChResults);
-        builderConfig.setSearchChRoutePathVariable(searchChRoutePathVariable);
+        builderConfig.setJourneyPathVariable(searchChRoutePathVariable);
         builderConfig.setArrival(arrival);
         builderConfig.setDeparture(departure);
         builderConfig.setDatePathVariable(datePathVariable);

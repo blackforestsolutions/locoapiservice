@@ -1,7 +1,7 @@
 package de.blackforestsolutions.apiservice.service.supportservice.hvv;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import de.blackforestsolutions.apiservice.configuration.AdditionalHttpHeadersConfiguration;
+import de.blackforestsolutions.apiservice.configuration.AdditionalHttpConfiguration;
 import de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother;
 import de.blackforestsolutions.apiservice.objectmothers.HttpBodyObjectMother;
 import de.blackforestsolutions.apiservice.objectmothers.TravelPointObjectMother;
@@ -20,7 +20,7 @@ class HvvJourneyHttpCallBuilderServiceImplTest {
 
     @Test
     void test_buildJourneyHttpEntityForHvv_with_apiToken_start_destination_and_HttpBody_returns_correct_header_and_body() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getHvvJourneyTokenAndUrl();
+        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getHvvTokenAndUrl();
         HvvStation start = TravelPointObjectMother.getRosenhofHvvStation();
         HvvStation destination = TravelPointObjectMother.getStadthausbrueckeHvvStation();
 
@@ -30,17 +30,17 @@ class HvvJourneyHttpCallBuilderServiceImplTest {
 
         Assertions.assertThat(headerResult.getFirst(HttpHeaders.ACCEPT)).isEqualTo(MediaType.APPLICATION_JSON_VALUE);
         Assertions.assertThat(headerResult.getFirst(HttpHeaders.CONTENT_TYPE)).isEqualTo(MediaType.APPLICATION_JSON_VALUE);
-        Assertions.assertThat(headerResult.getFirst(AdditionalHttpHeadersConfiguration.GEO_FEX_AUTH_TYPE)).isEqualTo("HmacSHA1");
-        Assertions.assertThat(headerResult.getFirst(AdditionalHttpHeadersConfiguration.GEO_FEX_AUTH_USER)).isEqualTo("janhendrikhausner");
-        Assertions.assertThat(headerResult.getFirst(AdditionalHttpHeadersConfiguration.GEO_FEX_AUTH_SIGNATURE)).isEqualTo("n1fA4PW5/7DtcnPueRXI9m7lDKw=");
+        Assertions.assertThat(headerResult.getFirst(AdditionalHttpConfiguration.GEO_FEX_AUTH_TYPE)).isEqualTo("HmacSHA1");
+        Assertions.assertThat(headerResult.getFirst(AdditionalHttpConfiguration.GEO_FEX_AUTH_USER)).isEqualTo("janhendrikhausner");
+        Assertions.assertThat(headerResult.getFirst(AdditionalHttpConfiguration.GEO_FEX_AUTH_SIGNATURE)).isEqualTo("n1fA4PW5/7DtcnPueRXI9m7lDKw=");
 
-        Assertions.assertThat(headerResult.getFirst(AdditionalHttpHeadersConfiguration.X_TRACE_ID)).isNotNull();
+        Assertions.assertThat(headerResult.getFirst(AdditionalHttpConfiguration.X_TRACE_ID)).isNotNull();
         Assertions.assertThat(headerResult.values().size()).isEqualTo(6);
     }
 
     @Test
     void test_buildJourneyHttpEntityForHvv_returns_correct_http_body() throws Exception {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getHvvJourneyTokenAndUrl();
+        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getHvvTokenAndUrl();
         ObjectMapper mapper = new ObjectMapper();
         String testBody = mapper.writeValueAsString(HttpBodyObjectMother.getHvvJourneyBodyObject());
         HvvStation start = TravelPointObjectMother.getRosenhofHvvStation();
@@ -55,7 +55,7 @@ class HvvJourneyHttpCallBuilderServiceImplTest {
 
     @Test
     void test_buildJourneyPathWith_pathvariable_journeyPathVariable_returns_valid_path_string() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getHvvJourneyTokenAndUrl();
+        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getHvvTokenAndUrl();
 
         String result = classUnderTest.buildJourneyPathWith(testData);
 
@@ -64,7 +64,7 @@ class HvvJourneyHttpCallBuilderServiceImplTest {
 
     @Test
     void test_buildJourneyPathWith_pathvariable_as_null_journeyPathVariable_throws_NullPointerException() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getHvvJourneyTokenAndUrl();
+        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getHvvTokenAndUrl();
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
         builder = builder.buildFrom(testData);
         builder.setPathVariable(null);
@@ -76,7 +76,7 @@ class HvvJourneyHttpCallBuilderServiceImplTest {
 
     @Test
     void test_buildTravelPointPathWith_pathvariable_journeyPathVariable_as_null_throws_NullPointerException() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getHvvJourneyTokenAndUrl();
+        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getHvvTokenAndUrl();
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
         builder = builder.buildFrom(testData);
         builder.setJourneyPathVariable(null);

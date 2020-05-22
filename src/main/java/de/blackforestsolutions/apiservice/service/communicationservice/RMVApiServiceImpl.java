@@ -1,6 +1,6 @@
 package de.blackforestsolutions.apiservice.service.communicationservice;
 
-import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.RMVCallService;
+import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallService;
 import de.blackforestsolutions.apiservice.service.mapper.RMVMapperService;
 import de.blackforestsolutions.apiservice.service.supportservice.RMVHttpCallBuilderService;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
@@ -13,16 +13,18 @@ import java.net.URL;
 import java.util.Map;
 import java.util.UUID;
 
+import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.buildUrlWith;
+
 @Service
 public class RMVApiServiceImpl implements RMVApiService {
 
-    private final RMVCallService rmvCallService;
+    private final CallService callService;
     private final RMVHttpCallBuilderService httpCallBuilderService;
     private final RMVMapperService rmvMapperService;
 
     @Autowired
-    public RMVApiServiceImpl(RMVCallService rmvCallService, RMVHttpCallBuilderService httpCallBuilderService, RMVMapperService rmvMapperService) {
-        this.rmvCallService = rmvCallService;
+    public RMVApiServiceImpl(CallService callService, RMVHttpCallBuilderService httpCallBuilderService, RMVMapperService rmvMapperService) {
+        this.callService = callService;
         this.httpCallBuilderService = httpCallBuilderService;
         this.rmvMapperService = rmvMapperService;
     }
@@ -36,13 +38,13 @@ public class RMVApiServiceImpl implements RMVApiService {
     private ResponseEntity<String> buildAndExecuteCall(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
         String urlDeparture = getRMVRequestString(apiTokenAndUrlInformation, apiTokenAndUrlInformation.getDeparture());
         String urlArrival = getRMVRequestString(apiTokenAndUrlInformation, apiTokenAndUrlInformation.getArrival());
-        ResponseEntity<String> departureIdJson = rmvCallService.getStationId(urlDeparture, httpCallBuilderService.buildHttpEntityStationForRMV(apiTokenAndUrlInformation, apiTokenAndUrlInformation.getDeparture()));
+        ResponseEntity<String> departureIdJson = callService.get(urlDeparture, httpCallBuilderService.buildHttpEntityStationForRMV(apiTokenAndUrlInformation));
         String departureId = (String) rmvMapperService.getIdFrom(departureIdJson.getBody()).getCalledObject();
-        ResponseEntity<String> arrivalIdJson = rmvCallService.getStationId(urlArrival, httpCallBuilderService.buildHttpEntityStationForRMV(apiTokenAndUrlInformation, apiTokenAndUrlInformation.getArrival()));
+        ResponseEntity<String> arrivalIdJson = callService.get(urlArrival, httpCallBuilderService.buildHttpEntityStationForRMV(apiTokenAndUrlInformation));
         String arrivalId = (String) rmvMapperService.getIdFrom(arrivalIdJson.getBody()).getCalledObject();
         ApiTokenAndUrlInformation callToken = replaceStartAndDestinationIn(apiTokenAndUrlInformation, departureId, arrivalId);
         String urlTrip = getRMVRequestString(callToken, null);
-        return rmvCallService.getTrip(urlTrip, httpCallBuilderService.buildHttpEntityTripForRMV(callToken));
+        return callService.get(urlTrip, httpCallBuilderService.buildHttpEntityTripForRMV(callToken));
     }
 
     private ApiTokenAndUrlInformation replaceStartAndDestinationIn(ApiTokenAndUrlInformation apiTokenAndUrlInformation, String departureId, String arrivalId) {
@@ -65,7 +67,7 @@ public class RMVApiServiceImpl implements RMVApiService {
         builder.setArrival(apiTokenAndUrlInformation.getArrival());
         builder.setDepartureDate(apiTokenAndUrlInformation.getDepartureDate());
         handleLocationCaseFor(builder, location);
-        URL requestUrl = httpCallBuilderService.buildRMVUrlWith(builder.build());
+        URL requestUrl = buildUrlWith(builder.build());
         return requestUrl.toString();
     }
 

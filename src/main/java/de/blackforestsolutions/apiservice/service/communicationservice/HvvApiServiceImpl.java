@@ -1,7 +1,7 @@
 package de.blackforestsolutions.apiservice.service.communicationservice;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.HvvCallService;
+import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallService;
 import de.blackforestsolutions.apiservice.service.mapper.HvvMapperService;
 import de.blackforestsolutions.apiservice.service.supportservice.hvv.HvvJourneyHttpCallBuilderService;
 import de.blackforestsolutions.apiservice.service.supportservice.hvv.HvvStationListHttpCallBuilderService;
@@ -26,15 +26,15 @@ import static de.blackforestsolutions.apiservice.service.supportservice.HttpCall
 @Slf4j
 public class HvvApiServiceImpl implements HvvApiService {
 
-    private final HvvCallService hvvCallService;
+    private final CallService callService;
     private final HvvStationListHttpCallBuilderService stationListCallBuilder;
     private final HvvTravelPointHttpCallBuilderService travelPointCallBuilder;
     private final HvvJourneyHttpCallBuilderService journeyCallBuilder;
     private final HvvMapperService mapper;
 
     @Autowired
-    public HvvApiServiceImpl(HvvCallService hvvCallService, HvvStationListHttpCallBuilderService stationListCallBuilder, HvvTravelPointHttpCallBuilderService travelPointCallBuilder, HvvJourneyHttpCallBuilderService journeyCallBuilder, HvvMapperService mapper) {
-        this.hvvCallService = hvvCallService;
+    public HvvApiServiceImpl(CallService callService, HvvStationListHttpCallBuilderService stationListCallBuilder, HvvTravelPointHttpCallBuilderService travelPointCallBuilder, HvvJourneyHttpCallBuilderService journeyCallBuilder, HvvMapperService mapper) {
+        this.callService = callService;
         this.stationListCallBuilder = stationListCallBuilder;
         this.travelPointCallBuilder = travelPointCallBuilder;
         this.journeyCallBuilder = journeyCallBuilder;
@@ -52,7 +52,7 @@ public class HvvApiServiceImpl implements HvvApiService {
         String url = getHvvStationListRequestString(apiTokenAndUrlInformation);
         ResponseEntity<String> result;
         try {
-            result = hvvCallService.postStationList(url, stationListCallBuilder.buildStationListHttpEntityForHvv(apiTokenAndUrlInformation));
+            result = callService.post(url, stationListCallBuilder.buildStationListHttpEntityForHvv(apiTokenAndUrlInformation));
             return new CallStatus(mapper.getStationListFrom(result.getBody()), Status.SUCCESS, null);
         } catch (JsonProcessingException e) {
             log.error("Error while processing json", e);
@@ -64,13 +64,13 @@ public class HvvApiServiceImpl implements HvvApiService {
         String travelPointUrl = getHvvTravelPointRequestString(apiTokenAndUrlInformation);
         String journeyUrl = getHvvJourneyRequestString(apiTokenAndUrlInformation);
 
-        ResponseEntity<String> departureJson = hvvCallService.postTravelPoint(travelPointUrl, travelPointCallBuilder.buildTravelPointHttpEntityForHvv(apiTokenAndUrlInformation, apiTokenAndUrlInformation.getDeparture()));
+        ResponseEntity<String> departureJson = callService.post(travelPointUrl, travelPointCallBuilder.buildTravelPointHttpEntityForHvv(apiTokenAndUrlInformation, apiTokenAndUrlInformation.getDeparture()));
         HvvStation departure = mapper.getHvvStationFrom(departureJson.getBody());
 
-        ResponseEntity<String> destinationJson = hvvCallService.postTravelPoint(travelPointUrl, travelPointCallBuilder.buildTravelPointHttpEntityForHvv(apiTokenAndUrlInformation, apiTokenAndUrlInformation.getArrival()));
+        ResponseEntity<String> destinationJson = callService.post(travelPointUrl, travelPointCallBuilder.buildTravelPointHttpEntityForHvv(apiTokenAndUrlInformation, apiTokenAndUrlInformation.getArrival()));
         HvvStation destination = mapper.getHvvStationFrom(destinationJson.getBody());
 
-        return hvvCallService.postJourney(journeyUrl, journeyCallBuilder.buildJourneyHttpEntityForHvv(apiTokenAndUrlInformation, departure, destination));
+        return callService.post(journeyUrl, journeyCallBuilder.buildJourneyHttpEntityForHvv(apiTokenAndUrlInformation, departure, destination));
 
     }
 

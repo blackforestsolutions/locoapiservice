@@ -1,6 +1,6 @@
 package de.blackforestsolutions.apiservice.service.communicationservice;
 
-import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.HafasCallService;
+import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallService;
 import de.blackforestsolutions.apiservice.service.mapper.HafasMapperService;
 import de.blackforestsolutions.apiservice.service.mapper.HafasPriceMapper;
 import de.blackforestsolutions.apiservice.service.supportservice.hafas.HafasHttpCallBuilderService;
@@ -16,16 +16,18 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
+import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.buildUrlWith;
+
 @Service
 public class HafasApiServiceImpl implements HafasApiService {
 
-    private final HafasCallService hafasCallService;
+    private final CallService callService;
     private final HafasHttpCallBuilderService httpCallBuilderService;
     private final HafasMapperService mapperService;
 
     @Autowired
-    public HafasApiServiceImpl(HafasCallService hafasCallService, HafasHttpCallBuilderService httpCallBuilderService, HafasMapperService mapperService) {
-        this.hafasCallService = hafasCallService;
+    public HafasApiServiceImpl(CallService callService, HafasHttpCallBuilderService httpCallBuilderService, HafasMapperService mapperService) {
+        this.callService = callService;
         this.httpCallBuilderService = httpCallBuilderService;
         this.mapperService = mapperService;
     }
@@ -39,13 +41,13 @@ public class HafasApiServiceImpl implements HafasApiService {
     private ResponseEntity<String> buildAndExecuteCall(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
         String urlDeparture = getHafasRequestString(apiTokenAndUrlInformation, apiTokenAndUrlInformation.getDeparture());
         String urlArrival = getHafasRequestString(apiTokenAndUrlInformation, apiTokenAndUrlInformation.getArrival());
-        ResponseEntity<String> departureIdJson = hafasCallService.getStationId(urlDeparture, httpCallBuilderService.buildHttpEntityStationForHafas(apiTokenAndUrlInformation, apiTokenAndUrlInformation.getDeparture()));
+        ResponseEntity<String> departureIdJson = callService.post(urlDeparture, httpCallBuilderService.buildHttpEntityStationForHafas(apiTokenAndUrlInformation, apiTokenAndUrlInformation.getDeparture()));
         String departureId = (String) mapperService.getIdFrom(departureIdJson.getBody()).getCalledObject();
-        ResponseEntity<String> arrivalIdJson = hafasCallService.getStationId(urlArrival, httpCallBuilderService.buildHttpEntityStationForHafas(apiTokenAndUrlInformation, apiTokenAndUrlInformation.getArrival()));
+        ResponseEntity<String> arrivalIdJson = callService.post(urlArrival, httpCallBuilderService.buildHttpEntityStationForHafas(apiTokenAndUrlInformation, apiTokenAndUrlInformation.getArrival()));
         String arrivalId = (String) mapperService.getIdFrom(arrivalIdJson.getBody()).getCalledObject();
         ApiTokenAndUrlInformation callToken = replaceStartAndDestinationIn(apiTokenAndUrlInformation, departureId, arrivalId);
         String urlJourney = getHafasRequestString(callToken, null);
-        return hafasCallService.getJourney(urlJourney, httpCallBuilderService.buildHttpEntityJourneyForHafas(callToken));
+        return callService.post(urlJourney, httpCallBuilderService.buildHttpEntityJourneyForHafas(callToken));
     }
 
     private ApiTokenAndUrlInformation replaceStartAndDestinationIn(ApiTokenAndUrlInformation apiTokenAndUrlInformation, String departureId, String arrivalId) {
@@ -77,7 +79,7 @@ public class HafasApiServiceImpl implements HafasApiService {
         builder.setArrival(apiTokenAndUrlInformation.getArrival());
         builder.setDepartureDate(apiTokenAndUrlInformation.getDepartureDate());
         builder.setPath(httpCallBuilderService.buildPathWith(builder.build(), location));
-        URL requestUrl = httpCallBuilderService.buildHafasUrlWith(builder.build());
+        URL requestUrl = buildUrlWith(builder.build());
         return requestUrl.toString();
     }
 }

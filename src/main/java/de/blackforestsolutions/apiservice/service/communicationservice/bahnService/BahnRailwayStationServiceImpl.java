@@ -2,7 +2,7 @@ package de.blackforestsolutions.apiservice.service.communicationservice.bahnServ
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.BahnCallService;
+import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallService;
 import de.blackforestsolutions.apiservice.service.supportservice.BahnHttpCallBuilderService;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import de.blackforestsolutions.datamodel.Coordinates;
@@ -19,34 +19,36 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.buildUrlWith;
+
 @Service
 public class BahnRailwayStationServiceImpl implements BahnRailwayStationService {
 
-    private final BahnCallService bahnCallService;
+    private final CallService callService;
     private final BahnHttpCallBuilderService bahnRailwayStationHttpCallBuilderService;
 
     @Autowired
-    public BahnRailwayStationServiceImpl(BahnCallService bahnCallService, BahnHttpCallBuilderService bahnRailwayStationHttpCallBuilderService) {
-        this.bahnCallService = bahnCallService;
+    public BahnRailwayStationServiceImpl(CallService callService, BahnHttpCallBuilderService bahnRailwayStationHttpCallBuilderService) {
+        this.callService = callService;
         this.bahnRailwayStationHttpCallBuilderService = bahnRailwayStationHttpCallBuilderService;
     }
 
-    public Map<String, TravelPoint> getTravelPointsForRouteFromApiWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) throws Exception {
-        String url = getBahnRailwayStationsRequestString(apiTokenAndUrlInformation);
-        ResponseEntity<String> result = bahnCallService.getRequestAnswer(url, bahnRailwayStationHttpCallBuilderService.buildHttpEntityForBahn(apiTokenAndUrlInformation));
+    @Override
+    public Map<String, TravelPoint> getTravelPointsForRouteFromApiWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation, String location) throws Exception {
+        String url = getBahnRailwayStationsRequestString(apiTokenAndUrlInformation, location);
+        ResponseEntity<String> result = callService.get(url, bahnRailwayStationHttpCallBuilderService.buildHttpEntityForBahn(apiTokenAndUrlInformation));
         return map(result.getBody());
     }
 
-    private String getBahnRailwayStationsRequestString(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
+    private String getBahnRailwayStationsRequestString(ApiTokenAndUrlInformation apiTokenAndUrlInformation, String location) {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
         builder = builder.buildFrom(apiTokenAndUrlInformation);
         builder.setHost(apiTokenAndUrlInformation.getHost());
         builder.setPathVariable(apiTokenAndUrlInformation.getPathVariable());
         builder.setApiVersion(apiTokenAndUrlInformation.getApiVersion());
         builder.setGermanRailLocationPath(apiTokenAndUrlInformation.getGermanRailLocationPath());
-        builder.setBahnLocation(apiTokenAndUrlInformation.getBahnLocation());
-        builder.setPath(bahnRailwayStationHttpCallBuilderService.buildBahnRailwayStationPathWith(builder.build()));
-        URL requestUrl = bahnRailwayStationHttpCallBuilderService.buildBahnUrlWith(builder.build());
+        builder.setPath(bahnRailwayStationHttpCallBuilderService.buildBahnRailwayStationPathWith(builder.build(), location));
+        URL requestUrl = buildUrlWith(builder.build());
         return requestUrl.toString();
     }
 

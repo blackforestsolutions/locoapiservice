@@ -2,8 +2,8 @@ package de.blackforestsolutions.apiservice.service.communicationservice;
 
 import de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother;
 import de.blackforestsolutions.apiservice.objectmothers.LegObjectMother;
-import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.HafasCallService;
-import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.HafasCallServiceImpl;
+import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallService;
+import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallServiceImpl;
 import de.blackforestsolutions.apiservice.service.mapper.HafasMapperService;
 import de.blackforestsolutions.apiservice.service.mapper.HafasMapperServiceImpl;
 import de.blackforestsolutions.apiservice.service.supportservice.UuidService;
@@ -38,7 +38,7 @@ class DBApiServiceTest {
 
     private final RestTemplateBuilder restTemplateBuilder = new RestTemplateBuilderStub(REST_TEMPLATE);
 
-    private final HafasCallService hafasCallService = new HafasCallServiceImpl(restTemplateBuilder);
+    private final CallService hafasCallService = new CallServiceImpl(restTemplateBuilder);
 
     private final HafasHttpCallBuilderService hafasHttpCallBuilderService = new HafasHttpCallBuilderServiceImpl();
 

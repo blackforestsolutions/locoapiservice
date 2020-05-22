@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.context.annotation.Bean;
 
-import static de.blackforestsolutions.apiservice.configuration.AdditionalHttpHeadersConfiguration.BA_CLIENT_KEY;
+import static de.blackforestsolutions.apiservice.configuration.AdditionalHttpConfiguration.BA_CLIENT_KEY;
 
 @SpringBootConfiguration
 public class BritishAirwaysConfiguration {

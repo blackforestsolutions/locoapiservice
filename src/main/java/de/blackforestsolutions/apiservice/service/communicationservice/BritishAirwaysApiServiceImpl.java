@@ -1,6 +1,6 @@
 package de.blackforestsolutions.apiservice.service.communicationservice;
 
-import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.BritishAirwaysCallService;
+import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallService;
 import de.blackforestsolutions.apiservice.service.mapper.BritishAirwaysMapperService;
 import de.blackforestsolutions.apiservice.service.supportservice.BritishAirwaysHttpCallBuilderService;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
@@ -14,17 +14,19 @@ import java.net.URL;
 import java.util.Map;
 import java.util.UUID;
 
+import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.buildUrlWith;
+
 @Service
 @Slf4j
 public class BritishAirwaysApiServiceImpl implements BritishAirwaysApiService {
 
-    private final BritishAirwaysCallService britishAirwaysCallService;
+    private final CallService callService;
     private final BritishAirwaysHttpCallBuilderService britishAirwaysHttpCallBuilderService;
     private final BritishAirwaysMapperService britishAirwaysMapperService;
 
     @Autowired
-    public BritishAirwaysApiServiceImpl(BritishAirwaysCallService britishAirwaysCallService, BritishAirwaysHttpCallBuilderService britishAirwaysHttpCallBuilderService, BritishAirwaysMapperService britishAirwaysMapperService) {
-        this.britishAirwaysCallService = britishAirwaysCallService;
+    public BritishAirwaysApiServiceImpl(CallService callService, BritishAirwaysHttpCallBuilderService britishAirwaysHttpCallBuilderService, BritishAirwaysMapperService britishAirwaysMapperService) {
+        this.callService = callService;
         this.britishAirwaysHttpCallBuilderService = britishAirwaysHttpCallBuilderService;
         this.britishAirwaysMapperService = britishAirwaysMapperService;
     }
@@ -32,7 +34,7 @@ public class BritishAirwaysApiServiceImpl implements BritishAirwaysApiService {
     @Override
     public Map<UUID, JourneyStatus> getJourneysForRouteWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
         String url = getBritishAirwaysRequestString(apiTokenAndUrlInformation);
-        ResponseEntity<String> result = britishAirwaysCallService.getFlights(url, britishAirwaysHttpCallBuilderService.buildHttpEntityBritishAirways(apiTokenAndUrlInformation));
+        ResponseEntity<String> result = callService.get(url, britishAirwaysHttpCallBuilderService.buildHttpEntityBritishAirways(apiTokenAndUrlInformation));
         return this.britishAirwaysMapperService.map(result.getBody());
     }
 
@@ -44,7 +46,7 @@ public class BritishAirwaysApiServiceImpl implements BritishAirwaysApiService {
         builder.setArrival(apiTokenAndUrlInformation.getArrival());
         builder.setDepartureDate(apiTokenAndUrlInformation.getDepartureDate());
         builder.setPath(britishAirwaysHttpCallBuilderService.buildPathWith(builder.build()));
-        URL requestUrl = britishAirwaysHttpCallBuilderService.buildUrlWith(builder.build());
+        URL requestUrl = buildUrlWith(builder.build());
         return requestUrl.toString();
     }
 }

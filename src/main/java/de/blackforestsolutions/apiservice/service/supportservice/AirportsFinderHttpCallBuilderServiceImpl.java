@@ -5,7 +5,6 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 
-import java.net.URL;
 import java.util.Objects;
 
 @Service
@@ -19,12 +18,6 @@ public class AirportsFinderHttpCallBuilderServiceImpl implements AirportsFinderH
     private static final String LNG = "lng";
     private static final String LAT = "lat";
     private static final String SLASH = "/";
-
-
-    @Override
-    public URL buildUrlWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
-        return HttpCallBuilder.buildUrlWith(apiTokenAndUrlInformation);
-    }
 
     @Override
     public String buildPathWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
@@ -52,7 +45,7 @@ public class AirportsFinderHttpCallBuilderServiceImpl implements AirportsFinderH
 
     @SuppressWarnings("rawtypes")
     @Override
-    public HttpEntity buildHttpEntityAirportsFinder(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
+    public HttpEntity<String> buildHttpEntityAirportsFinder(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
         return new HttpEntity<>(buildHttpHeaderForAirportsFinderWith(apiTokenAndUrlInformation));
     }
 

@@ -1,10 +1,12 @@
 package de.blackforestsolutions.apiservice.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother;
-import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.OSMCallService;
+import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallService;
 import de.blackforestsolutions.apiservice.service.supportservice.OSMHttpCallBuilderService;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
-import org.junit.jupiter.api.Assertions;
+import de.blackforestsolutions.generatedcontent.osm.OsmTravelPoint;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -12,25 +14,34 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import javax.annotation.Resource;
+
 import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.buildEmptyHttpEntity;
 import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.buildUrlWith;
+import static de.blackforestsolutions.apiservice.testutils.TestUtils.retrieveListJsonPojoFromResponse;
 
 @SpringBootTest
 @AutoConfigureMockMvc
 class OSMApiServiceIT {
 
     @Autowired
-    OSMCallService osmCallService;
+    private CallService callService;
+
+    @Resource(name = "osmApiTokenAndUrlInformation")
+    private ApiTokenAndUrlInformation osmApiTokenAndUrlInformation;
 
     @Autowired
-    OSMHttpCallBuilderService osmHttpCallBuilderService;
+    private OSMHttpCallBuilderService osmHttpCallBuilderService;
 
     @Test
-    void test_getCoordinates() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getOSMApiTokenAndUrlIT();
+    void test_getCoordinates() throws JsonProcessingException {
+        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder testData = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(osmApiTokenAndUrlInformation);
+        testData.setPath(osmHttpCallBuilderService.buildOSMPathWith(testData.build(), "Stuttgart, Waiblinger Str. 84"));
 
-        ResponseEntity<String> result = osmCallService.getTravelPoints(buildUrlWith(testData).toString(), buildEmptyHttpEntity());
+        ResponseEntity<String> result = callService.get(buildUrlWith(testData.build()).toString(), buildEmptyHttpEntity());
 
-        Assertions.assertEquals(HttpStatus.OK, result.getStatusCode());
+        Assertions.assertThat(result.getStatusCode()).isEqualTo(HttpStatus.OK);
+        Assertions.assertThat(result.getBody()).isNotEmpty();
+        Assertions.assertThat(retrieveListJsonPojoFromResponse(result, OsmTravelPoint.class)).isNotEmpty();
     }
 }

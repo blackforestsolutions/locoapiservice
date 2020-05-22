@@ -9,7 +9,8 @@ import org.springframework.context.annotation.Bean;
 @SpringBootConfiguration
 public class VBBConfiguration {
 
-    private final ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder hafasStandardConfiguration;
+    private final ApiTokenAndUrlInformation hafasStandardConfiguration;
+
     @Value("${hafasVbbExtension}")
     private String hafasVbbExtension;
     @Value("${hafasVbbHost}")
@@ -42,28 +43,29 @@ public class VBBConfiguration {
     private boolean hafasVbbTimeIsDeparture;
 
     @Autowired
-    public VBBConfiguration(ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder hafasStandardConfiguration) {
+    public VBBConfiguration(ApiTokenAndUrlInformation hafasStandardConfiguration) {
         this.hafasStandardConfiguration = hafasStandardConfiguration;
     }
 
     @Bean(name = "vbbApiTokenAndUrlInformation")
     public ApiTokenAndUrlInformation apiTokenAndUrlInformation() {
-        hafasStandardConfiguration.setHost(hafasVbbHost);
-        hafasStandardConfiguration.setApiName(hafasVbbExtension);
-        hafasStandardConfiguration.setMic(hafasVbbMic);
-        hafasStandardConfiguration.setMac(hafasVbbMac);
-        hafasStandardConfiguration.setClientId(hafasVbbClientId);
-        hafasStandardConfiguration.setClientVersion(hafasVbbClientVersion);
-        hafasStandardConfiguration.setClientName(hafasVbbClientName);
-        hafasStandardConfiguration.setClientType(hafasVbbClientType);
-        hafasStandardConfiguration.setAuthentificationType(hafasVbbAuthorizationType);
-        hafasStandardConfiguration.setAuthorization(hafasVbbAuthorization);
-        hafasStandardConfiguration.setAuthorizationKey(hafasVbbSalt);
-        hafasStandardConfiguration.setHafasProductionValue(hafasVbbProductionValue);
-        hafasStandardConfiguration.setWalkingSpeed(hafasVbbWalkingSpeed);
-        hafasStandardConfiguration.setResultLengthAfterDepartureTime(hafasVbbShResultsAfterDepartureTime);
-        hafasStandardConfiguration.setTimeIsDeparture(hafasVbbTimeIsDeparture);
-        return hafasStandardConfiguration.build();
+        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(hafasStandardConfiguration);
+        builder.setHost(hafasVbbHost);
+        builder.setApiName(hafasVbbExtension);
+        builder.setMic(hafasVbbMic);
+        builder.setMac(hafasVbbMac);
+        builder.setClientId(hafasVbbClientId);
+        builder.setClientVersion(hafasVbbClientVersion);
+        builder.setClientName(hafasVbbClientName);
+        builder.setClientType(hafasVbbClientType);
+        builder.setAuthentificationType(hafasVbbAuthorizationType);
+        builder.setAuthorization(hafasVbbAuthorization);
+        builder.setAuthorizationKey(hafasVbbSalt);
+        builder.setHafasProductionValue(hafasVbbProductionValue);
+        builder.setWalkingSpeed(hafasVbbWalkingSpeed);
+        builder.setResultLengthAfterDepartureTime(hafasVbbShResultsAfterDepartureTime);
+        builder.setTimeIsDeparture(hafasVbbTimeIsDeparture);
+        return builder.build();
     }
 
 }

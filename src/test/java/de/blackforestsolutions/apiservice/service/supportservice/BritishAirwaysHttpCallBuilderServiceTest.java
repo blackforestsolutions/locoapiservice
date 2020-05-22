@@ -1,15 +1,13 @@
 package de.blackforestsolutions.apiservice.service.supportservice;
 
-import de.blackforestsolutions.apiservice.configuration.AdditionalHttpHeadersConfiguration;
+import de.blackforestsolutions.apiservice.configuration.AdditionalHttpConfiguration;
 import de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
-
-import java.io.UncheckedIOException;
-import java.net.URL;
 
 class BritishAirwaysHttpCallBuilderServiceTest {
 
@@ -30,95 +28,18 @@ class BritishAirwaysHttpCallBuilderServiceTest {
 
         HttpHeaders result = classUnderTest.buildHttpHeadersForBritishAirwaysWith(apiTokenAndUrlInformation);
 
-        Assertions.assertThat(result.get(AdditionalHttpHeadersConfiguration.BA_APPLICATION)).contains(AdditionalHttpHeadersConfiguration.BA_APPLICATION_VALUE);
-        Assertions.assertThat(result.get(AdditionalHttpHeadersConfiguration.BA_CLIENT_KEY)).contains(apiTokenAndUrlInformation.getAuthorization());
-    }
-
-
-    @Test
-    void test_britishAirways_buildUrlWith_protocol_host_port_path_http_returns_correctUrl() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getBritishAirwaysTokenAndUrl();
-
-        URL result = classUnderTest.buildUrlWith(testData);
-
-        Assertions.assertThat(result.getProtocol()).isEqualToIgnoringCase(testData.getProtocol());
-        Assertions.assertThat(result.getHost()).isEqualToIgnoringCase(testData.getHost());
-        Assertions.assertThat(result.getPort()).isEqualTo(testData.getPort());
-        Assertions.assertThat(result.getPath()).isEqualToIgnoringCase(testData.getPath());
+        Assertions.assertThat(result.get(AdditionalHttpConfiguration.BA_APPLICATION).get(0)).isEqualTo(AdditionalHttpConfiguration.BA_APPLICATION_VALUE);
+        Assertions.assertThat(result.get(AdditionalHttpConfiguration.BA_CLIENT_KEY).get(0)).isEqualTo(apiTokenAndUrlInformation.getAuthorization());
     }
 
     @Test
-    void test_britishAirways_buildUrlWith_protocol_host_port_path_https_returns_correctUrl() {
+    void test_buildHttpEntityBritishAirways_with_apiToken_returns_correct_httpEntity() {
         ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getBritishAirwaysTokenAndUrl();
-        ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformationBuilder();
-        builder = builder.buildFrom(testData);
-        builder.setProtocol("https");
-        testData = builder.build();
 
-        URL result = classUnderTest.buildUrlWith(testData);
+        HttpEntity<String> result = classUnderTest.buildHttpEntityBritishAirways(testData);
 
-        Assertions.assertThat(result.getProtocol()).isEqualToIgnoringCase(testData.getProtocol());
-        Assertions.assertThat(result.getHost()).isEqualToIgnoringCase(testData.getHost());
-        Assertions.assertThat(result.getPort()).isEqualTo(testData.getPort());
-        Assertions.assertThat(result.getPath()).isEqualToIgnoringCase(testData.getPath());
-    }
-
-    @Test
-    void test_britishAirways_buildUrlWith_wrong_protocol_host_port_path_throws_MalformedURLException() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getBritishAirwaysTokenAndUrl();
-        ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformationBuilder();
-        builder = builder.buildFrom(testData);
-        builder.setProtocol("wrong");
-        testData = builder.build();
-
-        ApiTokenAndUrlInformation finalTestData = testData;
-        org.junit.jupiter.api.Assertions.assertThrows(UncheckedIOException.class, () -> classUnderTest.buildUrlWith(finalTestData));
-    }
-
-    @Test
-    void test_britishAirways_buildUrlWith_protocol_host_path_http_returns_correctUrl() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getBritishAirwaysTokenAndUrl();
-        ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformationBuilder();
-        builder = builder.buildFrom(testData);
-        builder.setPort(-1);
-        testData = builder.build();
-
-        URL result = classUnderTest.buildUrlWith(testData);
-
-        Assertions.assertThat(result.getProtocol()).isEqualToIgnoringCase(testData.getProtocol());
-        Assertions.assertThat(result.getHost()).isEqualToIgnoringCase(testData.getHost());
-        Assertions.assertThat(result.getPort()).isEqualTo(testData.getPort());
-        Assertions.assertThat(result.getPath()).isEqualToIgnoringCase(testData.getPath());
-    }
-
-    @Test
-    void test_britishAirways_buildUrlWith_protocol_host_path_correct_params_https_returns_correctUrl() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getBritishAirwaysTokenAndUrl();
-        ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformationBuilder();
-        builder = builder.buildFrom(testData);
-        builder.setProtocol("https");
-        builder.setPort(-1);
-        testData = builder.build();
-
-        URL result = classUnderTest.buildUrlWith(testData);
-
-        Assertions.assertThat(result.getProtocol()).isEqualToIgnoringCase(testData.getProtocol());
-        Assertions.assertThat(result.getHost()).isEqualToIgnoringCase(testData.getHost());
-        Assertions.assertThat(result.getPort()).isEqualTo(testData.getPort());
-        Assertions.assertThat(result.getPath()).isEqualToIgnoringCase(testData.getPath());
-    }
-
-    @Test
-    void test_britishAirways_buildUrlWith_wrong_protocol_host_path_throws_MalformedURLException() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getBritishAirwaysTokenAndUrl();
-        ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformationBuilder();
-        builder = builder.buildFrom(testData);
-        builder.setProtocol("wrong");
-        builder.setPort(-1);
-        testData = builder.build();
-
-        ApiTokenAndUrlInformation finalTestData = testData;
-        org.junit.jupiter.api.Assertions.assertThrows(UncheckedIOException.class, () -> classUnderTest.buildUrlWith(finalTestData));
+        Assertions.assertThat(result.getHeaders()).containsKeys(AdditionalHttpConfiguration.BA_APPLICATION, AdditionalHttpConfiguration.BA_CLIENT_KEY);
+        Assertions.assertThat(result.hasBody()).isFalse();
     }
 
     @Test

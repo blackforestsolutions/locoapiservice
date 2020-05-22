@@ -32,8 +32,8 @@ public class AirportsFinderConfiguration {
         builder.setHost(airportsFinderHostFull);
         builder.setPort(CONFIGURED_BASE_PORT);
         builder.setPathVariable(airportsFinderVariable);
-        builder.setAuthorization(xRapidapiKey);
-        builder.setAuthorizationKey(xRapidapiKeyValue);
+        builder.setAuthorization(xRapidapiKeyValue);
+        builder.setAuthorizationKey(xRapidapiKey);
         return builder.build();
     }
 

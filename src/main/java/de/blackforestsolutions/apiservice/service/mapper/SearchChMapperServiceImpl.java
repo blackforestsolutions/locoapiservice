@@ -225,7 +225,7 @@ public class SearchChMapperServiceImpl implements SearchChMapperService {
             travelPoint.setStationId(id);
             return travelPoint.build();
         }).orElseGet(() -> {
-            travelPoint.setStationId(uuidService.createUUID().toString());
+            travelPoint.setStationId(station.getLabel());
             travelPoint.setStreet(station.getLabel());
             return travelPoint.build();
         });

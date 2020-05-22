@@ -7,9 +7,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 
-import java.io.UncheckedIOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -18,20 +15,6 @@ import java.util.Objects;
 @Service
 @Slf4j
 public class BBCHttpCallBuilderServiceImpl implements BBCHttpCallBuilderService {
-
-    @Override
-    public URL buildUrlWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
-        try {
-            if (apiTokenAndUrlInformation.getPort() == 0 || apiTokenAndUrlInformation.getPort() == -1) {
-                return new URL(apiTokenAndUrlInformation.getProtocol(), apiTokenAndUrlInformation.getHost(), apiTokenAndUrlInformation.getPath());
-            }
-            return new URL(apiTokenAndUrlInformation.getProtocol(), apiTokenAndUrlInformation.getHost(), apiTokenAndUrlInformation.getPort(), apiTokenAndUrlInformation.getPath());
-        } catch (MalformedURLException e) {
-            log.error("URL could not be build because it was not valid: {}", apiTokenAndUrlInformation.getProtocol() + apiTokenAndUrlInformation.getHost() + apiTokenAndUrlInformation.getPort() + apiTokenAndUrlInformation.getPath());
-            throw new UncheckedIOException(e);
-        }
-    }
-
 
     @Override
     public String bbcBuildPathWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
@@ -64,7 +47,7 @@ public class BBCHttpCallBuilderServiceImpl implements BBCHttpCallBuilderService 
 
     @SuppressWarnings("rawtypes")
     @Override
-    public HttpEntity buildHttpEntityForBbc(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
+    public HttpEntity<String> buildHttpEntityForBbc(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
         return new HttpEntity<>(buildHttpHeadersForBbcWith(apiTokenAndUrlInformation));
     }
 

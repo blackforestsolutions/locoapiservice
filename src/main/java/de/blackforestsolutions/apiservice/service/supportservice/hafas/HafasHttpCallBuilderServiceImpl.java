@@ -8,12 +8,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
 import javax.xml.bind.DatatypeConverter;
-import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 import java.util.Optional;
 
-import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.buildUrlWith;
 import static de.blackforestsolutions.apiservice.service.supportservice.hafas.HafasHttpBodyBuilderService.buildJourneyHttpBodyWith;
 import static de.blackforestsolutions.apiservice.service.supportservice.hafas.HafasHttpBodyBuilderService.buildLocationHttpBodyWith;
 
@@ -55,11 +53,6 @@ public class HafasHttpCallBuilderServiceImpl implements HafasHttpCallBuilderServ
         byte[] micBytes = generateMicWith(requestBody).getBytes(StandardCharsets.UTF_8);
         byte[] saltBytes = DatatypeConverter.parseHexBinary(apiTokenAndUrlInformation.getAuthorizationKey());
         return DigestUtils.md5DigestAsHex(ArrayUtils.addAll(micBytes, saltBytes));
-    }
-
-    @Override
-    public URL buildHafasUrlWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
-        return buildUrlWith(apiTokenAndUrlInformation);
     }
 
     @Override

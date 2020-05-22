@@ -12,15 +12,17 @@ import java.util.Objects;
 @Service
 public class SearchChHttpCallBuilderServiceImpl implements SearchChHttpCallBuilderService {
 
+    private static final String FROM = "from";
+    private static final String TO = "to";
 
     @Override
-    public String buildSearchChLocationPath(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
+    public String buildSearchChLocationPath(ApiTokenAndUrlInformation apiTokenAndUrlInformation, String location) {
         Objects.requireNonNull(apiTokenAndUrlInformation.getPathVariable(), "pathvariable is not allowed to be null");
         Objects.requireNonNull(apiTokenAndUrlInformation.getLocationPath(), "location path is not allowed to be null");
         Objects.requireNonNull(apiTokenAndUrlInformation.getSearchChTermParameter(), "term parameter is not allowed to be null");
-        Objects.requireNonNull(apiTokenAndUrlInformation.getLocationSearchTerm(), "search term is not allowed to be null");
         Objects.requireNonNull(apiTokenAndUrlInformation.getSearchChStationId(), "station parameter is not allowed to be null");
         Objects.requireNonNull(apiTokenAndUrlInformation.getSearchChStationCoordinateParameter(), "coordinate parameter string is not allowed to be null");
+        Objects.requireNonNull(location, "location is not allowed to be null");
         return "/"
                 .concat(apiTokenAndUrlInformation.getPathVariable())
                 .concat("/")
@@ -28,7 +30,7 @@ public class SearchChHttpCallBuilderServiceImpl implements SearchChHttpCallBuild
                 .concat("?")
                 .concat(apiTokenAndUrlInformation.getSearchChTermParameter())
                 .concat("=")
-                .concat(apiTokenAndUrlInformation.getLocationSearchTerm())
+                .concat(location)
                 .concat("&")
                 .concat(apiTokenAndUrlInformation.getSearchChStationId())
                 .concat("&")
@@ -38,11 +40,9 @@ public class SearchChHttpCallBuilderServiceImpl implements SearchChHttpCallBuild
     @Override
     public String buildSearchChRoutePath(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
         Objects.requireNonNull(apiTokenAndUrlInformation.getPathVariable(), "pathvariable is not allowed to be null");
-        Objects.requireNonNull(apiTokenAndUrlInformation.getSearchChRoutePathVariable(), "route path variable is not allowed to be null");
-        Objects.requireNonNull(apiTokenAndUrlInformation.getDeparture(), "departure (from) is not allowed to be null");
-        Objects.requireNonNull(apiTokenAndUrlInformation.getStartLocation(), "start location is not allowed to be null");
-        Objects.requireNonNull(apiTokenAndUrlInformation.getArrival(), "arrival (to) is not allowed to be null");
-        Objects.requireNonNull(apiTokenAndUrlInformation.getDestinationLocation(), "destination location is not allowed to be null");
+        Objects.requireNonNull(apiTokenAndUrlInformation.getJourneyPathVariable(), "route path variable is not allowed to be null");
+        Objects.requireNonNull(apiTokenAndUrlInformation.getDeparture(), "departure is not allowed to be null");
+        Objects.requireNonNull(apiTokenAndUrlInformation.getArrival(), "arrival is not allowed to be null");
         Objects.requireNonNull(apiTokenAndUrlInformation.getDatePathVariable(), "date path variable is not allowed to be null");
         Objects.requireNonNull(apiTokenAndUrlInformation.getDepartureDate(), "departure date is not allowed to be null");
         Objects.requireNonNull(apiTokenAndUrlInformation.getTimePathVariable(), "time path variable is not allowed to be null");
@@ -51,23 +51,23 @@ public class SearchChHttpCallBuilderServiceImpl implements SearchChHttpCallBuild
         return "/"
                 .concat(apiTokenAndUrlInformation.getPathVariable())
                 .concat("/")
-                .concat(apiTokenAndUrlInformation.getSearchChRoutePathVariable())
+                .concat(apiTokenAndUrlInformation.getJourneyPathVariable())
                 .concat("?")
+                .concat(FROM)
+                .concat("=")
                 .concat(apiTokenAndUrlInformation.getDeparture())
-                .concat("=")
-                .concat(apiTokenAndUrlInformation.getStartLocation())
                 .concat("&")
-                .concat(apiTokenAndUrlInformation.getArrival())
+                .concat(TO)
                 .concat("=")
-                .concat(apiTokenAndUrlInformation.getDestinationLocation())
+                .concat(apiTokenAndUrlInformation.getArrival())
                 .concat("&")
                 .concat(apiTokenAndUrlInformation.getDatePathVariable())
                 .concat("=")
-                .concat(this.transformDateToString(apiTokenAndUrlInformation.getDepartureDate()))
+                .concat(transformDateToString(apiTokenAndUrlInformation.getDepartureDate()))
                 .concat("&")
                 .concat(apiTokenAndUrlInformation.getTimePathVariable())
                 .concat("=")
-                .concat(this.transformDateToTimeOfDayString(apiTokenAndUrlInformation.getDepartureDate()))
+                .concat(transformDateToTimeOfDayString(apiTokenAndUrlInformation.getDepartureDate()))
                 .concat("&")
                 .concat(apiTokenAndUrlInformation.getSearchChDelayParameter())
                 .concat("&")

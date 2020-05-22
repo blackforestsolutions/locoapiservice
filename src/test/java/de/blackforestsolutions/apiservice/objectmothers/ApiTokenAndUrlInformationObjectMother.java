@@ -15,17 +15,8 @@ import static de.blackforestsolutions.apiservice.testutils.TestUtils.generateDat
 @Slf4j
 public class ApiTokenAndUrlInformationObjectMother {
 
-
-    public static ApiTokenAndUrlInformation getOSMApiTokenAndUrlIT() {
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder.setProtocol("https");
-        builder.setHost("nominatim.openstreetmap.org");
-        builder.setDeparture("Stuttgart, Waiblinger Str. 84");
-        builder.setArrival("Stuttgart, Waiblinger Str. 84");
-        builder.setOutputFormat("json");
-        builder.setResultLength(1);
-        builder.setPath("/?addressdetails=1&q=Stuttgart,+Waiblinger+Str.+84&format=json&limit=1");
-        return builder.build();
+    public static ApiTokenAndUrlInformation getEmptyApiToken() {
+        return new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder().build();
     }
 
     public static ApiTokenAndUrlInformation getOSMApiTokenAndUrl() {
@@ -113,13 +104,13 @@ public class ApiTokenAndUrlInformationObjectMother {
         builder.setResultLengthAfterDepartureTime(1);
         builder.setTimeIsDeparture(true);
         builder.setAllowReducedPrice(true);
+        builder.setPath("/bin/mgate.exe?checksum=6d0c117c5a7f98d00582bc4a9be5dad1");
         return builder.build();
     }
 
     private static ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder getHafasStandardTokenAndUrl() {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
         builder.setProtocol("https");
-        builder.setPort(0);
         builder.setLanguage("de");
         builder.setResultLength(1);
         builder.setLocationPath("LocMatch");
@@ -135,145 +126,55 @@ public class ApiTokenAndUrlInformationObjectMother {
         return builder;
     }
 
-    public static ApiTokenAndUrlInformation getSearchChStationTokenAndUrl() {
+    public static ApiTokenAndUrlInformation getSearchChTokenAndUrl() {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
         builder.setProtocol("https");
         builder.setHost("fahrplan.search.ch");
-        builder.setPort(8080);
         builder.setPathVariable("api");
         builder.setLocationPath("completion.json");
+        builder.setJourneyPathVariable("route.json");
         builder.setSearchChTermParameter("term");
         builder.setLocationSearchTerm("lu");
         builder.setSearchChStationId("show_ids=1");
         builder.setSearchChStationCoordinateParameter("show_coordinates=1");
-        builder.setPath("/api/completion.json?term=lu");
-        return builder.build();
-    }
-
-    public static ApiTokenAndUrlInformation getSearchChStationTokenAndUrlIT() {
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder.setProtocol("https");
-        builder.setHost("fahrplan.search.ch");
-        builder.setPort(0);
-        builder.setPathVariable("api");
-        builder.setLocationPath("completion.json");
-        builder.setSearchChTermParameter("term");
-        builder.setLocationSearchTerm("lu");
-        builder.setSearchChStationId("show_ids");
-        builder.setSearchChStationCoordinateParameter("show_coordinates");
-        builder.setPath("/api/completion.json?term=lu");
-        return builder.build();
-    }
-
-    public static ApiTokenAndUrlInformation getSearchChRouteTokenAndUrl() {
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder.setProtocol("https");
-        builder.setHost("fahrplan.search.ch");
-        builder.setPort(8080);
-        builder.setPathVariable("api");
-        builder.setSearchChRoutePathVariable("route.json");
-        builder.setDeparture("from");
-        builder.setStartLocation("8503283");
-        builder.setArrival("to");
-        builder.setDestinationLocation("Zürich,+Förrlibuckstr.+60");
         builder.setDatePathVariable("date");
+        builder.setDeparture("8503283");
+        builder.setArrival("Zürich,+Förrlibuckstr.+60");
+        builder.setTimePathVariable("time");
+        builder.setSearchChDelayParameter("show_delays=1");
+        builder.setSearchChResults("num=1");
         try {
             builder.setDepartureDate(new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss").parse("2019-11-04-14-00-00"));
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        builder.setTimePathVariable("time");
-        builder.setSearchChDelayParameter("show_delays=1");
-        builder.setSearchChResults("num=1");
-        builder.setPath("/api/route.json?from=8503283&to=Zürich,+Förrlibuckstr.+60&date=04.11.2019&time=14:00&show_delays=1&num=1");
         return builder.build();
     }
 
-    public static ApiTokenAndUrlInformation getSearchChRouteTokenAndUrlIT() {
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder.setProtocol("https");
-        builder.setHost("fahrplan.search.ch");
-        builder.setPort(0);
-        builder.setPathVariable("api");
-        builder.setSearchChRoutePathVariable("route.json");
-        builder.setDeparture("from");
-        builder.setStartLocation("8503283");
-        builder.setArrival("to");
-        builder.setDestinationLocation("Zürich,+Förrlibuckstr.+60");
-        builder.setDatePathVariable("date");
-        try {
-            builder.setDepartureDate(new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss").parse("2019-11-04-14-00-00"));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        builder.setTimePathVariable("time");
-        builder.setSearchChDelayParameter("show_delays=1");
-        builder.setSearchChResults("num=1");
-        builder.setPath("/api/route.json?from=8503283&to=Zürich,+Förrlibuckstr.+60&date=04.11.2019&time=14:00&show_delays=1&num=1");
-        return builder.build();
-    }
-
-    public static ApiTokenAndUrlInformation getHvvStationListTokenAndUrl() {
+    public static ApiTokenAndUrlInformation getHvvTokenAndUrl() {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
 
         builder.setProtocol("http");
         builder.setHost("api-test.geofox.de");
         builder.setPathVariable("gti/public");
+        builder.setTravelPointPathVariable("/checkName");
         builder.setStationListPathVariable("/listStations");
-        builder.setAuthentificationType("HmacSHA1");
-        builder.setAuthentificationUser("janhendrikhausner");
-        builder.setAuthentificationPassword("R!7aP2YUK3yD");
-        builder.setApiVersion("37.3");
-        builder.setLanguage("de");
-        builder.setPath("/gti/public/listStations");
-        builder.setHvvAllowTypeSwitch(true);
-        builder.setAllowTariffDetails(true);
-        builder.setHvvFilterEquivalent(true);
-
-        return builder.build();
-    }
-
-    public static ApiTokenAndUrlInformation getHvvTravelpointTokenAndUrl() {
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-
-        builder.setProtocol("http");
-        builder.setHost("api-test.geofox.de");
-        builder.setPathVariable("gti/public");
-        builder.setTravelPointPathVariable("/checkName");
-        builder.setAuthentificationType("HmacSHA1");
-        builder.setAuthentificationUser("janhendrikhausner");
-        builder.setAuthentificationPassword("R!7aP2YUK3yD");
-        builder.setApiVersion("37.3");
-        builder.setLanguage("de");
-        builder.setResultLength(1);
-        builder.setDistanceFromTravelPoint(2500);
-        builder.setDeparture("Große Bleichen 25");
-        builder.setPath("/gti/public/checkName");
-        builder.setHvvAllowTypeSwitch(true);
-        builder.setAllowTariffDetails(true);
-
-        return builder.build();
-    }
-
-    public static ApiTokenAndUrlInformation getHvvJourneyTokenAndUrl() {
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-
-        builder.setProtocol("http");
-        builder.setHost("api-test.geofox.de");
-        builder.setPathVariable("gti/public");
         builder.setJourneyPathVariable("/getRoute");
-        builder.setTravelPointPathVariable("/checkName");
         builder.setAuthentificationType("HmacSHA1");
         builder.setAuthentificationUser("janhendrikhausner");
         builder.setAuthentificationPassword("R!7aP2YUK3yD");
         builder.setApiVersion("37.3");
         builder.setLanguage("de");
-        builder.setPath("/gti/public/getRoute");
         builder.setResultLength(1);
         builder.setDistanceFromTravelPoint(2500);
         builder.setDeparture("Ahrensburg");
         builder.setArrival("Stadthausbrücke");
+        builder.setPath("/gti/public/checkName");
+        builder.setHvvAllowTypeSwitch(true);
         builder.setAllowTariffDetails(true);
+        builder.setHvvFilterEquivalent(true);
+        builder.setResultLength(1);
+        builder.setDistanceFromTravelPoint(2500);
         builder.setHvvAllowTypeSwitch(true);
         try {
             builder.setDepartureDate(generateDateFromPatternAndString("dd.MM.yyyy HH:mm", "31.01.2020 13:10"));
@@ -285,6 +186,8 @@ public class ApiTokenAndUrlInformationObjectMother {
         builder.setTariff("all");
         builder.setTimeIsDeparture(true);
         builder.setAllowReducedPrice(true);
+        builder.setPath("/gti/public/getRoute");
+
         return builder.build();
     }
 
@@ -323,143 +226,27 @@ public class ApiTokenAndUrlInformationObjectMother {
         return builder.build();
     }
 
-    public static ApiTokenAndUrlInformation getBahnRailwayStationTokenAndUrl() {
+    public static ApiTokenAndUrlInformation getBahnTokenAndUrl() {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
         builder.setProtocol("https");
         builder.setHost("api.deutschebahn.com");
-        builder.setPort(8080);
         builder.setApiVersion("v1");
         builder.setPathVariable("fahrplan-plus");
         builder.setGermanRailLocationPath("location");
-        builder.setBahnLocation("Berlin");
-        builder.setAuthorizationKey("Authorization");
-        builder.setAuthorization("Bearer 4d3c7b35a42c7ecadeb41b905e0007f8");
-        builder.setPath("/fahrplan-plus/v1/location/Berlin");
-        return builder.build();
-    }
-
-    public static ApiTokenAndUrlInformation getBahnRailwayStationTokenAndUrlIT() {
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder.setProtocol("https");
-        builder.setHost("api.deutschebahn.com");
-        builder.setApiVersion("v1");
-        builder.setPort(0);
-        builder.setPathVariable("fahrplan-plus");
-        builder.setGermanRailLocationPath("location");
-        builder.setBahnLocation("Berlin");
-        builder.setAuthorizationKey("Authorization");
-        builder.setAuthorization("Bearer 4d3c7b35a42c7ecadeb41b905e0007f8");
-        builder.setPath("/fahrplan-plus/v1/location/Berlin");
-        return builder.build();
-    }
-
-    public static ApiTokenAndUrlInformation getBahnArrivalBoardTokenAndUrl() {
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder.setProtocol("https");
-        builder.setHost("api.deutschebahn.com");
-        builder.setPathVariable("fahrplan-plus");
-        builder.setApiVersion("v1");
         builder.setGermanRailArrivalBoardPath("arrivalBoard");
         builder.setStationId("8011160");
         try {
             builder.setGermanRailDatePathVariable(new SimpleDateFormat("yyyy-MM-dd").parse("2019-07-25"));
-        } catch (ParseException e) {
-            e.printStackTrace();
+            builder.setDepartureDate(new SimpleDateFormat("yyyy-MM-dd").parse("2019-07-25"));
+        } catch (ParseException ignored) {
         }
-        builder.setPort(8080);
-        builder.setAuthorizationKey("Authorization");
-        builder.setAuthorization("Bearer 4d3c7b35a42c7ecadeb41b905e0007f8");
-        builder.setPath("/fahrplan-plus/v1/arrivalBoard/8011160?date=2019-07-25");
-        return builder.build();
-    }
-
-    public static ApiTokenAndUrlInformation getBahnArrivalBoardTokenAndUrlIT() {
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder.setProtocol("https");
-        builder.setHost("api.deutschebahn.com");
-        builder.setPathVariable("fahrplan-plus");
-        builder.setApiVersion("v1");
-        builder.setGermanRailArrivalBoardPath("arrivalBoard");
-        builder.setStationId("8011160");
-        try {
-            builder.setGermanRailDatePathVariable(new SimpleDateFormat("yyyy-MM-dd").parse("2019-07-25"));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        builder.setPort(0);
-        builder.setAuthorizationKey("Authorization");
-        builder.setAuthorization("Bearer 4d3c7b35a42c7ecadeb41b905e0007f8");
-        builder.setPath("/fahrplan-plus/v1/arrivalBoard/8011160?date=2019-07-25");
-        return builder.build();
-    }
-
-    public static ApiTokenAndUrlInformation getBahnDepartureBoardTokenAndUrl() {
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder.setProtocol("https");
-        builder.setHost("api.deutschebahn.com");
-        builder.setPathVariable("fahrplan-plus");
-        builder.setApiVersion("v1");
         builder.setGermanRailDepartureBoardPath("departureBoard");
         builder.setStationId("8011160");
-        try {
-            builder.setDepartureDate(new SimpleDateFormat("yyyy-MM-dd").parse("2019-07-25"));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        builder.setPort(8080);
-        builder.setAuthorizationKey("Authorization");
-        builder.setAuthorization("Bearer 4d3c7b35a42c7ecadeb41b905e0007f8");
-        builder.setPath("/fahrplan-plus/v1/departureBoard/8011160?date=2019-07-25");
-        return builder.build();
-    }
-
-    public static ApiTokenAndUrlInformation getBahnDepartureBoardTokenAndUrlIT() {
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder.setProtocol("https");
-        builder.setHost("api.deutschebahn.com");
-        builder.setPathVariable("fahrplan-plus");
-        builder.setApiVersion("v1");
-        builder.setGermanRailDepartureBoardPath("departureBoard");
-        builder.setStationId("8011160");
-        try {
-            builder.setDepartureDate(new SimpleDateFormat("yyyy-MM-dd").parse("2019-07-25"));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        builder.setPort(0);
-        builder.setAuthorizationKey("Authorization");
-        builder.setAuthorization("Bearer 4d3c7b35a42c7ecadeb41b905e0007f8");
-        builder.setPath("/fahrplan-plus/v1/departureBoard/8011160?date=2019-07-25");
-        return builder.build();
-    }
-
-    public static ApiTokenAndUrlInformation getBahnJourneyDetailsTokenAndUrl() {
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder.setProtocol("https");
-        builder.setHost("api.deutschebahn.com");
-        builder.setPathVariable("fahrplan-plus");
-        builder.setApiVersion("v1");
+        builder.setLocationPath("location");
         builder.setGermanRailJourneyDeatilsPath("journeyDetails");
         builder.setJourneyDetailsId("715770%2F254084%2F898562%2F210691%2F80%3fstation_evaId%3D8000312");
-        builder.setPort(8080);
         builder.setAuthorizationKey("Authorization");
         builder.setAuthorization("Bearer 4d3c7b35a42c7ecadeb41b905e0007f8");
-        builder.setPath("/fahrplan-plus/v1/journeyDetails/715770%252F254084%252F898562%252F210691%252F80%253fstation_evaId%253D8000312");
-        return builder.build();
-    }
-
-    public static ApiTokenAndUrlInformation getBahnJourneyDetailsTokenAndUrlIT() {
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder.setProtocol("https");
-        builder.setHost("api.deutschebahn.com");
-        builder.setPathVariable("fahrplan-plus");
-        builder.setApiVersion("v1");
-        builder.setGermanRailJourneyDeatilsPath("journeyDetails");
-        builder.setJourneyDetailsId("715770%2F254084%2F898562%2F210691%2F80%3fstation_evaId%3D8000312");
-        builder.setPort(0);
-        builder.setAuthorizationKey("Authorization");
-        builder.setAuthorization("Bearer 4d3c7b35a42c7ecadeb41b905e0007f8");
-        builder.setPath("/fahrplan-plus/v1/journeyDetails/715770%252F254084%252F898562%252F210691%252F80%253fstation_evaId%253D8000312");
         return builder.build();
     }
 
@@ -467,9 +254,9 @@ public class ApiTokenAndUrlInformationObjectMother {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
         builder.setProtocol("https");
         builder.setHost("api.lufthansa.com");
-        builder.setPort(8080);
         builder.setApiVersion("v1");
-        builder.setPathVariable("operations/schedules");
+        builder.setPathVariable("oauth/token");
+        builder.setJourneyPathVariable("operations/schedules");
         builder.setDeparture("ZRH");
         builder.setArrival("FRA");
         try {
@@ -478,6 +265,13 @@ public class ApiTokenAndUrlInformationObjectMother {
         } catch (ParseException e) {
             log.error("Error While parsing Date", e);
         }
+        builder.setXOriginationIp("88.66.47.47");
+        builder.setXOriginationIpKey("X-Originating-IP");
+        builder.setClientId("v6tqqk92k2a6zzaharpz56x6");
+        builder.setClientSecret("c9kUKEuT3k");
+        builder.setClientType("client_credentials");
+        builder.setAuthorization("fhfdds7fskppmt6xn2z423a9");
+        builder.setPath("/v1/operations/schedules/ZRH/FRA/2019-12-28");
         builder.setAuthorizationKey("Authorization");
         builder.setXOriginationIp("88.66.47.47");
         builder.setXOriginationIpKey("X-Originating-IP");
@@ -485,29 +279,6 @@ public class ApiTokenAndUrlInformationObjectMother {
         builder.setPath("/v1/operations/schedules/ZRH/FRA/2019-12-28");
         return builder.build();
     }
-
-    public static ApiTokenAndUrlInformation getLufthansaTokenAndUrlIT() {
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder.setProtocol("https");
-        builder.setHost("api.lufthansa.com");
-        builder.setApiVersion("v1");
-        builder.setPathVariable("operations/schedules");
-        builder.setDeparture("ZRH");
-        builder.setArrival("FRA");
-        try {
-            builder.setDepartureDate(new SimpleDateFormat("yyyy-MM-dd").parse("2020-05-28"));
-            builder.setArrivalDate(new SimpleDateFormat("yyyy-MM-dd").parse("2020-05-28"));
-        } catch (ParseException e) {
-            log.error("Error While parsing Date", e);
-        }
-        builder.setAuthorizationKey("Authorization");
-        builder.setXOriginationIp("88.66.47.47");
-        builder.setXOriginationIpKey("X-Originating-IP");
-        builder.setAuthorization("Bearer j4zud4dsm9dzaq8r3bked9s4");
-        builder.setPath("/v1/operations/schedules/ZRH/FRA/2020-05-28");
-        return builder.build();
-    }
-
 
     public static ApiTokenAndUrlInformation getHazelcastTokenAndUrl() {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
@@ -527,7 +298,6 @@ public class ApiTokenAndUrlInformationObjectMother {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
         builder.setProtocol("https");
         builder.setHost("api.ba.com");
-        builder.setPort(8080);
         builder.setApiVersion("rest-v1/v1");
         builder.setPathVariable("flights");
         builder.setDeparture("lhr");
@@ -540,54 +310,11 @@ public class ApiTokenAndUrlInformationObjectMother {
         }
         builder.setAuthorizationKey("client-key");
         builder.setAuthorization("64x9epryst4b4g2aaks4b3yn");
-        builder.setPath("/rest-v1/v1/flights;departureLocation=lhr;arrivalLocation=txl;scheduledDepartureDate=2019-10-20");
-        return builder.build();
-    }
-
-    public static ApiTokenAndUrlInformation getBritishAirwaysTokenAndUrlIT() {
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder.setProtocol("https");
-        builder.setHost("api.ba.com");
-        builder.setApiVersion("rest-v1/v1");
-        builder.setPathVariable("flights");
-        builder.setDeparture("lhr");
-        builder.setArrival("txl");
-        try {
-            builder.setDepartureDate(new SimpleDateFormat("yyyy-MM-dd").parse("2019-10-20"));
-            builder.setArrivalDate(new SimpleDateFormat("yyyy-MM-dd").parse("2019-10-20"));
-        } catch (ParseException e) {
-            log.info("unable to parse british airways token: " + e);
-        }
-        builder.setAuthorizationKey("client-key");
-        builder.setAuthorization("64x9epryst4b4g2aaks4b3yn");
-        builder.setPath("/rest-v1/v1/flights;departureLocation=lhr;arrivalLocation=txl;scheduledDepartureDate=2019-10-20");
+        builder.setPath("/rest-v1/v1/flights;departureLocation=lhr;arrivalLocation=txl;scheduledDepartureDate=2020-10-20");
         return builder.build();
     }
 
     public static ApiTokenAndUrlInformation getBbcTokenAndUrl() {
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder.setProtocol("https");
-        builder.setHost("public-api.blablacar.com");
-        builder.setPort(8080);
-        builder.setApiVersion("api/v2");
-        builder.setPathVariable("trips?");
-        builder.setDeparture("ZRH");
-        builder.setArrival("FRA");
-        try {
-            builder.setDepartureDate(new SimpleDateFormat("yyyy-MM-dd").parse("2019-12-28"));
-            builder.setArrivalDate(new SimpleDateFormat("yyyy-MM-dd").parse("2019-12-28"));
-        } catch (ParseException e) {
-            log.info("unable to parse bbc token: " + e);
-        }
-        builder.setAuthorizationKey("key"); //FRAGE!
-        builder.setXOriginationIp("88.66.47.47");
-        builder.setXOriginationIpKey("X-Originating-IP");
-        builder.setAuthorization("7f529ec36ab542b78e63f5270a621837");
-        builder.setPath("/api/v2/trips");
-        return builder.build();
-    }
-
-    public static ApiTokenAndUrlInformation getBbcTokenAndUrlIT() {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
         builder.setProtocol("https");
         builder.setHost("public-api.blablacar.com");
@@ -605,42 +332,19 @@ public class ApiTokenAndUrlInformationObjectMother {
         builder.setXOriginationIp("88.66.47.47");
         builder.setXOriginationIpKey("X-Originating-IP");
         builder.setAuthorization("7f529ec36ab542b78e63f5270a621837");
-        builder.setPath("/api/v2/trips");
+        builder.setPath("/api/v2/trips?fn=ZRH&tn=FRA&db=2019-10-20\"");
         return builder.build();
     }
 
     public static ApiTokenAndUrlInformation getAirportsFinderTokenAndUrl() {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-
         builder.setProtocol("https");
         builder.setHost("cometari-airportsfinder-v1.p.rapidapi.com");
-        builder.setPort(8080);
         builder.setPathVariable("api/airports/by-radius");
-        Coordinates.CoordinatesBuilder departureCoordinates = new Coordinates.CoordinatesBuilder();
-        departureCoordinates.setLatitude(48.1301564);
-        departureCoordinates.setLongitude(8.2324351);
-        builder.setDepartureCoordinates(departureCoordinates.build());
-
+        builder.setDepartureCoordinates(new Coordinates.CoordinatesBuilder(48.1301564, 8.2324351).build());
         builder.setAuthorizationKey("x-rapidapi-key");
         builder.setAuthorization("b441403e78mshfe074d6ec0c2af2p1be89cjsn04932ccb889e");
         builder.setPath("/api/airports/by-radius;radius=300;lng=8.2324351;lat=48.1301564");
-        return builder.build();
-    }
-
-    public static ApiTokenAndUrlInformation getAirportsFinderTokenAndUrlIT() {
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-
-        builder.setProtocol("https");
-        builder.setHost("cometari-airportsfinder-v1.p.rapidapi.com");
-        builder.setPathVariable("api/airports/by-radius");
-        Coordinates.CoordinatesBuilder departureCoordinates = new Coordinates.CoordinatesBuilder();
-        departureCoordinates.setLatitude(48.1301564);
-        departureCoordinates.setLongitude(8.2324351);
-        builder.setDepartureCoordinates(departureCoordinates.build());
-
-        builder.setAuthorizationKey("x-rapidapi-key");
-        builder.setAuthorization("b441403e78mshfe074d6ec0c2af2p1be89cjsn04932ccb889e");
-        builder.setPath("/api/airports/by-radius?radius=300&lng=8.2324351&lat=48.1301564");
         return builder.build();
     }
 }

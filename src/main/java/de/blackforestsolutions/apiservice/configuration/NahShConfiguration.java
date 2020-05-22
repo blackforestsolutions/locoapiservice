@@ -9,7 +9,8 @@ import org.springframework.context.annotation.Bean;
 @SpringBootConfiguration
 public class NahShConfiguration {
 
-    private final ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder hafasStandardConfiguration;
+    private final ApiTokenAndUrlInformation hafasStandardConfiguration;
+
     @Value("${hafasNahShHost}")
     private String hafasNahShHost;
     @Value("${hafasNahShClientId}")
@@ -28,20 +29,21 @@ public class NahShConfiguration {
     private boolean hafasNahShTimeIsDeparture;
 
     @Autowired
-    public NahShConfiguration(ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder hafasStandardConfiguration) {
+    public NahShConfiguration(ApiTokenAndUrlInformation hafasStandardConfiguration) {
         this.hafasStandardConfiguration = hafasStandardConfiguration;
     }
 
     @Bean(name = "nahShApiTokenAndUrlInformation")
     public ApiTokenAndUrlInformation apiTokenAndUrlInformation() {
-        hafasStandardConfiguration.setHost(hafasNahShHost);
-        hafasStandardConfiguration.setClientId(hafasNahShClientId);
-        hafasStandardConfiguration.setClientVersion(hafasNahShClientVersion);
-        hafasStandardConfiguration.setClientName(hafasNahShClientName);
-        hafasStandardConfiguration.setAuthorization(hafasNahShAuthorization);
-        hafasStandardConfiguration.setHafasProductionValue(hafasNahShProductionValue);
-        hafasStandardConfiguration.setResultLengthAfterDepartureTime(hafasNahShResultsAfterDepartureTime);
-        hafasStandardConfiguration.setTimeIsDeparture(hafasNahShTimeIsDeparture);
-        return hafasStandardConfiguration.build();
+        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(hafasStandardConfiguration);
+        builder.setHost(hafasNahShHost);
+        builder.setClientId(hafasNahShClientId);
+        builder.setClientVersion(hafasNahShClientVersion);
+        builder.setClientName(hafasNahShClientName);
+        builder.setAuthorization(hafasNahShAuthorization);
+        builder.setHafasProductionValue(hafasNahShProductionValue);
+        builder.setResultLengthAfterDepartureTime(hafasNahShResultsAfterDepartureTime);
+        builder.setTimeIsDeparture(hafasNahShTimeIsDeparture);
+        return builder.build();
     }
 }

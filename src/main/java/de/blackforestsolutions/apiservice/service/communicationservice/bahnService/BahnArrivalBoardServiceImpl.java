@@ -2,7 +2,7 @@ package de.blackforestsolutions.apiservice.service.communicationservice.bahnServ
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.BahnCallService;
+import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallService;
 import de.blackforestsolutions.apiservice.service.supportservice.BahnHttpCallBuilderService;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import de.blackforestsolutions.generatedcontent.bahn.ArrivalBoard;
@@ -16,21 +16,23 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.buildUrlWith;
+
 @Service
 public class BahnArrivalBoardServiceImpl implements BahnArrivalBoardService {
 
-    private final BahnCallService bahnCallService;
+    private final CallService callService;
     private final BahnHttpCallBuilderService bahnArrivalBoardHttpCallBuilderService;
 
     @Autowired
-    public BahnArrivalBoardServiceImpl(BahnCallService bahnCallService, BahnHttpCallBuilderService bahnArrivalBoardHttpCallBuilderService) {
-        this.bahnCallService = bahnCallService;
+    public BahnArrivalBoardServiceImpl(CallService callService, BahnHttpCallBuilderService bahnArrivalBoardHttpCallBuilderService) {
+        this.callService = callService;
         this.bahnArrivalBoardHttpCallBuilderService = bahnArrivalBoardHttpCallBuilderService;
     }
 
     public Map<String, ArrivalBoard> getArrivalBoardForRouteFromApiWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) throws Exception {
         String url = getBahnArrivalBoardRequestString(apiTokenAndUrlInformation);
-        ResponseEntity<String> result = bahnCallService.getRequestAnswer(url, bahnArrivalBoardHttpCallBuilderService.buildHttpEntityForBahn(apiTokenAndUrlInformation));
+        ResponseEntity<String> result = callService.get(url, bahnArrivalBoardHttpCallBuilderService.buildHttpEntityForBahn(apiTokenAndUrlInformation));
         return map(result.getBody());
     }
 
@@ -44,7 +46,7 @@ public class BahnArrivalBoardServiceImpl implements BahnArrivalBoardService {
         builder.setStationId(apiTokenAndUrlInformation.getStationId());
         builder.setGermanRailDatePathVariable(apiTokenAndUrlInformation.getGermanRailDatePathVariable());
         builder.setPath(bahnArrivalBoardHttpCallBuilderService.buildBahnArrivalBoardPathWith(builder.build()));
-        URL requestUrl = bahnArrivalBoardHttpCallBuilderService.buildBahnUrlWith(builder.build());
+        URL requestUrl = buildUrlWith(builder.build());
         return requestUrl.toString();
     }
 

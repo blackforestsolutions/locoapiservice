@@ -2,6 +2,7 @@ package de.blackforestsolutions.apiservice.controller;
 
 import de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother;
 import de.blackforestsolutions.apiservice.service.communicationservice.AirportsFinderApiService;
+
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -25,7 +26,7 @@ public class NearestStationFinderControllerTest {
 
     private NearestStationFinderController initClassUnderTest() {
         NearestStationFinderController classUnderTest = new NearestStationFinderController(airportsFinderApiService);
-        classUnderTest.setAirportsFinderApiTokenAndUrlInformation(ApiTokenAndUrlInformationObjectMother.getAirportsFinderTokenAndUrlIT());
+        classUnderTest.setAirportsFinderApiTokenAndUrlInformation(ApiTokenAndUrlInformationObjectMother.getAirportsFinderTokenAndUrl());
         return classUnderTest;
     }
 

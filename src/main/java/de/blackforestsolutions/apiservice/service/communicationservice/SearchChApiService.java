@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.UUID;
 
 public interface SearchChApiService {
-    Map<String, TravelPoint> getTravelPointForRouteFromApiWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) throws IOException;
+    Map<String, TravelPoint> getTravelPointForRouteFromApiWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation, String station) throws IOException;
 
-    Map<UUID, JourneyStatus> getJourneysForRouteWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation);
+    Map<UUID, JourneyStatus> getJourneysForRouteWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) throws IOException;
 }

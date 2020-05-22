@@ -4,14 +4,11 @@ import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 
-import java.net.URL;
-
 public interface BahnHttpCallBuilderService {
-    URL buildBahnUrlWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation);
 
     String buildBahnArrivalBoardPathWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation);
 
-    String buildBahnRailwayStationPathWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation);
+    String buildBahnRailwayStationPathWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation, String station);
 
     String buildBahnDepartureBoardPathWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation);
 

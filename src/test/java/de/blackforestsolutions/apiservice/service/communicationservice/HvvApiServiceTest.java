@@ -3,8 +3,8 @@ package de.blackforestsolutions.apiservice.service.communicationservice;
 import de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother;
 import de.blackforestsolutions.apiservice.objectmothers.JourneyObjectMother;
 import de.blackforestsolutions.apiservice.objectmothers.TravelPointObjectMother;
-import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.HvvCallService;
-import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.HvvCallServiceImpl;
+import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallService;
+import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallServiceImpl;
 import de.blackforestsolutions.apiservice.service.mapper.HvvMapperService;
 import de.blackforestsolutions.apiservice.service.supportservice.hvv.*;
 import de.blackforestsolutions.apiservice.stubs.RestTemplateBuilderStub;
@@ -32,7 +32,7 @@ class HvvApiServiceTest {
 
     private final RestTemplateBuilder restTemplateBuilder = new RestTemplateBuilderStub(REST_TEMPLATE);
 
-    private final HvvCallService hvvCallService = new HvvCallServiceImpl(restTemplateBuilder);
+    private final CallService callService = new CallServiceImpl(restTemplateBuilder);
 
     private final HvvJourneyHttpCallBuilderService journeyHttpCallBuilder = new HvvJourneyHttpCallBuilderServiceImpl();
 
@@ -45,7 +45,7 @@ class HvvApiServiceTest {
 
     @InjectMocks
     private HvvApiService classUnderTest = new HvvApiServiceImpl(
-            hvvCallService,
+            callService,
             stationListHttpCallBuilder,
             travelPointHttpCallBuilder,
             journeyHttpCallBuilder,
@@ -54,7 +54,7 @@ class HvvApiServiceTest {
 
     @Test
     void test_getJourneysForRouteFromHvvApiWith_with_mocked_rest_and_json_is_excuted_correctly_and_returns_map() throws Exception {
-        ApiTokenAndUrlInformation apiTokenAndUrlInformation = ApiTokenAndUrlInformationObjectMother.getHvvJourneyTokenAndUrl();
+        ApiTokenAndUrlInformation apiTokenAndUrlInformation = ApiTokenAndUrlInformationObjectMother.getHvvTokenAndUrl();
         String rotenhofTravelPointJson = TestUtils.getResourceFileAsString("json/hvvRotenhofTravelPoint.json");
         ResponseEntity<String> rotenhofTravelPointResult = new ResponseEntity<>(rotenhofTravelPointJson, HttpStatus.OK);
         String stadthausbrueckeTravelPointJson = TestUtils.getResourceFileAsString("json/hvvStadthausbrueckeTravelPoint.json");
@@ -80,7 +80,7 @@ class HvvApiServiceTest {
 
     @Test
     void test_getStationListFromHvvApiWith_with_mocked_rest_is_excuted_correctly_and_returns_map() throws Exception {
-        ApiTokenAndUrlInformation apiTokenAndUrlInformation = ApiTokenAndUrlInformationObjectMother.getHvvStationListTokenAndUrl();
+        ApiTokenAndUrlInformation apiTokenAndUrlInformation = ApiTokenAndUrlInformationObjectMother.getHvvTokenAndUrl();
         String stationListJson = TestUtils.getResourceFileAsString("json/hvvStationList.json");
         ResponseEntity<String> testResult = new ResponseEntity<>(stationListJson, HttpStatus.OK);
         //noinspection unchecked

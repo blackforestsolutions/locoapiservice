@@ -4,9 +4,8 @@ import de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformatio
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
-
-import java.net.URL;
 
 class BbcHttpCallBuilderServiceTest {
 
@@ -27,67 +26,16 @@ class BbcHttpCallBuilderServiceTest {
 
         HttpHeaders result = classUnderTest.buildHttpHeadersForBbcWith(apiTokenAndUrlInformation);
 
-        Assertions.assertThat(result.get(apiTokenAndUrlInformation.getAuthorizationKey())).contains(apiTokenAndUrlInformation.getAuthorization());
+        Assertions.assertThat(result.get(apiTokenAndUrlInformation.getAuthorizationKey()).get(0)).isEqualTo(apiTokenAndUrlInformation.getAuthorization());
     }
 
     @Test
-    void test_buildUrlWith_protocol_host_port_path_http_returns_correcturl() {
+    void test_buildHttpEntityForBbc_with_apiToken_returns_correct_httpEntity() {
         ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getBbcTokenAndUrl();
 
-        URL result = classUnderTest.buildUrlWith(testData);
+        HttpEntity<String> result = classUnderTest.buildHttpEntityForBbc(testData);
 
-        Assertions.assertThat(result.getProtocol()).isEqualToIgnoringCase(testData.getProtocol());
-        Assertions.assertThat(result.getHost()).isEqualToIgnoringCase(testData.getHost());
-        Assertions.assertThat(result.getPort()).isEqualTo(testData.getPort());
-        Assertions.assertThat(result.getPath()).isEqualToIgnoringCase(testData.getPath());
-    }
-
-    @Test
-    void test_buildUrlWith_protocol_host_port_path_https_returns_correcturl() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getBbcTokenAndUrl();
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder = builder.buildFrom(testData);
-        builder.setProtocol("https");
-        testData = builder.build();
-
-        URL result = classUnderTest.buildUrlWith(testData);
-
-        Assertions.assertThat(result.getProtocol()).isEqualToIgnoringCase(testData.getProtocol());
-        Assertions.assertThat(result.getHost()).isEqualToIgnoringCase(testData.getHost());
-        Assertions.assertThat(result.getPort()).isEqualTo(testData.getPort());
-        Assertions.assertThat(result.getPath()).isEqualToIgnoringCase(testData.getPath());
-    }
-
-    @Test
-    void test_buildUrlWith_protocol_host_path_http_returns_correcturl() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getBbcTokenAndUrl();
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder = builder.buildFrom(testData);
-        builder.setPort(-1);
-        testData = builder.build();
-
-        URL result = classUnderTest.buildUrlWith(testData);
-
-        Assertions.assertThat(result.getProtocol()).isEqualToIgnoringCase(testData.getProtocol());
-        Assertions.assertThat(result.getHost()).isEqualToIgnoringCase(testData.getHost());
-        Assertions.assertThat(result.getPort()).isEqualTo(testData.getPort());
-        Assertions.assertThat(result.getPath()).isEqualToIgnoringCase(testData.getPath());
-    }
-
-    @Test
-    void test_buildUrlWith_protocol_host_path_correct_params_https_returns_correcturl() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getBbcTokenAndUrl();
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder = builder.buildFrom(testData);
-        builder.setProtocol("https");
-        builder.setPort(-1);
-        testData = builder.build();
-
-        URL result = classUnderTest.buildUrlWith(testData);
-
-        Assertions.assertThat(result.getProtocol()).isEqualToIgnoringCase(testData.getProtocol());
-        Assertions.assertThat(result.getHost()).isEqualToIgnoringCase(testData.getHost());
-        Assertions.assertThat(result.getPort()).isEqualTo(testData.getPort());
-        Assertions.assertThat(result.getPath()).isEqualToIgnoringCase(testData.getPath());
+        Assertions.assertThat(result.getHeaders()).containsKeys(testData.getAuthorizationKey());
+        Assertions.assertThat(result.hasBody()).isFalse();
     }
 }

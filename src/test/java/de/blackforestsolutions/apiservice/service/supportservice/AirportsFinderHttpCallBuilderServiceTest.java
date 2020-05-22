@@ -5,16 +5,14 @@ import de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformatio
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 
-import java.io.UncheckedIOException;
-import java.net.URL;
-
-public class AirportsFinderHttpCallBuilderServiceTest {
+class AirportsFinderHttpCallBuilderServiceTest {
     private final AirportsFinderHttpCallBuilderService classUnderTest = new AirportsFinderHttpCallBuilderServiceImpl();
 
     @Test
-    public void test_buildPathWith_apiVersion_pathvariable_departure_arrival_departureDate_returns_valid_path_string() {
+    void test_buildPathWith_apiVersion_pathvariable_departure_arrival_departureDate_returns_valid_path_string() {
         ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getAirportsFinderTokenAndUrl();
 
         String result = classUnderTest.buildPathWith(testData);
@@ -23,104 +21,25 @@ public class AirportsFinderHttpCallBuilderServiceTest {
     }
 
     @Test
-    public void test_buildHttpHeadersForAirportsFinderWith_AirportsFinderTokenAndUrlInfo_returns_correct_header() {
+    void test_buildHttpHeadersForAirportsFinderWith_AirportsFinderTokenAndUrlInfo_returns_correct_header() {
         ApiTokenAndUrlInformation apiTokenAndUrlInformation = ApiTokenAndUrlInformationObjectMother.getAirportsFinderTokenAndUrl();
 
         HttpHeaders result = classUnderTest.buildHttpHeaderForAirportsFinderWith(apiTokenAndUrlInformation);
         Assertions.assertThat(result.get(apiTokenAndUrlInformation.getAuthorizationKey())).contains(apiTokenAndUrlInformation.getAuthorization());
     }
 
-
     @Test
-    public void test_buildUrlWith_protocol_host_port_path_http_returns_correctUrl() {
+    void test_buildHttpEntityAirportsFinder_with_apiToken_returns_correct_httpEntity() {
         ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getAirportsFinderTokenAndUrl();
 
-        URL result = classUnderTest.buildUrlWith(testData);
+        HttpEntity<String> result = classUnderTest.buildHttpEntityAirportsFinder(testData);
 
-        Assertions.assertThat(result.getProtocol()).isEqualToIgnoringCase(testData.getProtocol());
-        Assertions.assertThat(result.getHost()).isEqualToIgnoringCase(testData.getHost());
-        Assertions.assertThat(result.getPort()).isEqualTo(testData.getPort());
-        Assertions.assertThat(result.getPath()).isEqualToIgnoringCase(testData.getPath());
+        Assertions.assertThat(result.getHeaders()).containsKeys(testData.getAuthorizationKey());
+        Assertions.assertThat(result.hasBody()).isFalse();
     }
 
     @Test
-    public void test_buildUrlWith_protocol_host_port_path_https_returns_correctUrl() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getAirportsFinderTokenAndUrl();
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder = builder.buildFrom(testData);
-        builder.setProtocol("https");
-        testData = builder.build();
-
-        URL result = classUnderTest.buildUrlWith(testData);
-
-        Assertions.assertThat(result.getProtocol()).isEqualToIgnoringCase(testData.getProtocol());
-        Assertions.assertThat(result.getHost()).isEqualToIgnoringCase(testData.getHost());
-        Assertions.assertThat(result.getPort()).isEqualTo(testData.getPort());
-        Assertions.assertThat(result.getPath()).isEqualToIgnoringCase(testData.getPath());
-    }
-
-
-    @Test
-    public void test_buildUrlWith_wrong_protocol_host_port_path_throws_MalformedURLException() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getAirportsFinderTokenAndUrl();
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder = builder.buildFrom(testData);
-        builder.setProtocol("wrong");
-        testData = builder.build();
-
-        ApiTokenAndUrlInformation finalTestData = testData;
-        org.junit.jupiter.api.Assertions.assertThrows(UncheckedIOException.class, () -> classUnderTest.buildUrlWith(finalTestData));
-    }
-
-    @Test
-    public void test_buildUrlWith_protocol_host_path_http_returns_correctUrl() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getAirportsFinderTokenAndUrl();
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder = builder.buildFrom(testData);
-        builder.setPort(-1);
-        testData = builder.build();
-
-        URL result = classUnderTest.buildUrlWith(testData);
-
-        Assertions.assertThat(result.getProtocol()).isEqualToIgnoringCase(testData.getProtocol());
-        Assertions.assertThat(result.getHost()).isEqualToIgnoringCase(testData.getHost());
-        Assertions.assertThat(result.getPort()).isEqualTo(testData.getPort());
-        Assertions.assertThat(result.getPath()).isEqualToIgnoringCase(testData.getPath());
-    }
-
-    @Test
-    public void test_buildUrlWith_protocol_host_path_correct_params_https_returns_correctUrl() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getAirportsFinderTokenAndUrl();
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder = builder.buildFrom(testData);
-        builder.setProtocol("https");
-        builder.setPort(-1);
-        testData = builder.build();
-
-        URL result = classUnderTest.buildUrlWith(testData);
-
-        Assertions.assertThat(result.getProtocol()).isEqualToIgnoringCase(testData.getProtocol());
-        Assertions.assertThat(result.getHost()).isEqualToIgnoringCase(testData.getHost());
-        Assertions.assertThat(result.getPort()).isEqualTo(testData.getPort());
-        Assertions.assertThat(result.getPath()).isEqualToIgnoringCase(testData.getPath());
-    }
-
-    @Test
-    public void test_buildUrlWith_wrong_protocol_host_path_throws_MalformedURLException() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getAirportsFinderTokenAndUrl();
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder = builder.buildFrom(testData);
-        builder.setProtocol("wrong");
-        builder.setPort(-1);
-        testData = builder.build();
-
-        ApiTokenAndUrlInformation finalTestData = testData;
-        org.junit.jupiter.api.Assertions.assertThrows(UncheckedIOException.class, () -> classUnderTest.buildUrlWith(finalTestData));
-    }
-
-
-    @Test
-    public void test_buildPathWith_apiVersion_pathVariable_as_null_departure_arrival_departureDate_throws_NullPointerException() {
+    void test_buildPathWith_apiVersion_pathVariable_as_null_departure_arrival_departureDate_throws_NullPointerException() {
         ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getAirportsFinderTokenAndUrl();
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
         builder = builder.buildFrom(testData);
@@ -132,7 +51,7 @@ public class AirportsFinderHttpCallBuilderServiceTest {
     }
 
     @Test
-    public void test_buildPathWith_everything_returns_correct_path() {
+    void test_buildPathWith_everything_returns_correct_path() {
         ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getAirportsFinderTokenAndUrl();
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
 

@@ -1,6 +1,6 @@
 package de.blackforestsolutions.apiservice.service.communicationservice;
 
-import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.BBCCallService;
+import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallService;
 import de.blackforestsolutions.apiservice.service.mapper.BBCMapperService;
 import de.blackforestsolutions.apiservice.service.supportservice.BBCHttpCallBuilderService;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
@@ -11,30 +11,22 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.net.URL;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Map;
 import java.util.UUID;
+
+import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.buildUrlWith;
 
 @Service
 @Slf4j
 public class BBCApiServiceImpl implements BBCApiService {
 
-    private static final String FN = "fn";
-    private static final String QUESTION_MARK = "?";
-    private static final String TN = "tn";
-    private static final String EQUAL = "=";
-    private static final String AND = "&";
-    private static final String DB = "db";
-
-    private final BBCCallService bbcCallService;
+    private final CallService callService;
     private final BBCHttpCallBuilderService bbcHttpCallBuilderService;
     private final BBCMapperService bbcMapperService;
 
     @Autowired
-    public BBCApiServiceImpl(BBCCallService bbcCallService, BBCHttpCallBuilderService bbcHttpCallBuilderService, BBCMapperService bbcMapperService) {
-        this.bbcCallService = bbcCallService;
+    public BBCApiServiceImpl(CallService callService, BBCHttpCallBuilderService bbcHttpCallBuilderService, BBCMapperService bbcMapperService) {
+        this.callService = callService;
         this.bbcHttpCallBuilderService = bbcHttpCallBuilderService;
         this.bbcMapperService = bbcMapperService;
     }
@@ -42,7 +34,7 @@ public class BBCApiServiceImpl implements BBCApiService {
     @Override
     public Map<UUID, JourneyStatus> getJourneysForRouteWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
         String url = getBbcRequestString(apiTokenAndUrlInformation);
-        ResponseEntity<String> result = bbcCallService.getRide(url, bbcHttpCallBuilderService.buildHttpEntityForBbc(apiTokenAndUrlInformation));
+        ResponseEntity<String> result = callService.get(url, bbcHttpCallBuilderService.buildHttpEntityForBbc(apiTokenAndUrlInformation));
         return bbcMapperService.map(result.getBody());
     }
 
@@ -54,18 +46,7 @@ public class BBCApiServiceImpl implements BBCApiService {
         builder.setArrival(apiTokenAndUrlInformation.getArrival());
         builder.setDepartureDate(apiTokenAndUrlInformation.getDepartureDate());
         builder.setPath(bbcHttpCallBuilderService.bbcBuildPathWith(builder.build()));
-        URL requestUrl = bbcHttpCallBuilderService.buildUrlWith(builder.build());
-        return requestUrl.toString().concat(addVariables(apiTokenAndUrlInformation));
-    }
-
-    private String addVariables(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
-        return QUESTION_MARK.concat(FN).concat(EQUAL).concat(apiTokenAndUrlInformation.getDeparture())
-                .concat(AND).concat(TN).concat(EQUAL).concat(apiTokenAndUrlInformation.getArrival())
-                .concat(AND).concat(DB).concat(EQUAL).concat(transformDateToString(apiTokenAndUrlInformation.getDepartureDate()));
-    }
-
-    private String transformDateToString(Date date) {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        return dateFormat.format(date);
+        URL requestUrl = buildUrlWith(builder.build());
+        return requestUrl.toString();
     }
 }

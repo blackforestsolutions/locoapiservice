@@ -3,14 +3,10 @@ package de.blackforestsolutions.apiservice.service.supportservice;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import org.springframework.http.HttpEntity;
 
-import java.net.URL;
-
 public interface RMVHttpCallBuilderService {
 
-    URL buildRMVUrlWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation);
-
     @SuppressWarnings("rawtypes")
-    HttpEntity buildHttpEntityStationForRMV(ApiTokenAndUrlInformation apiTokenAndUrlInformation, String station);
+    HttpEntity buildHttpEntityStationForRMV(ApiTokenAndUrlInformation apiTokenAndUrlInformation);
 
     @SuppressWarnings("rawtypes")
     HttpEntity buildHttpEntityTripForRMV(ApiTokenAndUrlInformation apiTokenAndUrlInformation);

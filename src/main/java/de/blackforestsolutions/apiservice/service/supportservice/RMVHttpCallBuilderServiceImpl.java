@@ -1,26 +1,22 @@
 package de.blackforestsolutions.apiservice.service.supportservice;
 
-import de.blackforestsolutions.apiservice.configuration.AdditionalHttpHeadersConfiguration;
+import de.blackforestsolutions.apiservice.configuration.AdditionalHttpConfiguration;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 
-import java.net.URL;
 import java.util.Objects;
 
-@Service
-public class RMVHttpCallBuilderServiceImpl extends HttpCallBuilder implements RMVHttpCallBuilderService {
+import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.setFormatToJsonFor;
 
-    @Override
-    public URL buildRMVUrlWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
-        return buildUrlWith(apiTokenAndUrlInformation);
-    }
+@Service
+public class RMVHttpCallBuilderServiceImpl implements RMVHttpCallBuilderService {
 
     @SuppressWarnings("rawtypes")
     @Override
-    public HttpEntity buildHttpEntityStationForRMV(ApiTokenAndUrlInformation apiTokenAndUrlInformation, String station) {
-        return new HttpEntity<>(buildHttpHeadersForRMVStationWith(apiTokenAndUrlInformation, station));
+    public HttpEntity buildHttpEntityStationForRMV(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
+        return new HttpEntity<>(buildHttpHeadersForRMVStationWith(apiTokenAndUrlInformation));
     }
 
     @SuppressWarnings("rawtypes")
@@ -32,17 +28,15 @@ public class RMVHttpCallBuilderServiceImpl extends HttpCallBuilder implements RM
     @Override
     public String buildLocationPathWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation, String location) {
         Objects.requireNonNull(apiTokenAndUrlInformation.getLocationPath(), "path is not allowed to be null");
-        Objects.requireNonNull(apiTokenAndUrlInformation.getDeparture(), "departure is not allowed to be null");
-        Objects.requireNonNull(apiTokenAndUrlInformation.getArrival(), "arrival is not allowed to be null");
         Objects.requireNonNull(location, "location is not allowed to be null");
         Objects.requireNonNull(apiTokenAndUrlInformation.getAuthorization(), "location is not allowed to be null");
         return "/"
                 .concat(apiTokenAndUrlInformation.getLocationPath())
-                .concat(AdditionalHttpHeadersConfiguration.INPUT)
+                .concat(AdditionalHttpConfiguration.INPUT)
                 .concat("=")
                 .concat(location)
                 .concat("&")
-                .concat(AdditionalHttpHeadersConfiguration.ACCESS_ID)
+                .concat(AdditionalHttpConfiguration.ACCESS_ID)
                 .concat("=")
                 .concat(apiTokenAndUrlInformation.getAuthorization());
     }
@@ -54,25 +48,21 @@ public class RMVHttpCallBuilderServiceImpl extends HttpCallBuilder implements RM
         Objects.requireNonNull(apiTokenAndUrlInformation.getArrival(), "arrival is not allowed to be null");
         return "/"
                 .concat(apiTokenAndUrlInformation.getGermanRailJourneyDeatilsPath())
-                .concat(AdditionalHttpHeadersConfiguration.ACCESS_ID)
+                .concat(AdditionalHttpConfiguration.ACCESS_ID)
                 .concat("=")
                 .concat(apiTokenAndUrlInformation.getAuthorization())
                 .concat("&")
-                .concat(AdditionalHttpHeadersConfiguration.ORIGIN_ID)
+                .concat(AdditionalHttpConfiguration.ORIGIN_ID)
                 .concat("=")
                 .concat(apiTokenAndUrlInformation.getDeparture())
                 .concat("&")
-                .concat(AdditionalHttpHeadersConfiguration.DEST_ID)
+                .concat(AdditionalHttpConfiguration.DEST_ID)
                 .concat("=")
                 .concat(apiTokenAndUrlInformation.getArrival());
     }
 
     private void setRMVAuthorisationFor(HttpHeaders httpHeaders, ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
-        httpHeaders.add(AdditionalHttpHeadersConfiguration.ACCESS_ID, apiTokenAndUrlInformation.getAuthorization());
-    }
-
-    private void setRMVStationFor(HttpHeaders httpHeaders, String station) {
-        httpHeaders.add(AdditionalHttpHeadersConfiguration.INPUT, station);
+        httpHeaders.add(AdditionalHttpConfiguration.ACCESS_ID, apiTokenAndUrlInformation.getAuthorization());
     }
 
     private HttpHeaders buildHttpHeadersForRMVTripWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
@@ -84,15 +74,14 @@ public class RMVHttpCallBuilderServiceImpl extends HttpCallBuilder implements RM
     }
 
     private void setRMVOriginAndDestFor(HttpHeaders httpHeaders, ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
-        httpHeaders.add(AdditionalHttpHeadersConfiguration.ORIGIN_ID, apiTokenAndUrlInformation.getDeparture());
-        httpHeaders.add(AdditionalHttpHeadersConfiguration.DEST_ID, apiTokenAndUrlInformation.getArrival());
+        httpHeaders.add(AdditionalHttpConfiguration.ORIGIN_ID, apiTokenAndUrlInformation.getDeparture());
+        httpHeaders.add(AdditionalHttpConfiguration.DEST_ID, apiTokenAndUrlInformation.getArrival());
     }
 
-    private HttpHeaders buildHttpHeadersForRMVStationWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation, String station) {
+    private HttpHeaders buildHttpHeadersForRMVStationWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
         HttpHeaders httpHeaders = new HttpHeaders();
         setFormatToJsonFor(httpHeaders);
         setRMVAuthorisationFor(httpHeaders, apiTokenAndUrlInformation);
-        setRMVStationFor(httpHeaders, station);
         return httpHeaders;
     }
 }

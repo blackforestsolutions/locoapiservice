@@ -2,28 +2,29 @@ package de.blackforestsolutions.apiservice.service.supportservice;
 
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import org.springframework.http.HttpEntity;
-
-import java.net.URL;
+import org.springframework.util.MultiValueMap;
 
 public interface LuftHansaHttpCallBuilderService {
 
     /**
-     * This method is to build the Lufthansa URL.
-     *
-     * @param apiTokenAndUrlInformation incoming information from frontend
-     * @return lufthansaUrl
-     */
-    URL buildLuftHansaUrlWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation);
-
-    /**
-     * This method is to build the Lufthansa path string basically without arrival date.
+     * This method is to build the Lufthansa journey path string basically without arrival date.
      *
      * @param apiTokenAndUrlInformation contains all relevant information
      * @return path
      */
-    String buildLuftHansaPathWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation);
+    String buildLufthansaJourneyPathWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation);
+
+    /**
+     * This method is to build the Lufthansa authorization path string.
+     *
+     * @param apiTokenAndUrlInformation contains all relevant information
+     * @return path
+     */
+    String buildLufthansaAuthorizationPathWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation);
 
     @SuppressWarnings("rawtypes")
-    HttpEntity buildHttpEntityForLuftHansa(ApiTokenAndUrlInformation apiTokenAndUrlInformation);
+    HttpEntity<String> buildHttpEntityForLufthansaJourney(ApiTokenAndUrlInformation apiTokenAndUrlInformation);
+
+    HttpEntity<MultiValueMap<String, String>> buildHttpEntityForLufthansaAuthorization(ApiTokenAndUrlInformation apiTokenAndUrlInformation);
 
 }

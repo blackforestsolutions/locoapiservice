@@ -1,15 +1,18 @@
 package de.blackforestsolutions.apiservice.configuration;
 
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.annotation.Resource;
+
 @Configuration
 public class DBConfiguration {
 
-    private final ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder hafasStandardConfiguration;
+    @Resource(name = "hafasStandardConfiguration")
+    private ApiTokenAndUrlInformation hafasStandardConfiguration;
+
     @Value("${hafasDbChecksum}")
     private String hafasDbChecksum;
     @Value("${hafasDbHost}")
@@ -41,28 +44,24 @@ public class DBConfiguration {
     @Value("${hafasDbAllowReduced}")
     private boolean hafasDbAllowReduced;
 
-    @Autowired
-    public DBConfiguration(ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder hafasStandardConfiguration) {
-        this.hafasStandardConfiguration = hafasStandardConfiguration;
-    }
-
     @Bean(name = "dbApiTokenAndUrlInformation")
     public ApiTokenAndUrlInformation apiTokenAndUrlInformation() {
-        hafasStandardConfiguration.setHost(hafasDbHost);
-        hafasStandardConfiguration.setApiName(hafasDbExtension);
-        hafasStandardConfiguration.setChecksum(hafasDbChecksum);
-        hafasStandardConfiguration.setHafasRtMode(hafasDbRtMode);
-        hafasStandardConfiguration.setClientId(hafasDbClientId);
-        hafasStandardConfiguration.setClientVersion(hafasDbClientVersion);
-        hafasStandardConfiguration.setClientName(hafasDbClientName);
-        hafasStandardConfiguration.setClientType(hafasDbClientType);
-        hafasStandardConfiguration.setAuthentificationType(hafasDbAuthorizationType);
-        hafasStandardConfiguration.setAuthorization(hafasDbAuthorization);
-        hafasStandardConfiguration.setAuthorizationKey(hafasDbSalt);
-        hafasStandardConfiguration.setHafasProductionValue(hafasDbProductionValue);
-        hafasStandardConfiguration.setResultLengthAfterDepartureTime(hafasDbResultsAfterDepartureTime);
-        hafasStandardConfiguration.setTimeIsDeparture(hafasDbTimeIsDeparture);
-        hafasStandardConfiguration.setAllowReducedPrice(hafasDbAllowReduced);
-        return hafasStandardConfiguration.build();
+        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(hafasStandardConfiguration);
+        builder.setHost(hafasDbHost);
+        builder.setApiName(hafasDbExtension);
+        builder.setChecksum(hafasDbChecksum);
+        builder.setHafasRtMode(hafasDbRtMode);
+        builder.setClientId(hafasDbClientId);
+        builder.setClientVersion(hafasDbClientVersion);
+        builder.setClientName(hafasDbClientName);
+        builder.setClientType(hafasDbClientType);
+        builder.setAuthentificationType(hafasDbAuthorizationType);
+        builder.setAuthorization(hafasDbAuthorization);
+        builder.setAuthorizationKey(hafasDbSalt);
+        builder.setHafasProductionValue(hafasDbProductionValue);
+        builder.setResultLengthAfterDepartureTime(hafasDbResultsAfterDepartureTime);
+        builder.setTimeIsDeparture(hafasDbTimeIsDeparture);
+        builder.setAllowReducedPrice(hafasDbAllowReduced);
+        return builder.build();
     }
 }

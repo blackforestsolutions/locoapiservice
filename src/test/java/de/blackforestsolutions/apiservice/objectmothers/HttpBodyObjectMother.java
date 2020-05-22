@@ -1,11 +1,14 @@
 package de.blackforestsolutions.apiservice.objectmothers;
 
+import de.blackforestsolutions.apiservice.configuration.AdditionalHttpConfiguration;
 import de.blackforestsolutions.generatedcontent.hafas.request.*;
 import de.blackforestsolutions.generatedcontent.hafas.request.journey.*;
 import de.blackforestsolutions.generatedcontent.hafas.request.locations.HafasRequestLocationBody;
 import de.blackforestsolutions.generatedcontent.hafas.request.locations.Input;
 import de.blackforestsolutions.generatedcontent.hafas.request.locations.Loc;
 import de.blackforestsolutions.generatedcontent.hvv.request.*;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,6 +22,14 @@ import static de.blackforestsolutions.apiservice.objectmothers.TravelPointObject
 public class HttpBodyObjectMother {
 
     private static final int FIRST_INDEX = 0;
+
+    public static MultiValueMap<String, String> getLufthansaAuthorizationBody() {
+        MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
+        body.add(AdditionalHttpConfiguration.CLIENT_ID, "v6tqqk92k2a6zzaharpz56x6");
+        body.add(AdditionalHttpConfiguration.CLIENT_SECRET, "c9kUKEuT3k");
+        body.add(AdditionalHttpConfiguration.GRANT_TYPE, "client_credentials");
+        return body;
+    }
 
     public static HvvStationListBody getStationListHttpBodyObject() {
         HvvStationListBody body = new HvvStationListBody();
@@ -38,7 +49,7 @@ public class HttpBodyObjectMother {
         body.setLanguage("de");
         body.setVersion(37.3);
         body.setFilterType(FilterType.NO_FILTER);
-        body.setTheName(new HvvStation("Große Bleichen 25"));
+        body.setTheName(new HvvStation("Ahrensburg"));
         body.setMaxList(1);
         body.setMaxDistance(2500);
         body.setTariffDetails(true);

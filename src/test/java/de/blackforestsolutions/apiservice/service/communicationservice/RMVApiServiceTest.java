@@ -1,8 +1,8 @@
 package de.blackforestsolutions.apiservice.service.communicationservice;
 
 import de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother;
-import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.RMVCallService;
-import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.RMVCallServiceImpl;
+import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallService;
+import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallServiceImpl;
 import de.blackforestsolutions.apiservice.service.mapper.RMVMapperService;
 import de.blackforestsolutions.apiservice.service.mapper.RMVMapperServiceImpl;
 import de.blackforestsolutions.apiservice.service.supportservice.RMVHttpCallBuilderService;
@@ -38,7 +38,7 @@ class RMVApiServiceTest {
 
     private final RestTemplateBuilder restTemplateBuilder = new RestTemplateBuilderStub(restTemplate);
 
-    private final RMVCallService rmvCallService = new RMVCallServiceImpl(restTemplateBuilder);
+    private final CallService callService = new CallServiceImpl(restTemplateBuilder);
 
     private final RMVHttpCallBuilderService httpCallBuilderService = new RMVHttpCallBuilderServiceImpl();
 
@@ -47,7 +47,7 @@ class RMVApiServiceTest {
     @InjectMocks
     private final RMVMapperService rmvMapperService = new RMVMapperServiceImpl(uuidService);
 
-    private final RMVApiService classUnderTest = new RMVApiServiceImpl(rmvCallService, httpCallBuilderService, rmvMapperService);
+    private final RMVApiService classUnderTest = new RMVApiServiceImpl(callService, httpCallBuilderService, rmvMapperService);
 
     @SuppressWarnings("OptionalGetWithoutIsPresent")
     @Test

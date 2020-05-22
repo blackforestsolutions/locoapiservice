@@ -1,8 +1,8 @@
 package de.blackforestsolutions.apiservice.service.communicationservice;
 
 import de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother;
-import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.BBCCallService;
-import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.BBCCallServiceImpl;
+import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallService;
+import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallServiceImpl;
 import de.blackforestsolutions.apiservice.service.mapper.BBCMapperService;
 import de.blackforestsolutions.apiservice.service.mapper.BBCMapperServiceImpl;
 import de.blackforestsolutions.apiservice.service.supportservice.BBCHttpCallBuilderService;
@@ -37,11 +37,11 @@ class BBCApiServiceImplTest {
     private static final RestTemplate REST_TEMPLATE = mock(RestTemplate.class);
     private final BBCHttpCallBuilderService bbcHttpCallBuilderService = new BBCHttpCallBuilderServiceImpl();
     private final RestTemplateBuilder restTemplateBuilder = new RestTemplateBuilderStub(REST_TEMPLATE);
-    private final BBCCallService bbcCallService = new BBCCallServiceImpl(restTemplateBuilder);
+    private final CallService callService = new CallServiceImpl(restTemplateBuilder);
     private final UuidService mockedUuidService = Mockito.mock(UuidService.class);
     @InjectMocks
     private final BBCMapperService bbcMapperService = new BBCMapperServiceImpl(mockedUuidService);
-    private final BBCApiService classUnderTest = new BBCApiServiceImpl(bbcCallService, bbcHttpCallBuilderService, bbcMapperService);
+    private final BBCApiService classUnderTest = new BBCApiServiceImpl(callService, bbcHttpCallBuilderService, bbcMapperService);
 
     @Test
     void test_map_with_trips28_12_2019_ZRH_FRA() {
@@ -60,7 +60,7 @@ class BBCApiServiceImplTest {
     @SuppressWarnings("OptionalGetWithoutIsPresent")
     @Test
     void test_getJournesForRouteFromApiWith_with_mocked_rest_service_is_executed_correctly_and_maps_correctly_returns_map() throws ParseException {
-        ApiTokenAndUrlInformation apiTokenAndUrlInformation = ApiTokenAndUrlInformationObjectMother.getBbcTokenAndUrlIT();
+        ApiTokenAndUrlInformation apiTokenAndUrlInformation = ApiTokenAndUrlInformationObjectMother.getBbcTokenAndUrl();
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder apiTokenAndUrlInformationBuilder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
         apiTokenAndUrlInformationBuilder = apiTokenAndUrlInformationBuilder.buildFrom(apiTokenAndUrlInformation);
         Date dateNow = formatDate(new Date());

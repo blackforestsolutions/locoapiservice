@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import de.blackforestsolutions.apiservice.service.supportservice.UuidService;
 import de.blackforestsolutions.datamodel.*;
 import de.blackforestsolutions.generatedcontent.lufthansa.Flight;
+import de.blackforestsolutions.generatedcontent.lufthansa.LufthansaAuthorization;
 import de.blackforestsolutions.generatedcontent.lufthansa.ScheduleResource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,16 @@ public class LufthansaMapperServiceImpl implements LufthansaMapperService {
             return Collections.singletonMap(uuidService.createUUID(), JourneyStatusBuilder.createJourneyStatusProblemWith(e));
         }
         return mapScheduledResourceToJourneyList(scheduleResource);
+    }
+
+    @Override
+    public CallStatus mapToAuthorization(String jsonString) {
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            return new CallStatus(mapper.readValue(jsonString, LufthansaAuthorization.class), Status.SUCCESS, null);
+        } catch (JsonProcessingException e) {
+            return new CallStatus(null, Status.FAILED, e);
+        }
     }
 
     private Map<UUID, JourneyStatus> mapScheduledResourceToJourneyList(ScheduleResource scheduleResource) {
