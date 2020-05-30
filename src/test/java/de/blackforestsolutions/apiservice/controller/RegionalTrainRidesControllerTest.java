@@ -5,10 +5,11 @@ import de.blackforestsolutions.apiservice.service.communicationservice.HvvApiSer
 import de.blackforestsolutions.apiservice.service.communicationservice.NahShApiService;
 import de.blackforestsolutions.apiservice.service.communicationservice.RMVApiService;
 import de.blackforestsolutions.apiservice.service.communicationservice.VBBApiService;
-
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+
+import java.text.ParseException;
 
 class RegionalTrainRidesControllerTest {
 
@@ -18,6 +19,9 @@ class RegionalTrainRidesControllerTest {
     private final NahShApiService nahShApiService = Mockito.mock(NahShApiService.class);
     private final RegionalTrainRidesController classUnderTest = initClassUnderTest();
 
+    RegionalTrainRidesControllerTest() throws ParseException {
+    }
+
     @Test
     void test_if_calls_executed_correctly() {
         //arrange
@@ -26,12 +30,13 @@ class RegionalTrainRidesControllerTest {
         classUnderTest.retrieveTrainJourneys(testRequest);
         //assert
         Mockito.verify(hvvApiService, Mockito.times(1)).getJourneysForRouteWith(Mockito.any(ApiTokenAndUrlInformation.class));
-        Mockito.verify(rmvApiService, Mockito.times(1)).getJourneysForRouteWith(Mockito.any(ApiTokenAndUrlInformation.class));
+        Mockito.verify(rmvApiService, Mockito.times(1)).getJourneysForRouteBySearchStringWith(Mockito.any(ApiTokenAndUrlInformation.class));
+        Mockito.verify(rmvApiService, Mockito.times(1)).getJourneysForRouteByCoordinatesWith(Mockito.any(ApiTokenAndUrlInformation.class));
         Mockito.verify(vbbApiService, Mockito.times(1)).getJourneysForRouteWith(Mockito.any(ApiTokenAndUrlInformation.class));
         Mockito.verify(nahShApiService, Mockito.times(1)).getJourneysForRouteWith(Mockito.any(ApiTokenAndUrlInformation.class));
     }
 
-    private RegionalTrainRidesController initClassUnderTest() {
+    private RegionalTrainRidesController initClassUnderTest() throws ParseException {
         RegionalTrainRidesController classUnderTest = new RegionalTrainRidesController(hvvApiService, rmvApiService, vbbApiService, nahShApiService);
         classUnderTest.setHvvApiTokenAndUrlInformation(ApiTokenAndUrlInformationObjectMother.getHvvTokenAndUrl());
         classUnderTest.setRMVApiTokenAndUrlInformation(ApiTokenAndUrlInformationObjectMother.getRMVTokenAndUrl("", ""));

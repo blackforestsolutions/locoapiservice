@@ -7,5 +7,7 @@ import java.util.Map;
 import java.util.UUID;
 
 public interface RMVApiService {
-    Map<UUID, JourneyStatus> getJourneysForRouteWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation);
+    Map<UUID, JourneyStatus> getJourneysForRouteBySearchStringWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation);
+
+    Map<UUID, JourneyStatus> getJourneysForRouteByCoordinatesWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation);
 }

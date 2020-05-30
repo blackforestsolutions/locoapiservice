@@ -57,6 +57,16 @@ public class HvvJourneyHttpCallBuilderServiceImpl implements HvvJourneyHttpCallB
     }
 
     private String buildJourneyHttpBodyForHvv(ApiTokenAndUrlInformation apiTokenAndUrlInformation, HvvStation start, HvvStation destination) {
+        Objects.requireNonNull(apiTokenAndUrlInformation.getDepartureDate(), "departure date is not allowed to be null");
+        Objects.requireNonNull(apiTokenAndUrlInformation.getTimeIsDeparture(), "timeIsDeparture date is not allowed to be null");
+        Objects.requireNonNull(apiTokenAndUrlInformation.getAllowTariffDetails(), "allowTarifDetails date is not allowed to be null");
+        Objects.requireNonNull(apiTokenAndUrlInformation.getResultLengthBeforeDepartureTime(), "resultLengthBeforeDepartureTime is not allowed to be null");
+        Objects.requireNonNull(apiTokenAndUrlInformation.getResultLengthAfterDepartureTime(), "resultLengthAfterDepartureTime is not allowed to be null");
+        Objects.requireNonNull(apiTokenAndUrlInformation.getAllowReducedPrice(), "allowReducedPrice date is not allowed to be null");
+        Objects.requireNonNull(apiTokenAndUrlInformation.getAllowIntermediateStops(), "allowIntermediateStops is not allowed to be null");
+        Objects.requireNonNull(apiTokenAndUrlInformation.getTariff(), "tariff is not allowed to be null");
+        Objects.requireNonNull(apiTokenAndUrlInformation.getHvvReturnContSearchData(), "hvvReturnContSearchData is not allowed to be null");
+
         HvvJourneyBody journeyBody = new HvvJourneyBody();
 
         journeyBody.setStart(start);

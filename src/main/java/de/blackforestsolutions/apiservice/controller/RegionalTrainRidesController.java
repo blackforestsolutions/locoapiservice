@@ -45,7 +45,8 @@ public class RegionalTrainRidesController {
     public Map<UUID, JourneyStatus> retrieveTrainJourneys(ApiTokenAndUrlInformation request) {
         Map<UUID, JourneyStatus> journeys = new HashMap<>();
         journeys.putAll(hvvApiService.getJourneysForRouteWith(getHvvApiTokenAndUrlInformation(request)));
-        journeys.putAll(rmvApiService.getJourneysForRouteWith(getRMVApiTokenAndUrlInformation(request)));
+        journeys.putAll(rmvApiService.getJourneysForRouteBySearchStringWith(getRMVApiTokenAndUrlInformation(request)));
+        journeys.putAll(rmvApiService.getJourneysForRouteByCoordinatesWith(getRMVApiTokenAndUrlInformation(request)));
         journeys.putAll(vbbApiService.getJourneysForRouteWith(getVbbApiTokenAndUrlInformation(request)));
         journeys.putAll(nahShApiService.getJourneysForRouteWith(getNahShApiTokenAndUrlInformation(request)));
         return journeys;

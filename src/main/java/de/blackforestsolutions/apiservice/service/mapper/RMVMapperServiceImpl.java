@@ -6,7 +6,9 @@ import de.blackforestsolutions.datamodel.Leg;
 import de.blackforestsolutions.datamodel.*;
 import de.blackforestsolutions.generatedcontent.rmv.hafas_rest.*;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.geo.Distance;
 import org.springframework.stereotype.Service;
 
 import javax.xml.bind.JAXBContext;
@@ -19,7 +21,6 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static de.blackforestsolutions.apiservice.service.mapper.MapperService.generateDurationFromStartToDestination;
 
@@ -29,8 +30,11 @@ public class RMVMapperServiceImpl implements RMVMapperService {
 
     private static final int START_INDEX = 0;
     private static final int SECOND_INDEX = 1;
+    private static final int THIRD_INDEX = 2;
+    private static final int FOURTH_INDEX = 3;
+    private static final String PUBLIC_JOURNEY_KEY = "JNY";
+    private static final String CAR_KEY = "KISS";
     private final UuidService uuidService;
-    private int counter = 0;
     private JAXBContext jaxbContext;
     private Unmarshaller unmarshaller;
 
@@ -110,18 +114,22 @@ public class RMVMapperServiceImpl implements RMVMapperService {
         newLeg.setArrivalTime(buildDateFrom(leg.getDestination().getDate().concat("-").concat(leg.getDestination().getTime())));
         newLeg.setDuration(generateDurationFromStartToDestination(newLeg.getStartTime(), newLeg.getArrivalTime()));
         newLeg.setTravelProvider(TravelProvider.RMV);
-
-        try {
-            counter++;
-            newLeg.setVehicleName(leg.getProduct().getName());
-        } catch (Exception npe) { // the value is null in third iteration
-            log.error("Nullpointer has been catched at the " + counter + (" iteration"), npe);
-        }
-
-        newLeg.setTravelLine(buildTravelLine(leg));
+        Optional.ofNullable(leg.getDist()).ifPresent(distance -> newLeg.setDistance(new Distance(distance)));
+        Optional.ofNullable(leg.getProduct()).ifPresent(product -> newLeg.setVehicleName(product.getName()));
         if (index == 0) {
             newLeg.setPrice(price);
             newLeg.setHasPrice(true);
+        }
+        if (leg.getType().equals(PUBLIC_JOURNEY_KEY)) {
+            newLeg.setTravelLine(buildTravelLine(leg));
+            newLeg.setVehicleName(leg.getProduct().getCatOutL());
+            newLeg.setVehicleNumber(StringUtils.deleteWhitespace(leg.getProduct().getName()));
+            newLeg.setUnknownTravelProvider(leg.getProduct().getOperator());
+            newLeg.setIncidents(buildIncidentsWith(leg.getNotes()));
+        } else if (leg.getType().equals(CAR_KEY)) {
+            newLeg.setVehicleType(VehicleType.CAR);
+        } else {
+            newLeg.setVehicleType(VehicleType.WALK);
         }
         return newLeg.build();
     }
@@ -129,19 +137,18 @@ public class RMVMapperServiceImpl implements RMVMapperService {
     private TravelLine buildTravelLine(de.blackforestsolutions.generatedcontent.rmv.hafas_rest.Leg leg) {
         TravelLine.TravelLineBuilder travelLine = new TravelLine.TravelLineBuilder();
         travelLine.setDirection(buildTravelPointWith(leg.getDirection()));
-        AtomicInteger counter = new AtomicInteger(0);
-
-        try {
-            travelLine.setBetweenHolds(
-                    Stream.of(leg.getStops().getStop())// todo stops is null, that's why nullpointer
-                            .flatMap(Collection::stream)
-                            .map(this::buildTravelPointWith)
-                            .collect(Collectors.toMap(travelPoint -> counter.getAndIncrement(), travelPoint -> travelPoint))
-            );
-        } catch (Exception npe) {
-            log.error("Nullpointer has been catched because the type is ".concat(leg.getType()), npe);
-        }
+        Optional.ofNullable(leg.getStops()).ifPresent(stops -> travelLine.setBetweenHolds(extractBetweenHoldsFrom(stops)));
         return travelLine.build();
+    }
+
+    private Map<Integer, TravelPoint> extractBetweenHoldsFrom(Stops stops) {
+        AtomicInteger counter = new AtomicInteger(0);
+        return stops.getStop()
+                .stream()
+                .skip(SECOND_INDEX)
+                .limit(stops.getStop().size() - SECOND_INDEX - SECOND_INDEX)
+                .map(this::buildTravelPointWith)
+                .collect(Collectors.toMap(travelPoint -> counter.getAndIncrement(), travelPoint -> travelPoint));
     }
 
     private Price extractPriceFrom(Trip trip) {
@@ -151,18 +158,20 @@ public class RMVMapperServiceImpl implements RMVMapperService {
         try {
             if (trip.getTariffResult() != null) {
                 price.setValues(Map.of(
-                        PriceCategory.ADULT, new BigDecimal(trip.getTariffResult().getFareSetItem().get(START_INDEX).getFareItem().get(START_INDEX).getTicket().get(START_INDEX).getPrice()), // todo what if only one price?
-                        PriceCategory.CHILD, new BigDecimal(trip.getTariffResult().getFareSetItem().get(START_INDEX).getFareItem().get(START_INDEX).getTicket().get(SECOND_INDEX).getPrice())
+                        PriceCategory.ADULT, new BigDecimal(convertPriceToPriceWithComma(trip.getTariffResult().getFareSetItem().get(START_INDEX).getFareItem().get(START_INDEX).getTicket().get(START_INDEX).getPrice())), // todo what if only one price?
+                        PriceCategory.CHILD, new BigDecimal(convertPriceToPriceWithComma(trip.getTariffResult().getFareSetItem().get(START_INDEX).getFareItem().get(START_INDEX).getTicket().get(SECOND_INDEX).getPrice())),
+                        PriceCategory.ADULT_REDUCED, new BigDecimal(convertPriceToPriceWithComma(trip.getTariffResult().getFareSetItem().get(START_INDEX).getFareItem().get(START_INDEX).getTicket().get(THIRD_INDEX).getPrice())),
+                        PriceCategory.CHILD_REDUCED, new BigDecimal(convertPriceToPriceWithComma(trip.getTariffResult().getFareSetItem().get(START_INDEX).getFareItem().get(START_INDEX).getTicket().get(FOURTH_INDEX).getPrice()))
                 ));
                 price.setCurrency(Currency.getInstance(trip.getTariffResult().getFareSetItem().get(START_INDEX).getFareItem().get(START_INDEX).getTicket().get(START_INDEX).getCur()));
                 price.setSymbol(price.getCurrency().getSymbol());
             }
             return price.build();
-        } catch (Exception ioob) {
+        } catch (IndexOutOfBoundsException ioob) {
             log.error("Array out of bound exception: there is only one price which is valid for adults as well as for children", ioob);
             if (trip.getTariffResult() != null) {
                 price.setValues(Map.of(
-                        PriceCategory.ADULT, new BigDecimal(trip.getTariffResult().getFareSetItem().get(START_INDEX).getFareItem().get(START_INDEX).getTicket().get(START_INDEX).getPrice()) // todo what if only one price?
+                        PriceCategory.ADULT, new BigDecimal(convertPriceToPriceWithComma(trip.getTariffResult().getFareSetItem().get(START_INDEX).getFareItem().get(START_INDEX).getTicket().get(START_INDEX).getPrice()))
                 ));
                 price.setCurrency(Currency.getInstance(trip.getTariffResult().getFareSetItem().get(START_INDEX).getFareItem().get(START_INDEX).getTicket().get(START_INDEX).getCur()));
                 price.setSymbol(price.getCurrency().getSymbol());
@@ -171,6 +180,20 @@ public class RMVMapperServiceImpl implements RMVMapperService {
         }
     }
 
+    private String convertPriceToPriceWithComma(int price) {
+        StringBuilder sb = new StringBuilder(String.valueOf(price));
+        int length = (int) Math.log10(price) + 1;
+        sb.insert(length - 2, ".");
+        return sb.toString();
+    }
+
+    private List<String> buildIncidentsWith(Notes notes) {
+        return notes.getNote()
+                .stream()
+                .filter(note -> Optional.ofNullable(note.getPriority()).isPresent())
+                .map(Note::getValue)
+                .collect(Collectors.toList());
+    }
 
     private TravelPoint buildTravelPointWith(String direction) {
         TravelPoint.TravelPointBuilder travelPoint = new TravelPoint.TravelPointBuilder();
@@ -182,7 +205,8 @@ public class RMVMapperServiceImpl implements RMVMapperService {
         TravelPoint.TravelPointBuilder travelPoint = new TravelPoint.TravelPointBuilder();
         travelPoint.setGpsCoordinates(new Coordinates.CoordinatesBuilder(stop.getLat().doubleValue(), stop.getLon().doubleValue()).build());
         travelPoint.setStationName(stop.getName());
-        travelPoint.setStationId(stop.getExtId());
+        travelPoint.setStationId(stop.getId());
+        travelPoint.setCountry(Locale.GERMANY);
         Optional.ofNullable(stop.getDepDate()).ifPresent(depTime -> travelPoint.setDepartureTime(buildDateFrom(stop.getDepDate().concat("-").concat(stop.getDepTime()))));
         Optional.ofNullable(stop.getArrDate()).ifPresent(arrTime -> travelPoint.setArrivalTime(buildDateFrom(stop.getArrDate().concat("-").concat(stop.getArrTime()))));
         return travelPoint.build();
@@ -192,8 +216,8 @@ public class RMVMapperServiceImpl implements RMVMapperService {
         TravelPoint.TravelPointBuilder travelPoint = new TravelPoint.TravelPointBuilder();
         travelPoint.setGpsCoordinates(new Coordinates.CoordinatesBuilder(originDestType.getLat().doubleValue(), originDestType.getLon().doubleValue()).build());
         travelPoint.setStationName(originDestType.getName());
-        travelPoint.setStationId(originDestType.getExtId());
-        travelPoint.setPlatform(originDestType.getTrack());
+        travelPoint.setStationId(originDestType.getId());
+        Optional.ofNullable(originDestType.getTrack()).ifPresent(travelPoint::setPlatform);
         travelPoint.setCountry(Locale.GERMANY);
         return travelPoint.build();
     }

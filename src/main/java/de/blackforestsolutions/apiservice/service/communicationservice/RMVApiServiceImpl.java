@@ -30,21 +30,55 @@ public class RMVApiServiceImpl implements RMVApiService {
     }
 
     @Override
-    public Map<UUID, JourneyStatus> getJourneysForRouteWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
-        ResponseEntity<String> result = buildAndExecuteCall(apiTokenAndUrlInformation);
+    public Map<UUID, JourneyStatus> getJourneysForRouteByCoordinatesWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
+        ResponseEntity<String> result = buildAndExecteCallForCoordinates(apiTokenAndUrlInformation);
         return rmvMapperService.getJourneysFrom(result.getBody());
     }
 
-    private ResponseEntity<String> buildAndExecuteCall(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
-        String urlDeparture = getRMVRequestString(apiTokenAndUrlInformation, apiTokenAndUrlInformation.getDeparture());
-        String urlArrival = getRMVRequestString(apiTokenAndUrlInformation, apiTokenAndUrlInformation.getArrival());
-        ResponseEntity<String> departureIdJson = callService.get(urlDeparture, httpCallBuilderService.buildHttpEntityStationForRMV(apiTokenAndUrlInformation));
+    @Override
+    public Map<UUID, JourneyStatus> getJourneysForRouteBySearchStringWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
+        ResponseEntity<String> result = buildAndExecuteCallForSearchString(apiTokenAndUrlInformation);
+        return rmvMapperService.getJourneysFrom(result.getBody());
+    }
+
+    private ResponseEntity<String> buildAndExecteCallForCoordinates(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
+        String urlDeparture = getRMVRequestString(apiTokenAndUrlInformation, httpCallBuilderService.buildLocationCoordinatesPathWith(
+                apiTokenAndUrlInformation,
+                apiTokenAndUrlInformation.getDepartureCoordinates()
+        ));
+        String urlArrival = getRMVRequestString(apiTokenAndUrlInformation, httpCallBuilderService.buildLocationCoordinatesPathWith(
+                apiTokenAndUrlInformation,
+                apiTokenAndUrlInformation.getArrivalCoordinates()
+        ));
+        return buildAndExecuteCall(apiTokenAndUrlInformation, urlDeparture, urlArrival);
+    }
+
+    private ResponseEntity<String> buildAndExecuteCallForSearchString(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
+        String urlDeparture = getRMVRequestString(apiTokenAndUrlInformation, httpCallBuilderService.buildLocationStringPathWith(
+                apiTokenAndUrlInformation,
+                apiTokenAndUrlInformation.getDeparture()
+        ));
+        String urlArrival = getRMVRequestString(apiTokenAndUrlInformation, httpCallBuilderService.buildLocationStringPathWith(
+                apiTokenAndUrlInformation,
+                apiTokenAndUrlInformation.getArrival()
+        ));
+        return buildAndExecuteCall(apiTokenAndUrlInformation, urlDeparture, urlArrival);
+    }
+
+    private ResponseEntity<String> buildAndExecuteCall(ApiTokenAndUrlInformation apiTokenAndUrlInformation, String urlDeparture, String urlArrival) {
+        ResponseEntity<String> departureIdJson = callService.get(
+                urlDeparture,
+                httpCallBuilderService.buildHttpEntityForRMV(apiTokenAndUrlInformation)
+        );
         String departureId = (String) rmvMapperService.getIdFrom(departureIdJson.getBody()).getCalledObject();
-        ResponseEntity<String> arrivalIdJson = callService.get(urlArrival, httpCallBuilderService.buildHttpEntityStationForRMV(apiTokenAndUrlInformation));
+        ResponseEntity<String> arrivalIdJson = callService.get(
+                urlArrival,
+                httpCallBuilderService.buildHttpEntityForRMV(apiTokenAndUrlInformation)
+        );
         String arrivalId = (String) rmvMapperService.getIdFrom(arrivalIdJson.getBody()).getCalledObject();
         ApiTokenAndUrlInformation callToken = replaceStartAndDestinationIn(apiTokenAndUrlInformation, departureId, arrivalId);
-        String urlTrip = getRMVRequestString(callToken, null);
-        return callService.get(urlTrip, httpCallBuilderService.buildHttpEntityTripForRMV(callToken));
+        String urlTrip = getRMVRequestString(callToken, httpCallBuilderService.buildTripPathWith(callToken));
+        return callService.get(urlTrip, httpCallBuilderService.buildHttpEntityForRMV(callToken));
     }
 
     private ApiTokenAndUrlInformation replaceStartAndDestinationIn(ApiTokenAndUrlInformation apiTokenAndUrlInformation, String departureId, String arrivalId) {
@@ -55,28 +89,11 @@ public class RMVApiServiceImpl implements RMVApiService {
         return builder.build();
     }
 
-    private String getRMVRequestString(ApiTokenAndUrlInformation apiTokenAndUrlInformation, String location) {
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder = builder.buildFrom(apiTokenAndUrlInformation);
-        if (location != null) {
-            builder.setPath(apiTokenAndUrlInformation.getLocationPath());
-        } else {
-            builder.setPath(apiTokenAndUrlInformation.getGermanRailJourneyDeatilsPath());
-        }
-        builder.setDeparture(apiTokenAndUrlInformation.getDeparture());
-        builder.setArrival(apiTokenAndUrlInformation.getArrival());
-        builder.setDepartureDate(apiTokenAndUrlInformation.getDepartureDate());
-        handleLocationCaseFor(builder, location);
+    private String getRMVRequestString(ApiTokenAndUrlInformation apiTokenAndUrlInformation, String path) {
+        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(apiTokenAndUrlInformation);
+        builder.setPath(path);
         URL requestUrl = buildUrlWith(builder.build());
         return requestUrl.toString();
-    }
-
-    private void handleLocationCaseFor(ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder, String location) {
-        if (location == null) {
-            builder.setPath(httpCallBuilderService.buildTripPathWith(builder.build()));
-        } else {
-            builder.setPath(httpCallBuilderService.buildLocationPathWith(builder.build(), location));
-        }
     }
 
 }

@@ -32,7 +32,7 @@ class HvvJourneyHttpCallBuilderServiceImplTest {
         Assertions.assertThat(headerResult.getFirst(HttpHeaders.CONTENT_TYPE)).isEqualTo(MediaType.APPLICATION_JSON_VALUE);
         Assertions.assertThat(headerResult.getFirst(AdditionalHttpConfiguration.GEO_FEX_AUTH_TYPE)).isEqualTo("HmacSHA1");
         Assertions.assertThat(headerResult.getFirst(AdditionalHttpConfiguration.GEO_FEX_AUTH_USER)).isEqualTo("janhendrikhausner");
-        Assertions.assertThat(headerResult.getFirst(AdditionalHttpConfiguration.GEO_FEX_AUTH_SIGNATURE)).isEqualTo("n1fA4PW5/7DtcnPueRXI9m7lDKw=");
+        Assertions.assertThat(headerResult.getFirst(AdditionalHttpConfiguration.GEO_FEX_AUTH_SIGNATURE)).isEqualTo("0fsMnAtZjmIUIk20j1F3RhI/B1Q=");
 
         Assertions.assertThat(headerResult.getFirst(AdditionalHttpConfiguration.X_TRACE_ID)).isNotNull();
         Assertions.assertThat(headerResult.values().size()).isEqualTo(6);
