@@ -1,165 +1,5089 @@
 {
   "links": {
-    "_self": "https://api.blablacar.com/api/v2/trips",
-    "_front": "https://www.blablacar.co.uk/search?fn=ZRH&fc=47.4582165%2C8.5554755&tn=FRA&tc=50.0379326%2C8.5621518&db=30/11/2019"
+    "_self": "",
+    "_front": "https://www.blablacar.de/search?fc=52.520006,13.404954&tc=53.551084,9.993681&db=2020-05-31"
   },
   "pager": {
     "page": 1,
     "pages": 1,
-    "total": 1,
-    "limit": 10
+    "total": 45,
+    "limit": 100
   },
   "trips": [
     {
       "links": {
-        "_self": "http://api.blablacar.com:443/api/v2/trips/1802963307-zuerich-frankfurt-am-main",
-        "_front": "https://www.blablacar.co.uk/trip/carpooling/1802963307-zuerich-frankfurt-am-main/?_force_https=1"
+        "_self": "",
+        "_front": "https://www.blablacar.de/trip/carpooling/1981400891-berlin-hamburg"
       },
-      "departure_date": "30/11/2019 18:45:00",
+      "departure_date": "30/04/2021 08:00:00",
+      "departure_date_iso8601": "2021-04-30T08:00:00+02:00",
+      "is_passed": false,
       "departure_place": {
-        "city_name": "Zürich",
-        "address": "Zürich HB, Zürich",
-        "latitude": 47.377866,
-        "longitude": 8.540345,
-        "country_code": "CH"
+        "city_name": "Berlin",
+        "address": "Flughafen Berlin-Tegel, Berlin",
+        "latitude": 52.558832,
+        "longitude": 13.288437,
+        "country_code": "DE"
       },
       "arrival_place": {
-        "city_name": "Frankfurt",
-        "address": "Hauptbahnhof, Frankfurt am Main",
-        "latitude": 50.107684,
-        "longitude": 8.664606,
+        "city_name": "Hamburg",
+        "address": "Hamburg Hbf, Hamburg",
+        "latitude": 53.552925,
+        "longitude": 10.006604,
         "country_code": "DE"
       },
       "price": {
-        "value": 17,
-        "currency": "GBP",
-        "symbol": "£",
-        "string_value": "£17",
+        "value": 11.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "11,00 €",
         "price_color": "BLACK"
       },
       "price_with_commission": {
-        "value": 19.5,
-        "currency": "GBP",
-        "symbol": "£",
-        "string_value": "£19.50",
+        "value": 11.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "11,00 €",
         "price_color": "BLACK"
       },
       "price_without_commission": {
-        "value": 17,
-        "currency": "GBP",
-        "symbol": "£",
-        "string_value": "£17",
+        "value": 11.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "11,00 €",
         "price_color": "BLACK"
       },
       "commission": {
-        "value": 2.5,
-        "currency": "GBP",
-        "symbol": "£",
-        "string_value": "£2.50"
+        "value": 0.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "0,00 €",
+        "price_color": "BLACK"
       },
-      "seats_left": 3,
-      "seats": 3,
+      "seats_left": 2,
+      "seats": 2,
+      "seats_count_origin": 2,
       "duration": {
-        "value": 16800,
+        "value": 10775,
         "unity": "s"
       },
       "distance": {
-        "value": 409,
+        "value": 276,
         "unity": "km"
       },
-      "permanent_id": "1802963307-zuerich-frankfurt-am-main",
+      "permanent_id": "1981400891-berlin-hamburg",
+      "main_permanent_id": "1981400891-berlin-hamburg",
+      "comment": "",
       "car": {
-        "id": "126279917",
-        "model": "Arona",
-        "make": "SEAT",
+        "id": "",
+        "model": "MODEL X",
+        "make": "TESLA",
         "comfort": "Normal",
-        "comfort_nb_star": 2,
+        "comfort_nb_star": 0,
+        "category": "CATEGORY_BERLINE"
+      },
+      "multimodal_id": {
+        "source": "CARPOOLING",
+        "id": "1981400891-berlin-hamburg"
+      },
+      "freeway": true,
+      "answer_delay": 0,
+      "bucketing_eligible": true,
+      "booking_mode": "manual",
+      "booking_type": "onboard",
+      "view_count": 0,
+      "cross_border_alert": false,
+      "trip_plan": [
+        {
+          "city_name": "Berlin",
+          "address": "Flughafen Berlin-Tegel, Berlin",
+          "latitude": 52.558832,
+          "longitude": 13.288437,
+          "country_code": "DE"
+        },
+        {
+          "city_name": "Hamburg",
+          "address": "Hamburg Hbf, Hamburg",
+          "latitude": 53.552925,
+          "longitude": 10.006604,
+          "country_code": "DE"
+        }
+      ],
+      "messaging_status": "public",
+      "passengers": [],
+      "display_contact": false,
+      "vehicle_pictures": [],
+      "can_report": false,
+      "locations_to_display": [
+        "Berlin",
+        "Hamburg"
+      ],
+      "corridoring_type": "PLANNED",
+      "viaggio_rosa": false,
+      "is_comfort": true,
+      "stop_overs": [],
+      "is_booking_allowed": true
+    },
+    {
+      "links": {
+        "_self": "",
+        "_front": "https://www.blablacar.de/trip/carpooling/1981401311-berlin-hamburg"
+      },
+      "departure_date": "03/04/2021 08:00:00",
+      "departure_date_iso8601": "2021-04-03T08:00:00+02:00",
+      "is_passed": false,
+      "departure_place": {
+        "city_name": "Berlin",
+        "address": "Flughafen Berlin-Tegel, Berlin",
+        "latitude": 52.558832,
+        "longitude": 13.288437,
+        "country_code": "DE"
+      },
+      "arrival_place": {
+        "city_name": "Hamburg",
+        "address": "Hamburg Hauptbahnhof, Hamburg",
+        "latitude": 53.553071,
+        "longitude": 10.006542,
+        "country_code": "DE"
+      },
+      "price": {
+        "value": 11.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "11,00 €",
+        "price_color": "BLACK"
+      },
+      "price_with_commission": {
+        "value": 11.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "11,00 €",
+        "price_color": "BLACK"
+      },
+      "price_without_commission": {
+        "value": 11.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "11,00 €",
+        "price_color": "BLACK"
+      },
+      "commission": {
+        "value": 0.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "0,00 €",
+        "price_color": "BLACK"
+      },
+      "seats_left": 1,
+      "seats": 1,
+      "seats_count_origin": 1,
+      "duration": {
+        "value": 10823,
+        "unity": "s"
+      },
+      "distance": {
+        "value": 277,
+        "unity": "km"
+      },
+      "permanent_id": "1981401311-berlin-hamburg",
+      "main_permanent_id": "1981401311-berlin-hamburg",
+      "comment": "",
+      "car": {
+        "id": "",
+        "model": "MODEL X",
+        "make": "TESLA",
+        "comfort": "Normal",
+        "comfort_nb_star": 0,
+        "category": "CATEGORY_BERLINE"
+      },
+      "multimodal_id": {
+        "source": "CARPOOLING",
+        "id": "1981401311-berlin-hamburg"
+      },
+      "freeway": true,
+      "answer_delay": 0,
+      "bucketing_eligible": true,
+      "booking_mode": "manual",
+      "booking_type": "onboard",
+      "view_count": 0,
+      "cross_border_alert": false,
+      "trip_plan": [
+        {
+          "city_name": "Berlin",
+          "address": "Flughafen Berlin-Tegel, Berlin",
+          "latitude": 52.558832,
+          "longitude": 13.288437,
+          "country_code": "DE"
+        },
+        {
+          "city_name": "Hamburg",
+          "address": "Hamburg Hauptbahnhof, Hamburg",
+          "latitude": 53.553071,
+          "longitude": 10.006542,
+          "country_code": "DE"
+        }
+      ],
+      "messaging_status": "public",
+      "passengers": [],
+      "display_contact": false,
+      "vehicle_pictures": [],
+      "can_report": false,
+      "locations_to_display": [
+        "Berlin",
+        "Hamburg"
+      ],
+      "corridoring_type": "PLANNED",
+      "viaggio_rosa": false,
+      "is_comfort": false,
+      "stop_overs": [],
+      "is_booking_allowed": true
+    },
+    {
+      "links": {
+        "_self": "",
+        "_front": "https://www.blablacar.de/trip/carpooling/1928522132-berlin-hamburg"
+      },
+      "departure_date": "25/10/2020 17:00:00",
+      "departure_date_iso8601": "2020-10-25T17:00:00+01:00",
+      "is_passed": false,
+      "departure_place": {
+        "city_name": "Berlin",
+        "address": "Berlin Hauptbahnhof, Berlin",
+        "latitude": 52.525083,
+        "longitude": 13.369402,
+        "country_code": "DE"
+      },
+      "arrival_place": {
+        "city_name": "Hamburg",
+        "address": "Mittlerer Landweg, Hamburg",
+        "latitude": 53.495142,
+        "longitude": 10.128684,
+        "country_code": "DE"
+      },
+      "price": {
+        "value": 14.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "14,00 €",
+        "price_color": "BLACK"
+      },
+      "price_with_commission": {
+        "value": 14.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "14,00 €",
+        "price_color": "BLACK"
+      },
+      "price_without_commission": {
+        "value": 14.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "14,00 €",
+        "price_color": "BLACK"
+      },
+      "commission": {
+        "value": 0.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "0,00 €",
+        "price_color": "BLACK"
+      },
+      "seats_left": 3,
+      "seats": 3,
+      "seats_count_origin": 3,
+      "duration": {
+        "value": 11130,
+        "unity": "s"
+      },
+      "distance": {
+        "value": 281,
+        "unity": "km"
+      },
+      "permanent_id": "1928522132-berlin-hamburg",
+      "main_permanent_id": "1928522132-berlin-hamburg",
+      "comment": "",
+      "multimodal_id": {
+        "source": "CARPOOLING",
+        "id": "1928522132-berlin-hamburg"
+      },
+      "freeway": true,
+      "answer_delay": 0,
+      "bucketing_eligible": true,
+      "booking_mode": "auto",
+      "booking_type": "online",
+      "view_count": 0,
+      "cross_border_alert": false,
+      "trip_plan": [
+        {
+          "city_name": "Berlin",
+          "address": "Berlin Hauptbahnhof, Berlin",
+          "latitude": 52.525083,
+          "longitude": 13.369402,
+          "country_code": "DE"
+        },
+        {
+          "city_name": "Hamburg",
+          "address": "Mittlerer Landweg, Hamburg",
+          "latitude": 53.495142,
+          "longitude": 10.128684,
+          "country_code": "DE"
+        }
+      ],
+      "messaging_status": "public",
+      "passengers": [],
+      "display_contact": false,
+      "vehicle_pictures": [],
+      "can_report": false,
+      "locations_to_display": [
+        "Berlin",
+        "Hamburg"
+      ],
+      "corridoring_type": "PLANNED",
+      "viaggio_rosa": false,
+      "is_comfort": true,
+      "stop_overs": [],
+      "is_booking_allowed": true
+    },
+    {
+      "links": {
+        "_self": "",
+        "_front": "https://www.blablacar.de/trip/carpooling/1981717696-berlin-hamburg"
+      },
+      "departure_date": "05/07/2020 21:50:00",
+      "departure_date_iso8601": "2020-07-05T21:50:00+02:00",
+      "is_passed": false,
+      "departure_place": {
+        "city_name": "Berlin",
+        "address": "S-Bahnhof Tempelhof, Berlin",
+        "latitude": 52.47097,
+        "longitude": 13.384445,
+        "country_code": "DE"
+      },
+      "arrival_place": {
+        "city_name": "Hamburg",
+        "address": "Hamburg Hbf (S-Bahn), Hamburg",
+        "latitude": 53.552845,
+        "longitude": 10.006683,
+        "country_code": "DE"
+      },
+      "price": {
+        "value": 14.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "14,00 €",
+        "price_color": "BLACK"
+      },
+      "price_with_commission": {
+        "value": 14.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "14,00 €",
+        "price_color": "BLACK"
+      },
+      "price_without_commission": {
+        "value": 14.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "14,00 €",
+        "price_color": "BLACK"
+      },
+      "commission": {
+        "value": 0.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "0,00 €",
+        "price_color": "BLACK"
+      },
+      "seats_left": 2,
+      "seats": 2,
+      "seats_count_origin": 2,
+      "duration": {
+        "value": 11485,
+        "unity": "s"
+      },
+      "distance": {
+        "value": 290,
+        "unity": "km"
+      },
+      "permanent_id": "1981717696-berlin-hamburg",
+      "main_permanent_id": "1981717696-berlin-hamburg",
+      "comment": "",
+      "car": {
+        "id": "",
+        "model": "MONDEO",
+        "make": "FORD",
+        "comfort": "Normal",
+        "comfort_nb_star": 0,
+        "category": "CATEGORY_BREAK"
+      },
+      "multimodal_id": {
+        "source": "CARPOOLING",
+        "id": "1981717696-berlin-hamburg"
+      },
+      "freeway": true,
+      "answer_delay": 0,
+      "bucketing_eligible": true,
+      "booking_mode": "manual",
+      "booking_type": "online",
+      "view_count": 0,
+      "cross_border_alert": false,
+      "trip_plan": [
+        {
+          "city_name": "Berlin",
+          "address": "S-Bahnhof Tempelhof, Berlin",
+          "latitude": 52.47097,
+          "longitude": 13.384445,
+          "country_code": "DE"
+        },
+        {
+          "city_name": "Hamburg",
+          "address": "Hamburg Hbf (S-Bahn), Hamburg",
+          "latitude": 53.552845,
+          "longitude": 10.006683,
+          "country_code": "DE"
+        }
+      ],
+      "messaging_status": "public",
+      "passengers": [],
+      "display_contact": false,
+      "vehicle_pictures": [],
+      "can_report": false,
+      "locations_to_display": [
+        "Berlin",
+        "Hamburg"
+      ],
+      "corridoring_type": "PLANNED",
+      "viaggio_rosa": false,
+      "is_comfort": false,
+      "stop_overs": [],
+      "is_booking_allowed": true
+    },
+    {
+      "links": {
+        "_self": "",
+        "_front": "https://www.blablacar.de/trip/carpooling/1981717351-berlin-hamburg"
+      },
+      "departure_date": "28/06/2020 21:50:00",
+      "departure_date_iso8601": "2020-06-28T21:50:00+02:00",
+      "is_passed": false,
+      "departure_place": {
+        "city_name": "Berlin",
+        "address": "S-Bahnhof Tempelhof, Berlin",
+        "latitude": 52.47097,
+        "longitude": 13.384445,
+        "country_code": "DE"
+      },
+      "arrival_place": {
+        "city_name": "Hamburg",
+        "address": "Hamburg Hbf (S-Bahn), Hamburg",
+        "latitude": 53.552845,
+        "longitude": 10.006683,
+        "country_code": "DE"
+      },
+      "price": {
+        "value": 14.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "14,00 €",
+        "price_color": "BLACK"
+      },
+      "price_with_commission": {
+        "value": 14.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "14,00 €",
+        "price_color": "BLACK"
+      },
+      "price_without_commission": {
+        "value": 14.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "14,00 €",
+        "price_color": "BLACK"
+      },
+      "commission": {
+        "value": 0.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "0,00 €",
+        "price_color": "BLACK"
+      },
+      "seats_left": 2,
+      "seats": 2,
+      "seats_count_origin": 2,
+      "duration": {
+        "value": 11485,
+        "unity": "s"
+      },
+      "distance": {
+        "value": 290,
+        "unity": "km"
+      },
+      "permanent_id": "1981717351-berlin-hamburg",
+      "main_permanent_id": "1981717351-berlin-hamburg",
+      "comment": "",
+      "car": {
+        "id": "",
+        "model": "MONDEO",
+        "make": "FORD",
+        "comfort": "Normal",
+        "comfort_nb_star": 0,
+        "category": "CATEGORY_BREAK"
+      },
+      "multimodal_id": {
+        "source": "CARPOOLING",
+        "id": "1981717351-berlin-hamburg"
+      },
+      "freeway": true,
+      "answer_delay": 0,
+      "bucketing_eligible": true,
+      "booking_mode": "manual",
+      "booking_type": "online",
+      "view_count": 0,
+      "cross_border_alert": false,
+      "trip_plan": [
+        {
+          "city_name": "Berlin",
+          "address": "S-Bahnhof Tempelhof, Berlin",
+          "latitude": 52.47097,
+          "longitude": 13.384445,
+          "country_code": "DE"
+        },
+        {
+          "city_name": "Hamburg",
+          "address": "Hamburg Hbf (S-Bahn), Hamburg",
+          "latitude": 53.552845,
+          "longitude": 10.006683,
+          "country_code": "DE"
+        }
+      ],
+      "messaging_status": "public",
+      "passengers": [],
+      "display_contact": false,
+      "vehicle_pictures": [],
+      "can_report": false,
+      "locations_to_display": [
+        "Berlin",
+        "Hamburg"
+      ],
+      "corridoring_type": "PLANNED",
+      "viaggio_rosa": false,
+      "is_comfort": false,
+      "stop_overs": [],
+      "is_booking_allowed": true
+    },
+    {
+      "links": {
+        "_self": "",
+        "_front": "https://www.blablacar.de/trip/carpooling/1981717076-berlin-hamburg"
+      },
+      "departure_date": "21/06/2020 21:50:00",
+      "departure_date_iso8601": "2020-06-21T21:50:00+02:00",
+      "is_passed": false,
+      "departure_place": {
+        "city_name": "Berlin",
+        "address": "S-Bahnhof Tempelhof, Berlin",
+        "latitude": 52.47097,
+        "longitude": 13.384445,
+        "country_code": "DE"
+      },
+      "arrival_place": {
+        "city_name": "Hamburg",
+        "address": "Hamburg Hbf (S-Bahn), Hamburg",
+        "latitude": 53.552845,
+        "longitude": 10.006683,
+        "country_code": "DE"
+      },
+      "price": {
+        "value": 14.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "14,00 €",
+        "price_color": "BLACK"
+      },
+      "price_with_commission": {
+        "value": 14.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "14,00 €",
+        "price_color": "BLACK"
+      },
+      "price_without_commission": {
+        "value": 14.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "14,00 €",
+        "price_color": "BLACK"
+      },
+      "commission": {
+        "value": 0.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "0,00 €",
+        "price_color": "BLACK"
+      },
+      "seats_left": 2,
+      "seats": 2,
+      "seats_count_origin": 2,
+      "duration": {
+        "value": 11485,
+        "unity": "s"
+      },
+      "distance": {
+        "value": 290,
+        "unity": "km"
+      },
+      "permanent_id": "1981717076-berlin-hamburg",
+      "main_permanent_id": "1981717076-berlin-hamburg",
+      "comment": "",
+      "car": {
+        "id": "",
+        "model": "MONDEO",
+        "make": "FORD",
+        "comfort": "Normal",
+        "comfort_nb_star": 0,
+        "category": "CATEGORY_BREAK"
+      },
+      "multimodal_id": {
+        "source": "CARPOOLING",
+        "id": "1981717076-berlin-hamburg"
+      },
+      "freeway": true,
+      "answer_delay": 0,
+      "bucketing_eligible": true,
+      "booking_mode": "manual",
+      "booking_type": "online",
+      "view_count": 0,
+      "cross_border_alert": false,
+      "trip_plan": [
+        {
+          "city_name": "Berlin",
+          "address": "S-Bahnhof Tempelhof, Berlin",
+          "latitude": 52.47097,
+          "longitude": 13.384445,
+          "country_code": "DE"
+        },
+        {
+          "city_name": "Hamburg",
+          "address": "Hamburg Hbf (S-Bahn), Hamburg",
+          "latitude": 53.552845,
+          "longitude": 10.006683,
+          "country_code": "DE"
+        }
+      ],
+      "messaging_status": "public",
+      "passengers": [],
+      "display_contact": false,
+      "vehicle_pictures": [],
+      "can_report": false,
+      "locations_to_display": [
+        "Berlin",
+        "Hamburg"
+      ],
+      "corridoring_type": "PLANNED",
+      "viaggio_rosa": false,
+      "is_comfort": false,
+      "stop_overs": [],
+      "is_booking_allowed": true
+    },
+    {
+      "links": {
+        "_self": "",
+        "_front": "https://www.blablacar.de/trip/carpooling/1980340451-berlin-hamburg"
+      },
+      "departure_date": "19/06/2020 09:30:00",
+      "departure_date_iso8601": "2020-06-19T09:30:00+02:00",
+      "is_passed": false,
+      "departure_place": {
+        "city_name": "Berlin",
+        "address": "Spandauer Damm 88, 14059 Berlin, Deutschland",
+        "latitude": 52.519001007,
+        "longitude": 13.284893036,
+        "country_code": "DE"
+      },
+      "arrival_place": {
+        "city_name": "Hamburg",
+        "address": "Steintorpl., 20099 Hamburg, Deutschland",
+        "latitude": 53.552600861,
+        "longitude": 10.009400368,
+        "country_code": "DE"
+      },
+      "price": {
+        "value": 12.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "12,00 €",
+        "price_color": "BLACK"
+      },
+      "price_with_commission": {
+        "value": 12.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "12,00 €",
+        "price_color": "BLACK"
+      },
+      "price_without_commission": {
+        "value": 12.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "12,00 €",
+        "price_color": "BLACK"
+      },
+      "commission": {
+        "value": 0.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "0,00 €",
+        "price_color": "BLACK"
+      },
+      "seats_left": 3,
+      "seats": 3,
+      "seats_count_origin": 3,
+      "duration": {
+        "value": 10780,
+        "unity": "s"
+      },
+      "distance": {
+        "value": 278,
+        "unity": "km"
+      },
+      "permanent_id": "1980340451-berlin-hamburg",
+      "main_permanent_id": "1980340451-berlin-hamburg",
+      "comment": "",
+      "car": {
+        "id": "",
+        "model": "A3",
+        "make": "AUDI",
+        "comfort": "Normal",
+        "comfort_nb_star": 0,
         "category": "CATEGORY_TOURISM"
       },
       "multimodal_id": {
         "source": "CARPOOLING",
-        "id": "1802963307-zuerich-frankfurt-am-main"
+        "id": "1980340451-berlin-hamburg"
       },
-      "viaggio_rosa": false,
-      "is_comfort": true,
       "freeway": true,
       "answer_delay": 0,
+      "bucketing_eligible": true,
       "booking_mode": "auto",
       "booking_type": "online",
-      "locations_to_display": [
-        "Zürich",
-        "Frankfurt"
+      "view_count": 0,
+      "cross_border_alert": false,
+      "trip_plan": [
+        {
+          "city_name": "Berlin",
+          "address": "Spandauer Damm 88, 14059 Berlin, Deutschland",
+          "latitude": 52.519001007,
+          "longitude": 13.284893036,
+          "country_code": "DE"
+        },
+        {
+          "city_name": "Hamburg",
+          "address": "Steintorpl., 20099 Hamburg, Deutschland",
+          "latitude": 53.552600861,
+          "longitude": 10.009400368,
+          "country_code": "DE"
+        }
       ],
-      "departure_passenger_routing": {
-        "proximity": "MIDDLE",
-        "routes": [
-          {
-            "distance_in_meters": 9007,
-            "type": "AS_THE_CROW_FLIES"
-          }
-        ]
-      },
-      "arrival_passenger_routing": {
-        "proximity": "MIDDLE",
-        "routes": [
-          {
-            "distance_in_meters": 10659,
-            "type": "AS_THE_CROW_FLIES"
-          }
-        ]
-      },
+      "messaging_status": "public",
+      "passengers": [],
+      "display_contact": false,
+      "vehicle_pictures": [],
+      "can_report": false,
+      "locations_to_display": [
+        "Berlin",
+        "Hamburg"
+      ],
       "corridoring_type": "PLANNED",
-      "vehicle_pictures": []
+      "viaggio_rosa": false,
+      "is_comfort": false,
+      "stop_overs": [],
+      "is_booking_allowed": true
+    },
+    {
+      "links": {
+        "_self": "",
+        "_front": "https://www.blablacar.de/trip/carpooling/1981715851-berlin-hamburg"
+      },
+      "departure_date": "14/06/2020 21:50:00",
+      "departure_date_iso8601": "2020-06-14T21:50:00+02:00",
+      "is_passed": false,
+      "departure_place": {
+        "city_name": "Berlin",
+        "address": "S-Bahnhof Tempelhof, Berlin",
+        "latitude": 52.47097,
+        "longitude": 13.384445,
+        "country_code": "DE"
+      },
+      "arrival_place": {
+        "city_name": "Hamburg",
+        "address": "Hamburg Hbf (S-Bahn), Hamburg",
+        "latitude": 53.552845,
+        "longitude": 10.006683,
+        "country_code": "DE"
+      },
+      "price": {
+        "value": 14.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "14,00 €",
+        "price_color": "BLACK"
+      },
+      "price_with_commission": {
+        "value": 14.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "14,00 €",
+        "price_color": "BLACK"
+      },
+      "price_without_commission": {
+        "value": 14.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "14,00 €",
+        "price_color": "BLACK"
+      },
+      "commission": {
+        "value": 0.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "0,00 €",
+        "price_color": "BLACK"
+      },
+      "seats_left": 2,
+      "seats": 2,
+      "seats_count_origin": 2,
+      "duration": {
+        "value": 11485,
+        "unity": "s"
+      },
+      "distance": {
+        "value": 290,
+        "unity": "km"
+      },
+      "permanent_id": "1981715851-berlin-hamburg",
+      "main_permanent_id": "1981715851-berlin-hamburg",
+      "comment": "",
+      "car": {
+        "id": "",
+        "model": "MONDEO",
+        "make": "FORD",
+        "comfort": "Normal",
+        "comfort_nb_star": 0,
+        "category": "CATEGORY_BREAK"
+      },
+      "multimodal_id": {
+        "source": "CARPOOLING",
+        "id": "1981715851-berlin-hamburg"
+      },
+      "freeway": true,
+      "answer_delay": 0,
+      "bucketing_eligible": true,
+      "booking_mode": "manual",
+      "booking_type": "online",
+      "view_count": 0,
+      "cross_border_alert": false,
+      "trip_plan": [
+        {
+          "city_name": "Berlin",
+          "address": "S-Bahnhof Tempelhof, Berlin",
+          "latitude": 52.47097,
+          "longitude": 13.384445,
+          "country_code": "DE"
+        },
+        {
+          "city_name": "Hamburg",
+          "address": "Hamburg Hbf (S-Bahn), Hamburg",
+          "latitude": 53.552845,
+          "longitude": 10.006683,
+          "country_code": "DE"
+        }
+      ],
+      "messaging_status": "public",
+      "passengers": [],
+      "display_contact": false,
+      "vehicle_pictures": [],
+      "can_report": false,
+      "locations_to_display": [
+        "Berlin",
+        "Hamburg"
+      ],
+      "corridoring_type": "PLANNED",
+      "viaggio_rosa": false,
+      "is_comfort": false,
+      "stop_overs": [],
+      "is_booking_allowed": true
+    },
+    {
+      "links": {
+        "_self": "",
+        "_front": "https://www.blablacar.de/trip/carpooling/1981241036-berlin-hamburg"
+      },
+      "departure_date": "14/06/2020 16:00:00",
+      "departure_date_iso8601": "2020-06-14T16:00:00+02:00",
+      "is_passed": false,
+      "departure_place": {
+        "city_name": "Berlin",
+        "address": "Sophie-Charlotten-Straße 33, Berlin",
+        "latitude": 52.515248,
+        "longitude": 13.287457,
+        "country_code": "DE"
+      },
+      "arrival_place": {
+        "city_name": "Hamburg",
+        "address": "Kornträgergang, Hamburg",
+        "latitude": 53.552448,
+        "longitude": 9.983206,
+        "country_code": "DE"
+      },
+      "price": {
+        "value": 10.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "10,00 €",
+        "price_color": "BLACK"
+      },
+      "price_with_commission": {
+        "value": 10.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "10,00 €",
+        "price_color": "BLACK"
+      },
+      "price_without_commission": {
+        "value": 10.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "10,00 €",
+        "price_color": "BLACK"
+      },
+      "commission": {
+        "value": 0.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "0,00 €",
+        "price_color": "BLACK"
+      },
+      "seats_left": 3,
+      "seats": 3,
+      "seats_count_origin": 3,
+      "duration": {
+        "value": 11073,
+        "unity": "s"
+      },
+      "distance": {
+        "value": 281,
+        "unity": "km"
+      },
+      "permanent_id": "1981241036-berlin-hamburg",
+      "main_permanent_id": "1981241036-berlin-hamburg",
+      "comment": "",
+      "car": {
+        "id": "",
+        "model": "GOLF",
+        "make": "VOLKSWAGEN",
+        "comfort": "Normal",
+        "comfort_nb_star": 0,
+        "category": "CATEGORY_TOURISM"
+      },
+      "multimodal_id": {
+        "source": "CARPOOLING",
+        "id": "1981241036-berlin-hamburg"
+      },
+      "freeway": true,
+      "answer_delay": 0,
+      "bucketing_eligible": true,
+      "booking_mode": "manual",
+      "booking_type": "online",
+      "view_count": 0,
+      "cross_border_alert": false,
+      "trip_plan": [
+        {
+          "city_name": "Berlin",
+          "address": "Sophie-Charlotten-Straße 33, Berlin",
+          "latitude": 52.515248,
+          "longitude": 13.287457,
+          "country_code": "DE"
+        },
+        {
+          "city_name": "Hamburg",
+          "address": "Kornträgergang, Hamburg",
+          "latitude": 53.552448,
+          "longitude": 9.983206,
+          "country_code": "DE"
+        }
+      ],
+      "messaging_status": "public",
+      "passengers": [],
+      "display_contact": false,
+      "vehicle_pictures": [],
+      "can_report": false,
+      "locations_to_display": [
+        "Berlin",
+        "Hamburg"
+      ],
+      "corridoring_type": "PLANNED",
+      "viaggio_rosa": false,
+      "is_comfort": false,
+      "stop_overs": [],
+      "is_booking_allowed": true
+    },
+    {
+      "links": {
+        "_self": "",
+        "_front": "https://www.blablacar.de/trip/carpooling/1980339851-berlin-hamburg"
+      },
+      "departure_date": "12/06/2020 09:30:00",
+      "departure_date_iso8601": "2020-06-12T09:30:00+02:00",
+      "is_passed": false,
+      "departure_place": {
+        "city_name": "Berlin",
+        "address": "Spandauer Damm 88, 14059 Berlin, Deutschland",
+        "latitude": 52.519001007,
+        "longitude": 13.284893036,
+        "country_code": "DE"
+      },
+      "arrival_place": {
+        "city_name": "Hamburg",
+        "address": "Steintorpl., 20099 Hamburg, Deutschland",
+        "latitude": 53.552600861,
+        "longitude": 10.009400368,
+        "country_code": "DE"
+      },
+      "price": {
+        "value": 11.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "11,00 €",
+        "price_color": "BLACK"
+      },
+      "price_with_commission": {
+        "value": 11.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "11,00 €",
+        "price_color": "BLACK"
+      },
+      "price_without_commission": {
+        "value": 11.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "11,00 €",
+        "price_color": "BLACK"
+      },
+      "commission": {
+        "value": 0.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "0,00 €",
+        "price_color": "BLACK"
+      },
+      "seats_left": 3,
+      "seats": 3,
+      "seats_count_origin": 3,
+      "duration": {
+        "value": 10780,
+        "unity": "s"
+      },
+      "distance": {
+        "value": 278,
+        "unity": "km"
+      },
+      "permanent_id": "1980339851-berlin-hamburg",
+      "main_permanent_id": "1980339851-berlin-hamburg",
+      "comment": "",
+      "car": {
+        "id": "",
+        "model": "A3",
+        "make": "AUDI",
+        "comfort": "Normal",
+        "comfort_nb_star": 0,
+        "category": "CATEGORY_TOURISM"
+      },
+      "multimodal_id": {
+        "source": "CARPOOLING",
+        "id": "1980339851-berlin-hamburg"
+      },
+      "freeway": true,
+      "answer_delay": 0,
+      "bucketing_eligible": true,
+      "booking_mode": "auto",
+      "booking_type": "online",
+      "view_count": 0,
+      "cross_border_alert": false,
+      "trip_plan": [
+        {
+          "city_name": "Berlin",
+          "address": "Spandauer Damm 88, 14059 Berlin, Deutschland",
+          "latitude": 52.519001007,
+          "longitude": 13.284893036,
+          "country_code": "DE"
+        },
+        {
+          "city_name": "Hamburg",
+          "address": "Steintorpl., 20099 Hamburg, Deutschland",
+          "latitude": 53.552600861,
+          "longitude": 10.009400368,
+          "country_code": "DE"
+        }
+      ],
+      "messaging_status": "public",
+      "passengers": [],
+      "display_contact": false,
+      "vehicle_pictures": [],
+      "can_report": false,
+      "locations_to_display": [
+        "Berlin",
+        "Hamburg"
+      ],
+      "corridoring_type": "PLANNED",
+      "viaggio_rosa": false,
+      "is_comfort": false,
+      "stop_overs": [],
+      "is_booking_allowed": true
+    },
+    {
+      "links": {
+        "_self": "",
+        "_front": "https://www.blablacar.de/trip/carpooling/1981447026-berlin-hamburg-1"
+      },
+      "departure_date": "11/06/2020 13:00:00",
+      "departure_date_iso8601": "2020-06-11T13:00:00+02:00",
+      "is_passed": false,
+      "departure_place": {
+        "city_name": "Berlin",
+        "address": "Aral Messedamm Berlin, Berlin",
+        "latitude": 52.508422,
+        "longitude": 13.280755,
+        "country_code": "DE"
+      },
+      "arrival_place": {
+        "city_name": "Hamburg",
+        "address": "Unnamed Road, 22111 Hamburg, Deutschland",
+        "latitude": 53.553939,
+        "longitude": 10.08486,
+        "country_code": "DE"
+      },
+      "price": {
+        "value": 16.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "16,00 €",
+        "price_color": "BLACK"
+      },
+      "price_with_commission": {
+        "value": 16.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "16,00 €",
+        "price_color": "BLACK"
+      },
+      "price_without_commission": {
+        "value": 16.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "16,00 €",
+        "price_color": "BLACK"
+      },
+      "commission": {
+        "value": 0.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "0,00 €",
+        "price_color": "BLACK"
+      },
+      "seats_left": 4,
+      "seats": 4,
+      "seats_count_origin": 4,
+      "duration": {
+        "value": 10671,
+        "unity": "s"
+      },
+      "distance": {
+        "value": 277,
+        "unity": "km"
+      },
+      "permanent_id": "1981447026-berlin-hamburg-1",
+      "main_permanent_id": "1981447026-berlin-hamburg-1",
+      "comment": "",
+      "car": {
+        "id": "",
+        "model": "E 350",
+        "make": "MERCEDES-BENZ",
+        "comfort": "Normal",
+        "comfort_nb_star": 0,
+        "category": "CATEGORY_BERLINE"
+      },
+      "multimodal_id": {
+        "source": "CARPOOLING",
+        "id": "1981447026-berlin-hamburg-1"
+      },
+      "freeway": true,
+      "answer_delay": 0,
+      "bucketing_eligible": true,
+      "booking_mode": "manual",
+      "booking_type": "online",
+      "view_count": 0,
+      "cross_border_alert": false,
+      "trip_plan": [
+        {
+          "city_name": "Berlin",
+          "address": "Aral Messedamm Berlin, Berlin",
+          "latitude": 52.508422,
+          "longitude": 13.280755,
+          "country_code": "DE"
+        },
+        {
+          "city_name": "Hamburg",
+          "address": "Unnamed Road, 22111 Hamburg, Deutschland",
+          "latitude": 53.553939,
+          "longitude": 10.08486,
+          "country_code": "DE"
+        }
+      ],
+      "messaging_status": "public",
+      "passengers": [],
+      "display_contact": false,
+      "vehicle_pictures": [],
+      "can_report": false,
+      "locations_to_display": [
+        "Berlin",
+        "Hamburg"
+      ],
+      "corridoring_type": "PLANNED",
+      "viaggio_rosa": false,
+      "is_comfort": false,
+      "stop_overs": [],
+      "is_booking_allowed": true
+    },
+    {
+      "links": {
+        "_self": "",
+        "_front": "https://www.blablacar.de/trip/carpooling/1981611191-berlin-hamburg"
+      },
+      "departure_date": "11/06/2020 11:00:00",
+      "departure_date_iso8601": "2020-06-11T11:00:00+02:00",
+      "is_passed": false,
+      "departure_place": {
+        "city_name": "Berlin",
+        "address": "Fuggerstraße, Berlin",
+        "latitude": 52.498840332,
+        "longitude": 13.34582901,
+        "country_code": "DE"
+      },
+      "arrival_place": {
+        "city_name": "Hamburg",
+        "address": "Mr. Asia, Hamburg",
+        "latitude": 53.564605713,
+        "longitude": 9.965413094,
+        "country_code": "DE"
+      },
+      "price": {
+        "value": 11.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "11,00 €",
+        "price_color": "BLACK"
+      },
+      "price_with_commission": {
+        "value": 11.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "11,00 €",
+        "price_color": "BLACK"
+      },
+      "price_without_commission": {
+        "value": 11.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "11,00 €",
+        "price_color": "BLACK"
+      },
+      "commission": {
+        "value": 0.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "0,00 €",
+        "price_color": "BLACK"
+      },
+      "seats_left": 3,
+      "seats": 3,
+      "seats_count_origin": 3,
+      "duration": {
+        "value": 11672,
+        "unity": "s"
+      },
+      "distance": {
+        "value": 286,
+        "unity": "km"
+      },
+      "permanent_id": "1981611191-berlin-hamburg",
+      "main_permanent_id": "1981611191-berlin-hamburg",
+      "comment": "",
+      "car": {
+        "id": "",
+        "model": "GOLF PLUS",
+        "make": "VOLKSWAGEN",
+        "comfort": "Normal",
+        "comfort_nb_star": 0,
+        "category": "CATEGORY_TOURISM"
+      },
+      "multimodal_id": {
+        "source": "CARPOOLING",
+        "id": "1981611191-berlin-hamburg"
+      },
+      "freeway": true,
+      "answer_delay": 0,
+      "bucketing_eligible": true,
+      "booking_mode": "auto",
+      "booking_type": "online",
+      "view_count": 0,
+      "cross_border_alert": false,
+      "trip_plan": [
+        {
+          "city_name": "Berlin",
+          "address": "Fuggerstraße, Berlin",
+          "latitude": 52.498840332,
+          "longitude": 13.34582901,
+          "country_code": "DE"
+        },
+        {
+          "city_name": "Hamburg",
+          "address": "Mr. Asia, Hamburg",
+          "latitude": 53.564605713,
+          "longitude": 9.965413094,
+          "country_code": "DE"
+        }
+      ],
+      "messaging_status": "public",
+      "passengers": [],
+      "display_contact": false,
+      "vehicle_pictures": [],
+      "can_report": false,
+      "locations_to_display": [
+        "Berlin",
+        "Hamburg"
+      ],
+      "corridoring_type": "PLANNED",
+      "viaggio_rosa": false,
+      "is_comfort": false,
+      "stop_overs": [],
+      "is_booking_allowed": true
+    },
+    {
+      "links": {
+        "_self": "",
+        "_front": "https://www.blablacar.de/trip/carpooling/1976921249-berlin-hamburg"
+      },
+      "departure_date": "07/06/2020 21:50:00",
+      "departure_date_iso8601": "2020-06-07T21:50:00+02:00",
+      "is_passed": false,
+      "departure_place": {
+        "city_name": "Berlin",
+        "address": "S-Bahnhof Tempelhof, Berlin",
+        "latitude": 52.47097,
+        "longitude": 13.384445,
+        "country_code": "DE"
+      },
+      "arrival_place": {
+        "city_name": "Hamburg",
+        "address": "Hamburg Hbf (S-Bahn), Hamburg",
+        "latitude": 53.552845,
+        "longitude": 10.006683,
+        "country_code": "DE"
+      },
+      "price": {
+        "value": 14.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "14,00 €",
+        "price_color": "BLACK"
+      },
+      "price_with_commission": {
+        "value": 14.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "14,00 €",
+        "price_color": "BLACK"
+      },
+      "price_without_commission": {
+        "value": 14.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "14,00 €",
+        "price_color": "BLACK"
+      },
+      "commission": {
+        "value": 0.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "0,00 €",
+        "price_color": "BLACK"
+      },
+      "seats_left": 1,
+      "seats": 1,
+      "seats_count_origin": 1,
+      "duration": {
+        "value": 11485,
+        "unity": "s"
+      },
+      "distance": {
+        "value": 290,
+        "unity": "km"
+      },
+      "permanent_id": "1976921249-berlin-hamburg",
+      "main_permanent_id": "1976921249-berlin-hamburg",
+      "comment": "",
+      "car": {
+        "id": "",
+        "model": "MONDEO",
+        "make": "FORD",
+        "comfort": "Normal",
+        "comfort_nb_star": 0,
+        "category": "CATEGORY_BREAK"
+      },
+      "multimodal_id": {
+        "source": "CARPOOLING",
+        "id": "1976921249-berlin-hamburg"
+      },
+      "freeway": true,
+      "answer_delay": 0,
+      "bucketing_eligible": true,
+      "booking_mode": "manual",
+      "booking_type": "online",
+      "view_count": 0,
+      "cross_border_alert": false,
+      "trip_plan": [
+        {
+          "city_name": "Berlin",
+          "address": "S-Bahnhof Tempelhof, Berlin",
+          "latitude": 52.47097,
+          "longitude": 13.384445,
+          "country_code": "DE"
+        },
+        {
+          "city_name": "Hamburg",
+          "address": "Hamburg Hbf (S-Bahn), Hamburg",
+          "latitude": 53.552845,
+          "longitude": 10.006683,
+          "country_code": "DE"
+        }
+      ],
+      "messaging_status": "public",
+      "passengers": [],
+      "display_contact": false,
+      "vehicle_pictures": [],
+      "can_report": false,
+      "locations_to_display": [
+        "Berlin",
+        "Hamburg"
+      ],
+      "corridoring_type": "PLANNED",
+      "viaggio_rosa": false,
+      "is_comfort": false,
+      "stop_overs": [],
+      "is_booking_allowed": true
+    },
+    {
+      "links": {
+        "_self": "",
+        "_front": "https://www.blablacar.de/trip/carpooling/1955676158-berlin-hamburg"
+      },
+      "departure_date": "07/06/2020 10:30:00",
+      "departure_date_iso8601": "2020-06-07T10:30:00+02:00",
+      "is_passed": false,
+      "departure_place": {
+        "city_name": "Berlin",
+        "address": "Berlin, Deutschland",
+        "latitude": 52.520006,
+        "longitude": 13.404954,
+        "country_code": "DE"
+      },
+      "arrival_place": {
+        "city_name": "Hamburg",
+        "address": "Hamburg Hbf",
+        "latitude": 53.552924,
+        "longitude": 10.006604,
+        "country_code": "DE"
+      },
+      "price": {
+        "value": 15.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "15,00 €",
+        "price_color": "BLACK"
+      },
+      "price_with_commission": {
+        "value": 15.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "15,00 €",
+        "price_color": "BLACK"
+      },
+      "price_without_commission": {
+        "value": 15.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "15,00 €",
+        "price_color": "BLACK"
+      },
+      "commission": {
+        "value": 0.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "0,00 €",
+        "price_color": "BLACK"
+      },
+      "seats_left": 3,
+      "seats": 3,
+      "seats_count_origin": 3,
+      "duration": {
+        "value": 11356,
+        "unity": "s"
+      },
+      "distance": {
+        "value": 282,
+        "unity": "km"
+      },
+      "permanent_id": "1955676158-berlin-hamburg",
+      "main_permanent_id": "1955676158-berlin-hamburg",
+      "comment": "",
+      "multimodal_id": {
+        "source": "CARPOOLING",
+        "id": "1955676158-berlin-hamburg"
+      },
+      "freeway": true,
+      "answer_delay": 0,
+      "bucketing_eligible": true,
+      "booking_mode": "manual",
+      "booking_type": "onboard",
+      "view_count": 0,
+      "cross_border_alert": false,
+      "trip_plan": [
+        {
+          "city_name": "Berlin",
+          "address": "Berlin, Deutschland",
+          "latitude": 52.520006,
+          "longitude": 13.404954,
+          "country_code": "DE"
+        },
+        {
+          "city_name": "Hamburg",
+          "address": "Hamburg Hbf",
+          "latitude": 53.552924,
+          "longitude": 10.006604,
+          "country_code": "DE"
+        }
+      ],
+      "messaging_status": "public",
+      "passengers": [],
+      "display_contact": false,
+      "vehicle_pictures": [],
+      "can_report": false,
+      "locations_to_display": [
+        "Berlin",
+        "Hamburg"
+      ],
+      "corridoring_type": "PLANNED",
+      "viaggio_rosa": false,
+      "is_comfort": true,
+      "stop_overs": [],
+      "is_booking_allowed": true
+    },
+    {
+      "links": {
+        "_self": "",
+        "_front": "https://www.blablacar.de/trip/carpooling/1981410521-berlin-hamburg"
+      },
+      "departure_date": "05/06/2020 19:30:00",
+      "departure_date_iso8601": "2020-06-05T19:30:00+02:00",
+      "is_passed": false,
+      "departure_place": {
+        "city_name": "Berlin",
+        "address": "Berlin Ostkreuz, Berlin, Deutschland",
+        "latitude": 52.503153,
+        "longitude": 13.469326,
+        "country_code": "DE"
+      },
+      "arrival_place": {
+        "city_name": "Hamburg",
+        "address": "Hamburg Hauptbahnhof",
+        "latitude": 53.553071,
+        "longitude": 10.006542,
+        "country_code": "DE"
+      },
+      "price": {
+        "value": 12.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "12,00 €",
+        "price_color": "BLACK"
+      },
+      "price_with_commission": {
+        "value": 12.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "12,00 €",
+        "price_color": "BLACK"
+      },
+      "price_without_commission": {
+        "value": 12.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "12,00 €",
+        "price_color": "BLACK"
+      },
+      "commission": {
+        "value": 0.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "0,00 €",
+        "price_color": "BLACK"
+      },
+      "seats_left": 2,
+      "seats": 2,
+      "seats_count_origin": 2,
+      "duration": {
+        "value": 11916,
+        "unity": "s"
+      },
+      "distance": {
+        "value": 288,
+        "unity": "km"
+      },
+      "permanent_id": "1981410521-berlin-hamburg",
+      "main_permanent_id": "1981410521-berlin-hamburg",
+      "comment": "",
+      "car": {
+        "id": "",
+        "model": "FIESTA",
+        "make": "FORD",
+        "comfort": "Normal",
+        "comfort_nb_star": 0,
+        "category": "CATEGORY_TOURISM"
+      },
+      "multimodal_id": {
+        "source": "CARPOOLING",
+        "id": "1981410521-berlin-hamburg"
+      },
+      "freeway": true,
+      "answer_delay": 0,
+      "bucketing_eligible": true,
+      "booking_mode": "manual",
+      "booking_type": "onboard",
+      "view_count": 0,
+      "cross_border_alert": false,
+      "trip_plan": [
+        {
+          "city_name": "Berlin",
+          "address": "Berlin Ostkreuz, Berlin, Deutschland",
+          "latitude": 52.503153,
+          "longitude": 13.469326,
+          "country_code": "DE"
+        },
+        {
+          "city_name": "Hamburg",
+          "address": "Hamburg Hauptbahnhof",
+          "latitude": 53.553071,
+          "longitude": 10.006542,
+          "country_code": "DE"
+        }
+      ],
+      "messaging_status": "public",
+      "passengers": [],
+      "display_contact": false,
+      "vehicle_pictures": [],
+      "can_report": false,
+      "locations_to_display": [
+        "Berlin",
+        "Hamburg"
+      ],
+      "corridoring_type": "PLANNED",
+      "viaggio_rosa": false,
+      "is_comfort": true,
+      "stop_overs": [],
+      "is_booking_allowed": true
+    },
+    {
+      "links": {
+        "_self": "",
+        "_front": "https://www.blablacar.de/trip/carpooling/1982610101-berlin-hamburg"
+      },
+      "departure_date": "05/06/2020 18:00:00",
+      "departure_date_iso8601": "2020-06-05T18:00:00+02:00",
+      "is_passed": false,
+      "departure_place": {
+        "city_name": "Berlin",
+        "address": "Alexanderplatz",
+        "latitude": 52.521900177,
+        "longitude": 13.413200378,
+        "country_code": "DE"
+      },
+      "arrival_place": {
+        "city_name": "Hamburg",
+        "address": "Hamburg Hbf",
+        "latitude": 53.552898407,
+        "longitude": 10.00660038,
+        "country_code": "DE"
+      },
+      "price": {
+        "value": 16.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "16,00 €",
+        "price_color": "BLACK"
+      },
+      "price_with_commission": {
+        "value": 16.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "16,00 €",
+        "price_color": "BLACK"
+      },
+      "price_without_commission": {
+        "value": 16.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "16,00 €",
+        "price_color": "BLACK"
+      },
+      "commission": {
+        "value": 0.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "0,00 €",
+        "price_color": "BLACK"
+      },
+      "seats_left": 2,
+      "seats": 2,
+      "seats_count_origin": 2,
+      "duration": {
+        "value": 11442,
+        "unity": "s"
+      },
+      "distance": {
+        "value": 283,
+        "unity": "km"
+      },
+      "permanent_id": "1982610101-berlin-hamburg",
+      "main_permanent_id": "1982610101-berlin-hamburg",
+      "comment": "",
+      "car": {
+        "id": "",
+        "model": "PASSAT",
+        "make": "VOLKSWAGEN",
+        "comfort": "Normal",
+        "comfort_nb_star": 0,
+        "category": "CATEGORY_BREAK"
+      },
+      "multimodal_id": {
+        "source": "CARPOOLING",
+        "id": "1982610101-berlin-hamburg"
+      },
+      "freeway": true,
+      "answer_delay": 0,
+      "bucketing_eligible": true,
+      "booking_mode": "auto",
+      "booking_type": "online",
+      "view_count": 0,
+      "cross_border_alert": false,
+      "trip_plan": [
+        {
+          "city_name": "Berlin",
+          "address": "Alexanderplatz",
+          "latitude": 52.521900177,
+          "longitude": 13.413200378,
+          "country_code": "DE"
+        },
+        {
+          "city_name": "Hamburg",
+          "address": "Hamburg Hbf",
+          "latitude": 53.552898407,
+          "longitude": 10.00660038,
+          "country_code": "DE"
+        }
+      ],
+      "messaging_status": "public",
+      "passengers": [],
+      "display_contact": false,
+      "vehicle_pictures": [],
+      "can_report": false,
+      "locations_to_display": [
+        "Berlin",
+        "Hamburg"
+      ],
+      "corridoring_type": "PLANNED",
+      "viaggio_rosa": false,
+      "is_comfort": false,
+      "stop_overs": [],
+      "is_booking_allowed": true
+    },
+    {
+      "links": {
+        "_self": "",
+        "_front": "https://www.blablacar.de/trip/carpooling/1932162990-berlin-hamburg"
+      },
+      "departure_date": "05/06/2020 09:30:00",
+      "departure_date_iso8601": "2020-06-05T09:30:00+02:00",
+      "is_passed": false,
+      "departure_place": {
+        "city_name": "Berlin",
+        "address": "Spandauer Damm 88, 14059 Berlin, Deutschland",
+        "latitude": 52.519001007,
+        "longitude": 13.284893036,
+        "country_code": "DE"
+      },
+      "arrival_place": {
+        "city_name": "Hamburg",
+        "address": "Steintorpl., 20099 Hamburg, Deutschland",
+        "latitude": 53.552600861,
+        "longitude": 10.009400368,
+        "country_code": "DE"
+      },
+      "price": {
+        "value": 13.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "13,00 €",
+        "price_color": "BLACK"
+      },
+      "price_with_commission": {
+        "value": 13.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "13,00 €",
+        "price_color": "BLACK"
+      },
+      "price_without_commission": {
+        "value": 13.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "13,00 €",
+        "price_color": "BLACK"
+      },
+      "commission": {
+        "value": 0.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "0,00 €",
+        "price_color": "BLACK"
+      },
+      "seats_left": 3,
+      "seats": 3,
+      "seats_count_origin": 3,
+      "duration": {
+        "value": 10780,
+        "unity": "s"
+      },
+      "distance": {
+        "value": 278,
+        "unity": "km"
+      },
+      "permanent_id": "1932162990-berlin-hamburg",
+      "main_permanent_id": "1932162990-berlin-hamburg",
+      "comment": "",
+      "car": {
+        "id": "",
+        "model": "A3",
+        "make": "AUDI",
+        "comfort": "Normal",
+        "comfort_nb_star": 0,
+        "category": "CATEGORY_TOURISM"
+      },
+      "multimodal_id": {
+        "source": "CARPOOLING",
+        "id": "1932162990-berlin-hamburg"
+      },
+      "freeway": true,
+      "answer_delay": 0,
+      "bucketing_eligible": true,
+      "booking_mode": "auto",
+      "booking_type": "online",
+      "view_count": 0,
+      "cross_border_alert": false,
+      "trip_plan": [
+        {
+          "city_name": "Berlin",
+          "address": "Spandauer Damm 88, 14059 Berlin, Deutschland",
+          "latitude": 52.519001007,
+          "longitude": 13.284893036,
+          "country_code": "DE"
+        },
+        {
+          "city_name": "Hamburg",
+          "address": "Steintorpl., 20099 Hamburg, Deutschland",
+          "latitude": 53.552600861,
+          "longitude": 10.009400368,
+          "country_code": "DE"
+        }
+      ],
+      "messaging_status": "public",
+      "passengers": [],
+      "display_contact": false,
+      "vehicle_pictures": [],
+      "can_report": false,
+      "locations_to_display": [
+        "Berlin",
+        "Hamburg"
+      ],
+      "corridoring_type": "PLANNED",
+      "viaggio_rosa": false,
+      "is_comfort": false,
+      "stop_overs": [],
+      "is_booking_allowed": true
+    },
+    {
+      "links": {
+        "_self": "",
+        "_front": "https://www.blablacar.de/trip/carpooling/1982009716-berlin-hamburg"
+      },
+      "departure_date": "05/06/2020 09:00:00",
+      "departure_date_iso8601": "2020-06-05T09:00:00+02:00",
+      "is_passed": false,
+      "departure_place": {
+        "city_name": "Berlin",
+        "address": "Gesundbrunnen-Center Berlin, Berlin",
+        "latitude": 52.549775,
+        "longitude": 13.387613,
+        "country_code": "DE"
+      },
+      "arrival_place": {
+        "city_name": "Hamburg",
+        "address": "Hamburg Hbf, Hamburg",
+        "latitude": 53.552925,
+        "longitude": 10.006604,
+        "country_code": "DE"
+      },
+      "price": {
+        "value": 15.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "15,00 €",
+        "price_color": "BLACK"
+      },
+      "price_with_commission": {
+        "value": 15.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "15,00 €",
+        "price_color": "BLACK"
+      },
+      "price_without_commission": {
+        "value": 15.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "15,00 €",
+        "price_color": "BLACK"
+      },
+      "commission": {
+        "value": 0.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "0,00 €",
+        "price_color": "BLACK"
+      },
+      "seats_left": 3,
+      "seats": 3,
+      "seats_count_origin": 3,
+      "duration": {
+        "value": 11127,
+        "unity": "s"
+      },
+      "distance": {
+        "value": 279,
+        "unity": "km"
+      },
+      "permanent_id": "1982009716-berlin-hamburg",
+      "main_permanent_id": "1982009716-berlin-hamburg",
+      "comment": "",
+      "car": {
+        "id": "",
+        "model": "VECTRA",
+        "make": "OPEL",
+        "comfort": "Normal",
+        "comfort_nb_star": 0,
+        "category": "CATEGORY_BERLINE"
+      },
+      "multimodal_id": {
+        "source": "CARPOOLING",
+        "id": "1982009716-berlin-hamburg"
+      },
+      "freeway": true,
+      "answer_delay": 0,
+      "bucketing_eligible": true,
+      "booking_mode": "manual",
+      "booking_type": "onboard",
+      "view_count": 0,
+      "cross_border_alert": false,
+      "trip_plan": [
+        {
+          "city_name": "Berlin",
+          "address": "Gesundbrunnen-Center Berlin, Berlin",
+          "latitude": 52.549775,
+          "longitude": 13.387613,
+          "country_code": "DE"
+        },
+        {
+          "city_name": "Hamburg",
+          "address": "Hamburg Hbf, Hamburg",
+          "latitude": 53.552925,
+          "longitude": 10.006604,
+          "country_code": "DE"
+        }
+      ],
+      "messaging_status": "public",
+      "passengers": [],
+      "display_contact": false,
+      "vehicle_pictures": [],
+      "can_report": false,
+      "locations_to_display": [
+        "Berlin",
+        "Hamburg"
+      ],
+      "corridoring_type": "PLANNED",
+      "viaggio_rosa": false,
+      "is_comfort": true,
+      "stop_overs": [],
+      "is_booking_allowed": true
+    },
+    {
+      "links": {
+        "_self": "",
+        "_front": "https://www.blablacar.de/trip/carpooling/1982828216-berlin-gambur"
+      },
+      "departure_date": "04/06/2020 00:10:00",
+      "departure_date_iso8601": "2020-06-04T00:10:00+02:00",
+      "is_passed": false,
+      "departure_place": {
+        "city_name": "Berlin",
+        "address": "Tauentzienstraße 9-12, 10789 Berlin, Germany",
+        "latitude": 52.503877,
+        "longitude": 13.338114,
+        "country_code": "DE"
+      },
+      "arrival_place": {
+        "city_name": "Hamburg",
+        "address": "Гамбурґ",
+        "latitude": 53.551084,
+        "longitude": 9.993681,
+        "country_code": "DE"
+      },
+      "price": {
+        "value": 17.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "17,00 €",
+        "price_color": "BLACK"
+      },
+      "price_with_commission": {
+        "value": 17.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "17,00 €",
+        "price_color": "BLACK"
+      },
+      "price_without_commission": {
+        "value": 17.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "17,00 €",
+        "price_color": "BLACK"
+      },
+      "commission": {
+        "value": 0.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "0,00 €",
+        "price_color": "BLACK"
+      },
+      "seats_left": 3,
+      "seats": 3,
+      "seats_count_origin": 3,
+      "duration": {
+        "value": 17249,
+        "unity": "s"
+      },
+      "distance": {
+        "value": 428,
+        "unity": "km"
+      },
+      "permanent_id": "1982828216-berlin-gambur",
+      "main_permanent_id": "1982828216-berlin-gambur",
+      "comment": "",
+      "multimodal_id": {
+        "source": "CARPOOLING",
+        "id": "1982828216-berlin-gambur"
+      },
+      "freeway": true,
+      "answer_delay": 0,
+      "bucketing_eligible": true,
+      "booking_mode": "manual",
+      "booking_type": "onboard",
+      "view_count": 0,
+      "cross_border_alert": false,
+      "trip_plan": [
+        {
+          "city_name": "Berlin",
+          "address": "Tauentzienstraße 9-12, 10789 Berlin, Germany",
+          "latitude": 52.503877,
+          "longitude": 13.338114,
+          "country_code": "DE"
+        },
+        {
+          "city_name": "Hamburg",
+          "address": "Гамбурґ",
+          "latitude": 53.551084,
+          "longitude": 9.993681,
+          "country_code": "DE"
+        }
+      ],
+      "messaging_status": "public",
+      "passengers": [],
+      "display_contact": false,
+      "vehicle_pictures": [],
+      "can_report": false,
+      "locations_to_display": [
+        "Berlin",
+        "Hamburg"
+      ],
+      "corridoring_type": "PLANNED",
+      "viaggio_rosa": false,
+      "is_comfort": true,
+      "stop_overs": [],
+      "is_booking_allowed": true
+    },
+    {
+      "links": {
+        "_self": "",
+        "_front": "https://www.blablacar.de/trip/carpooling/1981240996-berlin-gambur"
+      },
+      "departure_date": "03/06/2020 22:20:00",
+      "departure_date_iso8601": "2020-06-03T22:20:00+02:00",
+      "is_passed": false,
+      "departure_place": {
+        "city_name": "Berlin",
+        "address": "Ibsenstraße 47, 10439 Berlin, Німеччина",
+        "latitude": 52.555529,
+        "longitude": 13.404588,
+        "country_code": "DE"
+      },
+      "arrival_place": {
+        "city_name": "Hamburg",
+        "address": "Гамбурґ",
+        "latitude": 53.551084,
+        "longitude": 9.993681,
+        "country_code": "DE"
+      },
+      "price": {
+        "value": 7.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "7,00 €",
+        "price_color": "BLACK"
+      },
+      "price_with_commission": {
+        "value": 7.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "7,00 €",
+        "price_color": "BLACK"
+      },
+      "price_without_commission": {
+        "value": 7.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "7,00 €",
+        "price_color": "BLACK"
+      },
+      "commission": {
+        "value": 0.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "0,00 €",
+        "price_color": "BLACK"
+      },
+      "seats_left": 3,
+      "seats": 3,
+      "seats_count_origin": 3,
+      "duration": {
+        "value": 11318,
+        "unity": "s"
+      },
+      "distance": {
+        "value": 281,
+        "unity": "km"
+      },
+      "permanent_id": "1981240996-berlin-gambur",
+      "main_permanent_id": "1981240996-berlin-gambur",
+      "comment": "",
+      "multimodal_id": {
+        "source": "CARPOOLING",
+        "id": "1981240996-berlin-gambur"
+      },
+      "freeway": true,
+      "answer_delay": 0,
+      "bucketing_eligible": true,
+      "booking_mode": "auto",
+      "booking_type": "onboard",
+      "view_count": 0,
+      "cross_border_alert": false,
+      "trip_plan": [
+        {
+          "city_name": "Berlin",
+          "address": "Ibsenstraße 47, 10439 Berlin, Німеччина",
+          "latitude": 52.555529,
+          "longitude": 13.404588,
+          "country_code": "DE"
+        },
+        {
+          "city_name": "Hamburg",
+          "address": "Гамбурґ",
+          "latitude": 53.551084,
+          "longitude": 9.993681,
+          "country_code": "DE"
+        }
+      ],
+      "messaging_status": "public",
+      "passengers": [],
+      "display_contact": false,
+      "vehicle_pictures": [],
+      "can_report": false,
+      "locations_to_display": [
+        "Berlin",
+        "Hamburg"
+      ],
+      "corridoring_type": "PLANNED",
+      "viaggio_rosa": false,
+      "is_comfort": true,
+      "stop_overs": [],
+      "is_booking_allowed": true
+    },
+    {
+      "links": {
+        "_self": "",
+        "_front": "https://www.blablacar.de/trip/carpooling/1982576251-berlin-hamburg"
+      },
+      "departure_date": "03/06/2020 20:00:00",
+      "departure_date_iso8601": "2020-06-03T20:00:00+02:00",
+      "is_passed": false,
+      "departure_place": {
+        "city_name": "Berlin",
+        "address": "Berlin Hauptbahnhof, Berlin",
+        "latitude": 52.525083,
+        "longitude": 13.369402,
+        "country_code": "DE"
+      },
+      "arrival_place": {
+        "city_name": "Hamburg",
+        "address": "Hamburg Hbf, Hamburg",
+        "latitude": 53.552925,
+        "longitude": 10.006604,
+        "country_code": "DE"
+      },
+      "price": {
+        "value": 13.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "13,00 €",
+        "price_color": "BLACK"
+      },
+      "price_with_commission": {
+        "value": 13.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "13,00 €",
+        "price_color": "BLACK"
+      },
+      "price_without_commission": {
+        "value": 13.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "13,00 €",
+        "price_color": "BLACK"
+      },
+      "commission": {
+        "value": 0.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "0,00 €",
+        "price_color": "BLACK"
+      },
+      "seats_left": 4,
+      "seats": 4,
+      "seats_count_origin": 4,
+      "duration": {
+        "value": 15769,
+        "unity": "s"
+      },
+      "distance": {
+        "value": 375,
+        "unity": "km"
+      },
+      "permanent_id": "1982576251-berlin-hamburg",
+      "main_permanent_id": "1982576251-berlin-hamburg",
+      "comment": "",
+      "car": {
+        "id": "",
+        "model": "3 SERIES",
+        "make": "BMW",
+        "comfort": "Normal",
+        "comfort_nb_star": 0,
+        "category": "CATEGORY_BREAK"
+      },
+      "multimodal_id": {
+        "source": "CARPOOLING",
+        "id": "1982576251-berlin-hamburg"
+      },
+      "freeway": true,
+      "answer_delay": 0,
+      "bucketing_eligible": true,
+      "booking_mode": "manual",
+      "booking_type": "onboard",
+      "view_count": 0,
+      "cross_border_alert": false,
+      "trip_plan": [
+        {
+          "city_name": "Berlin",
+          "address": "Berlin Hauptbahnhof, Berlin",
+          "latitude": 52.525083,
+          "longitude": 13.369402,
+          "country_code": "DE"
+        },
+        {
+          "city_name": "Hamburg",
+          "address": "Hamburg Hbf, Hamburg",
+          "latitude": 53.552925,
+          "longitude": 10.006604,
+          "country_code": "DE"
+        }
+      ],
+      "messaging_status": "public",
+      "passengers": [],
+      "display_contact": false,
+      "vehicle_pictures": [],
+      "can_report": false,
+      "locations_to_display": [
+        "Berlin",
+        "Hamburg"
+      ],
+      "corridoring_type": "PLANNED",
+      "viaggio_rosa": false,
+      "is_comfort": false,
+      "stop_overs": [],
+      "is_booking_allowed": true
+    },
+    {
+      "links": {
+        "_self": "",
+        "_front": "https://www.blablacar.de/trip/carpooling/1982606071-berlin-hamburg"
+      },
+      "departure_date": "03/06/2020 18:00:00",
+      "departure_date_iso8601": "2020-06-03T18:00:00+02:00",
+      "is_passed": false,
+      "departure_place": {
+        "city_name": "Berlin",
+        "address": "Lichtenberger Straße, Berlin",
+        "latitude": 52.518042,
+        "longitude": 13.427814,
+        "country_code": "DE"
+      },
+      "arrival_place": {
+        "city_name": "Hamburg",
+        "address": "Holstenstraße, Hamburg",
+        "latitude": 53.556812,
+        "longitude": 9.950083,
+        "country_code": "DE"
+      },
+      "price": {
+        "value": 15.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "15,00 €",
+        "price_color": "BLACK"
+      },
+      "price_with_commission": {
+        "value": 15.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "15,00 €",
+        "price_color": "BLACK"
+      },
+      "price_without_commission": {
+        "value": 15.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "15,00 €",
+        "price_color": "BLACK"
+      },
+      "commission": {
+        "value": 0.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "0,00 €",
+        "price_color": "BLACK"
+      },
+      "seats_left": 3,
+      "seats": 3,
+      "seats_count_origin": 3,
+      "duration": {
+        "value": 13722,
+        "unity": "s"
+      },
+      "distance": {
+        "value": 309,
+        "unity": "km"
+      },
+      "permanent_id": "1982606071-berlin-hamburg",
+      "main_permanent_id": "1982606071-berlin-hamburg",
+      "comment": "",
+      "car": {
+        "id": "",
+        "model": "COOPER",
+        "make": "MINI",
+        "comfort": "Normal",
+        "comfort_nb_star": 0,
+        "category": "CATEGORY_TOURISM"
+      },
+      "multimodal_id": {
+        "source": "CARPOOLING",
+        "id": "1982606071-berlin-hamburg"
+      },
+      "freeway": true,
+      "answer_delay": 0,
+      "bucketing_eligible": true,
+      "booking_mode": "manual",
+      "booking_type": "online",
+      "view_count": 0,
+      "cross_border_alert": false,
+      "trip_plan": [
+        {
+          "city_name": "Berlin",
+          "address": "Lichtenberger Straße, Berlin",
+          "latitude": 52.518042,
+          "longitude": 13.427814,
+          "country_code": "DE"
+        },
+        {
+          "city_name": "Hamburg",
+          "address": "Holstenstraße, Hamburg",
+          "latitude": 53.556812,
+          "longitude": 9.950083,
+          "country_code": "DE"
+        }
+      ],
+      "messaging_status": "public",
+      "passengers": [],
+      "display_contact": false,
+      "vehicle_pictures": [],
+      "can_report": false,
+      "locations_to_display": [
+        "Berlin",
+        "Hamburg"
+      ],
+      "corridoring_type": "PLANNED",
+      "viaggio_rosa": false,
+      "is_comfort": false,
+      "stop_overs": [],
+      "is_booking_allowed": true
+    },
+    {
+      "links": {
+        "_self": "",
+        "_front": "https://www.blablacar.de/trip/carpooling/1981896441-berlin-hamburg"
+      },
+      "departure_date": "03/06/2020 13:00:00",
+      "departure_date_iso8601": "2020-06-03T13:00:00+02:00",
+      "is_passed": false,
+      "departure_place": {
+        "city_name": "Berlin",
+        "address": "Berliner Str. 32, 13127 Berlin, Deutschland",
+        "latitude": 52.601096,
+        "longitude": 13.432409,
+        "country_code": "DE"
+      },
+      "arrival_place": {
+        "city_name": "Hamburg",
+        "address": "Bahnhof Harburg",
+        "latitude": 53.456464,
+        "longitude": 9.991407,
+        "country_code": "DE"
+      },
+      "price": {
+        "value": 12.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "12,00 €",
+        "price_color": "BLACK"
+      },
+      "price_with_commission": {
+        "value": 12.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "12,00 €",
+        "price_color": "BLACK"
+      },
+      "price_without_commission": {
+        "value": 12.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "12,00 €",
+        "price_color": "BLACK"
+      },
+      "commission": {
+        "value": 0.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "0,00 €",
+        "price_color": "BLACK"
+      },
+      "seats_left": 1,
+      "seats": 1,
+      "seats_count_origin": 1,
+      "duration": {
+        "value": 11373,
+        "unity": "s"
+      },
+      "distance": {
+        "value": 287,
+        "unity": "km"
+      },
+      "permanent_id": "1981896441-berlin-hamburg",
+      "main_permanent_id": "1981896441-berlin-hamburg",
+      "comment": "",
+      "multimodal_id": {
+        "source": "CARPOOLING",
+        "id": "1981896441-berlin-hamburg"
+      },
+      "freeway": true,
+      "answer_delay": 0,
+      "bucketing_eligible": true,
+      "booking_mode": "manual",
+      "booking_type": "onboard",
+      "view_count": 0,
+      "cross_border_alert": false,
+      "trip_plan": [
+        {
+          "city_name": "Berlin",
+          "address": "Berliner Str. 32, 13127 Berlin, Deutschland",
+          "latitude": 52.601096,
+          "longitude": 13.432409,
+          "country_code": "DE"
+        },
+        {
+          "city_name": "Hamburg",
+          "address": "Bahnhof Harburg",
+          "latitude": 53.456464,
+          "longitude": 9.991407,
+          "country_code": "DE"
+        }
+      ],
+      "messaging_status": "public",
+      "passengers": [],
+      "display_contact": false,
+      "vehicle_pictures": [],
+      "can_report": false,
+      "locations_to_display": [
+        "Berlin",
+        "Hamburg"
+      ],
+      "corridoring_type": "PLANNED",
+      "viaggio_rosa": false,
+      "is_comfort": true,
+      "stop_overs": [],
+      "is_booking_allowed": true
+    },
+    {
+      "links": {
+        "_self": "",
+        "_front": "https://www.blablacar.de/trip/carpooling/1982143091-berlin-hamburg"
+      },
+      "departure_date": "03/06/2020 07:20:00",
+      "departure_date_iso8601": "2020-06-03T07:20:00+02:00",
+      "is_passed": false,
+      "departure_place": {
+        "city_name": "Berlin",
+        "address": "Danziger Str., Berlin, Deutschland",
+        "latitude": 52.536128,
+        "longitude": 13.432764,
+        "country_code": "DE"
+      },
+      "arrival_place": {
+        "city_name": "Hamburg",
+        "address": "Werner-Siemens-Straße, 22113 Hamburg, Deutschland",
+        "latitude": 53.529687,
+        "longitude": 10.094561,
+        "country_code": "DE"
+      },
+      "price": {
+        "value": 15.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "15,00 €",
+        "price_color": "BLACK"
+      },
+      "price_with_commission": {
+        "value": 15.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "15,00 €",
+        "price_color": "BLACK"
+      },
+      "price_without_commission": {
+        "value": 15.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "15,00 €",
+        "price_color": "BLACK"
+      },
+      "commission": {
+        "value": 0.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "0,00 €",
+        "price_color": "BLACK"
+      },
+      "seats_left": 3,
+      "seats": 3,
+      "seats_count_origin": 3,
+      "duration": {
+        "value": 11266,
+        "unity": "s"
+      },
+      "distance": {
+        "value": 279,
+        "unity": "km"
+      },
+      "permanent_id": "1982143091-berlin-hamburg",
+      "main_permanent_id": "1982143091-berlin-hamburg",
+      "comment": "",
+      "multimodal_id": {
+        "source": "CARPOOLING",
+        "id": "1982143091-berlin-hamburg"
+      },
+      "freeway": true,
+      "answer_delay": 0,
+      "bucketing_eligible": true,
+      "booking_mode": "manual",
+      "booking_type": "online",
+      "view_count": 0,
+      "cross_border_alert": false,
+      "trip_plan": [
+        {
+          "city_name": "Berlin",
+          "address": "Danziger Str., Berlin, Deutschland",
+          "latitude": 52.536128,
+          "longitude": 13.432764,
+          "country_code": "DE"
+        },
+        {
+          "city_name": "Hamburg",
+          "address": "Werner-Siemens-Straße, 22113 Hamburg, Deutschland",
+          "latitude": 53.529687,
+          "longitude": 10.094561,
+          "country_code": "DE"
+        }
+      ],
+      "messaging_status": "public",
+      "passengers": [],
+      "display_contact": false,
+      "vehicle_pictures": [],
+      "can_report": false,
+      "locations_to_display": [
+        "Berlin",
+        "Hamburg"
+      ],
+      "corridoring_type": "PLANNED",
+      "viaggio_rosa": false,
+      "is_comfort": false,
+      "stop_overs": [],
+      "is_booking_allowed": true
+    },
+    {
+      "links": {
+        "_self": "",
+        "_front": "https://www.blablacar.de/trip/carpooling/1982785496-berlin-hamburg"
+      },
+      "departure_date": "02/06/2020 15:50:00",
+      "departure_date_iso8601": "2020-06-02T15:50:00+02:00",
+      "is_passed": false,
+      "departure_place": {
+        "city_name": "Berlin",
+        "address": "Platz der Luftbrücke 12101",
+        "latitude": 52.483859,
+        "longitude": 13.388157,
+        "country_code": "DE"
+      },
+      "arrival_place": {
+        "city_name": "Hamburg",
+        "address": "Sievekingsallee 75, 20535",
+        "latitude": 53.560848,
+        "longitude": 10.058518,
+        "country_code": "DE"
+      },
+      "price": {
+        "value": 16.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "16,00 €",
+        "price_color": "BLACK"
+      },
+      "price_with_commission": {
+        "value": 16.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "16,00 €",
+        "price_color": "BLACK"
+      },
+      "price_without_commission": {
+        "value": 16.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "16,00 €",
+        "price_color": "BLACK"
+      },
+      "commission": {
+        "value": 0.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "0,00 €",
+        "price_color": "BLACK"
+      },
+      "seats_left": 3,
+      "seats": 3,
+      "seats_count_origin": 3,
+      "duration": {
+        "value": 11216,
+        "unity": "s"
+      },
+      "distance": {
+        "value": 286,
+        "unity": "km"
+      },
+      "permanent_id": "1982785496-berlin-hamburg",
+      "main_permanent_id": "1982785496-berlin-hamburg",
+      "comment": "",
+      "car": {
+        "id": "",
+        "model": "MONDEO",
+        "make": "FORD",
+        "comfort": "Normal",
+        "comfort_nb_star": 0,
+        "category": "CATEGORY_BREAK"
+      },
+      "multimodal_id": {
+        "source": "CARPOOLING",
+        "id": "1982785496-berlin-hamburg"
+      },
+      "freeway": true,
+      "answer_delay": 0,
+      "bucketing_eligible": true,
+      "booking_mode": "manual",
+      "booking_type": "onboard",
+      "view_count": 0,
+      "cross_border_alert": false,
+      "trip_plan": [
+        {
+          "city_name": "Berlin",
+          "address": "Platz der Luftbrücke 12101",
+          "latitude": 52.483859,
+          "longitude": 13.388157,
+          "country_code": "DE"
+        },
+        {
+          "city_name": "Hamburg",
+          "address": "Sievekingsallee 75, 20535",
+          "latitude": 53.560848,
+          "longitude": 10.058518,
+          "country_code": "DE"
+        }
+      ],
+      "messaging_status": "public",
+      "passengers": [],
+      "display_contact": false,
+      "vehicle_pictures": [],
+      "can_report": false,
+      "locations_to_display": [
+        "Berlin",
+        "Hamburg"
+      ],
+      "corridoring_type": "PLANNED",
+      "viaggio_rosa": false,
+      "is_comfort": false,
+      "stop_overs": [],
+      "is_booking_allowed": true
+    },
+    {
+      "links": {
+        "_self": "",
+        "_front": "https://www.blablacar.de/trip/carpooling/1982442671-berlin-hamburg"
+      },
+      "departure_date": "02/06/2020 08:00:00",
+      "departure_date_iso8601": "2020-06-02T08:00:00+02:00",
+      "is_passed": false,
+      "departure_place": {
+        "city_name": "Berlin",
+        "address": "Berlin-Gesundbrunnen, Berlin",
+        "latitude": 52.548751,
+        "longitude": 13.38894,
+        "country_code": "DE"
+      },
+      "arrival_place": {
+        "city_name": "Hamburg",
+        "address": "Hamburg Hbf, Hamburg",
+        "latitude": 53.552925,
+        "longitude": 10.006604,
+        "country_code": "DE"
+      },
+      "price": {
+        "value": 11.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "11,00 €",
+        "price_color": "BLACK"
+      },
+      "price_with_commission": {
+        "value": 11.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "11,00 €",
+        "price_color": "BLACK"
+      },
+      "price_without_commission": {
+        "value": 11.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "11,00 €",
+        "price_color": "BLACK"
+      },
+      "commission": {
+        "value": 0.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "0,00 €",
+        "price_color": "BLACK"
+      },
+      "seats_left": 2,
+      "seats": 2,
+      "seats_count_origin": 2,
+      "duration": {
+        "value": 11054,
+        "unity": "s"
+      },
+      "distance": {
+        "value": 279,
+        "unity": "km"
+      },
+      "permanent_id": "1982442671-berlin-hamburg",
+      "main_permanent_id": "1982442671-berlin-hamburg",
+      "comment": "",
+      "car": {
+        "id": "",
+        "model": "PUNTO",
+        "make": "FIAT",
+        "comfort": "Normal",
+        "comfort_nb_star": 0,
+        "category": "CATEGORY_BERLINE"
+      },
+      "multimodal_id": {
+        "source": "CARPOOLING",
+        "id": "1982442671-berlin-hamburg"
+      },
+      "freeway": true,
+      "answer_delay": 0,
+      "bucketing_eligible": true,
+      "booking_mode": "auto",
+      "booking_type": "online",
+      "view_count": 0,
+      "cross_border_alert": false,
+      "trip_plan": [
+        {
+          "city_name": "Berlin",
+          "address": "Berlin-Gesundbrunnen, Berlin",
+          "latitude": 52.548751,
+          "longitude": 13.38894,
+          "country_code": "DE"
+        },
+        {
+          "city_name": "Hamburg",
+          "address": "Hamburg Hbf, Hamburg",
+          "latitude": 53.552925,
+          "longitude": 10.006604,
+          "country_code": "DE"
+        }
+      ],
+      "messaging_status": "public",
+      "passengers": [],
+      "display_contact": false,
+      "vehicle_pictures": [],
+      "can_report": false,
+      "locations_to_display": [
+        "Berlin",
+        "Hamburg"
+      ],
+      "corridoring_type": "PLANNED",
+      "viaggio_rosa": false,
+      "is_comfort": false,
+      "stop_overs": [],
+      "is_booking_allowed": true
+    },
+    {
+      "links": {
+        "_self": "",
+        "_front": "https://www.blablacar.de/trip/carpooling/1982421001-berlin-hamburg"
+      },
+      "departure_date": "02/06/2020 07:30:00",
+      "departure_date_iso8601": "2020-06-02T07:30:00+02:00",
+      "is_passed": false,
+      "departure_place": {
+        "city_name": "Berlin",
+        "address": "Berlin",
+        "latitude": 52.503877,
+        "longitude": 13.338114,
+        "country_code": "DE"
+      },
+      "arrival_place": {
+        "city_name": "Hamburg",
+        "address": "Neue Wollkämmereistraße, 21107 Hamburg, Niemcy",
+        "latitude": 53.507715,
+        "longitude": 9.975329,
+        "country_code": "DE"
+      },
+      "price": {
+        "value": 16.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "16,00 €",
+        "price_color": "BLACK"
+      },
+      "price_with_commission": {
+        "value": 16.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "16,00 €",
+        "price_color": "BLACK"
+      },
+      "price_without_commission": {
+        "value": 16.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "16,00 €",
+        "price_color": "BLACK"
+      },
+      "commission": {
+        "value": 0.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "0,00 €",
+        "price_color": "BLACK"
+      },
+      "seats_left": 1,
+      "seats": 1,
+      "seats_count_origin": 1,
+      "duration": {
+        "value": 11517,
+        "unity": "s"
+      },
+      "distance": {
+        "value": 289,
+        "unity": "km"
+      },
+      "permanent_id": "1982421001-berlin-hamburg",
+      "main_permanent_id": "1982421001-berlin-hamburg",
+      "comment": "",
+      "multimodal_id": {
+        "source": "CARPOOLING",
+        "id": "1982421001-berlin-hamburg"
+      },
+      "freeway": true,
+      "answer_delay": 0,
+      "bucketing_eligible": true,
+      "booking_mode": "auto",
+      "booking_type": "onboard",
+      "view_count": 0,
+      "cross_border_alert": false,
+      "trip_plan": [
+        {
+          "city_name": "Berlin",
+          "address": "Berlin",
+          "latitude": 52.503877,
+          "longitude": 13.338114,
+          "country_code": "DE"
+        },
+        {
+          "city_name": "Hamburg",
+          "address": "Neue Wollkämmereistraße, 21107 Hamburg, Niemcy",
+          "latitude": 53.507715,
+          "longitude": 9.975329,
+          "country_code": "DE"
+        }
+      ],
+      "messaging_status": "public",
+      "passengers": [],
+      "display_contact": false,
+      "vehicle_pictures": [],
+      "can_report": false,
+      "locations_to_display": [
+        "Berlin",
+        "Hamburg"
+      ],
+      "corridoring_type": "PLANNED",
+      "viaggio_rosa": false,
+      "is_comfort": true,
+      "stop_overs": [],
+      "is_booking_allowed": true
+    },
+    {
+      "links": {
+        "_self": "",
+        "_front": "https://www.blablacar.de/trip/carpooling/1981874326-berlin-hamburg-1"
+      },
+      "departure_date": "02/06/2020 07:00:00",
+      "departure_date_iso8601": "2020-06-02T07:00:00+02:00",
+      "is_passed": false,
+      "departure_place": {
+        "city_name": "Berlin",
+        "address": "Mainzer Straße, Berlin",
+        "latitude": 52.514794,
+        "longitude": 13.46335,
+        "country_code": "DE"
+      },
+      "arrival_place": {
+        "city_name": "Hamburg",
+        "address": "Horner Kreisel, 22111 Hamburg, Deutschland",
+        "latitude": 53.559637,
+        "longitude": 10.070426,
+        "country_code": "DE"
+      },
+      "price": {
+        "value": 15.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "15,00 €",
+        "price_color": "BLACK"
+      },
+      "price_with_commission": {
+        "value": 15.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "15,00 €",
+        "price_color": "BLACK"
+      },
+      "price_without_commission": {
+        "value": 15.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "15,00 €",
+        "price_color": "BLACK"
+      },
+      "commission": {
+        "value": 0.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "0,00 €",
+        "price_color": "BLACK"
+      },
+      "seats_left": 2,
+      "seats": 2,
+      "seats_count_origin": 2,
+      "duration": {
+        "value": 11285,
+        "unity": "s"
+      },
+      "distance": {
+        "value": 281,
+        "unity": "km"
+      },
+      "permanent_id": "1981874326-berlin-hamburg-1",
+      "main_permanent_id": "1981874326-berlin-hamburg-1",
+      "comment": "",
+      "car": {
+        "id": "",
+        "model": "FIESTA",
+        "make": "FORD",
+        "comfort": "Normal",
+        "comfort_nb_star": 0,
+        "category": "CATEGORY_TOURISM"
+      },
+      "multimodal_id": {
+        "source": "CARPOOLING",
+        "id": "1981874326-berlin-hamburg-1"
+      },
+      "freeway": true,
+      "answer_delay": 0,
+      "bucketing_eligible": true,
+      "booking_mode": "manual",
+      "booking_type": "onboard",
+      "view_count": 0,
+      "cross_border_alert": false,
+      "trip_plan": [
+        {
+          "city_name": "Berlin",
+          "address": "Mainzer Straße, Berlin",
+          "latitude": 52.514794,
+          "longitude": 13.46335,
+          "country_code": "DE"
+        },
+        {
+          "city_name": "Hamburg",
+          "address": "Horner Kreisel, 22111 Hamburg, Deutschland",
+          "latitude": 53.559637,
+          "longitude": 10.070426,
+          "country_code": "DE"
+        }
+      ],
+      "messaging_status": "public",
+      "passengers": [],
+      "display_contact": false,
+      "vehicle_pictures": [],
+      "can_report": false,
+      "locations_to_display": [
+        "Berlin",
+        "Hamburg"
+      ],
+      "corridoring_type": "PLANNED",
+      "viaggio_rosa": false,
+      "is_comfort": true,
+      "stop_overs": [],
+      "is_booking_allowed": true
+    },
+    {
+      "links": {
+        "_self": "",
+        "_front": "https://www.blablacar.de/trip/carpooling/1981924241-berlin-hamburg"
+      },
+      "departure_date": "01/06/2020 22:00:00",
+      "departure_date_iso8601": "2020-06-01T22:00:00+02:00",
+      "is_passed": false,
+      "departure_place": {
+        "city_name": "Berlin",
+        "address": "ZOB am Funkturm, Berlin",
+        "latitude": 52.507213593,
+        "longitude": 13.279353142,
+        "country_code": "DE"
+      },
+      "arrival_place": {
+        "city_name": "Hamburg",
+        "address": "Wandsbek-Markt, Hamburg",
+        "latitude": 53.571651459,
+        "longitude": 10.06631279,
+        "country_code": "DE"
+      },
+      "price": {
+        "value": 12.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "12,00 €",
+        "price_color": "BLACK"
+      },
+      "price_with_commission": {
+        "value": 12.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "12,00 €",
+        "price_color": "BLACK"
+      },
+      "price_without_commission": {
+        "value": 12.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "12,00 €",
+        "price_color": "BLACK"
+      },
+      "commission": {
+        "value": 0.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "0,00 €",
+        "price_color": "BLACK"
+      },
+      "seats_left": 1,
+      "seats": 1,
+      "seats_count_origin": 1,
+      "duration": {
+        "value": 10671,
+        "unity": "s"
+      },
+      "distance": {
+        "value": 277,
+        "unity": "km"
+      },
+      "permanent_id": "1981924241-berlin-hamburg",
+      "main_permanent_id": "1981924241-berlin-hamburg",
+      "comment": "",
+      "car": {
+        "id": "",
+        "model": "GOLF",
+        "make": "VOLKSWAGEN",
+        "comfort": "Normal",
+        "comfort_nb_star": 0,
+        "category": "CATEGORY_TOURISM"
+      },
+      "multimodal_id": {
+        "source": "CARPOOLING",
+        "id": "1981924241-berlin-hamburg"
+      },
+      "freeway": true,
+      "answer_delay": 0,
+      "bucketing_eligible": true,
+      "booking_mode": "auto",
+      "booking_type": "online",
+      "view_count": 0,
+      "cross_border_alert": false,
+      "trip_plan": [
+        {
+          "city_name": "Berlin",
+          "address": "ZOB am Funkturm, Berlin",
+          "latitude": 52.507213593,
+          "longitude": 13.279353142,
+          "country_code": "DE"
+        },
+        {
+          "city_name": "Hamburg",
+          "address": "Wandsbek-Markt, Hamburg",
+          "latitude": 53.571651459,
+          "longitude": 10.06631279,
+          "country_code": "DE"
+        }
+      ],
+      "messaging_status": "public",
+      "passengers": [],
+      "display_contact": false,
+      "vehicle_pictures": [],
+      "can_report": false,
+      "locations_to_display": [
+        "Berlin",
+        "Hamburg"
+      ],
+      "corridoring_type": "PLANNED",
+      "viaggio_rosa": false,
+      "is_comfort": false,
+      "stop_overs": [],
+      "is_booking_allowed": true
+    },
+    {
+      "links": {
+        "_self": "",
+        "_front": "https://www.blablacar.de/trip/carpooling/1953132491-berlin-hamburg"
+      },
+      "departure_date": "01/06/2020 22:00:00",
+      "departure_date_iso8601": "2020-06-01T22:00:00+02:00",
+      "is_passed": false,
+      "departure_place": {
+        "city_name": "Berlin",
+        "address": "S-Bahnhof Tempelhof, Berlin",
+        "latitude": 52.47097,
+        "longitude": 13.384445,
+        "country_code": "DE"
+      },
+      "arrival_place": {
+        "city_name": "Hamburg",
+        "address": "Hamburg Hbf (S-Bahn), Hamburg",
+        "latitude": 53.552845,
+        "longitude": 10.006683,
+        "country_code": "DE"
+      },
+      "price": {
+        "value": 14.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "14,00 €",
+        "price_color": "BLACK"
+      },
+      "price_with_commission": {
+        "value": 14.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "14,00 €",
+        "price_color": "BLACK"
+      },
+      "price_without_commission": {
+        "value": 14.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "14,00 €",
+        "price_color": "BLACK"
+      },
+      "commission": {
+        "value": 0.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "0,00 €",
+        "price_color": "BLACK"
+      },
+      "seats_left": 1,
+      "seats": 1,
+      "seats_count_origin": 1,
+      "duration": {
+        "value": 11485,
+        "unity": "s"
+      },
+      "distance": {
+        "value": 290,
+        "unity": "km"
+      },
+      "permanent_id": "1953132491-berlin-hamburg",
+      "main_permanent_id": "1953132491-berlin-hamburg",
+      "comment": "",
+      "car": {
+        "id": "",
+        "model": "MONDEO",
+        "make": "FORD",
+        "comfort": "Normal",
+        "comfort_nb_star": 0,
+        "category": "CATEGORY_BREAK"
+      },
+      "multimodal_id": {
+        "source": "CARPOOLING",
+        "id": "1953132491-berlin-hamburg"
+      },
+      "freeway": true,
+      "answer_delay": 0,
+      "bucketing_eligible": true,
+      "booking_mode": "manual",
+      "booking_type": "online",
+      "view_count": 0,
+      "cross_border_alert": false,
+      "trip_plan": [
+        {
+          "city_name": "Berlin",
+          "address": "S-Bahnhof Tempelhof, Berlin",
+          "latitude": 52.47097,
+          "longitude": 13.384445,
+          "country_code": "DE"
+        },
+        {
+          "city_name": "Hamburg",
+          "address": "Hamburg Hbf (S-Bahn), Hamburg",
+          "latitude": 53.552845,
+          "longitude": 10.006683,
+          "country_code": "DE"
+        }
+      ],
+      "messaging_status": "public",
+      "passengers": [],
+      "display_contact": false,
+      "vehicle_pictures": [],
+      "can_report": false,
+      "locations_to_display": [
+        "Berlin",
+        "Hamburg"
+      ],
+      "corridoring_type": "PLANNED",
+      "viaggio_rosa": false,
+      "is_comfort": false,
+      "stop_overs": [],
+      "is_booking_allowed": true
+    },
+    {
+      "links": {
+        "_self": "",
+        "_front": "https://www.blablacar.de/trip/carpooling/1982723946-berlin-hamburg"
+      },
+      "departure_date": "01/06/2020 22:00:00",
+      "departure_date_iso8601": "2020-06-01T22:00:00+02:00",
+      "is_passed": false,
+      "departure_place": {
+        "city_name": "Berlin",
+        "address": "Berlin-Tempelhof",
+        "latitude": 52.470943,
+        "longitude": 13.384636,
+        "country_code": "DE"
+      },
+      "arrival_place": {
+        "city_name": "Hamburg",
+        "address": "Hamburg",
+        "latitude": 53.552925,
+        "longitude": 10.006604,
+        "country_code": "DE"
+      },
+      "price": {
+        "value": 16.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "16,00 €",
+        "price_color": "BLACK"
+      },
+      "price_with_commission": {
+        "value": 16.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "16,00 €",
+        "price_color": "BLACK"
+      },
+      "price_without_commission": {
+        "value": 16.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "16,00 €",
+        "price_color": "BLACK"
+      },
+      "commission": {
+        "value": 0.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "0,00 €",
+        "price_color": "BLACK"
+      },
+      "seats_left": 2,
+      "seats": 2,
+      "seats_count_origin": 2,
+      "duration": {
+        "value": 11488,
+        "unity": "s"
+      },
+      "distance": {
+        "value": 290,
+        "unity": "km"
+      },
+      "permanent_id": "1982723946-berlin-hamburg",
+      "main_permanent_id": "1982723946-berlin-hamburg",
+      "comment": "",
+      "multimodal_id": {
+        "source": "CARPOOLING",
+        "id": "1982723946-berlin-hamburg"
+      },
+      "freeway": true,
+      "answer_delay": 0,
+      "bucketing_eligible": true,
+      "booking_mode": "manual",
+      "booking_type": "onboard",
+      "view_count": 0,
+      "cross_border_alert": false,
+      "trip_plan": [
+        {
+          "city_name": "Berlin",
+          "address": "Berlin-Tempelhof",
+          "latitude": 52.470943,
+          "longitude": 13.384636,
+          "country_code": "DE"
+        },
+        {
+          "city_name": "Hamburg",
+          "address": "Hamburg",
+          "latitude": 53.552925,
+          "longitude": 10.006604,
+          "country_code": "DE"
+        }
+      ],
+      "messaging_status": "public",
+      "passengers": [],
+      "display_contact": false,
+      "vehicle_pictures": [],
+      "can_report": false,
+      "locations_to_display": [
+        "Berlin",
+        "Hamburg"
+      ],
+      "corridoring_type": "PLANNED",
+      "viaggio_rosa": false,
+      "is_comfort": false,
+      "stop_overs": [],
+      "is_booking_allowed": true
+    },
+    {
+      "links": {
+        "_self": "",
+        "_front": "https://www.blablacar.de/trip/carpooling/1982736721-berlin-hamburg"
+      },
+      "departure_date": "01/06/2020 21:50:00",
+      "departure_date_iso8601": "2020-06-01T21:50:00+02:00",
+      "is_passed": false,
+      "departure_place": {
+        "city_name": "Berlin",
+        "address": "S+U Tempelhof (Berlin)",
+        "latitude": 52.470943,
+        "longitude": 13.384636,
+        "country_code": "DE"
+      },
+      "arrival_place": {
+        "city_name": "Hamburg",
+        "address": "Hamburg Hbf",
+        "latitude": 53.552925,
+        "longitude": 10.006604,
+        "country_code": "DE"
+      },
+      "price": {
+        "value": 16.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "16,00 €",
+        "price_color": "BLACK"
+      },
+      "price_with_commission": {
+        "value": 16.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "16,00 €",
+        "price_color": "BLACK"
+      },
+      "price_without_commission": {
+        "value": 16.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "16,00 €",
+        "price_color": "BLACK"
+      },
+      "commission": {
+        "value": 0.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "0,00 €",
+        "price_color": "BLACK"
+      },
+      "seats_left": 2,
+      "seats": 2,
+      "seats_count_origin": 2,
+      "duration": {
+        "value": 11488,
+        "unity": "s"
+      },
+      "distance": {
+        "value": 290,
+        "unity": "km"
+      },
+      "permanent_id": "1982736721-berlin-hamburg",
+      "main_permanent_id": "1982736721-berlin-hamburg",
+      "comment": "",
+      "car": {
+        "id": "",
+        "model": "1,6L",
+        "make": "VOLKSWAGEN",
+        "comfort": "Normal",
+        "comfort_nb_star": 0,
+        "category": "CATEGORY_TOURISM"
+      },
+      "multimodal_id": {
+        "source": "CARPOOLING",
+        "id": "1982736721-berlin-hamburg"
+      },
+      "freeway": true,
+      "answer_delay": 0,
+      "bucketing_eligible": true,
+      "booking_mode": "manual",
+      "booking_type": "onboard",
+      "view_count": 0,
+      "cross_border_alert": false,
+      "trip_plan": [
+        {
+          "city_name": "Berlin",
+          "address": "S+U Tempelhof (Berlin)",
+          "latitude": 52.470943,
+          "longitude": 13.384636,
+          "country_code": "DE"
+        },
+        {
+          "city_name": "Hamburg",
+          "address": "Hamburg Hbf",
+          "latitude": 53.552925,
+          "longitude": 10.006604,
+          "country_code": "DE"
+        }
+      ],
+      "messaging_status": "public",
+      "passengers": [],
+      "display_contact": false,
+      "vehicle_pictures": [],
+      "can_report": false,
+      "locations_to_display": [
+        "Berlin",
+        "Hamburg"
+      ],
+      "corridoring_type": "PLANNED",
+      "viaggio_rosa": false,
+      "is_comfort": false,
+      "stop_overs": [],
+      "is_booking_allowed": true
+    },
+    {
+      "links": {
+        "_self": "",
+        "_front": "https://www.blablacar.de/trip/carpooling/1980952316-berlin-hamburg"
+      },
+      "departure_date": "01/06/2020 21:00:00",
+      "departure_date_iso8601": "2020-06-01T21:00:00+02:00",
+      "is_passed": false,
+      "departure_place": {
+        "city_name": "Berlin",
+        "address": "A 100, 12359 Berlin, Germany",
+        "latitude": 52.4628825,
+        "longitude": 13.4447716,
+        "country_code": "DE"
+      },
+      "arrival_place": {
+        "city_name": "Hamburg",
+        "address": "Steinfurther Allee, Hamburg",
+        "latitude": 53.538358,
+        "longitude": 10.139705,
+        "country_code": "DE"
+      },
+      "departure_meeting_point": {
+        "name": "U-Bahnhof Grenzallee",
+        "full_name": "U-Bahnhof Grenzallee, Berlin",
+        "city_name": "Berlin",
+        "country_code": "DE",
+        "latitude": 52.4628825,
+        "longitude": 13.4447716
+      },
+      "price": {
+        "value": 16.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "16,00 €",
+        "price_color": "BLACK"
+      },
+      "price_with_commission": {
+        "value": 16.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "16,00 €",
+        "price_color": "BLACK"
+      },
+      "price_without_commission": {
+        "value": 16.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "16,00 €",
+        "price_color": "BLACK"
+      },
+      "commission": {
+        "value": 0.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "0,00 €",
+        "price_color": "BLACK"
+      },
+      "seats_left": 3,
+      "seats": 3,
+      "seats_count_origin": 3,
+      "duration": {
+        "value": 11282,
+        "unity": "s"
+      },
+      "distance": {
+        "value": 288,
+        "unity": "km"
+      },
+      "permanent_id": "1980952316-berlin-hamburg",
+      "main_permanent_id": "1980952316-berlin-hamburg",
+      "comment": "",
+      "car": {
+        "id": "",
+        "model": "LEGACY",
+        "make": "SUBARU",
+        "comfort": "Normal",
+        "comfort_nb_star": 0,
+        "category": "CATEGORY_BREAK"
+      },
+      "multimodal_id": {
+        "source": "CARPOOLING",
+        "id": "1980952316-berlin-hamburg"
+      },
+      "freeway": true,
+      "answer_delay": 0,
+      "bucketing_eligible": true,
+      "booking_mode": "auto",
+      "booking_type": "onboard",
+      "view_count": 0,
+      "cross_border_alert": false,
+      "trip_plan": [
+        {
+          "city_name": "Berlin",
+          "address": "A 100, 12359 Berlin, Germany",
+          "latitude": 52.4628825,
+          "longitude": 13.4447716,
+          "country_code": "DE"
+        },
+        {
+          "city_name": "Hamburg",
+          "address": "Steinfurther Allee, Hamburg",
+          "latitude": 53.538358,
+          "longitude": 10.139705,
+          "country_code": "DE"
+        }
+      ],
+      "messaging_status": "public",
+      "passengers": [],
+      "display_contact": false,
+      "vehicle_pictures": [],
+      "can_report": false,
+      "locations_to_display": [
+        "Berlin",
+        "Hamburg"
+      ],
+      "corridoring_type": "PLANNED",
+      "viaggio_rosa": false,
+      "is_comfort": false,
+      "stop_overs": [],
+      "is_booking_allowed": true
+    },
+    {
+      "links": {
+        "_self": "",
+        "_front": "https://www.blablacar.de/trip/carpooling/1982337856-berlin-hamburg"
+      },
+      "departure_date": "01/06/2020 19:00:00",
+      "departure_date_iso8601": "2020-06-01T19:00:00+02:00",
+      "is_passed": false,
+      "departure_place": {
+        "city_name": "Berlin",
+        "address": "Bezirksamt Reinickendorf von Berlin Amt für Soziales, Berlin",
+        "latitude": 52.589870453,
+        "longitude": 13.324869156,
+        "country_code": "DE"
+      },
+      "arrival_place": {
+        "city_name": "Hamburg",
+        "address": "Veddeler Damm, Hamburg",
+        "latitude": 53.524997711,
+        "longitude": 9.99808979,
+        "country_code": "DE"
+      },
+      "price": {
+        "value": 14.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "14,00 €",
+        "price_color": "BLACK"
+      },
+      "price_with_commission": {
+        "value": 14.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "14,00 €",
+        "price_color": "BLACK"
+      },
+      "price_without_commission": {
+        "value": 14.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "14,00 €",
+        "price_color": "BLACK"
+      },
+      "commission": {
+        "value": 0.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "0,00 €",
+        "price_color": "BLACK"
+      },
+      "seats_left": 2,
+      "seats": 2,
+      "seats_count_origin": 2,
+      "duration": {
+        "value": 10639,
+        "unity": "s"
+      },
+      "distance": {
+        "value": 278,
+        "unity": "km"
+      },
+      "permanent_id": "1982337856-berlin-hamburg",
+      "main_permanent_id": "1982337856-berlin-hamburg",
+      "comment": "",
+      "car": {
+        "id": "",
+        "model": "3 SERIES",
+        "make": "BMW",
+        "comfort": "Normal",
+        "comfort_nb_star": 0,
+        "category": "CATEGORY_BREAK"
+      },
+      "multimodal_id": {
+        "source": "CARPOOLING",
+        "id": "1982337856-berlin-hamburg"
+      },
+      "freeway": true,
+      "answer_delay": 0,
+      "bucketing_eligible": true,
+      "booking_mode": "auto",
+      "booking_type": "onboard",
+      "view_count": 0,
+      "cross_border_alert": false,
+      "trip_plan": [
+        {
+          "city_name": "Berlin",
+          "address": "Bezirksamt Reinickendorf von Berlin Amt für Soziales, Berlin",
+          "latitude": 52.589870453,
+          "longitude": 13.324869156,
+          "country_code": "DE"
+        },
+        {
+          "city_name": "Hamburg",
+          "address": "Veddeler Damm, Hamburg",
+          "latitude": 53.524997711,
+          "longitude": 9.99808979,
+          "country_code": "DE"
+        }
+      ],
+      "messaging_status": "public",
+      "passengers": [],
+      "display_contact": false,
+      "vehicle_pictures": [],
+      "can_report": false,
+      "locations_to_display": [
+        "Berlin",
+        "Hamburg"
+      ],
+      "corridoring_type": "PLANNED",
+      "viaggio_rosa": false,
+      "is_comfort": false,
+      "stop_overs": [],
+      "is_booking_allowed": true
+    },
+    {
+      "links": {
+        "_self": "",
+        "_front": "https://www.blablacar.de/trip/carpooling/1981643376-berlin-hamburg"
+      },
+      "departure_date": "01/06/2020 18:30:00",
+      "departure_date_iso8601": "2020-06-01T18:30:00+02:00",
+      "is_passed": false,
+      "departure_place": {
+        "city_name": "Berlin",
+        "address": "Berlin Hauptbahnhof, Hauptbahnhof, Europaplatz 1, 10557 Berlin, Niemcy",
+        "latitude": 52.525083,
+        "longitude": 13.369402,
+        "country_code": "DE"
+      },
+      "arrival_place": {
+        "city_name": "Hamburg",
+        "address": "Alte Seevestraße 1, 21073 Hamburg, Germany",
+        "latitude": 53.457934,
+        "longitude": 9.987497,
+        "country_code": "DE"
+      },
+      "price": {
+        "value": 12.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "12,00 €",
+        "price_color": "BLACK"
+      },
+      "price_with_commission": {
+        "value": 12.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "12,00 €",
+        "price_color": "BLACK"
+      },
+      "price_without_commission": {
+        "value": 12.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "12,00 €",
+        "price_color": "BLACK"
+      },
+      "commission": {
+        "value": 0.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "0,00 €",
+        "price_color": "BLACK"
+      },
+      "seats_left": 2,
+      "seats": 2,
+      "seats_count_origin": 2,
+      "duration": {
+        "value": 11499,
+        "unity": "s"
+      },
+      "distance": {
+        "value": 290,
+        "unity": "km"
+      },
+      "permanent_id": "1981643376-berlin-hamburg",
+      "main_permanent_id": "1981643376-berlin-hamburg",
+      "comment": "",
+      "car": {
+        "id": "",
+        "model": "GOLF",
+        "make": "VOLKSWAGEN",
+        "comfort": "Normal",
+        "comfort_nb_star": 0,
+        "category": "CATEGORY_TOURISM"
+      },
+      "multimodal_id": {
+        "source": "CARPOOLING",
+        "id": "1981643376-berlin-hamburg"
+      },
+      "freeway": true,
+      "answer_delay": 0,
+      "bucketing_eligible": true,
+      "booking_mode": "manual",
+      "booking_type": "onboard",
+      "view_count": 0,
+      "cross_border_alert": false,
+      "trip_plan": [
+        {
+          "city_name": "Berlin",
+          "address": "Berlin Hauptbahnhof, Hauptbahnhof, Europaplatz 1, 10557 Berlin, Niemcy",
+          "latitude": 52.525083,
+          "longitude": 13.369402,
+          "country_code": "DE"
+        },
+        {
+          "city_name": "Hamburg",
+          "address": "Alte Seevestraße 1, 21073 Hamburg, Germany",
+          "latitude": 53.457934,
+          "longitude": 9.987497,
+          "country_code": "DE"
+        }
+      ],
+      "messaging_status": "public",
+      "passengers": [],
+      "display_contact": false,
+      "vehicle_pictures": [],
+      "can_report": false,
+      "locations_to_display": [
+        "Berlin",
+        "Hamburg"
+      ],
+      "corridoring_type": "PLANNED",
+      "viaggio_rosa": false,
+      "is_comfort": false,
+      "stop_overs": [],
+      "is_booking_allowed": true
+    },
+    {
+      "links": {
+        "_self": "",
+        "_front": "https://www.blablacar.de/trip/carpooling/1981280276-berlin-hamburg"
+      },
+      "departure_date": "01/06/2020 18:20:00",
+      "departure_date_iso8601": "2020-06-01T18:20:00+02:00",
+      "is_passed": false,
+      "departure_place": {
+        "city_name": "Berlin",
+        "address": "Port lotniczy Berlin-Tegel",
+        "latitude": 52.558832,
+        "longitude": 13.288437,
+        "country_code": "DE"
+      },
+      "arrival_place": {
+        "city_name": "Hamburg",
+        "address": "Hebebrandstraße, Hamburg, Niemcy",
+        "latitude": 53.60709,
+        "longitude": 10.030997,
+        "country_code": "DE"
+      },
+      "price": {
+        "value": 16.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "16,00 €",
+        "price_color": "BLACK"
+      },
+      "price_with_commission": {
+        "value": 16.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "16,00 €",
+        "price_color": "BLACK"
+      },
+      "price_without_commission": {
+        "value": 16.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "16,00 €",
+        "price_color": "BLACK"
+      },
+      "commission": {
+        "value": 0.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "0,00 €",
+        "price_color": "BLACK"
+      },
+      "seats_left": 1,
+      "seats": 1,
+      "seats_count_origin": 1,
+      "duration": {
+        "value": 11030,
+        "unity": "s"
+      },
+      "distance": {
+        "value": 279,
+        "unity": "km"
+      },
+      "permanent_id": "1981280276-berlin-hamburg",
+      "main_permanent_id": "1981280276-berlin-hamburg",
+      "comment": "",
+      "car": {
+        "id": "",
+        "model": "PASSAT",
+        "make": "VOLKSWAGEN",
+        "comfort": "Normal",
+        "comfort_nb_star": 0,
+        "category": "CATEGORY_BREAK"
+      },
+      "multimodal_id": {
+        "source": "CARPOOLING",
+        "id": "1981280276-berlin-hamburg"
+      },
+      "freeway": true,
+      "answer_delay": 0,
+      "bucketing_eligible": true,
+      "booking_mode": "manual",
+      "booking_type": "onboard",
+      "view_count": 0,
+      "cross_border_alert": false,
+      "trip_plan": [
+        {
+          "city_name": "Berlin",
+          "address": "Port lotniczy Berlin-Tegel",
+          "latitude": 52.558832,
+          "longitude": 13.288437,
+          "country_code": "DE"
+        },
+        {
+          "city_name": "Hamburg",
+          "address": "Hebebrandstraße, Hamburg, Niemcy",
+          "latitude": 53.60709,
+          "longitude": 10.030997,
+          "country_code": "DE"
+        }
+      ],
+      "messaging_status": "public",
+      "passengers": [],
+      "display_contact": false,
+      "vehicle_pictures": [],
+      "can_report": false,
+      "locations_to_display": [
+        "Berlin",
+        "Hamburg"
+      ],
+      "corridoring_type": "PLANNED",
+      "viaggio_rosa": false,
+      "is_comfort": false,
+      "stop_overs": [],
+      "is_booking_allowed": true
+    },
+    {
+      "links": {
+        "_self": "",
+        "_front": "https://www.blablacar.de/trip/carpooling/1982201631-berlin-hamburg"
+      },
+      "departure_date": "01/06/2020 16:30:00",
+      "departure_date_iso8601": "2020-06-01T16:30:00+02:00",
+      "is_passed": false,
+      "departure_place": {
+        "city_name": "Berlin",
+        "address": "Alexanderplatz",
+        "latitude": 52.521918,
+        "longitude": 13.413214,
+        "country_code": "DE"
+      },
+      "arrival_place": {
+        "city_name": "Hamburg",
+        "address": "Hannoversche Str., Hamburg, Deutschland",
+        "latitude": 53.460661,
+        "longitude": 9.991724,
+        "country_code": "DE"
+      },
+      "price": {
+        "value": 15.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "15,00 €",
+        "price_color": "BLACK"
+      },
+      "price_with_commission": {
+        "value": 15.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "15,00 €",
+        "price_color": "BLACK"
+      },
+      "price_without_commission": {
+        "value": 15.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "15,00 €",
+        "price_color": "BLACK"
+      },
+      "commission": {
+        "value": 0.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "0,00 €",
+        "price_color": "BLACK"
+      },
+      "seats_left": 1,
+      "seats": 1,
+      "seats_count_origin": 1,
+      "duration": {
+        "value": 11659,
+        "unity": "s"
+      },
+      "distance": {
+        "value": 291,
+        "unity": "km"
+      },
+      "permanent_id": "1982201631-berlin-hamburg",
+      "main_permanent_id": "1982201631-berlin-hamburg",
+      "comment": "",
+      "multimodal_id": {
+        "source": "CARPOOLING",
+        "id": "1982201631-berlin-hamburg"
+      },
+      "freeway": true,
+      "answer_delay": 0,
+      "bucketing_eligible": true,
+      "booking_mode": "manual",
+      "booking_type": "onboard",
+      "view_count": 0,
+      "cross_border_alert": false,
+      "trip_plan": [
+        {
+          "city_name": "Berlin",
+          "address": "Alexanderplatz",
+          "latitude": 52.521918,
+          "longitude": 13.413214,
+          "country_code": "DE"
+        },
+        {
+          "city_name": "Hamburg",
+          "address": "Hannoversche Str., Hamburg, Deutschland",
+          "latitude": 53.460661,
+          "longitude": 9.991724,
+          "country_code": "DE"
+        }
+      ],
+      "messaging_status": "public",
+      "passengers": [],
+      "display_contact": false,
+      "vehicle_pictures": [],
+      "can_report": false,
+      "locations_to_display": [
+        "Berlin",
+        "Hamburg"
+      ],
+      "corridoring_type": "PLANNED",
+      "viaggio_rosa": false,
+      "is_comfort": true,
+      "stop_overs": [],
+      "is_booking_allowed": true
+    },
+    {
+      "links": {
+        "_self": "",
+        "_front": "https://www.blablacar.de/trip/carpooling/1981619906-berlin-hamburg"
+      },
+      "departure_date": "01/06/2020 15:30:00",
+      "departure_date_iso8601": "2020-06-01T15:30:00+02:00",
+      "is_passed": false,
+      "departure_place": {
+        "city_name": "Berlin",
+        "address": "Pankow, Berlin",
+        "latitude": 52.566397,
+        "longitude": 13.410522,
+        "country_code": "DE"
+      },
+      "arrival_place": {
+        "city_name": "Hamburg",
+        "address": "Oberwerder Damm 1, 20539 Hamburg, Germany",
+        "latitude": 53.5267901,
+        "longitude": 10.0286357,
+        "country_code": "DE"
+      },
+      "arrival_meeting_point": {
+        "name": "Imbiss",
+        "full_name": "Imbiss, Hamburg",
+        "city_name": "Hamburg",
+        "country_code": "DE",
+        "latitude": 53.5267901,
+        "longitude": 10.0286357
+      },
+      "price": {
+        "value": 16.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "16,00 €",
+        "price_color": "BLACK"
+      },
+      "price_with_commission": {
+        "value": 16.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "16,00 €",
+        "price_color": "BLACK"
+      },
+      "price_without_commission": {
+        "value": 16.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "16,00 €",
+        "price_color": "BLACK"
+      },
+      "commission": {
+        "value": 0.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "0,00 €",
+        "price_color": "BLACK"
+      },
+      "seats_left": 2,
+      "seats": 2,
+      "seats_count_origin": 2,
+      "duration": {
+        "value": 11141,
+        "unity": "s"
+      },
+      "distance": {
+        "value": 283,
+        "unity": "km"
+      },
+      "permanent_id": "1981619906-berlin-hamburg",
+      "main_permanent_id": "1981619906-berlin-hamburg",
+      "comment": "",
+      "car": {
+        "id": "",
+        "model": "330",
+        "make": "BMW",
+        "comfort": "Normal",
+        "comfort_nb_star": 0,
+        "category": "CATEGORY_BERLINE"
+      },
+      "multimodal_id": {
+        "source": "CARPOOLING",
+        "id": "1981619906-berlin-hamburg"
+      },
+      "freeway": true,
+      "answer_delay": 0,
+      "bucketing_eligible": true,
+      "booking_mode": "auto",
+      "booking_type": "online",
+      "view_count": 0,
+      "cross_border_alert": false,
+      "trip_plan": [
+        {
+          "city_name": "Berlin",
+          "address": "Pankow, Berlin",
+          "latitude": 52.566397,
+          "longitude": 13.410522,
+          "country_code": "DE"
+        },
+        {
+          "city_name": "Hamburg",
+          "address": "Oberwerder Damm 1, 20539 Hamburg, Germany",
+          "latitude": 53.5267901,
+          "longitude": 10.0286357,
+          "country_code": "DE"
+        }
+      ],
+      "messaging_status": "public",
+      "passengers": [],
+      "display_contact": false,
+      "vehicle_pictures": [],
+      "can_report": false,
+      "locations_to_display": [
+        "Berlin",
+        "Hamburg"
+      ],
+      "corridoring_type": "PLANNED",
+      "viaggio_rosa": false,
+      "is_comfort": false,
+      "stop_overs": [],
+      "is_booking_allowed": true
+    },
+    {
+      "links": {
+        "_self": "",
+        "_front": "https://www.blablacar.de/trip/carpooling/1982659486-berlin-gambur"
+      },
+      "departure_date": "01/06/2020 14:40:00",
+      "departure_date_iso8601": "2020-06-01T14:40:00+02:00",
+      "is_passed": false,
+      "departure_place": {
+        "city_name": "Berlin",
+        "address": "Берлін, Німеччина",
+        "latitude": 52.520006,
+        "longitude": 13.404954,
+        "country_code": "DE"
+      },
+      "arrival_place": {
+        "city_name": "Hamburg",
+        "address": "Гамбурґ, Німеччина",
+        "latitude": 53.551084,
+        "longitude": 9.993681,
+        "country_code": "DE"
+      },
+      "price": {
+        "value": 50.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "50,00 €",
+        "price_color": "BLACK"
+      },
+      "price_with_commission": {
+        "value": 50.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "50,00 €",
+        "price_color": "BLACK"
+      },
+      "price_without_commission": {
+        "value": 50.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "50,00 €",
+        "price_color": "BLACK"
+      },
+      "commission": {
+        "value": 0.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "0,00 €",
+        "price_color": "BLACK"
+      },
+      "seats_left": 3,
+      "seats": 3,
+      "seats_count_origin": 3,
+      "duration": {
+        "value": 51278,
+        "unity": "s"
+      },
+      "distance": {
+        "value": 1398,
+        "unity": "km"
+      },
+      "permanent_id": "1982659486-berlin-gambur",
+      "main_permanent_id": "1982659486-berlin-gambur",
+      "comment": "",
+      "multimodal_id": {
+        "source": "CARPOOLING",
+        "id": "1982659486-berlin-gambur"
+      },
+      "freeway": true,
+      "answer_delay": 0,
+      "bucketing_eligible": true,
+      "booking_mode": "manual",
+      "booking_type": "onboard",
+      "view_count": 0,
+      "cross_border_alert": false,
+      "trip_plan": [
+        {
+          "city_name": "Berlin",
+          "address": "Берлін, Німеччина",
+          "latitude": 52.520006,
+          "longitude": 13.404954,
+          "country_code": "DE"
+        },
+        {
+          "city_name": "Hamburg",
+          "address": "Гамбурґ, Німеччина",
+          "latitude": 53.551084,
+          "longitude": 9.993681,
+          "country_code": "DE"
+        }
+      ],
+      "messaging_status": "public",
+      "passengers": [],
+      "display_contact": false,
+      "vehicle_pictures": [],
+      "can_report": false,
+      "locations_to_display": [
+        "Berlin",
+        "Hamburg"
+      ],
+      "corridoring_type": "PLANNED",
+      "viaggio_rosa": false,
+      "is_comfort": false,
+      "stop_overs": [],
+      "is_booking_allowed": true
+    },
+    {
+      "links": {
+        "_self": "",
+        "_front": "https://www.blablacar.de/trip/carpooling/1981396781-berlin-hamburg"
+      },
+      "departure_date": "01/06/2020 07:00:00",
+      "departure_date_iso8601": "2020-06-01T07:00:00+02:00",
+      "is_passed": false,
+      "departure_place": {
+        "city_name": "Berlin",
+        "address": "Bahnhof Berlin Lichterfelde Ost, Berlin",
+        "latitude": 52.429861,
+        "longitude": 13.328084,
+        "country_code": "DE"
+      },
+      "arrival_place": {
+        "city_name": "Hamburg",
+        "address": "Hamburg Hbf, Hamburg",
+        "latitude": 53.552925,
+        "longitude": 10.006604,
+        "country_code": "DE"
+      },
+      "price": {
+        "value": 15.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "15,00 €",
+        "price_color": "BLACK"
+      },
+      "price_with_commission": {
+        "value": 15.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "15,00 €",
+        "price_color": "BLACK"
+      },
+      "price_without_commission": {
+        "value": 15.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "15,00 €",
+        "price_color": "BLACK"
+      },
+      "commission": {
+        "value": 0.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "0,00 €",
+        "price_color": "BLACK"
+      },
+      "seats_left": 2,
+      "seats": 2,
+      "seats_count_origin": 2,
+      "duration": {
+        "value": 11845,
+        "unity": "s"
+      },
+      "distance": {
+        "value": 291,
+        "unity": "km"
+      },
+      "permanent_id": "1981396781-berlin-hamburg",
+      "main_permanent_id": "1981396781-berlin-hamburg",
+      "comment": "",
+      "car": {
+        "id": "",
+        "model": "3 SERIES",
+        "make": "BMW",
+        "comfort": "Normal",
+        "comfort_nb_star": 0,
+        "category": "CATEGORY_CABRIOLET"
+      },
+      "multimodal_id": {
+        "source": "CARPOOLING",
+        "id": "1981396781-berlin-hamburg"
+      },
+      "freeway": true,
+      "answer_delay": 0,
+      "bucketing_eligible": true,
+      "booking_mode": "manual",
+      "booking_type": "online",
+      "view_count": 0,
+      "cross_border_alert": false,
+      "trip_plan": [
+        {
+          "city_name": "Berlin",
+          "address": "Bahnhof Berlin Lichterfelde Ost, Berlin",
+          "latitude": 52.429861,
+          "longitude": 13.328084,
+          "country_code": "DE"
+        },
+        {
+          "city_name": "Hamburg",
+          "address": "Hamburg Hbf, Hamburg",
+          "latitude": 53.552925,
+          "longitude": 10.006604,
+          "country_code": "DE"
+        }
+      ],
+      "messaging_status": "public",
+      "passengers": [],
+      "display_contact": false,
+      "vehicle_pictures": [],
+      "can_report": false,
+      "locations_to_display": [
+        "Berlin",
+        "Hamburg"
+      ],
+      "corridoring_type": "PLANNED",
+      "viaggio_rosa": false,
+      "is_comfort": false,
+      "stop_overs": [],
+      "is_booking_allowed": true
+    },
+    {
+      "links": {
+        "_self": "",
+        "_front": "https://www.blablacar.de/trip/carpooling/1982775291-berlin-hamburg"
+      },
+      "departure_date": "01/06/2020 06:40:00",
+      "departure_date_iso8601": "2020-06-01T06:40:00+02:00",
+      "is_passed": false,
+      "departure_place": {
+        "city_name": "Berlin",
+        "address": "Berlin",
+        "latitude": 52.503877,
+        "longitude": 13.338114,
+        "country_code": "DE"
+      },
+      "arrival_place": {
+        "city_name": "Hamburg",
+        "address": "Hamburg",
+        "latitude": 53.560848,
+        "longitude": 10.058518,
+        "country_code": "DE"
+      },
+      "price": {
+        "value": 15.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "15,00 €",
+        "price_color": "BLACK"
+      },
+      "price_with_commission": {
+        "value": 15.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "15,00 €",
+        "price_color": "BLACK"
+      },
+      "price_without_commission": {
+        "value": 15.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "15,00 €",
+        "price_color": "BLACK"
+      },
+      "commission": {
+        "value": 0.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "0,00 €",
+        "price_color": "BLACK"
+      },
+      "seats_left": 3,
+      "seats": 3,
+      "seats_count_origin": 3,
+      "duration": {
+        "value": 10831,
+        "unity": "s"
+      },
+      "distance": {
+        "value": 278,
+        "unity": "km"
+      },
+      "permanent_id": "1982775291-berlin-hamburg",
+      "main_permanent_id": "1982775291-berlin-hamburg",
+      "comment": "",
+      "multimodal_id": {
+        "source": "CARPOOLING",
+        "id": "1982775291-berlin-hamburg"
+      },
+      "freeway": true,
+      "answer_delay": 0,
+      "bucketing_eligible": true,
+      "booking_mode": "auto",
+      "booking_type": "onboard",
+      "view_count": 0,
+      "cross_border_alert": false,
+      "trip_plan": [
+        {
+          "city_name": "Berlin",
+          "address": "Berlin",
+          "latitude": 52.503877,
+          "longitude": 13.338114,
+          "country_code": "DE"
+        },
+        {
+          "city_name": "Hamburg",
+          "address": "Hamburg",
+          "latitude": 53.560848,
+          "longitude": 10.058518,
+          "country_code": "DE"
+        }
+      ],
+      "messaging_status": "public",
+      "passengers": [],
+      "display_contact": false,
+      "vehicle_pictures": [],
+      "can_report": false,
+      "locations_to_display": [
+        "Berlin",
+        "Hamburg"
+      ],
+      "corridoring_type": "PLANNED",
+      "viaggio_rosa": false,
+      "is_comfort": false,
+      "stop_overs": [],
+      "is_booking_allowed": true
+    },
+    {
+      "links": {
+        "_self": "",
+        "_front": "https://www.blablacar.de/trip/carpooling/1982385331-berlin-hamburg"
+      },
+      "departure_date": "01/06/2020 06:30:00",
+      "departure_date_iso8601": "2020-06-01T06:30:00+02:00",
+      "is_passed": false,
+      "departure_place": {
+        "city_name": "Berlin",
+        "address": "Rathaus Steglitz, Berlin",
+        "latitude": 52.456872,
+        "longitude": 13.320665,
+        "country_code": "DE"
+      },
+      "arrival_place": {
+        "city_name": "Hamburg",
+        "address": "Sievekingsallee 75, 20535",
+        "latitude": 53.5608481,
+        "longitude": 10.0585188,
+        "country_code": "DE"
+      },
+      "arrival_meeting_point": {
+        "name": "Esso Tankstelle",
+        "full_name": "Esso Tankstelle, Hamburg",
+        "city_name": "Hamburg",
+        "country_code": "DE",
+        "latitude": 53.5608481,
+        "longitude": 10.0585188
+      },
+      "price": {
+        "value": 16.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "16,00 €",
+        "price_color": "BLACK"
+      },
+      "price_with_commission": {
+        "value": 16.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "16,00 €",
+        "price_color": "BLACK"
+      },
+      "price_without_commission": {
+        "value": 16.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "16,00 €",
+        "price_color": "BLACK"
+      },
+      "commission": {
+        "value": 0.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "0,00 €",
+        "price_color": "BLACK"
+      },
+      "seats_left": 4,
+      "seats": 4,
+      "seats_count_origin": 4,
+      "duration": {
+        "value": 11028,
+        "unity": "s"
+      },
+      "distance": {
+        "value": 283,
+        "unity": "km"
+      },
+      "permanent_id": "1982385331-berlin-hamburg",
+      "main_permanent_id": "1982385331-berlin-hamburg",
+      "comment": "",
+      "car": {
+        "id": "",
+        "model": "MEGANE II",
+        "make": "RENAULT",
+        "comfort": "Normal",
+        "comfort_nb_star": 0,
+        "category": "CATEGORY_BREAK"
+      },
+      "multimodal_id": {
+        "source": "CARPOOLING",
+        "id": "1982385331-berlin-hamburg"
+      },
+      "freeway": true,
+      "answer_delay": 0,
+      "bucketing_eligible": true,
+      "booking_mode": "auto",
+      "booking_type": "onboard",
+      "view_count": 0,
+      "cross_border_alert": false,
+      "trip_plan": [
+        {
+          "city_name": "Berlin",
+          "address": "Rathaus Steglitz, Berlin",
+          "latitude": 52.456872,
+          "longitude": 13.320665,
+          "country_code": "DE"
+        },
+        {
+          "city_name": "Hamburg",
+          "address": "Sievekingsallee 75, 20535",
+          "latitude": 53.5608481,
+          "longitude": 10.0585188,
+          "country_code": "DE"
+        }
+      ],
+      "messaging_status": "public",
+      "passengers": [],
+      "display_contact": false,
+      "vehicle_pictures": [],
+      "can_report": false,
+      "locations_to_display": [
+        "Berlin",
+        "Hamburg"
+      ],
+      "corridoring_type": "PLANNED",
+      "viaggio_rosa": false,
+      "is_comfort": false,
+      "stop_overs": [],
+      "is_booking_allowed": true
+    },
+    {
+      "links": {
+        "_self": "",
+        "_front": "https://www.blablacar.de/trip/carpooling/1982628261-berlin-hamburg"
+      },
+      "departure_date": "31/05/2020 20:30:00",
+      "departure_date_iso8601": "2020-05-31T20:30:00+02:00",
+      "is_passed": false,
+      "departure_place": {
+        "city_name": "Berlin",
+        "address": "Einkaufsbahnhof Berlin Hbf, Berlin",
+        "latitude": 52.524911,
+        "longitude": 13.369492,
+        "country_code": "DE"
+      },
+      "arrival_place": {
+        "city_name": "Hamburg",
+        "address": "Friedensallee, Hamburg",
+        "latitude": 53.556643,
+        "longitude": 9.91913,
+        "country_code": "DE"
+      },
+      "price": {
+        "value": 13.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "13,00 €",
+        "price_color": "BLACK"
+      },
+      "price_with_commission": {
+        "value": 13.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "13,00 €",
+        "price_color": "BLACK"
+      },
+      "price_without_commission": {
+        "value": 13.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "13,00 €",
+        "price_color": "BLACK"
+      },
+      "commission": {
+        "value": 0.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "0,00 €",
+        "price_color": "BLACK"
+      },
+      "seats_left": 2,
+      "seats": 2,
+      "seats_count_origin": 2,
+      "duration": {
+        "value": 11848,
+        "unity": "s"
+      },
+      "distance": {
+        "value": 286,
+        "unity": "km"
+      },
+      "permanent_id": "1982628261-berlin-hamburg",
+      "main_permanent_id": "1982628261-berlin-hamburg",
+      "comment": "",
+      "car": {
+        "id": "",
+        "model": "FIESTA",
+        "make": "FORD",
+        "comfort": "Normal",
+        "comfort_nb_star": 0,
+        "category": "CATEGORY_TOURISM"
+      },
+      "multimodal_id": {
+        "source": "CARPOOLING",
+        "id": "1982628261-berlin-hamburg"
+      },
+      "freeway": true,
+      "answer_delay": 0,
+      "bucketing_eligible": true,
+      "booking_mode": "manual",
+      "booking_type": "online",
+      "view_count": 0,
+      "cross_border_alert": false,
+      "trip_plan": [
+        {
+          "city_name": "Berlin",
+          "address": "Einkaufsbahnhof Berlin Hbf, Berlin",
+          "latitude": 52.524911,
+          "longitude": 13.369492,
+          "country_code": "DE"
+        },
+        {
+          "city_name": "Hamburg",
+          "address": "Friedensallee, Hamburg",
+          "latitude": 53.556643,
+          "longitude": 9.91913,
+          "country_code": "DE"
+        }
+      ],
+      "messaging_status": "public",
+      "passengers": [],
+      "display_contact": false,
+      "vehicle_pictures": [],
+      "can_report": false,
+      "locations_to_display": [
+        "Berlin",
+        "Hamburg"
+      ],
+      "corridoring_type": "PLANNED",
+      "viaggio_rosa": false,
+      "is_comfort": false,
+      "stop_overs": [],
+      "is_booking_allowed": true
+    },
+    {
+      "links": {
+        "_self": "",
+        "_front": "https://www.blablacar.de/trip/carpooling/1982658076-berlin-hamburg"
+      },
+      "departure_date": "31/05/2020 13:10:00",
+      "departure_date_iso8601": "2020-05-31T13:10:00+02:00",
+      "is_passed": false,
+      "departure_place": {
+        "city_name": "Berlin",
+        "address": "Berlin",
+        "latitude": 52.503877,
+        "longitude": 13.338114,
+        "country_code": "DE"
+      },
+      "arrival_place": {
+        "city_name": "Hamburg",
+        "address": "Tiroler Str., 22049 Hamburg, Deutschland",
+        "latitude": 53.581297,
+        "longitude": 10.066111,
+        "country_code": "DE"
+      },
+      "price": {
+        "value": 16.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "16,00 €",
+        "price_color": "BLACK"
+      },
+      "price_with_commission": {
+        "value": 16.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "16,00 €",
+        "price_color": "BLACK"
+      },
+      "price_without_commission": {
+        "value": 16.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "16,00 €",
+        "price_color": "BLACK"
+      },
+      "commission": {
+        "value": 0.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "0,00 €",
+        "price_color": "BLACK"
+      },
+      "seats_left": 1,
+      "seats": 1,
+      "seats_count_origin": 1,
+      "duration": {
+        "value": 11072,
+        "unity": "s"
+      },
+      "distance": {
+        "value": 280,
+        "unity": "km"
+      },
+      "permanent_id": "1982658076-berlin-hamburg",
+      "main_permanent_id": "1982658076-berlin-hamburg",
+      "comment": "",
+      "multimodal_id": {
+        "source": "CARPOOLING",
+        "id": "1982658076-berlin-hamburg"
+      },
+      "freeway": true,
+      "answer_delay": 0,
+      "bucketing_eligible": true,
+      "booking_mode": "manual",
+      "booking_type": "onboard",
+      "view_count": 0,
+      "cross_border_alert": false,
+      "trip_plan": [
+        {
+          "city_name": "Berlin",
+          "address": "Berlin",
+          "latitude": 52.503877,
+          "longitude": 13.338114,
+          "country_code": "DE"
+        },
+        {
+          "city_name": "Hamburg",
+          "address": "Tiroler Str., 22049 Hamburg, Deutschland",
+          "latitude": 53.581297,
+          "longitude": 10.066111,
+          "country_code": "DE"
+        }
+      ],
+      "messaging_status": "public",
+      "passengers": [],
+      "display_contact": false,
+      "vehicle_pictures": [],
+      "can_report": false,
+      "locations_to_display": [
+        "Berlin",
+        "Hamburg"
+      ],
+      "corridoring_type": "PLANNED",
+      "viaggio_rosa": false,
+      "is_comfort": false,
+      "stop_overs": [],
+      "is_booking_allowed": true
+    },
+    {
+      "links": {
+        "_self": "",
+        "_front": "https://www.blablacar.de/trip/carpooling/1982659036-berlin-gamburg"
+      },
+      "departure_date": "31/05/2020 10:50:00",
+      "departure_date_iso8601": "2020-05-31T10:50:00+02:00",
+      "is_passed": false,
+      "departure_place": {
+        "city_name": "Berlin",
+        "address": "Tauentzienstraße 9-12, 10789 Berlin, Germany",
+        "latitude": 52.5038775,
+        "longitude": 13.3381144,
+        "country_code": "DE"
+      },
+      "arrival_place": {
+        "city_name": "Hamburg",
+        "address": "Гамбург",
+        "latitude": 53.551084,
+        "longitude": 9.993681,
+        "country_code": "DE"
+      },
+      "departure_meeting_point": {
+        "name": "Europa-Center",
+        "full_name": "Europa-Center, Berlin",
+        "city_name": "Berlin",
+        "country_code": "DE",
+        "latitude": 52.5038775,
+        "longitude": 13.3381144
+      },
+      "price": {
+        "value": 7.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "7,00 €",
+        "price_color": "BLACK"
+      },
+      "price_with_commission": {
+        "value": 7.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "7,00 €",
+        "price_color": "BLACK"
+      },
+      "price_without_commission": {
+        "value": 7.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "7,00 €",
+        "price_color": "BLACK"
+      },
+      "commission": {
+        "value": 0.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "0,00 €",
+        "price_color": "BLACK"
+      },
+      "seats_left": 3,
+      "seats": 3,
+      "seats_count_origin": 3,
+      "duration": {
+        "value": 11398,
+        "unity": "s"
+      },
+      "distance": {
+        "value": 283,
+        "unity": "km"
+      },
+      "permanent_id": "1982659036-berlin-gamburg",
+      "main_permanent_id": "1982659036-berlin-gamburg",
+      "comment": "",
+      "multimodal_id": {
+        "source": "CARPOOLING",
+        "id": "1982659036-berlin-gamburg"
+      },
+      "freeway": true,
+      "answer_delay": 0,
+      "bucketing_eligible": true,
+      "booking_mode": "auto",
+      "booking_type": "onboard",
+      "view_count": 0,
+      "cross_border_alert": false,
+      "trip_plan": [
+        {
+          "city_name": "Berlin",
+          "address": "Tauentzienstraße 9-12, 10789 Berlin, Germany",
+          "latitude": 52.5038775,
+          "longitude": 13.3381144,
+          "country_code": "DE"
+        },
+        {
+          "city_name": "Hamburg",
+          "address": "Гамбург",
+          "latitude": 53.551084,
+          "longitude": 9.993681,
+          "country_code": "DE"
+        }
+      ],
+      "messaging_status": "public",
+      "passengers": [],
+      "display_contact": false,
+      "vehicle_pictures": [],
+      "can_report": false,
+      "locations_to_display": [
+        "Berlin",
+        "Hamburg"
+      ],
+      "corridoring_type": "PLANNED",
+      "viaggio_rosa": false,
+      "is_comfort": false,
+      "stop_overs": [],
+      "is_booking_allowed": true
     }
   ],
   "top_trips": [],
-  "facets": [
-    {
-      "name": "hour",
-      "type": "custom",
-      "items": [
-        {
-          "value": 18,
-          "count": 1,
-          "is_selected": true
-        },
-        {
-          "value": 19,
-          "count": 1,
-          "is_selected": true
-        }
-      ]
-    },
-    {
-      "name": "price",
-      "type": "custom",
-      "items": [
-        {
-          "value": 19,
-          "count": 1,
-          "is_selected": true
-        },
-        {
-          "value": 20,
-          "count": 1,
-          "is_selected": true
-        }
-      ]
-    }
-  ],
-  "distance": 398,
-  "duration": 16800,
-  "recommended_price": 27,
-  "savings": 81,
-  "lowest_price": 19,
-  "lowest_price_object": {
-    "value": 19.5,
-    "currency": "GBP",
-    "symbol": "£",
-    "string_value": "£20"
-  },
+  "facets": [],
+  "total_trip_count_to_display": 45,
   "full_trips_count": 0,
-  "total_trip_count_to_display": 1,
-  "sorting_algorithm": "trip_date",
-  "has_bus": false
+  "distance": 277,
+  "duration": 10775,
+  "recommended_price": 11,
+  "savings": 0,
+  "lowest_price": 7,
+  "lowest_price_object": {
+    "value": 7.0,
+    "currency": "EUR",
+    "symbol": "€",
+    "string_value": "7,00 €",
+    "price_color": "BLACK"
+  },
+  "sorting_algorithm": ""
 }
