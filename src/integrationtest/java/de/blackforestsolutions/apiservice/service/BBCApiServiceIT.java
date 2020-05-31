@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -35,11 +36,11 @@ class BBCApiServiceIT {
         testData.setDeparture("Berlin");
         testData.setArrival("Hamburg");
         testData.setDepartureDate(new Date());
-        testData.setPath(bBCHttpCallBuilderService.bbcBuildPathWith(testData.build()));
+        testData.setPath(bBCHttpCallBuilderService.bbcBuildJourneyStringPathWith(testData.build()));
 
         ResponseEntity<String> result = callService.get(
                 buildUrlWith(testData.build()).toString(),
-                bBCHttpCallBuilderService.buildHttpEntityForBbc(testData.build())
+                HttpEntity.EMPTY
         );
 
         Assertions.assertThat(HttpStatus.OK).isEqualTo(result.getStatusCode());

@@ -45,7 +45,7 @@ class BBCApiServiceImplTest {
 
     @Test
     void test_map_with_trips28_12_2019_ZRH_FRA() {
-        ApiTokenAndUrlInformation testToken = ApiTokenAndUrlInformationObjectMother.getBbcTokenAndUrl();
+        ApiTokenAndUrlInformation testToken = ApiTokenAndUrlInformationObjectMother.getBBCTokenAndUrl();
         String tripsJson = getResourceFileAsString("json/trips28-12-2019-ZRH-FRA.json");
         ResponseEntity<String> journeyTestResult = new ResponseEntity<>(tripsJson, HttpStatus.OK);
         //noinspection unchecked (justification: no type known for runtime therefore)
@@ -60,7 +60,7 @@ class BBCApiServiceImplTest {
     @SuppressWarnings("OptionalGetWithoutIsPresent")
     @Test
     void test_getJournesForRouteFromApiWith_with_mocked_rest_service_is_executed_correctly_and_maps_correctly_returns_map() throws ParseException {
-        ApiTokenAndUrlInformation apiTokenAndUrlInformation = ApiTokenAndUrlInformationObjectMother.getBbcTokenAndUrl();
+        ApiTokenAndUrlInformation apiTokenAndUrlInformation = ApiTokenAndUrlInformationObjectMother.getBBCTokenAndUrl();
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder apiTokenAndUrlInformationBuilder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
         apiTokenAndUrlInformationBuilder = apiTokenAndUrlInformationBuilder.buildFrom(apiTokenAndUrlInformation);
         Date dateNow = formatDate(new Date());

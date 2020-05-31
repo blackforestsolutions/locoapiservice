@@ -22,8 +22,6 @@ public final class AdditionalHttpConfiguration {
 
     public static final String X_TRACE_ID = "X-TraceId";
 
-    public static final String KEY = "key";
-
     public static final String CLIENT_ID = "client_id";
 
     public static final String CLIENT_SECRET = "client_secret";

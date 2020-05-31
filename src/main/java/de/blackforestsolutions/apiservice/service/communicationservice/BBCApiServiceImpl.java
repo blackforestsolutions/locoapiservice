@@ -7,6 +7,7 @@ import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import de.blackforestsolutions.datamodel.JourneyStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -34,7 +35,7 @@ public class BBCApiServiceImpl implements BBCApiService {
     @Override
     public Map<UUID, JourneyStatus> getJourneysForRouteWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
         String url = getBbcRequestString(apiTokenAndUrlInformation);
-        ResponseEntity<String> result = callService.get(url, bbcHttpCallBuilderService.buildHttpEntityForBbc(apiTokenAndUrlInformation));
+        ResponseEntity<String> result = callService.get(url, HttpEntity.EMPTY);
         return bbcMapperService.map(result.getBody());
     }
 
@@ -45,7 +46,7 @@ public class BBCApiServiceImpl implements BBCApiService {
         builder.setDeparture(apiTokenAndUrlInformation.getDeparture());
         builder.setArrival(apiTokenAndUrlInformation.getArrival());
         builder.setDepartureDate(apiTokenAndUrlInformation.getDepartureDate());
-        builder.setPath(bbcHttpCallBuilderService.bbcBuildPathWith(builder.build()));
+        builder.setPath(bbcHttpCallBuilderService.bbcBuildJourneyStringPathWith(builder.build()));
         URL requestUrl = buildUrlWith(builder.build());
         return requestUrl.toString();
     }

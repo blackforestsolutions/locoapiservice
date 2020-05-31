@@ -314,25 +314,31 @@ public class ApiTokenAndUrlInformationObjectMother {
         return builder.build();
     }
 
-    public static ApiTokenAndUrlInformation getBbcTokenAndUrl() {
+    public static ApiTokenAndUrlInformation getBBCTokenAndUrl() {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder.setProtocol("https");
+        builder.setAuthorization("7f529ec36ab542b78e63f5270a621837");
         builder.setHost("public-api.blablacar.com");
-        builder.setApiVersion("api/v2");
-        builder.setPathVariable("trips?");
-        builder.setDeparture("ZRH");
-        builder.setArrival("FRA");
+        builder.setPathVariable("api");
+        builder.setJourneyPathVariable("trips");
+        builder.setApiVersion("v2");
+        builder.setProtocol("https");
+        builder.setLanguage("de_DE");
+        builder.setCurrency("EUR");
+        builder.setRadius(30);
+        builder.setNumberOfPersons(1);
+        builder.setResultLength(100);
+        builder.setTimeIsDeparture(true);
+        builder.setSortDirection("departure_datetime:desc");
+        builder.setDeparture("Berlin");
+        builder.setArrival("Hamburg");
+        builder.setDepartureCoordinates(new Coordinates.CoordinatesBuilder(52.526455d, 13.367701d).build());
+        builder.setArrivalCoordinates(new Coordinates.CoordinatesBuilder(53.553918d, 10.005147d).build());
         try {
-            builder.setDepartureDate(new SimpleDateFormat("yyyy-MM-dd").parse("2019-12-28"));
-            builder.setArrivalDate(new SimpleDateFormat("yyyy-MM-dd").parse("2019-12-28"));
+            builder.setDepartureDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2020-05-31 13:00:00"));
+            builder.setArrivalDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2020-06-02 13:00:00"));
         } catch (ParseException e) {
             log.info("unable to parse bbc token: " + e);
         }
-        builder.setAuthorizationKey("key");
-        builder.setXOriginationIp("88.66.47.47");
-        builder.setXOriginationIpKey("X-Originating-IP");
-        builder.setAuthorization("7f529ec36ab542b78e63f5270a621837");
-        builder.setPath("/api/v2/trips?fn=ZRH&tn=FRA&db=2019-10-20\"");
         return builder.build();
     }
 
