@@ -36,7 +36,7 @@ public class BBCApiServiceImpl implements BBCApiService {
     public Map<UUID, JourneyStatus> getJourneysForRouteWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
         String url = getBbcRequestString(apiTokenAndUrlInformation);
         ResponseEntity<String> result = callService.get(url, HttpEntity.EMPTY);
-        return bbcMapperService.map(result.getBody());
+        return bbcMapperService.mapJsonToJourneys(result.getBody());
     }
 
     private String getBbcRequestString(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {

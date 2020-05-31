@@ -32,7 +32,7 @@ import static de.blackforestsolutions.apiservice.testutils.TestUtils.*;
 import static org.mockito.Mockito.*;
 
 
-class BBCApiServiceImplTest {
+class BBCApiServiceTest {
 
     private static final RestTemplate REST_TEMPLATE = mock(RestTemplate.class);
     private final BBCHttpCallBuilderService bbcHttpCallBuilderService = new BBCHttpCallBuilderServiceImpl();
