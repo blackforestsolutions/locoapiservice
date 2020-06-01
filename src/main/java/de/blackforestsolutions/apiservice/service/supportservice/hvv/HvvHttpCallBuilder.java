@@ -19,6 +19,7 @@ import java.io.UncheckedIOException;
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Objects;
 import java.util.UUID;
 
 @Slf4j
@@ -58,6 +59,7 @@ class HvvHttpCallBuilder {
     }
 
     private static Mac createMacWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
+        Objects.requireNonNull(apiTokenAndUrlInformation.getAuthentificationType(), "authentificationType is not allowed to be null");
         try {
             return Mac.getInstance(apiTokenAndUrlInformation.getAuthentificationType());
         } catch (NoSuchAlgorithmException e) {
@@ -77,6 +79,8 @@ class HvvHttpCallBuilder {
     }
 
     private static HvvBaseBody buildBaseHttpBodyWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
+        Objects.requireNonNull(apiTokenAndUrlInformation.getLanguage(), "language is not allowed to be null");
+        Objects.requireNonNull(apiTokenAndUrlInformation.getApiVersion(), "apiVersion is not allowed to be null");
         HvvBaseBody hvvBaseBody = new HvvBaseBody();
         hvvBaseBody.setLanguage(apiTokenAndUrlInformation.getLanguage());
         hvvBaseBody.setVersion(Double.parseDouble(apiTokenAndUrlInformation.getApiVersion()));

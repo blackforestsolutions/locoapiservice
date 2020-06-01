@@ -7,6 +7,7 @@ import org.springframework.data.geo.Metrics;
 import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -40,7 +41,7 @@ public class LegObjectMother {
     }
 
     public static Leg getBerlinHbfHamburgMittlerLandwegLeg() throws ParseException {
-        Date startTime = generateDateFromPatternAndString("dd/MM/yyyy HH:mm:ss","25/10/2020 17:00:00");
+        Date startTime = generateDateFromPatternAndString("dd/MM/yyyy HH:mm:ss", "25/10/2020 17:00:00");
         Date arrivalTime = convertToDate(LocalDateTime.parse("25/10/2020 17:00:00", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")).plusSeconds(11130));
         return new Leg.LegBuilder(TEST_UUID_3)
                 .setStartTime(startTime)
@@ -52,6 +53,60 @@ public class LegObjectMother {
                 .setDistance(new Distance(281, Metrics.KILOMETERS))
                 .setProviderId("1928522132-berlin-hamburg")
                 .setVehicleType(VehicleType.CAR)
+                .build();
+    }
+
+    public static Leg getLorchhausenOberfleckenToWiesbadenHauptbahnhofLeg() throws ParseException {
+        Date startTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2020-05-04 07:43:00");
+        Date arrivalTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2020-05-04 08:35:00");
+        return new Leg.LegBuilder(TEST_UUID_2)
+                .setStart(getLorchhausenOberfleckenTravelPoint())
+                .setStartTime(startTime)
+                .setDestination(getWiesbadenHauptbahnhofTravelPoint())
+                .setArrivalTime(arrivalTime)
+                .setDistance(new Distance(46423d))
+                .setDuration(generateDurationFromStartToDestination(startTime, arrivalTime))
+                .setPrice(getRMVPrice())
+                .setVehicleType(VehicleType.CAR)
+                .setTravelProvider(TravelProvider.RMV)
+                .setHasPrice(true)
+                .build();
+    }
+
+    public static Leg getWiesbadenHauptbahnhofTransferLeg() throws ParseException {
+        Date startTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2020-05-04 08:35:00");
+        Date arrivalTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2020-05-04 08:35:00");
+        return new Leg.LegBuilder(TEST_UUID_3)
+                .setStart(getWiesbadenHauptbahnhofTravelPoint())
+                .setStartTime(startTime)
+                .setDestination(getWiesbadenHauptbahnhofTravelPoint(""))
+                .setArrivalTime(arrivalTime)
+                .setDistance(new Distance(160))
+                .setDuration(generateDurationFromStartToDestination(startTime, arrivalTime))
+                .setVehicleType(VehicleType.WALK)
+                .setTravelProvider(TravelProvider.RMV)
+                .build();
+    }
+
+    public static Leg getWiesbadenHauptbahnhofToFrankfurtHauptbahnhofLeg() throws ParseException {
+        Date startTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2020-05-04 08:35:00");
+        Date arrivalTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2020-05-04 09:18:00");
+        return new Leg.LegBuilder(TEST_UUID_4)
+                .setStart(getWiesbadenHauptbahnhofTravelPoint("4"))
+                .setStartTime(startTime)
+                .setDestination(getFrankfurtHauptbahnhofTravelPoint())
+                .setArrivalTime(arrivalTime)
+                .setDuration(generateDurationFromStartToDestination(startTime, arrivalTime))
+                .setTravelLine(getWiesbadenHauptbahnhofFrankfurtHauptbahnhofTravelLine())
+                .setVehicleName("09:18:00")
+                .setVehicleNumber("S1")
+                .setIncidents(List.of(
+                        "Pflicht zur Bedeckung von Mund und Nase",
+                        "Fahrzeuggebundene Einstiegshilfe vorhanden",
+                        "Klimaanlage"
+                ))
+                .setTravelProvider(TravelProvider.RMV)
+                .setUnknownTravelProvider("DB Regio AG S-Bahn Rhein-Main")
                 .build();
     }
 

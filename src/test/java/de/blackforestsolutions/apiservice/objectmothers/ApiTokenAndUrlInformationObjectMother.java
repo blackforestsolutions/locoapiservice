@@ -186,21 +186,35 @@ public class ApiTokenAndUrlInformationObjectMother {
         builder.setTariff("all");
         builder.setTimeIsDeparture(true);
         builder.setAllowReducedPrice(true);
+        builder.setAllowIntermediateStops(true);
+        builder.setHvvReturnContSearchData(true);
         builder.setPath("/gti/public/getRoute");
 
         return builder.build();
     }
 
-    public static ApiTokenAndUrlInformation getRMVTokenAndUrl(String departure, String arrival) {
+    public static ApiTokenAndUrlInformation getRMVTokenAndUrl(String departure, String arrival) throws ParseException {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
         builder.setProtocol("https");
         builder.setHost("www.rmv.de");
         builder.setLocationPath("hapi/location.name?");
+        builder.setCoordinatesPath("hapi/location.nearbystops?");
         builder.setGermanRailJourneyDeatilsPath("hapi/trip?");
         builder.setAuthorizationKey("Authorization");
         builder.setAuthorization("1a4fbca8-ce2b-40fc-a1ed-333bcf5aed6e");
+        builder.setLanguage("de");
         builder.setArrival(arrival);
+        builder.setArrivalDate(new SimpleDateFormat("yyyy-MM-dd HH:mm").parse("2020-05-04 08:00"));
+        builder.setArrivalCoordinates(new Coordinates.CoordinatesBuilder(50.01d, 50.01d).build());
         builder.setDeparture(departure);
+        builder.setDepartureDate(new SimpleDateFormat("yyyy-MM-dd HH:mm").parse("2020-05-04 08:00"));
+        builder.setDepartureCoordinates(new Coordinates.CoordinatesBuilder(50.052278d, 8.571331d).build());
+        builder.setRadius(1000);
+        builder.setOutputFormat("SP");
+        builder.setTimeIsDeparture(true);
+        builder.setResultLengthBeforeDepartureTime(2);
+        builder.setResultLengthAfterDepartureTime(4);
+        builder.setAllowIntermediateStops(true);
         return builder.build();
     }
 

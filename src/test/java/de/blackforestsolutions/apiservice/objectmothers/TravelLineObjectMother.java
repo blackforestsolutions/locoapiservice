@@ -16,6 +16,15 @@ public class TravelLineObjectMother {
                 .build();
     }
 
+    static TravelLine getWiesbadenHauptbahnhofFrankfurtHauptbahnhofTravelLine() throws ParseException {
+        return new TravelLine.TravelLineBuilder()
+                .setDirection(getRödemarkOberRodenTravelPoint())
+                .setBetweenHolds(Map.of(
+                        0, getGriesheimbahnhofTravelPoint()
+                ))
+                .build();
+    }
+
     static TravelLine getPotsdamBerlinTravelLine() {
         TravelLine.TravelLineBuilder travelLine = new TravelLine.TravelLineBuilder();
         travelLine.setDirection(getBerlinOstkreuzTravelPoint());

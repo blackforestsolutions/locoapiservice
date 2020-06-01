@@ -1,116 +1,110 @@
 package de.blackforestsolutions.apiservice.service.communicationservice;
 
-import de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother;
 import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallService;
-import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallServiceImpl;
 import de.blackforestsolutions.apiservice.service.mapper.RMVMapperService;
 import de.blackforestsolutions.apiservice.service.mapper.RMVMapperServiceImpl;
 import de.blackforestsolutions.apiservice.service.supportservice.RMVHttpCallBuilderService;
 import de.blackforestsolutions.apiservice.service.supportservice.RMVHttpCallBuilderServiceImpl;
 import de.blackforestsolutions.apiservice.service.supportservice.UuidService;
-import de.blackforestsolutions.apiservice.stubs.RestTemplateBuilderStub;
+import de.blackforestsolutions.apiservice.service.supportservice.UuidServiceImpl;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
+import de.blackforestsolutions.datamodel.Coordinates;
 import de.blackforestsolutions.datamodel.JourneyStatus;
-import de.blackforestsolutions.datamodel.PriceCategory;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
+import org.mockito.InOrder;
 import org.mockito.InjectMocks;
-import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.RestTemplate;
 
-import java.math.BigDecimal;
-import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import static de.blackforestsolutions.apiservice.objectmothers.UUIDObjectMother.*;
-import static de.blackforestsolutions.apiservice.testutils.TestUtils.formatDate;
+import static de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother.getRMVTokenAndUrl;
 import static de.blackforestsolutions.apiservice.testutils.TestUtils.getResourceFileAsString;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 class RMVApiServiceTest {
-    private static final RestTemplate restTemplate = mock(RestTemplate.class);
 
-    private final RestTemplateBuilder restTemplateBuilder = new RestTemplateBuilderStub(restTemplate);
+    private final CallService callService = mock(CallService.class);
 
-    private final CallService callService = new CallServiceImpl(restTemplateBuilder);
+    private final RMVHttpCallBuilderService httpCallBuilderService = spy(new RMVHttpCallBuilderServiceImpl());
 
-    private final RMVHttpCallBuilderService httpCallBuilderService = new RMVHttpCallBuilderServiceImpl();
+    private final UuidService uuidService = new UuidServiceImpl();
 
-    private final UuidService uuidService = mock(UuidService.class);
+    private final RMVMapperService rmvMapperService = spy(new RMVMapperServiceImpl(uuidService));
 
     @InjectMocks
-    private final RMVMapperService rmvMapperService = new RMVMapperServiceImpl(uuidService);
-
     private final RMVApiService classUnderTest = new RMVApiServiceImpl(callService, httpCallBuilderService, rmvMapperService);
+
+    @BeforeEach
+    void init() {
+        String departureCall = getResourceFileAsString("xml/LocationList.xml");
+        String arrivalCall = getResourceFileAsString("xml/LocationList-frankfurt.xml");
+        String tripListXml = getResourceFileAsString("xml/TripList.xml");
+        when(callService.get(anyString(), any(HttpEntity.class)))
+                .thenReturn(new ResponseEntity<>(departureCall, HttpStatus.OK))
+                .thenReturn(new ResponseEntity<>(arrivalCall, HttpStatus.OK))
+                .thenReturn(new ResponseEntity<>(tripListXml, HttpStatus.OK));
+    }
+
 
     @SuppressWarnings("OptionalGetWithoutIsPresent")
     @Test
-    void test_getJourneysForRouteFromApiWith_with_mocked_rest_service_is_executed_correctly_and_maps_correctly_returns_map() throws Exception {
-        ApiTokenAndUrlInformation apiTokenAndUrlInformation = ApiTokenAndUrlInformationObjectMother.getRMVTokenAndUrl("Lorch-Lorchhausen Bahnhof", "frankfurt hauptbahnhof");
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder = builder.buildFrom(apiTokenAndUrlInformation);
-        Date now = formatDate(new Date());
-        builder.setArrivalDate(now);
-        builder.setDepartureDate(now);
-        builder.setLocationPath("hapi/location.name?");
-        apiTokenAndUrlInformation = builder.build();
-        String departureCall = getResourceFileAsString("xml/LocationList.xml");
-        ResponseEntity<String> departureCallResult = new ResponseEntity<>(departureCall, HttpStatus.OK);
-        String arrivalCall = getResourceFileAsString("xml/LocationList-frankfurt.xml");
-        ResponseEntity<String> arrivalCallResult = new ResponseEntity<>(arrivalCall, HttpStatus.OK);
-        String tripListXml = getResourceFileAsString("xml/TripList.xml");
-        ResponseEntity<String> testResult = new ResponseEntity<>(tripListXml, HttpStatus.OK);
-        when(uuidService.createUUID())
-                .thenReturn(TEST_UUID_1)
-                .thenReturn(TEST_UUID_2)
-                .thenReturn(TEST_UUID_3)
-                .thenReturn(TEST_UUID_4)
-                .thenReturn(TEST_UUID_5)
-                .thenReturn(TEST_UUID_6)
-                .thenReturn(TEST_UUID_7)
-                .thenReturn(TEST_UUID_8)
-                .thenReturn(TEST_UUID_9)
-                .thenReturn(TEST_UUID_10)
-                .thenReturn(TEST_UUID_11).thenReturn(TEST_UUID_12).thenReturn(TEST_UUID_13).thenReturn(TEST_UUID_14).thenReturn(TEST_UUID_15).thenReturn(TEST_UUID_16).thenReturn(TEST_UUID_17).thenReturn(TEST_UUID_18).thenReturn(TEST_UUID_19)
-                .thenReturn(TEST_UUID_20).thenReturn(TEST_UUID_21).thenReturn(TEST_UUID_22);
-        //noinspection unchecked (justification: no type known for runtime therefore)
-        when(restTemplate.exchange(anyString(), any(), any(), any(Class.class))).thenReturn(departureCallResult).thenReturn(arrivalCallResult).thenReturn(testResult);
+    void test_getJourneysForRouteBySearchStringWith_mocked_call_service_is_executed_correctly_and_map_correctly() throws Exception {
+        String expectedDeparture = "Lorch-Lorchhausen Bahnhof";
+        String expectedArrival = "frankfurt hauptbahnhof";
+        ApiTokenAndUrlInformation testToken = getRMVTokenAndUrl(expectedDeparture, expectedArrival);
+        ArgumentCaptor<String> httpCallBuilderArg = ArgumentCaptor.forClass(String.class);
+        ArgumentCaptor<String> callServiceArg = ArgumentCaptor.forClass(String.class);
 
-        Map<UUID, JourneyStatus> result = classUnderTest.getJourneysForRouteWith(apiTokenAndUrlInformation);
 
-        assertThat(result.size()).isEqualTo(5);
-        assertThat(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getStart().getStationName()).isEqualTo("Frankfurt (Main) Hauptbahnhof");
-        assertThat(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getDestination().getStationName()).isEqualTo("Lorch-Lorchhausen Bahnhof");
-        assertThat(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getPrice().getValues().get(PriceCategory.ADULT)).isEqualTo(new BigDecimal(1235));
-        assertThat(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getPrice().getValues().get(PriceCategory.CHILD)).isEqualTo(new BigDecimal(730));
-        assertThat(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).isHasPrice()).isEqualTo(true);
+        Map<UUID, JourneyStatus> result = classUnderTest.getJourneysForRouteBySearchStringWith(testToken);
 
-        assertThat(result.get(TEST_UUID_3).getJourney().get().getLegs().get(TEST_UUID_4).getStart().getStationName()).isEqualTo("Frankfurt (Main) Hauptbahnhof");
-        assertThat(result.get(TEST_UUID_3).getJourney().get().getLegs().get(TEST_UUID_4).getDestination().getStationName()).isEqualTo("Lorch-Lorchhausen Bahnhof");
-        assertThat(result.get(TEST_UUID_3).getJourney().get().getLegs().get(TEST_UUID_4).getPrice().getValues().get(PriceCategory.ADULT)).isEqualTo(new BigDecimal(1235));
-        assertThat(result.get(TEST_UUID_3).getJourney().get().getLegs().get(TEST_UUID_4).getPrice().getValues().get(PriceCategory.CHILD)).isEqualTo(new BigDecimal(730));
+        InOrder inOrder = inOrder(httpCallBuilderService, callService, rmvMapperService);
+        inOrder.verify(httpCallBuilderService, times(2)).buildLocationStringPathWith(any(ApiTokenAndUrlInformation.class), httpCallBuilderArg.capture());
+        inOrder.verify(callService, times(1)).get(anyString(), any(HttpEntity.class));
+        inOrder.verify(rmvMapperService, times(1)).getIdFrom(anyString());
+        inOrder.verify(callService, times(1)).get(anyString(), any(HttpEntity.class));
+        inOrder.verify(rmvMapperService, times(1)).getIdFrom(anyString());
+        inOrder.verify(httpCallBuilderService, times(1)).buildTripPathWith(any(ApiTokenAndUrlInformation.class));
+        inOrder.verify(callService, times(1)).get(callServiceArg.capture(), any(HttpEntity.class));
+        inOrder.verify(rmvMapperService, times(1)).getJourneysFrom(anyString());
+        assertThat(result.size()).isEqualTo(6);
+        assertThat(httpCallBuilderArg.getAllValues()).isEqualTo(List.of(expectedDeparture, expectedArrival));
+        assertThat(callServiceArg.getValue()).contains("originId=A%3D2%40O%3DLorch+-+Lorchhausen%2C+Oberflecken%40X%3D7785108%40Y%3D50053277%40U%3D103%40b%3D990117421%40B%3D1%40V%3D6.9%2C%40p%3D1530862110%40");
+        assertThat(callServiceArg.getValue()).contains("destId=A=1@O=Frankfurt (Main) Hauptbahnhof@X=8662653@Y=50106808@U=80@L=003000010@B=1@V=6.9,@p=1575313337@");
+    }
 
-        assertThat(result.get(TEST_UUID_5).getJourney().get().getLegs().get(TEST_UUID_6).getStart().getStationName()).isEqualTo("Frankfurt (Main) Hauptbahnhof");
-        assertThat(result.get(TEST_UUID_5).getJourney().get().getLegs().get(TEST_UUID_6).getDestination().getStationName()).isEqualTo("Lorch-Lorchhausen Bahnhof");
-        assertThat(result.get(TEST_UUID_5).getJourney().get().getLegs().get(TEST_UUID_6).getPrice().getValues().get(PriceCategory.ADULT)).isEqualTo(new BigDecimal(1235));
-        assertThat(result.get(TEST_UUID_5).getJourney().get().getLegs().get(TEST_UUID_6).getPrice().getValues().get(PriceCategory.CHILD)).isEqualTo(new BigDecimal(730));
+    @Test
+    void test_getJourneysForRouteByCoordinatesWith_mocked_rest_service_is_executed_correctly_and_map_correctly() throws Exception {
+        ApiTokenAndUrlInformation testToken = getRMVTokenAndUrl("", "");
+        ArgumentCaptor<Coordinates> httpCallBuilderArg = ArgumentCaptor.forClass(Coordinates.class);
+        ArgumentCaptor<String> callServiceArg = ArgumentCaptor.forClass(String.class);
 
-        assertThat(result.get(TEST_UUID_7).getJourney().get().getLegs().get(TEST_UUID_8).getStart().getStationName()).isEqualTo("Frankfurt (Main) Hauptbahnhof");
-        assertThat(result.get(TEST_UUID_7).getJourney().get().getLegs().get(TEST_UUID_8).getDestination().getStationName()).isEqualTo("Lorch-Lorchhausen Bahnhof");
-        assertThat(result.get(TEST_UUID_7).getJourney().get().getLegs().get(TEST_UUID_8).getPrice().getValues().get(PriceCategory.ADULT)).isEqualTo(new BigDecimal(1235));
-        assertThat(result.get(TEST_UUID_7).getJourney().get().getLegs().get(TEST_UUID_8).getPrice().getValues().get(PriceCategory.CHILD)).isEqualTo(new BigDecimal(730));
 
-        assertThat(result.get(TEST_UUID_9).getJourney().get().getLegs().get(TEST_UUID_10).getStart().getStationName()).isEqualTo("Frankfurt (Main) Hauptbahnhof tief");
-        assertThat(result.get(TEST_UUID_9).getJourney().get().getLegs().get(TEST_UUID_10).getDestination().getStationName()).isEqualTo("Wiesbaden Hauptbahnhof");
-        assertThat(result.get(TEST_UUID_9).getJourney().get().getLegs().get(TEST_UUID_10).getPrice().getValues().get(PriceCategory.ADULT)).isEqualTo(new BigDecimal(1235));
-        assertThat(result.get(TEST_UUID_9).getJourney().get().getLegs().get(TEST_UUID_10).getPrice().getValues().get(PriceCategory.CHILD)).isEqualTo(new BigDecimal(730));
-        assertThat(result.get(TEST_UUID_9).getJourney().get().getLegs().get(TEST_UUID_11).getStart().getStationName()).isEqualTo("Wiesbaden Hauptbahnhof");
-        assertThat(result.get(TEST_UUID_9).getJourney().get().getLegs().get(TEST_UUID_11).getDestination().getStationName()).isEqualTo("Lorch-Lorchhausen Bahnhof");
+        Map<UUID, JourneyStatus> result = classUnderTest.getJourneysForRouteByCoordinatesWith(testToken);
+
+        InOrder inOrder = inOrder(httpCallBuilderService, callService, rmvMapperService);
+        inOrder.verify(httpCallBuilderService, times(2)).buildLocationCoordinatesPathWith(any(ApiTokenAndUrlInformation.class), httpCallBuilderArg.capture());
+        inOrder.verify(callService, times(1)).get(anyString(), any(HttpEntity.class));
+        inOrder.verify(rmvMapperService, times(1)).getIdFrom(anyString());
+        inOrder.verify(callService, times(1)).get(anyString(), any(HttpEntity.class));
+        inOrder.verify(rmvMapperService, times(1)).getIdFrom(anyString());
+        inOrder.verify(httpCallBuilderService, times(1)).buildTripPathWith(any(ApiTokenAndUrlInformation.class));
+        inOrder.verify(callService, times(1)).get(callServiceArg.capture(), any(HttpEntity.class));
+        inOrder.verify(rmvMapperService, times(1)).getJourneysFrom(anyString());
+        assertThat(result.size()).isEqualTo(6);
+        assertThat(httpCallBuilderArg.getAllValues()).isEqualTo(List.of(
+                getRMVTokenAndUrl("", "").getDepartureCoordinates(),
+                getRMVTokenAndUrl("", "").getArrivalCoordinates()));
+        assertThat(callServiceArg.getValue()).contains("originId=A%3D2%40O%3DLorch+-+Lorchhausen%2C+Oberflecken%40X%3D7785108%40Y%3D50053277%40U%3D103%40b%3D990117421%40B%3D1%40V%3D6.9%2C%40p%3D1530862110%40");
+        assertThat(callServiceArg.getValue()).contains("destId=A=1@O=Frankfurt (Main) Hauptbahnhof@X=8662653@Y=50106808@U=80@L=003000010@B=1@V=6.9,@p=1575313337@");
     }
 }

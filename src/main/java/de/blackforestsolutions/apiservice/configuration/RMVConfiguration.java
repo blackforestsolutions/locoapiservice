@@ -17,8 +17,25 @@ public class RMVConfiguration {
     private String rmvPathLocation;
     @Value("${rmvpathtrip}")
     private String rmvPathTrip;
+    @Value("${rmvpathcoordinates}")
+    private String rmvPathCoordinates;
     @Value("${accessProtocol}")
     private String accesProtocol;
+    @Value("${rmvLanguage}")
+    private String rmvLanguage;
+    @Value("${rmvRadius}")
+    private String rmvRadius;
+    @Value("${rmvStationTypes}")
+    private String rmvStationTypes;
+    @Value("${rmvTimeIsDeparture}")
+    private boolean rmvTimeIsDeparture;
+    @Value("${rmvResultLengthBeforeDate}")
+    private Integer rmvResultLengthBeforeDate;
+    @Value("${rmvResultLengthAfterDate}")
+    private Integer rmvResultLengthAfterDate;
+    @Value("${rmvAllowIntermediateStops}")
+    private boolean rmvAllowIntermediateStops;
+
 
     @Bean(name = "rmvApiTokenAndUrlInformation")
     public ApiTokenAndUrlInformation apiTokenAndUrlInformation() {
@@ -28,9 +45,17 @@ public class RMVConfiguration {
         builder.setPort(0);
         builder.setPathVariable(rmvPathLocation);
         builder.setLocationPath(rmvPathLocation);
+        builder.setCoordinatesPath(rmvPathCoordinates);
         builder.setGermanRailJourneyDeatilsPath(rmvPathTrip);
         builder.setAuthorizationKey(HttpHeaders.AUTHORIZATION);
         builder.setAuthorization(authorization);
+        builder.setLanguage(rmvLanguage);
+        builder.setRadius(Integer.parseInt(rmvRadius));
+        builder.setOutputFormat(rmvStationTypes);
+        builder.setTimeIsDeparture(rmvTimeIsDeparture);
+        builder.setResultLengthBeforeDepartureTime(rmvResultLengthBeforeDate);
+        builder.setResultLengthAfterDepartureTime(rmvResultLengthAfterDate);
+        builder.setAllowIntermediateStops(rmvAllowIntermediateStops);
         return builder.build();
     }
 }

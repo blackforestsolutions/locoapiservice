@@ -48,6 +48,8 @@ public class HvvConfiguration {
     private int hvvResultLength;
     @Value("${hvvMaxDistanceFromCoordinate}")
     private int hvvMaxDistanceFromCoordinate;
+    @Value("${hvvTimeIsDeparture}")
+    private boolean hvvTimeIsDeparture;
 
     @Bean(name = "hvvApiTokenAndUrlInformation")
     public ApiTokenAndUrlInformation apiTokenAndUrlInformation() {
@@ -72,6 +74,7 @@ public class HvvConfiguration {
         builder.setHvvReturnContSearchData(hvvReturnContSearchData);
         builder.setResultLength(hvvResultLength);
         builder.setDistanceFromTravelPoint(hvvMaxDistanceFromCoordinate);
+        builder.setTimeIsDeparture(hvvTimeIsDeparture);
         return builder.build();
     }
 }
