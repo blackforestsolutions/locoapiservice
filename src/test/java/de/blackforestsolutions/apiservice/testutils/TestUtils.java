@@ -2,6 +2,8 @@ package de.blackforestsolutions.apiservice.testutils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import de.blackforestsolutions.datamodel.Journey;
+import de.blackforestsolutions.datamodel.JourneyStatus;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.http.ResponseEntity;
 
@@ -16,12 +18,20 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.Date;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class TestUtils {
+
+    public static Date convertToDate(LocalDateTime dateToConvert) {
+        return Date.from(dateToConvert.atZone(ZoneId.systemDefault())
+                        .toInstant());
+    }
 
     /**
      * Reads given resource file as a string.
@@ -117,6 +127,13 @@ public class TestUtils {
         JAXBContext jaxbContext = JAXBContext.newInstance(pojo);
         Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
         return (T) unmarshaller.unmarshal(readerResultBody);
+    }
+
+    public static JourneyStatus createJourneyStatusWith(Journey journey) {
+        JourneyStatus journeyStatus = new JourneyStatus();
+        journeyStatus.setJourney(Optional.of(journey));
+        journeyStatus.setProblem(Optional.empty());
+        return journeyStatus;
     }
 
 }

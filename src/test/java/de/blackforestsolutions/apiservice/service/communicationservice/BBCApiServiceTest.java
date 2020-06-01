@@ -1,108 +1,103 @@
 package de.blackforestsolutions.apiservice.service.communicationservice;
 
-import de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother;
 import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallService;
-import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallServiceImpl;
 import de.blackforestsolutions.apiservice.service.mapper.BBCMapperService;
-import de.blackforestsolutions.apiservice.service.mapper.BBCMapperServiceImpl;
 import de.blackforestsolutions.apiservice.service.supportservice.BBCHttpCallBuilderService;
-import de.blackforestsolutions.apiservice.service.supportservice.BBCHttpCallBuilderServiceImpl;
-import de.blackforestsolutions.apiservice.service.supportservice.UuidService;
-import de.blackforestsolutions.apiservice.stubs.RestTemplateBuilderStub;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import de.blackforestsolutions.datamodel.JourneyStatus;
-import de.blackforestsolutions.datamodel.PriceCategory;
-import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
+import org.mockito.ArgumentCaptor;
+import org.mockito.InOrder;
 import org.mockito.Mockito;
-import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.RestTemplate;
 
-import java.math.BigDecimal;
 import java.text.ParseException;
-import java.util.Date;
 import java.util.Map;
 import java.util.UUID;
 
-import static de.blackforestsolutions.apiservice.objectmothers.UUIDObjectMother.*;
-import static de.blackforestsolutions.apiservice.testutils.TestUtils.*;
+import static de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother.getBBCTokenAndUrl;
+import static de.blackforestsolutions.apiservice.objectmothers.JourneyObjectMother.getBerlinHbfToHamburgLandwehrJourney;
+import static de.blackforestsolutions.apiservice.objectmothers.JourneyObjectMother.getFlughafenBerlinToHamburgHbfJourney;
+import static de.blackforestsolutions.apiservice.testutils.TestUtils.createJourneyStatusWith;
+import static de.blackforestsolutions.apiservice.testutils.TestUtils.getResourceFileAsString;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
 
 class BBCApiServiceTest {
 
-    private static final RestTemplate REST_TEMPLATE = mock(RestTemplate.class);
-    private final BBCHttpCallBuilderService bbcHttpCallBuilderService = new BBCHttpCallBuilderServiceImpl();
-    private final RestTemplateBuilder restTemplateBuilder = new RestTemplateBuilderStub(REST_TEMPLATE);
-    private final CallService callService = new CallServiceImpl(restTemplateBuilder);
-    private final UuidService mockedUuidService = Mockito.mock(UuidService.class);
-    @InjectMocks
-    private final BBCMapperService bbcMapperService = new BBCMapperServiceImpl(mockedUuidService);
+    private final BBCMapperService bbcMapperService = mock(BBCMapperService.class);
+    private final CallService callService = mock(CallService.class);
+    private final BBCHttpCallBuilderService bbcHttpCallBuilderService = mock(BBCHttpCallBuilderService.class);
+
     private final BBCApiService classUnderTest = new BBCApiServiceImpl(callService, bbcHttpCallBuilderService, bbcMapperService);
 
-    @Test
-    void test_map_with_trips28_12_2019_ZRH_FRA() {
-        ApiTokenAndUrlInformation testToken = ApiTokenAndUrlInformationObjectMother.getBBCTokenAndUrl();
-        String tripsJson = getResourceFileAsString("json/trips28-12-2019-ZRH-FRA.json");
-        ResponseEntity<String> journeyTestResult = new ResponseEntity<>(tripsJson, HttpStatus.OK);
-        //noinspection unchecked (justification: no type known for runtime therefore)
-        when(REST_TEMPLATE.exchange(anyString(), any(), any(), any(Class.class))).thenReturn(journeyTestResult);
-        when(mockedUuidService.createUUID()).thenReturn(TEST_UUID_1).thenReturn(TEST_UUID_2).thenReturn(TEST_UUID_3).thenReturn(TEST_UUID_4).thenReturn(TEST_UUID_5).thenReturn(TEST_UUID_6);
+    @BeforeEach
+    void init() throws ParseException {
+        when(bbcHttpCallBuilderService.bbcBuildJourneyStringPathWith(Mockito.any(ApiTokenAndUrlInformation.class)))
+                .thenReturn("");
 
-        Map<UUID, JourneyStatus> result = classUnderTest.getJourneysForRouteWith(testToken);
+        when(bbcHttpCallBuilderService.bbcBuildJourneyCoordinatesPathWith(Mockito.any(ApiTokenAndUrlInformation.class)))
+                .thenReturn("");
 
-        Assertions.assertThat(result.size()).isEqualTo(3);
+        when(callService.get(anyString(), any(HttpEntity.class)))
+                .thenReturn(new ResponseEntity<>(getResourceFileAsString("json/bbcTest.json"), HttpStatus.OK));
+
+        when(bbcMapperService.mapJsonToJourneys(anyString()))
+                .thenReturn(Map.of(
+                        getFlughafenBerlinToHamburgHbfJourney().getId(), createJourneyStatusWith(getFlughafenBerlinToHamburgHbfJourney()),
+                        getBerlinHbfToHamburgLandwehrJourney().getId(), createJourneyStatusWith(getBerlinHbfToHamburgLandwehrJourney())
+                ));
     }
 
-    @SuppressWarnings("OptionalGetWithoutIsPresent")
     @Test
-    void test_getJournesForRouteFromApiWith_with_mocked_rest_service_is_executed_correctly_and_maps_correctly_returns_map() throws ParseException {
-        ApiTokenAndUrlInformation apiTokenAndUrlInformation = ApiTokenAndUrlInformationObjectMother.getBBCTokenAndUrl();
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder apiTokenAndUrlInformationBuilder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        apiTokenAndUrlInformationBuilder = apiTokenAndUrlInformationBuilder.buildFrom(apiTokenAndUrlInformation);
-        Date dateNow = formatDate(new Date());
-        apiTokenAndUrlInformationBuilder.setDepartureDate(dateNow);
-        apiTokenAndUrlInformation = apiTokenAndUrlInformationBuilder.build();
-        String scheduledResourceJson = getResourceFileAsString("json/trips28-12-2019-ZRH-FRA.json");
-        ResponseEntity<String> testResult = new ResponseEntity<>(scheduledResourceJson, HttpStatus.OK);
-        //noinspection unchecked (justification: no type known for runtime therefore)
-        doReturn(testResult).when(REST_TEMPLATE).exchange(anyString(), any(), any(), any(Class.class));
-        when(mockedUuidService.createUUID()).thenReturn(TEST_UUID_1).thenReturn(TEST_UUID_2).thenReturn(TEST_UUID_3).thenReturn(TEST_UUID_4).thenReturn(TEST_UUID_5).thenReturn(TEST_UUID_6);
+    void test_getJourneysForRouteWith_executes_apiSerive_in_right_order() {
+        ApiTokenAndUrlInformation testData = getBBCTokenAndUrl();
+        ArgumentCaptor<String> url = ArgumentCaptor.forClass(String.class);
+        ArgumentCaptor<String> body = ArgumentCaptor.forClass(String.class);
 
-        Map<UUID, JourneyStatus> result = classUnderTest.getJourneysForRouteWith(apiTokenAndUrlInformation);
+        Map<UUID, JourneyStatus> result = classUnderTest.getJourneysForRouteWith(testData);
 
-
-        Assertions.assertThat("1848602173-zuerich-frankfurt-am-main").isEqualTo(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getProviderId());
-        Assertions.assertThat("Zürich").isEqualTo(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getStart().getCity());
-        Assertions.assertThat("Frankfurt").isEqualTo(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getDestination().getCity());
-        Assertions.assertThat(new BigDecimal(21)).isEqualTo(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getPrice().getValues().get(PriceCategory.ADULT_REDUCED));
-        Assertions.assertThat(new BigDecimal(23.5)).isEqualTo(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getPrice().getValues().get(PriceCategory.ADULT));
-        Assertions.assertThat(407.0).isEqualTo(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getDistance().getValue());
-        Assertions.assertThat(buildDateFrom("29/12/2019 12:00:00")).isEqualTo(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getStartTime());
-        Assertions.assertThat("60346540").isEqualTo(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getVehicleNumber());
-        Assertions.assertThat("BMW530").isEqualTo(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getVehicleName());
-
-        Assertions.assertThat("1819468110-zuerich-frankfurt-am-main").isEqualTo(result.get(TEST_UUID_3).getJourney().get().getLegs().get(TEST_UUID_4).getProviderId());
-        Assertions.assertThat("Zürich").isEqualTo(result.get(TEST_UUID_3).getJourney().get().getLegs().get(TEST_UUID_4).getStart().getCity());
-        Assertions.assertThat("Frankfurt").isEqualTo(result.get(TEST_UUID_3).getJourney().get().getLegs().get(TEST_UUID_4).getDestination().getCity());
-        Assertions.assertThat(new BigDecimal(17)).isEqualTo(result.get(TEST_UUID_3).getJourney().get().getLegs().get(TEST_UUID_4).getPrice().getValues().get(PriceCategory.ADULT_REDUCED));
-        Assertions.assertThat(new BigDecimal(19.5)).isEqualTo(result.get(TEST_UUID_3).getJourney().get().getLegs().get(TEST_UUID_4).getPrice().getValues().get(PriceCategory.ADULT));
-        Assertions.assertThat(413.0).isEqualTo(result.get(TEST_UUID_3).getJourney().get().getLegs().get(TEST_UUID_4).getDistance().getValue());
-        Assertions.assertThat(buildDateFrom("29/12/2019 16:30:00")).isEqualTo(result.get(TEST_UUID_3).getJourney().get().getLegs().get(TEST_UUID_4).getStartTime());
-        Assertions.assertThat("90081710").isEqualTo(result.get(TEST_UUID_3).getJourney().get().getLegs().get(TEST_UUID_4).getVehicleNumber());
-        Assertions.assertThat("VOLKSWAGENPOLO").isEqualTo(result.get(TEST_UUID_3).getJourney().get().getLegs().get(TEST_UUID_4).getVehicleName());
-
-        Assertions.assertThat("1849864385-zurigo-francoforte-sul-meno").isEqualTo(result.get(TEST_UUID_5).getJourney().get().getLegs().get(TEST_UUID_6).getProviderId());
-        Assertions.assertThat("Zürich").isEqualTo(result.get(TEST_UUID_5).getJourney().get().getLegs().get(TEST_UUID_6).getStart().getCity());
-        Assertions.assertThat("Frankfurt").isEqualTo(result.get(TEST_UUID_5).getJourney().get().getLegs().get(TEST_UUID_6).getDestination().getCity());
-        Assertions.assertThat(new BigDecimal(23.0)).isEqualTo(result.get(TEST_UUID_5).getJourney().get().getLegs().get(TEST_UUID_6).getPrice().getValues().get(PriceCategory.ADULT_REDUCED));
-        Assertions.assertThat(new BigDecimal(26.5)).isEqualTo(result.get(TEST_UUID_5).getJourney().get().getLegs().get(TEST_UUID_6).getPrice().getValues().get(PriceCategory.ADULT));
-        Assertions.assertThat(403.0).isEqualTo(result.get(TEST_UUID_5).getJourney().get().getLegs().get(TEST_UUID_6).getDistance().getValue());
-        Assertions.assertThat(buildDateFrom("29/12/2019 17:30:00")).isEqualTo(result.get(TEST_UUID_5).getJourney().get().getLegs().get(TEST_UUID_6).getStartTime());
-        Assertions.assertThat("88772792").isEqualTo(result.get(TEST_UUID_5).getJourney().get().getLegs().get(TEST_UUID_6).getVehicleNumber());
-        Assertions.assertThat("AUDIQ3").isEqualTo(result.get(TEST_UUID_5).getJourney().get().getLegs().get(TEST_UUID_6).getVehicleName());
+        InOrder inOrder = inOrder(bbcMapperService, bbcHttpCallBuilderService, callService);
+        inOrder.verify(bbcHttpCallBuilderService, times(1)).bbcBuildJourneyStringPathWith(any(ApiTokenAndUrlInformation.class));
+        inOrder.verify(callService, times(1)).get(url.capture(), any(HttpEntity.class));
+        inOrder.verify(bbcMapperService, times(1)).mapJsonToJourneys(body.capture());
+        assertThat(url.getValue()).isEqualTo("https://public-api.blablacar.com");
+        assertThat(body.getValue()).isEqualTo(getResourceFileAsString("json/bbcTest.json"));
+        assertThat(result.size()).isEqualTo(2);
     }
+
+    @Test
+    void test_getJourneysForRouteByCoordinates_executes_apiSerive_in_right_order() {
+        ApiTokenAndUrlInformation testData = getBBCTokenAndUrl();
+        ArgumentCaptor<String> url = ArgumentCaptor.forClass(String.class);
+        ArgumentCaptor<String> body = ArgumentCaptor.forClass(String.class);
+
+        Map<UUID, JourneyStatus> result = classUnderTest.getJourneysForRouteByCoordinates(testData);
+
+        InOrder inOrder = inOrder(bbcMapperService, bbcHttpCallBuilderService, callService);
+        inOrder.verify(bbcHttpCallBuilderService, times(1)).bbcBuildJourneyCoordinatesPathWith(any(ApiTokenAndUrlInformation.class));
+        inOrder.verify(callService, times(1)).get(url.capture(), any(HttpEntity.class));
+        inOrder.verify(bbcMapperService, times(1)).mapJsonToJourneys(body.capture());
+        assertThat(url.getValue()).isEqualTo("https://public-api.blablacar.com");
+        assertThat(body.getValue()).isEqualTo(getResourceFileAsString("json/bbcTest.json"));
+        assertThat(result.size()).isEqualTo(2);
+    }
+
+    @Test
+    void test_getJourneysForRouteByCoordinates_with_arrival_coordintes_as_null_and_departure_coordinates_as_null_returns_empty_map() {
+        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder testData = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(getBBCTokenAndUrl());
+        testData.setArrivalCoordinates(null);
+        testData.setDepartureCoordinates(null);
+
+        Map<UUID, JourneyStatus> result = classUnderTest.getJourneysForRouteByCoordinates(testData.build());
+
+        assertThat(result.size()).isEqualTo(0);
+    }
+
 }

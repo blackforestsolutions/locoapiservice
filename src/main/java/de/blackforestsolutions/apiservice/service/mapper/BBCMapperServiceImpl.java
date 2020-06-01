@@ -4,13 +4,16 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.blackforestsolutions.apiservice.service.supportservice.UuidService;
 import de.blackforestsolutions.datamodel.*;
-import de.blackforestsolutions.datamodel.Price;
-import de.blackforestsolutions.generatedcontent.bbc.*;
+import de.blackforestsolutions.generatedcontent.bbc.Duration;
+import de.blackforestsolutions.generatedcontent.bbc.Place;
+import de.blackforestsolutions.generatedcontent.bbc.Rides;
+import de.blackforestsolutions.generatedcontent.bbc.Trip;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.geo.Distance;
+import org.springframework.data.geo.Metrics;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -75,7 +78,7 @@ public class BBCMapperServiceImpl implements BBCMapperService {
         leg.setStart(buildTravelPointWith(trip.getDeparturePlace()));
         leg.setDestination(buildTravelPointWith(trip.getArrivalPlace()));
         leg.setPrice(buildPriceWith(trip));
-        leg.setDistance(new Distance(trip.getDistance().getValue()));
+        leg.setDistance(new Distance(trip.getDistance().getValue(), Metrics.KILOMETERS));
         leg.setProviderId(trip.getMainPermanentId());
         if (StringUtils.isNotEmpty(trip.getComment())) {
             leg.setIncidents(List.of(trip.getComment()));
@@ -117,7 +120,7 @@ public class BBCMapperServiceImpl implements BBCMapperService {
         return tripPlans
                 .stream()
                 .skip(FIRST)
-                .limit(tripPlans.size() - FIRST)
+                .limit(tripPlans.size() - FIRST - FIRST)
                 .map(this::buildTravelPointWith)
                 .collect(Collectors.toMap(betweenHold -> counter.getAndIncrement(), beweenHold -> beweenHold));
     }

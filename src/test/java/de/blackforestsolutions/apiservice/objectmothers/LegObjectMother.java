@@ -2,8 +2,12 @@ package de.blackforestsolutions.apiservice.objectmothers;
 
 import de.blackforestsolutions.datamodel.*;
 import org.springframework.data.geo.Distance;
+import org.springframework.data.geo.Metrics;
 
 import java.text.ParseException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +19,41 @@ import static de.blackforestsolutions.apiservice.objectmothers.UUIDObjectMother.
 import static de.blackforestsolutions.apiservice.testutils.TestUtils.*;
 
 public class LegObjectMother {
+
+    public static Leg getFlughafenBerlinToHamburgHbfLeg() throws ParseException {
+        Date startTime = generateDateFromPatternAndString("dd/MM/yyyy HH:mm:ss","30/04/2021 08:00:00");
+        Date arrivalTime = convertToDate(LocalDateTime.parse("30/04/2021 08:00:00", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")).plusSeconds(10775));
+        return new Leg.LegBuilder(TEST_UUID_1)
+                .setStartTime(startTime)
+                .setStart(getBerlinFlughafenTravelPoint())
+                .setDestination(getHamburgHbfTravelPoint())
+                .setPrice(getBBCPriceFromBerlinFlughafenToHamburgHbf())
+                .setArrivalTime(arrivalTime)
+                .setDuration(generateDurationFromStartToDestination(startTime, arrivalTime))
+                .setDistance(new Distance(276, Metrics.KILOMETERS))
+                .setProviderId("1981400891-berlin-hamburg")
+                .setIncidents(List.of("Bitte eine Schutzmaske tragen!"))
+                .setVehicleName("TESLA MODEL X")
+                .setVehicleType(VehicleType.CAR)
+                .setTravelLine(getBerlinFlughafenHamburgHbfTravelLine())
+                .build();
+    }
+
+    public static Leg getBerlinHbfHamburgMittlerLandwegLeg() throws ParseException {
+        Date startTime = generateDateFromPatternAndString("dd/MM/yyyy HH:mm:ss","25/10/2020 17:00:00");
+        Date arrivalTime = convertToDate(LocalDateTime.parse("25/10/2020 17:00:00", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")).plusSeconds(11130));
+        return new Leg.LegBuilder(TEST_UUID_3)
+                .setStartTime(startTime)
+                .setStart(getBerlinHbfTravelPoint())
+                .setDestination(getHamburgMittlerLandwegTravelPoint())
+                .setPrice(getBBCPriceFromBerlinHbfToHamburgLandwehr())
+                .setArrivalTime(arrivalTime)
+                .setDuration(generateDurationFromStartToDestination(startTime, arrivalTime))
+                .setDistance(new Distance(281, Metrics.KILOMETERS))
+                .setProviderId("1928522132-berlin-hamburg")
+                .setVehicleType(VehicleType.CAR)
+                .build();
+    }
 
     public static Leg getEiderstrasseRendsburgGartenstrasseRendsburgLeg(Price price) {
         Leg.LegBuilder leg = new Leg.LegBuilder(TEST_UUID_2);

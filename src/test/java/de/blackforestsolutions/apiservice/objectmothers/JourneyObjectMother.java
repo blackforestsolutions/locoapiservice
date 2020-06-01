@@ -11,9 +11,25 @@ import java.util.UUID;
 import static de.blackforestsolutions.apiservice.objectmothers.LegObjectMother.*;
 import static de.blackforestsolutions.apiservice.objectmothers.PriceObjectMother.getDBPrice;
 import static de.blackforestsolutions.apiservice.objectmothers.PriceObjectMother.getNahShPrice;
-import static de.blackforestsolutions.apiservice.objectmothers.UUIDObjectMother.TEST_UUID_1;
+import static de.blackforestsolutions.apiservice.objectmothers.UUIDObjectMother.*;
 
 public class JourneyObjectMother {
+
+    public static Journey getFlughafenBerlinToHamburgHbfJourney() throws ParseException {
+        LinkedHashMap<UUID, Leg> legs = new LinkedHashMap<>();
+        legs.put(getFlughafenBerlinToHamburgHbfLeg().getId(), getFlughafenBerlinToHamburgHbfLeg());
+        return new Journey.JourneyBuilder(TEST_UUID_2)
+                .setLegs(legs)
+                .build();
+    }
+
+    public static Journey getBerlinHbfToHamburgLandwehrJourney() throws ParseException {
+        LinkedHashMap<UUID, Leg> legs = new LinkedHashMap<>();
+        legs.put(getBerlinHbfHamburgMittlerLandwegLeg().getId(), getBerlinHbfHamburgMittlerLandwegLeg());
+        return new Journey.JourneyBuilder(TEST_UUID_4)
+                .setLegs(legs)
+                .build();
+    }
 
     public static Journey getEiderstrasseRendsburgToRendsburgJourney() {
         Journey.JourneyBuilder journey = new Journey.JourneyBuilder(TEST_UUID_1);

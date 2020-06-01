@@ -18,6 +18,7 @@ class RideShareControllerTest {
         //act
         classUnderTest.retrieveRideSharingJourneys(testRequest);
         //assert
+        Mockito.verify(bbcApiService, Mockito.times(1)).getJourneysForRouteByCoordinates(Mockito.any(ApiTokenAndUrlInformation.class));
         Mockito.verify(bbcApiService, Mockito.times(1)).getJourneysForRouteWith(Mockito.any(ApiTokenAndUrlInformation.class));
     }
 
