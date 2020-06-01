@@ -1,26 +1,38 @@
 package de.blackforestsolutions.apiservice.service.mapper;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.blackforestsolutions.apiservice.service.supportservice.UuidService;
 import de.blackforestsolutions.datamodel.*;
+import de.blackforestsolutions.generatedcontent.bbc.Duration;
+import de.blackforestsolutions.generatedcontent.bbc.Place;
 import de.blackforestsolutions.generatedcontent.bbc.Rides;
 import de.blackforestsolutions.generatedcontent.bbc.Trip;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.geo.Distance;
+import org.springframework.data.geo.Metrics;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
+
+import static de.blackforestsolutions.apiservice.service.mapper.JourneyStatusBuilder.createJourneyStatusProblemWith;
+import static de.blackforestsolutions.apiservice.service.mapper.MapperService.generateDurationFromStartToDestination;
 
 @Slf4j
 @Service
 public class BBCMapperServiceImpl implements BBCMapperService {
+
+    private static final String SECONDS = "s";
+    private static final int FIRST = 1;
+    private static final int TRIP_PLAN_MIN_SIZE = 2;
 
     private final UuidService uuidService;
 
@@ -29,136 +41,105 @@ public class BBCMapperServiceImpl implements BBCMapperService {
         this.uuidService = uuidService;
     }
 
-    private static CallStatus retrieveRidesStatusFrom(String jsonString) {
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
+    @Override
+    public Map<UUID, JourneyStatus> mapJsonToJourneys(String jsonString) {
         try {
-            return new CallStatus(mapper.readValue(jsonString, Rides.class), Status.SUCCESS, null);
+            ObjectMapper mapper = new ObjectMapper();
+            Rides rides = mapper.readValue(jsonString, Rides.class);
+            return buildJourneysWith(rides);
         } catch (JsonProcessingException e) {
             log.error("Error while processing json: ", e);
-            return new CallStatus(null, Status.FAILED, e);
+            return Map.of(uuidService.createUUID(), createJourneyStatusProblemWith(e));
         }
     }
 
-    private static TravelPoint buildTravelPointWith(Trip trip, boolean departure) {
-        TravelPoint.TravelPointBuilder travelPoint = new TravelPoint.TravelPointBuilder();
-        if (isSafeToUnwrap(trip, departure) && departure) {
-            travelPoint.setCity(String.valueOf(trip.getDeparturePlace().getCityName()));
-            travelPoint.setStreet(String.valueOf(trip.getDeparturePlace().getAddress()));
-            Coordinates.CoordinatesBuilder coordinates = new Coordinates.CoordinatesBuilder();
-            coordinates.setLatitude(trip.getDeparturePlace().getLatitude());
-            coordinates.setLongitude(trip.getDeparturePlace().getLongitude());
-            travelPoint.setGpsCoordinates(coordinates.build());
-            Locale localeVar = new Locale(trip.getDeparturePlace().getCountryCode());
-            travelPoint.setCountry(localeVar);
+    private Map<UUID, JourneyStatus> buildJourneysWith(Rides rides) {
+        return rides
+                .getTrips()
+                .stream()
+                .map(this::buildJourneyWith)
+                .collect(Collectors.toMap(Journey::getId, JourneyStatusBuilder::createJourneyStatusWith));
+    }
 
+    private Journey buildJourneyWith(Trip trip) {
+        LinkedHashMap<UUID, Leg> legs = new LinkedHashMap<>();
+        Leg leg = buildLegWith(trip);
+        legs.put(leg.getId(), leg);
+        return new Journey.JourneyBuilder(uuidService.createUUID())
+                .setLegs(legs)
+                .build();
+    }
+
+    private Leg buildLegWith(Trip trip) {
+        Leg.LegBuilder leg = new Leg.LegBuilder(uuidService.createUUID());
+        leg.setStartTime(buildDateFrom(trip.getDepartureDate()));
+        leg.setArrivalTime(buildArrivalTimeWith(leg.getStartTime(), trip.getDuration()));
+        leg.setDuration(generateDurationFromStartToDestination(leg.getStartTime(), leg.getArrivalTime()));
+        leg.setStart(buildTravelPointWith(trip.getDeparturePlace()));
+        leg.setDestination(buildTravelPointWith(trip.getArrivalPlace()));
+        leg.setPrice(buildPriceWith(trip));
+        leg.setDistance(new Distance(trip.getDistance().getValue(), Metrics.KILOMETERS));
+        leg.setProviderId(trip.getMainPermanentId());
+        if (StringUtils.isNotEmpty(trip.getComment())) {
+            leg.setIncidents(List.of(trip.getComment()));
         }
-        if (isSafeToUnwrap(trip, departure) && !departure) {
-            travelPoint.setCity(String.valueOf(trip.getArrivalPlace().getCityName()));
-            travelPoint.setStreet(String.valueOf(trip.getArrivalPlace().getAddress()));
-            Coordinates.CoordinatesBuilder coordinates = new Coordinates.CoordinatesBuilder();
-            coordinates.setLatitude(trip.getArrivalPlace().getLatitude());
-            coordinates.setLongitude(trip.getArrivalPlace().getLongitude());
-            travelPoint.setGpsCoordinates(coordinates.build());
-            Locale localeVar = new Locale(trip.getArrivalPlace().getCountryCode());
-            travelPoint.setCountry(localeVar);
+        if (trip.getTripPlan().size() > TRIP_PLAN_MIN_SIZE) {
+            leg.setTravelLine(buildTravelLine(trip.getTripPlan()));
         }
-        return travelPoint.build();
+        leg.setVehicleType(VehicleType.CAR);
+        Optional.ofNullable(trip.getCar()).ifPresent(car -> leg.setVehicleName(car.getMake().concat(" ").concat(car.getModel())));
+        return leg.build();
     }
 
-    private static boolean isSafeToUnwrap(Trip trip, boolean departure) {
-        if (departure) {
-            return isSafeToUnwrapDeparture(trip);
-        }
-        return isSafeToUnwrapArrival(trip);
+    private TravelPoint buildTravelPointWith(Place place) {
+        return new TravelPoint.TravelPointBuilder()
+                .setCity(place.getCityName())
+                .setStationName(place.getAddress())
+                .setGpsCoordinates(new Coordinates.CoordinatesBuilder(place.getLatitude(), place.getLongitude()).build())
+                .setCountry(Locale.forLanguageTag(place.getCountryCode()))
+                .build();
     }
 
-    private static boolean isSafeToUnwrapArrival(Trip trip) {
-        return trip.getArrivalPlace() != null
-                && trip.getArrivalPlace().getCityName() != null
-                && trip.getArrivalPlace().getAddress() != null
-                && trip.getArrivalPlace().getCountryCode() != null;
-    }
-
-    private static boolean isSafeToUnwrapDeparture(Trip trip) {
-        return trip.getDeparturePlace() != null
-                && trip.getDeparturePlace().getCityName() != null
-                && trip.getDeparturePlace().getAddress() != null
-                && trip.getDeparturePlace().getCountryCode() != null;
-    }
-
-    private static Price buildPriceWith(Trip trip) {
+    private Price buildPriceWith(Trip trip) {
         Price.PriceBuilder price = new Price.PriceBuilder();
-        // todo price is int value in generated content
-        // todo affiliate links
-        price.setValues(Map.of(
-                PriceCategory.ADULT_REDUCED, new BigDecimal(trip.getPrice().getValue()),
-                PriceCategory.ADULT, new BigDecimal(trip.getPriceWithCommission().getValue())
-        ));
+        price.setValues(Map.of(PriceCategory.ADULT, new BigDecimal(trip.getPrice().getValue())));
+        price.setAffiliateLinks(Map.of(PriceCategory.ADULT, trip.getLinks().getFront()));
         price.setCurrency(Currency.getInstance(String.valueOf(trip.getPrice().getCurrency())));
         price.setSymbol(trip.getPrice().getSymbol());
         return price.build();
     }
 
-    private static Distance buildDistanceWith(Trip trip) {
-        Distance distance = null;
-        if (trip.getDistance() != null) {
-            distance = new Distance(trip.getDistance().getValue());
-        }
-        return distance;
+    private TravelLine buildTravelLine(List<Place> tripPlans) {
+        return new TravelLine.TravelLineBuilder()
+                .setBetweenHolds(buildBetweenHoldsWith(tripPlans))
+                .build();
     }
 
-    private static Date buildDateFrom(Trip trip) {
+    private Map<Integer, TravelPoint> buildBetweenHoldsWith(List<Place> tripPlans) {
+        AtomicInteger counter = new AtomicInteger(0);
+        return tripPlans
+                .stream()
+                .skip(FIRST)
+                .limit(tripPlans.size() - FIRST - FIRST)
+                .map(this::buildTravelPointWith)
+                .collect(Collectors.toMap(betweenHold -> counter.getAndIncrement(), beweenHold -> beweenHold));
+    }
+
+    private Date buildDateFrom(String date) {
         try {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-            String dateStringFixed = trip.getDepartureDate().replace("/", "-");
-            return simpleDateFormat.parse(dateStringFixed);
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+            return simpleDateFormat.parse(date);
         } catch (ParseException e) {
             log.error("Error while parsing Date and was replaced by new Date()", e);
             return new Date();
         }
     }
 
-    @Override
-    public Map<UUID, JourneyStatus> map(String jsonString) {
-        return mapTripsToJourney(retrieveRidesStatusFrom(jsonString));
-    }
-
-    private Map<UUID, JourneyStatus> mapTripsToJourney(CallStatus callStatus) {
-        if (callStatus.getCalledObject() != null) {
-            Rides ridesStatus = (Rides) callStatus.getCalledObject();
-            return ridesStatus
-                    .getTrips()
-                    .stream()
-                    .map(this::buildJourneyWith)
-                    .collect(Collectors.toMap(Journey::getId, JourneyStatusBuilder::createJourneyStatusWith));
-        } else {
-            UUID errorUuid = UUID.randomUUID();
-            return Map.of(errorUuid, JourneyStatusBuilder.createJourneyStatusProblemWith(callStatus.getException()));
+    private Date buildArrivalTimeWith(Date departureTime, Duration duration) {
+        if (!duration.getUnity().equals(SECONDS)) {
+            log.error("No unity found for building arrival time!");
+            return new Date();
         }
-
-    }
-
-    private Journey buildJourneyWith(Trip trip) {
-        Journey.JourneyBuilder journey = new Journey.JourneyBuilder(uuidService.createUUID());
-        LinkedHashMap<UUID, Leg> legs = new LinkedHashMap<>();
-        Leg leg = buildLegWith(trip);
-        legs.put(leg.getId(), leg);
-        journey.setLegs(legs);
-        return journey.build();
-    }
-
-    private Leg buildLegWith(Trip trip) {
-        Leg.LegBuilder leg = new Leg.LegBuilder(uuidService.createUUID());
-        leg.setStartTime(buildDateFrom(trip));
-        leg.setStart(buildTravelPointWith(trip, true));
-        leg.setDestination(buildTravelPointWith(trip, false));
-        leg.setPrice(buildPriceWith(trip));
-        leg.setDistance(buildDistanceWith(trip));
-        leg.setProviderId(trip.getPermanentId());
-        leg.setVehicleType(VehicleType.CAR);
-        leg.setVehicleName(trip.getCar().getMake().concat(trip.getCar().getModel()));
-        leg.setVehicleNumber(trip.getCar().getId());
-        return leg.build();
+        return DateUtils.addSeconds(departureTime, duration.getValue());
     }
 }

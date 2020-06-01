@@ -1,165 +1,274 @@
 {
   "links": {
-    "_self": "https://api.blablacar.com/api/v2/trips",
-    "_front": "https://www.blablacar.co.uk/search?fn=ZRH&fc=47.4582165%2C8.5554755&tn=FRA&tc=50.0379326%2C8.5621518&db=30/11/2019"
+    "_self": "",
+    "_front": "https://www.blablacar.de/search?fc=52.520006,13.404954&tc=53.551084,9.993681&db=2020-05-31"
   },
   "pager": {
     "page": 1,
     "pages": 1,
-    "total": 1,
-    "limit": 10
+    "total": 4,
+    "limit": 100
   },
   "trips": [
     {
       "links": {
-        "_self": "http://api.blablacar.com:443/api/v2/trips/1802963307-zuerich-frankfurt-am-main",
-        "_front": "https://www.blablacar.co.uk/trip/carpooling/1802963307-zuerich-frankfurt-am-main/?_force_https=1"
+        "_self": "",
+        "_front": "https://www.blablacar.de/trip/carpooling/1981400891-berlin-hamburg"
       },
-      "departure_date": "30/11/2019 18:45:00",
+      "departure_date": "30/04/2021 08:00:00",
+      "departure_date_iso8601": "2021-04-30T08:00:00+02:00",
+      "is_passed": false,
       "departure_place": {
-        "city_name": "Zürich",
-        "address": "Zürich HB, Zürich",
-        "latitude": 47.377866,
-        "longitude": 8.540345,
-        "country_code": "CH"
-      },
-      "arrival_place": {
-        "city_name": "Frankfurt",
-        "address": "Hauptbahnhof, Frankfurt am Main",
-        "latitude": 50.107684,
-        "longitude": 8.664606,
+        "city_name": "Berlin",
+        "address": "Flughafen Berlin-Tegel, Berlin",
+        "latitude": 52.558832,
+        "longitude": 13.288437,
         "country_code": "DE"
       },
+      "departure_meeting_point": {
+        "name": "U-Bahnhof Grenzallee",
+        "full_name": "U-Bahnhof Grenzallee, Berlin",
+        "city_name": "Berlin",
+        "country_code": "DE",
+        "latitude": 52.4628825,
+        "longitude": 13.4447716
+      },
+      "arrival_place": {
+        "city_name": "Hamburg",
+        "address": "Hamburg Hbf, Hamburg",
+        "latitude": 53.552925,
+        "longitude": 10.006604,
+        "country_code": "DE"
+      },
+      "arrival_meeting_point": {
+        "name": "Imbiss",
+        "full_name": "Imbiss, Hamburg",
+        "city_name": "Hamburg",
+        "country_code": "DE",
+        "latitude": 53.5267901,
+        "longitude": 10.0286357
+      },
       "price": {
-        "value": 17,
-        "currency": "GBP",
-        "symbol": "£",
-        "string_value": "£17",
+        "value": 11.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "11,00 €",
         "price_color": "BLACK"
       },
       "price_with_commission": {
-        "value": 19.5,
-        "currency": "GBP",
-        "symbol": "£",
-        "string_value": "£19.50",
+        "value": 11.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "11,00 €",
         "price_color": "BLACK"
       },
       "price_without_commission": {
-        "value": 17,
-        "currency": "GBP",
-        "symbol": "£",
-        "string_value": "£17",
+        "value": 11.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "11,00 €",
         "price_color": "BLACK"
       },
       "commission": {
-        "value": 2.5,
-        "currency": "GBP",
-        "symbol": "£",
-        "string_value": "£2.50"
+        "value": 0.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "0,00 €",
+        "price_color": "BLACK"
       },
-      "seats_left": 3,
-      "seats": 3,
+      "seats_left": 2,
+      "seats": 2,
+      "seats_count_origin": 2,
       "duration": {
-        "value": 16800,
+        "value": 10775,
         "unity": "s"
       },
       "distance": {
-        "value": 409,
+        "value": 276,
         "unity": "km"
       },
-      "permanent_id": "1802963307-zuerich-frankfurt-am-main",
+      "permanent_id": "1981400891-berlin-hamburg",
+      "main_permanent_id": "1981400891-berlin-hamburg",
+      "comment": "Bitte eine Schutzmaske tragen!",
       "car": {
-        "id": "126279917",
-        "model": "Arona",
-        "make": "SEAT",
+        "id": "",
+        "model": "MODEL X",
+        "make": "TESLA",
         "comfort": "Normal",
-        "comfort_nb_star": 2,
-        "category": "CATEGORY_TOURISM"
+        "comfort_nb_star": 0,
+        "category": "CATEGORY_BERLINE"
       },
       "multimodal_id": {
         "source": "CARPOOLING",
-        "id": "1802963307-zuerich-frankfurt-am-main"
+        "id": "1981400891-berlin-hamburg"
       },
-      "viaggio_rosa": false,
-      "is_comfort": true,
       "freeway": true,
       "answer_delay": 0,
+      "bucketing_eligible": true,
+      "booking_mode": "manual",
+      "booking_type": "onboard",
+      "view_count": 0,
+      "cross_border_alert": false,
+      "trip_plan": [
+        {
+          "city_name": "Berlin",
+          "address": "Flughafen Berlin-Tegel, Berlin",
+          "latitude": 52.558832,
+          "longitude": 13.288437,
+          "country_code": "DE"
+        },
+        {
+          "city_name": "Rostock",
+          "address": "Rostock Hbf, Rostock",
+          "latitude": 53.552925,
+          "longitude": 10.006604,
+          "country_code": "DE"
+        }
+        ,{
+          "city_name": "Hamburg",
+          "address": "Hamburg Hbf, Hamburg",
+          "latitude": 53.552925,
+          "longitude": 10.006604,
+          "country_code": "DE"
+        }
+      ],
+      "messaging_status": "public",
+      "passengers": [],
+      "display_contact": false,
+      "vehicle_pictures": [],
+      "can_report": false,
+      "locations_to_display": [
+        "Berlin",
+        "Hamburg"
+      ],
+      "corridoring_type": "PLANNED",
+      "viaggio_rosa": false,
+      "is_comfort": true,
+      "stop_overs": [],
+      "is_booking_allowed": true
+    },
+    {
+      "links": {
+        "_self": "",
+        "_front": "https://www.blablacar.de/trip/carpooling/1928522132-berlin-hamburg"
+      },
+      "departure_date": "25/10/2020 17:00:00",
+      "departure_date_iso8601": "2020-10-25T17:00:00+01:00",
+      "is_passed": false,
+      "departure_place": {
+        "city_name": "Berlin",
+        "address": "Berlin Hauptbahnhof, Berlin",
+        "latitude": 52.525083,
+        "longitude": 13.369402,
+        "country_code": "DE"
+      },
+      "arrival_place": {
+        "city_name": "Hamburg",
+        "address": "Mittlerer Landweg, Hamburg",
+        "latitude": 53.495142,
+        "longitude": 10.128684,
+        "country_code": "DE"
+      },
+      "price": {
+        "value": 14.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "14,00 €",
+        "price_color": "BLACK"
+      },
+      "price_with_commission": {
+        "value": 14.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "14,00 €",
+        "price_color": "BLACK"
+      },
+      "price_without_commission": {
+        "value": 14.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "14,00 €",
+        "price_color": "BLACK"
+      },
+      "commission": {
+        "value": 0.0,
+        "currency": "EUR",
+        "symbol": "€",
+        "string_value": "0,00 €",
+        "price_color": "BLACK"
+      },
+      "seats_left": 3,
+      "seats": 3,
+      "seats_count_origin": 3,
+      "duration": {
+        "value": 11130,
+        "unity": "s"
+      },
+      "distance": {
+        "value": 281,
+        "unity": "km"
+      },
+      "permanent_id": "1928522132-berlin-hamburg",
+      "main_permanent_id": "1928522132-berlin-hamburg",
+      "comment": "",
+      "multimodal_id": {
+        "source": "CARPOOLING",
+        "id": "1928522132-berlin-hamburg"
+      },
+      "freeway": true,
+      "answer_delay": 0,
+      "bucketing_eligible": true,
       "booking_mode": "auto",
       "booking_type": "online",
-      "locations_to_display": [
-        "Zürich",
-        "Frankfurt"
+      "view_count": 0,
+      "cross_border_alert": false,
+      "trip_plan": [
+        {
+          "city_name": "Berlin",
+          "address": "Berlin Hauptbahnhof, Berlin",
+          "latitude": 52.525083,
+          "longitude": 13.369402,
+          "country_code": "DE"
+        },
+        {
+          "city_name": "Hamburg",
+          "address": "Mittlerer Landweg, Hamburg",
+          "latitude": 53.495142,
+          "longitude": 10.128684,
+          "country_code": "DE"
+        }
       ],
-      "departure_passenger_routing": {
-        "proximity": "MIDDLE",
-        "routes": [
-          {
-            "distance_in_meters": 9007,
-            "type": "AS_THE_CROW_FLIES"
-          }
-        ]
-      },
-      "arrival_passenger_routing": {
-        "proximity": "MIDDLE",
-        "routes": [
-          {
-            "distance_in_meters": 10659,
-            "type": "AS_THE_CROW_FLIES"
-          }
-        ]
-      },
+      "messaging_status": "public",
+      "passengers": [],
+      "display_contact": false,
+      "vehicle_pictures": [],
+      "can_report": false,
+      "locations_to_display": [
+        "Berlin",
+        "Hamburg"
+      ],
       "corridoring_type": "PLANNED",
-      "vehicle_pictures": []
+      "viaggio_rosa": false,
+      "is_comfort": true,
+      "stop_overs": [],
+      "is_booking_allowed": true
     }
   ],
   "top_trips": [],
-  "facets": [
-    {
-      "name": "hour",
-      "type": "custom",
-      "items": [
-        {
-          "value": 18,
-          "count": 1,
-          "is_selected": true
-        },
-        {
-          "value": 19,
-          "count": 1,
-          "is_selected": true
-        }
-      ]
-    },
-    {
-      "name": "price",
-      "type": "custom",
-      "items": [
-        {
-          "value": 19,
-          "count": 1,
-          "is_selected": true
-        },
-        {
-          "value": 20,
-          "count": 1,
-          "is_selected": true
-        }
-      ]
-    }
-  ],
-  "distance": 398,
-  "duration": 16800,
-  "recommended_price": 27,
-  "savings": 81,
-  "lowest_price": 19,
-  "lowest_price_object": {
-    "value": 19.5,
-    "currency": "GBP",
-    "symbol": "£",
-    "string_value": "£20"
-  },
+  "facets": [],
+  "total_trip_count_to_display": 45,
   "full_trips_count": 0,
-  "total_trip_count_to_display": 1,
-  "sorting_algorithm": "trip_date",
-  "has_bus": false
+  "distance": 277,
+  "duration": 10775,
+  "recommended_price": 11,
+  "savings": 0,
+  "lowest_price": 7,
+  "lowest_price_object": {
+    "value": 7.0,
+    "currency": "EUR",
+    "symbol": "€",
+    "string_value": "7,00 €",
+    "price_color": "BLACK"
+  },
+  "sorting_algorithm": ""
 }

@@ -6,5 +6,5 @@ import java.util.Map;
 import java.util.UUID;
 
 public interface BBCMapperService {
-    Map<UUID, JourneyStatus> map(String jsonString);
+    Map<UUID, JourneyStatus> mapJsonToJourneys(String jsonString);
 }

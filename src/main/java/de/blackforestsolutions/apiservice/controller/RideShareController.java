@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
@@ -30,7 +29,9 @@ public class RideShareController {
 
     @GetMapping("ride-shares")
     public Map<UUID, JourneyStatus> retrieveRideSharingJourneys(ApiTokenAndUrlInformation request) {
-        return new HashMap<>(bbcApiService.getJourneysForRouteWith(getBbcApiTokenAndUrlInformation(request)));
+        Map<UUID, JourneyStatus> resultMap = bbcApiService.getJourneysForRouteWith(getBbcApiTokenAndUrlInformation(request));
+        resultMap.putAll(bbcApiService.getJourneysForRouteByCoordinates(getBbcApiTokenAndUrlInformation(request)));
+        return resultMap;
     }
 
     private ApiTokenAndUrlInformation getBbcApiTokenAndUrlInformation(ApiTokenAndUrlInformation request) {

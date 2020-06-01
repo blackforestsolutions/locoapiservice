@@ -7,11 +7,14 @@ import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import de.blackforestsolutions.datamodel.JourneyStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.net.URL;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
 import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.buildUrlWith;
@@ -33,19 +36,24 @@ public class BBCApiServiceImpl implements BBCApiService {
 
     @Override
     public Map<UUID, JourneyStatus> getJourneysForRouteWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
-        String url = getBbcRequestString(apiTokenAndUrlInformation);
-        ResponseEntity<String> result = callService.get(url, bbcHttpCallBuilderService.buildHttpEntityForBbc(apiTokenAndUrlInformation));
-        return bbcMapperService.map(result.getBody());
+        String url = getBbcRequestString(apiTokenAndUrlInformation, bbcHttpCallBuilderService.bbcBuildJourneyStringPathWith(apiTokenAndUrlInformation));
+        ResponseEntity<String> result = callService.get(url, HttpEntity.EMPTY);
+        return bbcMapperService.mapJsonToJourneys(result.getBody());
     }
 
-    private String getBbcRequestString(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder = builder.buildFrom(apiTokenAndUrlInformation);
-        builder.setPath(apiTokenAndUrlInformation.getHazelcastPath());
-        builder.setDeparture(apiTokenAndUrlInformation.getDeparture());
-        builder.setArrival(apiTokenAndUrlInformation.getArrival());
-        builder.setDepartureDate(apiTokenAndUrlInformation.getDepartureDate());
-        builder.setPath(bbcHttpCallBuilderService.bbcBuildPathWith(builder.build()));
+    @Override
+    public Map<UUID, JourneyStatus> getJourneysForRouteByCoordinates(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
+        if (Optional.ofNullable(apiTokenAndUrlInformation.getArrivalCoordinates()).isPresent() || Optional.ofNullable(apiTokenAndUrlInformation.getDepartureCoordinates()).isPresent()) {
+            String url = getBbcRequestString(apiTokenAndUrlInformation, bbcHttpCallBuilderService.bbcBuildJourneyCoordinatesPathWith(apiTokenAndUrlInformation));
+            ResponseEntity<String> result = callService.get(url, HttpEntity.EMPTY);
+            return bbcMapperService.mapJsonToJourneys(result.getBody());
+        }
+        return new HashMap<>();
+    }
+
+    private String getBbcRequestString(ApiTokenAndUrlInformation apiTokenAndUrlInformation, String path) {
+        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(apiTokenAndUrlInformation);
+        builder.setPath(path);
         URL requestUrl = buildUrlWith(builder.build());
         return requestUrl.toString();
     }

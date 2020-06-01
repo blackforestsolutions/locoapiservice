@@ -58,6 +58,51 @@ public class TravelPointObjectMother {
         return travelPoint;
     }
 
+    public static TravelPoint getBerlinFlughafenTravelPoint() {
+        return new TravelPoint.TravelPointBuilder()
+                .setCity("Berlin")
+                .setStationName("Flughafen Berlin-Tegel, Berlin")
+                .setGpsCoordinates(new Coordinates.CoordinatesBuilder(52.558832d, 13.288437d).build())
+                .setCountry(Locale.GERMAN)
+                .build();
+    }
+
+    public static TravelPoint getHamburgHbfTravelPoint() {
+        return new TravelPoint.TravelPointBuilder()
+                .setCity("Hamburg")
+                .setStationName("Hamburg Hbf, Hamburg")
+                .setGpsCoordinates(new Coordinates.CoordinatesBuilder(53.552925d, 10.006604d).build())
+                .setCountry(Locale.GERMAN)
+                .build();
+    }
+
+    public static TravelPoint getRostockHbfTravelPoint() {
+        return new TravelPoint.TravelPointBuilder()
+                .setCity("Rostock")
+                .setStationName("Rostock Hbf, Rostock")
+                .setGpsCoordinates(new Coordinates.CoordinatesBuilder(53.552925d, 10.006604d).build())
+                .setCountry(Locale.GERMAN)
+                .build();
+    }
+
+    public static TravelPoint getBerlinHbfTravelPoint() {
+        return new TravelPoint.TravelPointBuilder()
+                .setCity("Berlin")
+                .setStationName("Berlin Hauptbahnhof, Berlin")
+                .setGpsCoordinates(new Coordinates.CoordinatesBuilder(52.525083d, 13.369402d).build())
+                .setCountry(Locale.GERMAN)
+                .build();
+    }
+
+    public static TravelPoint getHamburgMittlerLandwegTravelPoint() {
+        return new TravelPoint.TravelPointBuilder()
+                .setCity("Hamburg")
+                .setStationName("Mittlerer Landweg, Hamburg")
+                .setGpsCoordinates(new Coordinates.CoordinatesBuilder(53.495142d, 10.128684d).build())
+                .setCountry(Locale.GERMAN)
+                .build();
+    }
+
     public static TravelPoint getRödemarkOberRodenTravelPoint() {
         return new TravelPoint.TravelPointBuilder()
                 .setStationName("Rödermark-Ober-Roden Bahnhof")

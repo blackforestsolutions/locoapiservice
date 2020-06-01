@@ -19,6 +19,7 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
+import static de.blackforestsolutions.apiservice.service.mapper.MapperService.generateDurationFromStartToDestination;
 import static de.blackforestsolutions.apiservice.util.CoordinatesUtil.convertWGS84ToCoordinatesWith;
 import static de.blackforestsolutions.apiservice.service.mapper.MapperService.setPriceForLegBy;
 
@@ -70,13 +71,6 @@ public class HafasMapperServiceImpl implements HafasMapperService {
     @Autowired
     public HafasMapperServiceImpl(UuidService uuidService) {
         this.uuidService = uuidService;
-    }
-
-    private static Duration generateDurationBetween(Date start, Date destination) {
-        return Duration.between(
-                LocalDateTime.ofInstant(start.toInstant(), ZoneId.systemDefault()),
-                LocalDateTime.ofInstant(destination.toInstant(), ZoneId.systemDefault())
-        );
     }
 
     @Override
@@ -145,8 +139,8 @@ public class HafasMapperServiceImpl implements HafasMapperService {
         leg.setDestination(buildTravelPointWith(locations.get(betweenTrip.getArr().getLocX()), null, null, betweenTrip.getArr().getAPlatfS()));
         leg.setStartTime(buildDateWith(date, betweenTrip.getDep().getDTimeS()));
         leg.setArrivalTime(buildDateWith(date, betweenTrip.getArr().getATimeS()));
-        leg.setDuration(generateDurationBetween(leg.getStartTime(), leg.getArrivalTime()));
-        Optional.ofNullable(betweenTrip.getArr().getATimeR()).ifPresent(prognosedArrivalTime -> leg.setDelay(generateDurationBetween(leg.getArrivalTime(), buildDateWith(date, prognosedArrivalTime))));
+        leg.setDuration(generateDurationFromStartToDestination(leg.getStartTime(), leg.getArrivalTime()));
+        Optional.ofNullable(betweenTrip.getArr().getATimeR()).ifPresent(prognosedArrivalTime -> leg.setDelay(generateDurationFromStartToDestination(leg.getArrivalTime(), buildDateWith(date, prognosedArrivalTime))));
         setLegForWalkWith(betweenTrip, leg);
         setLegForJourneyWith(betweenTrip, travelProvider, leg);
         logNoValidTypeForJourney(betweenTrip);

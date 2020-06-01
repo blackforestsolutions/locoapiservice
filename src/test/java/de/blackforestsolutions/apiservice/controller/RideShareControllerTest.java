@@ -2,7 +2,6 @@ package de.blackforestsolutions.apiservice.controller;
 
 import de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother;
 import de.blackforestsolutions.apiservice.service.communicationservice.BBCApiService;
-
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -19,12 +18,13 @@ class RideShareControllerTest {
         //act
         classUnderTest.retrieveRideSharingJourneys(testRequest);
         //assert
+        Mockito.verify(bbcApiService, Mockito.times(1)).getJourneysForRouteByCoordinates(Mockito.any(ApiTokenAndUrlInformation.class));
         Mockito.verify(bbcApiService, Mockito.times(1)).getJourneysForRouteWith(Mockito.any(ApiTokenAndUrlInformation.class));
     }
 
     private RideShareController initClassUnderTest() {
         RideShareController classUnderTest = new RideShareController(bbcApiService);
-        classUnderTest.setBbcApiTokenAndUrlInformation(ApiTokenAndUrlInformationObjectMother.getBbcTokenAndUrl());
+        classUnderTest.setBbcApiTokenAndUrlInformation(ApiTokenAndUrlInformationObjectMother.getBBCTokenAndUrl());
         return classUnderTest;
     }
 }

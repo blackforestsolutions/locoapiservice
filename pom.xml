@@ -19,8 +19,8 @@
         <apache.lang-version>2.6</apache.lang-version>
         <lombok.version>1.18.8</lombok.version>
         <jaxws.version>2.3.2</jaxws.version>
-        <blackforestsolutions.datamodel.version>2.2.1-RELEASE</blackforestsolutions.datamodel.version>
-        <blackforestsolutions.generatedcontent.version>0.0.4.RELEASE</blackforestsolutions.generatedcontent.version>
+        <blackforestsolutions.datamodel.version>2.2.2.RELEASE</blackforestsolutions.datamodel.version>
+        <blackforestsolutions.generatedcontent.version>0.0.5.RELEASE</blackforestsolutions.generatedcontent.version>
         <guava.version>28.1-jre</guava.version>
         <!-- Maven test Dependencies -->
         <assertj.version>3.9.0</assertj.version>
