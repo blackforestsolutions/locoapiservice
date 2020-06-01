@@ -3,15 +3,16 @@ package de.blackforestsolutions.apiservice.controller;
 import de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother;
 import de.blackforestsolutions.apiservice.service.communicationservice.BritishAirwaysApiService;
 import de.blackforestsolutions.apiservice.service.communicationservice.LufthansaApiService;
-
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import static org.mockito.Mockito.*;
+
 class FlightControllerTest {
 
-    private final LufthansaApiService lufthansaApiService = Mockito.mock(LufthansaApiService.class);
-    private final BritishAirwaysApiService britishAirwaysApiService = Mockito.mock(BritishAirwaysApiService.class);
+    private final LufthansaApiService lufthansaApiService = mock(LufthansaApiService.class);
+    private final BritishAirwaysApiService britishAirwaysApiService = mock(BritishAirwaysApiService.class);
 
     private final FlightController classUnderTest = initClassUnderTest();
 
@@ -22,8 +23,8 @@ class FlightControllerTest {
         //act
         classUnderTest.flights(testRequest);
         //assert
-        Mockito.verify(lufthansaApiService, Mockito.times(1)).getJourneysForRouteWith(Mockito.any(ApiTokenAndUrlInformation.class));
-        Mockito.verify(britishAirwaysApiService, Mockito.times(1)).getJourneysForRouteWith(Mockito.any(ApiTokenAndUrlInformation.class));
+        verify(lufthansaApiService, times(1)).getJourneysForRouteWith(Mockito.any(ApiTokenAndUrlInformation.class));
+        verify(britishAirwaysApiService, times(1)).getJourneysForRouteWith(Mockito.any(ApiTokenAndUrlInformation.class));
     }
 
     private FlightController initClassUnderTest() {

@@ -58,11 +58,11 @@ public class LufthansaHttpCallBuilderServiceImpl implements LuftHansaHttpCallBui
 
     private MultiValueMap<String, String> buildHttpBodyForLufthansaAuthorization(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
         Objects.requireNonNull(apiTokenAndUrlInformation.getClientId(), "clientId is not allowed to be null");
-        Objects.requireNonNull(apiTokenAndUrlInformation.getClientSecrect(), "client secret is not allowed to be null");
+        Objects.requireNonNull(apiTokenAndUrlInformation.getClientSecret(), "client secret is not allowed to be null");
         Objects.requireNonNull(apiTokenAndUrlInformation.getClientType(), "client type is not allowed to be null");
         MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
         body.add(AdditionalHttpConfiguration.CLIENT_ID, apiTokenAndUrlInformation.getClientId());
-        body.add(AdditionalHttpConfiguration.CLIENT_SECRET, apiTokenAndUrlInformation.getClientSecrect());
+        body.add(AdditionalHttpConfiguration.CLIENT_SECRET, apiTokenAndUrlInformation.getClientSecret());
         body.add(AdditionalHttpConfiguration.GRANT_TYPE, apiTokenAndUrlInformation.getClientType());
         return body;
     }

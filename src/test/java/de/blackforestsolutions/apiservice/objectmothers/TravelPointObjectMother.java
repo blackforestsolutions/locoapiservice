@@ -8,6 +8,7 @@ import de.blackforestsolutions.generatedcontent.hvv.request.HvvStation;
 import de.blackforestsolutions.generatedcontent.hvv.request.SDType;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -55,6 +56,61 @@ public class TravelPointObjectMother {
         );
 
         return travelPoint;
+    }
+
+    public static TravelPoint getRödemarkOberRodenTravelPoint() {
+        return new TravelPoint.TravelPointBuilder()
+                .setStationName("Rödermark-Ober-Roden Bahnhof")
+                .build();
+    }
+
+    public static TravelPoint getGriesheimbahnhofTravelPoint() throws ParseException {
+        return new TravelPoint.TravelPointBuilder()
+                .setStationId("A=1@O=Frankfurt (Main) Griesheim Bahnhof@X=8606425@Y=50093980@U=80@L=3000110@")
+                .setStationName("Frankfurt (Main) Griesheim Bahnhof")
+                .setArrivalTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2020-05-04 09:14:00"))
+                .setDepartureTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2020-05-04 09:14:00"))
+                .setGpsCoordinates(new Coordinates.CoordinatesBuilder(50.09398d, 8.606425d).build())
+                .setCountry(Locale.GERMANY)
+                .build();
+    }
+
+    public static TravelPoint getLorchhausenOberfleckenTravelPoint() {
+        return new TravelPoint.TravelPointBuilder()
+                .setStationId("A=2@O=Lorch - Lorchhausen, Oberflecken@X=7785108@Y=50053277@U=103@")
+                .setStationName("Lorch - Lorchhausen, Oberflecken")
+                .setGpsCoordinates(new Coordinates.CoordinatesBuilder(50.053277d, 7.785108d).build())
+                .setCountry(Locale.GERMANY)
+                .build();
+    }
+
+    public static TravelPoint getWiesbadenHauptbahnhofTravelPoint() {
+        return new TravelPoint.TravelPointBuilder()
+                .setStationId("A=1@O=Wiesbaden Hauptbahnhof@X=8242416@Y=50069718@U=80@L=690748@")
+                .setStationName("Wiesbaden Hauptbahnhof")
+                .setGpsCoordinates(new Coordinates.CoordinatesBuilder(50.069718d, 8.242416d).build())
+                .setCountry(Locale.GERMANY)
+                .build();
+    }
+
+    public static TravelPoint getWiesbadenHauptbahnhofTravelPoint(String track) {
+        return new TravelPoint.TravelPointBuilder()
+                .setStationId("A=1@O=Wiesbaden Hauptbahnhof@X=8244627@Y=50069476@U=80@L=3006907@")
+                .setStationName("Wiesbaden Hauptbahnhof")
+                .setGpsCoordinates(new Coordinates.CoordinatesBuilder(50.069476d, 8.244627d).build())
+                .setPlatform(track)
+                .setCountry(Locale.GERMANY)
+                .build();
+    }
+
+    public static TravelPoint getFrankfurtHauptbahnhofTravelPoint() {
+        return new TravelPoint.TravelPointBuilder()
+                .setStationId("A=1@O=Frankfurt (Main) Hauptbahnhof tief@X=8662500@Y=50107158@U=80@L=3007010@")
+                .setStationName("Frankfurt (Main) Hauptbahnhof tief")
+                .setGpsCoordinates(new Coordinates.CoordinatesBuilder(50.107158d, 8.6625d).build())
+                .setPlatform("102")
+                .setCountry(Locale.GERMANY)
+                .build();
     }
 
 

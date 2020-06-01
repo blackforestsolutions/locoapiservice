@@ -4,6 +4,8 @@ import de.blackforestsolutions.datamodel.*;
 import org.springframework.data.geo.Distance;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +17,60 @@ import static de.blackforestsolutions.apiservice.objectmothers.UUIDObjectMother.
 import static de.blackforestsolutions.apiservice.testutils.TestUtils.*;
 
 public class LegObjectMother {
+
+    public static Leg getLorchhausenOberfleckenToWiesbadenHauptbahnhofLeg() throws ParseException {
+        Date startTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2020-05-04 07:43:00");
+        Date arrivalTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2020-05-04 08:35:00");
+        return new Leg.LegBuilder(TEST_UUID_2)
+                .setStart(getLorchhausenOberfleckenTravelPoint())
+                .setStartTime(startTime)
+                .setDestination(getWiesbadenHauptbahnhofTravelPoint())
+                .setArrivalTime(arrivalTime)
+                .setDistance(new Distance(46423d))
+                .setDuration(generateDurationFromStartToDestination(startTime, arrivalTime))
+                .setPrice(getRMVPrice())
+                .setVehicleType(VehicleType.CAR)
+                .setTravelProvider(TravelProvider.RMV)
+                .setHasPrice(true)
+                .build();
+    }
+
+    public static Leg getWiesbadenHauptbahnhofTransferLeg() throws ParseException {
+        Date startTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2020-05-04 08:35:00");
+        Date arrivalTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2020-05-04 08:35:00");
+        return new Leg.LegBuilder(TEST_UUID_3)
+                .setStart(getWiesbadenHauptbahnhofTravelPoint())
+                .setStartTime(startTime)
+                .setDestination(getWiesbadenHauptbahnhofTravelPoint(""))
+                .setArrivalTime(arrivalTime)
+                .setDistance(new Distance(160))
+                .setDuration(generateDurationFromStartToDestination(startTime, arrivalTime))
+                .setVehicleType(VehicleType.WALK)
+                .setTravelProvider(TravelProvider.RMV)
+                .build();
+    }
+
+    public static Leg getWiesbadenHauptbahnhofToFrankfurtHauptbahnhofLeg() throws ParseException {
+        Date startTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2020-05-04 08:35:00");
+        Date arrivalTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2020-05-04 09:18:00");
+        return new Leg.LegBuilder(TEST_UUID_4)
+                .setStart(getWiesbadenHauptbahnhofTravelPoint("4"))
+                .setStartTime(startTime)
+                .setDestination(getFrankfurtHauptbahnhofTravelPoint())
+                .setArrivalTime(arrivalTime)
+                .setDuration(generateDurationFromStartToDestination(startTime, arrivalTime))
+                .setTravelLine(getWiesbadenHauptbahnhofFrankfurtHauptbahnhofTravelLine())
+                .setVehicleName("09:18:00")
+                .setVehicleNumber("S1")
+                .setIncidents(List.of(
+                        "Pflicht zur Bedeckung von Mund und Nase",
+                        "Fahrzeuggebundene Einstiegshilfe vorhanden",
+                        "Klimaanlage"
+                ))
+                .setTravelProvider(TravelProvider.RMV)
+                .setUnknownTravelProvider("DB Regio AG S-Bahn Rhein-Main")
+                .build();
+    }
 
     public static Leg getEiderstrasseRendsburgGartenstrasseRendsburgLeg(Price price) {
         Leg.LegBuilder leg = new Leg.LegBuilder(TEST_UUID_2);

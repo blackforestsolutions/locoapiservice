@@ -84,6 +84,8 @@ public class HttpBodyObjectMother {
                 )
         ));
         body.setRealtime(RealtimeType.REALTIME);
+        body.setReturnContSearchData(true);
+        body.setIntermediateStops(true);
 
         return body;
     }

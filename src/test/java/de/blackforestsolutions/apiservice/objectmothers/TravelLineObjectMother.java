@@ -10,6 +10,15 @@ import static de.blackforestsolutions.apiservice.objectmothers.TravelPointObject
 
 public class TravelLineObjectMother {
 
+    static TravelLine getWiesbadenHauptbahnhofFrankfurtHauptbahnhofTravelLine() throws ParseException {
+        return new TravelLine.TravelLineBuilder()
+                .setDirection(getRödemarkOberRodenTravelPoint())
+                .setBetweenHolds(Map.of(
+                        0, getGriesheimbahnhofTravelPoint()
+                ))
+                .build();
+    }
+
     static TravelLine getPotsdamBerlinTravelLine() {
         TravelLine.TravelLineBuilder travelLine = new TravelLine.TravelLineBuilder();
         travelLine.setDirection(getBerlinOstkreuzTravelPoint());

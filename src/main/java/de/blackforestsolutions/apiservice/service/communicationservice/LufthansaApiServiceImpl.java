@@ -94,7 +94,7 @@ public class LufthansaApiServiceImpl implements LufthansaApiService {
         builder.setApiVersion(apiTokenAndUrlInformation.getApiVersion());
         builder.setPathVariable(apiTokenAndUrlInformation.getPathVariable());
         builder.setClientId(apiTokenAndUrlInformation.getClientId());
-        builder.setClientSecret(apiTokenAndUrlInformation.getClientSecrect());
+        builder.setClientSecret(apiTokenAndUrlInformation.getClientSecret());
         builder.setClientType(apiTokenAndUrlInformation.getClientType());
         builder.setPath(httpCallBuilderService.buildLufthansaAuthorizationPathWith(builder.build()));
         URL requestUrl = buildUrlWith(builder.build());

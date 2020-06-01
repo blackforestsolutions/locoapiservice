@@ -5,9 +5,24 @@ import de.blackforestsolutions.datamodel.Price;
 import de.blackforestsolutions.datamodel.PriceCategory;
 
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.Currency;
+import java.util.Locale;
+import java.util.Map;
 
 public class PriceObjectMother {
+
+    static Price getRMVPrice() {
+        return new Price.PriceBuilder()
+                .setValues(Map.of(
+                        PriceCategory.ADULT, new BigDecimal("8.70"),
+                        PriceCategory.CHILD, new BigDecimal("5.10"),
+                        PriceCategory.ADULT_REDUCED, new BigDecimal("6.50"),
+                        PriceCategory.CHILD_REDUCED, new BigDecimal("3.80")
+                ))
+                .setCurrency(Currency.getInstance("EUR"))
+                .setSymbol("€")
+                .build();
+    }
 
     public static Price getNahShPrice() {
         Price.PriceBuilder price = new Price.PriceBuilder();

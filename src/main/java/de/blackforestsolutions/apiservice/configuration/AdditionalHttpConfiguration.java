@@ -6,14 +6,6 @@ public final class AdditionalHttpConfiguration {
     public static final String BA_APPLICATION_VALUE = "loco";
     public static final String BA_CLIENT_KEY = "client-key";
 
-    public static final String ACCESS_ID = "accessId";
-
-    public static final String INPUT = "input";
-
-    public static final String ORIGIN_ID = "originId";
-
-    public static final String DEST_ID = "destId";
-
     public static final String GEO_FEX_AUTH_TYPE = "geofox-auth-type";
 
     public static final String GEO_FEX_AUTH_USER = "geofox-auth-user";

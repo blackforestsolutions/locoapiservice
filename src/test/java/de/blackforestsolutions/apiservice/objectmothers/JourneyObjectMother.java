@@ -15,6 +15,16 @@ import static de.blackforestsolutions.apiservice.objectmothers.UUIDObjectMother.
 
 public class JourneyObjectMother {
 
+    public static Journey getLorchhausenOberfleckenToFrankfurtHauptbahnhofJourney() throws ParseException {
+        LinkedHashMap<UUID, Leg> legs = new LinkedHashMap<>();
+        legs.put(getLorchhausenOberfleckenToWiesbadenHauptbahnhofLeg().getId(), getLorchhausenOberfleckenToWiesbadenHauptbahnhofLeg());
+        legs.put(getWiesbadenHauptbahnhofTransferLeg().getId(), getWiesbadenHauptbahnhofTransferLeg());
+        legs.put(getWiesbadenHauptbahnhofToFrankfurtHauptbahnhofLeg().getId(), getWiesbadenHauptbahnhofToFrankfurtHauptbahnhofLeg());
+        return new Journey.JourneyBuilder(TEST_UUID_1)
+                .setLegs(legs)
+                .build();
+    }
+
     public static Journey getEiderstrasseRendsburgToRendsburgJourney() {
         Journey.JourneyBuilder journey = new Journey.JourneyBuilder(TEST_UUID_1);
         LinkedHashMap<UUID, Leg> legs = new LinkedHashMap<>();
