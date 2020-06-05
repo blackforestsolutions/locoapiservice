@@ -4,8 +4,10 @@ import com.google.common.annotations.VisibleForTesting;
 import de.blackforestsolutions.apiservice.service.communicationservice.SearchChApiService;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import de.blackforestsolutions.datamodel.JourneyStatus;
+import de.blackforestsolutions.datamodel.util.LocoJsonMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -15,8 +17,10 @@ import java.util.Map;
 import java.util.UUID;
 
 @RestController
+@RequestMapping("locate")
 public class LocatorController {
 
+    private final LocoJsonMapper locoJsonMapper = new LocoJsonMapper();
     private final SearchChApiService searchChApiService;
 
     @Resource(name = "searchApiTokenAndUrlInformation")
@@ -27,9 +31,10 @@ public class LocatorController {
         this.searchChApiService = searchChApiService;
     }
 
-    @GetMapping("/locate")
-    public Map<UUID, JourneyStatus> retrieveLocatorJourneys(ApiTokenAndUrlInformation request) throws IOException {
-        return new HashMap<>(searchChApiService.getJourneysForRouteWith(getSearchApiTokenAndUrlInformation(request)));
+    @RequestMapping("/get")
+    public Map<UUID, JourneyStatus> retrieveLocatorJourneys(@RequestBody String request) throws IOException {
+        ApiTokenAndUrlInformation requestInformation = locoJsonMapper.mapJsonToApiTokenAndUrlInformation(request);
+        return new HashMap<>(searchChApiService.getJourneysForRouteWith(getSearchApiTokenAndUrlInformation(requestInformation)));
     }
 
     private ApiTokenAndUrlInformation getSearchApiTokenAndUrlInformation(ApiTokenAndUrlInformation request) {

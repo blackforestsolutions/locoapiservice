@@ -1,18 +1,24 @@
 package de.blackforestsolutions.apiservice.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.common.annotations.VisibleForTesting;
 import de.blackforestsolutions.apiservice.service.communicationservice.AirportsFinderApiService;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import de.blackforestsolutions.datamodel.CallStatus;
+import de.blackforestsolutions.datamodel.util.LocoJsonMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.util.LinkedHashSet;
 
 @RestController
+@RequestMapping("nearest-airports")
 public class NearestStationFinderController {
+
+    private final LocoJsonMapper locoJsonMapper = new LocoJsonMapper();
     private final AirportsFinderApiService airportsFinderApiService;
 
     @Resource(name = "airportsFinderApiTokenAndUrlInformation")
@@ -23,9 +29,11 @@ public class NearestStationFinderController {
         this.airportsFinderApiService = airportsFinderApiService;
     }
 
-    @GetMapping("/nearestairports")
-    public LinkedHashSet<CallStatus> retrieveAirportsFinderTravelPoints(ApiTokenAndUrlInformation request) {
-        return new LinkedHashSet<>(airportsFinderApiService.getAirportsWith(getAirportsFinderApiTokenAndUrlInformation(request)));
+    @RequestMapping("/get")
+    public LinkedHashSet<CallStatus> retrieveAirportsFinderTravelPoints(@RequestBody String request) throws JsonProcessingException {
+        ApiTokenAndUrlInformation requestInformation = locoJsonMapper.mapJsonToApiTokenAndUrlInformation(request);
+
+        return new LinkedHashSet<>(airportsFinderApiService.getAirportsWith(getAirportsFinderApiTokenAndUrlInformation(requestInformation)));
     }
 
     private ApiTokenAndUrlInformation getAirportsFinderApiTokenAndUrlInformation(ApiTokenAndUrlInformation request) {

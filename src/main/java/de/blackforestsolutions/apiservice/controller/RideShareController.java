@@ -1,11 +1,14 @@
 package de.blackforestsolutions.apiservice.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.common.annotations.VisibleForTesting;
 import de.blackforestsolutions.apiservice.service.communicationservice.BBCApiService;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import de.blackforestsolutions.datamodel.JourneyStatus;
+import de.blackforestsolutions.datamodel.util.LocoJsonMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -15,8 +18,10 @@ import java.util.UUID;
 import static de.blackforestsolutions.apiservice.controller.RequestTokenHandler.getRequestApiTokenWith;
 
 @RestController
+@RequestMapping("ride-shares")
 public class RideShareController {
 
+    private final LocoJsonMapper locoJsonMapper = new LocoJsonMapper();
     private final BBCApiService bbcApiService;
 
     @Resource(name = "bbcApiTokenAndUrlInformation")
@@ -27,10 +32,12 @@ public class RideShareController {
         this.bbcApiService = bbcApiService;
     }
 
-    @GetMapping("ride-shares")
-    public Map<UUID, JourneyStatus> retrieveRideSharingJourneys(ApiTokenAndUrlInformation request) {
-        Map<UUID, JourneyStatus> resultMap = bbcApiService.getJourneysForRouteWith(getBbcApiTokenAndUrlInformation(request));
-        resultMap.putAll(bbcApiService.getJourneysForRouteByCoordinates(getBbcApiTokenAndUrlInformation(request)));
+    @RequestMapping("get")
+    public Map<UUID, JourneyStatus> retrieveRideSharingJourneys(@RequestBody String request) throws JsonProcessingException {
+        ApiTokenAndUrlInformation requestInformation = locoJsonMapper.mapJsonToApiTokenAndUrlInformation(request);
+
+        Map<UUID, JourneyStatus> resultMap = bbcApiService.getJourneysForRouteWith(getBbcApiTokenAndUrlInformation(requestInformation));
+        resultMap.putAll(bbcApiService.getJourneysForRouteByCoordinates(getBbcApiTokenAndUrlInformation(requestInformation)));
         return resultMap;
     }
 
