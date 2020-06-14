@@ -1,5 +1,6 @@
 package de.blackforestsolutions.apiservice.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.common.annotations.VisibleForTesting;
 import de.blackforestsolutions.apiservice.service.communicationservice.HvvApiService;
 import de.blackforestsolutions.apiservice.service.communicationservice.NahShApiService;
@@ -7,8 +8,10 @@ import de.blackforestsolutions.apiservice.service.communicationservice.RMVApiSer
 import de.blackforestsolutions.apiservice.service.communicationservice.VBBApiService;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import de.blackforestsolutions.datamodel.JourneyStatus;
+import de.blackforestsolutions.datamodel.util.LocoJsonMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -17,8 +20,10 @@ import java.util.Map;
 import java.util.UUID;
 
 @RestController
+@RequestMapping("regional-train")
 public class RegionalTrainRidesController {
 
+    private final LocoJsonMapper locoJsonMapper = new LocoJsonMapper();
     private final HvvApiService hvvApiService;
     private final RMVApiService rmvApiService;
     private final VBBApiService vbbApiService;
@@ -41,14 +46,16 @@ public class RegionalTrainRidesController {
         this.nahShApiService = nahShApiService;
     }
 
-    @GetMapping("regional-train")
-    public Map<UUID, JourneyStatus> retrieveTrainJourneys(ApiTokenAndUrlInformation request) {
+    @RequestMapping("get")
+    public Map<UUID, JourneyStatus> retrieveTrainJourneys(@RequestBody String request) throws JsonProcessingException {
+        ApiTokenAndUrlInformation requestInformation = locoJsonMapper.mapJsonToApiTokenAndUrlInformation(request);
+
         Map<UUID, JourneyStatus> journeys = new HashMap<>();
-        journeys.putAll(hvvApiService.getJourneysForRouteWith(getHvvApiTokenAndUrlInformation(request)));
-        journeys.putAll(rmvApiService.getJourneysForRouteBySearchStringWith(getRMVApiTokenAndUrlInformation(request)));
-        journeys.putAll(rmvApiService.getJourneysForRouteByCoordinatesWith(getRMVApiTokenAndUrlInformation(request)));
-        journeys.putAll(vbbApiService.getJourneysForRouteWith(getVbbApiTokenAndUrlInformation(request)));
-        journeys.putAll(nahShApiService.getJourneysForRouteWith(getNahShApiTokenAndUrlInformation(request)));
+        journeys.putAll(hvvApiService.getJourneysForRouteWith(getHvvApiTokenAndUrlInformation(requestInformation)));
+        journeys.putAll(rmvApiService.getJourneysForRouteBySearchStringWith(getRMVApiTokenAndUrlInformation(requestInformation)));
+        journeys.putAll(rmvApiService.getJourneysForRouteByCoordinatesWith(getRMVApiTokenAndUrlInformation(requestInformation)));
+        journeys.putAll(vbbApiService.getJourneysForRouteWith(getVbbApiTokenAndUrlInformation(requestInformation)));
+        journeys.putAll(nahShApiService.getJourneysForRouteWith(getNahShApiTokenAndUrlInformation(requestInformation)));
         return journeys;
     }
 

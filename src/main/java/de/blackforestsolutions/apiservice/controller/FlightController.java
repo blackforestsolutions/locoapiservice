@@ -1,13 +1,15 @@
 package de.blackforestsolutions.apiservice.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.common.annotations.VisibleForTesting;
 import de.blackforestsolutions.apiservice.service.communicationservice.BritishAirwaysApiService;
 import de.blackforestsolutions.apiservice.service.communicationservice.LufthansaApiService;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import de.blackforestsolutions.datamodel.JourneyStatus;
+import de.blackforestsolutions.datamodel.util.LocoJsonMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -15,8 +17,10 @@ import java.util.Map;
 import java.util.UUID;
 
 @RestController
+@RequestMapping("flights")
 public class FlightController {
 
+    private final LocoJsonMapper locoJsonMapper = new LocoJsonMapper();
     private final BritishAirwaysApiService britishAirwaysApiService;
     private final LufthansaApiService lufthansaApiService;
     @Resource(name = "britishAirwaysApiTokenAndUrlInformation")
@@ -30,8 +34,9 @@ public class FlightController {
         this.lufthansaApiService = lufthansaApiService;
     }
 
-    @GetMapping("/flights")
-    public Map<UUID, JourneyStatus> flights(@RequestBody ApiTokenAndUrlInformation requestInformation) {
+    @RequestMapping("/get")
+    public Map<UUID, JourneyStatus> flights(@RequestBody String request) throws JsonProcessingException {
+        ApiTokenAndUrlInformation requestInformation = locoJsonMapper.mapJsonToApiTokenAndUrlInformation(request);
         Map<UUID, JourneyStatus> resultMap = this.britishAirwaysApiService.getJourneysForRouteWith(getBritishAirwaysApiTokenAndUrlInformation(requestInformation));
         resultMap.putAll(this.lufthansaApiService.getJourneysForRouteWith(getLufthansaApiTokenAndUrlInformation(requestInformation)));
         return resultMap;
