@@ -42,9 +42,9 @@ public class FlightController {
     public Map<UUID, JourneyStatus> flights(@RequestBody String request) throws JsonProcessingException {
         final Map<UUID, JourneyStatus> resultMap = new HashMap<>();
         ApiTokenAndUrlInformation requestInformation = locoJsonMapper.mapJsonToApiTokenAndUrlInformation(request);
-        // todo when executing FlightControllerTest I can't get into getJourneyFor... despite setting breakpoints
         CallStatus britishAirwaysCallStatus = this.britishAirwaysApiService.getJourneysForRouteWith(getBritishAirwaysApiTokenAndUrlInformation(requestInformation));
 
+        // todo I had to create these if checks bc the flightcontrollertest causes a npe -> would be nice if someone could show me how to do this prettier
         if (britishAirwaysCallStatus != null && britishAirwaysCallStatus.getCalledObject() != null) {
             Optional.ofNullable(britishAirwaysCallStatus).ifPresent(britishAirwaysFlights -> resultMap.putAll((Map<UUID, JourneyStatus>) britishAirwaysCallStatus.getCalledObject()));
         }
