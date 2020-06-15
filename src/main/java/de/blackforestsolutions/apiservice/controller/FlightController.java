@@ -42,6 +42,7 @@ public class FlightController {
     public Map<UUID, JourneyStatus> flights(@RequestBody String request) throws JsonProcessingException {
         final Map<UUID, JourneyStatus> resultMap = new HashMap<>();
         ApiTokenAndUrlInformation requestInformation = locoJsonMapper.mapJsonToApiTokenAndUrlInformation(request);
+        // todo when executing FlightControllerTest I can't get into getJourneyFor... despite setting breakpoints
         CallStatus britishAirwaysCallStatus = this.britishAirwaysApiService.getJourneysForRouteWith(getBritishAirwaysApiTokenAndUrlInformation(requestInformation));
 
         Optional.ofNullable(britishAirwaysCallStatus.getCalledObject()).ifPresent(britishAirwaysFlights -> resultMap.putAll((Map<UUID, JourneyStatus>) britishAirwaysCallStatus.getCalledObject()));
