@@ -45,18 +45,14 @@ public class FlightController {
         // todo when executing FlightControllerTest I can't get into getJourneyFor... despite setting breakpoints
         CallStatus britishAirwaysCallStatus = this.britishAirwaysApiService.getJourneysForRouteWith(getBritishAirwaysApiTokenAndUrlInformation(requestInformation));
 
-        if (britishAirwaysCallStatus != null) {
-            if (britishAirwaysCallStatus.getCalledObject() != null) {
-                Optional.ofNullable(britishAirwaysCallStatus).ifPresent(britishAirwaysFlights -> resultMap.putAll((Map<UUID, JourneyStatus>) britishAirwaysCallStatus.getCalledObject()));
-            }
+        if (britishAirwaysCallStatus != null && britishAirwaysCallStatus.getCalledObject() != null) {
+            Optional.ofNullable(britishAirwaysCallStatus).ifPresent(britishAirwaysFlights -> resultMap.putAll((Map<UUID, JourneyStatus>) britishAirwaysCallStatus.getCalledObject()));
         }
         // Optional.ofNullable(britishAirwaysCallStatus).ifPresent(britishAirwaysFlights -> resultMap.putAll((Map<UUID, JourneyStatus>) britishAirwaysCallStatus.getCalledObject()));
 
         CallStatus lufthansaCallStatus = this.lufthansaApiService.getJourneysForRouteWith(getLufthansaApiTokenAndUrlInformation(requestInformation));
-        if (lufthansaCallStatus != null) {
-            if (lufthansaCallStatus.getCalledObject() != null) {
-                Optional.ofNullable(lufthansaCallStatus.getCalledObject()).ifPresent(lufthansaFlights -> resultMap.putAll((Map<UUID, JourneyStatus>) lufthansaCallStatus.getCalledObject()));
-            }
+        if (lufthansaCallStatus != null && lufthansaCallStatus.getCalledObject() != null) {
+            Optional.ofNullable(lufthansaCallStatus.getCalledObject()).ifPresent(lufthansaFlights -> resultMap.putAll((Map<UUID, JourneyStatus>) lufthansaCallStatus.getCalledObject()));
         }
         // Optional.ofNullable(lufthansaCallStatus.getCalledObject()).ifPresent(lufthansaFlights -> resultMap.putAll((Map<UUID, JourneyStatus>) lufthansaCallStatus.getCalledObject()));
 
