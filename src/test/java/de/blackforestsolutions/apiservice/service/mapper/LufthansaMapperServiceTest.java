@@ -62,7 +62,7 @@ class LufthansaMapperServiceTest {
     void test_map_jsonObject_and_return_Map_with_journeys() {
         String scheduledResourcesJson = getResourceFileAsString("json/lufthansaJourneyTest.json");
 
-        Map<UUID, JourneyStatus> result = classUnderTest.map(scheduledResourcesJson);
+        Map<UUID, JourneyStatus> result = (Map<UUID, JourneyStatus>) classUnderTest.map(scheduledResourcesJson).getCalledObject();
 
         assertThat(result.size()).isEqualTo(12);
         assertThat("E90").isEqualTo(result.get(TEST_UUID_11).getJourney().get().getLegs().get(TEST_UUID_12).getVehicleNumber());

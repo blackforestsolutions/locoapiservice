@@ -78,7 +78,7 @@ class BritishAirwaysApiServiceTest {
         doReturn(testResult).when(restTemplate).exchange(anyString(), any(), Mockito.any(), any(Class.class));
         Mockito.when(mockedUuidService.createUUID()).thenReturn(TEST_UUID_1).thenReturn(TEST_UUID_2).thenReturn(TEST_UUID_3).thenReturn(TEST_UUID_4).thenReturn(TEST_UUID_5).thenReturn(TEST_UUID_6).thenReturn(TEST_UUID_7).thenReturn(TEST_UUID_8);
 
-        Map<UUID, JourneyStatus> result = classUnderTest.getJourneysForRouteWith(apiTokenAndUrlInformation);
+        Map<UUID, JourneyStatus> result = (Map<UUID, JourneyStatus>) classUnderTest.getJourneysForRouteWith(apiTokenAndUrlInformation);
 
         Assertions.assertThat(TravelProvider.BRITISHAIRWAYS).isEqualTo(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getTravelProvider());
         Assertions.assertThat("0982").isEqualTo(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getProviderId());
@@ -147,7 +147,7 @@ class BritishAirwaysApiServiceTest {
         doReturn(testResult).when(restTemplate).exchange(anyString(), any(), any(), any(Class.class));
         Mockito.when(mockedUuidService.createUUID()).thenReturn(TEST_UUID_1).thenReturn(TEST_UUID_2).thenReturn(TEST_UUID_3).thenReturn(TEST_UUID_4).thenReturn(TEST_UUID_5).thenReturn(TEST_UUID_6).thenReturn(TEST_UUID_7).thenReturn(TEST_UUID_8);
 
-        Map<UUID, JourneyStatus> result = classUnderTest.getJourneysForRouteWith(apiTokenAndUrlInformation);
+        Map<UUID, JourneyStatus> result = (Map<UUID, JourneyStatus>) classUnderTest.getJourneysForRouteWith(apiTokenAndUrlInformation);
 
         Assertions.assertThat(TravelProvider.BRITISHAIRWAYS).isEqualTo(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getTravelProvider());
         Assertions.assertThat("0117").isEqualTo(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getProviderId());
@@ -201,4 +201,5 @@ class BritishAirwaysApiServiceTest {
         Assertions.assertThat("AA").isEqualTo(result.get(TEST_UUID_7).getJourney().get().getLegs().get(TEST_UUID_8).getUnknownTravelProvider());
         Assertions.assertThat("772").isEqualTo(result.get(TEST_UUID_7).getJourney().get().getLegs().get(TEST_UUID_8).getVehicleNumber());
     }
+
 }
