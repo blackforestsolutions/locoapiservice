@@ -42,21 +42,7 @@ public class FlightController {
     public Map<UUID, JourneyStatus> flights(@RequestBody String request) throws JsonProcessingException {
         final Map<UUID, JourneyStatus> resultMap = new HashMap<>();
         ApiTokenAndUrlInformation requestInformation = locoJsonMapper.mapJsonToApiTokenAndUrlInformation(request);
-        CallStatus britishAirwaysCallStatus = this.britishAirwaysApiService.getJourneysForRouteWith(getBritishAirwaysApiTokenAndUrlInformation(requestInformation));
-
-        // todo I had to create these if checks bc the flightcontrollertest causes a npe -> would be nice if someone could show me how to do this prettier
-        if (britishAirwaysCallStatus != null && britishAirwaysCallStatus.getCalledObject() != null) {
-            Optional.ofNullable(britishAirwaysCallStatus).ifPresent(britishAirwaysFlights -> resultMap.putAll((Map<UUID, JourneyStatus>) britishAirwaysCallStatus.getCalledObject()));
-        }
-        // Optional.ofNullable(britishAirwaysCallStatus).ifPresent(britishAirwaysFlights -> resultMap.putAll((Map<UUID, JourneyStatus>) britishAirwaysCallStatus.getCalledObject()));
-
-        CallStatus lufthansaCallStatus = this.lufthansaApiService.getJourneysForRouteWith(getLufthansaApiTokenAndUrlInformation(requestInformation));
-        if (lufthansaCallStatus != null && lufthansaCallStatus.getCalledObject() != null) {
-            Optional.ofNullable(lufthansaCallStatus.getCalledObject()).ifPresent(lufthansaFlights -> resultMap.putAll((Map<UUID, JourneyStatus>) lufthansaCallStatus.getCalledObject()));
-        }
-        // Optional.ofNullable(lufthansaCallStatus.getCalledObject()).ifPresent(lufthansaFlights -> resultMap.putAll((Map<UUID, JourneyStatus>) lufthansaCallStatus.getCalledObject()));
-
-        return resultMap;
+        return mapFlightsResults(requestInformation, resultMap);
     }
 
     private ApiTokenAndUrlInformation getBritishAirwaysApiTokenAndUrlInformation(
@@ -77,5 +63,19 @@ public class FlightController {
     void setLufthansaApiTokenAndUrlInformation(ApiTokenAndUrlInformation lufthansaApiTokenAndUrlInformation) {
         this.lufthansaApiTokenAndUrlInformation = lufthansaApiTokenAndUrlInformation;
     }
+
+    private Map<UUID, JourneyStatus> mapFlightsResults(ApiTokenAndUrlInformation requestInformation, Map<UUID, JourneyStatus> resultMap) {
+        CallStatus britishAirwaysCallStatus = this.britishAirwaysApiService.getJourneysForRouteWith(getBritishAirwaysApiTokenAndUrlInformation(requestInformation));
+        if (Optional.ofNullable(britishAirwaysCallStatus).isPresent() && Optional.ofNullable(britishAirwaysCallStatus.getCalledObject()).isPresent()) {
+            resultMap.putAll((Map<UUID, JourneyStatus>) britishAirwaysCallStatus.getCalledObject());
+        }
+
+        CallStatus lufthansaCallStatus = this.lufthansaApiService.getJourneysForRouteWith(getLufthansaApiTokenAndUrlInformation(requestInformation));
+        if (Optional.ofNullable(lufthansaCallStatus).isPresent() && Optional.ofNullable(lufthansaCallStatus.getCalledObject()).isPresent()) {
+            resultMap.putAll((Map<UUID, JourneyStatus>) lufthansaCallStatus.getCalledObject());
+        }
+        return resultMap;
+    }
+
 }
 

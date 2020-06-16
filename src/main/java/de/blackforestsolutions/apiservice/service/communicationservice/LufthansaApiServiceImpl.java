@@ -63,7 +63,6 @@ public class LufthansaApiServiceImpl implements LufthansaApiService {
         return mapper.mapToAuthorization(result.getBody());
     }
 
-    //Map<UUID, JourneyStatus>
     @Override
     public CallStatus getJourneysForRouteWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
         String url = getLufthansaJourneyRequestString(apiTokenAndUrlInformation);
