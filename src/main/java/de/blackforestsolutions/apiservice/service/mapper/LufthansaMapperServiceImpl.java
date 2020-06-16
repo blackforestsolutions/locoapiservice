@@ -41,7 +41,6 @@ public class LufthansaMapperServiceImpl implements LufthansaMapperService {
         try {
             scheduleResource = mapper.readValue(jsonString, ScheduleResource.class);
         } catch (JsonProcessingException e) {
-            // todo exception is in CallStatus and in JourneyStatus
             return new CallStatus(Collections.singletonMap(uuidService.createUUID(), JourneyStatusBuilder.createJourneyStatusProblemWith(e)), Status.FAILED, e);
         }
         return new CallStatus(mapScheduledResourceToJourneyList(scheduleResource), Status.SUCCESS, null);
