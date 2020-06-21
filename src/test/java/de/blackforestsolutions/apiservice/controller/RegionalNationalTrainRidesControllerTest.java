@@ -13,7 +13,7 @@ import org.mockito.Mockito;
 
 import java.text.ParseException;
 
-class RegionalTrainRidesControllerTest {
+class RegionalNationalTrainRidesControllerTest {
 
     private final LocoJsonMapper locoJsonMapper = new LocoJsonMapper();
     private final HvvApiService hvvApiService = Mockito.mock(HvvApiService.class);
@@ -22,7 +22,7 @@ class RegionalTrainRidesControllerTest {
     private final NahShApiService nahShApiService = Mockito.mock(NahShApiService.class);
     private final RegionalTrainRidesController classUnderTest = initClassUnderTest();
 
-    RegionalTrainRidesControllerTest() throws ParseException {
+    RegionalNationalTrainRidesControllerTest() throws ParseException {
     }
 
     @Test

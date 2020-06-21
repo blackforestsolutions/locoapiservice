@@ -18,8 +18,8 @@ import java.util.Map;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("train-rides")
-public class TrainRidesController {
+@RequestMapping("national-train")
+public class NationalTrainRidesController {
 
     private final LocoJsonMapper locoJsonMapper = new LocoJsonMapper();
     private final BahnJourneyDetailsService bahnJourneyDetailsService;
@@ -31,7 +31,7 @@ public class TrainRidesController {
     private ApiTokenAndUrlInformation dbApiTokenAndUrlInformation;
 
     @Autowired
-    public TrainRidesController(BahnJourneyDetailsService bahnJourneyDetailsService, DBApiService dbApiService) {
+    public NationalTrainRidesController(BahnJourneyDetailsService bahnJourneyDetailsService, DBApiService dbApiService) {
         this.bahnJourneyDetailsService = bahnJourneyDetailsService;
         this.dbApiService = dbApiService;
     }
