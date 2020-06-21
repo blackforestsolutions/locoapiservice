@@ -1,7 +1,6 @@
 package de.blackforestsolutions.apiservice.service.communicationservice;
 
 import de.blackforestsolutions.apiservice.configuration.AirportConfiguration;
-import de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother;
 import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallService;
 import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallServiceImpl;
 import de.blackforestsolutions.apiservice.service.mapper.AirportsFinderMapperService;
@@ -62,7 +61,7 @@ public class AirportsFinderApiServiceTest {
         apiTokenAndUrlInformation = builder.build();
         ResponseEntity<String> testResult = new ResponseEntity<>(airportsFinderResource, HttpStatus.OK);
         doReturn(testResult).when(restTemplate).exchange(anyString(), any(), Mockito.any(), any(Class.class));
-        LinkedHashSet<CallStatus> resultLinkedHashSet = classUnderTest.getAirportsWith(apiTokenAndUrlInformation);
+        LinkedHashSet<CallStatus> resultLinkedHashSet = (LinkedHashSet<CallStatus>) classUnderTest.getAirportsWith(apiTokenAndUrlInformation).getCalledObject();
 
         ArrayList<CallStatus> resultArrayList = convertSetToArrayListForTestingPurpose(resultLinkedHashSet);
 

@@ -6,13 +6,13 @@ import de.blackforestsolutions.apiservice.service.supportservice.AirportsFinderH
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import de.blackforestsolutions.datamodel.CallStatus;
 import de.blackforestsolutions.datamodel.Coordinates;
+import de.blackforestsolutions.datamodel.Status;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.net.URL;
-import java.util.LinkedHashSet;
 
 import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.buildUrlWith;
 
@@ -31,11 +31,19 @@ public class AirportsFinderApiServiceImpl implements AirportsFinderApiService {
         this.airportsFinderMapperService = airportsFinderMapperService;
     }
 
+    // todo we need coordinates here but we receive the either from the algorithm or not at all bc they are lost
+    // GateWayTimeOut 504
+    // LinkedHashSet<CallStatus>
     @Override
-    public LinkedHashSet<CallStatus> getAirportsWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
-        String url = getAirportsFinderRequestString(apiTokenAndUrlInformation);
-        ResponseEntity<String> result = callService.get(url, airportsFinderHttpCallBuilderService.buildHttpEntityAirportsFinder(apiTokenAndUrlInformation));
-        return this.airportsFinderMapperService.map(result.getBody());
+    public CallStatus getAirportsWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
+        try {
+            String url = getAirportsFinderRequestString(apiTokenAndUrlInformation);
+
+            ResponseEntity<String> result = callService.get(url, airportsFinderHttpCallBuilderService.buildHttpEntityAirportsFinder(apiTokenAndUrlInformation));
+            return new CallStatus(this.airportsFinderMapperService.map(result.getBody()), Status.SUCCESS, null);
+        } catch (Exception ex) {
+            return new CallStatus(null, Status.FAILED, ex);
+        }
     }
 
 
