@@ -23,8 +23,8 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Map;
 import java.util.UUID;
 
-import static de.blackforestsolutions.apiservice.objectmothers.UUIDObjectMother.*;
 import static de.blackforestsolutions.apiservice.objectmothers.PriceObjectMother.getNahShPrice;
+import static de.blackforestsolutions.apiservice.objectmothers.UUIDObjectMother.*;
 import static de.blackforestsolutions.apiservice.testutils.TestUtils.getResourceFileAsString;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
