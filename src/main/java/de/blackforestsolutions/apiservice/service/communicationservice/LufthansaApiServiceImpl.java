@@ -68,7 +68,7 @@ public class LufthansaApiServiceImpl implements LufthansaApiService {
         String url = getLufthansaJourneyRequestString(apiTokenAndUrlInformation);
         try {
             ResponseEntity<String> result = callService.get(url, httpCallBuilderService.buildHttpEntityForLufthansaJourney(apiTokenAndUrlInformation));
-            return mapper.map(result.getBody());
+            return new CallStatus(mapper.map(result.getBody()), Status.SUCCESS, null);
         } catch (Exception ex) {
             return new CallStatus(null, Status.FAILED, ex);
         }

@@ -34,16 +34,16 @@ public class LufthansaMapperServiceImpl implements LufthansaMapperService {
     }
 
     @Override
-    public CallStatus map(String jsonString) {
+    public Map<UUID, JourneyStatus> map(String jsonString) {
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
         ScheduleResource scheduleResource;
         try {
             scheduleResource = mapper.readValue(jsonString, ScheduleResource.class);
         } catch (JsonProcessingException e) {
-            return new CallStatus(Collections.singletonMap(uuidService.createUUID(), JourneyStatusBuilder.createJourneyStatusProblemWith(e)), Status.FAILED, e);
+            return Collections.singletonMap(uuidService.createUUID(), JourneyStatusBuilder.createJourneyStatusProblemWith(e));
         }
-        return new CallStatus(mapScheduledResourceToJourneyList(scheduleResource), Status.SUCCESS, null);
+        return mapScheduledResourceToJourneyList(scheduleResource);
     }
 
     @Override
