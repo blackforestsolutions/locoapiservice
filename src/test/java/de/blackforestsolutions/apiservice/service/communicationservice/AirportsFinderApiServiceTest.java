@@ -1,7 +1,6 @@
 package de.blackforestsolutions.apiservice.service.communicationservice;
 
 import de.blackforestsolutions.apiservice.configuration.AirportConfiguration;
-import de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother;
 import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallService;
 import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallServiceImpl;
 import de.blackforestsolutions.apiservice.service.mapper.AirportsFinderMapperService;

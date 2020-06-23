@@ -5,7 +5,6 @@ import de.blackforestsolutions.apiservice.service.mapper.LufthansaMapperService;
 import de.blackforestsolutions.apiservice.service.supportservice.LuftHansaHttpCallBuilderService;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import de.blackforestsolutions.datamodel.CallStatus;
-import de.blackforestsolutions.datamodel.JourneyStatus;
 import de.blackforestsolutions.datamodel.Status;
 import de.blackforestsolutions.generatedcontent.lufthansa.LufthansaAuthorization;
 import lombok.extern.slf4j.Slf4j;
@@ -16,8 +15,6 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.net.URL;
-import java.util.Map;
-import java.util.UUID;
 
 import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.buildUrlWith;
 import static de.blackforestsolutions.apiservice.util.TimeUtil.transformToYyyyMMDdWith;
@@ -67,10 +64,14 @@ public class LufthansaApiServiceImpl implements LufthansaApiService {
     }
 
     @Override
-    public Map<UUID, JourneyStatus> getJourneysForRouteWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
+    public CallStatus getJourneysForRouteWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
         String url = getLufthansaJourneyRequestString(apiTokenAndUrlInformation);
-        ResponseEntity<String> result = callService.get(url, httpCallBuilderService.buildHttpEntityForLufthansaJourney(apiTokenAndUrlInformation));
-        return mapper.map(result.getBody());
+        try {
+            ResponseEntity<String> result = callService.get(url, httpCallBuilderService.buildHttpEntityForLufthansaJourney(apiTokenAndUrlInformation));
+            return new CallStatus(mapper.map(result.getBody()), Status.SUCCESS, null);
+        } catch (Exception ex) {
+            return new CallStatus(null, Status.FAILED, ex);
+        }
     }
 
     private String getLufthansaJourneyRequestString(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {

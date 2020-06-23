@@ -22,8 +22,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import static de.blackforestsolutions.apiservice.objectmothers.UUIDObjectMother.TEST_UUID_1;
 import static org.mockito.Mockito.*;
-import static de.blackforestsolutions.apiservice.objectmothers.UUIDObjectMother.*;
 
 class HazelcastApiServiceTest {
 

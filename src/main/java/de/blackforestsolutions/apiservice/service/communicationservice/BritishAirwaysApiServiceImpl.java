@@ -4,15 +4,14 @@ import de.blackforestsolutions.apiservice.service.communicationservice.restcalls
 import de.blackforestsolutions.apiservice.service.mapper.BritishAirwaysMapperService;
 import de.blackforestsolutions.apiservice.service.supportservice.BritishAirwaysHttpCallBuilderService;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
-import de.blackforestsolutions.datamodel.JourneyStatus;
+import de.blackforestsolutions.datamodel.CallStatus;
+import de.blackforestsolutions.datamodel.Status;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.net.URL;
-import java.util.Map;
-import java.util.UUID;
 
 import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.buildUrlWith;
 
@@ -32,10 +31,17 @@ public class BritishAirwaysApiServiceImpl implements BritishAirwaysApiService {
     }
 
     @Override
-    public Map<UUID, JourneyStatus> getJourneysForRouteWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
+    public CallStatus getJourneysForRouteWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
         String url = getBritishAirwaysRequestString(apiTokenAndUrlInformation);
-        ResponseEntity<String> result = callService.get(url, britishAirwaysHttpCallBuilderService.buildHttpEntityBritishAirways(apiTokenAndUrlInformation));
-        return this.britishAirwaysMapperService.map(result.getBody());
+        ResponseEntity<String> result;
+        try {
+            result = callService.get(url, britishAirwaysHttpCallBuilderService.buildHttpEntityBritishAirways(apiTokenAndUrlInformation));
+            return new CallStatus(this.britishAirwaysMapperService.map(result.getBody()), Status.SUCCESS, null);
+        } catch (Exception ex) {
+            return new CallStatus(null, Status.FAILED, ex);
+        }
+
+
     }
 
     private String getBritishAirwaysRequestString(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
