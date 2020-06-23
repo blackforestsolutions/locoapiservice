@@ -7,6 +7,7 @@ import de.blackforestsolutions.apiservice.service.communicationservice.Lufthansa
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import de.blackforestsolutions.datamodel.CallStatus;
 import de.blackforestsolutions.datamodel.JourneyStatus;
+import de.blackforestsolutions.datamodel.Status;
 import de.blackforestsolutions.datamodel.util.LocoJsonMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -66,12 +67,12 @@ public class FlightController {
 
     private Map<UUID, JourneyStatus> mapFlightsResults(ApiTokenAndUrlInformation requestInformation, Map<UUID, JourneyStatus> resultMap) {
         CallStatus britishAirwaysCallStatus = this.britishAirwaysApiService.getJourneysForRouteWith(getBritishAirwaysApiTokenAndUrlInformation(requestInformation));
-        if (Optional.ofNullable(britishAirwaysCallStatus).isPresent() && Optional.ofNullable(britishAirwaysCallStatus.getCalledObject()).isPresent()) {
+        if (Optional.ofNullable(britishAirwaysCallStatus).isPresent() && Optional.ofNullable(britishAirwaysCallStatus.getCalledObject()).isPresent() && britishAirwaysCallStatus.getStatus().equals(Status.SUCCESS)) {
             resultMap.putAll((Map<UUID, JourneyStatus>) britishAirwaysCallStatus.getCalledObject());
         }
 
         CallStatus lufthansaCallStatus = this.lufthansaApiService.getJourneysForRouteWith(getLufthansaApiTokenAndUrlInformation(requestInformation));
-        if (Optional.ofNullable(lufthansaCallStatus).isPresent() && Optional.ofNullable(lufthansaCallStatus.getCalledObject()).isPresent()) {
+        if (Optional.ofNullable(lufthansaCallStatus).isPresent() && Optional.ofNullable(lufthansaCallStatus.getCalledObject()).isPresent() && lufthansaCallStatus.getStatus().equals(Status.SUCCESS)) {
             resultMap.putAll((Map<UUID, JourneyStatus>) lufthansaCallStatus.getCalledObject());
         }
         return resultMap;
