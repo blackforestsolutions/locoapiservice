@@ -408,7 +408,7 @@ public class TravelPointObjectMother {
         travelPoint.setStationName("Elmshorn, Hainholz");
         travelPoint.setCity("Elmshorn");
         travelPoint.setCountry(Locale.GERMANY);
-        travelPoint.setGpsCoordinates(new Coordinates.CoordinatesBuilder(53.738052,9.670171).build());
+        travelPoint.setGpsCoordinates(new Coordinates.CoordinatesBuilder(53.738052, 9.670171).build());
         return travelPoint.build();
     }
 
@@ -430,7 +430,7 @@ public class TravelPointObjectMother {
         travelPoint.setStationName("Elmshorn");
         travelPoint.setCity("Elmshorn");
         travelPoint.setCountry(Locale.GERMANY);
-        travelPoint.setGpsCoordinates(new Coordinates.CoordinatesBuilder(53.754662,9.659292).build());
+        travelPoint.setGpsCoordinates(new Coordinates.CoordinatesBuilder(53.754662, 9.659292).build());
         travelPoint.setPlatform("Gleis 2");
         return travelPoint.build();
     }
@@ -441,7 +441,7 @@ public class TravelPointObjectMother {
         travelPoint.setStationName("Hamburg-Altona");
         travelPoint.setCity("Hamburg");
         travelPoint.setCountry(Locale.GERMANY);
-        travelPoint.setGpsCoordinates(new Coordinates.CoordinatesBuilder(53.553269,9.935405).build());
+        travelPoint.setGpsCoordinates(new Coordinates.CoordinatesBuilder(53.553269, 9.935405).build());
         travelPoint.setPlatform("Gleis 9");
         return travelPoint.build();
     }
@@ -452,7 +452,7 @@ public class TravelPointObjectMother {
         travelPoint.setStationName("Pinneberg");
         travelPoint.setCity("Pinneberg");
         travelPoint.setCountry(Locale.GERMANY);
-        travelPoint.setGpsCoordinates(new Coordinates.CoordinatesBuilder(53.654943,9.798367).build());
+        travelPoint.setGpsCoordinates(new Coordinates.CoordinatesBuilder(53.654943, 9.798367).build());
         travelPoint.setDepartureTime(generateDateFromPatternAndString("yyyy-MM-dd HH:mm", "2020-05-05 13:52"));
         return travelPoint.build();
     }

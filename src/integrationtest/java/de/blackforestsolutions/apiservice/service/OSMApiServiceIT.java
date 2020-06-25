@@ -1,7 +1,6 @@
 package de.blackforestsolutions.apiservice.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother;
 import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallService;
 import de.blackforestsolutions.apiservice.service.supportservice.OSMHttpCallBuilderService;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;

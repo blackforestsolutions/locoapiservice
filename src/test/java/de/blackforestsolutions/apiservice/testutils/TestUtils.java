@@ -30,7 +30,7 @@ public class TestUtils {
 
     public static Date convertToDate(LocalDateTime dateToConvert) {
         return Date.from(dateToConvert.atZone(ZoneId.systemDefault())
-                        .toInstant());
+                .toInstant());
     }
 
     /**

@@ -5,5 +5,5 @@ import de.blackforestsolutions.datamodel.CallStatus;
 
 public interface LufthansaApiService {
 
-   CallStatus getJourneysForRouteWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation);
+    CallStatus getJourneysForRouteWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation);
 }

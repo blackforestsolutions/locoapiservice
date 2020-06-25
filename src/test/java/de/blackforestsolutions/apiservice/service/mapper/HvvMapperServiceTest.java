@@ -3,7 +3,10 @@ package de.blackforestsolutions.apiservice.service.mapper;
 import de.blackforestsolutions.apiservice.objectmothers.JourneyObjectMother;
 import de.blackforestsolutions.apiservice.objectmothers.TravelPointObjectMother;
 import de.blackforestsolutions.apiservice.service.supportservice.UuidService;
-import de.blackforestsolutions.datamodel.*;
+import de.blackforestsolutions.datamodel.Journey;
+import de.blackforestsolutions.datamodel.JourneyStatus;
+import de.blackforestsolutions.datamodel.Leg;
+import de.blackforestsolutions.datamodel.TravelPoint;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,7 +28,7 @@ class HvvMapperServiceTest {
 
     private final UuidService uuidGenerator = Mockito.mock(UuidService.class);
     @InjectMocks
-    private HvvMapperService classUnderTest = new HvvMapperServiceImpl(uuidGenerator);
+    private final HvvMapperService classUnderTest = new HvvMapperServiceImpl(uuidGenerator);
 
     @BeforeEach
     void init() {

@@ -1,7 +1,6 @@
 package de.blackforestsolutions.apiservice.controller;
 
 import de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother;
-
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;

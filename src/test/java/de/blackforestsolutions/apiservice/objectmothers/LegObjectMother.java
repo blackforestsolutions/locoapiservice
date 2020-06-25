@@ -5,9 +5,9 @@ import org.springframework.data.geo.Distance;
 import org.springframework.data.geo.Metrics;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -22,7 +22,7 @@ import static de.blackforestsolutions.apiservice.testutils.TestUtils.*;
 public class LegObjectMother {
 
     public static Leg getFlughafenBerlinToHamburgHbfLeg() throws ParseException {
-        Date startTime = generateDateFromPatternAndString("dd/MM/yyyy HH:mm:ss","30/04/2021 08:00:00");
+        Date startTime = generateDateFromPatternAndString("dd/MM/yyyy HH:mm:ss", "30/04/2021 08:00:00");
         Date arrivalTime = convertToDate(LocalDateTime.parse("30/04/2021 08:00:00", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")).plusSeconds(10775));
         return new Leg.LegBuilder(TEST_UUID_1)
                 .setStartTime(startTime)

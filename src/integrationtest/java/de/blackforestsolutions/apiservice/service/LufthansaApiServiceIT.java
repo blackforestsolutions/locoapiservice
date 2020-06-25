@@ -40,8 +40,8 @@ class LufthansaApiServiceIT {
         Awaitility.await()
                 .atMost(Duration.ONE_SECOND)
                 .untilAsserted(() -> {
-                        Assertions.assertThat(lufthansaApiTokenAndUrlInformation.getAuthorization()).isNotNull();
-                        authorization.set(lufthansaApiTokenAndUrlInformation.getAuthorization());
+                    Assertions.assertThat(lufthansaApiTokenAndUrlInformation.getAuthorization()).isNotNull();
+                    authorization.set(lufthansaApiTokenAndUrlInformation.getAuthorization());
                 });
 
         Awaitility.await()
