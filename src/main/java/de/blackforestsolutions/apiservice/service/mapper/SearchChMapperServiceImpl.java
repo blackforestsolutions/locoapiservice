@@ -6,8 +6,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import de.blackforestsolutions.apiservice.service.supportservice.UuidService;
 import de.blackforestsolutions.apiservice.util.CoordinatesUtil;
 import de.blackforestsolutions.datamodel.*;
-import de.blackforestsolutions.generatedcontent.searchCh.*;
 import de.blackforestsolutions.generatedcontent.searchCh.Leg;
+import de.blackforestsolutions.generatedcontent.searchCh.*;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,95 +29,11 @@ import static de.blackforestsolutions.apiservice.configuration.LocaleConfigurati
 @Service
 public class SearchChMapperServiceImpl implements SearchChMapperService {
 
-    private enum SearchChVehicleType {
-        STRAIN(VehicleType.TRAIN),
-        WALK(VehicleType.WALK),
-        TRAM(VehicleType.TRAIN),
-        EXPRESS_TRAIN(VehicleType.TRAIN),
-        BUS(VehicleType.BUS),
-        TRAIN(VehicleType.TRAIN);
-
-        private final VehicleType vehicleType;
-
-        SearchChVehicleType(VehicleType vehicleType) {
-            this.vehicleType = vehicleType;
-        }
-
-        VehicleType getVehicleType() {
-            return vehicleType;
-        }
-    }
-
     private final UuidService uuidService;
 
     @Autowired
     public SearchChMapperServiceImpl(UuidService uuidService) {
         this.uuidService = uuidService;
-    }
-
-    @Override
-    public Map<String, TravelPoint> getTravelPointFrom(String jsonString) throws IOException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        return mapStationListToTravelPointMap(objectMapper.readValue(
-                jsonString,
-                objectMapper.getTypeFactory().constructCollectionType(List.class, Station.class)
-        ));
-    }
-
-    @Override
-    public Map<UUID, JourneyStatus> getJourneysFrom(String jsonString) {
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
-        Route route;
-        try {
-            route = mapper.readValue(jsonString, Route.class);
-        } catch (JsonProcessingException e) {
-            log.error("Error while parsing json: {}", jsonString, e);
-            return Collections.singletonMap(uuidService.createUUID(), JourneyStatusBuilder.createJourneyStatusProblemWith(e));
-        }
-        return mapRouteToJourneyMap(route);
-    }
-
-    private Map<UUID, JourneyStatus> mapRouteToJourneyMap(Route route) {
-        Objects.requireNonNull(route, "Route is not allowed to be null");
-        return Optional.ofNullable(route.getConnections())
-                .orElse(Collections.emptyList())
-                .stream()
-                .map(this::buildLegWith)
-                .map(JourneyStatusBuilder::createJourneyStatusWith)
-                .collect(Collectors.toMap(JourneyStatusBuilder::extractJourneyUuidFrom, journey -> journey));
-    }
-
-    private Journey buildLegWith(Connection connection) {
-        Journey.JourneyBuilder journey = new Journey.JourneyBuilder(uuidService.createUUID());
-        journey.setLegs(buildLegsWith(connection.getLegs()));
-        return journey.build();
-    }
-
-    private LinkedHashMap<UUID, de.blackforestsolutions.datamodel.Leg> buildLegsWith(List<Leg> legs) {
-        return legs
-                .stream()
-                .limit(legs.size() - 1)
-                .map(this::buildLegWith)
-                .collect(Collectors.toMap(de.blackforestsolutions.datamodel.Leg::getId, leg -> leg, (prev, next) -> next, LinkedHashMap::new));
-    }
-
-    private de.blackforestsolutions.datamodel.Leg buildLegWith(Leg betweenTrip) {
-        de.blackforestsolutions.datamodel.Leg.LegBuilder leg = new de.blackforestsolutions.datamodel.Leg.LegBuilder(uuidService.createUUID());
-        leg.setStart(buildTravelPointWith(betweenTrip));
-        leg.setDestination(buildDestinationTravelPointWith(betweenTrip.getExit()));
-        leg.setStartTime(buildDateFrom(betweenTrip.getDeparture()));
-        leg.setArrivalTime(buildDateFrom(betweenTrip.getExit().getArrival()));
-        leg.setDuration(buildDurationBetween(leg.getStartTime(), leg.getArrivalTime()));
-        Optional.ofNullable(betweenTrip.getStops()).ifPresent(stops -> leg.setTravelLine(buildTravelLineWith(stops)));
-        Optional.ofNullable(betweenTrip.getTripid()).ifPresent(leg::setProviderId);
-        buildTravelProviderWith(betweenTrip, leg);
-        leg.setVehicleType(getVehicleType(betweenTrip.getType()));
-        if (Optional.ofNullable(betweenTrip.getLine()).isPresent()) {
-            leg.setVehicleName(betweenTrip.getLine());
-        }
-        return leg.build();
     }
 
     private static TravelLine buildTravelLineWith(List<Stop> stops) {
@@ -210,6 +126,71 @@ public class SearchChMapperServiceImpl implements SearchChMapperService {
         );
     }
 
+    @Override
+    public Map<String, TravelPoint> getTravelPointFrom(String jsonString) throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        return mapStationListToTravelPointMap(objectMapper.readValue(
+                jsonString,
+                objectMapper.getTypeFactory().constructCollectionType(List.class, Station.class)
+        ));
+    }
+
+    @Override
+    public Map<UUID, JourneyStatus> getJourneysFrom(String jsonString) {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
+        Route route;
+        try {
+            route = mapper.readValue(jsonString, Route.class);
+        } catch (JsonProcessingException e) {
+            log.error("Error while parsing json: {}", jsonString, e);
+            return Collections.singletonMap(uuidService.createUUID(), JourneyStatusBuilder.createJourneyStatusProblemWith(e));
+        }
+        return mapRouteToJourneyMap(route);
+    }
+
+    private Map<UUID, JourneyStatus> mapRouteToJourneyMap(Route route) {
+        Objects.requireNonNull(route, "Route is not allowed to be null");
+        return Optional.ofNullable(route.getConnections())
+                .orElse(Collections.emptyList())
+                .stream()
+                .map(this::buildLegWith)
+                .map(JourneyStatusBuilder::createJourneyStatusWith)
+                .collect(Collectors.toMap(JourneyStatusBuilder::extractJourneyUuidFrom, journey -> journey));
+    }
+
+    private Journey buildLegWith(Connection connection) {
+        Journey.JourneyBuilder journey = new Journey.JourneyBuilder(uuidService.createUUID());
+        journey.setLegs(buildLegsWith(connection.getLegs()));
+        return journey.build();
+    }
+
+    private LinkedHashMap<UUID, de.blackforestsolutions.datamodel.Leg> buildLegsWith(List<Leg> legs) {
+        return legs
+                .stream()
+                .limit(legs.size() - 1)
+                .map(this::buildLegWith)
+                .collect(Collectors.toMap(de.blackforestsolutions.datamodel.Leg::getId, leg -> leg, (prev, next) -> next, LinkedHashMap::new));
+    }
+
+    private de.blackforestsolutions.datamodel.Leg buildLegWith(Leg betweenTrip) {
+        de.blackforestsolutions.datamodel.Leg.LegBuilder leg = new de.blackforestsolutions.datamodel.Leg.LegBuilder(uuidService.createUUID());
+        leg.setStart(buildTravelPointWith(betweenTrip));
+        leg.setDestination(buildDestinationTravelPointWith(betweenTrip.getExit()));
+        leg.setStartTime(buildDateFrom(betweenTrip.getDeparture()));
+        leg.setArrivalTime(buildDateFrom(betweenTrip.getExit().getArrival()));
+        leg.setDuration(buildDurationBetween(leg.getStartTime(), leg.getArrivalTime()));
+        Optional.ofNullable(betweenTrip.getStops()).ifPresent(stops -> leg.setTravelLine(buildTravelLineWith(stops)));
+        Optional.ofNullable(betweenTrip.getTripid()).ifPresent(leg::setProviderId);
+        buildTravelProviderWith(betweenTrip, leg);
+        leg.setVehicleType(getVehicleType(betweenTrip.getType()));
+        if (Optional.ofNullable(betweenTrip.getLine()).isPresent()) {
+            leg.setVehicleName(betweenTrip.getLine());
+        }
+        return leg.build();
+    }
+
     private Map<String, TravelPoint> mapStationListToTravelPointMap(List<Station> stations) {
         return stations
                 .stream()
@@ -237,5 +218,24 @@ public class SearchChMapperServiceImpl implements SearchChMapperService {
                 .findFirst()
                 .map(SearchChVehicleType::getVehicleType)
                 .orElse(null);
+    }
+
+    private enum SearchChVehicleType {
+        STRAIN(VehicleType.TRAIN),
+        WALK(VehicleType.WALK),
+        TRAM(VehicleType.TRAIN),
+        EXPRESS_TRAIN(VehicleType.TRAIN),
+        BUS(VehicleType.BUS),
+        TRAIN(VehicleType.TRAIN);
+
+        private final VehicleType vehicleType;
+
+        SearchChVehicleType(VehicleType vehicleType) {
+            this.vehicleType = vehicleType;
+        }
+
+        VehicleType getVehicleType() {
+            return vehicleType;
+        }
     }
 }

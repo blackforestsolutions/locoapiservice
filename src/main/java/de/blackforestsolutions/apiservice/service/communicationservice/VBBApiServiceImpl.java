@@ -8,7 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.Currency;
+import java.util.Locale;
+import java.util.Map;
+import java.util.UUID;
 
 @Service
 public class VBBApiServiceImpl implements VBBApiService {
@@ -20,12 +23,6 @@ public class VBBApiServiceImpl implements VBBApiService {
     @Autowired
     public VBBApiServiceImpl(HafasApiService hafasApiService) {
         this.hafasApiService = hafasApiService;
-    }
-
-    @Override
-    public Map<UUID, JourneyStatus> getJourneysForRouteWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
-        HafasPriceMapper priceMapper = VBBApiServiceImpl::mapPrice;
-        return hafasApiService.getJourneysForRouteWith(apiTokenAndUrlInformation, TravelProvider.VBB, priceMapper);
     }
 
     private static Price mapPrice(TrfRes trfRes) {
@@ -43,6 +40,12 @@ public class VBBApiServiceImpl implements VBBApiService {
         return Map.of(
                 PriceCategory.ADULT, new BigDecimal(sb.toString())
         );
+    }
+
+    @Override
+    public Map<UUID, JourneyStatus> getJourneysForRouteWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
+        HafasPriceMapper priceMapper = VBBApiServiceImpl::mapPrice;
+        return hafasApiService.getJourneysForRouteWith(apiTokenAndUrlInformation, TravelProvider.VBB, priceMapper);
     }
 
 }

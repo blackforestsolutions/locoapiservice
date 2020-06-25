@@ -26,9 +26,7 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
-import static de.blackforestsolutions.apiservice.service.mapper.MapperService.checkIfStringPropertyExists;
-import static de.blackforestsolutions.apiservice.service.mapper.MapperService.generateDurationFromStartToDestination;
-import static de.blackforestsolutions.apiservice.service.mapper.MapperService.setPriceForLegBy;
+import static de.blackforestsolutions.apiservice.service.mapper.MapperService.*;
 
 @Service
 @Slf4j
@@ -36,50 +34,11 @@ public class HvvMapperServiceImpl implements HvvMapperService {
 
     private static final int FIRST_INDEX = 0;
     private static final int SECOND_INDEX = 1;
-
-    private enum HvvVehicleType {
-        BUS(VehicleType.BUS),
-        TRAIN(VehicleType.TRAIN),
-        SHIP(VehicleType.FERRY),
-        FOOTPATH(VehicleType.WALK),
-        BICYCLE(VehicleType.BIKE),
-        AIRPLANE(VehicleType.PLANE),
-        CHANGE(VehicleType.WALK),
-        CHANGE_SAME_PLATFORM(VehicleType.WALK);
-
-        private final VehicleType vehicleType;
-
-        HvvVehicleType(VehicleType vehicleType) {
-            this.vehicleType = vehicleType;
-        }
-
-        VehicleType getVehicleType() {
-            return vehicleType;
-        }
-    }
-
     private final UuidService uuidService;
 
     @Autowired
     public HvvMapperServiceImpl(UuidService uuidService) {
         this.uuidService = uuidService;
-    }
-
-    @Override
-    public HvvStation getHvvStationFrom(String jsonString) {
-        return mapHvvTravelPointResponseToHvvStation(retrieveHvvTravelPointResponse(jsonString));
-    }
-
-    @Override
-    public List<TravelPoint> getStationListFrom(String jsonBody) throws JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
-        HvvStationList hvvStationList = mapper.readValue(jsonBody, HvvStationList.class);
-        return mapHvvStationListToTravelPointList(hvvStationList);
-    }
-
-    @Override
-    public Map<UUID, JourneyStatus> getJourneyMapFrom(String jsonBody) {
-        return mapHvvRouteToJourneyMap(retrieveHvvRouteStatus(jsonBody));
     }
 
     private static HvvTravelPointResponse retrieveHvvTravelPointResponse(String jsonString) {
@@ -178,6 +137,23 @@ public class HvvMapperServiceImpl implements HvvMapperService {
         return coordinates.build();
     }
 
+    @Override
+    public HvvStation getHvvStationFrom(String jsonString) {
+        return mapHvvTravelPointResponseToHvvStation(retrieveHvvTravelPointResponse(jsonString));
+    }
+
+    @Override
+    public List<TravelPoint> getStationListFrom(String jsonBody) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        HvvStationList hvvStationList = mapper.readValue(jsonBody, HvvStationList.class);
+        return mapHvvStationListToTravelPointList(hvvStationList);
+    }
+
+    @Override
+    public Map<UUID, JourneyStatus> getJourneyMapFrom(String jsonBody) {
+        return mapHvvRouteToJourneyMap(retrieveHvvRouteStatus(jsonBody));
+    }
+
     private CallStatus retrieveHvvRouteStatus(String jsonString) {
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
@@ -271,5 +247,26 @@ public class HvvMapperServiceImpl implements HvvMapperService {
                 .findFirst()
                 .map(HvvVehicleType::getVehicleType)
                 .orElse(null);
+    }
+
+    private enum HvvVehicleType {
+        BUS(VehicleType.BUS),
+        TRAIN(VehicleType.TRAIN),
+        SHIP(VehicleType.FERRY),
+        FOOTPATH(VehicleType.WALK),
+        BICYCLE(VehicleType.BIKE),
+        AIRPLANE(VehicleType.PLANE),
+        CHANGE(VehicleType.WALK),
+        CHANGE_SAME_PLATFORM(VehicleType.WALK);
+
+        private final VehicleType vehicleType;
+
+        HvvVehicleType(VehicleType vehicleType) {
+            this.vehicleType = vehicleType;
+        }
+
+        VehicleType getVehicleType() {
+            return vehicleType;
+        }
     }
 }
