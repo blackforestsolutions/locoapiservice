@@ -17,10 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @RestController
 @RequestMapping("regional-train")
@@ -50,9 +47,15 @@ public class RegionalTrainRidesController {
     }
 
     @RequestMapping("/get")
-    public Map<UUID, JourneyStatus> retrieveTrainJourneys(@RequestBody String request) throws JsonProcessingException {
+    public List<CallStatus<Map<UUID, JourneyStatus>>> retrieveTrainJourneys(@RequestBody String request) throws JsonProcessingException {
         ApiTokenAndUrlInformation requestInformation = locoJsonMapper.mapJsonToApiTokenAndUrlInformation(request);
-        return mapJourneyResults(requestInformation);
+        return Arrays.asList(
+                hvvApiService.getJourneysForRouteWith(getHvvApiTokenAndUrlInformation(requestInformation)),
+                rmvApiService.getJourneysForRouteByCoordinatesWith(getRMVApiTokenAndUrlInformation(requestInformation)),
+                rmvApiService.getJourneysForRouteBySearchStringWith(getRMVApiTokenAndUrlInformation(requestInformation)),
+                vbbApiService.getJourneysForRouteWith(getVbbApiTokenAndUrlInformation(requestInformation)),
+                nahShApiService.getJourneysForRouteWith(getNahShApiTokenAndUrlInformation(requestInformation))
+        );
     }
 
     private ApiTokenAndUrlInformation getHvvApiTokenAndUrlInformation(ApiTokenAndUrlInformation request) {
@@ -91,34 +94,4 @@ public class RegionalTrainRidesController {
         this.nahShApiTokenAndUrlInformation = nahShApiTokenAndUrlInformation;
     }
 
-    private Map<UUID, JourneyStatus> mapJourneyResults(ApiTokenAndUrlInformation requestToken) {
-        final Map<UUID, JourneyStatus> journeys = new HashMap<>();
-
-        CallStatus<Map<UUID, JourneyStatus>> hvvJourneyStatus = hvvApiService.getJourneysForRouteWith(getHvvApiTokenAndUrlInformation(requestToken));
-        if (Optional.ofNullable(hvvJourneyStatus).isPresent() && Optional.ofNullable(hvvJourneyStatus.getCalledObject()).isPresent() && hvvJourneyStatus.getStatus().equals(Status.SUCCESS)) {
-            journeys.putAll(hvvJourneyStatus.getCalledObject());
-        }
-
-        CallStatus<Map<UUID, JourneyStatus>> rmvJourneyByStringStatus = rmvApiService.getJourneysForRouteBySearchStringWith(getRMVApiTokenAndUrlInformation(requestToken));
-        if (Optional.ofNullable(rmvJourneyByStringStatus).isPresent() && Optional.ofNullable(rmvJourneyByStringStatus.getCalledObject()).isPresent() && rmvJourneyByStringStatus.getStatus().equals(Status.SUCCESS)) {
-            journeys.putAll(rmvJourneyByStringStatus.getCalledObject());
-        }
-
-        CallStatus<Map<UUID, JourneyStatus>> rmvJourneyStatusByCoordinates = rmvApiService.getJourneysForRouteByCoordinatesWith(getRMVApiTokenAndUrlInformation(requestToken));
-        if (Optional.ofNullable(rmvJourneyStatusByCoordinates).isPresent() && Optional.ofNullable(rmvJourneyStatusByCoordinates.getCalledObject()).isPresent() && rmvJourneyStatusByCoordinates.getStatus().equals(Status.SUCCESS)) {
-            journeys.putAll(rmvJourneyStatusByCoordinates.getCalledObject());
-        }
-
-        CallStatus<Map<UUID, JourneyStatus>> vbbJourneyStatus = vbbApiService.getJourneysForRouteWith(getVbbApiTokenAndUrlInformation(requestToken));
-        if (Optional.ofNullable(vbbJourneyStatus).isPresent() && Optional.ofNullable(vbbJourneyStatus.getCalledObject()).isPresent() && vbbJourneyStatus.getStatus().equals(Status.SUCCESS)) {
-            journeys.putAll(vbbJourneyStatus.getCalledObject());
-        }
-
-        CallStatus<Map<UUID, JourneyStatus>> nahShJourneyStatus = nahShApiService.getJourneysForRouteWith(getNahShApiTokenAndUrlInformation(requestToken));
-        if (Optional.ofNullable(nahShJourneyStatus).isPresent() && Optional.ofNullable(nahShJourneyStatus.getCalledObject()).isPresent() && nahShJourneyStatus.getStatus().equals(Status.SUCCESS)) {
-            journeys.putAll(nahShJourneyStatus.getCalledObject());
-        }
-
-        return journeys;
-    }
 }

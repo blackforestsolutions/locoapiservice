@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.io.IOException;
 import java.util.*;
 
 @RestController
@@ -42,12 +43,12 @@ public class NationalTrainRidesController {
     }
 
     @RequestMapping("/get")
-    public List<CallStatus<Map<UUID, JourneyStatus>>> retrieveTrainJourneys(@RequestBody String request) throws JsonProcessingException {
+    public List<CallStatus<Map<UUID, JourneyStatus>>> retrieveTrainJourneys(@RequestBody String request) throws IOException {
         ApiTokenAndUrlInformation requestInformation = locoJsonMapper.mapJsonToApiTokenAndUrlInformation(request);
         return Arrays.asList(
                 bahnJourneyDetailsService.getJourneysForRouteWith(getBahnApiTokenAndUrlInformation(requestInformation)),
                 dbApiService.getJourneysForRouteWith(getDbApiTokenAndUrlInformation(requestInformation)),
-                searchChApiService.getTravelPointForRouteFromApiWith(getSearchApiTokenAndUrlInformation(requestInformation))
+                searchChApiService.getJourneysForRouteWith(getSearchApiTokenAndUrlInformation(requestInformation))
         );
     }
 
