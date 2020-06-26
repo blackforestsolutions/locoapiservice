@@ -5,6 +5,7 @@ import com.google.common.annotations.VisibleForTesting;
 import de.blackforestsolutions.apiservice.service.communicationservice.AirportsFinderApiService;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import de.blackforestsolutions.datamodel.CallStatus;
+import de.blackforestsolutions.datamodel.Status;
 import de.blackforestsolutions.datamodel.util.LocoJsonMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -48,7 +49,7 @@ public class NearestStationFinderController {
 
     private LinkedHashSet<CallStatus> mapStationsToHashSet(LinkedHashSet<CallStatus> resultNearestStationFinder, ApiTokenAndUrlInformation requestInformation) {
         CallStatus airportsFinderCallStatus = this.airportsFinderApiService.getAirportsWith(getAirportsFinderApiTokenAndUrlInformation(requestInformation));
-        if (Optional.ofNullable(airportsFinderCallStatus).isPresent() && Optional.ofNullable(airportsFinderCallStatus.getCalledObject()).isPresent()) {
+        if (Optional.ofNullable(airportsFinderCallStatus).isPresent() && Optional.ofNullable(airportsFinderCallStatus.getCalledObject()).isPresent() && airportsFinderCallStatus.getStatus().equals(Status.SUCCESS)) {
             resultNearestStationFinder.addAll((LinkedHashSet<CallStatus>) airportsFinderCallStatus.getCalledObject());
         }
         return resultNearestStationFinder;

@@ -40,6 +40,7 @@ public class AirportsFinderApiServiceImpl implements AirportsFinderApiService {
             ResponseEntity<String> result = callService.get(url, airportsFinderHttpCallBuilderService.buildHttpEntityAirportsFinder(apiTokenAndUrlInformation));
             return new CallStatus(this.airportsFinderMapperService.map(result.getBody()), Status.SUCCESS, null);
         } catch (Exception ex) {
+            log.error("AirportsFinder api call was not successful", ex);
             return new CallStatus(null, Status.FAILED, ex);
         }
     }
