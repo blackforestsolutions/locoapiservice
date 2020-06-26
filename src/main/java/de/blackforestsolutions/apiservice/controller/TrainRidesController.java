@@ -5,7 +5,9 @@ import com.google.common.annotations.VisibleForTesting;
 import de.blackforestsolutions.apiservice.service.communicationservice.DBApiService;
 import de.blackforestsolutions.apiservice.service.communicationservice.bahnService.BahnJourneyDetailsService;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
+import de.blackforestsolutions.datamodel.CallStatus;
 import de.blackforestsolutions.datamodel.JourneyStatus;
+import de.blackforestsolutions.datamodel.Status;
 import de.blackforestsolutions.datamodel.util.LocoJsonMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -39,11 +42,7 @@ public class TrainRidesController {
     @RequestMapping("/get")
     public Map<UUID, JourneyStatus> retrieveTrainJourneys(@RequestBody String request) throws JsonProcessingException {
         ApiTokenAndUrlInformation requestInformation = locoJsonMapper.mapJsonToApiTokenAndUrlInformation(request);
-
-        Map<UUID, JourneyStatus> journeys = new HashMap<>();
-        journeys.putAll(bahnJourneyDetailsService.getJourneysForRouteWith(getBahnApiTokenAndUrlInformation(requestInformation)));
-        journeys.putAll(dbApiService.getJourneysForRouteWith(getDbApiTokenAndUrlInformation(requestInformation)));
-        return journeys;
+        return mapJourneyResults(requestInformation);
     }
 
     private ApiTokenAndUrlInformation getBahnApiTokenAndUrlInformation(ApiTokenAndUrlInformation request) {
@@ -62,5 +61,17 @@ public class TrainRidesController {
     @VisibleForTesting
     void setDbApiTokenAndUrlInformation(ApiTokenAndUrlInformation dbApiTokenAndUrlInformation) {
         this.dbApiTokenAndUrlInformation = dbApiTokenAndUrlInformation;
+    }
+
+    private Map<UUID, JourneyStatus> mapJourneyResults(ApiTokenAndUrlInformation requestToken) {
+        final Map<UUID, JourneyStatus> journeys = new HashMap<>();
+        journeys.putAll(bahnJourneyDetailsService.getJourneysForRouteWith(getBahnApiTokenAndUrlInformation(requestToken)));
+
+        CallStatus<Map<UUID, JourneyStatus>> dbJourneyStatus = dbApiService.getJourneysForRouteWith(getDbApiTokenAndUrlInformation(requestToken));
+        if (Optional.ofNullable(dbJourneyStatus).isPresent() && Optional.ofNullable(dbJourneyStatus.getCalledObject()).isPresent() && dbJourneyStatus.getStatus().equals(Status.SUCCESS)) {
+            journeys.putAll(dbJourneyStatus.getCalledObject());
+        }
+
+        return journeys;
     }
 }

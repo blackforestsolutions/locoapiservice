@@ -75,7 +75,7 @@ class DBApiServiceTest {
                 .thenReturn(travelPointResult)
                 .thenReturn(testResult);
 
-        Map<UUID, JourneyStatus> result = classUnderTest.getJourneysForRouteWith(testData);
+        Map<UUID, JourneyStatus> result = classUnderTest.getJourneysForRouteWith(testData).getCalledObject();
 
         Assertions.assertThat(result.size()).isEqualTo(1);
         //noinspection OptionalGetWithoutIsPresent

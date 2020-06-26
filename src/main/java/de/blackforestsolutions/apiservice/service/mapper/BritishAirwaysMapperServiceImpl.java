@@ -47,21 +47,21 @@ public class BritishAirwaysMapperServiceImpl implements BritishAirwaysMapperServ
         return britishAirwaysMapFlightResponseToJourneyList(retrieveFlightResponse(jsonString));
     }
 
-    private CallStatus retrieveFlightResponse(String jsonString) {
+    private CallStatus<FlightsResponse> retrieveFlightResponse(String jsonString) {
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
         try {
-            return new CallStatus(mapper.readValue(jsonString, FlightsResponse.class), Status.SUCCESS, null);
+            return new CallStatus<>(mapper.readValue(jsonString, FlightsResponse.class), Status.SUCCESS, null);
         } catch (JsonProcessingException e) {
             log.error("Error during mapping json to object: {}", jsonString, e);
-            return new CallStatus(null, Status.FAILED, e);
+            return new CallStatus<>(null, Status.FAILED, e);
         }
     }
 
     @SuppressWarnings("unchecked")
-    private Map<UUID, JourneyStatus> britishAirwaysMapFlightResponseToJourneyList(CallStatus flightsResponseStatus) {
+    private Map<UUID, JourneyStatus> britishAirwaysMapFlightResponseToJourneyList(CallStatus<FlightsResponse> flightsResponseStatus) {
         if (flightsResponseStatus.getCalledObject() != null) {
-            FlightsResponse flightsResponse = (FlightsResponse) flightsResponseStatus.getCalledObject();
+            FlightsResponse flightsResponse = flightsResponseStatus.getCalledObject();
             return flightsResponse
                     .getAdditionalProperties()
                     .values()

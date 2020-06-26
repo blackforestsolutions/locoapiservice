@@ -38,8 +38,8 @@ class OSMApiServiceTest {
         //noinspection unchecked (justification: no type known for runtime therefore)
         Mockito.doReturn(testResultDeparture).when(restTemplate).exchange(Mockito.anyString(), Mockito.any(), Mockito.any(), Mockito.any(Class.class));
 
-        CallStatus result = classUnderTest.getCoordinatesFromTravelPointWith(testData, testData.getDeparture());
-        Coordinates coordinatesResult = (Coordinates) result.getCalledObject();
+        CallStatus<Coordinates> result = classUnderTest.getCoordinatesFromTravelPointWith(testData, testData.getDeparture());
+        Coordinates coordinatesResult = result.getCalledObject();
 
         Assertions.assertEquals(48.80549925, coordinatesResult.getLatitude());
         Assertions.assertEquals(9.228576954173775, coordinatesResult.getLongitude());
@@ -53,8 +53,8 @@ class OSMApiServiceTest {
         //noinspection unchecked (justification: no type known for runtime therefore)
         Mockito.doReturn(testResultArrival).when(restTemplate).exchange(Mockito.anyString(), Mockito.any(), Mockito.any(), Mockito.any(Class.class));
 
-        CallStatus result = classUnderTest.getCoordinatesFromTravelPointWith(testData, testData.getArrival());
-        Coordinates coordinatesResult = (Coordinates) result.getCalledObject();
+        CallStatus<Coordinates> result = classUnderTest.getCoordinatesFromTravelPointWith(testData, testData.getArrival());
+        Coordinates coordinatesResult = result.getCalledObject();
 
         Assertions.assertEquals(48.0510888, coordinatesResult.getLatitude());
         Assertions.assertEquals(8.2073542, coordinatesResult.getLongitude());

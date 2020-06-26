@@ -13,15 +13,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.geo.Distance;
 import org.springframework.stereotype.Service;
 
-import java.time.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 import static de.blackforestsolutions.apiservice.service.mapper.MapperService.generateDurationFromStartToDestination;
-import static de.blackforestsolutions.apiservice.util.CoordinatesUtil.convertWGS84ToCoordinatesWith;
 import static de.blackforestsolutions.apiservice.service.mapper.MapperService.setPriceForLegBy;
+import static de.blackforestsolutions.apiservice.util.CoordinatesUtil.convertWGS84ToCoordinatesWith;
 
 @Slf4j
 @Service
@@ -87,7 +90,7 @@ public class HafasMapperServiceImpl implements HafasMapperService {
     }
 
     @Override
-    public CallStatus getIdFrom(String resultBody) {
+    public CallStatus<String> getIdFrom(String resultBody) {
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
         HafasLocationResponse response;
@@ -95,10 +98,10 @@ public class HafasMapperServiceImpl implements HafasMapperService {
             response = mapper.readValue(resultBody, HafasLocationResponse.class);
         } catch (JsonProcessingException e) {
             log.error("Errow while mapping travelPoint json: ", e);
-            return new CallStatus(null, Status.FAILED, e);
+            return new CallStatus<>(null, Status.FAILED, e);
         }
         LocL location = response.getSvcResL().get(FIRST_INDEX).getRes().getMatch().getLocL().get(FIRST_INDEX);
-        return new CallStatus(selectIdFrom(location), Status.SUCCESS, null);
+        return new CallStatus<>(selectIdFrom(location), Status.SUCCESS, null);
     }
 
     private String selectIdFrom(LocL location) {

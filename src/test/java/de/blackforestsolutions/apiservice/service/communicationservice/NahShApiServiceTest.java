@@ -72,7 +72,7 @@ class NahShApiServiceTest {
         ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getNahShTokenAndUrl("", "");
         Leg expectedJourney = LegObjectMother.getEiderstrasseRendsburgGartenstrasseRendsburgLeg(getNahShPrice());
 
-        Map<UUID, JourneyStatus> result = classUnderTest.getJourneysForRouteWith(testData);
+        Map<UUID, JourneyStatus> result = classUnderTest.getJourneysForRouteWith(testData).getCalledObject();
         //noinspection OptionalGetWithoutIsPresent
         Leg legResult = result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2);
 
@@ -84,7 +84,7 @@ class NahShApiServiceTest {
         ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getNahShTokenAndUrl("", "");
         Journey expectedJourney = JourneyObjectMother.getEiderstrasseRendsburgToRendsburgJourney();
 
-        Map<UUID, JourneyStatus> result = classUnderTest.getJourneysForRouteWith(testData);
+        Map<UUID, JourneyStatus> result = classUnderTest.getJourneysForRouteWith(testData).getCalledObject();
         //noinspection OptionalGetWithoutIsPresent
         Journey journeyResult = result.get(TEST_UUID_1).getJourney().get();
 
@@ -98,7 +98,7 @@ class NahShApiServiceTest {
         ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getNahShTokenAndUrl("", "");
         Leg expectedLeg = LegObjectMother.getEiderstrasseRendsburgGartenstrasseRendsburgLeg(getNahShPrice());
 
-        Map<UUID, JourneyStatus> result = classUnderTest.getJourneysForRouteWith(testData);
+        Map<UUID, JourneyStatus> result = classUnderTest.getJourneysForRouteWith(testData).getCalledObject();
         //noinspection OptionalGetWithoutIsPresent
         Leg legResult = result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2);
 
@@ -112,7 +112,7 @@ class NahShApiServiceTest {
         ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getNahShTokenAndUrl("", "");
         Leg expectedLeg = LegObjectMother.getGartenstrasseRendsburgLeg(TravelProvider.NAHSH);
 
-        Map<UUID, JourneyStatus> result = classUnderTest.getJourneysForRouteWith(testData);
+        Map<UUID, JourneyStatus> result = classUnderTest.getJourneysForRouteWith(testData).getCalledObject();
         //noinspection OptionalGetWithoutIsPresent
         Leg legResult = result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_3);
 
@@ -127,7 +127,7 @@ class NahShApiServiceTest {
         ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getNahShTokenAndUrl("", "");
         Leg expectedLeg = LegObjectMother.getRendsburgZobToRendsburgLeg();
 
-        Map<UUID, JourneyStatus> result = classUnderTest.getJourneysForRouteWith(testData);
+        Map<UUID, JourneyStatus> result = classUnderTest.getJourneysForRouteWith(testData).getCalledObject();
         //noinspection OptionalGetWithoutIsPresent
         Leg legResult = result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_4);
 

@@ -7,7 +7,9 @@ import de.blackforestsolutions.apiservice.service.communicationservice.NahShApiS
 import de.blackforestsolutions.apiservice.service.communicationservice.RMVApiService;
 import de.blackforestsolutions.apiservice.service.communicationservice.VBBApiService;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
+import de.blackforestsolutions.datamodel.CallStatus;
 import de.blackforestsolutions.datamodel.JourneyStatus;
+import de.blackforestsolutions.datamodel.Status;
 import de.blackforestsolutions.datamodel.util.LocoJsonMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -46,17 +49,10 @@ public class RegionalTrainRidesController {
         this.nahShApiService = nahShApiService;
     }
 
-    @RequestMapping("get")
+    @RequestMapping("/get")
     public Map<UUID, JourneyStatus> retrieveTrainJourneys(@RequestBody String request) throws JsonProcessingException {
         ApiTokenAndUrlInformation requestInformation = locoJsonMapper.mapJsonToApiTokenAndUrlInformation(request);
-
-        Map<UUID, JourneyStatus> journeys = new HashMap<>();
-        journeys.putAll(hvvApiService.getJourneysForRouteWith(getHvvApiTokenAndUrlInformation(requestInformation)));
-        journeys.putAll(rmvApiService.getJourneysForRouteBySearchStringWith(getRMVApiTokenAndUrlInformation(requestInformation)));
-        journeys.putAll(rmvApiService.getJourneysForRouteByCoordinatesWith(getRMVApiTokenAndUrlInformation(requestInformation)));
-        journeys.putAll(vbbApiService.getJourneysForRouteWith(getVbbApiTokenAndUrlInformation(requestInformation)));
-        journeys.putAll(nahShApiService.getJourneysForRouteWith(getNahShApiTokenAndUrlInformation(requestInformation)));
-        return journeys;
+        return mapJourneyResults(requestInformation);
     }
 
     private ApiTokenAndUrlInformation getHvvApiTokenAndUrlInformation(ApiTokenAndUrlInformation request) {
@@ -93,5 +89,36 @@ public class RegionalTrainRidesController {
     @VisibleForTesting
     void setNahShApiTokenAndUrlInformation(ApiTokenAndUrlInformation nahShApiTokenAndUrlInformation) {
         this.nahShApiTokenAndUrlInformation = nahShApiTokenAndUrlInformation;
+    }
+
+    private Map<UUID, JourneyStatus> mapJourneyResults(ApiTokenAndUrlInformation requestToken) {
+        final Map<UUID, JourneyStatus> journeys = new HashMap<>();
+
+        CallStatus<Map<UUID, JourneyStatus>> hvvJourneyStatus = hvvApiService.getJourneysForRouteWith(getHvvApiTokenAndUrlInformation(requestToken));
+        if (Optional.ofNullable(hvvJourneyStatus).isPresent() && Optional.ofNullable(hvvJourneyStatus.getCalledObject()).isPresent() && hvvJourneyStatus.getStatus().equals(Status.SUCCESS)) {
+            journeys.putAll(hvvJourneyStatus.getCalledObject());
+        }
+
+        CallStatus<Map<UUID, JourneyStatus>> rmvJourneyByStringStatus = rmvApiService.getJourneysForRouteBySearchStringWith(getRMVApiTokenAndUrlInformation(requestToken));
+        if (Optional.ofNullable(rmvJourneyByStringStatus).isPresent() && Optional.ofNullable(rmvJourneyByStringStatus.getCalledObject()).isPresent() && rmvJourneyByStringStatus.getStatus().equals(Status.SUCCESS)) {
+            journeys.putAll(rmvJourneyByStringStatus.getCalledObject());
+        }
+
+        CallStatus<Map<UUID, JourneyStatus>> rmvJourneyStatusByCoordinates = rmvApiService.getJourneysForRouteByCoordinatesWith(getRMVApiTokenAndUrlInformation(requestToken));
+        if (Optional.ofNullable(rmvJourneyStatusByCoordinates).isPresent() && Optional.ofNullable(rmvJourneyStatusByCoordinates.getCalledObject()).isPresent() && rmvJourneyStatusByCoordinates.getStatus().equals(Status.SUCCESS)) {
+            journeys.putAll(rmvJourneyStatusByCoordinates.getCalledObject());
+        }
+
+        CallStatus<Map<UUID, JourneyStatus>> vbbJourneyStatus = vbbApiService.getJourneysForRouteWith(getVbbApiTokenAndUrlInformation(requestToken));
+        if (Optional.ofNullable(vbbJourneyStatus).isPresent() && Optional.ofNullable(vbbJourneyStatus.getCalledObject()).isPresent() && vbbJourneyStatus.getStatus().equals(Status.SUCCESS)) {
+            journeys.putAll(vbbJourneyStatus.getCalledObject());
+        }
+
+        CallStatus<Map<UUID, JourneyStatus>> nahShJourneyStatus = nahShApiService.getJourneysForRouteWith(getNahShApiTokenAndUrlInformation(requestToken));
+        if (Optional.ofNullable(nahShJourneyStatus).isPresent() && Optional.ofNullable(nahShJourneyStatus.getCalledObject()).isPresent() && nahShJourneyStatus.getStatus().equals(Status.SUCCESS)) {
+            journeys.putAll(nahShJourneyStatus.getCalledObject());
+        }
+
+        return journeys;
     }
 }

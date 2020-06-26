@@ -53,7 +53,7 @@ public class LufthansaHttpCallBuilderServiceImpl implements LuftHansaHttpCallBui
 
     @Override
     public HttpEntity<MultiValueMap<String, String>> buildHttpEntityForLufthansaAuthorization(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
-        return new HttpEntity(buildHttpBodyForLufthansaAuthorization(apiTokenAndUrlInformation), new HttpHeaders());
+        return new HttpEntity<>(buildHttpBodyForLufthansaAuthorization(apiTokenAndUrlInformation), new HttpHeaders());
     }
 
     private MultiValueMap<String, String> buildHttpBodyForLufthansaAuthorization(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {

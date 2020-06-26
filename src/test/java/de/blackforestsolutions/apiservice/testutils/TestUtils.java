@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.blackforestsolutions.datamodel.Journey;
 import de.blackforestsolutions.datamodel.JourneyStatus;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.http.ResponseEntity;
 
@@ -26,6 +27,7 @@ import java.util.stream.Collectors;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
+@Slf4j
 public class TestUtils {
 
     public static Date convertToDate(LocalDateTime dateToConvert) {
@@ -119,6 +121,16 @@ public class TestUtils {
         Objects.requireNonNull(response.getBody(), "response body is not allowed to be null");
         ObjectMapper mapper = new ObjectMapper();
         return mapper.readValue(response.getBody(), mapper.getTypeFactory().constructCollectionType(List.class, pojo));
+    }
+
+    public static <T> String convertObjectToJsonString(T object) {
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            return mapper.writeValueAsString(object);
+        } catch (JsonProcessingException e) {
+            log.warn("Error during parsing object to json for testing: ", e);
+        }
+        return null;
     }
 
     public static <T> T retrieveXmlPojoFromResponse(ResponseEntity<String> response, Class<T> pojo) throws JAXBException {

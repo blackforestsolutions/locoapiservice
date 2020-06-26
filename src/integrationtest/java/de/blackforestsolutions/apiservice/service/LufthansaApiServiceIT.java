@@ -21,7 +21,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.buildUrlWith;
 
 @SpringBootTest
-@TestPropertySource(properties = {"lufthansaBearerExpirationTime=8000"})
+@TestPropertySource(properties = {"lufthansaBearerExpirationTime=6000"})
 @AutoConfigureMockMvc
 class LufthansaApiServiceIT {
 

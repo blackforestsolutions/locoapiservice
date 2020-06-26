@@ -6,8 +6,8 @@ import de.blackforestsolutions.generatedcontent.lufthansa.LufthansaAuthorization
 
 public class CallStatusObjectMother {
 
-    public static CallStatus getLufthansaAuthorizationResponse() {
-        return new CallStatus(
+    public static CallStatus<LufthansaAuthorization> getLufthansaAuthorizationResponse() {
+        return new CallStatus<>(
                 getLufthansaAuthorization(),
                 Status.SUCCESS,
                 null

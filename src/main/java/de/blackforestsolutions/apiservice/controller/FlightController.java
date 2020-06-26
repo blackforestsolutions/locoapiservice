@@ -41,13 +41,11 @@ public class FlightController {
 
     @RequestMapping("/get")
     public Map<UUID, JourneyStatus> flights(@RequestBody String request) throws JsonProcessingException {
-        final Map<UUID, JourneyStatus> resultMap = new HashMap<>();
         ApiTokenAndUrlInformation requestInformation = locoJsonMapper.mapJsonToApiTokenAndUrlInformation(request);
-        return mapFlightsResults(requestInformation, resultMap);
+        return mapFlightsResults(requestInformation);
     }
 
-    private ApiTokenAndUrlInformation getBritishAirwaysApiTokenAndUrlInformation(
-            ApiTokenAndUrlInformation request) {
+    private ApiTokenAndUrlInformation getBritishAirwaysApiTokenAndUrlInformation(ApiTokenAndUrlInformation request) {
         return RequestTokenHandler.getRequestApiTokenWith(request, britishAirwaysApiTokenAndUrlInformation);
     }
 
@@ -65,15 +63,17 @@ public class FlightController {
         this.lufthansaApiTokenAndUrlInformation = lufthansaApiTokenAndUrlInformation;
     }
 
-    private Map<UUID, JourneyStatus> mapFlightsResults(ApiTokenAndUrlInformation requestInformation, Map<UUID, JourneyStatus> resultMap) {
-        CallStatus britishAirwaysCallStatus = this.britishAirwaysApiService.getJourneysForRouteWith(getBritishAirwaysApiTokenAndUrlInformation(requestInformation));
+    private Map<UUID, JourneyStatus> mapFlightsResults(ApiTokenAndUrlInformation requestInformation) {
+        final Map<UUID, JourneyStatus> resultMap = new HashMap<>();
+
+        CallStatus<Map<UUID, JourneyStatus>> britishAirwaysCallStatus = britishAirwaysApiService.getJourneysForRouteWith(getBritishAirwaysApiTokenAndUrlInformation(requestInformation));
         if (Optional.ofNullable(britishAirwaysCallStatus).isPresent() && Optional.ofNullable(britishAirwaysCallStatus.getCalledObject()).isPresent() && britishAirwaysCallStatus.getStatus().equals(Status.SUCCESS)) {
-            resultMap.putAll((Map<UUID, JourneyStatus>) britishAirwaysCallStatus.getCalledObject());
+            resultMap.putAll(britishAirwaysCallStatus.getCalledObject());
         }
 
-        CallStatus lufthansaCallStatus = this.lufthansaApiService.getJourneysForRouteWith(getLufthansaApiTokenAndUrlInformation(requestInformation));
+        CallStatus<Map<UUID, JourneyStatus>> lufthansaCallStatus = lufthansaApiService.getJourneysForRouteWith(getLufthansaApiTokenAndUrlInformation(requestInformation));
         if (Optional.ofNullable(lufthansaCallStatus).isPresent() && Optional.ofNullable(lufthansaCallStatus.getCalledObject()).isPresent() && lufthansaCallStatus.getStatus().equals(Status.SUCCESS)) {
-            resultMap.putAll((Map<UUID, JourneyStatus>) lufthansaCallStatus.getCalledObject());
+            resultMap.putAll(lufthansaCallStatus.getCalledObject());
         }
         return resultMap;
     }

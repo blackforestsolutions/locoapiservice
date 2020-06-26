@@ -44,7 +44,7 @@ public class RMVMapperServiceImpl implements RMVMapperService {
     }
 
     @Override
-    public CallStatus getIdFrom(String resultBody) {
+    public CallStatus<String> getIdFrom(String resultBody) {
         StringReader readerResultBody = new StringReader(resultBody);
         LocationList locationList;
         try {
@@ -53,18 +53,18 @@ public class RMVMapperServiceImpl implements RMVMapperService {
             locationList = (LocationList) unmarshaller.unmarshal(readerResultBody);
         } catch (JAXBException e) {
             log.error("Error during unmarshalling of XML Objects: {}", readerResultBody, e);
-            return new CallStatus(null, Status.FAILED, e);
+            return new CallStatus<>(null, Status.FAILED, e);
         }
         try {
             StopLocation stopLocation = (StopLocation) locationList.getStopLocationOrCoordLocation().get(START_INDEX);
-            return new CallStatus(stopLocation.getId(), Status.SUCCESS, null);
+            return new CallStatus<>(stopLocation.getId(), Status.SUCCESS, null);
         } catch (ClassCastException e) {
             try {
                 CoordLocation coordLocation = (CoordLocation) locationList.getStopLocationOrCoordLocation().get(START_INDEX);
-                return new CallStatus(coordLocation.getId(), Status.SUCCESS, null);
+                return new CallStatus<>(coordLocation.getId(), Status.SUCCESS, null);
             } catch (ClassCastException ex) {
                 log.error("Error during mapping xml to station type. Type not found.");
-                return new CallStatus(null, Status.FAILED, ex);
+                return new CallStatus<>(null, Status.FAILED, ex);
             }
         }
     }

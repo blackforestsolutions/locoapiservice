@@ -65,7 +65,7 @@ class RMVApiServiceTest {
         ArgumentCaptor<String> callServiceArg = ArgumentCaptor.forClass(String.class);
 
 
-        Map<UUID, JourneyStatus> result = classUnderTest.getJourneysForRouteBySearchStringWith(testToken);
+        Map<UUID, JourneyStatus> result = classUnderTest.getJourneysForRouteBySearchStringWith(testToken).getCalledObject();
 
         InOrder inOrder = inOrder(httpCallBuilderService, callService, rmvMapperService);
         inOrder.verify(httpCallBuilderService, times(2)).buildLocationStringPathWith(any(ApiTokenAndUrlInformation.class), httpCallBuilderArg.capture());
@@ -89,7 +89,7 @@ class RMVApiServiceTest {
         ArgumentCaptor<String> callServiceArg = ArgumentCaptor.forClass(String.class);
 
 
-        Map<UUID, JourneyStatus> result = classUnderTest.getJourneysForRouteByCoordinatesWith(testToken);
+        Map<UUID, JourneyStatus> result = classUnderTest.getJourneysForRouteByCoordinatesWith(testToken).getCalledObject();
 
         InOrder inOrder = inOrder(httpCallBuilderService, callService, rmvMapperService);
         inOrder.verify(httpCallBuilderService, times(2)).buildLocationCoordinatesPathWith(any(ApiTokenAndUrlInformation.class), httpCallBuilderArg.capture());

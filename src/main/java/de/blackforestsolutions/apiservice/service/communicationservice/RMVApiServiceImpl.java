@@ -4,7 +4,10 @@ import de.blackforestsolutions.apiservice.service.communicationservice.restcalls
 import de.blackforestsolutions.apiservice.service.mapper.RMVMapperService;
 import de.blackforestsolutions.apiservice.service.supportservice.RMVHttpCallBuilderService;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
+import de.blackforestsolutions.datamodel.CallStatus;
 import de.blackforestsolutions.datamodel.JourneyStatus;
+import de.blackforestsolutions.datamodel.Status;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -15,6 +18,7 @@ import java.util.UUID;
 
 import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.buildUrlWith;
 
+@Slf4j
 @Service
 public class RMVApiServiceImpl implements RMVApiService {
 
@@ -30,15 +34,25 @@ public class RMVApiServiceImpl implements RMVApiService {
     }
 
     @Override
-    public Map<UUID, JourneyStatus> getJourneysForRouteByCoordinatesWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
-        ResponseEntity<String> result = buildAndExecteCallForCoordinates(apiTokenAndUrlInformation);
-        return rmvMapperService.getJourneysFrom(result.getBody());
+    public CallStatus<Map<UUID, JourneyStatus>> getJourneysForRouteByCoordinatesWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
+        try {
+            ResponseEntity<String> result = buildAndExecteCallForCoordinates(apiTokenAndUrlInformation);
+            return new CallStatus<>(rmvMapperService.getJourneysFrom(result.getBody()), Status.SUCCESS, null);
+        } catch (Exception e) {
+            log.error("Error during calling rmv api: ", e);
+            return new CallStatus<>(null, Status.FAILED, e);
+        }
     }
 
     @Override
-    public Map<UUID, JourneyStatus> getJourneysForRouteBySearchStringWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
-        ResponseEntity<String> result = buildAndExecuteCallForSearchString(apiTokenAndUrlInformation);
-        return rmvMapperService.getJourneysFrom(result.getBody());
+    public CallStatus<Map<UUID, JourneyStatus>> getJourneysForRouteBySearchStringWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
+        try {
+            ResponseEntity<String> result = buildAndExecuteCallForSearchString(apiTokenAndUrlInformation);
+            return new CallStatus<>(rmvMapperService.getJourneysFrom(result.getBody()), Status.SUCCESS, null);
+        } catch (Exception e) {
+            log.error("Error during calling rmv api: ", e);
+            return new CallStatus<>(null, Status.FAILED, e);
+        }
     }
 
     private ResponseEntity<String> buildAndExecteCallForCoordinates(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
@@ -70,12 +84,12 @@ public class RMVApiServiceImpl implements RMVApiService {
                 urlDeparture,
                 httpCallBuilderService.buildHttpEntityForRMV(apiTokenAndUrlInformation)
         );
-        String departureId = (String) rmvMapperService.getIdFrom(departureIdJson.getBody()).getCalledObject();
+        String departureId = rmvMapperService.getIdFrom(departureIdJson.getBody()).getCalledObject();
         ResponseEntity<String> arrivalIdJson = callService.get(
                 urlArrival,
                 httpCallBuilderService.buildHttpEntityForRMV(apiTokenAndUrlInformation)
         );
-        String arrivalId = (String) rmvMapperService.getIdFrom(arrivalIdJson.getBody()).getCalledObject();
+        String arrivalId = rmvMapperService.getIdFrom(arrivalIdJson.getBody()).getCalledObject();
         ApiTokenAndUrlInformation callToken = replaceStartAndDestinationIn(apiTokenAndUrlInformation, departureId, arrivalId);
         String urlTrip = getRMVRequestString(callToken, httpCallBuilderService.buildTripPathWith(callToken));
         return callService.get(urlTrip, httpCallBuilderService.buildHttpEntityForRMV(callToken));

@@ -6,6 +6,7 @@ import de.blackforestsolutions.apiservice.service.supportservice.AirportsFinderH
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import de.blackforestsolutions.datamodel.CallStatus;
 import de.blackforestsolutions.datamodel.Coordinates;
+import de.blackforestsolutions.datamodel.TravelPoint;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +33,7 @@ public class AirportsFinderApiServiceImpl implements AirportsFinderApiService {
     }
 
     @Override
-    public LinkedHashSet<CallStatus> getAirportsWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
+    public LinkedHashSet<CallStatus<TravelPoint>> getAirportsWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
         String url = getAirportsFinderRequestString(apiTokenAndUrlInformation);
         ResponseEntity<String> result = callService.get(url, airportsFinderHttpCallBuilderService.buildHttpEntityAirportsFinder(apiTokenAndUrlInformation));
         return this.airportsFinderMapperService.map(result.getBody());

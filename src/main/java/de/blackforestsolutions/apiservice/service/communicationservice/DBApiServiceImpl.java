@@ -3,6 +3,7 @@ package de.blackforestsolutions.apiservice.service.communicationservice;
 import de.blackforestsolutions.apiservice.service.mapper.HafasPriceMapper;
 import de.blackforestsolutions.apiservice.service.mapper.MapperService;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
+import de.blackforestsolutions.datamodel.CallStatus;
 import de.blackforestsolutions.datamodel.JourneyStatus;
 import de.blackforestsolutions.datamodel.TravelProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class DBApiServiceImpl implements DBApiService {
     }
 
     @Override
-    public Map<UUID, JourneyStatus> getJourneysForRouteWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
+    public CallStatus<Map<UUID, JourneyStatus>> getJourneysForRouteWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
         HafasPriceMapper priceMapper = MapperService::mapPriceForHafas;
         return hafasApiService.getJourneysForRouteWith(apiTokenAndUrlInformation, TravelProvider.DB, priceMapper);
     }

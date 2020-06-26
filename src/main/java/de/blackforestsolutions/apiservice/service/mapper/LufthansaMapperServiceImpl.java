@@ -47,12 +47,12 @@ public class LufthansaMapperServiceImpl implements LufthansaMapperService {
     }
 
     @Override
-    public CallStatus mapToAuthorization(String jsonString) {
+    public CallStatus<LufthansaAuthorization> mapToAuthorization(String jsonString) {
         ObjectMapper mapper = new ObjectMapper();
         try {
-            return new CallStatus(mapper.readValue(jsonString, LufthansaAuthorization.class), Status.SUCCESS, null);
+            return new CallStatus<>(mapper.readValue(jsonString, LufthansaAuthorization.class), Status.SUCCESS, null);
         } catch (JsonProcessingException e) {
-            return new CallStatus(null, Status.FAILED, e);
+            return new CallStatus<>(null, Status.FAILED, e);
         }
     }
 

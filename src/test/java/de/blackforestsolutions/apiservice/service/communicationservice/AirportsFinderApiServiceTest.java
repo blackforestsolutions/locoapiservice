@@ -61,9 +61,9 @@ public class AirportsFinderApiServiceTest {
         apiTokenAndUrlInformation = builder.build();
         ResponseEntity<String> testResult = new ResponseEntity<>(airportsFinderResource, HttpStatus.OK);
         doReturn(testResult).when(restTemplate).exchange(anyString(), any(), Mockito.any(), any(Class.class));
-        LinkedHashSet<CallStatus> resultLinkedHashSet = classUnderTest.getAirportsWith(apiTokenAndUrlInformation);
+        LinkedHashSet<CallStatus<TravelPoint>> resultLinkedHashSet = classUnderTest.getAirportsWith(apiTokenAndUrlInformation);
 
-        ArrayList<CallStatus> resultArrayList = convertSetToArrayListForTestingPurpose(resultLinkedHashSet);
+        ArrayList<CallStatus<TravelPoint>> resultArrayList = convertSetToArrayListForTestingPurpose(resultLinkedHashSet);
 
         Assertions.assertThat(resultLinkedHashSet.size()).isEqualTo(3);
         Assertions.assertThat(resultArrayList.get(0).getStatus()).isEqualTo(Status.SUCCESS);
@@ -75,7 +75,7 @@ public class AirportsFinderApiServiceTest {
         Assertions.assertThat(resultArrayList.get(2).getException().getMessage()).isEqualTo("The provided AirportFinding object is not mapped because the airport code is not provided in the airports.dat");
     }
 
-    private ArrayList<CallStatus> convertSetToArrayListForTestingPurpose(LinkedHashSet<CallStatus> linkedHashSet) {
+    private ArrayList<CallStatus<TravelPoint>> convertSetToArrayListForTestingPurpose(LinkedHashSet<CallStatus<TravelPoint>> linkedHashSet) {
         return new ArrayList<>(linkedHashSet);
     }
 }

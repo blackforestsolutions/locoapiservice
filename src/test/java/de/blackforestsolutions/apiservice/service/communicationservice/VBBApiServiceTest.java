@@ -74,7 +74,7 @@ class VBBApiServiceTest {
         ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getVBBTokenAndUrl("900230999", "900140006");
         Journey expectedJourney = JourneyObjectMother.getPotsdamBerlinJourney();
 
-        Map<UUID, JourneyStatus> result = classUnderTest.getJourneysForRouteWith(testData);
+        Map<UUID, JourneyStatus> result = classUnderTest.getJourneysForRouteWith(testData).getCalledObject();
         //noinspection OptionalGetWithoutIsPresent
         Journey journeyResult = result.get(TEST_UUID_1).getJourney().get();
 
@@ -87,7 +87,7 @@ class VBBApiServiceTest {
         ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getVBBTokenAndUrl("900230999", "900140006");
         Leg expectedLeg = LegObjectMother.getPotsdamBerlinLeg();
 
-        Map<UUID, JourneyStatus> result = classUnderTest.getJourneysForRouteWith(testData);
+        Map<UUID, JourneyStatus> result = classUnderTest.getJourneysForRouteWith(testData).getCalledObject();
         //noinspection OptionalGetWithoutIsPresent
         LinkedHashMap<UUID, Leg> legsResult = result.get(TEST_UUID_1).getJourney().get().getLegs();
 

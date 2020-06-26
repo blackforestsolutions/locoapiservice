@@ -6,7 +6,8 @@ import de.blackforestsolutions.apiservice.objectmothers.TravelPointObjectMother;
 import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallService;
 import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallServiceImpl;
 import de.blackforestsolutions.apiservice.service.mapper.HvvMapperService;
-import de.blackforestsolutions.apiservice.service.supportservice.hvv.*;
+import de.blackforestsolutions.apiservice.service.supportservice.hvv.HvvHttpCallBuilderService;
+import de.blackforestsolutions.apiservice.service.supportservice.hvv.HvvHttpCallBuilderServiceImpl;
 import de.blackforestsolutions.apiservice.stubs.RestTemplateBuilderStub;
 import de.blackforestsolutions.apiservice.testutils.TestUtils;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
@@ -34,23 +35,13 @@ class HvvApiServiceTest {
 
     private final CallService callService = new CallServiceImpl(restTemplateBuilder);
 
-    private final HvvJourneyHttpCallBuilderService journeyHttpCallBuilder = new HvvJourneyHttpCallBuilderServiceImpl();
-
-    private final HvvTravelPointHttpCallBuilderService travelPointHttpCallBuilder = new HvvTravelPointHttpCallBuilderServiceImpl();
-
-    private final HvvStationListHttpCallBuilderService stationListHttpCallBuilder = new HvvStationListHttpCallBuilderServiceImpl();
+    private final HvvHttpCallBuilderService hvvHttpCallBuilderService = new HvvHttpCallBuilderServiceImpl();
 
     @Mock
     private HvvMapperService mapperService = mock(HvvMapperService.class);
 
     @InjectMocks
-    private HvvApiService classUnderTest = new HvvApiServiceImpl(
-            callService,
-            stationListHttpCallBuilder,
-            travelPointHttpCallBuilder,
-            journeyHttpCallBuilder,
-            mapperService
-    );
+    private HvvApiService classUnderTest = new HvvApiServiceImpl(callService, hvvHttpCallBuilderService, mapperService);
 
     @Test
     void test_getJourneysForRouteFromHvvApiWith_with_mocked_rest_and_json_is_excuted_correctly_and_returns_map() throws Exception {
@@ -70,7 +61,7 @@ class HvvApiServiceTest {
         mockedJourneys.put(mockedJourney.getId(), journeyStatus);
         when(mapperService.getJourneyMapFrom(journeyJson)).thenReturn(mockedJourneys);
 
-        Map<UUID, JourneyStatus> result = classUnderTest.getJourneysForRouteWith(apiTokenAndUrlInformation);
+        Map<UUID, JourneyStatus> result = (Map<UUID, JourneyStatus>) classUnderTest.getJourneysForRouteWith(apiTokenAndUrlInformation).getCalledObject();
 
         Assertions.assertThat(result.size()).isEqualTo(1);
         //noinspection OptionalGetWithoutIsPresent (justification: we allways knoww that there optional here is not empty)

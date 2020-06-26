@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 
 import javax.annotation.Resource;
 import javax.xml.bind.JAXBException;
+import java.util.Date;
 
 import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.buildUrlWith;
 import static de.blackforestsolutions.apiservice.testutils.TestUtils.retrieveXmlPojoFromResponse;
@@ -71,6 +72,7 @@ class RMVApiServiceIT {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder testData = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(rmvApiTokenAndUrlInformation);
         testData.setDeparture("003011037");
         testData.setArrival("003000010");
+        testData.setDepartureDate(new Date());
         testData.setPath(httpCallBuilderService.buildTripPathWith(testData.build()));
 
         ResponseEntity<String> result = callService.get(

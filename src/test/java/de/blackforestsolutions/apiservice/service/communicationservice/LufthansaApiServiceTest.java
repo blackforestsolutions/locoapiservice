@@ -94,7 +94,7 @@ class LufthansaApiServiceTest {
         //noinspection unchecked (justification: no type known for runtime therefore)
         doReturn(testResult).when(restTemplate).exchange(anyString(), any(), any(), any(Class.class));
 
-        Map<UUID, JourneyStatus> result = (Map<UUID, JourneyStatus>) classUnderTest.getJourneysForRouteWith(apiTokenAndUrlInformation).getCalledObject();
+        Map<UUID, JourneyStatus> result = classUnderTest.getJourneysForRouteWith(apiTokenAndUrlInformation).getCalledObject();
 
         assertThat("E90").isEqualTo(result.get(TEST_UUID_11).getJourney().get().getLegs().get(TEST_UUID_12).getVehicleNumber());
         assertThat(TravelProvider.LUFTHANSA).isEqualTo(result.get(TEST_UUID_11).getJourney().get().getLegs().get(TEST_UUID_12).getTravelProvider());

@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.UUID;
 
 public interface RMVMapperService {
-    CallStatus getIdFrom(String resultBody);
+    CallStatus<String> getIdFrom(String resultBody);
 
     Map<UUID, JourneyStatus> getJourneysFrom(String resultBody);
 }

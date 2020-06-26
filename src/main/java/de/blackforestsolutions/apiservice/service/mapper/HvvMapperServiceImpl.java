@@ -26,9 +26,7 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
-import static de.blackforestsolutions.apiservice.service.mapper.MapperService.checkIfStringPropertyExists;
-import static de.blackforestsolutions.apiservice.service.mapper.MapperService.generateDurationFromStartToDestination;
-import static de.blackforestsolutions.apiservice.service.mapper.MapperService.setPriceForLegBy;
+import static de.blackforestsolutions.apiservice.service.mapper.MapperService.*;
 
 @Service
 @Slf4j
@@ -178,14 +176,14 @@ public class HvvMapperServiceImpl implements HvvMapperService {
         return coordinates.build();
     }
 
-    private CallStatus retrieveHvvRouteStatus(String jsonString) {
+    private CallStatus<HvvRoute> retrieveHvvRouteStatus(String jsonString) {
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
         try {
-            return new CallStatus(mapper.readValue(jsonString, HvvRoute.class), Status.SUCCESS, null);
+            return new CallStatus<>(mapper.readValue(jsonString, HvvRoute.class), Status.SUCCESS, null);
         } catch (JsonProcessingException e) {
             log.error("Error during mapping json to object: {}", jsonString, e);
-            return new CallStatus(null, Status.FAILED, e);
+            return new CallStatus<>(null, Status.FAILED, e);
         }
     }
 
@@ -196,7 +194,7 @@ public class HvvMapperServiceImpl implements HvvMapperService {
     }
 
     private Map<UUID, JourneyStatus> mapHvvRouteToJourneyMap(CallStatus callStatus) {
-        if (callStatus.getCalledObject() != null) {
+        if (callStatus.getStatus().equals(Status.SUCCESS) && Optional.ofNullable(callStatus.getCalledObject()).isPresent()) {
             HvvRoute hvvRoute = (HvvRoute) callStatus.getCalledObject();
             return hvvRoute
                     .getRealtimeSchedules()

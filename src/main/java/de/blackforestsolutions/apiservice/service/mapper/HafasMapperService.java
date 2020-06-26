@@ -11,5 +11,5 @@ public interface HafasMapperService {
 
     Map<UUID, JourneyStatus> getJourneysFrom(String body, TravelProvider travelProvider, HafasPriceMapper priceMapper);
 
-    CallStatus getIdFrom(String resultBody);
+    CallStatus<String> getIdFrom(String resultBody);
 }

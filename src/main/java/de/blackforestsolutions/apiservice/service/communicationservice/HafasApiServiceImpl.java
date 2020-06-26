@@ -4,9 +4,8 @@ import de.blackforestsolutions.apiservice.service.communicationservice.restcalls
 import de.blackforestsolutions.apiservice.service.mapper.HafasMapperService;
 import de.blackforestsolutions.apiservice.service.mapper.HafasPriceMapper;
 import de.blackforestsolutions.apiservice.service.supportservice.hafas.HafasHttpCallBuilderService;
-import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
-import de.blackforestsolutions.datamodel.JourneyStatus;
-import de.blackforestsolutions.datamodel.TravelProvider;
+import de.blackforestsolutions.datamodel.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -18,6 +17,7 @@ import java.util.UUID;
 
 import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.buildUrlWith;
 
+@Slf4j
 @Service
 public class HafasApiServiceImpl implements HafasApiService {
 
@@ -33,18 +33,23 @@ public class HafasApiServiceImpl implements HafasApiService {
     }
 
     @Override
-    public Map<UUID, JourneyStatus> getJourneysForRouteWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation, TravelProvider travelProvider, HafasPriceMapper priceMapper) {
-        ResponseEntity<String> result = buildAndExecuteCall(apiTokenAndUrlInformation);
-        return mapperService.getJourneysFrom(result.getBody(), travelProvider, priceMapper);
+    public CallStatus<Map<UUID, JourneyStatus>> getJourneysForRouteWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation, TravelProvider travelProvider, HafasPriceMapper priceMapper) {
+        try {
+            ResponseEntity<String> result = buildAndExecuteCall(apiTokenAndUrlInformation);
+            return new CallStatus<>(mapperService.getJourneysFrom(result.getBody(), travelProvider, priceMapper), Status.SUCCESS, null);
+        } catch (Exception e) {
+            log.error("Error during calling hafas api: ", e);
+            return new CallStatus<>(null, Status.FAILED, e);
+        }
     }
 
     private ResponseEntity<String> buildAndExecuteCall(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
         String urlDeparture = getHafasRequestString(apiTokenAndUrlInformation, apiTokenAndUrlInformation.getDeparture());
         String urlArrival = getHafasRequestString(apiTokenAndUrlInformation, apiTokenAndUrlInformation.getArrival());
         ResponseEntity<String> departureIdJson = callService.post(urlDeparture, httpCallBuilderService.buildHttpEntityStationForHafas(apiTokenAndUrlInformation, apiTokenAndUrlInformation.getDeparture()));
-        String departureId = (String) mapperService.getIdFrom(departureIdJson.getBody()).getCalledObject();
+        String departureId = mapperService.getIdFrom(departureIdJson.getBody()).getCalledObject();
         ResponseEntity<String> arrivalIdJson = callService.post(urlArrival, httpCallBuilderService.buildHttpEntityStationForHafas(apiTokenAndUrlInformation, apiTokenAndUrlInformation.getArrival()));
-        String arrivalId = (String) mapperService.getIdFrom(arrivalIdJson.getBody()).getCalledObject();
+        String arrivalId = mapperService.getIdFrom(arrivalIdJson.getBody()).getCalledObject();
         ApiTokenAndUrlInformation callToken = replaceStartAndDestinationIn(apiTokenAndUrlInformation, departureId, arrivalId);
         String urlJourney = getHafasRequestString(callToken, null);
         return callService.post(urlJourney, httpCallBuilderService.buildHttpEntityJourneyForHafas(callToken));

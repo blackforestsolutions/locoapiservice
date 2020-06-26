@@ -45,8 +45,8 @@ class RMVMapperServiceTest {
     void test_getIdFrom_with_safed_xml_return_id_Lorch() {
         String locationListXml = getResourceFileAsString("xml/LocationList.xml");
 
-        CallStatus result = classUnderTest.getIdFrom(locationListXml);
-        String callResult = (String) result.getCalledObject();
+        CallStatus<String> result = classUnderTest.getIdFrom(locationListXml);
+        String callResult = result.getCalledObject();
 
         assertThat(callResult).isEqualTo("A%3D2%40O%3DLorch+-+Lorchhausen%2C+Oberflecken%40X%3D7785108%40Y%3D50053277%40U%3D103%40b%3D990117421%40B%3D1%40V%3D6.9%2C%40p%3D1530862110%40");
     }
@@ -55,8 +55,8 @@ class RMVMapperServiceTest {
     void test_getIdFrom_with_safed_xml_return_id_Main_station() {
         String locationListXml = getResourceFileAsString("xml/LocationList-frankfurt.xml");
 
-        CallStatus result = classUnderTest.getIdFrom(locationListXml);
-        String callResult = (String) result.getCalledObject();
+        CallStatus<String> result = classUnderTest.getIdFrom(locationListXml);
+        String callResult = result.getCalledObject();
 
         assertThat(callResult).isEqualTo("A=1@O=Frankfurt (Main) Hauptbahnhof@X=8662653@Y=50106808@U=80@L=003000010@B=1@V=6.9,@p=1575313337@");
     }

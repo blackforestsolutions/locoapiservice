@@ -42,10 +42,9 @@ class HafasMapperServiceTest {
         String scheduledResourcesJson = getResourceFileAsString("json/dbHafasRendsburgTravelPoint.json");
         ResponseEntity<String> testResult = new ResponseEntity<>(scheduledResourcesJson, HttpStatus.OK);
 
-        CallStatus result = classUnderTest.getIdFrom(testResult.getBody());
-        String callResult = (String) result.getCalledObject();
+        CallStatus<String> result = classUnderTest.getIdFrom(testResult.getBody());
 
-        Assertions.assertThat(callResult).isEqualTo("981068999");
+        Assertions.assertThat(result.getCalledObject()).isEqualTo("981068999");
     }
 
     @Test
@@ -53,10 +52,9 @@ class HafasMapperServiceTest {
         String scheduledResourcesJson = getResourceFileAsString("json/dbHafasKarlsruheTravelPoint.json");
         ResponseEntity<String> testResult = new ResponseEntity<>(scheduledResourcesJson, HttpStatus.OK);
 
-        CallStatus result = classUnderTest.getIdFrom(testResult.getBody());
-        String callResult = (String) result.getCalledObject();
+        CallStatus<String> result = classUnderTest.getIdFrom(testResult.getBody());
 
-        Assertions.assertThat(callResult).isEqualTo("008000191");
+        Assertions.assertThat(result.getCalledObject()).isEqualTo("008000191");
     }
 
     @Test
