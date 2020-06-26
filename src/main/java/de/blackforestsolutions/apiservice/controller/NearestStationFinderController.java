@@ -31,10 +31,11 @@ public class NearestStationFinderController {
     }
 
     @RequestMapping("/get")
-    public LinkedHashSet<CallStatus<TravelPoint>> retrieveAirportsFinderTravelPoints(@RequestBody String request) throws JsonProcessingException {
+    public CallStatus<LinkedHashSet<TravelPoint>> retrieveAirportsFinderTravelPoints(@RequestBody String request) throws JsonProcessingException {
         ApiTokenAndUrlInformation requestInformation = locoJsonMapper.mapJsonToApiTokenAndUrlInformation(request);
 
-        return new LinkedHashSet<>(airportsFinderApiService.getAirportsWith(getAirportsFinderApiTokenAndUrlInformation(requestInformation)));
+        return airportsFinderApiService.getAirportsWith(getAirportsFinderApiTokenAndUrlInformation(requestInformation));
+              // new LinkedHashSet<>(airportsFinderApiService.getAirportsWith(getAirportsFinderApiTokenAndUrlInformation(requestInformation)));
     }
 
     private ApiTokenAndUrlInformation getAirportsFinderApiTokenAndUrlInformation(ApiTokenAndUrlInformation request) {

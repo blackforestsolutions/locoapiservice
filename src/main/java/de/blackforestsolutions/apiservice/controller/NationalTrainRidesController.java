@@ -46,8 +46,8 @@ public class NationalTrainRidesController {
         ApiTokenAndUrlInformation requestInformation = locoJsonMapper.mapJsonToApiTokenAndUrlInformation(request);
         return Arrays.asList(
                 bahnJourneyDetailsService.getJourneysForRouteWith(getBahnApiTokenAndUrlInformation(requestInformation)),
-                dbApiService.getJourneysForRouteWith(getDbApiTokenAndUrlInformation(requestInformation))
-
+                dbApiService.getJourneysForRouteWith(getDbApiTokenAndUrlInformation(requestInformation)),
+                searchChApiService.getTravelPointForRouteFromApiWith(getSearchApiTokenAndUrlInformation(requestInformation))
         );
     }
 

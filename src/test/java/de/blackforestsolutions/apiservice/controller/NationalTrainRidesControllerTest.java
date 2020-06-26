@@ -10,6 +10,8 @@ import de.blackforestsolutions.datamodel.util.LocoJsonMapper;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import java.io.IOException;
+
 class NationalTrainRidesControllerTest {
 
     private final LocoJsonMapper locoJsonMapper = new LocoJsonMapper();
@@ -20,7 +22,7 @@ class NationalTrainRidesControllerTest {
     private final NationalTrainRidesController classUnderTest = initClassUnderTest();
 
     @Test
-    void test_if_calls_executed_correctly() throws JsonProcessingException {
+    void test_if_calls_executed_correctly() throws IOException {
         //arrange
         ApiTokenAndUrlInformation testRequest = ApiTokenAndUrlInformationObjectMother.requestInfos();
         String testRequestString = locoJsonMapper.map(testRequest);
@@ -29,12 +31,14 @@ class NationalTrainRidesControllerTest {
         //assert
         Mockito.verify(bahnJourneyDetailsService, Mockito.times(1)).getJourneysForRouteWith(Mockito.any(ApiTokenAndUrlInformation.class));
         Mockito.verify(dbApiService, Mockito.times(1)).getJourneysForRouteWith(Mockito.any(ApiTokenAndUrlInformation.class));
+        Mockito.verify(searchChApiService, Mockito.times(1)).getJourneysForRouteWith(Mockito.any(ApiTokenAndUrlInformation.class));
     }
 
     private NationalTrainRidesController initClassUnderTest() {
         NationalTrainRidesController classUnderTest = new NationalTrainRidesController(bahnJourneyDetailsService, dbApiService, searchChApiService);
         classUnderTest.setBahnApiTokenAndUrlInformation(ApiTokenAndUrlInformationObjectMother.getBahnTokenAndUrl());
         classUnderTest.setDbApiTokenAndUrlInformation(ApiTokenAndUrlInformationObjectMother.getDBTokenAndUrl("", ""));
+        classUnderTest.setSearchApiTokenAndUrlInformation(ApiTokenAndUrlInformationObjectMother.getSearchChTokenAndUrl());
         return classUnderTest;
     }
 }
