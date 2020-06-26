@@ -13,15 +13,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.geo.Distance;
 import org.springframework.stereotype.Service;
 
-import java.time.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 import static de.blackforestsolutions.apiservice.service.mapper.MapperService.generateDurationFromStartToDestination;
-import static de.blackforestsolutions.apiservice.util.CoordinatesUtil.convertWGS84ToCoordinatesWith;
 import static de.blackforestsolutions.apiservice.service.mapper.MapperService.setPriceForLegBy;
+import static de.blackforestsolutions.apiservice.util.CoordinatesUtil.convertWGS84ToCoordinatesWith;
 
 @Slf4j
 @Service
@@ -35,38 +38,10 @@ public class HafasMapperServiceImpl implements HafasMapperService {
     private static final String TELE_TAXI = "TETA";
     private static final String WALK = "WALK";
     private static final String TRANSFER = "TRSF";
-
-    private enum HafasVehicleType {
-        BUS(VehicleType.BUS),
-        RE(VehicleType.TRAIN),
-        IC(VehicleType.TRAIN),
-        R(VehicleType.TRAIN),
-        RB(VehicleType.TRAIN),
-        ICE(VehicleType.TRAIN),
-        CJX(VehicleType.TRAIN),
-        RJX(VehicleType.TRAIN),
-        AST(VehicleType.CAR),
-        S(VehicleType.TRAIN),
-        STR(VehicleType.TRAIN),
-        U(VehicleType.TRAIN),
-        RT(VehicleType.TRAIN);
-
-        private final VehicleType vehicleType;
-
-        HafasVehicleType(VehicleType vehicleType) {
-            this.vehicleType = vehicleType;
-        }
-
-        VehicleType getVehicleType() {
-            return vehicleType;
-        }
-    }
-
+    private final UuidService uuidService;
     private List<LocL> locations;
     private List<ProdL> vehicles;
     private String date;
-
-    private final UuidService uuidService;
 
     @Autowired
     public HafasMapperServiceImpl(UuidService uuidService) {
@@ -257,6 +232,32 @@ public class HafasMapperServiceImpl implements HafasMapperService {
                 .findFirst()
                 .map(HafasVehicleType::getVehicleType)
                 .orElse(null);
+    }
+
+    private enum HafasVehicleType {
+        BUS(VehicleType.BUS),
+        RE(VehicleType.TRAIN),
+        IC(VehicleType.TRAIN),
+        R(VehicleType.TRAIN),
+        RB(VehicleType.TRAIN),
+        ICE(VehicleType.TRAIN),
+        CJX(VehicleType.TRAIN),
+        RJX(VehicleType.TRAIN),
+        AST(VehicleType.CAR),
+        S(VehicleType.TRAIN),
+        STR(VehicleType.TRAIN),
+        U(VehicleType.TRAIN),
+        RT(VehicleType.TRAIN);
+
+        private final VehicleType vehicleType;
+
+        HafasVehicleType(VehicleType vehicleType) {
+            this.vehicleType = vehicleType;
+        }
+
+        VehicleType getVehicleType() {
+            return vehicleType;
+        }
     }
 
 }

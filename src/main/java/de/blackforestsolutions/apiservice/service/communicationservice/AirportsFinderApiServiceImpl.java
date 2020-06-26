@@ -6,13 +6,13 @@ import de.blackforestsolutions.apiservice.service.supportservice.AirportsFinderH
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import de.blackforestsolutions.datamodel.CallStatus;
 import de.blackforestsolutions.datamodel.Coordinates;
+import de.blackforestsolutions.datamodel.Status;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.net.URL;
-import java.util.LinkedHashSet;
 
 import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.buildUrlWith;
 
@@ -31,11 +31,18 @@ public class AirportsFinderApiServiceImpl implements AirportsFinderApiService {
         this.airportsFinderMapperService = airportsFinderMapperService;
     }
 
+
     @Override
-    public LinkedHashSet<CallStatus> getAirportsWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
-        String url = getAirportsFinderRequestString(apiTokenAndUrlInformation);
-        ResponseEntity<String> result = callService.get(url, airportsFinderHttpCallBuilderService.buildHttpEntityAirportsFinder(apiTokenAndUrlInformation));
-        return this.airportsFinderMapperService.map(result.getBody());
+    public CallStatus getAirportsWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
+        try {
+            String url = getAirportsFinderRequestString(apiTokenAndUrlInformation);
+
+            ResponseEntity<String> result = callService.get(url, airportsFinderHttpCallBuilderService.buildHttpEntityAirportsFinder(apiTokenAndUrlInformation));
+            return new CallStatus(this.airportsFinderMapperService.map(result.getBody()), Status.SUCCESS, null);
+        } catch (Exception ex) {
+            log.error("AirportsFinder api call was not successful", ex);
+            return new CallStatus(null, Status.FAILED, ex);
+        }
     }
 
 

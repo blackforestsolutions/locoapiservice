@@ -11,6 +11,8 @@ public final class RequestTokenHandler {
         builderCopy.setDeparture(request.getDeparture());
         builderCopy.setArrivalDate(request.getArrivalDate());
         builderCopy.setDepartureDate(request.getDepartureDate());
+        builderCopy.setDepartureCoordinates(request.getDepartureCoordinates());
+        builderCopy.setArrivalCoordinates(request.getArrivalCoordinates());
         return builderCopy.build();
     }
 }

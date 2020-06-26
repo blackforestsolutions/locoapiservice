@@ -43,7 +43,7 @@ public class FlightController {
     public Map<UUID, JourneyStatus> flights(@RequestBody String request) throws JsonProcessingException {
         final Map<UUID, JourneyStatus> resultMap = new HashMap<>();
         ApiTokenAndUrlInformation requestInformation = locoJsonMapper.mapJsonToApiTokenAndUrlInformation(request);
-        return mapFlightsResults(requestInformation, resultMap);
+        return callFlightsResults(requestInformation, resultMap);
     }
 
     private ApiTokenAndUrlInformation getBritishAirwaysApiTokenAndUrlInformation(
@@ -65,7 +65,7 @@ public class FlightController {
         this.lufthansaApiTokenAndUrlInformation = lufthansaApiTokenAndUrlInformation;
     }
 
-    private Map<UUID, JourneyStatus> mapFlightsResults(ApiTokenAndUrlInformation requestInformation, Map<UUID, JourneyStatus> resultMap) {
+    private Map<UUID, JourneyStatus> callFlightsResults(ApiTokenAndUrlInformation requestInformation, Map<UUID, JourneyStatus> resultMap) {
         CallStatus britishAirwaysCallStatus = this.britishAirwaysApiService.getJourneysForRouteWith(getBritishAirwaysApiTokenAndUrlInformation(requestInformation));
         if (Optional.ofNullable(britishAirwaysCallStatus).isPresent() && Optional.ofNullable(britishAirwaysCallStatus.getCalledObject()).isPresent() && britishAirwaysCallStatus.getStatus().equals(Status.SUCCESS)) {
             resultMap.putAll((Map<UUID, JourneyStatus>) britishAirwaysCallStatus.getCalledObject());

@@ -38,6 +38,7 @@ public class BritishAirwaysApiServiceImpl implements BritishAirwaysApiService {
             result = callService.get(url, britishAirwaysHttpCallBuilderService.buildHttpEntityBritishAirways(apiTokenAndUrlInformation));
             return new CallStatus(this.britishAirwaysMapperService.map(result.getBody()), Status.SUCCESS, null);
         } catch (Exception ex) {
+            log.error("BritishAirways api call was not successful", ex);
             return new CallStatus(null, Status.FAILED, ex);
         }
 
