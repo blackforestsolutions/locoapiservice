@@ -35,7 +35,7 @@ public class NearestStationFinderController {
     public LinkedHashSet<CallStatus> retrieveAirportsFinderTravelPoints(@RequestBody String request) throws JsonProcessingException {
         ApiTokenAndUrlInformation requestInformation = locoJsonMapper.mapJsonToApiTokenAndUrlInformation(request);
         LinkedHashSet<CallStatus> resultNearestStationFinder = new LinkedHashSet<>();
-        return callStationsToHashSet(resultNearestStationFinder, requestInformation);
+        return callNearestStations(resultNearestStationFinder, requestInformation);
     }
 
     private ApiTokenAndUrlInformation getAirportsFinderApiTokenAndUrlInformation(ApiTokenAndUrlInformation request) {
@@ -47,7 +47,7 @@ public class NearestStationFinderController {
         this.airportsFinderApiTokenAndUrlInformation = airportsFinderApiTokenAndUrlInformation;
     }
 
-    private LinkedHashSet<CallStatus> callStationsToHashSet(LinkedHashSet<CallStatus> resultNearestStationFinder, ApiTokenAndUrlInformation requestInformation) {
+    private LinkedHashSet<CallStatus> callNearestStations(LinkedHashSet<CallStatus> resultNearestStationFinder, ApiTokenAndUrlInformation requestInformation) {
         CallStatus airportsFinderCallStatus = this.airportsFinderApiService.getAirportsWith(getAirportsFinderApiTokenAndUrlInformation(requestInformation));
         if (Optional.ofNullable(airportsFinderCallStatus).isPresent() && Optional.ofNullable(airportsFinderCallStatus.getCalledObject()).isPresent() && airportsFinderCallStatus.getStatus().equals(Status.SUCCESS)) {
             resultNearestStationFinder.addAll((LinkedHashSet<CallStatus>) airportsFinderCallStatus.getCalledObject());
