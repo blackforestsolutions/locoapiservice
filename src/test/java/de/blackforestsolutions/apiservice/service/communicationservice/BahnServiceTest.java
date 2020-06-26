@@ -44,10 +44,10 @@ class BahnServiceTest {
     private final BahnDepartureBoardService classUnderTestBahnDepartureBoardService = new BahnDepartureBoardServiceImpl(callService, bahnHttpCallBuilderService);
 
     @Mock
-    private UuidService uuidGenerator = mock(UuidServiceImpl.class);
+    private final UuidService uuidGenerator = mock(UuidServiceImpl.class);
 
     @InjectMocks
-    private BahnJourneyDetailsService classUnderTestBahnJourneyDetailsService = new BahnJourneyDetailsServiceImpl(callService, bahnHttpCallBuilderService, uuidGenerator);
+    private final BahnJourneyDetailsService classUnderTestBahnJourneyDetailsService = new BahnJourneyDetailsServiceImpl(callService, bahnHttpCallBuilderService, uuidGenerator);
 
     @Test
     void test_getTravelPointsForRouteFromApiWith_mocked_rest_service_is_excuted_correctly_and_maps_correctly_returns_map() throws Exception {
@@ -124,7 +124,7 @@ class BahnServiceTest {
                 .thenReturn(TEST_UUID_5)
                 .thenReturn(TEST_UUID_6);
 
-        Map<UUID, JourneyStatus> result = classUnderTestBahnJourneyDetailsService.getJourneysForRouteWith(apiTokenAndUrlInformation);
+        Map<UUID, JourneyStatus> result = classUnderTestBahnJourneyDetailsService.getJourneysForRouteWith(apiTokenAndUrlInformation).getCalledObject();
 
         Assertions.assertThat(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2)).extracting(
                 Leg::getTravelProvider,
