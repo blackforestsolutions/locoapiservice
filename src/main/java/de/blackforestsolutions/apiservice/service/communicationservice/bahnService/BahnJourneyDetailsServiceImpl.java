@@ -46,14 +46,15 @@ public class BahnJourneyDetailsServiceImpl implements BahnJourneyDetailsService 
     }
 
     @Override
-    public Map<UUID, JourneyStatus> getJourneysForRouteWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
+    public CallStatus<Map<UUID, JourneyStatus>> getJourneysForRouteWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
         String url;
         try {
             url = getBahnJourneyDetailsRequestString(apiTokenAndUrlInformation);
             ResponseEntity<String> result = callService.get(url, bahnHttpCallBuilderService.buildHttpEntityForBahn(apiTokenAndUrlInformation));
-            return map(result.getBody());
-        } catch (IOException e) {
-            return Collections.singletonMap(uuidService.createUUID(), JourneyStatusBuilder.createJourneyStatusProblemWith(e));
+            return new CallStatus<>(map(result.getBody()), Status.SUCCESS, null);
+        } catch (Exception ex) {
+            log.error("Error during calling Deutsche Bahn api", ex);
+            return new CallStatus<>(Collections.singletonMap(uuidService.createUUID(), JourneyStatusBuilder.createJourneyStatusProblemWith(ex)), Status.FAILED, ex);
         }
     }
 
