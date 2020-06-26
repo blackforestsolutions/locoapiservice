@@ -31,9 +31,7 @@ public class AirportsFinderApiServiceImpl implements AirportsFinderApiService {
         this.airportsFinderMapperService = airportsFinderMapperService;
     }
 
-    // todo we need coordinates here but we receive the either from the algorithm or not at all bc they are lost
-    // GateWayTimeOut 504
-    // LinkedHashSet<CallStatus>
+
     @Override
     public CallStatus getAirportsWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
         try {
