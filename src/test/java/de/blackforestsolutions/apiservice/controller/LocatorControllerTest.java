@@ -1,6 +1,7 @@
 package de.blackforestsolutions.apiservice.controller;
 
 import de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother;
+import de.blackforestsolutions.apiservice.service.communicationservice.OSMApiService;
 import de.blackforestsolutions.apiservice.service.communicationservice.SearchChApiService;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import de.blackforestsolutions.datamodel.util.LocoJsonMapper;
@@ -12,7 +13,7 @@ import java.io.IOException;
 class LocatorControllerTest {
 
     private final LocoJsonMapper locoJsonMapper = new LocoJsonMapper();
-    private final SearchChApiService searchChApiService = Mockito.mock(SearchChApiService.class);
+    private final OSMApiService osmApiService = Mockito.mock(OSMApiService.class);
 
     private final LocatorController classUnderTest = initClassUnderTest();
 
@@ -24,12 +25,12 @@ class LocatorControllerTest {
         //act
         classUnderTest.retrieveLocatorJourneys(testRequestString);
         //assert
-        Mockito.verify(searchChApiService, Mockito.times(1)).getJourneysForRouteWith(Mockito.any(ApiTokenAndUrlInformation.class));
+        Mockito.verify(osmApiService, Mockito.times(1)).getCoordinatesFromTravelPointWith(Mockito.any(ApiTokenAndUrlInformation.class), Mockito.anyString());
     }
 
     private LocatorController initClassUnderTest() {
-        LocatorController classUnderTest = new LocatorController(searchChApiService);
-        classUnderTest.setSearchApiTokenAndUrlInformation(ApiTokenAndUrlInformationObjectMother.getSearchChTokenAndUrl());
+        LocatorController classUnderTest = new LocatorController(osmApiService);
+        classUnderTest.setOsmApiTokenAndUrlInformation(ApiTokenAndUrlInformationObjectMother.getSearchChTokenAndUrl());
         return classUnderTest;
     }
 }

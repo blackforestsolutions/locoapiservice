@@ -3,6 +3,7 @@ package de.blackforestsolutions.apiservice.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.common.annotations.VisibleForTesting;
 import de.blackforestsolutions.apiservice.service.communicationservice.DBApiService;
+import de.blackforestsolutions.apiservice.service.communicationservice.SearchChApiService;
 import de.blackforestsolutions.apiservice.service.communicationservice.bahnService.BahnJourneyDetailsService;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import de.blackforestsolutions.datamodel.CallStatus;
@@ -15,34 +16,39 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @RestController
 @RequestMapping("train-rides")
-public class TrainRidesController {
+public class NationalTrainRidesController {
 
     private final LocoJsonMapper locoJsonMapper = new LocoJsonMapper();
     private final BahnJourneyDetailsService bahnJourneyDetailsService;
     private final DBApiService dbApiService;
+    private final SearchChApiService searchChApiService;
 
     @Resource(name = "bahnApiTokenAndUrlInformation")
     private ApiTokenAndUrlInformation bahnApiTokenAndUrlInformation;
     @Resource(name = "dbApiTokenAndUrlInformation")
     private ApiTokenAndUrlInformation dbApiTokenAndUrlInformation;
+    @Resource(name = "searchApiTokenAndUrlInformation")
+    private ApiTokenAndUrlInformation searchApiTokenAndUrlInformation;
 
     @Autowired
-    public TrainRidesController(BahnJourneyDetailsService bahnJourneyDetailsService, DBApiService dbApiService) {
+    public NationalTrainRidesController(BahnJourneyDetailsService bahnJourneyDetailsService, DBApiService dbApiService, SearchChApiService searchChApiService) {
         this.bahnJourneyDetailsService = bahnJourneyDetailsService;
         this.dbApiService = dbApiService;
+        this.searchChApiService = searchChApiService;
     }
 
     @RequestMapping("/get")
-    public Map<UUID, JourneyStatus> retrieveTrainJourneys(@RequestBody String request) throws JsonProcessingException {
+    public List<CallStatus<Map<UUID, JourneyStatus>>> retrieveTrainJourneys(@RequestBody String request) throws JsonProcessingException {
         ApiTokenAndUrlInformation requestInformation = locoJsonMapper.mapJsonToApiTokenAndUrlInformation(request);
-        return mapJourneyResults(requestInformation);
+        return Arrays.asList(
+                bahnJourneyDetailsService.getJourneysForRouteWith(getBahnApiTokenAndUrlInformation(requestInformation)),
+                dbApiService.getJourneysForRouteWith(getDbApiTokenAndUrlInformation(requestInformation))
+
+        );
     }
 
     private ApiTokenAndUrlInformation getBahnApiTokenAndUrlInformation(ApiTokenAndUrlInformation request) {
@@ -51,6 +57,10 @@ public class TrainRidesController {
 
     private ApiTokenAndUrlInformation getDbApiTokenAndUrlInformation(ApiTokenAndUrlInformation request) {
         return RequestTokenHandler.getRequestApiTokenWith(request, dbApiTokenAndUrlInformation);
+    }
+
+    private ApiTokenAndUrlInformation getSearchApiTokenAndUrlInformation(ApiTokenAndUrlInformation request) {
+        return RequestTokenHandler.getRequestApiTokenWith(request, searchApiTokenAndUrlInformation);
     }
 
     @VisibleForTesting
@@ -63,7 +73,12 @@ public class TrainRidesController {
         this.dbApiTokenAndUrlInformation = dbApiTokenAndUrlInformation;
     }
 
-    private Map<UUID, JourneyStatus> mapJourneyResults(ApiTokenAndUrlInformation requestToken) {
+    @VisibleForTesting
+    void setSearchApiTokenAndUrlInformation(ApiTokenAndUrlInformation searchApiTokenAndUrlInformation) {
+        this.searchApiTokenAndUrlInformation = searchApiTokenAndUrlInformation;
+    }
+
+/*    private Map<UUID, JourneyStatus> mapJourneyResults(ApiTokenAndUrlInformation requestToken) {
         final Map<UUID, JourneyStatus> journeys = new HashMap<>();
         journeys.putAll(bahnJourneyDetailsService.getJourneysForRouteWith(getBahnApiTokenAndUrlInformation(requestToken)));
 
@@ -73,5 +88,5 @@ public class TrainRidesController {
         }
 
         return journeys;
-    }
+    }*/
 }

@@ -7,7 +7,6 @@ import de.blackforestsolutions.apiservice.service.communicationservice.Lufthansa
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import de.blackforestsolutions.datamodel.CallStatus;
 import de.blackforestsolutions.datamodel.JourneyStatus;
-import de.blackforestsolutions.datamodel.Status;
 import de.blackforestsolutions.datamodel.util.LocoJsonMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -40,9 +39,12 @@ public class FlightController {
 
 
     @RequestMapping("/get")
-    public Map<UUID, JourneyStatus> flights(@RequestBody String request) throws JsonProcessingException {
+    public List<CallStatus<Map<UUID, JourneyStatus>>> flights(@RequestBody String request) throws JsonProcessingException {
         ApiTokenAndUrlInformation requestInformation = locoJsonMapper.mapJsonToApiTokenAndUrlInformation(request);
-        return mapFlightsResults(requestInformation);
+        return Arrays.asList(
+                britishAirwaysApiService.getJourneysForRouteWith(getBritishAirwaysApiTokenAndUrlInformation(requestInformation)),
+                lufthansaApiService.getJourneysForRouteWith(getLufthansaApiTokenAndUrlInformation(requestInformation))
+        );
     }
 
     private ApiTokenAndUrlInformation getBritishAirwaysApiTokenAndUrlInformation(ApiTokenAndUrlInformation request) {
@@ -61,21 +63,6 @@ public class FlightController {
     @VisibleForTesting
     void setLufthansaApiTokenAndUrlInformation(ApiTokenAndUrlInformation lufthansaApiTokenAndUrlInformation) {
         this.lufthansaApiTokenAndUrlInformation = lufthansaApiTokenAndUrlInformation;
-    }
-
-    private Map<UUID, JourneyStatus> mapFlightsResults(ApiTokenAndUrlInformation requestInformation) {
-        final Map<UUID, JourneyStatus> resultMap = new HashMap<>();
-
-        CallStatus<Map<UUID, JourneyStatus>> britishAirwaysCallStatus = britishAirwaysApiService.getJourneysForRouteWith(getBritishAirwaysApiTokenAndUrlInformation(requestInformation));
-        if (Optional.ofNullable(britishAirwaysCallStatus).isPresent() && Optional.ofNullable(britishAirwaysCallStatus.getCalledObject()).isPresent() && britishAirwaysCallStatus.getStatus().equals(Status.SUCCESS)) {
-            resultMap.putAll(britishAirwaysCallStatus.getCalledObject());
-        }
-
-        CallStatus<Map<UUID, JourneyStatus>> lufthansaCallStatus = lufthansaApiService.getJourneysForRouteWith(getLufthansaApiTokenAndUrlInformation(requestInformation));
-        if (Optional.ofNullable(lufthansaCallStatus).isPresent() && Optional.ofNullable(lufthansaCallStatus.getCalledObject()).isPresent() && lufthansaCallStatus.getStatus().equals(Status.SUCCESS)) {
-            resultMap.putAll(lufthansaCallStatus.getCalledObject());
-        }
-        return resultMap;
     }
 
 }

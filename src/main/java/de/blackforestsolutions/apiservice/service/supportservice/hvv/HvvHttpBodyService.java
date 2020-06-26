@@ -21,7 +21,7 @@ class HvvHttpBodyService {
         hvvStationListBody.setFilterEquivalent(apiTokenAndUrlInformation.getHvvFilterEquivalent());
         hvvStationListBody.setModificationTypes(ModificationType.MAIN);
 
-        return HvvHttpCallBuilder.combineBaseHttpBodyWithApiCallBody(hvvStationListBody, apiTokenAndUrlInformation);
+        return combineBaseHttpBodyWithApiCallBody(hvvStationListBody, apiTokenAndUrlInformation);
     }
 
     static String buildTravelPointHttpBodyForHvv(ApiTokenAndUrlInformation apiTokenAndUrlInformation, String station) {
@@ -33,7 +33,7 @@ class HvvHttpBodyService {
         hvvTravelPointBody.setMaxDistance(apiTokenAndUrlInformation.getDistanceFromTravelPoint());
         hvvTravelPointBody.setTariffDetails(apiTokenAndUrlInformation.getAllowTariffDetails());
 
-        return HvvHttpCallBuilder.combineBaseHttpBodyWithApiCallBody(hvvTravelPointBody, apiTokenAndUrlInformation);
+        return combineBaseHttpBodyWithApiCallBody(hvvTravelPointBody, apiTokenAndUrlInformation);
 
     }
 
