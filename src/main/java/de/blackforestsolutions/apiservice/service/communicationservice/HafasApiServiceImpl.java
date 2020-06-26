@@ -38,7 +38,7 @@ public class HafasApiServiceImpl implements HafasApiService {
             ResponseEntity<String> result = buildAndExecuteCall(apiTokenAndUrlInformation);
             return new CallStatus<>(mapperService.getJourneysFrom(result.getBody(), travelProvider, priceMapper), Status.SUCCESS, null);
         } catch (Exception e) {
-            log.error("Error during calling hafas api: ", e);
+            //log.error("Error during calling hafas api: ", e);
             return new CallStatus<>(null, Status.FAILED, e);
         }
     }

@@ -2,7 +2,10 @@ package de.blackforestsolutions.apiservice.service.mapper;
 
 import de.blackforestsolutions.apiservice.objectmothers.JourneyObjectMother;
 import de.blackforestsolutions.apiservice.service.supportservice.UuidService;
-import de.blackforestsolutions.datamodel.*;
+import de.blackforestsolutions.datamodel.Journey;
+import de.blackforestsolutions.datamodel.JourneyStatus;
+import de.blackforestsolutions.datamodel.Leg;
+import de.blackforestsolutions.datamodel.TravelLine;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,10 +24,10 @@ import static de.blackforestsolutions.apiservice.testutils.TestUtils.getResource
 class SearchChMapperServiceTest {
 
     @Mock
-    private UuidService uuidService = Mockito.mock(UuidService.class);
+    private final UuidService uuidService = Mockito.mock(UuidService.class);
 
     @InjectMocks
-    private SearchChMapperService classUnderTest = new SearchChMapperServiceImpl(uuidService);
+    private final SearchChMapperService classUnderTest = new SearchChMapperServiceImpl(uuidService);
 
     @BeforeEach
     void init() {
@@ -87,15 +90,20 @@ class SearchChMapperServiceTest {
     }
 
     @Test
-    void test_getTravelPointsForStationFromApi_with_mocked_rest_service_is_executed_correctly_and_maps_correctly_returns_map() throws Exception {
-        String jsonResources = getResourceFileAsString("json/searchChTestStation.json");
+    void test_getIdFromStation_with_mocked_rest_service_is_executed_correctly_and_maps_correctly_withId() throws Exception {
+        String jsonResources = getResourceFileAsString("json/searchChTestStationWithId.json");
 
-        Map<String, TravelPoint> result = classUnderTest.getTravelPointFrom(jsonResources);
+        String result = classUnderTest.getIdFromStation(jsonResources);
 
-        Assertions.assertThat("Luzern").isEqualTo(result.get("8505000").getStationName());
-        Assertions.assertThat(51.016962568215476).isEqualTo(result.get("8505000").getGpsCoordinates().getLatitude());
-        Assertions.assertThat(1.9118631730189604).isEqualTo(result.get("8505000").getGpsCoordinates().getLongitude());
+        Assertions.assertThat(result).isEqualTo("8505000");
+    }
 
-        Assertions.assertThat("Zürich, Förrlibuckstr. 60/62 ").isEqualTo(result.get("Zürich, Förrlibuckstr. 60/62 ").getStreet());
+    @Test
+    void test_getIdFromStation_with_mocked_rest_service_is_executed_correctly_and_maps_correctly_withoutId() throws Exception {
+        String jsonResources = getResourceFileAsString("json/searchChTestStationWithoutId.json");
+
+        String result = classUnderTest.getIdFromStation(jsonResources);
+
+        Assertions.assertThat(result).isEqualTo("Zürich, Förrlibuckstr. 60/62 ");
     }
 }

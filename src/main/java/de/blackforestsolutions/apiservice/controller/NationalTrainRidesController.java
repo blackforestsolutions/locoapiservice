@@ -8,7 +8,6 @@ import de.blackforestsolutions.apiservice.service.communicationservice.bahnServi
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import de.blackforestsolutions.datamodel.CallStatus;
 import de.blackforestsolutions.datamodel.JourneyStatus;
-import de.blackforestsolutions.datamodel.Status;
 import de.blackforestsolutions.datamodel.util.LocoJsonMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,7 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("train-rides")
@@ -47,7 +49,7 @@ public class NationalTrainRidesController {
         return Arrays.asList(
                 bahnJourneyDetailsService.getJourneysForRouteWith(getBahnApiTokenAndUrlInformation(requestInformation)),
                 dbApiService.getJourneysForRouteWith(getDbApiTokenAndUrlInformation(requestInformation)),
-                searchChApiService.getTravelPointForRouteFromApiWith(getSearchApiTokenAndUrlInformation(requestInformation))
+                searchChApiService.getJourneysForRouteWith(getSearchApiTokenAndUrlInformation(requestInformation))
         );
     }
 

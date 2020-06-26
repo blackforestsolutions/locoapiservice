@@ -6,8 +6,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import de.blackforestsolutions.apiservice.service.supportservice.UuidService;
 import de.blackforestsolutions.apiservice.util.CoordinatesUtil;
 import de.blackforestsolutions.datamodel.*;
-import de.blackforestsolutions.generatedcontent.searchCh.*;
 import de.blackforestsolutions.generatedcontent.searchCh.Leg;
+import de.blackforestsolutions.generatedcontent.searchCh.*;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +28,8 @@ import static de.blackforestsolutions.apiservice.configuration.LocaleConfigurati
 @Slf4j
 @Service
 public class SearchChMapperServiceImpl implements SearchChMapperService {
+
+    private static final int FIRST_INDEX = 0;
 
     private enum SearchChVehicleType {
         STRAIN(VehicleType.TRAIN),
@@ -56,10 +58,10 @@ public class SearchChMapperServiceImpl implements SearchChMapperService {
     }
 
     @Override
-    public Map<String, TravelPoint> getTravelPointFrom(String jsonString) throws IOException {
+    public String getIdFromStation(String jsonString) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        return mapStationListToTravelPointMap(objectMapper.readValue(
+        return extractIdFrom(objectMapper.readValue(
                 jsonString,
                 objectMapper.getTypeFactory().constructCollectionType(List.class, Station.class)
         ));
@@ -210,25 +212,9 @@ public class SearchChMapperServiceImpl implements SearchChMapperService {
         );
     }
 
-    private Map<String, TravelPoint> mapStationListToTravelPointMap(List<Station> stations) {
-        return stations
-                .stream()
-                .map(this::buildTravelPointWith)
-                .collect(Collectors.toMap(TravelPoint::getStationId, travelPoint -> travelPoint));
-    }
-
-    private TravelPoint buildTravelPointWith(Station station) {
-        TravelPoint.TravelPointBuilder travelPoint = new TravelPoint.TravelPointBuilder();
-        return Optional.ofNullable(station.getId()).map(id -> {
-            travelPoint.setStationName(station.getLabel());
-            travelPoint.setGpsCoordinates(CoordinatesUtil.convertCh1903ToCoordinatesWith(Integer.parseInt(station.getX()), Integer.parseInt(station.getY())));
-            travelPoint.setStationId(id);
-            return travelPoint.build();
-        }).orElseGet(() -> {
-            travelPoint.setStationId(station.getLabel());
-            travelPoint.setStreet(station.getLabel());
-            return travelPoint.build();
-        });
+    private String extractIdFrom(List<Station> stations) {
+        Station firstStation = stations.get(FIRST_INDEX);
+        return Optional.ofNullable(firstStation.getId()).orElse(firstStation.getLabel());
     }
 
     private VehicleType getVehicleType(String vehicleType) {
