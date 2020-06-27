@@ -14,7 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.net.URL;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
@@ -42,11 +41,11 @@ public class BBCApiServiceImpl implements BBCApiService {
             String url = getBbcRequestString(apiTokenAndUrlInformation, bbcHttpCallBuilderService.bbcBuildJourneyStringPathWith(apiTokenAndUrlInformation));
             ResponseEntity<String> result = callService.get(url, HttpEntity.EMPTY);
             return new CallStatus<>(bbcMapperService.mapJsonToJourneys(result.getBody()), Status.SUCCESS, null);
-        }catch (Exception e) {
+        } catch (Exception e) {
             log.error("Error doing calling BBC Api with String: ", e);
             return new CallStatus<>(null, Status.FAILED, e);
 
-    }
+        }
     }
 
     @Override
@@ -63,6 +62,7 @@ public class BBCApiServiceImpl implements BBCApiService {
             return new CallStatus<>(null, Status.FAILED, e);
         }
     }
+
     private String getBbcRequestString(ApiTokenAndUrlInformation apiTokenAndUrlInformation, String path) {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(apiTokenAndUrlInformation);
         builder.setPath(path);

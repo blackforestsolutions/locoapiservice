@@ -1,10 +1,10 @@
 package de.blackforestsolutions.apiservice.service.mapper;
 
-import de.blackforestsolutions.datamodel.CallStatus;
-import de.blackforestsolutions.datamodel.TravelPoint;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import de.blackforestsolutions.datamodel.TravelPointStatus;
 
 import java.util.LinkedHashSet;
 
 public interface AirportsFinderMapperService {
-    LinkedHashSet<CallStatus<TravelPoint>> map(String jsonString);
+    LinkedHashSet<TravelPointStatus> map(String jsonString) throws JsonProcessingException;
 }

@@ -5,7 +5,7 @@ import com.google.common.annotations.VisibleForTesting;
 import de.blackforestsolutions.apiservice.service.communicationservice.AirportsFinderApiService;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import de.blackforestsolutions.datamodel.CallStatus;
-import de.blackforestsolutions.datamodel.TravelPoint;
+import de.blackforestsolutions.datamodel.TravelPointStatus;
 import de.blackforestsolutions.datamodel.util.LocoJsonMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,11 +31,11 @@ public class NearestStationFinderController {
     }
 
     @RequestMapping("/get")
-    public CallStatus<LinkedHashSet<TravelPoint>> retrieveAirportsFinderTravelPoints(@RequestBody String request) throws JsonProcessingException {
+    public CallStatus<LinkedHashSet<TravelPointStatus>> retrieveAirportsFinderTravelPoints(@RequestBody String request) throws JsonProcessingException {
         ApiTokenAndUrlInformation requestInformation = locoJsonMapper.mapJsonToApiTokenAndUrlInformation(request);
 
         return airportsFinderApiService.getAirportsWith(getAirportsFinderApiTokenAndUrlInformation(requestInformation));
-              // new LinkedHashSet<>(airportsFinderApiService.getAirportsWith(getAirportsFinderApiTokenAndUrlInformation(requestInformation)));
+        // new LinkedHashSet<>(airportsFinderApiService.getAirportsWith(getAirportsFinderApiTokenAndUrlInformation(requestInformation)));
     }
 
     private ApiTokenAndUrlInformation getAirportsFinderApiTokenAndUrlInformation(ApiTokenAndUrlInformation request) {

@@ -1,12 +1,10 @@
 package de.blackforestsolutions.apiservice.service.communicationservice;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallService;
 import de.blackforestsolutions.apiservice.service.mapper.AirportsFinderMapperService;
 import de.blackforestsolutions.apiservice.service.supportservice.AirportsFinderHttpCallBuilderService;
-import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
-import de.blackforestsolutions.datamodel.CallStatus;
-import de.blackforestsolutions.datamodel.Coordinates;
-import de.blackforestsolutions.datamodel.TravelPoint;
+import de.blackforestsolutions.datamodel.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -33,10 +31,17 @@ public class AirportsFinderApiServiceImpl implements AirportsFinderApiService {
     }
 
     @Override
-    public LinkedHashSet<CallStatus<TravelPoint>> getAirportsWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
-        String url = getAirportsFinderRequestString(apiTokenAndUrlInformation);
-        ResponseEntity<String> result = callService.get(url, airportsFinderHttpCallBuilderService.buildHttpEntityAirportsFinder(apiTokenAndUrlInformation));
-        return this.airportsFinderMapperService.map(result.getBody());
+    public CallStatus<LinkedHashSet<TravelPointStatus>> getAirportsWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) throws JsonProcessingException {
+        try {
+            String url = getAirportsFinderRequestString(apiTokenAndUrlInformation);
+            ResponseEntity<String> result = callService.get(url, airportsFinderHttpCallBuilderService.buildHttpEntityAirportsFinder(apiTokenAndUrlInformation));
+            return new CallStatus<>(airportsFinderMapperService.map(result.getBody()), Status.SUCCESS, null);
+        } catch (Exception ex) {
+            log.error("Error during AirportFinder Api call", ex);
+            return new CallStatus<>(null, Status.FAILED, ex);
+        }
+
+        //return null;
     }
 
 
