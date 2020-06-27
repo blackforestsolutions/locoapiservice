@@ -4,7 +4,9 @@ import de.blackforestsolutions.apiservice.service.communicationservice.restcalls
 import de.blackforestsolutions.apiservice.service.mapper.BBCMapperService;
 import de.blackforestsolutions.apiservice.service.supportservice.BBCHttpCallBuilderService;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
+import de.blackforestsolutions.datamodel.CallStatus;
 import de.blackforestsolutions.datamodel.JourneyStatus;
+import de.blackforestsolutions.datamodel.Status;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -35,22 +37,32 @@ public class BBCApiServiceImpl implements BBCApiService {
     }
 
     @Override
-    public Map<UUID, JourneyStatus> getJourneysForRouteWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
-        String url = getBbcRequestString(apiTokenAndUrlInformation, bbcHttpCallBuilderService.bbcBuildJourneyStringPathWith(apiTokenAndUrlInformation));
-        ResponseEntity<String> result = callService.get(url, HttpEntity.EMPTY);
-        return bbcMapperService.mapJsonToJourneys(result.getBody());
+    public CallStatus<Map<UUID, JourneyStatus>> getJourneysForRouteWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
+        try {
+            String url = getBbcRequestString(apiTokenAndUrlInformation, bbcHttpCallBuilderService.bbcBuildJourneyStringPathWith(apiTokenAndUrlInformation));
+            ResponseEntity<String> result = callService.get(url, HttpEntity.EMPTY);
+            return new CallStatus<>(bbcMapperService.mapJsonToJourneys(result.getBody()), Status.SUCCESS, null);
+        }catch (Exception e) {
+            log.error("Error doing calling BBC Api with String: ", e);
+            return new CallStatus<>(null, Status.FAILED, e);
+
+    }
     }
 
     @Override
-    public Map<UUID, JourneyStatus> getJourneysForRouteByCoordinates(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
-        if (Optional.ofNullable(apiTokenAndUrlInformation.getArrivalCoordinates()).isPresent() || Optional.ofNullable(apiTokenAndUrlInformation.getDepartureCoordinates()).isPresent()) {
-            String url = getBbcRequestString(apiTokenAndUrlInformation, bbcHttpCallBuilderService.bbcBuildJourneyCoordinatesPathWith(apiTokenAndUrlInformation));
-            ResponseEntity<String> result = callService.get(url, HttpEntity.EMPTY);
-            return bbcMapperService.mapJsonToJourneys(result.getBody());
+    public CallStatus<Map<UUID, JourneyStatus>> getJourneysForRouteByCoordinates(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
+        try {
+            if (Optional.ofNullable(apiTokenAndUrlInformation.getArrivalCoordinates()).isPresent() || Optional.ofNullable(apiTokenAndUrlInformation.getDepartureCoordinates()).isPresent()) {
+                String url = getBbcRequestString(apiTokenAndUrlInformation, bbcHttpCallBuilderService.bbcBuildJourneyCoordinatesPathWith(apiTokenAndUrlInformation));
+                ResponseEntity<String> result = callService.get(url, HttpEntity.EMPTY);
+                return new CallStatus<>(bbcMapperService.mapJsonToJourneys(result.getBody()), Status.SUCCESS, null);
+            }
+            return new CallStatus<>(null, Status.FAILED, new Exception("No coordinates found doing calling BBC Api:"));
+        } catch (Exception e) {
+            log.error("Error doing calling BBC Api with Coordinates: ", e);
+            return new CallStatus<>(null, Status.FAILED, e);
         }
-        return new HashMap<>();
     }
-
     private String getBbcRequestString(ApiTokenAndUrlInformation apiTokenAndUrlInformation, String path) {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(apiTokenAndUrlInformation);
         builder.setPath(path);
