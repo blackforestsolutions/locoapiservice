@@ -25,6 +25,7 @@ import java.util.stream.Collectors;
 import static de.blackforestsolutions.apiservice.service.mapper.MapperService.generateDurationFromStartToDestination;
 import static de.blackforestsolutions.apiservice.service.mapper.MapperService.setPriceForLegBy;
 import static de.blackforestsolutions.apiservice.util.CoordinatesUtil.convertWGS84ToCoordinatesWith;
+import static java.util.Collections.EMPTY_LIST;
 
 @Slf4j
 @Service
@@ -84,7 +85,7 @@ public class HafasMapperServiceImpl implements HafasMapperService {
             response = mapper.readValue(body, HafasJourneyResponse.class);
         } catch (JsonProcessingException e) {
             log.error("Error while mapping hafas journey json: ", e);
-            return Collections.singletonMap(uuidService.createUUID(), JourneyStatusBuilder.createJourneyStatusProblemWith(e));
+            return Collections.singletonMap(uuidService.createUUID(), JourneyStatusBuilder.createJourneyStatusProblemWith(List.of(e), EMPTY_LIST));
         }
         return getJourneysFrom(response, travelProvider, priceMapper);
     }

@@ -25,6 +25,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.buildUrlWith;
+import static java.util.Collections.EMPTY_LIST;
 
 @Service
 @Slf4j
@@ -52,9 +53,9 @@ public class BahnJourneyDetailsServiceImpl implements BahnJourneyDetailsService 
             url = getBahnJourneyDetailsRequestString(apiTokenAndUrlInformation);
             ResponseEntity<String> result = callService.get(url, bahnHttpCallBuilderService.buildHttpEntityForBahn(apiTokenAndUrlInformation));
             return new CallStatus<>(map(result.getBody()), Status.SUCCESS, null);
-        } catch (Exception ex) {
-            log.error("Error during calling Deutsche Bahn api", ex);
-            return new CallStatus<>(Collections.singletonMap(uuidService.createUUID(), JourneyStatusBuilder.createJourneyStatusProblemWith(ex)), Status.FAILED, ex);
+        } catch (Exception e) {
+            log.error("Error during calling Deutsche Bahn api", e);
+            return new CallStatus<>(Collections.singletonMap(uuidService.createUUID(), JourneyStatusBuilder.createJourneyStatusProblemWith(List.of(e), EMPTY_LIST)), Status.FAILED, e);
         }
     }
 

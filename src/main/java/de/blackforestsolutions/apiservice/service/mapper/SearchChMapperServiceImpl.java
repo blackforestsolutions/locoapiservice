@@ -24,6 +24,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 import static de.blackforestsolutions.apiservice.configuration.LocaleConfiguration.LOCALE_SWITZERLAND;
+import static java.util.Collections.EMPTY_LIST;
 
 @Slf4j
 @Service
@@ -76,7 +77,7 @@ public class SearchChMapperServiceImpl implements SearchChMapperService {
             route = mapper.readValue(jsonString, Route.class);
         } catch (JsonProcessingException e) {
             log.error("Error while parsing json: {}", jsonString, e);
-            return Collections.singletonMap(uuidService.createUUID(), JourneyStatusBuilder.createJourneyStatusProblemWith(e));
+            return Collections.singletonMap(uuidService.createUUID(), JourneyStatusBuilder.createJourneyStatusProblemWith(List.of(e), EMPTY_LIST));
         }
         return mapRouteToJourneyMap(route);
     }

@@ -7,7 +7,11 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.text.ParseException;
+import java.util.Collections;
+import java.util.List;
 import java.util.UUID;
+
+import static java.util.Collections.EMPTY_LIST;
 
 
 class JourneyStatusBuilderTest {
@@ -27,9 +31,9 @@ class JourneyStatusBuilderTest {
     @Test
     void test_createJourneyStatusProblemWith_Exception_returns_status_with_exception() {
         //arrange
-        Exception exception = new Exception();
+        Exception e = new Exception();
         //act
-        JourneyStatus result = JourneyStatusBuilder.createJourneyStatusProblemWith(exception);
+        JourneyStatus result = JourneyStatusBuilder.createJourneyStatusProblemWith(List.of(e), EMPTY_LIST);
         //assert
         Assertions.assertThat(result.getJourney().isEmpty()).isTrue();
         Assertions.assertThat(result.getProblem().isEmpty()).isFalse();

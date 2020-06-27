@@ -1,8 +1,10 @@
 package de.blackforestsolutions.apiservice.service.mapper;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import de.blackforestsolutions.apiservice.service.supportservice.UuidService;
 import de.blackforestsolutions.datamodel.Journey;
 import de.blackforestsolutions.datamodel.JourneyStatus;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -35,7 +37,7 @@ class BBCMapperServiceTest {
 
 
     @Test
-    void test_mapJsonToJourneys_with_mocked_json_and_apiToken_returns() {
+    void test_mapJsonToJourneys_with_mocked_json_and_apiToken_returns() throws JsonProcessingException {
         String json = getResourceFileAsString("json/bbcTest.json");
 
         Map<UUID, JourneyStatus> result = classUnderTest.mapJsonToJourneys(json);
@@ -44,7 +46,7 @@ class BBCMapperServiceTest {
     }
 
     @Test
-    void test_mapJsonToJourneys_returns_correct_journey() throws ParseException {
+    void test_mapJsonToJourneys_returns_correct_journey() throws ParseException, JsonProcessingException {
         String json = getResourceFileAsString("json/bbcTest.json");
         Journey expectedJourney = getFlughafenBerlinToHamburgHbfJourney();
 
@@ -58,7 +60,7 @@ class BBCMapperServiceTest {
     }
 
     @Test
-    void test_mapJsonToJourneys_returns_journey_without_vehicleName_and_travelLine() throws ParseException {
+    void test_mapJsonToJourneys_returns_journey_without_vehicleName_and_travelLine() throws ParseException, JsonProcessingException {
         String json = getResourceFileAsString("json/bbcTest.json");
         Journey expectedJourney = getBerlinHbfToHamburgLandwehrJourney();
 
@@ -72,5 +74,14 @@ class BBCMapperServiceTest {
         assertThat(result.getLegs().get(TEST_UUID_3).getTravelLine()).isNull();
     }
 
+    @Test
+    void test() throws ParseException, JsonProcessingException {
+        String json = getResourceFileAsString("json/bbcFailedTest.json");
+
+        Map<UUID, JourneyStatus> result = classUnderTest.mapJsonToJourneys(json);
+
+        //Assertions.assertThat(result.get(TEST_UUID_2).getProblem().get().getExceptions().get(0), CoreMatchers.instanceOf(NullPointerException.class));
+        Assertions.assertThat(result.get(TEST_UUID_2).getProblem().get().getExceptions().get(0)).isInstanceOf(NullPointerException.class);
+    }
 
 }

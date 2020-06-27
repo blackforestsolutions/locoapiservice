@@ -6,6 +6,7 @@ import de.blackforestsolutions.datamodel.Problem;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -21,18 +22,17 @@ public class JourneyStatusBuilder {
         return journeyStatus;
     }
 
-    public static JourneyStatus createJourneyStatusProblemWith(Exception exception) {
+    public static JourneyStatus createJourneyStatusProblemWith(List<Exception> exceptions, List<String> loggedMessages) {
         JourneyStatus journeyStatus = new JourneyStatus();
         journeyStatus.setJourney(Optional.empty());
-        journeyStatus.setProblem(Optional.of(solve(exception)));
+        journeyStatus.setProblem(Optional.of(solve(exceptions, loggedMessages)));
         return journeyStatus;
     }
 
-    private static Problem solve(Exception exception) {
+    private static Problem solve(List<Exception> exceptions, List<String> loggedMessages) {
         Problem.ProblemBuilder builder = new Problem.ProblemBuilder();
-        builder.setExceptions(Collections.singletonList(exception));
-        //noinspection unchecked (justification: we will not have a list of logmessages at this place)
-        builder.setLoggedMessages(EMPTY_LIST);
+        builder.setExceptions(exceptions);
+        builder.setLoggedMessages(loggedMessages);
         return new Problem(builder.build());
     }
 

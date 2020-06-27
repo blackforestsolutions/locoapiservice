@@ -16,6 +16,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static de.blackforestsolutions.apiservice.service.mapper.JourneyStatusBuilder.createJourneyStatusProblemWith;
+import static java.util.Collections.EMPTY_LIST;
 
 @SuppressWarnings("rawtypes")
 @Slf4j
@@ -75,12 +76,12 @@ public class BritishAirwaysMapperServiceImpl implements BritishAirwaysMapperServ
                     .collect(Collectors.toMap(Journey::getId, JourneyStatusBuilder::createJourneyStatusWith));
         } else {
             UUID errorMapKey = UUID.randomUUID();
-            Exception exception = new IllegalStateException("There was no Flight response nor an exception in FlightResponseStatus");
+            Exception e = new IllegalStateException("There was no Flight response nor an exception in FlightResponseStatus");
             if (flightsResponseStatus.getException() != null) {
-                exception = flightsResponseStatus
+                e = flightsResponseStatus
                         .getException();
             }
-            return Map.of(errorMapKey, createJourneyStatusProblemWith(exception));
+            return Map.of(errorMapKey, createJourneyStatusProblemWith(List.of(e), EMPTY_LIST));
         }
 
     }

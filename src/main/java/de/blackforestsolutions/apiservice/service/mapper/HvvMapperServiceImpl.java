@@ -27,6 +27,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 import static de.blackforestsolutions.apiservice.service.mapper.MapperService.*;
+import static java.util.Collections.EMPTY_LIST;
 
 @Service
 @Slf4j
@@ -202,7 +203,7 @@ public class HvvMapperServiceImpl implements HvvMapperService {
                     .map(this::mapRealtimeScheduleToJourney)
                     .collect(Collectors.toMap(Journey::getId, JourneyStatusBuilder::createJourneyStatusWith));
         } else {
-            return Map.of(uuidService.createUUID(), JourneyStatusBuilder.createJourneyStatusProblemWith(callStatus.getException()));
+            return Map.of(uuidService.createUUID(), JourneyStatusBuilder.createJourneyStatusProblemWith(List.of(callStatus.getException()), EMPTY_LIST));
         }
     }
 

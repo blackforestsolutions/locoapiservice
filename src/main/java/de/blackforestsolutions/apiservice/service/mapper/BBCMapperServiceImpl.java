@@ -25,6 +25,7 @@ import java.util.stream.Collectors;
 
 import static de.blackforestsolutions.apiservice.service.mapper.JourneyStatusBuilder.createJourneyStatusProblemWith;
 import static de.blackforestsolutions.apiservice.service.mapper.MapperService.generateDurationFromStartToDestination;
+import static java.util.Collections.EMPTY_LIST;
 
 @Slf4j
 @Service
@@ -42,15 +43,10 @@ public class BBCMapperServiceImpl implements BBCMapperService {
     }
 
     @Override
-    public Map<UUID, JourneyStatus> mapJsonToJourneys(String jsonString) {
-        try {
+    public Map<UUID, JourneyStatus> mapJsonToJourneys(String jsonString) throws JsonProcessingException {
             ObjectMapper mapper = new ObjectMapper();
             Rides rides = mapper.readValue(jsonString, Rides.class);
             return buildJourneysWith(rides);
-        } catch (JsonProcessingException e) {
-            log.error("Error while processing json: ", e);
-            return Map.of(uuidService.createUUID(), createJourneyStatusProblemWith(e));
-        }
     }
 
     private Map<UUID, JourneyStatus> buildJourneysWith(Rides rides) {
@@ -58,16 +54,22 @@ public class BBCMapperServiceImpl implements BBCMapperService {
                 .getTrips()
                 .stream()
                 .map(this::buildJourneyWith)
-                .collect(Collectors.toMap(Journey::getId, JourneyStatusBuilder::createJourneyStatusWith));
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
-    private Journey buildJourneyWith(Trip trip) {
-        LinkedHashMap<UUID, Leg> legs = new LinkedHashMap<>();
-        Leg leg = buildLegWith(trip);
-        legs.put(leg.getId(), leg);
-        return new Journey.JourneyBuilder(uuidService.createUUID())
-                .setLegs(legs)
-                .build();
+    private Map.Entry<UUID, JourneyStatus> buildJourneyWith(Trip trip) {
+        try {
+            LinkedHashMap<UUID, Leg> legs = new LinkedHashMap<>();
+            Leg leg = buildLegWith(trip);
+            legs.put(leg.getId(), leg);
+            UUID id = uuidService.createUUID();
+            return Map.entry(id, JourneyStatusBuilder.createJourneyStatusWith(new Journey.JourneyBuilder(id)
+                    .setLegs(legs)
+                    .build()));
+        } catch (Exception e) {
+            log.error("Unable to map", e);
+            return Map.entry(uuidService.createUUID(), createJourneyStatusProblemWith(List.of(e), EMPTY_LIST));
+        }
     }
 
     private Leg buildLegWith(Trip trip) {

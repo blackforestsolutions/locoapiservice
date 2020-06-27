@@ -23,6 +23,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 import static de.blackforestsolutions.apiservice.service.mapper.MapperService.generateDurationFromStartToDestination;
+import static java.util.Collections.EMPTY_LIST;
 
 @Slf4j
 @Service
@@ -79,7 +80,7 @@ public class RMVMapperServiceImpl implements RMVMapperService {
             tripList = (TripList) unmarshaller.unmarshal(readerResultBody);
         } catch (JAXBException e) {
             log.error("Error during unmarshalling of XML Objects: {}", readerResultBody, e);
-            return Collections.singletonMap(uuidService.createUUID(), JourneyStatusBuilder.createJourneyStatusProblemWith(e));
+            return Collections.singletonMap(uuidService.createUUID(), JourneyStatusBuilder.createJourneyStatusProblemWith(List.of(e), EMPTY_LIST));
         }
         return getJourneysFrom(tripList);
     }

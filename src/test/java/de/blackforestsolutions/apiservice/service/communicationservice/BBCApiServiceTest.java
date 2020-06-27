@@ -1,5 +1,6 @@
 package de.blackforestsolutions.apiservice.service.communicationservice;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallService;
 import de.blackforestsolutions.apiservice.service.mapper.BBCMapperService;
 import de.blackforestsolutions.apiservice.service.supportservice.BBCHttpCallBuilderService;
@@ -40,7 +41,7 @@ class BBCApiServiceTest {
     private final BBCApiService classUnderTest = new BBCApiServiceImpl(callService, bbcHttpCallBuilderService, bbcMapperService);
 
     @BeforeEach
-    void init() throws ParseException {
+    void init() throws ParseException, JsonProcessingException {
         when(bbcHttpCallBuilderService.bbcBuildJourneyStringPathWith(Mockito.any(ApiTokenAndUrlInformation.class)))
                 .thenReturn("");
 
@@ -58,7 +59,7 @@ class BBCApiServiceTest {
     }
 
     @Test
-    void test_getJourneysForRouteWith_executes_apiSerive_in_right_order() {
+    void test_getJourneysForRouteWith_executes_apiSerive_in_right_order() throws JsonProcessingException {
         ApiTokenAndUrlInformation testData = getBBCTokenAndUrl();
         ArgumentCaptor<String> url = ArgumentCaptor.forClass(String.class);
         ArgumentCaptor<String> body = ArgumentCaptor.forClass(String.class);
@@ -76,7 +77,7 @@ class BBCApiServiceTest {
     }
 
     @Test
-    void test_getJourneysForRouteByCoordinates_executes_apiSerive_in_right_order() {
+    void test_getJourneysForRouteByCoordinates_executes_apiSerive_in_right_order() throws JsonProcessingException {
         ApiTokenAndUrlInformation testData = getBBCTokenAndUrl();
         ArgumentCaptor<String> url = ArgumentCaptor.forClass(String.class);
         ArgumentCaptor<String> body = ArgumentCaptor.forClass(String.class);
