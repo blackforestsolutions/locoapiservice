@@ -2,11 +2,8 @@ package de.blackforestsolutions.apiservice.service.mapper;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import de.blackforestsolutions.apiservice.configuration.AirportConfiguration;
-import de.blackforestsolutions.datamodel.CallStatus;
-import de.blackforestsolutions.datamodel.Status;
 import de.blackforestsolutions.datamodel.TravelPoint;
 import de.blackforestsolutions.datamodel.TravelPointStatus;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -15,6 +12,7 @@ import java.util.LinkedHashSet;
 
 import static de.blackforestsolutions.apiservice.objectmothers.TravelPointObjectMother.getTravelPointsForAirportsFinder;
 import static de.blackforestsolutions.apiservice.testutils.TestUtils.getResourceFileAsString;
+import static org.assertj.core.api.Assertions.assertThat;
 
 
 class AirportsFinderMapperServiceTest {
@@ -32,14 +30,11 @@ class AirportsFinderMapperServiceTest {
         String airportsFinderResource = getResourceFileAsString("json/AirportsFinderJsons/fromTriberg300KmOnlyThree.json");
         ArrayList<TravelPoint> testDataArrayList = getTravelPointsForAirportsFinder();
 
-        LinkedHashSet<TravelPointStatus> resultLinkedHashSet = classUnderTest.map(airportsFinderResource);
-        ArrayList<TravelPointStatus> resultArrayList = convertSetToArrayListForTestingPurpose(resultLinkedHashSet);
+        LinkedHashSet<TravelPointStatus> result = classUnderTest.map(airportsFinderResource);
 
-        Assertions.assertThat(resultArrayList.get(0).getTravelPoint().get()).isEqualToComparingFieldByField(testDataArrayList.get(0));
-        Assertions.assertThat(resultArrayList.get(1).getTravelPoint().get()).isEqualToComparingFieldByField(testDataArrayList.get(1));
+        assertThat(new ArrayList<>(result).get(0).getTravelPoint().get()).isEqualToComparingFieldByField(testDataArrayList.get(0));
+        assertThat(new ArrayList<>(result).get(1).getTravelPoint().get()).isEqualToComparingFieldByField(testDataArrayList.get(1));
+        assertThat(new ArrayList<>(result).get(2).getProblem().get().getExceptions().get(0)).isInstanceOf(Exception.class);
     }
 
-    private ArrayList<TravelPointStatus> convertSetToArrayListForTestingPurpose(LinkedHashSet<TravelPointStatus> linkedHashSet) {
-        return new ArrayList<>(linkedHashSet);
-    }
 }

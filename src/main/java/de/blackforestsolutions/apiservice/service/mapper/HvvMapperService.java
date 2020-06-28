@@ -10,9 +10,9 @@ import java.util.Map;
 import java.util.UUID;
 
 public interface HvvMapperService {
-    HvvStation getHvvStationFrom(String jsonString);
+    HvvStation getHvvStationFrom(String jsonString) throws JsonProcessingException;
 
     List<TravelPoint> getStationListFrom(String jsonBody) throws JsonProcessingException;
 
-    Map<UUID, JourneyStatus> getJourneyMapFrom(String jsonBody);
+    Map<UUID, JourneyStatus> getJourneyMapFrom(String jsonBody) throws JsonProcessingException;
 }

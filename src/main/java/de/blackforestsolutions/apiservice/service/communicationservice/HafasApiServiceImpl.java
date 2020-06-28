@@ -1,5 +1,6 @@
 package de.blackforestsolutions.apiservice.service.communicationservice;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallService;
 import de.blackforestsolutions.apiservice.service.mapper.HafasMapperService;
 import de.blackforestsolutions.apiservice.service.mapper.HafasPriceMapper;
@@ -38,18 +39,18 @@ public class HafasApiServiceImpl implements HafasApiService {
             ResponseEntity<String> result = buildAndExecuteCall(apiTokenAndUrlInformation);
             return new CallStatus<>(mapperService.getJourneysFrom(result.getBody(), travelProvider, priceMapper), Status.SUCCESS, null);
         } catch (Exception e) {
-            //log.error("Error during calling hafas api: ", e);
+            log.error("Error during calling or mapping HafasApi: ", e);
             return new CallStatus<>(null, Status.FAILED, e);
         }
     }
 
-    private ResponseEntity<String> buildAndExecuteCall(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
+    private ResponseEntity<String> buildAndExecuteCall(ApiTokenAndUrlInformation apiTokenAndUrlInformation) throws JsonProcessingException {
         String urlDeparture = getHafasRequestString(apiTokenAndUrlInformation, apiTokenAndUrlInformation.getDeparture());
         String urlArrival = getHafasRequestString(apiTokenAndUrlInformation, apiTokenAndUrlInformation.getArrival());
         ResponseEntity<String> departureIdJson = callService.post(urlDeparture, httpCallBuilderService.buildHttpEntityStationForHafas(apiTokenAndUrlInformation, apiTokenAndUrlInformation.getDeparture()));
-        String departureId = mapperService.getIdFrom(departureIdJson.getBody()).getCalledObject();
+        String departureId = mapperService.getIdFrom(departureIdJson.getBody());
         ResponseEntity<String> arrivalIdJson = callService.post(urlArrival, httpCallBuilderService.buildHttpEntityStationForHafas(apiTokenAndUrlInformation, apiTokenAndUrlInformation.getArrival()));
-        String arrivalId = mapperService.getIdFrom(arrivalIdJson.getBody()).getCalledObject();
+        String arrivalId = mapperService.getIdFrom(arrivalIdJson.getBody());
         ApiTokenAndUrlInformation callToken = replaceStartAndDestinationIn(apiTokenAndUrlInformation, departureId, arrivalId);
         String urlJourney = getHafasRequestString(callToken, null);
         return callService.post(urlJourney, httpCallBuilderService.buildHttpEntityJourneyForHafas(callToken));
@@ -69,21 +70,13 @@ public class HafasApiServiceImpl implements HafasApiService {
         builder.setProtocol(apiTokenAndUrlInformation.getProtocol());
         builder.setHost(apiTokenAndUrlInformation.getHost());
         builder.setPathVariable(apiTokenAndUrlInformation.getPathVariable());
-        if (Optional.ofNullable(apiTokenAndUrlInformation.getChecksum()).isPresent()) {
-            builder.setChecksum(apiTokenAndUrlInformation.getChecksum());
-        }
-        if (Optional.ofNullable(apiTokenAndUrlInformation.getMic()).isPresent()) {
-            builder.setMic(apiTokenAndUrlInformation.getMic());
-        }
-        if (Optional.ofNullable(apiTokenAndUrlInformation.getMac()).isPresent()) {
-            builder.setMac(apiTokenAndUrlInformation.getMac());
-        }
-        if (Optional.ofNullable(apiTokenAndUrlInformation.getAuthorizationKey()).isPresent()) {
-            builder.setAuthorization(apiTokenAndUrlInformation.getAuthorizationKey());
-        }
         builder.setArrival(apiTokenAndUrlInformation.getArrival());
         builder.setDepartureDate(apiTokenAndUrlInformation.getDepartureDate());
         builder.setPath(httpCallBuilderService.buildPathWith(builder.build(), location));
+        Optional.ofNullable(apiTokenAndUrlInformation.getChecksum()).ifPresent(builder::setChecksum);
+        Optional.ofNullable(apiTokenAndUrlInformation.getMic()).ifPresent(builder::setMic);
+        Optional.ofNullable(apiTokenAndUrlInformation.getMac()).ifPresent(builder::setMac);
+        Optional.ofNullable(apiTokenAndUrlInformation.getAuthorizationKey()).ifPresent(builder::setAuthorizationKey);
         URL requestUrl = buildUrlWith(builder.build());
         return requestUrl.toString();
     }

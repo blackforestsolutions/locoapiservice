@@ -1,5 +1,6 @@
 package de.blackforestsolutions.apiservice.service.mapper;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import de.blackforestsolutions.apiservice.objectmothers.JourneyObjectMother;
 import de.blackforestsolutions.apiservice.service.supportservice.UuidService;
 import de.blackforestsolutions.datamodel.Journey;
@@ -39,7 +40,7 @@ class SearchChMapperServiceTest {
     }
 
     @Test
-    void test_getJourneysFrom_with_json_and_return_map_with_journeys() {
+    void test_getJourneysFrom_with_json_and_return_map_with_journeys() throws JsonProcessingException {
         String journeyJson = getResourceFileAsString("json/searchChTestRoute.json");
 
         Map<UUID, JourneyStatus> result = classUnderTest.getJourneysFrom(journeyJson);
@@ -49,7 +50,7 @@ class SearchChMapperServiceTest {
 
     @SuppressWarnings("OptionalGetWithoutIsPresent")
     @Test
-    void test_getJourneysFrom_with_json_and_return_correct_journey() throws ParseException {
+    void test_getJourneysFrom_with_json_and_return_correct_journey() throws ParseException, JsonProcessingException {
         String journeyJson = getResourceFileAsString("json/searchChTestRoute.json");
         Journey testJourneyData = JourneyObjectMother.getEinsiedeln_to_Zuerich_Foerlibuckstreet60_Journey();
 
@@ -60,7 +61,7 @@ class SearchChMapperServiceTest {
 
     @SuppressWarnings("OptionalGetWithoutIsPresent")
     @Test
-    void test_getJourneysFrom_with_json_and_return_correct_legs() throws ParseException {
+    void test_getJourneysFrom_with_json_and_return_correct_legs() throws ParseException, JsonProcessingException {
         String journeyJson = getResourceFileAsString("json/searchChTestRoute.json");
         LinkedHashMap<UUID, Leg> testLegs = JourneyObjectMother.getEinsiedeln_to_Zuerich_Foerlibuckstreet60_Journey().getLegs();
 
@@ -75,7 +76,7 @@ class SearchChMapperServiceTest {
 
     @SuppressWarnings("OptionalGetWithoutIsPresent")
     @Test
-    void test_getJourneysFrom_with_json_and_return_correct_travelLine() throws ParseException {
+    void test_getJourneysFrom_with_json_and_return_correct_travelLine() throws ParseException, JsonProcessingException {
         String journeyJson = getResourceFileAsString("json/searchChTestRoute.json");
         TravelLine testTravelLine = JourneyObjectMother.getEinsiedeln_to_Zuerich_Foerlibuckstreet60_Journey().getLegs().get(TEST_UUID_2).getTravelLine();
 

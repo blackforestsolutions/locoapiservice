@@ -10,11 +10,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
+
+import static de.blackforestsolutions.apiservice.service.mapper.TravelPointStatusBuilder.createTravelPointStatusProblemWith;
 
 @Slf4j
 @Service
@@ -49,7 +48,10 @@ public class AirportsFinderMapperServiceImpl implements AirportsFinderMapperServ
         return Optional.ofNullable(airports.get(airportCode))
                 .map(TravelPoint.TravelPointBuilder::build)
                 .map(TravelPointStatusBuilder::createTravelPointStatusWith)
-                .orElse(TravelPointStatusBuilder.createTravelPointStatusProblemWith(new Exception("The provided AirportFinding object is not mapped because the airport code is not provided in the airports.dat")));
+                .orElse(createTravelPointStatusProblemWith(
+                        List.of(new Exception("The provided AirportFinding object is not mapped because the airport code is not provided in the airports.dat")),
+                        Collections.emptyList()
+                ));
     }
 
 }

@@ -1,7 +1,6 @@
 package de.blackforestsolutions.apiservice.service.mapper;
 
 import de.blackforestsolutions.apiservice.service.supportservice.UuidService;
-import de.blackforestsolutions.datamodel.CallStatus;
 import de.blackforestsolutions.datamodel.Journey;
 import de.blackforestsolutions.datamodel.JourneyStatus;
 import de.blackforestsolutions.datamodel.PriceCategory;
@@ -9,6 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 
+import javax.xml.bind.JAXBException;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.util.Map;
@@ -42,27 +42,25 @@ class RMVMapperServiceTest {
     }
 
     @Test
-    void test_getIdFrom_with_safed_xml_return_id_Lorch() {
+    void test_getIdFrom_with_safed_xml_return_id_Lorch() throws JAXBException {
         String locationListXml = getResourceFileAsString("xml/LocationList.xml");
 
-        CallStatus<String> result = classUnderTest.getIdFrom(locationListXml);
-        String callResult = result.getCalledObject();
+        String result = classUnderTest.getIdFrom(locationListXml);
 
-        assertThat(callResult).isEqualTo("A%3D2%40O%3DLorch+-+Lorchhausen%2C+Oberflecken%40X%3D7785108%40Y%3D50053277%40U%3D103%40b%3D990117421%40B%3D1%40V%3D6.9%2C%40p%3D1530862110%40");
+        assertThat(result).isEqualTo("A%3D2%40O%3DLorch+-+Lorchhausen%2C+Oberflecken%40X%3D7785108%40Y%3D50053277%40U%3D103%40b%3D990117421%40B%3D1%40V%3D6.9%2C%40p%3D1530862110%40");
     }
 
     @Test
-    void test_getIdFrom_with_safed_xml_return_id_Main_station() {
+    void test_getIdFrom_with_safed_xml_return_id_Main_station() throws JAXBException {
         String locationListXml = getResourceFileAsString("xml/LocationList-frankfurt.xml");
 
-        CallStatus<String> result = classUnderTest.getIdFrom(locationListXml);
-        String callResult = result.getCalledObject();
+        String result = classUnderTest.getIdFrom(locationListXml);
 
-        assertThat(callResult).isEqualTo("A=1@O=Frankfurt (Main) Hauptbahnhof@X=8662653@Y=50106808@U=80@L=003000010@B=1@V=6.9,@p=1575313337@");
+        assertThat(result).isEqualTo("A=1@O=Frankfurt (Main) Hauptbahnhof@X=8662653@Y=50106808@U=80@L=003000010@B=1@V=6.9,@p=1575313337@");
     }
 
     @Test
-    void test_getJourneysFrom_with_mocked_xml_returns_correct_size_of_journeys() throws ParseException {
+    void test_getJourneysFrom_with_mocked_xml_returns_correct_size_of_journeys() throws JAXBException {
         String tripListXml = getResourceFileAsString("xml/TripList.xml");
 
         Map<UUID, JourneyStatus> result = classUnderTest.getJourneysFrom(tripListXml);
@@ -71,7 +69,7 @@ class RMVMapperServiceTest {
     }
 
     @Test
-    void test_test_getJourneysFrom_with_mocked_xml_is_mapping_first_journey_correctly() throws ParseException {
+    void test_test_getJourneysFrom_with_mocked_xml_is_mapping_first_journey_correctly() throws ParseException, JAXBException {
         String tripListXml = getResourceFileAsString("xml/TripList.xml");
         Journey expectedJourney = getLorchhausenOberfleckenToFrankfurtHauptbahnhofJourney();
 
@@ -89,7 +87,7 @@ class RMVMapperServiceTest {
 
     @SuppressWarnings("OptionalGetWithoutIsPresent")
     @Test
-    void test_getJourneyFrom_with_xml_stub_and_return_correct_price_edge_case() {
+    void test_getJourneyFrom_with_xml_stub_and_return_correct_price_edge_case() throws JAXBException {
         String tripListXml = getResourceFileAsString("xml/TripList-edge-case.xml");
 
         Map<UUID, JourneyStatus> result = classUnderTest.getJourneysFrom(tripListXml);

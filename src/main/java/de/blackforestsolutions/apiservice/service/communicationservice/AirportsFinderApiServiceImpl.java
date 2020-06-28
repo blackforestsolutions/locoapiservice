@@ -40,8 +40,6 @@ public class AirportsFinderApiServiceImpl implements AirportsFinderApiService {
             log.error("Error during AirportFinder Api call", ex);
             return new CallStatus<>(null, Status.FAILED, ex);
         }
-
-        //return null;
     }
 
 

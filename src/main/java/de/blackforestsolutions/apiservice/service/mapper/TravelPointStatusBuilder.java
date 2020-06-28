@@ -4,10 +4,8 @@ import de.blackforestsolutions.datamodel.Problem;
 import de.blackforestsolutions.datamodel.TravelPoint;
 import de.blackforestsolutions.datamodel.TravelPointStatus;
 
-import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
-
-import static java.util.Collections.EMPTY_LIST;
 
 public class TravelPointStatusBuilder {
 
@@ -18,17 +16,17 @@ public class TravelPointStatusBuilder {
         return travelPointStatus;
     }
 
-    public static TravelPointStatus createTravelPointStatusProblemWith(Exception e) {
+    public static TravelPointStatus createTravelPointStatusProblemWith(List<Exception> exceptions, List<String> loggedMessages) {
         TravelPointStatus travelPointStatus = new TravelPointStatus();
         travelPointStatus.setTravelPoint(Optional.empty());
-        travelPointStatus.setProblem(Optional.of(solve(e)));
+        travelPointStatus.setProblem(Optional.of(solve(exceptions, loggedMessages)));
         return travelPointStatus;
     }
 
-    private static Problem solve(Exception e) {
+    private static Problem solve(List<Exception> exceptions, List<String> loggedMessages) {
         Problem.ProblemBuilder builder = new Problem.ProblemBuilder();
-        builder.setExceptions(Collections.singletonList(e));
-        builder.setLoggedMessages(EMPTY_LIST);
+        builder.setExceptions(exceptions);
+        builder.setLoggedMessages(loggedMessages);
         return new Problem(builder.build());
     }
 }

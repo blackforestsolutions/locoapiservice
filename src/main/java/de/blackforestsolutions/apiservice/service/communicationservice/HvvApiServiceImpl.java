@@ -57,7 +57,7 @@ public class HvvApiServiceImpl implements HvvApiService {
         }
     }
 
-    private ResponseEntity<String> buildAndExceuteCall(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
+    private ResponseEntity<String> buildAndExceuteCall(ApiTokenAndUrlInformation apiTokenAndUrlInformation) throws JsonProcessingException {
         String travelPointUrl = getHvvTravelPointRequestString(apiTokenAndUrlInformation);
         String journeyUrl = getHvvJourneyRequestString(apiTokenAndUrlInformation);
 

@@ -22,10 +22,11 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
+import static de.blackforestsolutions.apiservice.service.mapper.JourneyStatusBuilder.createJourneyStatusProblemWith;
+import static de.blackforestsolutions.apiservice.service.mapper.JourneyStatusBuilder.createJourneyStatusWith;
 import static de.blackforestsolutions.apiservice.service.mapper.MapperService.generateDurationFromStartToDestination;
 import static de.blackforestsolutions.apiservice.service.mapper.MapperService.setPriceForLegBy;
 import static de.blackforestsolutions.apiservice.util.CoordinatesUtil.convertWGS84ToCoordinatesWith;
-import static java.util.Collections.EMPTY_LIST;
 
 @Slf4j
 @Service
@@ -39,37 +40,6 @@ public class HafasMapperServiceImpl implements HafasMapperService {
     private static final String TELE_TAXI = "TETA";
     private static final String WALK = "WALK";
     private static final String TRANSFER = "TRSF";
-
-    private enum HafasVehicleType {
-        BUS(VehicleType.BUS),
-        RE(VehicleType.TRAIN),
-        IC(VehicleType.TRAIN),
-        R(VehicleType.TRAIN),
-        RB(VehicleType.TRAIN),
-        ICE(VehicleType.TRAIN),
-        CJX(VehicleType.TRAIN),
-        RJX(VehicleType.TRAIN),
-        AST(VehicleType.CAR),
-        S(VehicleType.TRAIN),
-        STR(VehicleType.TRAIN),
-        U(VehicleType.TRAIN),
-        RT(VehicleType.TRAIN);
-
-        private final VehicleType vehicleType;
-
-        HafasVehicleType(VehicleType vehicleType) {
-            this.vehicleType = vehicleType;
-        }
-
-        VehicleType getVehicleType() {
-            return vehicleType;
-        }
-    }
-
-    private List<LocL> locations;
-    private List<ProdL> vehicles;
-    private String date;
-
     private final UuidService uuidService;
 
     @Autowired
@@ -78,31 +48,18 @@ public class HafasMapperServiceImpl implements HafasMapperService {
     }
 
     @Override
-    public Map<UUID, JourneyStatus> getJourneysFrom(String body, TravelProvider travelProvider, HafasPriceMapper priceMapper) {
+    public Map<UUID, JourneyStatus> getJourneysFrom(String body, TravelProvider travelProvider, HafasPriceMapper priceMapper) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
-        HafasJourneyResponse response;
-        try {
-            response = mapper.readValue(body, HafasJourneyResponse.class);
-        } catch (JsonProcessingException e) {
-            log.error("Error while mapping hafas journey json: ", e);
-            return Collections.singletonMap(uuidService.createUUID(), JourneyStatusBuilder.createJourneyStatusProblemWith(List.of(e), EMPTY_LIST));
-        }
+        HafasJourneyResponse response = mapper.readValue(body, HafasJourneyResponse.class);
         return getJourneysFrom(response, travelProvider, priceMapper);
     }
 
     @Override
-    public CallStatus<String> getIdFrom(String resultBody) {
+    public String getIdFrom(String resultBody) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
-        HafasLocationResponse response;
-        try {
-            response = mapper.readValue(resultBody, HafasLocationResponse.class);
-        } catch (JsonProcessingException e) {
-            log.error("Errow while mapping travelPoint json: ", e);
-            return new CallStatus<>(null, Status.FAILED, e);
-        }
-        LocL location = response.getSvcResL().get(FIRST_INDEX).getRes().getMatch().getLocL().get(FIRST_INDEX);
-        return new CallStatus<>(selectIdFrom(location), Status.SUCCESS, null);
+        HafasLocationResponse response = mapper.readValue(resultBody, HafasLocationResponse.class);
+        return selectIdFrom(response.getSvcResL().get(FIRST_INDEX).getRes().getMatch().getLocL().get(FIRST_INDEX));
     }
 
     private String selectIdFrom(LocL location) {
@@ -112,41 +69,42 @@ public class HafasMapperServiceImpl implements HafasMapperService {
 
     private Map<UUID, JourneyStatus> getJourneysFrom(HafasJourneyResponse journeyResponse, TravelProvider travelProvider, HafasPriceMapper priceMapper) {
         Res response = journeyResponse.getSvcResL().get(FIRST_INDEX).getRes();
-        locations = response.getCommon().getLocL();
-        vehicles = response.getCommon().getProdL();
         return response
                 .getOutConL()
                 .stream()
-                .map(journey -> getJourneyFrom(journey, travelProvider, priceMapper))
-                .map(JourneyStatusBuilder::createJourneyStatusWith)
-                .collect(Collectors.toMap(JourneyStatusBuilder::extractJourneyUuidFrom, journeyStatus -> journeyStatus));
+                .map(journey -> getJourneyFrom(journey, travelProvider, priceMapper, response.getCommon().getLocL(), response.getCommon().getProdL()))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
-    private Journey getJourneyFrom(OutConL hafasJourney, TravelProvider travelProvider, HafasPriceMapper priceMapper) {
-        date = hafasJourney.getDate();
-        Journey.JourneyBuilder journey = new Journey.JourneyBuilder(uuidService.createUUID());
-        journey.setLegs(getLegsFrom(hafasJourney.getSecL(), travelProvider, priceMapper.map(hafasJourney.getTrfRes())));
-        return journey.build();
+    private Map.Entry<UUID, JourneyStatus> getJourneyFrom(OutConL hafasJourney, TravelProvider travelProvider, HafasPriceMapper priceMapper, List<LocL> locations, List<ProdL> vehicles) {
+        try {
+            Journey.JourneyBuilder journey = new Journey.JourneyBuilder(uuidService.createUUID());
+            journey.setLegs(getLegsFrom(hafasJourney.getSecL(), travelProvider, priceMapper.map(hafasJourney.getTrfRes()), locations, vehicles, hafasJourney.getDate()));
+            return Map.entry(journey.getId(), createJourneyStatusWith(journey.build()));
+        } catch (Exception e) {
+            log.error("Unable to map Pojo: ", e);
+            return Map.entry(uuidService.createUUID(), createJourneyStatusProblemWith(List.of(e), Collections.emptyList()));
+        }
     }
 
-    private LinkedHashMap<UUID, Leg> getLegsFrom(List<SecL> betweenTrips, TravelProvider travelProvider, Price price) {
+    private LinkedHashMap<UUID, Leg> getLegsFrom(List<SecL> betweenTrips, TravelProvider travelProvider, Price price, List<LocL> locations, List<ProdL> vehicles, String date) {
         AtomicInteger counter = new AtomicInteger(0);
         return betweenTrips
                 .stream()
-                .map(secL -> getLegFrom(secL, travelProvider, price, counter.getAndIncrement()))
+                .map(secL -> getLegFrom(secL, travelProvider, price, counter.getAndIncrement(), locations, vehicles, date))
                 .collect(Collectors.toMap(Leg::getId, leg -> leg, (prev, next) -> next, LinkedHashMap::new));
     }
 
-    private Leg getLegFrom(SecL betweenTrip, TravelProvider travelProvider, Price price, int index) {
+    private Leg getLegFrom(SecL betweenTrip, TravelProvider travelProvider, Price price, int index, List<LocL> locations, List<ProdL> vehicles, String date) {
         Leg.LegBuilder leg = new Leg.LegBuilder(uuidService.createUUID());
-        leg.setStart(buildTravelPointWith(locations.get(betweenTrip.getDep().getLocX()), null, null, betweenTrip.getDep().getDPlatfS()));
-        leg.setDestination(buildTravelPointWith(locations.get(betweenTrip.getArr().getLocX()), null, null, betweenTrip.getArr().getAPlatfS()));
+        leg.setStart(buildTravelPointWith(locations.get(betweenTrip.getDep().getLocX()), null, null, betweenTrip.getDep().getDPlatfS(), date));
+        leg.setDestination(buildTravelPointWith(locations.get(betweenTrip.getArr().getLocX()), null, null, betweenTrip.getArr().getAPlatfS(), date));
         leg.setStartTime(buildDateWith(date, betweenTrip.getDep().getDTimeS()));
         leg.setArrivalTime(buildDateWith(date, betweenTrip.getArr().getATimeS()));
         leg.setDuration(generateDurationFromStartToDestination(leg.getStartTime(), leg.getArrivalTime()));
         Optional.ofNullable(betweenTrip.getArr().getATimeR()).ifPresent(prognosedArrivalTime -> leg.setDelay(generateDurationFromStartToDestination(leg.getArrivalTime(), buildDateWith(date, prognosedArrivalTime))));
         setLegForWalkWith(betweenTrip, leg);
-        setLegForJourneyWith(betweenTrip, travelProvider, leg);
+        setLegForJourneyWith(betweenTrip, travelProvider, leg, locations, vehicles, date);
         logNoValidTypeForJourney(betweenTrip);
         setPriceForLegBy(index, leg, price);
         return leg.build();
@@ -159,12 +117,12 @@ public class HafasMapperServiceImpl implements HafasMapperService {
         }
     }
 
-    private void setLegForJourneyWith(SecL betweenTrip, TravelProvider travelProvider, Leg.LegBuilder leg) {
+    private void setLegForJourneyWith(SecL betweenTrip, TravelProvider travelProvider, Leg.LegBuilder leg, List<LocL> locations, List<ProdL> vehicles, String date) {
         if (betweenTrip.getType().equals(JOURNEY) || betweenTrip.getType().equals(TELE_TAXI)) {
             Jny hafasLeg = betweenTrip.getJny();
             leg.setProviderId(hafasLeg.getJid());
             leg.setTravelProvider(travelProvider);
-            leg.setTravelLine(buildTravelLineWith(hafasLeg));
+            leg.setTravelLine(buildTravelLineWith(hafasLeg, locations, date));
             ProdL vehicle = vehicles.get(hafasLeg.getProdX());
             leg.setVehicleType(getVehicleType(vehicle.getProdCtx().getCatOut()));
             leg.setVehicleName(vehicle.getProdCtx().getCatOutL());
@@ -178,23 +136,23 @@ public class HafasMapperServiceImpl implements HafasMapperService {
         }
     }
 
-    private TravelLine buildTravelLineWith(Jny betweenHolds) {
+    private TravelLine buildTravelLineWith(Jny betweenHolds, List<LocL> locations, String date) {
         TravelLine.TravelLineBuilder travelLine = new TravelLine.TravelLineBuilder();
         if (!betweenHolds.getStopL().isEmpty()) {
             travelLine.setDirection(buildTravelPointWith(betweenHolds.getDirTxt()));
-            travelLine.setBetweenHolds(buildBetweenHoldsWith(betweenHolds.getStopL()));
+            travelLine.setBetweenHolds(buildBetweenHoldsWith(betweenHolds.getStopL(), locations, date));
             return travelLine.build();
         }
         return travelLine.build();
     }
 
-    private Map<Integer, TravelPoint> buildBetweenHoldsWith(List<StopL> intermediateStops) {
+    private Map<Integer, TravelPoint> buildBetweenHoldsWith(List<StopL> intermediateStops, List<LocL> locations, String date) {
         AtomicInteger counter = new AtomicInteger(0);
         return intermediateStops
                 .stream()
                 .skip(INDEX_SUBTRACTION)
                 .limit(intermediateStops.size() - INDEX_SUBTRACTION - INDEX_SUBTRACTION)
-                .map(stop -> buildTravelPointWith(locations.get(stop.getLocX()), stop.getDTimeS(), stop.getATimeS(), extractPlatformFrom(stop)))
+                .map(stop -> buildTravelPointWith(locations.get(stop.getLocX()), stop.getDTimeS(), stop.getATimeS(), extractPlatformFrom(stop), date))
                 .collect(Collectors.toMap(travelPoint -> counter.getAndIncrement(), travelPoint -> travelPoint));
     }
 
@@ -214,7 +172,7 @@ public class HafasMapperServiceImpl implements HafasMapperService {
         return "";
     }
 
-    private TravelPoint buildTravelPointWith(LocL location, String departureTime, String arrivalTime, String platform) {
+    private TravelPoint buildTravelPointWith(LocL location, String departureTime, String arrivalTime, String platform, String date) {
         TravelPoint.TravelPointBuilder travelPoint = new TravelPoint.TravelPointBuilder();
         travelPoint.setStationName(location.getName());
         travelPoint.setStationId(selectIdFrom(location));
@@ -261,6 +219,32 @@ public class HafasMapperServiceImpl implements HafasMapperService {
                 .findFirst()
                 .map(HafasVehicleType::getVehicleType)
                 .orElse(null);
+    }
+
+    private enum HafasVehicleType {
+        BUS(VehicleType.BUS),
+        RE(VehicleType.TRAIN),
+        IC(VehicleType.TRAIN),
+        R(VehicleType.TRAIN),
+        RB(VehicleType.TRAIN),
+        ICE(VehicleType.TRAIN),
+        CJX(VehicleType.TRAIN),
+        RJX(VehicleType.TRAIN),
+        AST(VehicleType.CAR),
+        S(VehicleType.TRAIN),
+        STR(VehicleType.TRAIN),
+        U(VehicleType.TRAIN),
+        RT(VehicleType.TRAIN);
+
+        private final VehicleType vehicleType;
+
+        HafasVehicleType(VehicleType vehicleType) {
+            this.vehicleType = vehicleType;
+        }
+
+        VehicleType getVehicleType() {
+            return vehicleType;
+        }
     }
 
 }

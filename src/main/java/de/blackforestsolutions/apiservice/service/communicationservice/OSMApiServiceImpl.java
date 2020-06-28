@@ -48,9 +48,9 @@ public class OSMApiServiceImpl implements OSMApiService {
 
     @Override
     public CallStatus<Coordinates> getCoordinatesFromTravelPointWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation, String address) {
-        String url = getOSMRequestString(apiTokenAndUrlInformation, address);
-        ResponseEntity<String> result = callService.get(url, buildEmptyHttpEntity());
         try {
+            String url = getOSMRequestString(apiTokenAndUrlInformation, address);
+            ResponseEntity<String> result = callService.get(url, buildEmptyHttpEntity());
             return new CallStatus<>(
                     map(result.getBody()),
                     Status.SUCCESS,

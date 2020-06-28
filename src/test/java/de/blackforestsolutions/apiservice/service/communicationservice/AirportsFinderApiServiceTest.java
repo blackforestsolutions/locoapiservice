@@ -62,17 +62,12 @@ public class AirportsFinderApiServiceTest {
         apiTokenAndUrlInformation = builder.build();
         ResponseEntity<String> testResult = new ResponseEntity<>(airportsFinderResource, HttpStatus.OK);
         doReturn(testResult).when(restTemplate).exchange(anyString(), any(), Mockito.any(), any(Class.class));
-        CallStatus<LinkedHashSet<TravelPointStatus>> resultLinkedHashSet = classUnderTest.getAirportsWith(apiTokenAndUrlInformation);
 
-        ArrayList<TravelPointStatus> resultArrayList = convertSetToArrayListForTestingPurpose(resultLinkedHashSet);
+        CallStatus<LinkedHashSet<TravelPointStatus>> result = classUnderTest.getAirportsWith(apiTokenAndUrlInformation);
 
-        Assertions.assertThat(resultLinkedHashSet.getCalledObject().size()).isEqualTo(3);
-        Assertions.assertThat(resultArrayList.get(0).getTravelPoint().get()).isEqualToComparingFieldByField(testDataArrayList.get(0));
-        Assertions.assertThat(resultArrayList.get(1).getTravelPoint().get()).isEqualToComparingFieldByField(testDataArrayList.get(1));
-        Assertions.assertThat(resultArrayList.get(2).getTravelPoint().isEmpty()).isTrue();
-    }
-
-    private ArrayList<TravelPointStatus> convertSetToArrayListForTestingPurpose(CallStatus<LinkedHashSet<TravelPointStatus>> linkedHashSet) {
-        return new ArrayList<>(linkedHashSet.getCalledObject());
+        Assertions.assertThat(new ArrayList<>(result.getCalledObject()).size()).isEqualTo(3);
+        Assertions.assertThat(new ArrayList<>(result.getCalledObject()).get(0).getTravelPoint().get()).isEqualToComparingFieldByField(testDataArrayList.get(0));
+        Assertions.assertThat(new ArrayList<>(result.getCalledObject()).get(1).getTravelPoint().get()).isEqualToComparingFieldByField(testDataArrayList.get(1));
+        Assertions.assertThat(new ArrayList<>(result.getCalledObject()).get(2).getTravelPoint().isEmpty()).isTrue();
     }
 }

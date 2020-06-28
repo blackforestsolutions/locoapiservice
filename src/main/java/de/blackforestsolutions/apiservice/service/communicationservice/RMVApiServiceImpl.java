@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.xml.bind.JAXBException;
 import java.net.URL;
 import java.util.Map;
 import java.util.UUID;
@@ -55,7 +56,7 @@ public class RMVApiServiceImpl implements RMVApiService {
         }
     }
 
-    private ResponseEntity<String> buildAndExecteCallForCoordinates(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
+    private ResponseEntity<String> buildAndExecteCallForCoordinates(ApiTokenAndUrlInformation apiTokenAndUrlInformation) throws JAXBException {
         String urlDeparture = getRMVRequestString(apiTokenAndUrlInformation, httpCallBuilderService.buildLocationCoordinatesPathWith(
                 apiTokenAndUrlInformation,
                 apiTokenAndUrlInformation.getDepartureCoordinates()
@@ -67,7 +68,7 @@ public class RMVApiServiceImpl implements RMVApiService {
         return buildAndExecuteCall(apiTokenAndUrlInformation, urlDeparture, urlArrival);
     }
 
-    private ResponseEntity<String> buildAndExecuteCallForSearchString(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
+    private ResponseEntity<String> buildAndExecuteCallForSearchString(ApiTokenAndUrlInformation apiTokenAndUrlInformation) throws JAXBException {
         String urlDeparture = getRMVRequestString(apiTokenAndUrlInformation, httpCallBuilderService.buildLocationStringPathWith(
                 apiTokenAndUrlInformation,
                 apiTokenAndUrlInformation.getDeparture()
@@ -79,17 +80,17 @@ public class RMVApiServiceImpl implements RMVApiService {
         return buildAndExecuteCall(apiTokenAndUrlInformation, urlDeparture, urlArrival);
     }
 
-    private ResponseEntity<String> buildAndExecuteCall(ApiTokenAndUrlInformation apiTokenAndUrlInformation, String urlDeparture, String urlArrival) {
+    private ResponseEntity<String> buildAndExecuteCall(ApiTokenAndUrlInformation apiTokenAndUrlInformation, String urlDeparture, String urlArrival) throws JAXBException {
         ResponseEntity<String> departureIdJson = callService.get(
                 urlDeparture,
                 httpCallBuilderService.buildHttpEntityForRMV(apiTokenAndUrlInformation)
         );
-        String departureId = rmvMapperService.getIdFrom(departureIdJson.getBody()).getCalledObject();
+        String departureId = rmvMapperService.getIdFrom(departureIdJson.getBody());
         ResponseEntity<String> arrivalIdJson = callService.get(
                 urlArrival,
                 httpCallBuilderService.buildHttpEntityForRMV(apiTokenAndUrlInformation)
         );
-        String arrivalId = rmvMapperService.getIdFrom(arrivalIdJson.getBody()).getCalledObject();
+        String arrivalId = rmvMapperService.getIdFrom(arrivalIdJson.getBody());
         ApiTokenAndUrlInformation callToken = replaceStartAndDestinationIn(apiTokenAndUrlInformation, departureId, arrivalId);
         String urlTrip = getRMVRequestString(callToken, httpCallBuilderService.buildTripPathWith(callToken));
         return callService.get(urlTrip, httpCallBuilderService.buildHttpEntityForRMV(callToken));

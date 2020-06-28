@@ -1,9 +1,13 @@
 package de.blackforestsolutions.apiservice.service.mapper;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import de.blackforestsolutions.apiservice.objectmothers.JourneyObjectMother;
 import de.blackforestsolutions.apiservice.objectmothers.TravelPointObjectMother;
 import de.blackforestsolutions.apiservice.service.supportservice.UuidService;
-import de.blackforestsolutions.datamodel.*;
+import de.blackforestsolutions.datamodel.Journey;
+import de.blackforestsolutions.datamodel.JourneyStatus;
+import de.blackforestsolutions.datamodel.Leg;
+import de.blackforestsolutions.datamodel.TravelPoint;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -52,7 +56,7 @@ class HvvMapperServiceTest {
     }
 
     @Test
-    void test_getJourneyMapFrom_json_returns_map_with_journeys() throws ParseException {
+    void test_getJourneyMapFrom_json_returns_map_with_journeys() throws ParseException, JsonProcessingException {
         String jsonJourneys = getResourceFileAsString("json/hvvJourney.json");
         Journey testData = JourneyObjectMother.getGustavHeinemannStreetToUniversityJourney();
 
@@ -63,7 +67,7 @@ class HvvMapperServiceTest {
     }
 
     @Test
-    void test_getJourneyMapFrom_json_returns_correct_legs() throws ParseException {
+    void test_getJourneyMapFrom_json_returns_correct_legs() throws ParseException, JsonProcessingException {
         String jsonJourneys = getResourceFileAsString("json/hvvJourney.json");
         LinkedHashMap<UUID, Leg> testData = JourneyObjectMother.getGustavHeinemannStreetToUniversityJourney().getLegs();
 

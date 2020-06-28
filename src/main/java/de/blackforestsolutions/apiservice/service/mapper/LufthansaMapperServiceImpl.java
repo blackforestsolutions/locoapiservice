@@ -20,8 +20,6 @@ import java.time.ZoneId;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static java.util.Collections.EMPTY_LIST;
-
 @Slf4j
 @Service
 public class LufthansaMapperServiceImpl implements LufthansaMapperService {
@@ -43,7 +41,7 @@ public class LufthansaMapperServiceImpl implements LufthansaMapperService {
         try {
             scheduleResource = mapper.readValue(jsonString, ScheduleResource.class);
         } catch (JsonProcessingException e) {
-            return Collections.singletonMap(uuidService.createUUID(), JourneyStatusBuilder.createJourneyStatusProblemWith(List.of(e), EMPTY_LIST));
+            return Collections.singletonMap(uuidService.createUUID(), JourneyStatusBuilder.createJourneyStatusProblemWith(List.of(e), Collections.emptyList()));
         }
         return mapScheduledResourceToJourneyList(scheduleResource);
     }

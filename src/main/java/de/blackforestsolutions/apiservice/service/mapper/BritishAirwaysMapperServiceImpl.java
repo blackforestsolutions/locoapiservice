@@ -16,7 +16,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static de.blackforestsolutions.apiservice.service.mapper.JourneyStatusBuilder.createJourneyStatusProblemWith;
-import static java.util.Collections.EMPTY_LIST;
+import static de.blackforestsolutions.apiservice.service.mapper.JourneyStatusBuilder.createJourneyStatusWith;
 
 @SuppressWarnings("rawtypes")
 @Slf4j
@@ -44,55 +44,40 @@ public class BritishAirwaysMapperServiceImpl implements BritishAirwaysMapperServ
     }
 
     @Override
-    public Map<UUID, JourneyStatus> map(String jsonString) {
-        return britishAirwaysMapFlightResponseToJourneyList(retrieveFlightResponse(jsonString));
-    }
-
-    private CallStatus<FlightsResponse> retrieveFlightResponse(String jsonString) {
+    public Map<UUID, JourneyStatus> map(String jsonString) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
-        try {
-            return new CallStatus<>(mapper.readValue(jsonString, FlightsResponse.class), Status.SUCCESS, null);
-        } catch (JsonProcessingException e) {
-            log.error("Error during mapping json to object: {}", jsonString, e);
-            return new CallStatus<>(null, Status.FAILED, e);
-        }
+        return britishAirwaysMapFlightResponseToJourneyList(mapper.readValue(jsonString, FlightsResponse.class));
     }
 
     @SuppressWarnings("unchecked")
-    private Map<UUID, JourneyStatus> britishAirwaysMapFlightResponseToJourneyList(CallStatus<FlightsResponse> flightsResponseStatus) {
-        if (flightsResponseStatus.getCalledObject() != null) {
-            FlightsResponse flightsResponse = flightsResponseStatus.getCalledObject();
-            return flightsResponse
-                    .getAdditionalProperties()
-                    .values()
-                    .stream()
-                    .map(entry -> (LinkedHashMap) entry)
-                    .map(BritishAirwaysMapperServiceImpl::mapLinkedHashMapToFlightObject)
-                    .flatMap(List::stream)
-                    .map(flights -> (ArrayList<LinkedHashMap>) flights)
-                    .flatMap(ArrayList::stream)
-                    .map(this::createJourneysWith)
-                    .collect(Collectors.toMap(Journey::getId, JourneyStatusBuilder::createJourneyStatusWith));
-        } else {
-            UUID errorMapKey = UUID.randomUUID();
-            Exception e = new IllegalStateException("There was no Flight response nor an exception in FlightResponseStatus");
-            if (flightsResponseStatus.getException() != null) {
-                e = flightsResponseStatus
-                        .getException();
-            }
-            return Map.of(errorMapKey, createJourneyStatusProblemWith(List.of(e), EMPTY_LIST));
-        }
+    private Map<UUID, JourneyStatus> britishAirwaysMapFlightResponseToJourneyList(FlightsResponse flightsResponse) {
+        return flightsResponse
+                .getAdditionalProperties()
+                .values()
+                .stream()
+                .map(entry -> (LinkedHashMap) entry)
+                .map(BritishAirwaysMapperServiceImpl::mapLinkedHashMapToFlightObject)
+                .flatMap(List::stream)
+                .map(flights -> (ArrayList<LinkedHashMap>) flights)
+                .flatMap(ArrayList::stream)
+                .map(this::createJourneysWith)
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 
     }
 
-    private Journey createJourneysWith(LinkedHashMap singleFlight) {
-        Journey.JourneyBuilder journey = new Journey.JourneyBuilder(uuidService.createUUID());
-        LinkedHashMap<UUID, Leg> legs = new LinkedHashMap<>();
-        Leg leg = createLegWith(singleFlight);
-        legs.put(leg.getId(), leg);
-        journey.setLegs(legs);
-        return journey.build();
+    private Map.Entry<UUID, JourneyStatus> createJourneysWith(LinkedHashMap singleFlight) {
+        try {
+            Journey.JourneyBuilder journey = new Journey.JourneyBuilder(uuidService.createUUID());
+            LinkedHashMap<UUID, Leg> legs = new LinkedHashMap<>();
+            Leg leg = createLegWith(singleFlight);
+            legs.put(leg.getId(), leg);
+            journey.setLegs(legs);
+            return Map.entry(journey.getId(), createJourneyStatusWith(journey.build()));
+        } catch (Exception e) {
+            log.error("Unable to map Pojo: ", e);
+            return Map.entry(uuidService.createUUID(), createJourneyStatusProblemWith(List.of(e), Collections.emptyList()));
+        }
     }
 
     private Leg createLegWith(LinkedHashMap singleFlight) {

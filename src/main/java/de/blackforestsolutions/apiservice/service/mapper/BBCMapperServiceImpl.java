@@ -25,7 +25,6 @@ import java.util.stream.Collectors;
 
 import static de.blackforestsolutions.apiservice.service.mapper.JourneyStatusBuilder.createJourneyStatusProblemWith;
 import static de.blackforestsolutions.apiservice.service.mapper.MapperService.generateDurationFromStartToDestination;
-import static java.util.Collections.EMPTY_LIST;
 
 @Slf4j
 @Service
@@ -44,9 +43,9 @@ public class BBCMapperServiceImpl implements BBCMapperService {
 
     @Override
     public Map<UUID, JourneyStatus> mapJsonToJourneys(String jsonString) throws JsonProcessingException {
-            ObjectMapper mapper = new ObjectMapper();
-            Rides rides = mapper.readValue(jsonString, Rides.class);
-            return buildJourneysWith(rides);
+        ObjectMapper mapper = new ObjectMapper();
+        Rides rides = mapper.readValue(jsonString, Rides.class);
+        return buildJourneysWith(rides);
     }
 
     private Map<UUID, JourneyStatus> buildJourneysWith(Rides rides) {
@@ -65,10 +64,11 @@ public class BBCMapperServiceImpl implements BBCMapperService {
             UUID id = uuidService.createUUID();
             return Map.entry(id, JourneyStatusBuilder.createJourneyStatusWith(new Journey.JourneyBuilder(id)
                     .setLegs(legs)
-                    .build()));
+                    .build())
+            );
         } catch (Exception e) {
-            log.error("Unable to map", e);
-            return Map.entry(uuidService.createUUID(), createJourneyStatusProblemWith(List.of(e), EMPTY_LIST));
+            log.error("Unable to map Pojo: ", e);
+            return Map.entry(uuidService.createUUID(), createJourneyStatusProblemWith(List.of(e), Collections.emptyList()));
         }
     }
 

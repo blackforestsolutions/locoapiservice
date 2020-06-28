@@ -1,6 +1,6 @@
 package de.blackforestsolutions.apiservice.service.mapper;
 
-import de.blackforestsolutions.datamodel.CallStatus;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import de.blackforestsolutions.datamodel.JourneyStatus;
 import de.blackforestsolutions.datamodel.TravelProvider;
 
@@ -9,7 +9,7 @@ import java.util.UUID;
 
 public interface HafasMapperService {
 
-    Map<UUID, JourneyStatus> getJourneysFrom(String body, TravelProvider travelProvider, HafasPriceMapper priceMapper);
+    Map<UUID, JourneyStatus> getJourneysFrom(String body, TravelProvider travelProvider, HafasPriceMapper priceMapper) throws JsonProcessingException;
 
-    CallStatus<String> getIdFrom(String resultBody);
+    String getIdFrom(String resultBody) throws JsonProcessingException;
 }

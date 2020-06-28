@@ -22,8 +22,9 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
+import static de.blackforestsolutions.apiservice.service.mapper.JourneyStatusBuilder.createJourneyStatusProblemWith;
+import static de.blackforestsolutions.apiservice.service.mapper.JourneyStatusBuilder.createJourneyStatusWith;
 import static de.blackforestsolutions.apiservice.service.mapper.MapperService.generateDurationFromStartToDestination;
-import static java.util.Collections.EMPTY_LIST;
 
 @Slf4j
 @Service
@@ -35,9 +36,8 @@ public class RMVMapperServiceImpl implements RMVMapperService {
     private static final int FOURTH_INDEX = 3;
     private static final String PUBLIC_JOURNEY_KEY = "JNY";
     private static final String CAR_KEY = "KISS";
+
     private final UuidService uuidService;
-    private JAXBContext jaxbContext;
-    private Unmarshaller unmarshaller;
 
     @Autowired
     public RMVMapperServiceImpl(UuidService uuidService) {
@@ -45,58 +45,44 @@ public class RMVMapperServiceImpl implements RMVMapperService {
     }
 
     @Override
-    public CallStatus<String> getIdFrom(String resultBody) {
+    public String getIdFrom(String resultBody) throws JAXBException {
         StringReader readerResultBody = new StringReader(resultBody);
-        LocationList locationList;
-        try {
-            jaxbContext = JAXBContext.newInstance(LocationList.class);
-            unmarshaller = jaxbContext.createUnmarshaller();
-            locationList = (LocationList) unmarshaller.unmarshal(readerResultBody);
-        } catch (JAXBException e) {
-            log.error("Error during unmarshalling of XML Objects: {}", readerResultBody, e);
-            return new CallStatus<>(null, Status.FAILED, e);
-        }
+        JAXBContext jaxbContext = JAXBContext.newInstance(LocationList.class);
+        Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+        LocationList locationList = (LocationList) unmarshaller.unmarshal(readerResultBody);
         try {
             StopLocation stopLocation = (StopLocation) locationList.getStopLocationOrCoordLocation().get(START_INDEX);
-            return new CallStatus<>(stopLocation.getId(), Status.SUCCESS, null);
+            return stopLocation.getId();
         } catch (ClassCastException e) {
-            try {
-                CoordLocation coordLocation = (CoordLocation) locationList.getStopLocationOrCoordLocation().get(START_INDEX);
-                return new CallStatus<>(coordLocation.getId(), Status.SUCCESS, null);
-            } catch (ClassCastException ex) {
-                log.error("Error during mapping xml to station type. Type not found.");
-                return new CallStatus<>(null, Status.FAILED, ex);
-            }
+            CoordLocation coordLocation = (CoordLocation) locationList.getStopLocationOrCoordLocation().get(START_INDEX);
+            return coordLocation.getId();
         }
     }
 
     @Override
-    public Map<UUID, JourneyStatus> getJourneysFrom(String resultBody) {
-        TripList tripList;
+    public Map<UUID, JourneyStatus> getJourneysFrom(String resultBody) throws JAXBException {
         StringReader readerResultBody = new StringReader(resultBody);
-        try {
-            jaxbContext = JAXBContext.newInstance(TripList.class);
-            unmarshaller = jaxbContext.createUnmarshaller();
-            tripList = (TripList) unmarshaller.unmarshal(readerResultBody);
-        } catch (JAXBException e) {
-            log.error("Error during unmarshalling of XML Objects: {}", readerResultBody, e);
-            return Collections.singletonMap(uuidService.createUUID(), JourneyStatusBuilder.createJourneyStatusProblemWith(List.of(e), EMPTY_LIST));
-        }
-        return getJourneysFrom(tripList);
+        JAXBContext jaxbContext = JAXBContext.newInstance(TripList.class);
+        Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+        return getJourneysFrom((TripList) unmarshaller.unmarshal(readerResultBody));
     }
 
     private Map<UUID, JourneyStatus> getJourneysFrom(TripList tripList) {
         return tripList.getTrip()
                 .stream()
                 .map(this::getJourneyFrom)
-                .map(JourneyStatusBuilder::createJourneyStatusWith)
-                .collect(Collectors.toMap(JourneyStatusBuilder::extractJourneyUuidFrom, journey -> journey));
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
-    private Journey getJourneyFrom(Trip trip) {
-        Journey.JourneyBuilder journey = new Journey.JourneyBuilder(uuidService.createUUID());
-        journey.setLegs(getLegsFrom(trip.getLegList(), extractPriceFrom(trip)));
-        return journey.build();
+    private Map.Entry<UUID, JourneyStatus> getJourneyFrom(Trip trip) {
+        try {
+            Journey.JourneyBuilder journey = new Journey.JourneyBuilder(uuidService.createUUID());
+            journey.setLegs(getLegsFrom(trip.getLegList(), extractPriceFrom(trip)));
+            return Map.entry(journey.getId(), createJourneyStatusWith(journey.build()));
+        } catch (Exception e) {
+            log.error("Unable to map Pojo: ", e);
+            return Map.entry(uuidService.createUUID(), createJourneyStatusProblemWith(List.of(e), Collections.emptyList()));
+        }
     }
 
     private LinkedHashMap<UUID, Leg> getLegsFrom(LegList legList, Price price) {
