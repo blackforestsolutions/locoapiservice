@@ -3,15 +3,19 @@ package de.blackforestsolutions.apiservice.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother;
 import de.blackforestsolutions.apiservice.service.communicationservice.AirportsFinderApiService;
+import de.blackforestsolutions.apiservice.service.exceptionhandling.ExceptionHandlerService;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import de.blackforestsolutions.datamodel.util.LocoJsonMapper;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import static org.mockito.Mockito.mock;
+
 public class NearestStationFinderControllerTest {
 
     private final LocoJsonMapper locoJsonMapper = new LocoJsonMapper();
     private final AirportsFinderApiService airportsFinderApiService = Mockito.mock(AirportsFinderApiService.class);
+    private final ExceptionHandlerService exceptionHandlerService = mock(ExceptionHandlerService.class);
 
     private final NearestStationFinderController classUnderTest = initClassUnderTest();
 
@@ -28,7 +32,7 @@ public class NearestStationFinderControllerTest {
 
 
     private NearestStationFinderController initClassUnderTest() {
-        NearestStationFinderController classUnderTest = new NearestStationFinderController(airportsFinderApiService);
+        NearestStationFinderController classUnderTest = new NearestStationFinderController(airportsFinderApiService, exceptionHandlerService);
         classUnderTest.setAirportsFinderApiTokenAndUrlInformation(ApiTokenAndUrlInformationObjectMother.getAirportsFinderTokenAndUrl());
         return classUnderTest;
     }

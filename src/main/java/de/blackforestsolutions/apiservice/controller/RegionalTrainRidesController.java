@@ -6,9 +6,9 @@ import de.blackforestsolutions.apiservice.service.communicationservice.HvvApiSer
 import de.blackforestsolutions.apiservice.service.communicationservice.NahShApiService;
 import de.blackforestsolutions.apiservice.service.communicationservice.RMVApiService;
 import de.blackforestsolutions.apiservice.service.communicationservice.VBBApiService;
+import de.blackforestsolutions.apiservice.service.exceptionhandling.ExceptionHandlerService;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
-import de.blackforestsolutions.datamodel.CallStatus;
-import de.blackforestsolutions.datamodel.JourneyStatus;
+import de.blackforestsolutions.datamodel.Journey;
 import de.blackforestsolutions.datamodel.util.LocoJsonMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -30,6 +29,7 @@ public class RegionalTrainRidesController {
     private final RMVApiService rmvApiService;
     private final VBBApiService vbbApiService;
     private final NahShApiService nahShApiService;
+    private final ExceptionHandlerService exceptionHandlerService;
 
     @Resource(name = "hvvApiTokenAndUrlInformation")
     private ApiTokenAndUrlInformation hvvApiTokenAndUrlInformation;
@@ -41,22 +41,23 @@ public class RegionalTrainRidesController {
     private ApiTokenAndUrlInformation nahShApiTokenAndUrlInformation;
 
     @Autowired
-    public RegionalTrainRidesController(HvvApiService hvvApiService, RMVApiService rmvApiService, VBBApiService vbbApiService, NahShApiService nahShApiService) {
+    public RegionalTrainRidesController(HvvApiService hvvApiService, RMVApiService rmvApiService, VBBApiService vbbApiService, NahShApiService nahShApiService, ExceptionHandlerService exceptionHandlerService) {
         this.hvvApiService = hvvApiService;
         this.rmvApiService = rmvApiService;
         this.vbbApiService = vbbApiService;
         this.nahShApiService = nahShApiService;
+        this.exceptionHandlerService = exceptionHandlerService;
     }
 
     @RequestMapping("/get")
-    public List<CallStatus<Map<UUID, JourneyStatus>>> retrieveTrainJourneys(@RequestBody String request) throws JsonProcessingException {
+    public Map<UUID, Journey> retrieveTrainJourneys(@RequestBody String request) throws JsonProcessingException {
         ApiTokenAndUrlInformation requestInformation = locoJsonMapper.mapJsonToApiTokenAndUrlInformation(request);
-        return Arrays.asList(
+        return this.exceptionHandlerService.handleExceptions(Arrays.asList(
                 hvvApiService.getJourneysForRouteWith(getHvvApiTokenAndUrlInformation(requestInformation)),
                 rmvApiService.getJourneysForRouteByCoordinatesWith(getRMVApiTokenAndUrlInformation(requestInformation)),
                 rmvApiService.getJourneysForRouteBySearchStringWith(getRMVApiTokenAndUrlInformation(requestInformation)),
                 vbbApiService.getJourneysForRouteWith(getVbbApiTokenAndUrlInformation(requestInformation)),
-                nahShApiService.getJourneysForRouteWith(getNahShApiTokenAndUrlInformation(requestInformation))
+                nahShApiService.getJourneysForRouteWith(getNahShApiTokenAndUrlInformation(requestInformation)))
         );
     }
 

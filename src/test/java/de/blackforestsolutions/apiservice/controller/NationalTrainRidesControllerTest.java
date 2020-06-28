@@ -1,10 +1,10 @@
 package de.blackforestsolutions.apiservice.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother;
 import de.blackforestsolutions.apiservice.service.communicationservice.DBApiService;
 import de.blackforestsolutions.apiservice.service.communicationservice.SearchChApiService;
 import de.blackforestsolutions.apiservice.service.communicationservice.bahnService.BahnJourneyDetailsService;
+import de.blackforestsolutions.apiservice.service.exceptionhandling.ExceptionHandlerService;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import de.blackforestsolutions.datamodel.util.LocoJsonMapper;
 import org.junit.jupiter.api.Test;
@@ -12,12 +12,15 @@ import org.mockito.Mockito;
 
 import java.io.IOException;
 
+import static org.mockito.Mockito.mock;
+
 class NationalTrainRidesControllerTest {
 
     private final LocoJsonMapper locoJsonMapper = new LocoJsonMapper();
     private final BahnJourneyDetailsService bahnJourneyDetailsService = Mockito.mock(BahnJourneyDetailsService.class);
     private final DBApiService dbApiService = Mockito.mock(DBApiService.class);
     private final SearchChApiService searchChApiService = Mockito.mock(SearchChApiService.class);
+    private final ExceptionHandlerService exceptionHandlerService = mock(ExceptionHandlerService.class);
 
     private final NationalTrainRidesController classUnderTest = initClassUnderTest();
 
@@ -35,7 +38,7 @@ class NationalTrainRidesControllerTest {
     }
 
     private NationalTrainRidesController initClassUnderTest() {
-        NationalTrainRidesController classUnderTest = new NationalTrainRidesController(bahnJourneyDetailsService, dbApiService, searchChApiService);
+        NationalTrainRidesController classUnderTest = new NationalTrainRidesController(bahnJourneyDetailsService, dbApiService, searchChApiService, exceptionHandlerService);
         classUnderTest.setBahnApiTokenAndUrlInformation(ApiTokenAndUrlInformationObjectMother.getBahnTokenAndUrl());
         classUnderTest.setDbApiTokenAndUrlInformation(ApiTokenAndUrlInformationObjectMother.getDBTokenAndUrl("", ""));
         classUnderTest.setSearchApiTokenAndUrlInformation(ApiTokenAndUrlInformationObjectMother.getSearchChTokenAndUrl());

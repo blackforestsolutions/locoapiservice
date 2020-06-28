@@ -4,9 +4,9 @@ import com.google.common.annotations.VisibleForTesting;
 import de.blackforestsolutions.apiservice.service.communicationservice.DBApiService;
 import de.blackforestsolutions.apiservice.service.communicationservice.SearchChApiService;
 import de.blackforestsolutions.apiservice.service.communicationservice.bahnService.BahnJourneyDetailsService;
+import de.blackforestsolutions.apiservice.service.exceptionhandling.ExceptionHandlerService;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
-import de.blackforestsolutions.datamodel.CallStatus;
-import de.blackforestsolutions.datamodel.JourneyStatus;
+import de.blackforestsolutions.datamodel.Journey;
 import de.blackforestsolutions.datamodel.util.LocoJsonMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -29,6 +28,7 @@ public class NationalTrainRidesController {
     private final BahnJourneyDetailsService bahnJourneyDetailsService;
     private final DBApiService dbApiService;
     private final SearchChApiService searchChApiService;
+    private final ExceptionHandlerService exceptionHandlerService;
 
     @Resource(name = "bahnApiTokenAndUrlInformation")
     private ApiTokenAndUrlInformation bahnApiTokenAndUrlInformation;
@@ -38,19 +38,20 @@ public class NationalTrainRidesController {
     private ApiTokenAndUrlInformation searchApiTokenAndUrlInformation;
 
     @Autowired
-    public NationalTrainRidesController(BahnJourneyDetailsService bahnJourneyDetailsService, DBApiService dbApiService, SearchChApiService searchChApiService) {
+    public NationalTrainRidesController(BahnJourneyDetailsService bahnJourneyDetailsService, DBApiService dbApiService, SearchChApiService searchChApiService, ExceptionHandlerService exceptionHandlerService) {
         this.bahnJourneyDetailsService = bahnJourneyDetailsService;
         this.dbApiService = dbApiService;
         this.searchChApiService = searchChApiService;
+        this.exceptionHandlerService = exceptionHandlerService;
     }
 
     @RequestMapping("/get")
-    public List<CallStatus<Map<UUID, JourneyStatus>>> retrieveTrainJourneys(@RequestBody String request) throws IOException {
+    public Map<UUID, Journey> retrieveTrainJourneys(@RequestBody String request) throws IOException {
         ApiTokenAndUrlInformation requestInformation = locoJsonMapper.mapJsonToApiTokenAndUrlInformation(request);
-        return Arrays.asList(
+        return this.exceptionHandlerService.handleExceptions(Arrays.asList(
                 bahnJourneyDetailsService.getJourneysForRouteWith(getBahnApiTokenAndUrlInformation(requestInformation)),
                 dbApiService.getJourneysForRouteWith(getDbApiTokenAndUrlInformation(requestInformation)),
-                searchChApiService.getJourneysForRouteWith(getSearchApiTokenAndUrlInformation(requestInformation))
+                searchChApiService.getJourneysForRouteWith(getSearchApiTokenAndUrlInformation(requestInformation)))
         );
     }
 

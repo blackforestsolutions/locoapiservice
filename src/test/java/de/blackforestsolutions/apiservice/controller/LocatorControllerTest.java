@@ -2,7 +2,7 @@ package de.blackforestsolutions.apiservice.controller;
 
 import de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother;
 import de.blackforestsolutions.apiservice.service.communicationservice.OSMApiService;
-import de.blackforestsolutions.apiservice.service.communicationservice.SearchChApiService;
+import de.blackforestsolutions.apiservice.service.exceptionhandling.ExceptionHandlerService;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import de.blackforestsolutions.datamodel.util.LocoJsonMapper;
 import org.junit.jupiter.api.Test;
@@ -10,10 +10,13 @@ import org.mockito.Mockito;
 
 import java.io.IOException;
 
+import static org.mockito.Mockito.mock;
+
 class LocatorControllerTest {
 
     private final LocoJsonMapper locoJsonMapper = new LocoJsonMapper();
     private final OSMApiService osmApiService = Mockito.mock(OSMApiService.class);
+    private final ExceptionHandlerService exceptionHandlerService = mock(ExceptionHandlerService.class);
 
     private final LocatorController classUnderTest = initClassUnderTest();
 
@@ -29,7 +32,7 @@ class LocatorControllerTest {
     }
 
     private LocatorController initClassUnderTest() {
-        LocatorController classUnderTest = new LocatorController(osmApiService);
+        LocatorController classUnderTest = new LocatorController(osmApiService, exceptionHandlerService);
         classUnderTest.setOsmApiTokenAndUrlInformation(ApiTokenAndUrlInformationObjectMother.getSearchChTokenAndUrl());
         return classUnderTest;
     }

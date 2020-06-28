@@ -3,9 +3,9 @@ package de.blackforestsolutions.apiservice.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.common.annotations.VisibleForTesting;
 import de.blackforestsolutions.apiservice.service.communicationservice.AirportsFinderApiService;
+import de.blackforestsolutions.apiservice.service.exceptionhandling.ExceptionHandlerService;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
-import de.blackforestsolutions.datamodel.CallStatus;
-import de.blackforestsolutions.datamodel.TravelPointStatus;
+import de.blackforestsolutions.datamodel.TravelPoint;
 import de.blackforestsolutions.datamodel.util.LocoJsonMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,20 +21,22 @@ public class NearestStationFinderController {
 
     private final LocoJsonMapper locoJsonMapper = new LocoJsonMapper();
     private final AirportsFinderApiService airportsFinderApiService;
+    private final ExceptionHandlerService exceptionHandlerService;
 
     @Resource(name = "airportsFinderApiTokenAndUrlInformation")
     private ApiTokenAndUrlInformation airportsFinderApiTokenAndUrlInformation;
 
     @Autowired
-    public NearestStationFinderController(AirportsFinderApiService airportsFinderApiService) {
+    public NearestStationFinderController(AirportsFinderApiService airportsFinderApiService, ExceptionHandlerService exceptionHandlerService) {
         this.airportsFinderApiService = airportsFinderApiService;
+        this.exceptionHandlerService = exceptionHandlerService;
     }
 
     @RequestMapping("/get")
-    public CallStatus<LinkedHashSet<TravelPointStatus>> retrieveAirportsFinderTravelPoints(@RequestBody String request) throws JsonProcessingException {
+    public LinkedHashSet<TravelPoint> retrieveAirportsFinderTravelPoints(@RequestBody String request) throws JsonProcessingException {
         ApiTokenAndUrlInformation requestInformation = locoJsonMapper.mapJsonToApiTokenAndUrlInformation(request);
 
-        return airportsFinderApiService.getAirportsWith(getAirportsFinderApiTokenAndUrlInformation(requestInformation));
+        return this.exceptionHandlerService.handleExceptionsTravelPoints(airportsFinderApiService.getAirportsWith(getAirportsFinderApiTokenAndUrlInformation(requestInformation)));
         // new LinkedHashSet<>(airportsFinderApiService.getAirportsWith(getAirportsFinderApiTokenAndUrlInformation(requestInformation)));
     }
 

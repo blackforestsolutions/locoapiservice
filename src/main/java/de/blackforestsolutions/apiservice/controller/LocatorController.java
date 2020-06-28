@@ -2,8 +2,8 @@ package de.blackforestsolutions.apiservice.controller;
 
 import com.google.common.annotations.VisibleForTesting;
 import de.blackforestsolutions.apiservice.service.communicationservice.OSMApiService;
+import de.blackforestsolutions.apiservice.service.exceptionhandling.ExceptionHandlerService;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
-import de.blackforestsolutions.datamodel.CallStatus;
 import de.blackforestsolutions.datamodel.Coordinates;
 import de.blackforestsolutions.datamodel.util.LocoJsonMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,19 +20,21 @@ public class LocatorController {
 
     private final LocoJsonMapper locoJsonMapper = new LocoJsonMapper();
     private final OSMApiService osmApiService;
+    private final ExceptionHandlerService exceptionHandlerService;
 
     @Resource(name = "osmApiTokenAndUrlInformation")
     private ApiTokenAndUrlInformation osmApiTokenAndUrlInformation;
 
     @Autowired
-    public LocatorController(OSMApiService osmApiService) {
+    public LocatorController(OSMApiService osmApiService, ExceptionHandlerService exceptionHandlerService) {
         this.osmApiService = osmApiService;
+        this.exceptionHandlerService = exceptionHandlerService;
     }
 
     @RequestMapping("/get")
-    public CallStatus<Coordinates> retrieveLocatorJourneys(@RequestBody String request) throws IOException {
+    public Coordinates retrieveLocatorJourneys(@RequestBody String request) throws IOException {
         ApiTokenAndUrlInformation requestInformation = locoJsonMapper.mapJsonToApiTokenAndUrlInformation(request);
-        return osmApiService.getCoordinatesFromTravelPointWith(getOsmApiTokenAndUrlInformation(requestInformation), request);
+        return this.exceptionHandlerService.handleExceptions(osmApiService.getCoordinatesFromTravelPointWith(getOsmApiTokenAndUrlInformation(requestInformation), request));
     }
 
     private ApiTokenAndUrlInformation getOsmApiTokenAndUrlInformation(ApiTokenAndUrlInformation request) {

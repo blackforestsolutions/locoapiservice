@@ -5,12 +5,9 @@ import de.blackforestsolutions.datamodel.JourneyStatus;
 import de.blackforestsolutions.datamodel.Problem;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-
-import static java.util.Collections.EMPTY_LIST;
 
 @Slf4j
 public class JourneyStatusBuilder {
