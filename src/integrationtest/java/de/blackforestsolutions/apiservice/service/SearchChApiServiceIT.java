@@ -1,7 +1,6 @@
 package de.blackforestsolutions.apiservice.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother;
 import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallService;
 import de.blackforestsolutions.apiservice.service.supportservice.SearchChHttpCallBuilderService;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
@@ -17,12 +16,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import javax.annotation.Resource;
-
 import java.util.Date;
 
 import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.buildEmptyHttpEntity;
 import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.buildUrlWith;
-import static de.blackforestsolutions.apiservice.testutils.TestUtils.*;
+import static de.blackforestsolutions.apiservice.testutils.TestUtils.retrieveJsonToPojoFromResponse;
+import static de.blackforestsolutions.apiservice.testutils.TestUtils.retrieveListJsonToPojoFromResponse;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -49,7 +48,7 @@ class SearchChApiServiceIT {
 
         Assertions.assertThat(HttpStatus.OK).isEqualTo(result.getStatusCode());
         Assertions.assertThat(result.getBody()).isNotEmpty();
-        Assertions.assertThat(retrieveJsonPojoFromResponse(result, Route.class).getCount()).isEqualTo(1);
+        Assertions.assertThat(retrieveJsonToPojoFromResponse(result, Route.class).getCount()).isEqualTo(1);
     }
 
     @Test
@@ -61,6 +60,6 @@ class SearchChApiServiceIT {
 
         Assertions.assertThat(HttpStatus.OK).isEqualTo(result.getStatusCode());
         Assertions.assertThat(result.getBody()).isNotEmpty();
-        Assertions.assertThat(retrieveListJsonPojoFromResponse(result, Station.class).get(0).getHtml()).contains(WordUtils.capitalize("Einsiedeln"));
+        Assertions.assertThat(retrieveListJsonToPojoFromResponse(result, Station.class).get(0).getHtml()).contains(WordUtils.capitalize("Einsiedeln"));
     }
 }

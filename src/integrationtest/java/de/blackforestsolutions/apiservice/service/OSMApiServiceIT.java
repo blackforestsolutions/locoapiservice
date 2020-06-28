@@ -1,7 +1,6 @@
 package de.blackforestsolutions.apiservice.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother;
 import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallService;
 import de.blackforestsolutions.apiservice.service.supportservice.OSMHttpCallBuilderService;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
@@ -18,7 +17,7 @@ import javax.annotation.Resource;
 
 import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.buildEmptyHttpEntity;
 import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.buildUrlWith;
-import static de.blackforestsolutions.apiservice.testutils.TestUtils.retrieveListJsonPojoFromResponse;
+import static de.blackforestsolutions.apiservice.testutils.TestUtils.retrieveListJsonToPojoFromResponse;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -42,6 +41,6 @@ class OSMApiServiceIT {
 
         Assertions.assertThat(result.getStatusCode()).isEqualTo(HttpStatus.OK);
         Assertions.assertThat(result.getBody()).isNotEmpty();
-        Assertions.assertThat(retrieveListJsonPojoFromResponse(result, OsmTravelPoint.class)).isNotEmpty();
+        Assertions.assertThat(retrieveListJsonToPojoFromResponse(result, OsmTravelPoint.class)).isNotEmpty();
     }
 }

@@ -18,7 +18,7 @@ import javax.annotation.Resource;
 import java.util.Date;
 
 import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.buildUrlWith;
-import static de.blackforestsolutions.apiservice.testutils.TestUtils.retrieveJsonPojoFromResponse;
+import static de.blackforestsolutions.apiservice.testutils.TestUtils.retrieveJsonToPojoFromResponse;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -45,7 +45,7 @@ class VBBApiServiceIT {
 
         Assertions.assertThat(HttpStatus.OK).isEqualTo(result.getStatusCode());
         Assertions.assertThat(result.getBody()).isNotEmpty();
-        Assertions.assertThat(retrieveJsonPojoFromResponse(result, HafasLocationResponse.class).getSvcResL().get(0).getErr()).isEqualTo("OK");
+        Assertions.assertThat(retrieveJsonToPojoFromResponse(result, HafasLocationResponse.class).getSvcResL().get(0).getErr()).isEqualTo("OK");
     }
 
     @Test
@@ -63,7 +63,7 @@ class VBBApiServiceIT {
 
         Assertions.assertThat(HttpStatus.OK).isEqualTo(result.getStatusCode());
         Assertions.assertThat(result.getBody()).isNotEmpty();
-        Assertions.assertThat(retrieveJsonPojoFromResponse(result, HafasJourneyResponse.class).getSvcResL().get(0).getErr()).isEqualTo("OK");
+        Assertions.assertThat(retrieveJsonToPojoFromResponse(result, HafasJourneyResponse.class).getSvcResL().get(0).getErr()).isEqualTo("OK");
     }
 
 }

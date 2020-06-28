@@ -4,9 +4,11 @@ import de.blackforestsolutions.apiservice.service.supportservice.UuidService;
 import de.blackforestsolutions.datamodel.Journey;
 import de.blackforestsolutions.datamodel.JourneyStatus;
 import de.blackforestsolutions.datamodel.PriceCategory;
+import de.blackforestsolutions.generatedcontent.rmv.hafas_rest.TripList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import javax.xml.bind.JAXBException;
 import java.math.BigDecimal;
@@ -17,6 +19,7 @@ import java.util.UUID;
 import static de.blackforestsolutions.apiservice.objectmothers.JourneyObjectMother.getLorchhausenOberfleckenToFrankfurtHauptbahnhofJourney;
 import static de.blackforestsolutions.apiservice.objectmothers.UUIDObjectMother.*;
 import static de.blackforestsolutions.apiservice.testutils.TestUtils.getResourceFileAsString;
+import static de.blackforestsolutions.apiservice.testutils.TestUtils.retrieveXmlToPojoFromResponse;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -97,6 +100,19 @@ class RMVMapperServiceTest {
         assertThat(result.get(TEST_UUID_7).getJourney().get().getLegs().get(TEST_UUID_8).getPrice().getValues().get(PriceCategory.ADULT)).isEqualTo(new BigDecimal("36.00"));
         assertThat(result.get(TEST_UUID_13).getJourney().get().getLegs().get(TEST_UUID_14).getPrice().getValues().get(PriceCategory.ADULT)).isEqualTo(new BigDecimal("12.35"));
         assertThat(result.get(TEST_UUID_13).getJourney().get().getLegs().get(TEST_UUID_14).getPrice().getValues().get(PriceCategory.CHILD)).isEqualTo(new BigDecimal("7.30"));
+    }
+
+    @Test
+    void test_mapHvvRouteToJourneyMap_with_wrong_pojo_returns_problem_with_nullPointerException() throws JAXBException {
+        String xmlTripList = getResourceFileAsString("xml/TripList.xml");
+        TripList tripList = retrieveXmlToPojoFromResponse(xmlTripList, TripList.class);
+        tripList.getTrip().get(0).getLegList().getLeg().get(0).setOrigin(null);
+
+        Map<UUID, JourneyStatus> result = ReflectionTestUtils.invokeMethod(classUnderTest, "getJourneysFrom", tripList);
+
+        assertThat(result.get(TEST_UUID_3).getProblem().get().getExceptions().get(0)).isInstanceOf(NullPointerException.class);
+        assertThat(result.get(TEST_UUID_3).getProblem().get().getExceptions().get(0)).isInstanceOf(Exception.class);
+        assertThat(result.get(TEST_UUID_8).getJourney().get()).isInstanceOf(Journey.class);
     }
 
 }

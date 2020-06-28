@@ -20,6 +20,9 @@ import java.time.ZoneId;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static de.blackforestsolutions.apiservice.service.mapper.JourneyStatusBuilder.createJourneyStatusProblemWith;
+import static de.blackforestsolutions.apiservice.service.mapper.JourneyStatusBuilder.createJourneyStatusWith;
+
 @Slf4j
 @Service
 public class LufthansaMapperServiceImpl implements LufthansaMapperService {
@@ -34,15 +37,10 @@ public class LufthansaMapperServiceImpl implements LufthansaMapperService {
     }
 
     @Override
-    public Map<UUID, JourneyStatus> map(String jsonString) {
+    public Map<UUID, JourneyStatus> map(String jsonString) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
-        ScheduleResource scheduleResource;
-        try {
-            scheduleResource = mapper.readValue(jsonString, ScheduleResource.class);
-        } catch (JsonProcessingException e) {
-            return Collections.singletonMap(uuidService.createUUID(), JourneyStatusBuilder.createJourneyStatusProblemWith(List.of(e), Collections.emptyList()));
-        }
+        ScheduleResource scheduleResource = mapper.readValue(jsonString, ScheduleResource.class);
         return mapScheduledResourceToJourneyList(scheduleResource);
     }
 
@@ -62,17 +60,22 @@ public class LufthansaMapperServiceImpl implements LufthansaMapperService {
                 .map(entry -> entry.getFlight().stream().findAny())
                 .flatMap(Optional::stream)
                 .map(this::buildJourneyWith)
-                .map(JourneyStatusBuilder::createJourneyStatusWith)
-                .collect(Collectors.toMap(JourneyStatusBuilder::extractJourneyUuidFrom, journeyStatus -> journeyStatus));
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
-    private Journey buildJourneyWith(Flight flight) {
-        Journey.JourneyBuilder journey = new Journey.JourneyBuilder(uuidService.createUUID());
-        LinkedHashMap<UUID, Leg> legs = new LinkedHashMap<>();
-        Leg leg = buildLegWith(flight);
-        legs.put(leg.getId(), leg);
-        journey.setLegs(legs);
-        return journey.build();
+    private Map.Entry<UUID, JourneyStatus> buildJourneyWith(Flight flight) {
+        try {
+            Journey.JourneyBuilder journey = new Journey.JourneyBuilder(uuidService.createUUID());
+            LinkedHashMap<UUID, Leg> legs = new LinkedHashMap<>();
+            Leg leg = buildLegWith(flight);
+            legs.put(leg.getId(), leg);
+            journey.setLegs(legs);
+            return Map.entry(journey.getId(), createJourneyStatusWith(journey.build()));
+        } catch (Exception e) {
+            log.error("Unable to map Pojo: ", e);
+            UUID id = uuidService.createUUID();
+            return Map.entry(id, createJourneyStatusProblemWith(List.of(e), Collections.emptyList()));
+        }
     }
 
     private Leg buildLegWith(Flight flight) {

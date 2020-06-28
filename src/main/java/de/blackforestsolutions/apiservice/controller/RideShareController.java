@@ -39,9 +39,6 @@ public class RideShareController {
     @RequestMapping("get")
     public Map<UUID, Journey> retrieveRideSharingJourneys(@RequestBody String request) throws JsonProcessingException {
         ApiTokenAndUrlInformation requestInformation = locoJsonMapper.mapJsonToApiTokenAndUrlInformation(request);
-
-        // Map<UUID, JourneyStatus> resultMap = bbcApiService.getJourneysForRouteWith(getBbcApiTokenAndUrlInformation(requestInformation));
-        // resultMap.putAll(bbcApiService.getJourneysForRouteByCoordinates(getBbcApiTokenAndUrlInformation(requestInformation)));
         return this.exceptionHandlerService.handleExceptions(Arrays.asList(
                 bbcApiService.getJourneysForRouteByCoordinates(getBbcApiTokenAndUrlInformation(requestInformation)),
                 bbcApiService.getJourneysForRouteWith(getBbcApiTokenAndUrlInformation(requestInformation)))

@@ -1,6 +1,7 @@
 package de.blackforestsolutions.apiservice.testutils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.blackforestsolutions.datamodel.Journey;
 import de.blackforestsolutions.datamodel.JourneyStatus;
@@ -111,13 +112,19 @@ public class TestUtils {
         );
     }
 
-    public static <T> T retrieveJsonPojoFromResponse(ResponseEntity<String> response, Class<T> pojo) throws JsonProcessingException {
+    public static <T> T retrieveJsonToPojoFromResponse(ResponseEntity<String> response, Class<T> pojo) throws JsonProcessingException {
         Objects.requireNonNull(response.getBody(), "response body is not allowed to be null");
         ObjectMapper mapper = new ObjectMapper();
         return mapper.readValue(response.getBody(), pojo);
     }
 
-    public static <T> List<T> retrieveListJsonPojoFromResponse(ResponseEntity<String> response, Class<T> pojo) throws JsonProcessingException {
+    public static <T> T retrieveJsonToPojo(String json, Class<T> pojo) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
+        return mapper.readValue(json, pojo);
+    }
+
+    public static <T> List<T> retrieveListJsonToPojoFromResponse(ResponseEntity<String> response, Class<T> pojo) throws JsonProcessingException {
         Objects.requireNonNull(response.getBody(), "response body is not allowed to be null");
         ObjectMapper mapper = new ObjectMapper();
         return mapper.readValue(response.getBody(), mapper.getTypeFactory().constructCollectionType(List.class, pojo));
@@ -133,9 +140,16 @@ public class TestUtils {
         return null;
     }
 
-    public static <T> T retrieveXmlPojoFromResponse(ResponseEntity<String> response, Class<T> pojo) throws JAXBException {
+    public static <T> T retrieveXmlToPojoFromResponse(ResponseEntity<String> response, Class<T> pojo) throws JAXBException {
         Objects.requireNonNull(response.getBody(), "response body is not allowed to be null");
         StringReader readerResultBody = new StringReader(response.getBody());
+        JAXBContext jaxbContext = JAXBContext.newInstance(pojo);
+        Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+        return (T) unmarshaller.unmarshal(readerResultBody);
+    }
+
+    public static <T> T retrieveXmlToPojoFromResponse(String xml, Class<T> pojo) throws JAXBException {
+        StringReader readerResultBody = new StringReader(xml);
         JAXBContext jaxbContext = JAXBContext.newInstance(pojo);
         Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
         return (T) unmarshaller.unmarshal(readerResultBody);

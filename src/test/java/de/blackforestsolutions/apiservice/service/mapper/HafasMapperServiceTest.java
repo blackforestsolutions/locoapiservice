@@ -4,11 +4,13 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import de.blackforestsolutions.apiservice.objectmothers.PriceObjectMother;
 import de.blackforestsolutions.apiservice.service.supportservice.UuidService;
 import de.blackforestsolutions.datamodel.*;
+import de.blackforestsolutions.generatedcontent.hafas.response.journey.HafasJourneyResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import java.util.Map;
 import java.util.UUID;
@@ -16,6 +18,7 @@ import java.util.UUID;
 import static de.blackforestsolutions.apiservice.objectmothers.JourneyObjectMother.getEiderstrasseRendsburgToKarlsruheJourney;
 import static de.blackforestsolutions.apiservice.objectmothers.UUIDObjectMother.*;
 import static de.blackforestsolutions.apiservice.testutils.TestUtils.getResourceFileAsString;
+import static de.blackforestsolutions.apiservice.testutils.TestUtils.retrieveJsonToPojo;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
@@ -159,7 +162,15 @@ class HafasMapperServiceTest {
     }
 
     @Test
-    void test() {
+    void test_getJourneysFrom_with_wrong_pojo_returns_problem_with_nullPointerException() throws JsonProcessingException {
+        String json = getResourceFileAsString("json/dbHafasJourney.json");
+        HafasJourneyResponse testData = retrieveJsonToPojo(json, HafasJourneyResponse.class);
+        testData.getSvcResL().get(0).getRes().getOutConL().get(0).setDate(null);
+        HafasPriceMapper priceMapper = (price) -> new Price.PriceBuilder().build();
 
+        Map<UUID, JourneyStatus> result = ReflectionTestUtils.invokeMethod(classUnderTest, "getJourneysFrom", testData, TravelProvider.DB, priceMapper);
+
+        assertThat(result.get(TEST_UUID_3).getProblem().get().getExceptions().get(0)).isInstanceOf(NullPointerException.class);
+        assertThat(result.get(TEST_UUID_3).getProblem().get().getExceptions().get(0)).isInstanceOf(Exception.class);
     }
 }

@@ -26,4 +26,5 @@ public class UUIDObjectMother {
     public static final UUID TEST_UUID_20 = UUID.fromString("20d9d2ca-3b94-11ea-b77f-2e728ce88125");
     public static final UUID TEST_UUID_21 = UUID.fromString("21d9d2ca-3b94-11ea-b77f-2e728ce88125");
     public static final UUID TEST_UUID_22 = UUID.fromString("22d9d2ca-3b94-11ea-b77f-2e728ce88125");
+    public static final UUID TEST_UUID_23 = UUID.fromString("8241857f-9cdc-4d53-bf8a-af02976774c9");
 }

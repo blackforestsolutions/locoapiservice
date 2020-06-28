@@ -7,12 +7,14 @@ import de.blackforestsolutions.datamodel.Journey;
 import de.blackforestsolutions.datamodel.JourneyStatus;
 import de.blackforestsolutions.datamodel.Leg;
 import de.blackforestsolutions.datamodel.TravelLine;
+import de.blackforestsolutions.generatedcontent.searchCh.Route;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import java.text.ParseException;
 import java.util.LinkedHashMap;
@@ -21,6 +23,8 @@ import java.util.UUID;
 
 import static de.blackforestsolutions.apiservice.objectmothers.UUIDObjectMother.*;
 import static de.blackforestsolutions.apiservice.testutils.TestUtils.getResourceFileAsString;
+import static de.blackforestsolutions.apiservice.testutils.TestUtils.retrieveJsonToPojo;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class SearchChMapperServiceTest {
 
@@ -106,5 +110,17 @@ class SearchChMapperServiceTest {
         String result = classUnderTest.getIdFromStation(jsonResources);
 
         Assertions.assertThat(result).isEqualTo("Zürich, Förrlibuckstr. 60/62 ");
+    }
+
+    @Test
+    void test_mapRouteToJourneyMap_with_wrong_pojo_returns_problem_with_nullPointerException() throws JsonProcessingException {
+        String json = getResourceFileAsString("json/searchChTestRoute.json");
+        Route route = retrieveJsonToPojo(json, Route.class);
+        route.getConnections().get(0).getLegs().get(0).setDeparture(null);
+
+        Map<UUID, JourneyStatus> result = ReflectionTestUtils.invokeMethod(classUnderTest, "mapRouteToJourneyMap", route);
+
+        assertThat(result.get(TEST_UUID_3).getProblem().get().getExceptions().get(0)).isInstanceOf(NullPointerException.class);
+        assertThat(result.get(TEST_UUID_3).getProblem().get().getExceptions().get(0)).isInstanceOf(Exception.class);
     }
 }

@@ -18,7 +18,7 @@ import javax.annotation.Resource;
 import java.util.Date;
 
 import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.buildUrlWith;
-import static de.blackforestsolutions.apiservice.testutils.TestUtils.retrieveJsonPojoFromResponse;
+import static de.blackforestsolutions.apiservice.testutils.TestUtils.retrieveJsonToPojoFromResponse;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
@@ -49,7 +49,7 @@ class BBCApiServiceIT {
 
         assertThat(HttpStatus.OK).isEqualTo(result.getStatusCode());
         assertThat(result.getBody()).isNotEmpty();
-        assertThat(retrieveJsonPojoFromResponse(result, Rides.class).getPager().getTotal()).isGreaterThan(0);
+        assertThat(retrieveJsonToPojoFromResponse(result, Rides.class).getPager().getTotal()).isGreaterThan(0);
     }
 
     @Test
@@ -69,7 +69,7 @@ class BBCApiServiceIT {
 
         assertThat(HttpStatus.OK).isEqualTo(result.getStatusCode());
         assertThat(result.getBody()).isNotEmpty();
-        assertThat(retrieveJsonPojoFromResponse(result, Rides.class).getPager().getTotal()).isGreaterThan(0);
+        assertThat(retrieveJsonToPojoFromResponse(result, Rides.class).getPager().getTotal()).isGreaterThan(0);
     }
 
     @Test
@@ -89,7 +89,7 @@ class BBCApiServiceIT {
 
         assertThat(HttpStatus.OK).isEqualTo(result.getStatusCode());
         assertThat(result.getBody()).isNotEmpty();
-        assertThat(retrieveJsonPojoFromResponse(result, Rides.class).getPager().getTotal()).isGreaterThan(0);
+        assertThat(retrieveJsonToPojoFromResponse(result, Rides.class).getPager().getTotal()).isGreaterThan(0);
     }
 
     @Test
@@ -109,7 +109,7 @@ class BBCApiServiceIT {
 
         assertThat(HttpStatus.OK).isEqualTo(result.getStatusCode());
         assertThat(result.getBody()).isNotEmpty();
-        assertThat(retrieveJsonPojoFromResponse(result, Rides.class).getPager().getTotal()).isGreaterThan(0);
+        assertThat(retrieveJsonToPojoFromResponse(result, Rides.class).getPager().getTotal()).isGreaterThan(0);
     }
 
 

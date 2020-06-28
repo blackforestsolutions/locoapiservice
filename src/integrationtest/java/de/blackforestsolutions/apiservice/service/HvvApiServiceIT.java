@@ -22,7 +22,7 @@ import java.util.Date;
 
 import static de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother.getHvvTokenAndUrl;
 import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.buildUrlWith;
-import static de.blackforestsolutions.apiservice.testutils.TestUtils.retrieveJsonPojoFromResponse;
+import static de.blackforestsolutions.apiservice.testutils.TestUtils.retrieveJsonToPojoFromResponse;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -46,7 +46,7 @@ class HvvApiServiceIT {
 
         Assertions.assertThat(HttpStatus.OK).isEqualTo(result.getStatusCode());
         Assertions.assertThat(result.getBody()).isNotNull();
-        Assertions.assertThat(retrieveJsonPojoFromResponse(result, HvvStationList.class).getReturnCode()).isEqualTo("OK");
+        Assertions.assertThat(retrieveJsonToPojoFromResponse(result, HvvStationList.class).getReturnCode()).isEqualTo("OK");
     }
 
     @Test
@@ -59,7 +59,7 @@ class HvvApiServiceIT {
 
         Assertions.assertThat(HttpStatus.OK).isEqualTo(result.getStatusCode());
         Assertions.assertThat(result.getBody()).isNotEmpty();
-        Assertions.assertThat(retrieveJsonPojoFromResponse(result, HvvTravelPointResponse.class).getReturnCode()).isEqualTo("OK");
+        Assertions.assertThat(retrieveJsonToPojoFromResponse(result, HvvTravelPointResponse.class).getReturnCode()).isEqualTo("OK");
     }
 
     @Test
@@ -74,7 +74,7 @@ class HvvApiServiceIT {
 
         Assertions.assertThat(HttpStatus.OK).isEqualTo(result.getStatusCode());
         Assertions.assertThat(result.getBody()).isNotEmpty();
-        Assertions.assertThat(retrieveJsonPojoFromResponse(result, HvvRoute.class).getReturnCode()).isEqualTo("OK");
+        Assertions.assertThat(retrieveJsonToPojoFromResponse(result, HvvRoute.class).getReturnCode()).isEqualTo("OK");
     }
 
 

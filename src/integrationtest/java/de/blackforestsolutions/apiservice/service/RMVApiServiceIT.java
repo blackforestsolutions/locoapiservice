@@ -19,7 +19,7 @@ import javax.xml.bind.JAXBException;
 import java.util.Date;
 
 import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.buildUrlWith;
-import static de.blackforestsolutions.apiservice.testutils.TestUtils.retrieveXmlPojoFromResponse;
+import static de.blackforestsolutions.apiservice.testutils.TestUtils.retrieveXmlToPojoFromResponse;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -49,7 +49,7 @@ class RMVApiServiceIT {
 
         Assertions.assertThat(result.getStatusCode()).isEqualTo(HttpStatus.OK);
         Assertions.assertThat(result.getBody()).isNotEmpty();
-        Assertions.assertThat(retrieveXmlPojoFromResponse(result, LocationList.class).getStopLocationOrCoordLocation()).isNotEmpty();
+        Assertions.assertThat(retrieveXmlToPojoFromResponse(result, LocationList.class).getStopLocationOrCoordLocation()).isNotEmpty();
     }
 
     @Test
@@ -64,7 +64,7 @@ class RMVApiServiceIT {
 
         Assertions.assertThat(HttpStatus.OK).isEqualTo(result.getStatusCode());
         Assertions.assertThat(result.getBody()).isNotEmpty();
-        Assertions.assertThat(retrieveXmlPojoFromResponse(result, LocationList.class).getStopLocationOrCoordLocation()).isNotEmpty();
+        Assertions.assertThat(retrieveXmlToPojoFromResponse(result, LocationList.class).getStopLocationOrCoordLocation()).isNotEmpty();
     }
 
     @Test
@@ -82,6 +82,6 @@ class RMVApiServiceIT {
 
         Assertions.assertThat(HttpStatus.OK).isEqualTo(result.getStatusCode());
         Assertions.assertThat(result.getBody()).isNotEmpty();
-        Assertions.assertThat(retrieveXmlPojoFromResponse(result, TripList.class).getTrip()).isNotEmpty();
+        Assertions.assertThat(retrieveXmlToPojoFromResponse(result, TripList.class).getTrip()).isNotEmpty();
     }
 }
