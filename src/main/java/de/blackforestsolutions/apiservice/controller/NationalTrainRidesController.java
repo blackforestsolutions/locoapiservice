@@ -1,7 +1,6 @@
 package de.blackforestsolutions.apiservice.controller;
 
 import com.google.common.annotations.VisibleForTesting;
-import de.blackforestsolutions.apiservice.service.communicationservice.DBApiService;
 import de.blackforestsolutions.apiservice.service.communicationservice.SearchChApiService;
 import de.blackforestsolutions.apiservice.service.communicationservice.bahnService.BahnJourneyDetailsService;
 import de.blackforestsolutions.apiservice.service.exceptionhandling.ExceptionHandlerService;
@@ -26,21 +25,17 @@ public class NationalTrainRidesController {
 
     private final LocoJsonMapper locoJsonMapper = new LocoJsonMapper();
     private final BahnJourneyDetailsService bahnJourneyDetailsService;
-    private final DBApiService dbApiService;
     private final SearchChApiService searchChApiService;
     private final ExceptionHandlerService exceptionHandlerService;
 
     @Resource(name = "bahnApiTokenAndUrlInformation")
     private ApiTokenAndUrlInformation bahnApiTokenAndUrlInformation;
-    @Resource(name = "dbApiTokenAndUrlInformation")
-    private ApiTokenAndUrlInformation dbApiTokenAndUrlInformation;
     @Resource(name = "searchApiTokenAndUrlInformation")
     private ApiTokenAndUrlInformation searchApiTokenAndUrlInformation;
 
     @Autowired
-    public NationalTrainRidesController(BahnJourneyDetailsService bahnJourneyDetailsService, DBApiService dbApiService, SearchChApiService searchChApiService, ExceptionHandlerService exceptionHandlerService) {
+    public NationalTrainRidesController(BahnJourneyDetailsService bahnJourneyDetailsService, SearchChApiService searchChApiService, ExceptionHandlerService exceptionHandlerService) {
         this.bahnJourneyDetailsService = bahnJourneyDetailsService;
-        this.dbApiService = dbApiService;
         this.searchChApiService = searchChApiService;
         this.exceptionHandlerService = exceptionHandlerService;
     }
@@ -50,17 +45,12 @@ public class NationalTrainRidesController {
         ApiTokenAndUrlInformation requestInformation = locoJsonMapper.mapJsonToApiTokenAndUrlInformation(request);
         return this.exceptionHandlerService.handleExceptions(Arrays.asList(
                 bahnJourneyDetailsService.getJourneysForRouteWith(getBahnApiTokenAndUrlInformation(requestInformation)),
-                dbApiService.getJourneysForRouteWith(getDbApiTokenAndUrlInformation(requestInformation)),
                 searchChApiService.getJourneysForRouteWith(getSearchApiTokenAndUrlInformation(requestInformation)))
         );
     }
 
     private ApiTokenAndUrlInformation getBahnApiTokenAndUrlInformation(ApiTokenAndUrlInformation request) {
         return RequestTokenHandler.getRequestApiTokenWith(request, bahnApiTokenAndUrlInformation);
-    }
-
-    private ApiTokenAndUrlInformation getDbApiTokenAndUrlInformation(ApiTokenAndUrlInformation request) {
-        return RequestTokenHandler.getRequestApiTokenWith(request, dbApiTokenAndUrlInformation);
     }
 
     private ApiTokenAndUrlInformation getSearchApiTokenAndUrlInformation(ApiTokenAndUrlInformation request) {
@@ -70,11 +60,6 @@ public class NationalTrainRidesController {
     @VisibleForTesting
     void setBahnApiTokenAndUrlInformation(ApiTokenAndUrlInformation bahnApiTokenAndUrlInformation) {
         this.bahnApiTokenAndUrlInformation = bahnApiTokenAndUrlInformation;
-    }
-
-    @VisibleForTesting
-    void setDbApiTokenAndUrlInformation(ApiTokenAndUrlInformation dbApiTokenAndUrlInformation) {
-        this.dbApiTokenAndUrlInformation = dbApiTokenAndUrlInformation;
     }
 
     @VisibleForTesting
