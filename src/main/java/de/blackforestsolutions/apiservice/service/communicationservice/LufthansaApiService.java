@@ -8,6 +8,5 @@ import java.util.Map;
 import java.util.UUID;
 
 public interface LufthansaApiService {
-
    CallStatus<Map<UUID, JourneyStatus>> getJourneysForRouteWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation);
 }

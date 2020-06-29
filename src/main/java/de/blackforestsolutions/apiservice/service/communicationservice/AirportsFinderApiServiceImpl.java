@@ -29,6 +29,7 @@ public class AirportsFinderApiServiceImpl implements AirportsFinderApiService {
         this.airportsFinderMapperService = airportsFinderMapperService;
     }
 
+
     @Override
     public CallStatus<LinkedHashSet<TravelPointStatus>> getAirportsWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
         try {

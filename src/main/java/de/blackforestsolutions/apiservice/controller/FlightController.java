@@ -65,6 +65,5 @@ public class FlightController {
     void setLufthansaApiTokenAndUrlInformation(ApiTokenAndUrlInformation lufthansaApiTokenAndUrlInformation) {
         this.lufthansaApiTokenAndUrlInformation = lufthansaApiTokenAndUrlInformation;
     }
-
 }
 
