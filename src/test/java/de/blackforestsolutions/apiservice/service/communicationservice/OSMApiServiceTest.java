@@ -1,5 +1,6 @@
 package de.blackforestsolutions.apiservice.service.communicationservice;
 
+import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 import de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother;
 import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallService;
 import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallServiceImpl;
@@ -9,18 +10,23 @@ import de.blackforestsolutions.apiservice.stubs.RestTemplateBuilderStub;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import de.blackforestsolutions.datamodel.CallStatus;
 import de.blackforestsolutions.datamodel.Coordinates;
+import de.blackforestsolutions.datamodel.Status;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
+import static de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother.getOSMApiTokenAndUrl;
 import static de.blackforestsolutions.apiservice.testutils.TestUtils.getResourceFileAsString;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.*;
 
 class OSMApiServiceTest {
-    private static final RestTemplate restTemplate = Mockito.mock(RestTemplate.class);
+    private static final RestTemplate restTemplate = mock(RestTemplate.class);
 
     private final RestTemplateBuilder restTemplateBuilder = new RestTemplateBuilderStub(restTemplate);
 
@@ -36,7 +42,7 @@ class OSMApiServiceTest {
         String departureJson = getResourceFileAsString("json/osmTravelPointDeparture.json");
         ResponseEntity<String> testResultDeparture = new ResponseEntity<>(departureJson, HttpStatus.OK);
         //noinspection unchecked (justification: no type known for runtime therefore)
-        Mockito.doReturn(testResultDeparture).when(restTemplate).exchange(Mockito.anyString(), Mockito.any(), Mockito.any(), Mockito.any(Class.class));
+        doReturn(testResultDeparture).when(restTemplate).exchange(anyString(), any(), any(), any(Class.class));
 
         CallStatus<Coordinates> result = classUnderTest.getCoordinatesFromTravelPointWith(testData, testData.getDeparture());
         Coordinates coordinatesResult = result.getCalledObject();
@@ -51,12 +57,59 @@ class OSMApiServiceTest {
         String arrivalJson = getResourceFileAsString("json/osmTravelPointArrival.json");
         ResponseEntity<String> testResultArrival = new ResponseEntity<>(arrivalJson, HttpStatus.OK);
         //noinspection unchecked (justification: no type known for runtime therefore)
-        Mockito.doReturn(testResultArrival).when(restTemplate).exchange(Mockito.anyString(), Mockito.any(), Mockito.any(), Mockito.any(Class.class));
+        doReturn(testResultArrival).when(restTemplate).exchange(anyString(), any(), any(), any(Class.class));
 
         CallStatus<Coordinates> result = classUnderTest.getCoordinatesFromTravelPointWith(testData, testData.getArrival());
         Coordinates coordinatesResult = result.getCalledObject();
 
         Assertions.assertEquals(48.0510888, coordinatesResult.getLatitude());
         Assertions.assertEquals(8.2073542, coordinatesResult.getLongitude());
+    }
+
+    @Test
+    void test_getCoordinatesFromTravelPointWith_apiToken_and_host_as_null_returns_failed_call_status() {
+        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder testData = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(getOSMApiTokenAndUrl());
+        testData.setHost(null);
+
+        CallStatus<Coordinates> result = classUnderTest.getCoordinatesFromTravelPointWith(testData.build(), testData.getArrival());
+
+        assertThat(result.getStatus()).isEqualTo(Status.FAILED);
+        assertThat(result.getException()).isInstanceOf(NullPointerException.class);
+    }
+
+    @Test
+    void test_getCoordinatesFromTravelPointWith_apiToken_and_wrong_mocked_http_answer_returns_failed_call_status() {
+        ApiTokenAndUrlInformation testData = getOSMApiTokenAndUrl();
+        when(restTemplate.exchange(anyString(), any(), any(), any(Class.class))).thenReturn(new ResponseEntity<>("", HttpStatus.BAD_REQUEST));
+
+        CallStatus<Coordinates> result = classUnderTest.getCoordinatesFromTravelPointWith(testData, testData.getArrival());
+
+        assertThat(result.getStatus()).isEqualTo(Status.FAILED);
+        assertThat(result.getException()).isInstanceOf(MismatchedInputException.class);
+    }
+
+    @Test
+    void test_getCoordinatesFromTravelPointWith_apiToken_throws_exception_during_http_call_returns_failed_call_status() {
+        ApiTokenAndUrlInformation testData = getOSMApiTokenAndUrl();
+        doThrow(new RuntimeException()).when(restTemplate).exchange(anyString(), any(), any(), any(Class.class));
+
+        CallStatus<Coordinates> result = classUnderTest.getCoordinatesFromTravelPointWith(testData, testData.getArrival());
+
+        assertThat(result.getStatus()).isEqualTo(Status.FAILED);
+        assertThat(result.getException()).isInstanceOf(RuntimeException.class);
+    }
+
+    @Test
+    void test_getCoordinatesFromTravelPointWith_wrong_pojo_returns__one_problem_with_nullPointerException() {
+        ApiTokenAndUrlInformation testData = getOSMApiTokenAndUrl();
+        String arrivalJson = getResourceFileAsString("json/osmTravelPointArrivalError.json");
+        ResponseEntity<String> testResultArrival = new ResponseEntity<>(arrivalJson, HttpStatus.OK);
+        //noinspection unchecked (justification: no type known for runtime therefore)
+        doReturn(testResultArrival).when(restTemplate).exchange(anyString(), any(), any(), any(Class.class));
+
+        CallStatus<Coordinates> result = classUnderTest.getCoordinatesFromTravelPointWith(testData, testData.getArrival());
+
+        assertThat(result.getException()).isInstanceOf(NullPointerException.class);
+        assertThat(result.getException()).isInstanceOf(Exception.class);
     }
 }

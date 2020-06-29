@@ -1,6 +1,5 @@
 package de.blackforestsolutions.apiservice.service.communicationservice;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallService;
 import de.blackforestsolutions.apiservice.service.mapper.AirportsFinderMapperService;
 import de.blackforestsolutions.apiservice.service.supportservice.AirportsFinderHttpCallBuilderService;
@@ -31,7 +30,7 @@ public class AirportsFinderApiServiceImpl implements AirportsFinderApiService {
     }
 
     @Override
-    public CallStatus<LinkedHashSet<TravelPointStatus>> getAirportsWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) throws JsonProcessingException {
+    public CallStatus<LinkedHashSet<TravelPointStatus>> getAirportsWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
         try {
             String url = getAirportsFinderRequestString(apiTokenAndUrlInformation);
             ResponseEntity<String> result = callService.get(url, airportsFinderHttpCallBuilderService.buildHttpEntityAirportsFinder(apiTokenAndUrlInformation));

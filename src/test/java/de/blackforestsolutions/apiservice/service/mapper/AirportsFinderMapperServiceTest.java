@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 
 import static de.blackforestsolutions.apiservice.objectmothers.TravelPointObjectMother.getTravelPointsForAirportsFinder;
 import static de.blackforestsolutions.apiservice.testutils.TestUtils.getResourceFileAsString;
@@ -28,7 +29,7 @@ class AirportsFinderMapperServiceTest {
     @Test
     void test_map_jsonObject_and_return_linkedHashSet_with_two_successful_and_one_failed_callstatus() throws JsonProcessingException {
         String airportsFinderResource = getResourceFileAsString("json/AirportsFinderJsons/fromTriberg300KmOnlyThree.json");
-        ArrayList<TravelPoint> testDataArrayList = getTravelPointsForAirportsFinder();
+        List<TravelPoint> testDataArrayList = getTravelPointsForAirportsFinder();
 
         LinkedHashSet<TravelPointStatus> result = classUnderTest.map(airportsFinderResource);
 

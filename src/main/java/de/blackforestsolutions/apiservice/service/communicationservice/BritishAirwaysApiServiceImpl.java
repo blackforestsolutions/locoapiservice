@@ -35,16 +35,13 @@ public class BritishAirwaysApiServiceImpl implements BritishAirwaysApiService {
 
     @Override
     public CallStatus<Map<UUID, JourneyStatus>> getJourneysForRouteWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
-        String url = getBritishAirwaysRequestString(apiTokenAndUrlInformation);
-        ResponseEntity<String> result;
         try {
-            result = callService.get(url, britishAirwaysHttpCallBuilderService.buildHttpEntityBritishAirways(apiTokenAndUrlInformation));
+            String url = getBritishAirwaysRequestString(apiTokenAndUrlInformation);
+            ResponseEntity<String> result = callService.get(url, britishAirwaysHttpCallBuilderService.buildHttpEntityBritishAirways(apiTokenAndUrlInformation));
             return new CallStatus<>(this.britishAirwaysMapperService.map(result.getBody()), Status.SUCCESS, null);
         } catch (Exception ex) {
             return new CallStatus<>(null, Status.FAILED, ex);
         }
-
-
     }
 
     private String getBritishAirwaysRequestString(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {

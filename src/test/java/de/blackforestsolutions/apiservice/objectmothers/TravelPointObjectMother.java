@@ -9,7 +9,7 @@ import de.blackforestsolutions.generatedcontent.hvv.request.SDType;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import static de.blackforestsolutions.apiservice.testutils.TestUtils.generateDateFrom;
@@ -537,31 +537,30 @@ public class TravelPointObjectMother {
         return travelPoint.build();
     }
 
-    public static ArrayList<TravelPoint> getTravelPointsForAirportsFinder() {
-        ArrayList<TravelPoint> testDataArrayList = new ArrayList<>();
-        TravelPoint.TravelPointBuilder zrhTravelPoint = new TravelPoint.TravelPointBuilder();
-        zrhTravelPoint.setStationId("ZRH");
-        zrhTravelPoint.setStationName("Zürich Airport");
-        Locale zrhCountry = new Locale("", "switzerland");
-        zrhTravelPoint.setCountry(zrhCountry);
-        Coordinates.CoordinatesBuilder zrhCoordinates = new Coordinates.CoordinatesBuilder();
-        zrhCoordinates.setLatitude(47.464699);
-        zrhCoordinates.setLongitude(8.54917);
-        zrhTravelPoint.setCity("Zurich");
-        zrhTravelPoint.setGpsCoordinates(zrhCoordinates.build());
+    public static List<TravelPoint> getTravelPointsForAirportsFinder() {
+        return List.of(
+                getZuerichAirportTravelPoint(),
+                getBadenBadenTravelPoint()
+        );
+    }
 
-        TravelPoint.TravelPointBuilder fkbTravelPoint = new TravelPoint.TravelPointBuilder();
-        fkbTravelPoint.setStationId("FKB");
-        fkbTravelPoint.setStationName("Karlsruhe Baden-Baden Airport");
-        Locale fkbCountry = new Locale("", "germany");
-        fkbTravelPoint.setCity("Karlsruhe/Baden-Baden");
-        fkbTravelPoint.setCountry(fkbCountry);
-        Coordinates.CoordinatesBuilder fkbCoordinates = new Coordinates.CoordinatesBuilder();
-        fkbCoordinates.setLatitude(48.7793998718);
-        fkbCoordinates.setLongitude(8.08049964905);
-        fkbTravelPoint.setGpsCoordinates(fkbCoordinates.build());
-        testDataArrayList.add(zrhTravelPoint.build());
-        testDataArrayList.add(fkbTravelPoint.build());
-        return testDataArrayList;
+    public static TravelPoint getZuerichAirportTravelPoint() {
+        TravelPoint.TravelPointBuilder travelPoint = new TravelPoint.TravelPointBuilder();
+        travelPoint.setStationId("ZRH");
+        travelPoint.setStationName("Zürich Airport");
+        travelPoint.setCountry(new Locale("", "switzerland"));
+        travelPoint.setCity("Zurich");
+        travelPoint.setGpsCoordinates(new Coordinates.CoordinatesBuilder(47.464699, 8.54917).build());
+        return travelPoint.build();
+    }
+
+    public static TravelPoint getBadenBadenTravelPoint() {
+        TravelPoint.TravelPointBuilder travelPoint = new TravelPoint.TravelPointBuilder();
+        travelPoint.setStationId("FKB");
+        travelPoint.setStationName("Karlsruhe Baden-Baden Airport");
+        travelPoint.setCity("Karlsruhe/Baden-Baden");
+        travelPoint.setCountry(new Locale("", "germany"));
+        travelPoint.setGpsCoordinates(new Coordinates.CoordinatesBuilder(48.7793998718, 8.08049964905).build());
+        return travelPoint.build();
     }
 }

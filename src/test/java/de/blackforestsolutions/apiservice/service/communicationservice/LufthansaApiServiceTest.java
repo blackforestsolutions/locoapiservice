@@ -1,5 +1,6 @@
 package de.blackforestsolutions.apiservice.service.communicationservice;
 
+import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 import de.blackforestsolutions.apiservice.configuration.AirportConfiguration;
 import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallService;
 import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallServiceImpl;
@@ -9,9 +10,7 @@ import de.blackforestsolutions.apiservice.service.supportservice.LuftHansaHttpCa
 import de.blackforestsolutions.apiservice.service.supportservice.LufthansaHttpCallBuilderServiceImpl;
 import de.blackforestsolutions.apiservice.service.supportservice.UuidService;
 import de.blackforestsolutions.apiservice.stubs.RestTemplateBuilderStub;
-import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
-import de.blackforestsolutions.datamodel.JourneyStatus;
-import de.blackforestsolutions.datamodel.TravelProvider;
+import de.blackforestsolutions.datamodel.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -82,23 +81,53 @@ class LufthansaApiServiceTest {
     @SuppressWarnings("OptionalGetWithoutIsPresent")
     @Test
     void test_getJourneysForRouteFromApiWith_with_mocked_rest_service_is_executed_correctly_and_maps_correctly_returns_map() throws Exception {
-        ApiTokenAndUrlInformation apiTokenAndUrlInformation = getLufthansaTokenAndUrl();
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder = builder.buildFrom(apiTokenAndUrlInformation);
+        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder testData = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(getLufthansaTokenAndUrl());
         Date now = formatDate(new Date());
-        builder.setArrivalDate(now);
-        builder.setDepartureDate(now);
-        apiTokenAndUrlInformation = builder.build();
+        testData.setArrivalDate(now);
+        testData.setDepartureDate(now);
         String scheduledResourcesJson = getResourceFileAsString("json/lufthansaJourneyTest.json");
         ResponseEntity<String> testResult = new ResponseEntity<>(scheduledResourcesJson, HttpStatus.OK);
         //noinspection unchecked (justification: no type known for runtime therefore)
         doReturn(testResult).when(restTemplate).exchange(anyString(), any(), any(), any(Class.class));
 
-        Map<UUID, JourneyStatus> result = classUnderTest.getJourneysForRouteWith(apiTokenAndUrlInformation).getCalledObject();
+        Map<UUID, JourneyStatus> result = classUnderTest.getJourneysForRouteWith(testData.build()).getCalledObject();
 
         assertThat("E90").isEqualTo(result.get(TEST_UUID_11).getJourney().get().getLegs().get(TEST_UUID_12).getVehicleNumber());
         assertThat(TravelProvider.LUFTHANSA).isEqualTo(result.get(TEST_UUID_11).getJourney().get().getLegs().get(TEST_UUID_12).getTravelProvider());
         assertThat("LH1191").isEqualTo(result.get(TEST_UUID_11).getJourney().get().getLegs().get(TEST_UUID_12).getProviderId());
+    }
+
+    @Test
+    void test_getJourneysForRouteWith_apiToken_and_host_as_null_returns_failed_call_status() {
+        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder testData = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(getLufthansaTokenAndUrl());
+        testData.setHost(null);
+
+        CallStatus<Map<UUID, JourneyStatus>> result = classUnderTest.getJourneysForRouteWith(testData.build());
+
+        assertThat(result.getStatus()).isEqualTo(Status.FAILED);
+        assertThat(result.getException()).isInstanceOf(NullPointerException.class);
+    }
+
+    @Test
+    void test_getJourneysForRouteWith_apiToken_and_wrong_mocked_http_answer_returns_failed_call_status() {
+        ApiTokenAndUrlInformation testData = getLufthansaTokenAndUrl();
+        when(restTemplate.exchange(anyString(), any(), any(), any(Class.class))).thenReturn(new ResponseEntity<>("", HttpStatus.BAD_REQUEST));
+
+        CallStatus<Map<UUID, JourneyStatus>> result = classUnderTest.getJourneysForRouteWith(testData);
+
+        assertThat(result.getStatus()).isEqualTo(Status.FAILED);
+        assertThat(result.getException()).isInstanceOf(MismatchedInputException.class);
+    }
+
+    @Test
+    void test_getJourneysForRouteWith_apiToken_throws_exception_during_http_call_returns_failed_call_status() {
+        ApiTokenAndUrlInformation testData = getLufthansaTokenAndUrl();
+        doThrow(new RuntimeException()).when(restTemplate).exchange(anyString(), any(), any(), any(Class.class));
+
+        CallStatus<Map<UUID, JourneyStatus>> result = classUnderTest.getJourneysForRouteWith(testData);
+
+        assertThat(result.getStatus()).isEqualTo(Status.FAILED);
+        assertThat(result.getException()).isInstanceOf(RuntimeException.class);
     }
 }
 

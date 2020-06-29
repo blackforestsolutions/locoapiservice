@@ -47,9 +47,8 @@ public class BahnJourneyDetailsServiceImpl implements BahnJourneyDetailsService 
 
     @Override
     public CallStatus<Map<UUID, JourneyStatus>> getJourneysForRouteWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
-        String url;
         try {
-            url = getBahnJourneyDetailsRequestString(apiTokenAndUrlInformation);
+            String url = getBahnJourneyDetailsRequestString(apiTokenAndUrlInformation);
             ResponseEntity<String> result = callService.get(url, bahnHttpCallBuilderService.buildHttpEntityForBahn(apiTokenAndUrlInformation));
             return new CallStatus<>(map(result.getBody()), Status.SUCCESS, null);
         } catch (Exception e) {

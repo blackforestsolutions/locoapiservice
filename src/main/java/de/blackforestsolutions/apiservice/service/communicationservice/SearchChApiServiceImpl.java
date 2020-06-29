@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.Map;
 import java.util.UUID;
@@ -52,7 +51,7 @@ public class SearchChApiServiceImpl implements SearchChApiService {
         }
     }
 
-    private String getIdFromStation(ApiTokenAndUrlInformation apiTokenAndUrlInformation, String station) throws IOException {
+    private String getIdFromStation(ApiTokenAndUrlInformation apiTokenAndUrlInformation, String station) throws Exception {
         String url = getTravelPointRequestString(apiTokenAndUrlInformation, station);
         ResponseEntity<String> result = callService.get(url, buildEmptyHttpEntity());
         return searchChMapperService.getIdFromStation(result.getBody());

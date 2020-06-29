@@ -24,7 +24,8 @@ class AirportsFinderHttpCallBuilderServiceTest {
     void test_buildHttpHeadersForAirportsFinderWith_AirportsFinderTokenAndUrlInfo_returns_correct_header() {
         ApiTokenAndUrlInformation apiTokenAndUrlInformation = ApiTokenAndUrlInformationObjectMother.getAirportsFinderTokenAndUrl();
 
-        HttpHeaders result = classUnderTest.buildHttpHeaderForAirportsFinderWith(apiTokenAndUrlInformation);
+        HttpHeaders result = classUnderTest.buildHttpEntityAirportsFinder(apiTokenAndUrlInformation).getHeaders();
+
         Assertions.assertThat(result.get(apiTokenAndUrlInformation.getAuthorizationKey())).contains(apiTokenAndUrlInformation.getAuthorization());
     }
 

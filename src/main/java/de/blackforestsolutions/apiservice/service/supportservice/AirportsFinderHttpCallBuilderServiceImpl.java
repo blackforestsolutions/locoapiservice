@@ -49,8 +49,7 @@ public class AirportsFinderHttpCallBuilderServiceImpl implements AirportsFinderH
         return new HttpEntity<>(buildHttpHeaderForAirportsFinderWith(apiTokenAndUrlInformation));
     }
 
-    @Override
-    public HttpHeaders buildHttpHeaderForAirportsFinderWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
+    private HttpHeaders buildHttpHeaderForAirportsFinderWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
         HttpHeaders httpHeaders = buildBasicHttpHeader();
         setAirportsFinderClientKeyFor(httpHeaders, apiTokenAndUrlInformation);
         return httpHeaders;

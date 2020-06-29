@@ -7,9 +7,7 @@ import de.blackforestsolutions.apiservice.service.supportservice.RMVHttpCallBuil
 import de.blackforestsolutions.apiservice.service.supportservice.RMVHttpCallBuilderServiceImpl;
 import de.blackforestsolutions.apiservice.service.supportservice.UuidService;
 import de.blackforestsolutions.apiservice.service.supportservice.UuidServiceImpl;
-import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
-import de.blackforestsolutions.datamodel.Coordinates;
-import de.blackforestsolutions.datamodel.JourneyStatus;
+import de.blackforestsolutions.datamodel.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
@@ -19,6 +17,8 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import javax.xml.bind.UnmarshalException;
+import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -106,5 +106,71 @@ class RMVApiServiceTest {
                 getRMVTokenAndUrl("", "").getArrivalCoordinates()));
         assertThat(callServiceArg.getValue()).contains("originId=A%3D2%40O%3DLorch+-+Lorchhausen%2C+Oberflecken%40X%3D7785108%40Y%3D50053277%40U%3D103%40b%3D990117421%40B%3D1%40V%3D6.9%2C%40p%3D1530862110%40");
         assertThat(callServiceArg.getValue()).contains("destId=A=1@O=Frankfurt (Main) Hauptbahnhof@X=8662653@Y=50106808@U=80@L=003000010@B=1@V=6.9,@p=1575313337@");
+    }
+
+    @Test
+    void test_getJourneysForRouteByCoordinatesWith_apiToken_and_host_as_null_returns_failed_call_status() throws ParseException {
+        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder testData = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(getRMVTokenAndUrl("", ""));
+        testData.setHost(null);
+
+        CallStatus<Map<UUID, JourneyStatus>> result = classUnderTest.getJourneysForRouteByCoordinatesWith(testData.build());
+
+        assertThat(result.getStatus()).isEqualTo(Status.FAILED);
+        assertThat(result.getException()).isInstanceOf(NullPointerException.class);
+    }
+
+    @Test
+    void test_getJourneysForRouteByCoordinatesWith_apiToken_and_wrong_mocked_http_answer_returns_failed_call_status() throws ParseException {
+        ApiTokenAndUrlInformation testData = getRMVTokenAndUrl("", "");
+        when(callService.get(anyString(), any())).thenReturn(new ResponseEntity<>("", HttpStatus.BAD_REQUEST));
+
+        CallStatus<Map<UUID, JourneyStatus>> result = classUnderTest.getJourneysForRouteByCoordinatesWith(testData);
+
+        assertThat(result.getStatus()).isEqualTo(Status.FAILED);
+        assertThat(result.getException()).isInstanceOf(UnmarshalException.class);
+    }
+
+    @Test
+    void test_getJourneysForRouteByCoordinatesWith_apiToken_throws_exception_during_http_call_returns_failed_call_status() throws ParseException {
+        ApiTokenAndUrlInformation testData = getRMVTokenAndUrl("", "");
+        doThrow(new RuntimeException()).when(callService).get(anyString(), any());
+
+        CallStatus<Map<UUID, JourneyStatus>> result = classUnderTest.getJourneysForRouteByCoordinatesWith(testData);
+
+        assertThat(result.getStatus()).isEqualTo(Status.FAILED);
+        assertThat(result.getException()).isInstanceOf(RuntimeException.class);
+    }
+
+    @Test
+    void test_getJourneysForRouteBySearchStringWith_apiToken_and_host_as_null_returns_failed_call_status() throws ParseException {
+        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder testData = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(getRMVTokenAndUrl("", ""));
+        testData.setHost(null);
+
+        CallStatus<Map<UUID, JourneyStatus>> result = classUnderTest.getJourneysForRouteBySearchStringWith(testData.build());
+
+        assertThat(result.getStatus()).isEqualTo(Status.FAILED);
+        assertThat(result.getException()).isInstanceOf(NullPointerException.class);
+    }
+
+    @Test
+    void test_getJourneysForRouteBySearchStringWith_apiToken_and_wrong_mocked_http_answer_returns_failed_call_status() throws ParseException {
+        ApiTokenAndUrlInformation testData = getRMVTokenAndUrl("", "");
+        when(callService.get(anyString(), any())).thenReturn(new ResponseEntity<>("", HttpStatus.BAD_REQUEST));
+
+        CallStatus<Map<UUID, JourneyStatus>> result = classUnderTest.getJourneysForRouteBySearchStringWith(testData);
+
+        assertThat(result.getStatus()).isEqualTo(Status.FAILED);
+        assertThat(result.getException()).isInstanceOf(UnmarshalException.class);
+    }
+
+    @Test
+    void test_getJourneysForRouteBySearchStringWith_apiToken_throws_exception_during_http_call_returns_failed_call_status() throws ParseException {
+        ApiTokenAndUrlInformation testData = getRMVTokenAndUrl("", "");
+        doThrow(new RuntimeException()).when(callService).get(anyString(), any());
+
+        CallStatus<Map<UUID, JourneyStatus>> result = classUnderTest.getJourneysForRouteBySearchStringWith(testData);
+
+        assertThat(result.getStatus()).isEqualTo(Status.FAILED);
+        assertThat(result.getException()).isInstanceOf(RuntimeException.class);
     }
 }

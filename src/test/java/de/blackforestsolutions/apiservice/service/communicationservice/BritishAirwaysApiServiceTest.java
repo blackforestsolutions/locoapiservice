@@ -1,7 +1,7 @@
 package de.blackforestsolutions.apiservice.service.communicationservice;
 
+import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 import de.blackforestsolutions.apiservice.configuration.AirportConfiguration;
-import de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother;
 import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallService;
 import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallServiceImpl;
 import de.blackforestsolutions.apiservice.service.mapper.BritishAirwaysMapperService;
@@ -11,10 +11,9 @@ import de.blackforestsolutions.apiservice.service.supportservice.BritishAirwaysH
 import de.blackforestsolutions.apiservice.service.supportservice.UuidService;
 import de.blackforestsolutions.apiservice.stubs.RestTemplateBuilderStub;
 import de.blackforestsolutions.apiservice.testutils.TestUtils;
-import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
-import de.blackforestsolutions.datamodel.JourneyStatus;
-import de.blackforestsolutions.datamodel.TravelProvider;
+import de.blackforestsolutions.datamodel.*;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mockito;
@@ -30,11 +29,13 @@ import java.util.Date;
 import java.util.Map;
 import java.util.UUID;
 
+import static de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother.getBritishAirwaysTokenAndUrl;
 import static de.blackforestsolutions.apiservice.objectmothers.UUIDObjectMother.*;
+import static de.blackforestsolutions.apiservice.testutils.TestUtils.getResourceFileAsString;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.*;
 
 class BritishAirwaysApiServiceTest {
     private static final RestTemplate restTemplate = mock(RestTemplate.class);
@@ -62,23 +63,32 @@ class BritishAirwaysApiServiceTest {
         return inFormat.parse(dateTime);
     }
 
+    @BeforeEach
+    void init() {
+        Mockito.when(mockedUuidService.createUUID())
+                .thenReturn(TEST_UUID_1)
+                .thenReturn(TEST_UUID_2)
+                .thenReturn(TEST_UUID_3)
+                .thenReturn(TEST_UUID_4)
+                .thenReturn(TEST_UUID_5)
+                .thenReturn(TEST_UUID_6)
+                .thenReturn(TEST_UUID_7)
+                .thenReturn(TEST_UUID_8);
+    }
+
     @SuppressWarnings("OptionalGetWithoutIsPresent")
     @Test
     void test1_getJourneysForRouteFromApiWith_with_mocked_rest_service_is_executed_correctly_and_maps_correctly_returns_map() throws Exception {
-        ApiTokenAndUrlInformation apiTokenAndUrlInformation = ApiTokenAndUrlInformationObjectMother.getBritishAirwaysTokenAndUrl();
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder = builder.buildFrom(apiTokenAndUrlInformation);
+        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder testData = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(getBritishAirwaysTokenAndUrl());
         Date now = TestUtils.formatDate(new Date());
-        builder.setArrivalDate(now);
-        builder.setDepartureDate(now);
-        apiTokenAndUrlInformation = builder.build();
+        testData.setArrivalDate(now);
+        testData.setDepartureDate(now);
         String scheduledResourcesJson = TestUtils.getResourceFileAsString("json/BritishAirwaysJsons/1_britishAirways_lhr_txl.json");
         ResponseEntity<String> testResult = new ResponseEntity<>(scheduledResourcesJson, HttpStatus.OK);
         //noinspection unchecked (justification: no type known for runtime therefore)
         doReturn(testResult).when(restTemplate).exchange(anyString(), any(), Mockito.any(), any(Class.class));
-        Mockito.when(mockedUuidService.createUUID()).thenReturn(TEST_UUID_1).thenReturn(TEST_UUID_2).thenReturn(TEST_UUID_3).thenReturn(TEST_UUID_4).thenReturn(TEST_UUID_5).thenReturn(TEST_UUID_6).thenReturn(TEST_UUID_7).thenReturn(TEST_UUID_8);
 
-        Map<UUID, JourneyStatus> result = classUnderTest.getJourneysForRouteWith(apiTokenAndUrlInformation).getCalledObject();
+        Map<UUID, JourneyStatus> result = classUnderTest.getJourneysForRouteWith(testData.build()).getCalledObject();
 
         Assertions.assertThat(TravelProvider.BRITISHAIRWAYS).isEqualTo(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getTravelProvider());
         Assertions.assertThat("0982").isEqualTo(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getProviderId());
@@ -134,20 +144,16 @@ class BritishAirwaysApiServiceTest {
     @SuppressWarnings("OptionalGetWithoutIsPresent")
     @Test
     void test2_getJourneysForRouteFromApiWith_with_mocked_rest_service_is_executed_correctly_and_maps_correctly_returns_map() throws Exception {
-        ApiTokenAndUrlInformation apiTokenAndUrlInformation = ApiTokenAndUrlInformationObjectMother.getBritishAirwaysTokenAndUrl();
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder = builder.buildFrom(apiTokenAndUrlInformation);
+        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder testData = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(getBritishAirwaysTokenAndUrl());
         Date now = TestUtils.formatDate(new Date());
-        builder.setArrivalDate(now);
-        builder.setDepartureDate(now);
-        apiTokenAndUrlInformation = builder.build();
-        String scheduledResourcesJson = TestUtils.getResourceFileAsString("json/BritishAirwaysJsons/3_britishAirways_lhr_jfk.json");
+        testData.setArrivalDate(now);
+        testData.setDepartureDate(now);
+        String scheduledResourcesJson = getResourceFileAsString("json/BritishAirwaysJsons/3_britishAirways_lhr_jfk.json");
         ResponseEntity<String> testResult = new ResponseEntity<>(scheduledResourcesJson, HttpStatus.OK);
         //noinspection unchecked (justification: no type known for runtime therefore)
         doReturn(testResult).when(restTemplate).exchange(anyString(), any(), any(), any(Class.class));
-        Mockito.when(mockedUuidService.createUUID()).thenReturn(TEST_UUID_1).thenReturn(TEST_UUID_2).thenReturn(TEST_UUID_3).thenReturn(TEST_UUID_4).thenReturn(TEST_UUID_5).thenReturn(TEST_UUID_6).thenReturn(TEST_UUID_7).thenReturn(TEST_UUID_8);
 
-        Map<UUID, JourneyStatus> result = classUnderTest.getJourneysForRouteWith(apiTokenAndUrlInformation).getCalledObject();
+        Map<UUID, JourneyStatus> result = classUnderTest.getJourneysForRouteWith(testData.build()).getCalledObject();
 
         Assertions.assertThat(TravelProvider.BRITISHAIRWAYS).isEqualTo(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getTravelProvider());
         Assertions.assertThat("0117").isEqualTo(result.get(TEST_UUID_1).getJourney().get().getLegs().get(TEST_UUID_2).getProviderId());
@@ -200,6 +206,39 @@ class BritishAirwaysApiServiceTest {
         Assertions.assertThat(buildDateFrom("2020-01-11T18:10:00")).isEqualTo(result.get(TEST_UUID_7).getJourney().get().getLegs().get(TEST_UUID_8).getArrivalTime());
         Assertions.assertThat("AA").isEqualTo(result.get(TEST_UUID_7).getJourney().get().getLegs().get(TEST_UUID_8).getUnknownTravelProvider());
         Assertions.assertThat("772").isEqualTo(result.get(TEST_UUID_7).getJourney().get().getLegs().get(TEST_UUID_8).getVehicleNumber());
+    }
+
+    @Test
+    void test_getJourneysForRouteWith_apiToken_and_host_as_null_returns_failed_call_status() {
+        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder testData = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(getBritishAirwaysTokenAndUrl());
+        testData.setHost(null);
+
+        CallStatus<Map<UUID, JourneyStatus>> result = classUnderTest.getJourneysForRouteWith(testData.build());
+
+        assertThat(result.getStatus()).isEqualTo(Status.FAILED);
+        assertThat(result.getException()).isInstanceOf(NullPointerException.class);
+    }
+
+    @Test
+    void test_getJourneysForRouteWith_apiToken_and_wrong_mocked_http_answer_returns_failed_call_status() {
+        ApiTokenAndUrlInformation testData = getBritishAirwaysTokenAndUrl();
+        doReturn(new ResponseEntity<>("", HttpStatus.BAD_REQUEST)).when(restTemplate).exchange(anyString(), any(), any(), any(Class.class));
+
+        CallStatus<Map<UUID, JourneyStatus>> result = classUnderTest.getJourneysForRouteWith(testData);
+
+        assertThat(result.getStatus()).isEqualTo(Status.FAILED);
+        assertThat(result.getException()).isInstanceOf(MismatchedInputException.class);
+    }
+
+    @Test
+    void test_getJourneysForRouteWith_apiToken_throws_exception_during_http_call_returns_failed_call_status() {
+        ApiTokenAndUrlInformation testData = getBritishAirwaysTokenAndUrl();
+        doThrow(new RuntimeException()).when(restTemplate).exchange(anyString(), any(), any(), any(Class.class));
+
+        CallStatus<Map<UUID, JourneyStatus>> result = classUnderTest.getJourneysForRouteWith(testData);
+
+        assertThat(result.getStatus()).isEqualTo(Status.FAILED);
+        assertThat(result.getException()).isInstanceOf(RuntimeException.class);
     }
 
 }

@@ -130,6 +130,12 @@ public class TestUtils {
         return mapper.readValue(response.getBody(), mapper.getTypeFactory().constructCollectionType(List.class, pojo));
     }
 
+    public static <T> List<T> retrieveListJsonToPojoFromResponse(String json, Class<T> pojo) throws JsonProcessingException {
+        Objects.requireNonNull(json, "response body is not allowed to be null");
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.readValue(json, mapper.getTypeFactory().constructCollectionType(List.class, pojo));
+    }
+
     public static <T> String convertObjectToJsonString(T object) {
         ObjectMapper mapper = new ObjectMapper();
         try {
