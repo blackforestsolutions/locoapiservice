@@ -1,6 +1,7 @@
 package de.blackforestsolutions.apiservice.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import de.blackforestsolutions.apiservice.configuration.TimeConfiguration;
 import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallService;
 import de.blackforestsolutions.apiservice.service.supportservice.BBCHttpCallBuilderService;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
@@ -15,7 +16,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import javax.annotation.Resource;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.buildUrlWith;
 import static de.blackforestsolutions.apiservice.testutils.TestUtils.retrieveJsonToPojoFromResponse;
@@ -39,7 +41,7 @@ class BBCApiServiceIT {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder testData = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(bbcApiTokenAndUrlInformation);
         testData.setDeparture("Berlin");
         testData.setArrival("Hamburg");
-        testData.setDepartureDate(new Date());
+        testData.setDepartureDate(LocalDate.now().plus(1, ChronoUnit.DAYS).atStartOfDay(TimeConfiguration.GERMAN_TIME_ZONE));
         testData.setPath(bBCHttpCallBuilderService.bbcBuildJourneyStringPathWith(testData.build()));
 
         ResponseEntity<String> result = callService.get(
@@ -57,7 +59,7 @@ class BBCApiServiceIT {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder testData = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(bbcApiTokenAndUrlInformation);
         testData.setDepartureCoordinates(new Coordinates.CoordinatesBuilder(52.526455d, 13.367701d).build());
         testData.setArrivalCoordinates(new Coordinates.CoordinatesBuilder(53.553918d, 10.005147d).build());
-        testData.setDepartureDate(new Date());
+        testData.setDepartureDate(LocalDate.now().plus(1, ChronoUnit.DAYS).atStartOfDay(TimeConfiguration.GERMAN_TIME_ZONE));
         testData.setDeparture("Berlin");
         testData.setArrival("Hamburg");
         testData.setPath(bBCHttpCallBuilderService.bbcBuildJourneyStringPathWith(testData.build()));
@@ -77,7 +79,7 @@ class BBCApiServiceIT {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder testData = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(bbcApiTokenAndUrlInformation);
         testData.setDepartureCoordinates(new Coordinates.CoordinatesBuilder(52.526455d, 13.367701d).build());
         testData.setArrivalCoordinates(null);
-        testData.setDepartureDate(new Date());
+        testData.setDepartureDate(LocalDate.now().plus(1, ChronoUnit.DAYS).atStartOfDay(TimeConfiguration.GERMAN_TIME_ZONE));
         testData.setDeparture("Berlin");
         testData.setArrival("Hamburg");
         testData.setPath(bBCHttpCallBuilderService.bbcBuildJourneyStringPathWith(testData.build()));
@@ -96,7 +98,7 @@ class BBCApiServiceIT {
     void test_journey_with_arrivalDate() throws JsonProcessingException {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder testData = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(bbcApiTokenAndUrlInformation);
         testData.setDepartureCoordinates(new Coordinates.CoordinatesBuilder(52.526455d, 13.367701d).build());
-        testData.setArrivalDate(new Date());
+        testData.setArrivalDate(LocalDate.now().plus(2, ChronoUnit.DAYS).atStartOfDay(TimeConfiguration.GERMAN_TIME_ZONE));
         testData.setDeparture("Berlin");
         testData.setArrival("Hamburg");
         testData.setTimeIsDeparture(false);

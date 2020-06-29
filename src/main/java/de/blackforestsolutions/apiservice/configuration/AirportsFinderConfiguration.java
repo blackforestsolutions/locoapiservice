@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Bean;
 
 @SpringBootConfiguration
 public class AirportsFinderConfiguration {
-    public static final int CONFIGURED_BASE_PORT = 0;
+    private static final int CONFIGURED_BASE_PORT = 0;
     @Value("${accessProtocol}")
     private String accessProtocol;
     @Value("${xRapidapiKeyValue}")

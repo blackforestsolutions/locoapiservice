@@ -30,8 +30,7 @@ public class HazelcastApiServiceImpl extends HttpCallBuilder implements Hazelcas
 
     @Override
     public String readFromHazelcast(String key, ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder = builder.buildFrom(apiTokenAndUrlInformation);
+        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(apiTokenAndUrlInformation);
         builder.setPath(apiTokenAndUrlInformation.getHazelcastPath());
         URL hazelcastBaseUrl = buildUrlWith(builder.build());
         return hazelCallService.getEntryByKey(hazelcastBaseUrl.toString(), key);
@@ -60,8 +59,7 @@ public class HazelcastApiServiceImpl extends HttpCallBuilder implements Hazelcas
     public String writeToHazelcast(String key, String value, ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
         HttpHeaders headers = new HttpHeaders();
         setFormatToXmlFor(headers);
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder = builder.buildFrom(apiTokenAndUrlInformation);
+        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(apiTokenAndUrlInformation);
         builder.setPath(apiTokenAndUrlInformation.getHazelcastWritePath());
         URL hazelcastBaseUrl = buildUrlWith(builder.build());
         return hazelCallService.saveEntry(hazelcastBaseUrl.toString(), headers, key, value);
@@ -69,8 +67,7 @@ public class HazelcastApiServiceImpl extends HttpCallBuilder implements Hazelcas
 
     @Override
     public Map<String, String> readAllFromHazelcast(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder = builder.buildFrom(apiTokenAndUrlInformation);
+        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(apiTokenAndUrlInformation);
         builder.setPath(apiTokenAndUrlInformation.getHazelcastReadAllPath());
         URL hazelcastBaseUrl = buildUrlWith(builder.build());
         return hazelCallService.getAllEntries(hazelcastBaseUrl.toString());

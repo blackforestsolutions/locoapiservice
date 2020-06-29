@@ -3,10 +3,10 @@ package de.blackforestsolutions.apiservice.service.supportservice.hvv;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import de.blackforestsolutions.generatedcontent.hvv.request.*;
 
-import java.text.SimpleDateFormat;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Date;
 import java.util.Objects;
 
 import static de.blackforestsolutions.apiservice.service.supportservice.hvv.HvvHttpCallBuilder.combineBaseHttpBodyWithApiCallBody;
@@ -74,20 +74,18 @@ class HvvHttpBodyService {
         return combineBaseHttpBodyWithApiCallBody(journeyBody, apiTokenAndUrlInformation);
     }
 
-    private static Time getHvvTimeFormat(Date depatureDate) {
+    private static Time getHvvTimeFormat(ZonedDateTime depatureDate) {
         return new Time(
                 buildDateStringFrom(depatureDate),
                 buildTimeStringFrom(depatureDate)
         );
     }
 
-    private static String buildDateStringFrom(Date date) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-        return dateFormat.format(date);
+    private static String buildDateStringFrom(ZonedDateTime date) {
+        return date.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
     }
 
-    private static String buildTimeStringFrom(Date date) {
-        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
-        return timeFormat.format(date);
+    private static String buildTimeStringFrom(ZonedDateTime time) {
+        return time.format(DateTimeFormatter.ISO_LOCAL_TIME);
     }
 }

@@ -16,7 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import javax.annotation.Resource;
-import java.util.Date;
+import java.time.ZonedDateTime;
 
 import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.buildEmptyHttpEntity;
 import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.buildUrlWith;
@@ -41,7 +41,7 @@ class SearchChApiServiceIT {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder testData = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(searchApiTokenAndUrlInformation);
         testData.setDeparture("8503283");
         testData.setArrival("Zürich,+Förrlibuckstr.+60");
-        testData.setDepartureDate(new Date());
+        testData.setDepartureDate(ZonedDateTime.now());
         testData.setPath(searchChHttpCallBuilderService.buildSearchChRoutePath(testData.build()));
 
         ResponseEntity<String> result = callService.get(buildUrlWith(testData.build()).toString(), buildEmptyHttpEntity());

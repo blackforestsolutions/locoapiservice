@@ -9,7 +9,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.util.ReflectionTestUtils;
 
-import java.text.ParseException;
 import java.util.Map;
 import java.util.UUID;
 
@@ -48,7 +47,7 @@ class BBCMapperServiceTest {
     }
 
     @Test
-    void test_mapJsonToJourneys_returns_correct_journey() throws ParseException, JsonProcessingException {
+    void test_mapJsonToJourneys_returns_correct_journey() throws JsonProcessingException {
         String json = getResourceFileAsString("json/bbcTest.json");
         Journey expectedJourney = getFlughafenBerlinToHamburgHbfJourney();
 
@@ -62,7 +61,7 @@ class BBCMapperServiceTest {
     }
 
     @Test
-    void test_mapJsonToJourneys_returns_journey_without_vehicleName_and_travelLine() throws ParseException, JsonProcessingException {
+    void test_mapJsonToJourneys_returns_journey_without_vehicleName_and_travelLine() throws JsonProcessingException {
         String json = getResourceFileAsString("json/bbcTest.json");
         Journey expectedJourney = getBerlinHbfToHamburgLandwehrJourney();
 
@@ -84,6 +83,7 @@ class BBCMapperServiceTest {
 
         Map<UUID, JourneyStatus> result = ReflectionTestUtils.invokeMethod(classUnderTest, "buildJourneysWith", rides);
 
+        //noinspection ConstantConditions
         assertThat(result.size()).isEqualTo(2);
         assertThat(result.get(TEST_UUID_2).getProblem().get().getExceptions().get(0)).isInstanceOf(NullPointerException.class);
         assertThat(result.get(TEST_UUID_2).getProblem().get().getExceptions().get(0)).isInstanceOf(Exception.class);

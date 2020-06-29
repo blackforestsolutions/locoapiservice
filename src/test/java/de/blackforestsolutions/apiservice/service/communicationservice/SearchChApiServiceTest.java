@@ -28,8 +28,6 @@ import static de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInf
 import static de.blackforestsolutions.apiservice.objectmothers.UUIDObjectMother.*;
 import static de.blackforestsolutions.apiservice.testutils.TestUtils.getResourceFileAsString;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
 class SearchChApiServiceTest {
@@ -71,6 +69,7 @@ class SearchChApiServiceTest {
     @Test
     void test_getJourneysForRouteWith_apiToken_and_wrong_mocked_http_answer_returns_failed_call_status() {
         ApiTokenAndUrlInformation testData = getSearchChTokenAndUrl();
+        //noinspection unchecked
         when(REST_TEMPLATE.exchange(anyString(), any(), any(), any(Class.class))).thenReturn(new ResponseEntity<>("", HttpStatus.BAD_REQUEST));
 
         CallStatus<Map<UUID, JourneyStatus>> result = classUnderTest.getJourneysForRouteWith(testData);
@@ -82,6 +81,7 @@ class SearchChApiServiceTest {
     @Test
     void test_getJourneysForRouteWith_apiToken_throws_exception_during_http_call_returns_failed_call_status() {
         ApiTokenAndUrlInformation testData = getSearchChTokenAndUrl();
+        //noinspection unchecked
         doThrow(new RuntimeException()).when(REST_TEMPLATE).exchange(anyString(), any(), any(), any(Class.class));
 
         CallStatus<Map<UUID, JourneyStatus>> result = classUnderTest.getJourneysForRouteWith(testData);

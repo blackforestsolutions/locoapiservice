@@ -5,12 +5,11 @@ import de.blackforestsolutions.datamodel.JourneyStatus;
 import de.blackforestsolutions.datamodel.Problem;
 import de.blackforestsolutions.datamodel.Status;
 
-import java.text.ParseException;
 import java.util.*;
 
 public class CallStatusListObjectMother {
 
-    public static List<CallStatus<Map<UUID, JourneyStatus>>> retrieveCallStatusList() throws ParseException {
+    public static List<CallStatus<Map<UUID, JourneyStatus>>> retrieveCallStatusList() {
         List<CallStatus<Map<UUID, JourneyStatus>>> callStatuses = new ArrayList<>();
         Problem problem = new Problem.ProblemBuilder().setExceptions(List.of(new Exception("Test JourneyStatus"))).build();
         JourneyStatus journeyStatusProblem = new JourneyStatus();
@@ -19,8 +18,8 @@ public class CallStatusListObjectMother {
         JourneyStatus journeyStatus = new JourneyStatus();
         journeyStatus.setJourney(Optional.of(JourneyObjectMother.getBerlinHbfToHamburgLandwehrJourney()));
         journeyStatus.setProblem(Optional.empty());
-        CallStatus<Map<UUID, JourneyStatus>> callStatusSuccess = new CallStatus<Map<UUID, JourneyStatus>>(Collections.singletonMap(JourneyObjectMother.getBerlinHbfToHamburgLandwehrJourney().getId(), journeyStatus), Status.SUCCESS, null);
-        CallStatus<Map<UUID, JourneyStatus>> callStatusFailure = new CallStatus<Map<UUID, JourneyStatus>>(Collections.emptyMap(), Status.FAILED, new Exception("Test CallStatus"));
+        CallStatus<Map<UUID, JourneyStatus>> callStatusSuccess = new CallStatus<>(Collections.singletonMap(JourneyObjectMother.getBerlinHbfToHamburgLandwehrJourney().getId(), journeyStatus), Status.SUCCESS, null);
+        CallStatus<Map<UUID, JourneyStatus>> callStatusFailure = new CallStatus<>(Collections.emptyMap(), Status.FAILED, new Exception("Test CallStatus"));
         callStatuses.add(callStatusSuccess);
         callStatuses.add(callStatusFailure);
         return callStatuses;

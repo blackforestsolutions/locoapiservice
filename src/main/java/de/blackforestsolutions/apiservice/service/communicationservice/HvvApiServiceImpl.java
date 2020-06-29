@@ -46,20 +46,19 @@ public class HvvApiServiceImpl implements HvvApiService {
 
     @Override
     public CallStatus<List<TravelPoint>> getStationListFromHvvApiWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
-        String url = getHvvStationListRequestString(apiTokenAndUrlInformation);
-        ResponseEntity<String> result;
         try {
-            result = callService.post(url, httpCallBuilderService.buildStationListHttpEntityForHvv(apiTokenAndUrlInformation));
+            String url = getHvvRequestString(apiTokenAndUrlInformation, httpCallBuilderService.buildStationListPathWith(apiTokenAndUrlInformation));
+            ResponseEntity<String> result = callService.post(url, httpCallBuilderService.buildStationListHttpEntityForHvv(apiTokenAndUrlInformation));
             return new CallStatus<>(mapper.getStationListFrom(result.getBody()), Status.SUCCESS, null);
-        } catch (JsonProcessingException e) {
+        } catch (Exception e) {
             log.error("Error while processing json", e);
             return new CallStatus<>(null, Status.FAILED, e);
         }
     }
 
     private ResponseEntity<String> buildAndExceuteCall(ApiTokenAndUrlInformation apiTokenAndUrlInformation) throws JsonProcessingException {
-        String travelPointUrl = getHvvTravelPointRequestString(apiTokenAndUrlInformation);
-        String journeyUrl = getHvvJourneyRequestString(apiTokenAndUrlInformation);
+        String travelPointUrl = getHvvRequestString(apiTokenAndUrlInformation, httpCallBuilderService.buildTravelPointPathWith(apiTokenAndUrlInformation));
+        String journeyUrl = getHvvRequestString(apiTokenAndUrlInformation, httpCallBuilderService.buildJourneyPathWith(apiTokenAndUrlInformation));
 
         ResponseEntity<String> departureJson = callService.post(travelPointUrl, httpCallBuilderService.buildTravelPointHttpEntityForHvv(apiTokenAndUrlInformation, apiTokenAndUrlInformation.getDeparture()));
         HvvStation departure = mapper.getHvvStationFrom(departureJson.getBody());
@@ -71,44 +70,11 @@ public class HvvApiServiceImpl implements HvvApiService {
 
     }
 
-
-    private String getHvvTravelPointRequestString(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = buildFrom(apiTokenAndUrlInformation);
-        builder.setPath(httpCallBuilderService.buildTravelPointPathWith(builder.build()));
-
+    private String getHvvRequestString(ApiTokenAndUrlInformation apiTokenAndUrlInformation, String path) {
+        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(apiTokenAndUrlInformation);
+        builder.setPath(path);
         URL requestUrl = buildUrlWith(builder.build());
         return requestUrl.toString();
     }
-
-    private String getHvvJourneyRequestString(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = buildFrom(apiTokenAndUrlInformation);
-        builder.setPath(httpCallBuilderService.buildJourneyPathWith(builder.build()));
-
-        URL requestUrl = buildUrlWith(builder.build());
-        return requestUrl.toString();
-    }
-
-    private String getHvvStationListRequestString(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = buildFrom(apiTokenAndUrlInformation);
-        builder.setPath(httpCallBuilderService.buildStationListPathWith(builder.build()));
-
-        URL requestUrl = buildUrlWith(builder.build());
-        return requestUrl.toString();
-    }
-
-    private ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder buildFrom(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder = builder.buildFrom(apiTokenAndUrlInformation);
-
-        builder.setProtocol(apiTokenAndUrlInformation.getProtocol());
-        builder.setHost(apiTokenAndUrlInformation.getHost());
-        builder.setPathVariable(apiTokenAndUrlInformation.getPathVariable());
-        builder.setJourneyPathVariable(apiTokenAndUrlInformation.getJourneyPathVariable());
-        builder.setStationListPathVariable(apiTokenAndUrlInformation.getStationListPathVariable());
-        builder.setTravelPointPathVariable(apiTokenAndUrlInformation.getTravelPointPathVariable());
-
-        return builder;
-    }
-
 
 }

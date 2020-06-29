@@ -3,6 +3,7 @@ package de.blackforestsolutions.apiservice.service.mapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import de.blackforestsolutions.apiservice.configuration.TimeConfiguration;
 import de.blackforestsolutions.apiservice.service.supportservice.UuidService;
 import de.blackforestsolutions.datamodel.*;
 import de.blackforestsolutions.generatedcontent.britishairways.FlightsResponse;
@@ -10,8 +11,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -203,12 +205,7 @@ public class BritishAirwaysMapperServiceImpl implements BritishAirwaysMapperServ
         }
     }
 
-    private Date buildDateFrom(String dateTime) {
-        try {
-            return new SimpleDateFormat("yyyy-MM-dd'T'mm:ss").parse(dateTime);
-        } catch (ParseException e) {
-            log.error("Error while parsing Date and was replaced by new Date()", e);
-            return new Date();
-        }
+    private ZonedDateTime buildDateFrom(String dateTime) {
+        return LocalDateTime.parse(dateTime, DateTimeFormatter.ISO_DATE_TIME).atZone(TimeConfiguration.GERMAN_TIME_ZONE);
     }
 }

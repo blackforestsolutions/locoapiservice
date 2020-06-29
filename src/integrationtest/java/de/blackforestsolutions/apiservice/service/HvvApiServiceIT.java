@@ -18,7 +18,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import javax.annotation.Resource;
-import java.util.Date;
+import java.time.ZonedDateTime;
 
 import static de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother.getHvvTokenAndUrl;
 import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.buildUrlWith;
@@ -65,7 +65,7 @@ class HvvApiServiceIT {
     @Test
     void test_getJourney() throws JsonProcessingException {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder testData = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(hvvApiTokenAndUrlInformation);
-        testData.setDepartureDate(new Date());
+        testData.setDepartureDate(ZonedDateTime.now());
         testData.setPath(httpCallBuilderService.buildJourneyPathWith(testData.build()));
         HvvStation start = TravelPointObjectMother.getRosenhofHvvStation();
         HvvStation destination = TravelPointObjectMother.getStadthausbrueckeHvvStation();

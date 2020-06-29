@@ -45,7 +45,6 @@ public class LufthansaHttpCallBuilderServiceImpl implements LuftHansaHttpCallBui
                 .concat(transformDateToString(apiTokenAndUrlInformation.getDepartureDate()));
     }
 
-    @SuppressWarnings("rawtypes")
     @Override
     public HttpEntity<String> buildHttpEntityForLufthansaJourney(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
         return new HttpEntity<>(buildHttpHeadersForLufthansaJourney(apiTokenAndUrlInformation));

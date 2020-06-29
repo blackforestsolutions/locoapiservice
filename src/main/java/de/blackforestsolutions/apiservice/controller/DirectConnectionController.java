@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.io.IOException;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.Map;
 import java.util.UUID;
 
@@ -36,7 +36,7 @@ public class DirectConnectionController {
     @RequestMapping("/get")
     public Map<UUID, Journey> retrieveTrainJourneys(@RequestBody String request) throws IOException {
         ApiTokenAndUrlInformation requestInformation = locoJsonMapper.mapJsonToApiTokenAndUrlInformation(request);
-        return this.exceptionHandlerService.handleExceptions(Arrays.asList(
+        return this.exceptionHandlerService.handleExceptions(Collections.singletonList(
                 dbApiService.getJourneysForRouteWith(getDbApiTokenAndUrlInformation(requestInformation))
         ));
     }

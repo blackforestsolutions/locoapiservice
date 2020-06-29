@@ -59,39 +59,16 @@ public class SearchChApiServiceImpl implements SearchChApiService {
 
 
     private String getTravelPointRequestString(ApiTokenAndUrlInformation apiTokenAndUrlInformation, String location) {
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder = builder.buildFrom(apiTokenAndUrlInformation);
-        builder.setHost(apiTokenAndUrlInformation.getHost());
-        builder.setProtocol(apiTokenAndUrlInformation.getProtocol());
-        builder.setPathVariable(apiTokenAndUrlInformation.getPathVariable());
-        builder.setLocationPath(apiTokenAndUrlInformation.getLocationPath());
-        builder.setSearchChTermParameter(apiTokenAndUrlInformation.getSearchChTermParameter());
-        builder.setSearchChStationId(apiTokenAndUrlInformation.getSearchChStationId());
-        builder.setSearchChStationCoordinateParameter(apiTokenAndUrlInformation.getSearchChStationCoordinateParameter());
+        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(apiTokenAndUrlInformation);
         builder.setPath(searchChHttpCallBuilderService.buildSearchChLocationPath(builder.build(), location));
         URL requestUrl = buildUrlWith(builder.build());
         return requestUrl.toString();
     }
 
     private String getRouteRequestString(ApiTokenAndUrlInformation apiTokenAndUrlInformation, String departure, String arrival) {
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-
-        builder = builder.buildFrom(apiTokenAndUrlInformation);
-        builder.setProtocol(apiTokenAndUrlInformation.getProtocol());
-        builder.setHost(apiTokenAndUrlInformation.getHost());
-        builder.setPort(apiTokenAndUrlInformation.getPort());
-        builder.setPathVariable(apiTokenAndUrlInformation.getPathVariable());
-        builder.setSearchChRoutePathVariable(apiTokenAndUrlInformation.getSearchChRoutePathVariable());
+        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(apiTokenAndUrlInformation);
         builder.setDeparture(departure);
-        builder.setStartLocation(apiTokenAndUrlInformation.getStartLocation());
         builder.setArrival(arrival);
-        builder.setDestinationLocation(apiTokenAndUrlInformation.getDestinationLocation());
-        builder.setDatePathVariable(apiTokenAndUrlInformation.getDatePathVariable());
-        builder.setDepartureDate(apiTokenAndUrlInformation.getDepartureDate());
-        builder.setTimePathVariable(apiTokenAndUrlInformation.getTimePathVariable());
-        builder.setSearchChDelayParameter(apiTokenAndUrlInformation.getSearchChDelayParameter());
-        builder.setSearchChResults(apiTokenAndUrlInformation.getSearchChResults());
-
         builder.setPath(searchChHttpCallBuilderService.buildSearchChRoutePath(builder.build()));
         URL requestUrl = buildUrlWith(builder.build());
         return requestUrl.toString();

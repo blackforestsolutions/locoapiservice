@@ -4,8 +4,6 @@ import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpEntity;
 
-import java.text.ParseException;
-
 import static de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother.getRMVTokenAndUrl;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -14,7 +12,7 @@ class RMVHttpCallBuilderServiceTest {
     private final RMVHttpCallBuilderService classUnderTest = new RMVHttpCallBuilderServiceImpl();
 
     @Test
-    void test_buildLocationPathWith_locationPath_locationString_authorization_language_returns_correct_path() throws ParseException {
+    void test_buildLocationPathWith_locationPath_locationString_authorization_language_returns_correct_path() {
         ApiTokenAndUrlInformation testData = getRMVTokenAndUrl("", "");
 
         String result = classUnderTest.buildLocationStringPathWith(testData, "Lorch-Lorchhausen Bahnhof");
@@ -23,7 +21,7 @@ class RMVHttpCallBuilderServiceTest {
     }
 
     @Test
-    void test_buildLocationCoordinatesPathWith_coordinatesPath_authorization_language_radius_outputFormat_and_coordinates_return_correct_path() throws ParseException {
+    void test_buildLocationCoordinatesPathWith_coordinatesPath_authorization_language_radius_outputFormat_and_coordinates_return_correct_path() {
         ApiTokenAndUrlInformation testData = getRMVTokenAndUrl("", "");
 
         String result = classUnderTest.buildLocationCoordinatesPathWith(testData, testData.getDepartureCoordinates());
@@ -32,7 +30,7 @@ class RMVHttpCallBuilderServiceTest {
     }
 
     @Test
-    void test_buildTripPathWith_journeyDetailsPath_authorization_departure_arrival_timeIsDeparture_resultLengthBeforeAndAfterDate_allowIntermediateStops_return_correct_path() throws ParseException {
+    void test_buildTripPathWith_journeyDetailsPath_authorization_departure_arrival_timeIsDeparture_resultLengthBeforeAndAfterDate_allowIntermediateStops_return_correct_path() {
         ApiTokenAndUrlInformation testData = getRMVTokenAndUrl("003011037", "003000010");
 
         String result = classUnderTest.buildTripPathWith(testData);
@@ -41,7 +39,7 @@ class RMVHttpCallBuilderServiceTest {
     }
 
     @Test
-    void test_buildHttpEntityForRMV_with_authorization_returns_correct_header_and_entity() throws ParseException {
+    void test_buildHttpEntityForRMV_with_authorization_returns_correct_header_and_entity() {
         ApiTokenAndUrlInformation testData = getRMVTokenAndUrl("", "");
 
         HttpEntity<String> result = classUnderTest.buildHttpEntityForRMV(testData);

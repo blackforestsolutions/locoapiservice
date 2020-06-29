@@ -3,6 +3,7 @@ package de.blackforestsolutions.apiservice.service.mapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import de.blackforestsolutions.apiservice.configuration.TimeConfiguration;
 import de.blackforestsolutions.apiservice.service.supportservice.UuidService;
 import de.blackforestsolutions.datamodel.*;
 import de.blackforestsolutions.generatedcontent.hafas.response.journey.*;
@@ -13,10 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.geo.Distance;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -24,7 +25,6 @@ import java.util.stream.Collectors;
 
 import static de.blackforestsolutions.apiservice.service.mapper.JourneyStatusBuilder.createJourneyStatusProblemWith;
 import static de.blackforestsolutions.apiservice.service.mapper.JourneyStatusBuilder.createJourneyStatusWith;
-import static de.blackforestsolutions.apiservice.service.mapper.MapperService.generateDurationFromStartToDestination;
 import static de.blackforestsolutions.apiservice.service.mapper.MapperService.setPriceForLegBy;
 import static de.blackforestsolutions.apiservice.util.CoordinatesUtil.convertWGS84ToCoordinatesWith;
 
@@ -101,8 +101,8 @@ public class HafasMapperServiceImpl implements HafasMapperService {
         leg.setDestination(buildTravelPointWith(locations.get(betweenTrip.getArr().getLocX()), null, null, betweenTrip.getArr().getAPlatfS(), date));
         leg.setStartTime(buildDateWith(date, betweenTrip.getDep().getDTimeS()));
         leg.setArrivalTime(buildDateWith(date, betweenTrip.getArr().getATimeS()));
-        leg.setDuration(generateDurationFromStartToDestination(leg.getStartTime(), leg.getArrivalTime()));
-        Optional.ofNullable(betweenTrip.getArr().getATimeR()).ifPresent(prognosedArrivalTime -> leg.setDelay(generateDurationFromStartToDestination(leg.getArrivalTime(), buildDateWith(date, prognosedArrivalTime))));
+        leg.setDuration(Duration.between(leg.getStartTime(), leg.getArrivalTime()));
+        Optional.ofNullable(betweenTrip.getArr().getATimeR()).ifPresent(prognosedArrivalTime -> leg.setDelay(Duration.between(leg.getArrivalTime(), buildDateWith(date, prognosedArrivalTime))));
         setLegForWalkWith(betweenTrip, leg);
         setLegForJourneyWith(betweenTrip, travelProvider, leg, locations, vehicles, date);
         logNoValidTypeForJourney(betweenTrip);
@@ -196,21 +196,14 @@ public class HafasMapperServiceImpl implements HafasMapperService {
                 });
     }
 
-    private Date buildDateWith(String date, String time) {
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyyMMdd");
-        LocalDate datePart = LocalDate.parse(date, dateFormatter);
+    private ZonedDateTime buildDateWith(String date, String time) {
+        LocalDate datePart = LocalDate.parse(date, DateTimeFormatter.BASIC_ISO_DATE);
         if (time.length() == TIME_LENGTH) {
             time = StringUtils.substring(time, 2);
             datePart = datePart.plusDays(1);
         }
-        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmmss");
-        LocalTime timePart = LocalTime.parse(time, timeFormatter);
-        LocalDateTime dateTime = LocalDateTime.of(datePart, timePart);
-        return convertToDate(dateTime);
-    }
-
-    private Date convertToDate(LocalDateTime dateTime) {
-        return Date.from(dateTime.atZone(ZoneId.systemDefault()).toInstant());
+        LocalTime timePart = LocalTime.parse(time, DateTimeFormatter.ofPattern("HHmmss"));
+        return ZonedDateTime.of(datePart, timePart, TimeConfiguration.GERMAN_TIME_ZONE);
     }
 
     private VehicleType getVehicleType(String vehicleType) {

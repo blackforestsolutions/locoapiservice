@@ -16,7 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import javax.annotation.Resource;
-import java.util.Date;
+import java.time.ZonedDateTime;
 
 import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.buildUrlWith;
 import static de.blackforestsolutions.apiservice.testutils.TestUtils.retrieveListJsonToPojoFromResponse;
@@ -54,7 +54,7 @@ class BahnApiServiceIT {
     void test_BahnArrivalBoard_() throws JsonProcessingException {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder testData = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(bahnApiTokenAndUrlInformation);
         testData.setStationId("8011160");
-        testData.setDepartureDate(new Date());
+        testData.setDepartureDate(ZonedDateTime.now());
         testData.setPath(bahnHttpCallBuilderService.buildBahnArrivalBoardPathWith(testData.build()));
 
         ResponseEntity<String> result = callService.get(
@@ -72,7 +72,7 @@ class BahnApiServiceIT {
     void test_BahnDepartureBoard() throws JsonProcessingException {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder testData = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(bahnApiTokenAndUrlInformation);
         testData.setStationId("8011160");
-        testData.setDepartureDate(new Date());
+        testData.setDepartureDate(ZonedDateTime.now());
         testData.setPath(bahnHttpCallBuilderService.buildBahnDepartureBoardPathWith(testData.build()));
 
         ResponseEntity<String> result = callService.get(

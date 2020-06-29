@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
+import de.blackforestsolutions.apiservice.configuration.TimeConfiguration;
 import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallService;
 import de.blackforestsolutions.apiservice.service.mapper.JourneyStatusBuilder;
 import de.blackforestsolutions.apiservice.service.supportservice.BahnHttpCallBuilderService;
@@ -16,11 +17,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.Duration;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -58,13 +59,7 @@ public class BahnJourneyDetailsServiceImpl implements BahnJourneyDetailsService 
     }
 
     private String getBahnJourneyDetailsRequestString(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder = builder.buildFrom(apiTokenAndUrlInformation);
-        builder.setHost(apiTokenAndUrlInformation.getHost());
-        builder.setPathVariable(apiTokenAndUrlInformation.getPathVariable());
-        builder.setApiVersion(apiTokenAndUrlInformation.getApiVersion());
-        builder.setGermanRailJourneyDeatilsPath(apiTokenAndUrlInformation.getGermanRailJourneyDeatilsPath());
-        builder.setJourneyDetailsId(apiTokenAndUrlInformation.getJourneyDetailsId());
+        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(apiTokenAndUrlInformation);
         builder.setPath(bahnHttpCallBuilderService.buildBahnJourneyDetailsPath(builder.build()));
         return buildUrlWith(builder.build()).toString();
     }
@@ -114,10 +109,7 @@ public class BahnJourneyDetailsServiceImpl implements BahnJourneyDetailsService 
         journey.setTravelProvider(TravelProvider.DB);
         journey.setStartTime(buildTimeFrom(journeyDetailsStop.get(START).getDepTime()));
         journey.setArrivalTime(buildTimeFrom(journeyDetailsStop.get(DESTINATION).getArrTime()));
-        journey.setDuration(buildDurationBetween(
-                journey.getStartTime(),
-                journey.getArrivalTime()
-        ));
+        journey.setDuration(Duration.between(journey.getStartTime(), journey.getArrivalTime()));
         journey.setVehicleName(journeyDetailsStop.get(START).getType());
         journey.setVehicleNumber(journeyDetailsStop.get(START).getTrain());
 
@@ -161,26 +153,8 @@ public class BahnJourneyDetailsServiceImpl implements BahnJourneyDetailsService 
     }
 
 
-    private Date buildTimeFrom(String time) {
-        try {
-            return new SimpleDateFormat("HH:mm").parse(time);
-        } catch (ParseException e) {
-            log.error("could not parse time will use now instead", e);
-            return new Date();
-        }
-    }
-
-    private LocalDateTime convertToLocalDateTime(Date dateToConvert) {
-        return LocalDateTime.ofInstant(
-                dateToConvert.toInstant(),
-                ZoneId.systemDefault());
-    }
-
-    private Duration buildDurationBetween(Date departure, Date arrival) {
-        return Duration.between(
-                convertToLocalDateTime(departure),
-                convertToLocalDateTime(arrival)
-        );
+    private ZonedDateTime buildTimeFrom(String time) {
+        return LocalTime.parse(time, DateTimeFormatter.ofPattern("HH:mm")).atDate(LocalDate.now()).atZone(TimeConfiguration.GERMAN_TIME_ZONE);
     }
 
 }

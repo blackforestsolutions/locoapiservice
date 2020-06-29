@@ -2,6 +2,7 @@ package de.blackforestsolutions.apiservice.service.mapper;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import de.blackforestsolutions.apiservice.configuration.TimeConfiguration;
 import de.blackforestsolutions.apiservice.service.supportservice.UuidService;
 import de.blackforestsolutions.datamodel.*;
 import de.blackforestsolutions.generatedcontent.bbc.Duration;
@@ -10,21 +11,20 @@ import de.blackforestsolutions.generatedcontent.bbc.Rides;
 import de.blackforestsolutions.generatedcontent.bbc.Trip;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.geo.Distance;
 import org.springframework.data.geo.Metrics;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 import static de.blackforestsolutions.apiservice.service.mapper.JourneyStatusBuilder.createJourneyStatusProblemWith;
-import static de.blackforestsolutions.apiservice.service.mapper.MapperService.generateDurationFromStartToDestination;
 
 @Slf4j
 @Service
@@ -76,7 +76,7 @@ public class BBCMapperServiceImpl implements BBCMapperService {
         Leg.LegBuilder leg = new Leg.LegBuilder(uuidService.createUUID());
         leg.setStartTime(buildDateFrom(trip.getDepartureDate()));
         leg.setArrivalTime(buildArrivalTimeWith(leg.getStartTime(), trip.getDuration()));
-        leg.setDuration(generateDurationFromStartToDestination(leg.getStartTime(), leg.getArrivalTime()));
+        leg.setDuration(java.time.Duration.between(leg.getStartTime(), leg.getArrivalTime()));
         leg.setStart(buildTravelPointWith(trip.getDeparturePlace()));
         leg.setDestination(buildTravelPointWith(trip.getArrivalPlace()));
         leg.setPrice(buildPriceWith(trip));
@@ -127,21 +127,16 @@ public class BBCMapperServiceImpl implements BBCMapperService {
                 .collect(Collectors.toMap(betweenHold -> counter.getAndIncrement(), beweenHold -> beweenHold));
     }
 
-    private Date buildDateFrom(String date) {
-        try {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-            return simpleDateFormat.parse(date);
-        } catch (ParseException e) {
-            log.error("Error while parsing Date and was replaced by new Date()", e);
-            return new Date();
-        }
+    private ZonedDateTime buildDateFrom(String date) {
+        return LocalDateTime.parse(date, DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"))
+                .atZone(TimeConfiguration.GERMAN_TIME_ZONE);
     }
 
-    private Date buildArrivalTimeWith(Date departureTime, Duration duration) {
+    private ZonedDateTime buildArrivalTimeWith(ZonedDateTime departureTime, Duration duration) {
         if (!duration.getUnity().equals(SECONDS)) {
             log.error("No unity found for building arrival time!");
-            return new Date();
+            return ZonedDateTime.now();
         }
-        return DateUtils.addSeconds(departureTime, duration.getValue());
+        return departureTime.plusSeconds(duration.getValue());
     }
 }

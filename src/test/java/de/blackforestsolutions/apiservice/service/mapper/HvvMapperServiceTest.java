@@ -17,7 +17,6 @@ import org.mockito.Mockito;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -60,7 +59,7 @@ class HvvMapperServiceTest {
     }
 
     @Test
-    void test_getJourneyMapFrom_json_returns_map_with_journeys() throws ParseException, JsonProcessingException {
+    void test_getJourneyMapFrom_json_returns_map_with_journeys() throws JsonProcessingException {
         String jsonJourneys = getResourceFileAsString("json/hvvJourney.json");
         Journey testData = JourneyObjectMother.getGustavHeinemannStreetToUniversityJourney();
 
@@ -71,7 +70,7 @@ class HvvMapperServiceTest {
     }
 
     @Test
-    void test_getJourneyMapFrom_json_returns_correct_legs() throws ParseException, JsonProcessingException {
+    void test_getJourneyMapFrom_json_returns_correct_legs() throws JsonProcessingException {
         String jsonJourneys = getResourceFileAsString("json/hvvJourney.json");
         LinkedHashMap<UUID, Leg> testData = JourneyObjectMother.getGustavHeinemannStreetToUniversityJourney().getLegs();
 
@@ -98,6 +97,7 @@ class HvvMapperServiceTest {
 
         Map<UUID, JourneyStatus> result = ReflectionTestUtils.invokeMethod(classUnderTest, "mapHvvRouteToJourneyMap", hvvRoute);
 
+        //noinspection ConstantConditions
         assertThat(result.get(TEST_UUID_3).getProblem().get().getExceptions().get(0)).isInstanceOf(NullPointerException.class);
         assertThat(result.get(TEST_UUID_3).getProblem().get().getExceptions().get(0)).isInstanceOf(Exception.class);
     }

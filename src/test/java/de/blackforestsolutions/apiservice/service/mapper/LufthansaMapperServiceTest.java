@@ -93,6 +93,7 @@ class LufthansaMapperServiceTest {
 
         Map<UUID, JourneyStatus> result = ReflectionTestUtils.invokeMethod(classUnderTest, "mapScheduledResourceToJourneyList", scheduleResource);
 
+        //noinspection ConstantConditions
         assertThat(result.get(TEST_UUID_3).getProblem().get().getExceptions().get(0)).isInstanceOf(NullPointerException.class);
         assertThat(result.get(TEST_UUID_3).getProblem().get().getExceptions().get(0)).isInstanceOf(Exception.class);
     }

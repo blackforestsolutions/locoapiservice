@@ -12,8 +12,6 @@ import de.blackforestsolutions.datamodel.util.LocoJsonMapper;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import java.text.ParseException;
-
 import static org.mockito.Mockito.mock;
 
 class RegionalNationalTrainRidesControllerTest {
@@ -26,7 +24,7 @@ class RegionalNationalTrainRidesControllerTest {
     private final ExceptionHandlerService exceptionHandlerService = mock(ExceptionHandlerService.class);
     private final RegionalTrainRidesController classUnderTest = initClassUnderTest();
 
-    RegionalNationalTrainRidesControllerTest() throws ParseException {
+    RegionalNationalTrainRidesControllerTest() {
     }
 
     @Test
@@ -44,7 +42,7 @@ class RegionalNationalTrainRidesControllerTest {
         Mockito.verify(nahShApiService, Mockito.times(1)).getJourneysForRouteWith(Mockito.any(ApiTokenAndUrlInformation.class));
     }
 
-    private RegionalTrainRidesController initClassUnderTest() throws ParseException {
+    private RegionalTrainRidesController initClassUnderTest() {
         RegionalTrainRidesController classUnderTest = new RegionalTrainRidesController(hvvApiService, rmvApiService, vbbApiService, nahShApiService, exceptionHandlerService);
         classUnderTest.setHvvApiTokenAndUrlInformation(ApiTokenAndUrlInformationObjectMother.getHvvTokenAndUrl());
         classUnderTest.setRMVApiTokenAndUrlInformation(ApiTokenAndUrlInformationObjectMother.getRMVTokenAndUrl("", ""));

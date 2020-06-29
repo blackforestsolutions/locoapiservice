@@ -43,7 +43,6 @@ public class AirportsFinderHttpCallBuilderServiceImpl implements AirportsFinderH
                 .concat(latitude);
     }
 
-    @SuppressWarnings("rawtypes")
     @Override
     public HttpEntity<String> buildHttpEntityAirportsFinder(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
         return new HttpEntity<>(buildHttpHeaderForAirportsFinderWith(apiTokenAndUrlInformation));

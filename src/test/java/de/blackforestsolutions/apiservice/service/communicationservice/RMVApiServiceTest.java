@@ -18,7 +18,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import javax.xml.bind.UnmarshalException;
-import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -26,8 +25,6 @@ import java.util.UUID;
 import static de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother.getRMVTokenAndUrl;
 import static de.blackforestsolutions.apiservice.testutils.TestUtils.getResourceFileAsString;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
 class RMVApiServiceTest {
@@ -55,7 +52,6 @@ class RMVApiServiceTest {
     }
 
 
-    @SuppressWarnings("OptionalGetWithoutIsPresent")
     @Test
     void test_getJourneysForRouteBySearchStringWith_mocked_call_service_is_executed_correctly_and_map_correctly() throws Exception {
         String expectedDeparture = "Lorch-Lorchhausen Bahnhof";
@@ -109,7 +105,7 @@ class RMVApiServiceTest {
     }
 
     @Test
-    void test_getJourneysForRouteByCoordinatesWith_apiToken_and_host_as_null_returns_failed_call_status() throws ParseException {
+    void test_getJourneysForRouteByCoordinatesWith_apiToken_and_host_as_null_returns_failed_call_status() {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder testData = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(getRMVTokenAndUrl("", ""));
         testData.setHost(null);
 
@@ -120,7 +116,7 @@ class RMVApiServiceTest {
     }
 
     @Test
-    void test_getJourneysForRouteByCoordinatesWith_apiToken_and_wrong_mocked_http_answer_returns_failed_call_status() throws ParseException {
+    void test_getJourneysForRouteByCoordinatesWith_apiToken_and_wrong_mocked_http_answer_returns_failed_call_status() {
         ApiTokenAndUrlInformation testData = getRMVTokenAndUrl("", "");
         when(callService.get(anyString(), any())).thenReturn(new ResponseEntity<>("", HttpStatus.BAD_REQUEST));
 
@@ -131,7 +127,7 @@ class RMVApiServiceTest {
     }
 
     @Test
-    void test_getJourneysForRouteByCoordinatesWith_apiToken_throws_exception_during_http_call_returns_failed_call_status() throws ParseException {
+    void test_getJourneysForRouteByCoordinatesWith_apiToken_throws_exception_during_http_call_returns_failed_call_status() {
         ApiTokenAndUrlInformation testData = getRMVTokenAndUrl("", "");
         doThrow(new RuntimeException()).when(callService).get(anyString(), any());
 
@@ -142,7 +138,7 @@ class RMVApiServiceTest {
     }
 
     @Test
-    void test_getJourneysForRouteBySearchStringWith_apiToken_and_host_as_null_returns_failed_call_status() throws ParseException {
+    void test_getJourneysForRouteBySearchStringWith_apiToken_and_host_as_null_returns_failed_call_status() {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder testData = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(getRMVTokenAndUrl("", ""));
         testData.setHost(null);
 
@@ -153,7 +149,7 @@ class RMVApiServiceTest {
     }
 
     @Test
-    void test_getJourneysForRouteBySearchStringWith_apiToken_and_wrong_mocked_http_answer_returns_failed_call_status() throws ParseException {
+    void test_getJourneysForRouteBySearchStringWith_apiToken_and_wrong_mocked_http_answer_returns_failed_call_status() {
         ApiTokenAndUrlInformation testData = getRMVTokenAndUrl("", "");
         when(callService.get(anyString(), any())).thenReturn(new ResponseEntity<>("", HttpStatus.BAD_REQUEST));
 
@@ -164,7 +160,7 @@ class RMVApiServiceTest {
     }
 
     @Test
-    void test_getJourneysForRouteBySearchStringWith_apiToken_throws_exception_during_http_call_returns_failed_call_status() throws ParseException {
+    void test_getJourneysForRouteBySearchStringWith_apiToken_throws_exception_during_http_call_returns_failed_call_status() {
         ApiTokenAndUrlInformation testData = getRMVTokenAndUrl("", "");
         doThrow(new RuntimeException()).when(callService).get(anyString(), any());
 

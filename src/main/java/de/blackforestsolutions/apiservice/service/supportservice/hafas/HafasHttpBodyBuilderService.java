@@ -8,9 +8,12 @@ import de.blackforestsolutions.generatedcontent.hafas.request.locations.HafasReq
 import de.blackforestsolutions.generatedcontent.hafas.request.locations.Input;
 import de.blackforestsolutions.generatedcontent.hafas.request.locations.Loc;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.convertHttpModelToJson;
 
@@ -208,12 +211,11 @@ class HafasHttpBodyBuilderService {
         return auth;
     }
 
-    private static String transformDateToString(Date date) {
-        DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
-        return dateFormat.format(date);
+    private static String transformDateToString(ZonedDateTime date) {
+        return date.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
     }
 
-    private static String transformDateToTime(Date date) {
-        return new SimpleDateFormat("HHmmss").format(date);
+    private static String transformDateToTime(ZonedDateTime date) {
+        return date.format(DateTimeFormatter.ofPattern("HHmmss"));
     }
 }

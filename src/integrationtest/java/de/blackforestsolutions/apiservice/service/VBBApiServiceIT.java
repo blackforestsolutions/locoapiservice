@@ -15,7 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import javax.annotation.Resource;
-import java.util.Date;
+import java.time.ZonedDateTime;
 
 import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.buildUrlWith;
 import static de.blackforestsolutions.apiservice.testutils.TestUtils.retrieveJsonToPojoFromResponse;
@@ -52,7 +52,7 @@ class VBBApiServiceIT {
     void test_getJourney() throws JsonProcessingException {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder testData = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(vbbApiTokenAndUrlInformation);
         testData.setDeparture("770000350");
-        testData.setDepartureDate(new Date());
+        testData.setDepartureDate(ZonedDateTime.now());
         testData.setArrival("900985256");
         testData.setPath(httpCallBuilderService.buildPathWith(testData.build(), null));
 

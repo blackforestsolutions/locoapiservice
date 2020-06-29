@@ -39,9 +39,9 @@ class HvvApiServiceTest {
 
     private final HvvHttpCallBuilderService hvvHttpCallBuilderService = new HvvHttpCallBuilderServiceImpl();
 
-    private UuidService uuidService = new UuidServiceImpl();
+    private final UuidService uuidService = new UuidServiceImpl();
 
-    private HvvMapperService mapperService = spy(new HvvMapperServiceImpl(uuidService));
+    private final HvvMapperService mapperService = spy(new HvvMapperServiceImpl(uuidService));
 
     @InjectMocks
     private HvvApiService classUnderTest = new HvvApiServiceImpl(callService, hvvHttpCallBuilderService, mapperService);
@@ -108,6 +108,7 @@ class HvvApiServiceTest {
     @Test
     void test_getJourneysForRouteWith_apiToken_and_wrong_mocked_http_answer_returns_failed_call_status() {
         ApiTokenAndUrlInformation testData = getHvvTokenAndUrl();
+        //noinspection unchecked
         when(REST_TEMPLATE.exchange(anyString(), any(), any(), any(Class.class))).thenReturn(new ResponseEntity<>("", HttpStatus.BAD_REQUEST));
 
         CallStatus<Map<UUID, JourneyStatus>> result = classUnderTest.getJourneysForRouteWith(testData);
@@ -119,6 +120,7 @@ class HvvApiServiceTest {
     @Test
     void test_getJourneysForRouteWith_apiToken_throws_exception_during_http_call_returns_failed_call_status() {
         ApiTokenAndUrlInformation testData = getHvvTokenAndUrl();
+        //noinspection unchecked
         doThrow(new RuntimeException()).when(REST_TEMPLATE).exchange(anyString(), any(), any(), any(Class.class));
 
         CallStatus<Map<UUID, JourneyStatus>> result = classUnderTest.getJourneysForRouteWith(testData);

@@ -19,13 +19,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
-import java.util.Date;
+import java.time.ZonedDateTime;
 import java.util.Map;
 import java.util.UUID;
 
 import static de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother.getLufthansaTokenAndUrl;
 import static de.blackforestsolutions.apiservice.objectmothers.UUIDObjectMother.*;
-import static de.blackforestsolutions.apiservice.testutils.TestUtils.formatDate;
 import static de.blackforestsolutions.apiservice.testutils.TestUtils.getResourceFileAsString;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
@@ -80,11 +79,10 @@ class LufthansaApiServiceTest {
 
     @SuppressWarnings("OptionalGetWithoutIsPresent")
     @Test
-    void test_getJourneysForRouteFromApiWith_with_mocked_rest_service_is_executed_correctly_and_maps_correctly_returns_map() throws Exception {
+    void test_getJourneysForRouteFromApiWith_with_mocked_rest_service_is_executed_correctly_and_maps_correctly_returns_map() {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder testData = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(getLufthansaTokenAndUrl());
-        Date now = formatDate(new Date());
-        testData.setArrivalDate(now);
-        testData.setDepartureDate(now);
+        testData.setArrivalDate(ZonedDateTime.now());
+        testData.setDepartureDate(ZonedDateTime.now());
         String scheduledResourcesJson = getResourceFileAsString("json/lufthansaJourneyTest.json");
         ResponseEntity<String> testResult = new ResponseEntity<>(scheduledResourcesJson, HttpStatus.OK);
         //noinspection unchecked (justification: no type known for runtime therefore)
@@ -111,6 +109,7 @@ class LufthansaApiServiceTest {
     @Test
     void test_getJourneysForRouteWith_apiToken_and_wrong_mocked_http_answer_returns_failed_call_status() {
         ApiTokenAndUrlInformation testData = getLufthansaTokenAndUrl();
+        //noinspection unchecked
         when(restTemplate.exchange(anyString(), any(), any(), any(Class.class))).thenReturn(new ResponseEntity<>("", HttpStatus.BAD_REQUEST));
 
         CallStatus<Map<UUID, JourneyStatus>> result = classUnderTest.getJourneysForRouteWith(testData);
@@ -122,6 +121,7 @@ class LufthansaApiServiceTest {
     @Test
     void test_getJourneysForRouteWith_apiToken_throws_exception_during_http_call_returns_failed_call_status() {
         ApiTokenAndUrlInformation testData = getLufthansaTokenAndUrl();
+        //noinspection unchecked
         doThrow(new RuntimeException()).when(restTemplate).exchange(anyString(), any(), any(), any(Class.class));
 
         CallStatus<Map<UUID, JourneyStatus>> result = classUnderTest.getJourneysForRouteWith(testData);

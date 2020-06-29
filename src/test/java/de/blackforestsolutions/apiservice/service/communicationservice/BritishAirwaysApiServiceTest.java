@@ -2,6 +2,7 @@ package de.blackforestsolutions.apiservice.service.communicationservice;
 
 import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 import de.blackforestsolutions.apiservice.configuration.AirportConfiguration;
+import de.blackforestsolutions.apiservice.configuration.TimeConfiguration;
 import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallService;
 import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallServiceImpl;
 import de.blackforestsolutions.apiservice.service.mapper.BritishAirwaysMapperService;
@@ -23,9 +24,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Map;
 import java.util.UUID;
 
@@ -33,8 +34,6 @@ import static de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInf
 import static de.blackforestsolutions.apiservice.objectmothers.UUIDObjectMother.*;
 import static de.blackforestsolutions.apiservice.testutils.TestUtils.getResourceFileAsString;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
 class BritishAirwaysApiServiceTest {
@@ -58,9 +57,8 @@ class BritishAirwaysApiServiceTest {
     BritishAirwaysApiServiceTest() throws IOException {
     }
 
-    private Date buildDateFrom(String dateTime) throws ParseException {
-        SimpleDateFormat inFormat = new SimpleDateFormat("yyyy-MM-dd'T'mm:ss");
-        return inFormat.parse(dateTime);
+    private ZonedDateTime buildDateFrom(String dateTime) {
+        return LocalDateTime.parse(dateTime, DateTimeFormatter.ISO_LOCAL_DATE_TIME).atZone(TimeConfiguration.GERMAN_TIME_ZONE);
     }
 
     @BeforeEach
@@ -78,11 +76,10 @@ class BritishAirwaysApiServiceTest {
 
     @SuppressWarnings("OptionalGetWithoutIsPresent")
     @Test
-    void test1_getJourneysForRouteFromApiWith_with_mocked_rest_service_is_executed_correctly_and_maps_correctly_returns_map() throws Exception {
+    void test1_getJourneysForRouteFromApiWith_with_mocked_rest_service_is_executed_correctly_and_maps_correctly_returns_map() {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder testData = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(getBritishAirwaysTokenAndUrl());
-        Date now = TestUtils.formatDate(new Date());
-        testData.setArrivalDate(now);
-        testData.setDepartureDate(now);
+        testData.setArrivalDate(ZonedDateTime.now());
+        testData.setDepartureDate(ZonedDateTime.now());
         String scheduledResourcesJson = TestUtils.getResourceFileAsString("json/BritishAirwaysJsons/1_britishAirways_lhr_txl.json");
         ResponseEntity<String> testResult = new ResponseEntity<>(scheduledResourcesJson, HttpStatus.OK);
         //noinspection unchecked (justification: no type known for runtime therefore)
@@ -143,11 +140,10 @@ class BritishAirwaysApiServiceTest {
 
     @SuppressWarnings("OptionalGetWithoutIsPresent")
     @Test
-    void test2_getJourneysForRouteFromApiWith_with_mocked_rest_service_is_executed_correctly_and_maps_correctly_returns_map() throws Exception {
+    void test2_getJourneysForRouteFromApiWith_with_mocked_rest_service_is_executed_correctly_and_maps_correctly_returns_map() {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder testData = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(getBritishAirwaysTokenAndUrl());
-        Date now = TestUtils.formatDate(new Date());
-        testData.setArrivalDate(now);
-        testData.setDepartureDate(now);
+        testData.setArrivalDate(ZonedDateTime.now());
+        testData.setDepartureDate(ZonedDateTime.now());
         String scheduledResourcesJson = getResourceFileAsString("json/BritishAirwaysJsons/3_britishAirways_lhr_jfk.json");
         ResponseEntity<String> testResult = new ResponseEntity<>(scheduledResourcesJson, HttpStatus.OK);
         //noinspection unchecked (justification: no type known for runtime therefore)
@@ -222,6 +218,7 @@ class BritishAirwaysApiServiceTest {
     @Test
     void test_getJourneysForRouteWith_apiToken_and_wrong_mocked_http_answer_returns_failed_call_status() {
         ApiTokenAndUrlInformation testData = getBritishAirwaysTokenAndUrl();
+        //noinspection unchecked
         doReturn(new ResponseEntity<>("", HttpStatus.BAD_REQUEST)).when(restTemplate).exchange(anyString(), any(), any(), any(Class.class));
 
         CallStatus<Map<UUID, JourneyStatus>> result = classUnderTest.getJourneysForRouteWith(testData);
@@ -233,6 +230,7 @@ class BritishAirwaysApiServiceTest {
     @Test
     void test_getJourneysForRouteWith_apiToken_throws_exception_during_http_call_returns_failed_call_status() {
         ApiTokenAndUrlInformation testData = getBritishAirwaysTokenAndUrl();
+        //noinspection unchecked
         doThrow(new RuntimeException()).when(restTemplate).exchange(anyString(), any(), any(), any(Class.class));
 
         CallStatus<Map<UUID, JourneyStatus>> result = classUnderTest.getJourneysForRouteWith(testData);

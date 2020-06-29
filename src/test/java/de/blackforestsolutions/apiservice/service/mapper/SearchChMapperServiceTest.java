@@ -16,7 +16,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.test.util.ReflectionTestUtils;
 
-import java.text.ParseException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -54,7 +53,7 @@ class SearchChMapperServiceTest {
 
     @SuppressWarnings("OptionalGetWithoutIsPresent")
     @Test
-    void test_getJourneysFrom_with_json_and_return_correct_journey() throws ParseException, JsonProcessingException {
+    void test_getJourneysFrom_with_json_and_return_correct_journey() throws JsonProcessingException {
         String journeyJson = getResourceFileAsString("json/searchChTestRoute.json");
         Journey testJourneyData = JourneyObjectMother.getEinsiedeln_to_Zuerich_Foerlibuckstreet60_Journey();
 
@@ -65,7 +64,7 @@ class SearchChMapperServiceTest {
 
     @SuppressWarnings("OptionalGetWithoutIsPresent")
     @Test
-    void test_getJourneysFrom_with_json_and_return_correct_legs() throws ParseException, JsonProcessingException {
+    void test_getJourneysFrom_with_json_and_return_correct_legs() throws JsonProcessingException {
         String journeyJson = getResourceFileAsString("json/searchChTestRoute.json");
         LinkedHashMap<UUID, Leg> testLegs = JourneyObjectMother.getEinsiedeln_to_Zuerich_Foerlibuckstreet60_Journey().getLegs();
 
@@ -80,7 +79,7 @@ class SearchChMapperServiceTest {
 
     @SuppressWarnings("OptionalGetWithoutIsPresent")
     @Test
-    void test_getJourneysFrom_with_json_and_return_correct_travelLine() throws ParseException, JsonProcessingException {
+    void test_getJourneysFrom_with_json_and_return_correct_travelLine() throws JsonProcessingException {
         String journeyJson = getResourceFileAsString("json/searchChTestRoute.json");
         TravelLine testTravelLine = JourneyObjectMother.getEinsiedeln_to_Zuerich_Foerlibuckstreet60_Journey().getLegs().get(TEST_UUID_2).getTravelLine();
 

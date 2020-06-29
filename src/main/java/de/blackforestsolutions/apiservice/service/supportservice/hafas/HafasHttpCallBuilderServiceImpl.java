@@ -56,14 +56,12 @@ public class HafasHttpCallBuilderServiceImpl implements HafasHttpCallBuilderServ
     }
 
     @Override
-    @SuppressWarnings("rawtypes")
-    public HttpEntity buildHttpEntityStationForHafas(ApiTokenAndUrlInformation apiTokenAndUrlInformation, String station) {
+    public HttpEntity<String> buildHttpEntityStationForHafas(ApiTokenAndUrlInformation apiTokenAndUrlInformation, String station) {
         return new HttpEntity<>(buildLocationHttpBodyWith(apiTokenAndUrlInformation, station));
     }
 
     @Override
-    @SuppressWarnings("rawtypes")
-    public HttpEntity buildHttpEntityJourneyForHafas(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
+    public HttpEntity<String> buildHttpEntityJourneyForHafas(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
         return new HttpEntity<>(buildJourneyHttpBodyWith(apiTokenAndUrlInformation));
     }
 

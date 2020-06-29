@@ -1,6 +1,5 @@
 package de.blackforestsolutions.apiservice.service.supportservice;
 
-import de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother;
 import de.blackforestsolutions.apiservice.objectmothers.HttpBodyObjectMother;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import org.junit.jupiter.api.Assertions;
@@ -9,13 +8,15 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.util.MultiValueMap;
 
+import static de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother.getLufthansaTokenAndUrl;
+
 class LufthansaHttpCallBuilderServiceTest {
 
     private final LuftHansaHttpCallBuilderService classUnderTest = new LufthansaHttpCallBuilderServiceImpl();
 
     @Test
     void test_buildLufthansaJourneyPathWith_apiVersion_pathvariable_departure_arrival_departureDate_returns_valid_path_string() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getLufthansaTokenAndUrl();
+        ApiTokenAndUrlInformation testData = getLufthansaTokenAndUrl();
 
         String result = classUnderTest.buildLufthansaJourneyPathWith(testData);
 
@@ -24,7 +25,7 @@ class LufthansaHttpCallBuilderServiceTest {
 
     @Test
     void test_buildLufthansaAuthorizationPathWith_with_apiVersion_pathVariable_returns_valid_path() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getLufthansaTokenAndUrl();
+        ApiTokenAndUrlInformation testData = getLufthansaTokenAndUrl();
 
         String result = classUnderTest.buildLufthansaAuthorizationPathWith(testData);
 
@@ -33,7 +34,7 @@ class LufthansaHttpCallBuilderServiceTest {
 
     @Test
     void test_buildHttpEntityForLufthansaAuthorization_with_clientId_clientSecret_clientType_returns_correct_httpEntity() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getLufthansaTokenAndUrl();
+        ApiTokenAndUrlInformation testData = getLufthansaTokenAndUrl();
 
         HttpEntity<MultiValueMap<String, String>> result = classUnderTest.buildHttpEntityForLufthansaAuthorization(testData);
 
@@ -43,49 +44,33 @@ class LufthansaHttpCallBuilderServiceTest {
 
     @Test
     void test_buildPathWith_apiVersion_as_null_pathVariable_departure_arrival_departureDate_throws_NullPointerException() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getLufthansaTokenAndUrl();
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder = builder.buildFrom(testData);
+        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(getLufthansaTokenAndUrl());
         builder.setApiVersion(null);
-        testData = builder.build();
 
-        ApiTokenAndUrlInformation finalTestData = testData;
-        Assertions.assertThrows(NullPointerException.class, () -> classUnderTest.buildLufthansaJourneyPathWith(finalTestData));
+        Assertions.assertThrows(NullPointerException.class, () -> classUnderTest.buildLufthansaJourneyPathWith(builder.build()));
     }
 
     @Test
     void test_buildPathWith_apiVersion_journeyPathVariable_as_null_departure_arrival_departureDate_throws_NullPointerException() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getLufthansaTokenAndUrl();
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder = builder.buildFrom(testData);
+        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(getLufthansaTokenAndUrl());
         builder.setJourneyPathVariable(null);
-        testData = builder.build();
 
-        ApiTokenAndUrlInformation finalTestData = testData;
-        Assertions.assertThrows(NullPointerException.class, () -> classUnderTest.buildLufthansaJourneyPathWith(finalTestData));
+        Assertions.assertThrows(NullPointerException.class, () -> classUnderTest.buildLufthansaJourneyPathWith(builder.build()));
     }
 
     @Test
     void test_buildPathWith_apiVersion_pathvariable_departure_as_null_arrival_departureDate_throws_NullPointerException() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getLufthansaTokenAndUrl();
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder = builder.buildFrom(testData);
+        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(getLufthansaTokenAndUrl());
         builder.setDeparture(null);
-        testData = builder.build();
 
-        ApiTokenAndUrlInformation finalTestData = testData;
-        Assertions.assertThrows(NullPointerException.class, () -> classUnderTest.buildLufthansaJourneyPathWith(finalTestData));
+        Assertions.assertThrows(NullPointerException.class, () -> classUnderTest.buildLufthansaJourneyPathWith(builder.build()));
     }
 
     @Test
     void test_buildPathWith_apiVersion_pathvariable_departure_arrival_as_null_departureDate_throws_NullPointerException() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getLufthansaTokenAndUrl();
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder = builder.buildFrom(testData);
+        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(getLufthansaTokenAndUrl());
         builder.setArrival(null);
-        testData = builder.build();
 
-        ApiTokenAndUrlInformation finalTestData = testData;
-        Assertions.assertThrows(NullPointerException.class, () -> classUnderTest.buildLufthansaJourneyPathWith(finalTestData));
+        Assertions.assertThrows(NullPointerException.class, () -> classUnderTest.buildLufthansaJourneyPathWith(builder.build()));
     }
 }

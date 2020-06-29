@@ -1,5 +1,6 @@
 package de.blackforestsolutions.apiservice.objectmothers;
 
+import de.blackforestsolutions.apiservice.testutils.TestUtils;
 import de.blackforestsolutions.apiservice.util.CoordinatesUtil;
 import de.blackforestsolutions.datamodel.Coordinates;
 import de.blackforestsolutions.datamodel.TravelPoint;
@@ -7,13 +8,10 @@ import de.blackforestsolutions.generatedcontent.hvv.request.Coordinate;
 import de.blackforestsolutions.generatedcontent.hvv.request.HvvStation;
 import de.blackforestsolutions.generatedcontent.hvv.request.SDType;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
 
 import static de.blackforestsolutions.apiservice.testutils.TestUtils.generateDateFrom;
-import static de.blackforestsolutions.apiservice.testutils.TestUtils.generateDateFromPatternAndString;
 import static de.blackforestsolutions.apiservice.util.CoordinatesUtil.convertWGS84ToCoordinatesWith;
 
 
@@ -103,18 +101,18 @@ public class TravelPointObjectMother {
                 .build();
     }
 
-    public static TravelPoint getRödemarkOberRodenTravelPoint() {
+    public static TravelPoint getRoedemarkOberRodenTravelPoint() {
         return new TravelPoint.TravelPointBuilder()
                 .setStationName("Rödermark-Ober-Roden Bahnhof")
                 .build();
     }
 
-    public static TravelPoint getGriesheimbahnhofTravelPoint() throws ParseException {
+    public static TravelPoint getGriesheimbahnhofTravelPoint() {
         return new TravelPoint.TravelPointBuilder()
                 .setStationId("A=1@O=Frankfurt (Main) Griesheim Bahnhof@X=8606425@Y=50093980@U=80@L=3000110@")
                 .setStationName("Frankfurt (Main) Griesheim Bahnhof")
-                .setArrivalTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2020-05-04 09:14:00"))
-                .setDepartureTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2020-05-04 09:14:00"))
+                .setArrivalTime(TestUtils.generateDateFromLocalDateTimeAndString("yyyy-MM-dd HH:mm:ss", "2020-05-04 09:14:00"))
+                .setDepartureTime(TestUtils.generateDateFromLocalDateTimeAndString("yyyy-MM-dd HH:mm:ss", "2020-05-04 09:14:00"))
                 .setGpsCoordinates(new Coordinates.CoordinatesBuilder(50.09398d, 8.606425d).build())
                 .setCountry(Locale.GERMANY)
                 .build();
@@ -382,17 +380,17 @@ public class TravelPointObjectMother {
         return travelPoint.build();
     }
 
-    public static TravelPoint getBiberbruggTravelPoint() throws ParseException {
+    public static TravelPoint getBiberbruggTravelPoint() {
         TravelPoint.TravelPointBuilder travelPoint = new TravelPoint.TravelPointBuilder();
         travelPoint.setStationName("Biberbrugg");
         travelPoint.setStationId("8503284");
         travelPoint.setGpsCoordinates(CoordinatesUtil.convertCh1903ToCoordinatesWith(697373, 223619));
-        travelPoint.setArrivalTime(generateDateFromPatternAndString("yyyy-MM-dd HH:mm:ss", "2019-11-04 14:32:00"));
-        travelPoint.setDepartureTime(generateDateFromPatternAndString("yyyy-MM-dd HH:mm:ss", "2019-11-04 14:32:00"));
+        travelPoint.setArrivalTime(TestUtils.generateDateFromLocalDateTimeAndString("yyyy-MM-dd HH:mm:ss", "2019-11-04 14:32:00"));
+        travelPoint.setDepartureTime(TestUtils.generateDateFromLocalDateTimeAndString("yyyy-MM-dd HH:mm:ss", "2019-11-04 14:32:00"));
         return travelPoint.build();
     }
 
-    public static TravelPoint getGustavHeinemannStraßeTravelPoint() {
+    public static TravelPoint getGustavHeinemannStrasseTravelPoint() {
         TravelPoint.TravelPointBuilder travelPoint = new TravelPoint.TravelPointBuilder();
         travelPoint.setStationId("9600");
         travelPoint.setStationName("Gustav-Heinemann-Straße, Elmshorn");
@@ -446,14 +444,14 @@ public class TravelPointObjectMother {
         return travelPoint.build();
     }
 
-    public static TravelPoint getPinnebergTravelPoint() throws ParseException {
+    public static TravelPoint getPinnebergTravelPoint() {
         TravelPoint.TravelPointBuilder travelPoint = new TravelPoint.TravelPointBuilder();
         travelPoint.setStationId("Master:99951");
         travelPoint.setStationName("Pinneberg");
         travelPoint.setCity("Pinneberg");
         travelPoint.setCountry(Locale.GERMANY);
         travelPoint.setGpsCoordinates(new Coordinates.CoordinatesBuilder(53.654943,9.798367).build());
-        travelPoint.setDepartureTime(generateDateFromPatternAndString("yyyy-MM-dd HH:mm", "2020-05-05 13:52"));
+        travelPoint.setDepartureTime(TestUtils.generateDateFromLocalDateTimeAndString("yyyy-MM-dd HH:mm", "2020-05-05 13:52"));
         return travelPoint.build();
     }
 
@@ -516,24 +514,24 @@ public class TravelPointObjectMother {
         return travelPoint.build();
     }
 
-    public static TravelPoint getSchindellegiFeusisbergTravelPoint() throws ParseException {
+    public static TravelPoint getSchindellegiFeusisbergTravelPoint() {
         TravelPoint.TravelPointBuilder travelPoint = new TravelPoint.TravelPointBuilder();
         travelPoint.setStationName("Schindellegi-Feusisberg");
         travelPoint.setStationId("8503285");
         travelPoint.setCountry(SWIZERLAND_LOCALE);
         travelPoint.setGpsCoordinates(CoordinatesUtil.convertCh1903ToCoordinatesWith(696326, 225829));
-        travelPoint.setArrivalTime(generateDateFromPatternAndString("yyyy-MM-dd HH:mm:ss", "2019-11-04 14:36:00"));
-        travelPoint.setDepartureTime(generateDateFromPatternAndString("yyyy-MM-dd HH:mm:ss", "2019-11-04 14:36:00"));
+        travelPoint.setArrivalTime(TestUtils.generateDateFromLocalDateTimeAndString("yyyy-MM-dd HH:mm:ss", "2019-11-04 14:36:00"));
+        travelPoint.setDepartureTime(TestUtils.generateDateFromLocalDateTimeAndString("yyyy-MM-dd HH:mm:ss", "2019-11-04 14:36:00"));
         return travelPoint.build();
     }
 
-    public static TravelPoint getSamstagernTravelPoint() throws ParseException {
+    public static TravelPoint getSamstagernTravelPoint() {
         TravelPoint.TravelPointBuilder travelPoint = new TravelPoint.TravelPointBuilder();
         travelPoint.setStationName("Samstagern");
         travelPoint.setStationId("8503286");
         travelPoint.setGpsCoordinates(CoordinatesUtil.convertCh1903ToCoordinatesWith(694526, 227483));
-        travelPoint.setArrivalTime(generateDateFromPatternAndString("yyyy-MM-dd HH:mm:ss", "2019-11-04 14:40:00"));
-        travelPoint.setDepartureTime(generateDateFromPatternAndString("yyyy-MM-dd HH:mm:ss", "2019-11-04 14:41:00"));
+        travelPoint.setArrivalTime(TestUtils.generateDateFromLocalDateTimeAndString("yyyy-MM-dd HH:mm:ss", "2019-11-04 14:40:00"));
+        travelPoint.setDepartureTime(TestUtils.generateDateFromLocalDateTimeAndString("yyyy-MM-dd HH:mm:ss", "2019-11-04 14:41:00"));
         return travelPoint.build();
     }
 

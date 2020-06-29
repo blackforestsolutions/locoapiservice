@@ -21,8 +21,6 @@ import org.springframework.web.client.RestTemplate;
 import static de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother.getOSMApiTokenAndUrl;
 import static de.blackforestsolutions.apiservice.testutils.TestUtils.getResourceFileAsString;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
 class OSMApiServiceTest {
@@ -80,6 +78,7 @@ class OSMApiServiceTest {
     @Test
     void test_getCoordinatesFromTravelPointWith_apiToken_and_wrong_mocked_http_answer_returns_failed_call_status() {
         ApiTokenAndUrlInformation testData = getOSMApiTokenAndUrl();
+        //noinspection unchecked
         when(restTemplate.exchange(anyString(), any(), any(), any(Class.class))).thenReturn(new ResponseEntity<>("", HttpStatus.BAD_REQUEST));
 
         CallStatus<Coordinates> result = classUnderTest.getCoordinatesFromTravelPointWith(testData, testData.getArrival());
@@ -91,6 +90,7 @@ class OSMApiServiceTest {
     @Test
     void test_getCoordinatesFromTravelPointWith_apiToken_throws_exception_during_http_call_returns_failed_call_status() {
         ApiTokenAndUrlInformation testData = getOSMApiTokenAndUrl();
+        //noinspection unchecked
         doThrow(new RuntimeException()).when(restTemplate).exchange(anyString(), any(), any(), any(Class.class));
 
         CallStatus<Coordinates> result = classUnderTest.getCoordinatesFromTravelPointWith(testData, testData.getArrival());

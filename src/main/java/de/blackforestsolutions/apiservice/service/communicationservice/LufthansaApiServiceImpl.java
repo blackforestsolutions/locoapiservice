@@ -20,7 +20,6 @@ import java.util.Map;
 import java.util.UUID;
 
 import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.buildUrlWith;
-import static de.blackforestsolutions.apiservice.util.TimeUtil.transformToYyyyMMDdWith;
 
 @Slf4j
 @Service
@@ -78,28 +77,14 @@ public class LufthansaApiServiceImpl implements LufthansaApiService {
     }
 
     private String getLufthansaJourneyRequestString(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder = builder.buildFrom(apiTokenAndUrlInformation);
-        builder.setApiVersion(apiTokenAndUrlInformation.getApiVersion());
-        builder.setJourneyPathVariable(apiTokenAndUrlInformation.getJourneyPathVariable());
-        builder.setDeparture(apiTokenAndUrlInformation.getDeparture());
-        builder.setArrival(apiTokenAndUrlInformation.getArrival());
-        builder.setDepartureDate(transformToYyyyMMDdWith(apiTokenAndUrlInformation.getDepartureDate()));
-        builder.setAuthorization(apiTokenAndUrlInformation.getAuthorization());
-        builder.setXOriginationIp(apiTokenAndUrlInformation.getXOriginationIp());
+        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(apiTokenAndUrlInformation);
         builder.setPath(httpCallBuilderService.buildLufthansaJourneyPathWith(builder.build()));
         URL requestUrl = buildUrlWith(builder.build());
         return requestUrl.toString();
     }
 
     private String getLufthansaAuthorizationRequestString(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder = builder.buildFrom(apiTokenAndUrlInformation);
-        builder.setApiVersion(apiTokenAndUrlInformation.getApiVersion());
-        builder.setPathVariable(apiTokenAndUrlInformation.getPathVariable());
-        builder.setClientId(apiTokenAndUrlInformation.getClientId());
-        builder.setClientSecret(apiTokenAndUrlInformation.getClientSecret());
-        builder.setClientType(apiTokenAndUrlInformation.getClientType());
+        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(apiTokenAndUrlInformation);
         builder.setPath(httpCallBuilderService.buildLufthansaAuthorizationPathWith(builder.build()));
         URL requestUrl = buildUrlWith(builder.build());
         return requestUrl.toString();

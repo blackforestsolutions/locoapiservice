@@ -10,7 +10,6 @@ public interface BritishAirwaysHttpCallBuilderService {
 
     HttpHeaders buildHttpHeadersForBritishAirwaysWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation);
 
-    @SuppressWarnings("rawtypes")
     HttpEntity<String> buildHttpEntityBritishAirways(ApiTokenAndUrlInformation apiTokenAndUrlInformation);
 
 

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.blackforestsolutions.apiservice.configuration.CurrencyConfiguration;
+import de.blackforestsolutions.apiservice.configuration.TimeConfiguration;
 import de.blackforestsolutions.apiservice.service.supportservice.UuidService;
 import de.blackforestsolutions.datamodel.*;
 import de.blackforestsolutions.generatedcontent.hvv.request.HvvStation;
@@ -17,10 +18,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.time.Duration;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -28,7 +29,8 @@ import java.util.stream.Collectors;
 
 import static de.blackforestsolutions.apiservice.service.mapper.JourneyStatusBuilder.createJourneyStatusProblemWith;
 import static de.blackforestsolutions.apiservice.service.mapper.JourneyStatusBuilder.createJourneyStatusWith;
-import static de.blackforestsolutions.apiservice.service.mapper.MapperService.*;
+import static de.blackforestsolutions.apiservice.service.mapper.MapperService.checkIfStringPropertyExists;
+import static de.blackforestsolutions.apiservice.service.mapper.MapperService.setPriceForLegBy;
 
 @Service
 @Slf4j
@@ -69,16 +71,10 @@ public class HvvMapperServiceImpl implements HvvMapperService {
                 .collect(Collectors.toMap(travelPoint -> counter.getAndIncrement(), travelPoint -> travelPoint));
     }
 
-    private static Date generateDateFromDateAndTime(String date, String time) {
-        DateTimeFormatter dTF = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-        LocalDate datePart = LocalDate.parse(date, dTF);
-        LocalTime timePart = LocalTime.parse(time);
-        LocalDateTime dateTime = LocalDateTime.of(datePart, timePart);
-        return convertLocalDateTimeToDate(dateTime);
-    }
-
-    private static Date convertLocalDateTimeToDate(LocalDateTime dateTime) {
-        return Date.from(dateTime.atZone(ZoneId.systemDefault()).toInstant());
+    private static ZonedDateTime generateDateFromDateAndTime(String date, String time) {
+        LocalDate datePart = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+        LocalTime timePart = LocalTime.parse(time, DateTimeFormatter.ofPattern("HH:mm"));
+        return ZonedDateTime.of(datePart, timePart, TimeConfiguration.GERMAN_TIME_ZONE);
     }
 
     private static Price buildPriceFrom(List<TicketInfo> ticketInfos) {
@@ -197,7 +193,7 @@ public class HvvMapperServiceImpl implements HvvMapperService {
                 scheduleElement.getTo().getArrTime().getDate(),
                 scheduleElement.getTo().getArrTime().getTime())
         );
-        leg.setDuration(generateDurationFromStartToDestination(leg.getStartTime(), leg.getArrivalTime()));
+        leg.setDuration(Duration.between(leg.getStartTime(), leg.getArrivalTime()));
         leg.setTravelProvider(TravelProvider.HVV);
         leg.setVehicleName(scheduleElement.getLine().getName());
         String vehicleType = scheduleElement.getLine().getType().getSimpleType();

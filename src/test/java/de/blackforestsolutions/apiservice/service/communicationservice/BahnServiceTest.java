@@ -21,11 +21,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.Duration;
 import java.util.Map;
 import java.util.UUID;
 
 import static de.blackforestsolutions.apiservice.objectmothers.UUIDObjectMother.*;
-import static de.blackforestsolutions.apiservice.testutils.TestUtils.*;
+import static de.blackforestsolutions.apiservice.testutils.TestUtils.generateTimeFromString;
+import static de.blackforestsolutions.apiservice.testutils.TestUtils.getResourceFileAsString;
 import static org.mockito.Mockito.*;
 
 class BahnServiceTest {
@@ -110,7 +112,7 @@ class BahnServiceTest {
 
     @SuppressWarnings("OptionalGetWithoutIsPresent")
     @Test
-    void test_getJourneyDetailsForRouteFromApiWith_mocked_rest_service_is_excceuted_correctly_and_maps_correctly_returns_map() throws Exception {
+    void test_getJourneyDetailsForRouteFromApiWith_mocked_rest_service_is_excceuted_correctly_and_maps_correctly_returns_map() {
         ApiTokenAndUrlInformation apiTokenAndUrlInformation = ApiTokenAndUrlInformationObjectMother.getBahnTokenAndUrl();
         String bahnJourneyDetailsRessourceJson = getResourceFileAsString("json/bahnTestJourneyDetailsID.json");
         ResponseEntity<String> testResult = new ResponseEntity<>(bahnJourneyDetailsRessourceJson, HttpStatus.OK);
@@ -137,7 +139,7 @@ class BahnServiceTest {
                         TravelProvider.DB,
                         generateTimeFromString("10:53"),
                         generateTimeFromString("10:56"),
-                        generateDurationFromStartToDestination(generateTimeFromString("10:53"), generateTimeFromString("10:56")),
+                        Duration.between(generateTimeFromString("10:53"), generateTimeFromString("10:56")),
                         "IC",
                         "IC 386"
                 );
@@ -155,7 +157,7 @@ class BahnServiceTest {
                         TravelProvider.DB,
                         generateTimeFromString("10:53"),
                         generateTimeFromString("12:11"),
-                        generateDurationFromStartToDestination(generateTimeFromString("10:53"), generateTimeFromString("12:11")),
+                        Duration.between(generateTimeFromString("10:53"), generateTimeFromString("12:11")),
                         "IC",
                         "IC 386"
                 );
@@ -171,7 +173,7 @@ class BahnServiceTest {
                         TravelProvider.DB,
                         generateTimeFromString("10:58"),
                         generateTimeFromString("12:11"),
-                        generateDurationFromStartToDestination(generateTimeFromString("10:58"), generateTimeFromString("12:11")),
+                        Duration.between(generateTimeFromString("10:58"), generateTimeFromString("12:11")),
                         "IC",
                         "IC 386"
                 );

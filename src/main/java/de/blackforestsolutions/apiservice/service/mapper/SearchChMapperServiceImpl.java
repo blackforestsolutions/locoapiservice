@@ -3,6 +3,7 @@ package de.blackforestsolutions.apiservice.service.mapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import de.blackforestsolutions.apiservice.configuration.TimeConfiguration;
 import de.blackforestsolutions.apiservice.service.supportservice.UuidService;
 import de.blackforestsolutions.apiservice.util.CoordinatesUtil;
 import de.blackforestsolutions.datamodel.*;
@@ -14,11 +15,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
@@ -105,27 +105,9 @@ public class SearchChMapperServiceImpl implements SearchChMapperService {
         return new Coordinates.CoordinatesBuilder().build();
     }
 
-    private static Date buildDateFrom(String dateTime) {
-        try {
-            return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(dateTime);
-        } catch (ParseException e) {
-            log.error("Error while parsing Date and was replaced by new Date()", e);
-            return new Date();
-        }
-    }
-
-    private static LocalDateTime convertToLocalDateTime(Date dateToConvert) {
-        return LocalDateTime.ofInstant(
-                dateToConvert.toInstant(),
-                ZoneId.systemDefault()
-        );
-    }
-
-    private static Duration buildDurationBetween(Date departure, Date arrival) {
-        return Duration.between(
-                convertToLocalDateTime(departure),
-                convertToLocalDateTime(arrival)
-        );
+    private static ZonedDateTime buildDateFrom(String dateTime) {
+        return LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
+                .atZone(TimeConfiguration.GERMAN_TIME_ZONE);
     }
 
     @Override
@@ -180,7 +162,7 @@ public class SearchChMapperServiceImpl implements SearchChMapperService {
         leg.setDestination(buildDestinationTravelPointWith(betweenTrip.getExit()));
         leg.setStartTime(buildDateFrom(betweenTrip.getDeparture()));
         leg.setArrivalTime(buildDateFrom(betweenTrip.getExit().getArrival()));
-        leg.setDuration(buildDurationBetween(leg.getStartTime(), leg.getArrivalTime()));
+        leg.setDuration(Duration.between(leg.getStartTime(), leg.getArrivalTime()));
         Optional.ofNullable(betweenTrip.getStops()).ifPresent(stops -> leg.setTravelLine(buildTravelLineWith(stops)));
         Optional.ofNullable(betweenTrip.getTripid()).ifPresent(leg::setProviderId);
         buildTravelProviderWith(betweenTrip, leg);

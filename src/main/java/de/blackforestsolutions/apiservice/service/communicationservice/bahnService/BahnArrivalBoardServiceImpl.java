@@ -37,14 +37,7 @@ public class BahnArrivalBoardServiceImpl implements BahnArrivalBoardService {
     }
 
     private String getBahnArrivalBoardRequestString(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder = builder.buildFrom(apiTokenAndUrlInformation);
-        builder.setHost(apiTokenAndUrlInformation.getHost());
-        builder.setPathVariable(apiTokenAndUrlInformation.getPathVariable());
-        builder.setApiVersion(apiTokenAndUrlInformation.getApiVersion());
-        builder.setGermanRailArrivalBoardPath(apiTokenAndUrlInformation.getGermanRailArrivalBoardPath());
-        builder.setStationId(apiTokenAndUrlInformation.getStationId());
-        builder.setGermanRailDatePathVariable(apiTokenAndUrlInformation.getGermanRailDatePathVariable());
+        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(apiTokenAndUrlInformation);
         builder.setPath(bahnArrivalBoardHttpCallBuilderService.buildBahnArrivalBoardPathWith(builder.build()));
         URL requestUrl = buildUrlWith(builder.build());
         return requestUrl.toString();

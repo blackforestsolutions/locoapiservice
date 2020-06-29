@@ -17,7 +17,6 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import java.text.ParseException;
 import java.util.Map;
 import java.util.UUID;
 
@@ -27,8 +26,6 @@ import static de.blackforestsolutions.apiservice.objectmothers.JourneyObjectMoth
 import static de.blackforestsolutions.apiservice.testutils.TestUtils.createJourneyStatusWith;
 import static de.blackforestsolutions.apiservice.testutils.TestUtils.getResourceFileAsString;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
 
@@ -41,7 +38,7 @@ class BBCApiServiceTest {
     private final BBCApiService classUnderTest = new BBCApiServiceImpl(callService, bbcHttpCallBuilderService, bbcMapperService);
 
     @BeforeEach
-    void init() throws ParseException, JsonProcessingException {
+    void init() throws JsonProcessingException {
         when(bbcHttpCallBuilderService.bbcBuildJourneyStringPathWith(Mockito.any(ApiTokenAndUrlInformation.class)))
                 .thenReturn("");
 

@@ -14,7 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import javax.annotation.Resource;
-import java.util.Date;
+import java.time.ZonedDateTime;
 
 import static de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother.getBritishAirwaysTokenAndUrl;
 import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.buildUrlWith;
@@ -38,7 +38,7 @@ class BritishAirwaysApiServiceIT {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder testData = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(britishAirwaysApiTokenAndUrlInformation);
         testData.setDeparture(getBritishAirwaysTokenAndUrl().getDeparture());
         testData.setArrival(getBritishAirwaysTokenAndUrl().getArrival());
-        testData.setDepartureDate(new Date());
+        testData.setDepartureDate(ZonedDateTime.now());
         testData.setPath(httpCallBuilderService.buildPathWith(testData.build()));
 
         ResponseEntity<String> result = callService.get(

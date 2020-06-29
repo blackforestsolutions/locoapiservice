@@ -27,7 +27,6 @@ class HvvHttpCallBuilderServiceImplTest {
         HvvStation start = getRosenhofHvvStation();
         HvvStation destination = getStadthausbrueckeHvvStation();
 
-        //noinspection rawtypes (justification: not known until runtime)
         HttpHeaders result = classUnderTest.buildJourneyHttpEntityForHvv(testData, start, destination).getHeaders();
 
         Assertions.assertThat(result.getFirst(HttpHeaders.ACCEPT)).isEqualTo(MediaType.APPLICATION_JSON_VALUE);
@@ -81,7 +80,6 @@ class HvvHttpCallBuilderServiceImplTest {
     void test_buildStationListHttpEntityForHvv_with_apiToken_andHttpBody_returns_correct_header_and_body() {
         ApiTokenAndUrlInformation testData = getHvvTokenAndUrl();
 
-        //noinspection rawtypes (justification: not known until runtime)
         HttpHeaders result = classUnderTest.buildStationListHttpEntityForHvv(testData).getHeaders();
 
         Assertions.assertThat(result.getFirst(HttpHeaders.ACCEPT)).isEqualTo(MediaType.APPLICATION_JSON_VALUE);
@@ -149,7 +147,6 @@ class HvvHttpCallBuilderServiceImplTest {
         ApiTokenAndUrlInformation testData = getHvvTokenAndUrl();
         String testBody = convertObjectToJsonString(getHvvTravelPointBody());
 
-        //noinspection rawtypes (justification: not known until runtime)
         HttpEntity<String> result = classUnderTest.buildTravelPointHttpEntityForHvv(testData, testData.getDeparture());
 
         org.assertj.core.api.Assertions.assertThat(result.getBody()).isEqualTo(testBody);

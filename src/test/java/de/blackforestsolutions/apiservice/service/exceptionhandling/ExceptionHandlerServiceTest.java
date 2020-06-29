@@ -7,17 +7,16 @@ import de.blackforestsolutions.datamodel.*;
 import de.blackforestsolutions.datamodel.exception.CompromisedAttributeException;
 import org.junit.jupiter.api.Test;
 
-import java.text.ParseException;
 import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ExceptionHandlerServiceTest {
+class ExceptionHandlerServiceTest {
 
     private final ExceptionHandlerService classUnderTest = new ExceptionHandlerServiceServiceImpl();
 
     @Test
-    void test_handleExceptionsWith_CallStatuses() throws ParseException, CompromisedAttributeException {
+    void test_handleExceptionsWith_CallStatuses() throws CompromisedAttributeException {
         List<CallStatus<Map<UUID, JourneyStatus>>> testData = CallStatusListObjectMother.retrieveCallStatusList();
 
         Map<UUID, Journey> result = this.classUnderTest.handleExceptions(testData);

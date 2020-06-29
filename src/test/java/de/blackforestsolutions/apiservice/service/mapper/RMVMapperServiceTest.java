@@ -12,7 +12,6 @@ import org.springframework.test.util.ReflectionTestUtils;
 
 import javax.xml.bind.JAXBException;
 import java.math.BigDecimal;
-import java.text.ParseException;
 import java.util.Map;
 import java.util.UUID;
 
@@ -72,7 +71,7 @@ class RMVMapperServiceTest {
     }
 
     @Test
-    void test_test_getJourneysFrom_with_mocked_xml_is_mapping_first_journey_correctly() throws ParseException, JAXBException {
+    void test_test_getJourneysFrom_with_mocked_xml_is_mapping_first_journey_correctly() throws JAXBException {
         String tripListXml = getResourceFileAsString("xml/TripList.xml");
         Journey expectedJourney = getLorchhausenOberfleckenToFrankfurtHauptbahnhofJourney();
 
@@ -110,6 +109,7 @@ class RMVMapperServiceTest {
 
         Map<UUID, JourneyStatus> result = ReflectionTestUtils.invokeMethod(classUnderTest, "getJourneysFrom", tripList);
 
+        //noinspection ConstantConditions
         assertThat(result.get(TEST_UUID_3).getProblem().get().getExceptions().get(0)).isInstanceOf(NullPointerException.class);
         assertThat(result.get(TEST_UUID_3).getProblem().get().getExceptions().get(0)).isInstanceOf(Exception.class);
         assertThat(result.get(TEST_UUID_8).getJourney().get()).isInstanceOf(Journey.class);

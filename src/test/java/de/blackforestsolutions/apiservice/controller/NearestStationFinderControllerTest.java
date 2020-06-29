@@ -11,7 +11,7 @@ import org.mockito.Mockito;
 
 import static org.mockito.Mockito.mock;
 
-public class NearestStationFinderControllerTest {
+class NearestStationFinderControllerTest {
 
     private final LocoJsonMapper locoJsonMapper = new LocoJsonMapper();
     private final AirportsFinderApiService airportsFinderApiService = Mockito.mock(AirportsFinderApiService.class);

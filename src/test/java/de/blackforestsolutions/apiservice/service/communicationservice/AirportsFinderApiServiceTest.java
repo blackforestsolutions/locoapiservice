@@ -25,8 +25,6 @@ import static de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInf
 import static de.blackforestsolutions.apiservice.objectmothers.TravelPointObjectMother.getTravelPointsForAirportsFinder;
 import static de.blackforestsolutions.apiservice.testutils.TestUtils.getResourceFileAsString;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
 
@@ -45,7 +43,7 @@ class AirportsFinderApiServiceTest {
 
     private final AirportsFinderApiService classUnderTest = new AirportsFinderApiServiceImpl(callService, httpCallBuilderService, mapper);
 
-    public AirportsFinderApiServiceTest() throws IOException {
+    AirportsFinderApiServiceTest() throws IOException {
     }
 
     @Test
@@ -54,6 +52,7 @@ class AirportsFinderApiServiceTest {
         List<TravelPoint> testDataArrayList = getTravelPointsForAirportsFinder();
         ApiTokenAndUrlInformation apiTokenAndUrlInformation = getAirportsFinderTokenAndUrl();
         ResponseEntity<String> testResult = new ResponseEntity<>(airportsFinderResource, HttpStatus.OK);
+        //noinspection unchecked
         doReturn(testResult).when(restTemplate).exchange(anyString(), any(), any(), any(Class.class));
 
         CallStatus<LinkedHashSet<TravelPointStatus>> result = classUnderTest.getAirportsWith(apiTokenAndUrlInformation);
@@ -78,6 +77,7 @@ class AirportsFinderApiServiceTest {
     @Test
     void test_getAirportsWith_apiToken_and_mocked_http_answer_returns_failed_call_status() {
         ApiTokenAndUrlInformation testData = getAirportsFinderTokenAndUrl();
+        //noinspection unchecked
         doReturn(new ResponseEntity<>("", HttpStatus.UNAUTHORIZED)).when(restTemplate).exchange(anyString(), any(), any(), any(Class.class));
 
         CallStatus<LinkedHashSet<TravelPointStatus>> result = classUnderTest.getAirportsWith(testData);
@@ -89,6 +89,7 @@ class AirportsFinderApiServiceTest {
     @Test
     void test_getAirportsWith_apiToken_and_mocked_empty_http_answer_returns_empty_map() {
         ApiTokenAndUrlInformation testData = getAirportsFinderTokenAndUrl();
+        //noinspection unchecked
         doReturn(new ResponseEntity<>("[]", HttpStatus.OK)).when(restTemplate).exchange(anyString(), any(), any(), any(Class.class));
 
         CallStatus<LinkedHashSet<TravelPointStatus>> result = classUnderTest.getAirportsWith(testData);
@@ -100,6 +101,7 @@ class AirportsFinderApiServiceTest {
     @Test
     void test_getAirportsWith_apiToken_throws_exception_during_http_call_returns_failed_call_status() {
         ApiTokenAndUrlInformation testData = getAirportsFinderTokenAndUrl();
+        //noinspection unchecked
         doThrow(new RuntimeException()).when(restTemplate).exchange(anyString(), any(), any(), any(Class.class));
 
         CallStatus<LinkedHashSet<TravelPointStatus>> result = classUnderTest.getAirportsWith(testData);

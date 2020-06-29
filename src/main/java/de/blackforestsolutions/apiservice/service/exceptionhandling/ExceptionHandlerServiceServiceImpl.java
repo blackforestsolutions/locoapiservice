@@ -25,8 +25,7 @@ public class ExceptionHandlerServiceServiceImpl implements ExceptionHandlerServi
         List<Map<UUID, Journey>> result = callStatusList.stream()
                 .map(ExceptionHandlerServiceServiceImpl::handleCallStatus)
                 .collect(Collectors.toList());
-        Map<UUID, Journey> reducedResult = reduce(result);
-        return reducedResult;
+        return reduce(result);
     }
 
     private static Map<UUID, Journey> reduce(List<Map<UUID, Journey>> mapList) {
@@ -43,12 +42,11 @@ public class ExceptionHandlerServiceServiceImpl implements ExceptionHandlerServi
 
     private static Map<UUID, Journey> handleCallStatus(CallStatus<Map<UUID, JourneyStatus>> callStatus) {
         callStatus.getCalledObject().values().forEach(ExceptionHandlerServiceServiceImpl::logError);
-        Map<UUID, Journey> result = callStatus.getCalledObject().values().stream()
+        return callStatus.getCalledObject().values().stream()
                 .filter(journeyStatus -> journeyStatus.getJourney().isPresent())
                 .map(JourneyStatus::getJourney)
                 .map(Optional::get)
                 .collect(toMap(Journey::getId, journey -> journey));
-        return result;
     }
 
     private static void logError(JourneyStatus journeyStatus) {

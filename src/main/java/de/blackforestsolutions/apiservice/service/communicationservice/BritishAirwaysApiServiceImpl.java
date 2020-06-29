@@ -45,12 +45,7 @@ public class BritishAirwaysApiServiceImpl implements BritishAirwaysApiService {
     }
 
     private String getBritishAirwaysRequestString(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder = builder.buildFrom(apiTokenAndUrlInformation);
-        builder.setPath(apiTokenAndUrlInformation.getHazelcastPath());
-        builder.setDeparture(apiTokenAndUrlInformation.getDeparture());
-        builder.setArrival(apiTokenAndUrlInformation.getArrival());
-        builder.setDepartureDate(apiTokenAndUrlInformation.getDepartureDate());
+        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(apiTokenAndUrlInformation);
         builder.setPath(britishAirwaysHttpCallBuilderService.buildPathWith(builder.build()));
         URL requestUrl = buildUrlWith(builder.build());
         return requestUrl.toString();

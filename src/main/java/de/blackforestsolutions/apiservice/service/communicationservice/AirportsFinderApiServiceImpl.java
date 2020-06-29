@@ -43,9 +43,7 @@ public class AirportsFinderApiServiceImpl implements AirportsFinderApiService {
 
 
     private String getAirportsFinderRequestString(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder = builder.buildFrom(apiTokenAndUrlInformation);
-        builder.setPath(apiTokenAndUrlInformation.getHazelcastPath());
+        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(apiTokenAndUrlInformation);
         builder.setDepartureCoordinates(getBuilderDepartureCoordinates(apiTokenAndUrlInformation));
         builder.setPath(airportsFinderHttpCallBuilderService.buildPathWith(builder.build()));
         URL requestUrl = buildUrlWith(builder.build());

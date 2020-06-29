@@ -1,5 +1,6 @@
 package de.blackforestsolutions.apiservice.service.mapper;
 
+import de.blackforestsolutions.apiservice.configuration.TimeConfiguration;
 import de.blackforestsolutions.apiservice.service.supportservice.UuidService;
 import de.blackforestsolutions.datamodel.Journey;
 import de.blackforestsolutions.datamodel.Leg;
@@ -16,15 +17,16 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import java.io.StringReader;
 import java.math.BigDecimal;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 import static de.blackforestsolutions.apiservice.service.mapper.JourneyStatusBuilder.createJourneyStatusProblemWith;
 import static de.blackforestsolutions.apiservice.service.mapper.JourneyStatusBuilder.createJourneyStatusWith;
-import static de.blackforestsolutions.apiservice.service.mapper.MapperService.generateDurationFromStartToDestination;
 
 @Slf4j
 @Service
@@ -97,9 +99,9 @@ public class RMVMapperServiceImpl implements RMVMapperService {
         Leg.LegBuilder newLeg = new Leg.LegBuilder(uuidService.createUUID());
         newLeg.setStart(buildTravelPointWith(leg.getOrigin()));
         newLeg.setDestination(buildTravelPointWith(leg.getDestination()));
-        newLeg.setStartTime(buildDateFrom(leg.getOrigin().getDate().concat("-").concat(leg.getOrigin().getTime())));
-        newLeg.setArrivalTime(buildDateFrom(leg.getDestination().getDate().concat("-").concat(leg.getDestination().getTime())));
-        newLeg.setDuration(generateDurationFromStartToDestination(newLeg.getStartTime(), newLeg.getArrivalTime()));
+        newLeg.setStartTime(buildDateFrom(leg.getOrigin().getDate().concat("T").concat(leg.getOrigin().getTime())));
+        newLeg.setArrivalTime(buildDateFrom(leg.getDestination().getDate().concat("T").concat(leg.getDestination().getTime())));
+        newLeg.setDuration(Duration.between(newLeg.getStartTime(), newLeg.getArrivalTime()));
         newLeg.setTravelProvider(TravelProvider.RMV);
         Optional.ofNullable(leg.getDist()).ifPresent(distance -> newLeg.setDistance(new Distance(distance)));
         Optional.ofNullable(leg.getProduct()).ifPresent(product -> newLeg.setVehicleName(product.getName()));
@@ -194,8 +196,8 @@ public class RMVMapperServiceImpl implements RMVMapperService {
         travelPoint.setStationName(stop.getName());
         travelPoint.setStationId(stop.getId());
         travelPoint.setCountry(Locale.GERMANY);
-        Optional.ofNullable(stop.getDepDate()).ifPresent(depTime -> travelPoint.setDepartureTime(buildDateFrom(stop.getDepDate().concat("-").concat(stop.getDepTime()))));
-        Optional.ofNullable(stop.getArrDate()).ifPresent(arrTime -> travelPoint.setArrivalTime(buildDateFrom(stop.getArrDate().concat("-").concat(stop.getArrTime()))));
+        Optional.ofNullable(stop.getDepDate()).ifPresent(depTime -> travelPoint.setDepartureTime(buildDateFrom(stop.getDepDate().concat("T").concat(stop.getDepTime()))));
+        Optional.ofNullable(stop.getArrDate()).ifPresent(arrTime -> travelPoint.setArrivalTime(buildDateFrom(stop.getArrDate().concat("T").concat(stop.getArrTime()))));
         return travelPoint.build();
     }
 
@@ -209,13 +211,7 @@ public class RMVMapperServiceImpl implements RMVMapperService {
         return travelPoint.build();
     }
 
-    private Date buildDateFrom(String dateTime) {
-        try {
-            SimpleDateFormat inFormat = new SimpleDateFormat("yyyy-MM-dd'-'HH:mm:ss");
-            return inFormat.parse(dateTime);
-        } catch (ParseException e) {
-            log.error("Error while parsing Date and was replaced by new Date(): ", e);
-            return new Date();
-        }
+    private ZonedDateTime buildDateFrom(String dateTime) {
+        return LocalDateTime.parse(dateTime, DateTimeFormatter.ISO_LOCAL_DATE_TIME).atZone(TimeConfiguration.GERMAN_TIME_ZONE);
     }
 }

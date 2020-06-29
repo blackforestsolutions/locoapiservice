@@ -7,10 +7,10 @@ import de.blackforestsolutions.datamodel.PriceCategory;
 import de.blackforestsolutions.generatedcontent.hafas.response.journey.TrfRes;
 
 import java.math.BigDecimal;
-import java.time.Duration;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.*;
+import java.util.Currency;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Optional;
 
 public class MapperService {
 
@@ -19,10 +19,6 @@ public class MapperService {
     static String checkIfStringPropertyExists(String jsonProperty) {
         Optional<String> optionalJsonProperty = Optional.ofNullable(jsonProperty);
         return optionalJsonProperty.orElse("");
-    }
-
-    static Duration generateDurationFromStartToDestination(Date start, Date destination) {
-        return Duration.between(LocalDateTime.ofInstant(start.toInstant(), ZoneId.systemDefault()), LocalDateTime.ofInstant(destination.toInstant(), ZoneId.systemDefault()));
     }
 
     public static Price mapPriceForHafas(TrfRes trfRes) {

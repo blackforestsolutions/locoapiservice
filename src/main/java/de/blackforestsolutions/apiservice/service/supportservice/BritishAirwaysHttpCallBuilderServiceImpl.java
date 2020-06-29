@@ -6,9 +6,8 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 @Service
@@ -45,7 +44,6 @@ public class BritishAirwaysHttpCallBuilderServiceImpl implements BritishAirwaysH
         return httpHeaders;
     }
 
-    @SuppressWarnings("rawtypes")
     @Override
     public HttpEntity<String> buildHttpEntityBritishAirways(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
         return new HttpEntity<>(buildHttpHeadersForBritishAirwaysWith(apiTokenAndUrlInformation));
@@ -60,8 +58,7 @@ public class BritishAirwaysHttpCallBuilderServiceImpl implements BritishAirwaysH
         httpHeaders.add(apiTokenAndUrlInformation.getAuthorizationKey(), apiTokenAndUrlInformation.getAuthorization());
     }
 
-    private String transformDateToString(Date date) {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        return dateFormat.format(date);
+    private String transformDateToString(ZonedDateTime date) {
+        return date.format(DateTimeFormatter.ISO_LOCAL_DATE);
     }
 }

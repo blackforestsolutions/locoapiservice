@@ -6,18 +6,15 @@ import de.blackforestsolutions.datamodel.JourneyStatus;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.text.ParseException;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
-
-import static java.util.Collections.EMPTY_LIST;
 
 
 class JourneyStatusBuilderTest {
 
     @Test
-    void test_createJourneyStatusWith_journey_returns_status_with_journey() throws ParseException {
+    void test_createJourneyStatusWith_journey_returns_status_with_journey() {
         //arrange
         Journey testData = JourneyObjectMother.getGustavHeinemannStreetToUniversityJourney();
         //act
@@ -33,14 +30,14 @@ class JourneyStatusBuilderTest {
         //arrange
         Exception e = new Exception();
         //act
-        JourneyStatus result = JourneyStatusBuilder.createJourneyStatusProblemWith(List.of(e), EMPTY_LIST);
+        JourneyStatus result = JourneyStatusBuilder.createJourneyStatusProblemWith(List.of(e), Collections.emptyList());
         //assert
         Assertions.assertThat(result.getJourney().isEmpty()).isTrue();
         Assertions.assertThat(result.getProblem().isEmpty()).isFalse();
     }
 
     @Test
-    void extractJourneyUuidFrom() throws ParseException {
+    void extractJourneyUuidFrom() {
         //arrange
         Journey testJourney = JourneyObjectMother.getGustavHeinemannStreetToUniversityJourney();
         JourneyStatus testJourneyStatus = JourneyStatusBuilder.createJourneyStatusWith(testJourney);

@@ -5,9 +5,8 @@ import de.blackforestsolutions.datamodel.Coordinates;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -140,9 +139,8 @@ public class BBCHttpCallBuilderServiceImpl implements BBCHttpCallBuilderService 
                 .concat(Double.toString(coordinates.getLongitude()));
     }
 
-    private String transformDateToString(Date date) {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd+HH:mm:ss");
-        return dateFormat.format(date);
+    private String transformDateToString(ZonedDateTime date) {
+        return date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd+HH:mm:ss"));
     }
 
 }

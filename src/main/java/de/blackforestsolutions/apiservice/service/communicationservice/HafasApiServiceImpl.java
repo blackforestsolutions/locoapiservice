@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.net.URL;
 import java.util.Map;
-import java.util.Optional;
 import java.util.UUID;
 
 import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.buildUrlWith;
@@ -57,26 +56,15 @@ public class HafasApiServiceImpl implements HafasApiService {
     }
 
     private ApiTokenAndUrlInformation replaceStartAndDestinationIn(ApiTokenAndUrlInformation apiTokenAndUrlInformation, String departureId, String arrivalId) {
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder = builder.buildFrom(apiTokenAndUrlInformation);
+        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(apiTokenAndUrlInformation);
         builder.setDeparture(departureId);
         builder.setArrival(arrivalId);
         return builder.build();
     }
 
     private String getHafasRequestString(ApiTokenAndUrlInformation apiTokenAndUrlInformation, String location) {
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder = builder.buildFrom(apiTokenAndUrlInformation);
-        builder.setProtocol(apiTokenAndUrlInformation.getProtocol());
-        builder.setHost(apiTokenAndUrlInformation.getHost());
-        builder.setPathVariable(apiTokenAndUrlInformation.getPathVariable());
-        builder.setArrival(apiTokenAndUrlInformation.getArrival());
-        builder.setDepartureDate(apiTokenAndUrlInformation.getDepartureDate());
+        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(apiTokenAndUrlInformation);
         builder.setPath(httpCallBuilderService.buildPathWith(builder.build(), location));
-        Optional.ofNullable(apiTokenAndUrlInformation.getChecksum()).ifPresent(builder::setChecksum);
-        Optional.ofNullable(apiTokenAndUrlInformation.getMic()).ifPresent(builder::setMic);
-        Optional.ofNullable(apiTokenAndUrlInformation.getMac()).ifPresent(builder::setMac);
-        Optional.ofNullable(apiTokenAndUrlInformation.getAuthorizationKey()).ifPresent(builder::setAuthorizationKey);
         URL requestUrl = buildUrlWith(builder.build());
         return requestUrl.toString();
     }

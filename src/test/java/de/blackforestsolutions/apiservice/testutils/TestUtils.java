@@ -3,6 +3,7 @@ package de.blackforestsolutions.apiservice.testutils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import de.blackforestsolutions.apiservice.configuration.TimeConfiguration;
 import de.blackforestsolutions.datamodel.Journey;
 import de.blackforestsolutions.datamodel.JourneyStatus;
 import lombok.extern.slf4j.Slf4j;
@@ -16,11 +17,11 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringReader;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -30,11 +31,6 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 
 @Slf4j
 public class TestUtils {
-
-    public static Date convertToDate(LocalDateTime dateToConvert) {
-        return Date.from(dateToConvert.atZone(ZoneId.systemDefault())
-                        .toInstant());
-    }
 
     /**
      * Reads given resource file as a string.
@@ -52,28 +48,19 @@ public class TestUtils {
         return null;
     }
 
-    /**
-     * @param now Given date.
-     * @return returns formated date
-     * @throws ParseException when formating is failing
-     */
-    public static Date formatDate(Date now) throws ParseException {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        String format = formatter.format(now);
-        return new SimpleDateFormat("yyyy-MM-dd").parse(format);
+    public static ZonedDateTime generateDateFromLocalDateTimeAndString(String localDateTimePattern, String date) {
+        return LocalDateTime.parse(date, DateTimeFormatter.ofPattern(localDateTimePattern)).atZone(TimeConfiguration.GERMAN_TIME_ZONE);
     }
 
-    public static Date generateDateFromPatternAndString(String pattern, String date) throws ParseException {
-        return new SimpleDateFormat(pattern).parse(date);
+    public static ZonedDateTime generateDateFromLocalDatePatternAndString(String localDatePattern, String date) {
+        return LocalDate.parse(date, DateTimeFormatter.ofPattern(localDatePattern)).atStartOfDay(TimeConfiguration.GERMAN_TIME_ZONE);
     }
 
-    public static Date buildDateFrom(String date) throws ParseException {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-        String dateStringFixed = date.replace("/", "-");
-        return simpleDateFormat.parse(dateStringFixed);
+    public static ZonedDateTime generateDateFromLocalDatePatternAndString(DateTimeFormatter localDatePattern, String date) {
+        return LocalDate.parse(date, localDatePattern).atStartOfDay(TimeConfiguration.GERMAN_TIME_ZONE);
     }
 
-    public static Date generateDateFrom(String datePattern, String date, String timePattern, String time) {
+    public static ZonedDateTime generateDateFrom(String datePattern, String date, String timePattern, String time) {
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(datePattern);
         LocalDate datePart = LocalDate.parse(date, dateFormatter);
         if (time.length() == 8) {
@@ -82,34 +69,11 @@ public class TestUtils {
         }
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern(timePattern);
         LocalTime timePart = LocalTime.parse(time, timeFormatter);
-        LocalDateTime dateTime = LocalDateTime.of(datePart, timePart);
-        return convertDateTimeToDate(dateTime);
+        return ZonedDateTime.of(datePart, timePart, TimeConfiguration.GERMAN_TIME_ZONE);
     }
 
-    public static Date generateTimeFromString(String date) throws ParseException {
-        return new SimpleDateFormat("HH:mm").parse(date);
-    }
-
-    public static Duration generateDurationFromStartToDestination(Date start, Date destination) {
-        return Duration.between(LocalDateTime.ofInstant(start.toInstant(), ZoneId.systemDefault()), LocalDateTime.ofInstant(destination.toInstant(), ZoneId.systemDefault()));
-    }
-
-    private static Date convertDateTimeToDate(LocalDateTime dateTime) {
-        return Date.from(dateTime.atZone(ZoneId.systemDefault()).toInstant());
-    }
-
-
-    private static LocalDateTime convertToLocalDateTime(Date dateToConvert) {
-        return LocalDateTime.ofInstant(
-                dateToConvert.toInstant(),
-                ZoneId.systemDefault());
-    }
-
-    public static Duration buildDurationBetween(Date departure, Date arrival) {
-        return Duration.between(
-                convertToLocalDateTime(departure),
-                convertToLocalDateTime(arrival)
-        );
+    public static ZonedDateTime generateTimeFromString(String time) {
+        return LocalTime.parse(time, DateTimeFormatter.ofPattern("HH:mm")).atDate(LocalDate.now()).atZone(TimeConfiguration.GERMAN_TIME_ZONE);
     }
 
     public static <T> T retrieveJsonToPojoFromResponse(ResponseEntity<String> response, Class<T> pojo) throws JsonProcessingException {
@@ -151,6 +115,7 @@ public class TestUtils {
         StringReader readerResultBody = new StringReader(response.getBody());
         JAXBContext jaxbContext = JAXBContext.newInstance(pojo);
         Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+        //noinspection unchecked
         return (T) unmarshaller.unmarshal(readerResultBody);
     }
 
@@ -158,6 +123,7 @@ public class TestUtils {
         StringReader readerResultBody = new StringReader(xml);
         JAXBContext jaxbContext = JAXBContext.newInstance(pojo);
         Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+        //noinspection unchecked
         return (T) unmarshaller.unmarshal(readerResultBody);
     }
 
