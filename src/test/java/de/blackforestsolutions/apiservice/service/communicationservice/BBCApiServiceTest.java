@@ -12,7 +12,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InOrder;
-import org.mockito.Mockito;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +25,7 @@ import static de.blackforestsolutions.apiservice.objectmothers.JourneyObjectMoth
 import static de.blackforestsolutions.apiservice.testutils.TestUtils.createJourneyStatusWith;
 import static de.blackforestsolutions.apiservice.testutils.TestUtils.getResourceFileAsString;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 
@@ -39,10 +39,10 @@ class BBCApiServiceTest {
 
     @BeforeEach
     void init() throws JsonProcessingException {
-        when(bbcHttpCallBuilderService.bbcBuildJourneyStringPathWith(Mockito.any(ApiTokenAndUrlInformation.class)))
+        when(bbcHttpCallBuilderService.bbcBuildJourneyStringPathWith(any(ApiTokenAndUrlInformation.class)))
                 .thenReturn("");
 
-        when(bbcHttpCallBuilderService.bbcBuildJourneyCoordinatesPathWith(Mockito.any(ApiTokenAndUrlInformation.class)))
+        when(bbcHttpCallBuilderService.bbcBuildJourneyCoordinatesPathWith(any(ApiTokenAndUrlInformation.class)))
                 .thenReturn("");
 
         when(bbcMapperService.mapJsonToJourneys(anyString()))
@@ -69,7 +69,6 @@ class BBCApiServiceTest {
         assertThat(url.getValue()).isEqualTo("https://public-api.blablacar.com");
         assertThat(body.getValue()).isEqualTo(getResourceFileAsString("json/bbcTest.json"));
         assertThat(result.getCalledObject().size()).isEqualTo(2);
-        //assertThat(result.size()).isEqualTo(2);
     }
 
     @Test
