@@ -3,9 +3,9 @@ package de.blackforestsolutions.apiservice.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.common.annotations.VisibleForTesting;
 import de.blackforestsolutions.apiservice.service.communicationservice.AirportsFinderApiService;
+import de.blackforestsolutions.apiservice.service.exceptionhandling.ExceptionHandlerService;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
-import de.blackforestsolutions.datamodel.CallStatus;
-import de.blackforestsolutions.datamodel.Status;
+import de.blackforestsolutions.datamodel.TravelPoint;
 import de.blackforestsolutions.datamodel.util.LocoJsonMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.util.LinkedHashSet;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("nearest-airports")
@@ -22,20 +21,21 @@ public class NearestStationFinderController {
 
     private final LocoJsonMapper locoJsonMapper = new LocoJsonMapper();
     private final AirportsFinderApiService airportsFinderApiService;
+    private final ExceptionHandlerService exceptionHandlerService;
 
     @Resource(name = "airportsFinderApiTokenAndUrlInformation")
     private ApiTokenAndUrlInformation airportsFinderApiTokenAndUrlInformation;
 
     @Autowired
-    public NearestStationFinderController(AirportsFinderApiService airportsFinderApiService) {
+    public NearestStationFinderController(AirportsFinderApiService airportsFinderApiService, ExceptionHandlerService exceptionHandlerService) {
         this.airportsFinderApiService = airportsFinderApiService;
+        this.exceptionHandlerService = exceptionHandlerService;
     }
 
     @RequestMapping("/get")
-    public LinkedHashSet<CallStatus> retrieveAirportsFinderTravelPoints(@RequestBody String request) throws JsonProcessingException {
+    public LinkedHashSet<TravelPoint> retrieveAirportsFinderTravelPoints(@RequestBody String request) throws JsonProcessingException {
         ApiTokenAndUrlInformation requestInformation = locoJsonMapper.mapJsonToApiTokenAndUrlInformation(request);
-        LinkedHashSet<CallStatus> resultNearestStationFinder = new LinkedHashSet<>();
-        return callNearestStations(resultNearestStationFinder, requestInformation);
+        return this.exceptionHandlerService.handleExceptionsTravelPoints(airportsFinderApiService.getAirportsWith(getAirportsFinderApiTokenAndUrlInformation(requestInformation)));
     }
 
     private ApiTokenAndUrlInformation getAirportsFinderApiTokenAndUrlInformation(ApiTokenAndUrlInformation request) {
@@ -45,13 +45,5 @@ public class NearestStationFinderController {
     @VisibleForTesting
     void setAirportsFinderApiTokenAndUrlInformation(ApiTokenAndUrlInformation airportsFinderApiTokenAndUrlInformation) {
         this.airportsFinderApiTokenAndUrlInformation = airportsFinderApiTokenAndUrlInformation;
-    }
-
-    private LinkedHashSet<CallStatus> callNearestStations(LinkedHashSet<CallStatus> resultNearestStationFinder, ApiTokenAndUrlInformation requestInformation) {
-        CallStatus airportsFinderCallStatus = this.airportsFinderApiService.getAirportsWith(getAirportsFinderApiTokenAndUrlInformation(requestInformation));
-        if (Optional.ofNullable(airportsFinderCallStatus).isPresent() && Optional.ofNullable(airportsFinderCallStatus.getCalledObject()).isPresent() && airportsFinderCallStatus.getStatus().equals(Status.SUCCESS)) {
-            resultNearestStationFinder.addAll((LinkedHashSet<CallStatus>) airportsFinderCallStatus.getCalledObject());
-        }
-        return resultNearestStationFinder;
     }
 }

@@ -37,14 +37,7 @@ public class BahnDepartureBoardServiceImpl implements BahnDepartureBoardService 
     }
 
     private String getBahnDepartureBoardRequestString(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder = builder.buildFrom(apiTokenAndUrlInformation);
-        builder.setHost(apiTokenAndUrlInformation.getHost());
-        builder.setPathVariable(apiTokenAndUrlInformation.getPathVariable());
-        builder.setApiVersion(apiTokenAndUrlInformation.getApiVersion());
-        builder.setGermanRailDepartureBoardPath(apiTokenAndUrlInformation.getGermanRailDepartureBoardPath());
-        builder.setStationId(apiTokenAndUrlInformation.getStationId());
-        builder.setDepartureDate(apiTokenAndUrlInformation.getDepartureDate());
+        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(apiTokenAndUrlInformation);
         builder.setPath(bahnDepartureBoardHttpCallBuilderService.buildBahnDepartureBoardPathWith(builder.build()));
         URL requestUrl = buildUrlWith(builder.build());
         return requestUrl.toString();
@@ -59,8 +52,7 @@ public class BahnDepartureBoardServiceImpl implements BahnDepartureBoardService 
 
     private Map<String, DepartureBoard> mapDepartureBoardListToMap(List<DepartureBoard> departureBoards) {
         Map<String, DepartureBoard> departureBoardMap = new HashMap<>();
-        departureBoards
-                .forEach(departureBoard -> departureBoardMap.put(departureBoard.getDetailsId(), departureBoard));
+        departureBoards.forEach(departureBoard -> departureBoardMap.put(departureBoard.getDetailsId(), departureBoard));
         return departureBoardMap;
     }
 }

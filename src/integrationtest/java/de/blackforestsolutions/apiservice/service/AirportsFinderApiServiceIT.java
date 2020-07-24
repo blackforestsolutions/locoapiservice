@@ -17,7 +17,7 @@ import javax.annotation.Resource;
 
 import static de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother.getAirportsFinderTokenAndUrl;
 import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.buildUrlWith;
-import static de.blackforestsolutions.apiservice.testutils.TestUtils.retrieveListJsonPojoFromResponse;
+import static de.blackforestsolutions.apiservice.testutils.TestUtils.retrieveListJsonToPojoFromResponse;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -42,7 +42,7 @@ class AirportsFinderApiServiceIT {
 
         Assertions.assertThat(HttpStatus.OK).isEqualTo(result.getStatusCode());
         Assertions.assertThat(result.getBody()).isNotEmpty();
-        Assertions.assertThat(retrieveListJsonPojoFromResponse(result, AirportsFinding.class).get(0).getAirportId()).isEqualTo("17b055f6-95af-4959-935c-c08ce3f230d9");
+        Assertions.assertThat(retrieveListJsonToPojoFromResponse(result, AirportsFinding.class).get(0).getAirportId()).isEqualTo("17b055f6-95af-4959-935c-c08ce3f230d9");
     }
 
 }

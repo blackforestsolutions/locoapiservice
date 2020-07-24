@@ -1,23 +1,18 @@
 package de.blackforestsolutions.apiservice.objectmothers;
 
+import de.blackforestsolutions.apiservice.testutils.TestUtils;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import de.blackforestsolutions.datamodel.Coordinates;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.util.Date;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 
-import static de.blackforestsolutions.apiservice.testutils.TestUtils.generateDateFromPatternAndString;
+import static de.blackforestsolutions.apiservice.testutils.TestUtils.generateDateFromLocalDatePatternAndString;
 
 @Slf4j
 public class ApiTokenAndUrlInformationObjectMother {
-
-    public static ApiTokenAndUrlInformation getEmptyApiToken() {
-        return new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder().build();
-    }
 
     public static ApiTokenAndUrlInformation getOSMApiTokenAndUrl() {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
@@ -40,11 +35,7 @@ public class ApiTokenAndUrlInformationObjectMother {
         builder.setAuthorization("r0Ot9FLFNAFxijLW");
         builder.setDeparture(departure);
         builder.setArrival(arrival);
-        try {
-            builder.setDepartureDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2020-02-13 11:46:50"));
-        } catch (ParseException e) {
-            log.error("Error While parsing Date", e);
-        }
+        builder.setDepartureDate(TestUtils.generateDateFromLocalDateTimeAndString("yyyy-MM-dd HH:mm:ss", "2020-02-13 11:46:50"));
         builder.setHafasProductionValue("1023");
         builder.setResultLengthAfterDepartureTime(1);
         builder.setTimeIsDeparture(true);
@@ -63,11 +54,7 @@ public class ApiTokenAndUrlInformationObjectMother {
         builder.setClientType("IPA");
         builder.setDeparture(departure);
         builder.setArrival(arrival);
-        try {
-            builder.setDepartureDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2020-02-14 09:26:53"));
-        } catch (ParseException e) {
-            log.error("Error While parsing Date", e);
-        }
+        builder.setDepartureDate(TestUtils.generateDateFromLocalDateTimeAndString("yyyy-MM-dd HH:mm:ss", "2020-02-14 09:26:53"));
         builder.setAuthentificationType("AID");
         builder.setAuthorization("hafas-vbb-apps");
         builder.setDeparture(departure);
@@ -92,11 +79,7 @@ public class ApiTokenAndUrlInformationObjectMother {
         builder.setClientType("IPH");
         builder.setDeparture(departure);
         builder.setArrival(arrival);
-        try {
-            builder.setDepartureDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2020-02-14 09:44:29"));
-        } catch (ParseException e) {
-            log.error("Error While parsing Date", e);
-        }
+        builder.setDepartureDate(TestUtils.generateDateFromLocalDateTimeAndString("yyyy-MM-dd HH:mm:ss", "2020-02-14 09:44:29"));
         builder.setAuthentificationType("AID");
         builder.setAuthorization("n91dB8Z77MLdoR0K");
         builder.setAuthorizationKey("bdI8UVj40K5fvxwf");
@@ -143,11 +126,7 @@ public class ApiTokenAndUrlInformationObjectMother {
         builder.setTimePathVariable("time");
         builder.setSearchChDelayParameter("show_delays=1");
         builder.setSearchChResults("num=1");
-        try {
-            builder.setDepartureDate(new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss").parse("2019-11-04-14-00-00"));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        builder.setDepartureDate(TestUtils.generateDateFromLocalDateTimeAndString("yyyy-MM-dd HH:mm:ss", "2019-11-04 14:00:00"));
         return builder.build();
     }
 
@@ -176,11 +155,7 @@ public class ApiTokenAndUrlInformationObjectMother {
         builder.setResultLength(1);
         builder.setDistanceFromTravelPoint(2500);
         builder.setHvvAllowTypeSwitch(true);
-        try {
-            builder.setDepartureDate(generateDateFromPatternAndString("dd.MM.yyyy HH:mm", "31.01.2020 13:10"));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        builder.setDepartureDate(TestUtils.generateDateFromLocalDateTimeAndString("dd.MM.yyyy HH:mm", "31.01.2020 13:10"));
         builder.setResultLengthBeforeDepartureTime(2);
         builder.setResultLengthAfterDepartureTime(2);
         builder.setTariff("all");
@@ -193,7 +168,7 @@ public class ApiTokenAndUrlInformationObjectMother {
         return builder.build();
     }
 
-    public static ApiTokenAndUrlInformation getRMVTokenAndUrl(String departure, String arrival) throws ParseException {
+    public static ApiTokenAndUrlInformation getRMVTokenAndUrl(String departure, String arrival) {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
         builder.setProtocol("https");
         builder.setHost("www.rmv.de");
@@ -204,10 +179,10 @@ public class ApiTokenAndUrlInformationObjectMother {
         builder.setAuthorization("1a4fbca8-ce2b-40fc-a1ed-333bcf5aed6e");
         builder.setLanguage("de");
         builder.setArrival(arrival);
-        builder.setArrivalDate(new SimpleDateFormat("yyyy-MM-dd HH:mm").parse("2020-05-04 08:00"));
+        builder.setArrivalDate(TestUtils.generateDateFromLocalDateTimeAndString("yyyy-MM-dd HH:mm", "2020-05-04 08:00"));
         builder.setArrivalCoordinates(new Coordinates.CoordinatesBuilder(50.01d, 50.01d).build());
         builder.setDeparture(departure);
-        builder.setDepartureDate(new SimpleDateFormat("yyyy-MM-dd HH:mm").parse("2020-05-04 08:00"));
+        builder.setDepartureDate(TestUtils.generateDateFromLocalDateTimeAndString("yyyy-MM-dd HH:mm", "2020-05-04 08:00"));
         builder.setDepartureCoordinates(new Coordinates.CoordinatesBuilder(50.052278d, 8.571331d).build());
         builder.setRadius(1000);
         builder.setOutputFormat("SP");
@@ -235,8 +210,8 @@ public class ApiTokenAndUrlInformationObjectMother {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
         builder.setDeparture("testDeparture");
         builder.setArrival("testArrival");
-        builder.setArrivalDate(Date.from(Instant.ofEpochSecond(10)));
-        builder.setDepartureDate(Date.from(Instant.ofEpochSecond(1)));
+        builder.setArrivalDate(ZonedDateTime.parse("2020-06-29T10:15:30+01:00"));
+        builder.setDepartureDate(ZonedDateTime.parse("2020-06-29T10:15:30+01:00"));
         return builder.build();
     }
 
@@ -249,11 +224,8 @@ public class ApiTokenAndUrlInformationObjectMother {
         builder.setGermanRailLocationPath("location");
         builder.setGermanRailArrivalBoardPath("arrivalBoard");
         builder.setStationId("8011160");
-        try {
-            builder.setGermanRailDatePathVariable(new SimpleDateFormat("yyyy-MM-dd").parse("2019-07-25"));
-            builder.setDepartureDate(new SimpleDateFormat("yyyy-MM-dd").parse("2019-07-25"));
-        } catch (ParseException ignored) {
-        }
+        builder.setGermanRailDatePathVariable(generateDateFromLocalDatePatternAndString(DateTimeFormatter.ISO_LOCAL_DATE, "2019-07-25"));
+        builder.setDepartureDate(generateDateFromLocalDatePatternAndString(DateTimeFormatter.ISO_LOCAL_DATE, "2019-07-25"));
         builder.setGermanRailDepartureBoardPath("departureBoard");
         builder.setStationId("8011160");
         builder.setLocationPath("location");
@@ -273,12 +245,8 @@ public class ApiTokenAndUrlInformationObjectMother {
         builder.setJourneyPathVariable("operations/schedules");
         builder.setDeparture("ZRH");
         builder.setArrival("FRA");
-        try {
-            builder.setDepartureDate(new SimpleDateFormat("yyyy-MM-dd").parse("2019-06-28"));
-            builder.setArrivalDate(new SimpleDateFormat("yyyy-MM-dd").parse("2019-06-28"));
-        } catch (ParseException e) {
-            log.error("Error While parsing Date", e);
-        }
+        builder.setDepartureDate(generateDateFromLocalDatePatternAndString(DateTimeFormatter.ISO_LOCAL_DATE, "2019-06-28"));
+        builder.setArrivalDate(generateDateFromLocalDatePatternAndString(DateTimeFormatter.ISO_LOCAL_DATE, "2019-06-28"));
         builder.setXOriginationIp("88.66.47.47");
         builder.setXOriginationIpKey("X-Originating-IP");
         builder.setClientId("v6tqqk92k2a6zzaharpz56x6");
@@ -316,12 +284,8 @@ public class ApiTokenAndUrlInformationObjectMother {
         builder.setPathVariable("flights");
         builder.setDeparture("lhr");
         builder.setArrival("txl");
-        try {
-            builder.setDepartureDate(new SimpleDateFormat("yyyy-MM-dd").parse("2019-10-20"));
-            builder.setArrivalDate(new SimpleDateFormat("yyyy-MM-dd").parse("2019-10-20"));
-        } catch (ParseException e) {
-            log.info("unable to parse british airways token: " + e);
-        }
+        builder.setDepartureDate(generateDateFromLocalDatePatternAndString(DateTimeFormatter.ISO_LOCAL_DATE, "2019-10-20"));
+        builder.setArrivalDate(generateDateFromLocalDatePatternAndString(DateTimeFormatter.ISO_LOCAL_DATE, "2019-10-20"));
         builder.setAuthorizationKey("client-key");
         builder.setAuthorization("64x9epryst4b4g2aaks4b3yn");
         builder.setPath("/rest-v1/v1/flights;departureLocation=lhr;arrivalLocation=txl;scheduledDepartureDate=2020-10-20");
@@ -347,12 +311,8 @@ public class ApiTokenAndUrlInformationObjectMother {
         builder.setArrival("Hamburg");
         builder.setDepartureCoordinates(new Coordinates.CoordinatesBuilder(52.526455d, 13.367701d).build());
         builder.setArrivalCoordinates(new Coordinates.CoordinatesBuilder(53.553918d, 10.005147d).build());
-        try {
-            builder.setDepartureDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2020-05-31 13:00:00"));
-            builder.setArrivalDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2020-06-02 13:00:00"));
-        } catch (ParseException e) {
-            log.info("unable to parse bbc token: " + e);
-        }
+        builder.setDepartureDate(TestUtils.generateDateFromLocalDateTimeAndString("yyyy-MM-dd HH:mm:ss", "2020-05-31 13:00:00"));
+        builder.setArrivalDate(TestUtils.generateDateFromLocalDateTimeAndString("yyyy-MM-dd HH:mm:ss", "2020-06-02 13:00:00"));
         return builder.build();
     }
 

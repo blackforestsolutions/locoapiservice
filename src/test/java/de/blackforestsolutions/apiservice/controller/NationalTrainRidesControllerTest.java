@@ -1,24 +1,29 @@
 package de.blackforestsolutions.apiservice.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother;
-import de.blackforestsolutions.apiservice.service.communicationservice.DBApiService;
+import de.blackforestsolutions.apiservice.service.communicationservice.SearchChApiService;
 import de.blackforestsolutions.apiservice.service.communicationservice.bahnService.BahnJourneyDetailsService;
+import de.blackforestsolutions.apiservice.service.exceptionhandling.ExceptionHandlerService;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import de.blackforestsolutions.datamodel.util.LocoJsonMapper;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-class TrainRidesControllerTest {
+import java.io.IOException;
+
+import static org.mockito.Mockito.mock;
+
+class NationalTrainRidesControllerTest {
 
     private final LocoJsonMapper locoJsonMapper = new LocoJsonMapper();
     private final BahnJourneyDetailsService bahnJourneyDetailsService = Mockito.mock(BahnJourneyDetailsService.class);
-    private final DBApiService dbApiService = Mockito.mock(DBApiService.class);
+    private final SearchChApiService searchChApiService = Mockito.mock(SearchChApiService.class);
+    private final ExceptionHandlerService exceptionHandlerService = mock(ExceptionHandlerService.class);
 
-    private final TrainRidesController classUnderTest = initClassUnderTest();
+    private final NationalTrainRidesController classUnderTest = initClassUnderTest();
 
     @Test
-    void test_if_calls_executed_correctly() throws JsonProcessingException {
+    void test_if_calls_executed_correctly() throws IOException {
         //arrange
         ApiTokenAndUrlInformation testRequest = ApiTokenAndUrlInformationObjectMother.requestInfos();
         String testRequestString = locoJsonMapper.map(testRequest);
@@ -26,13 +31,13 @@ class TrainRidesControllerTest {
         classUnderTest.retrieveTrainJourneys(testRequestString);
         //assert
         Mockito.verify(bahnJourneyDetailsService, Mockito.times(1)).getJourneysForRouteWith(Mockito.any(ApiTokenAndUrlInformation.class));
-        Mockito.verify(dbApiService, Mockito.times(1)).getJourneysForRouteWith(Mockito.any(ApiTokenAndUrlInformation.class));
+        Mockito.verify(searchChApiService, Mockito.times(1)).getJourneysForRouteWith(Mockito.any(ApiTokenAndUrlInformation.class));
     }
 
-    private TrainRidesController initClassUnderTest() {
-        TrainRidesController classUnderTest = new TrainRidesController(bahnJourneyDetailsService, dbApiService);
+    private NationalTrainRidesController initClassUnderTest() {
+        NationalTrainRidesController classUnderTest = new NationalTrainRidesController(bahnJourneyDetailsService, searchChApiService, exceptionHandlerService);
         classUnderTest.setBahnApiTokenAndUrlInformation(ApiTokenAndUrlInformationObjectMother.getBahnTokenAndUrl());
-        classUnderTest.setDbApiTokenAndUrlInformation(ApiTokenAndUrlInformationObjectMother.getDBTokenAndUrl("", ""));
+        classUnderTest.setSearchApiTokenAndUrlInformation(ApiTokenAndUrlInformationObjectMother.getSearchChTokenAndUrl());
         return classUnderTest;
     }
 }

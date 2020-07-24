@@ -15,13 +15,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.TestPropertySource;
 
 import javax.annotation.Resource;
-import java.util.Date;
+import java.time.ZonedDateTime;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.buildUrlWith;
 
 @SpringBootTest
-@TestPropertySource(properties = {"lufthansaBearerExpirationTime=8000"})
+@TestPropertySource(properties = {"lufthansaBearerExpirationTime=6000"})
 @AutoConfigureMockMvc
 class LufthansaApiServiceIT {
 
@@ -40,8 +40,8 @@ class LufthansaApiServiceIT {
         Awaitility.await()
                 .atMost(Duration.ONE_SECOND)
                 .untilAsserted(() -> {
-                        Assertions.assertThat(lufthansaApiTokenAndUrlInformation.getAuthorization()).isNotNull();
-                        authorization.set(lufthansaApiTokenAndUrlInformation.getAuthorization());
+                    Assertions.assertThat(lufthansaApiTokenAndUrlInformation.getAuthorization()).isNotNull();
+                    authorization.set(lufthansaApiTokenAndUrlInformation.getAuthorization());
                 });
 
         Awaitility.await()
@@ -59,7 +59,7 @@ class LufthansaApiServiceIT {
                 .atMost(Duration.TEN_SECONDS)
                 .untilAsserted(() -> {
                     ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder testData = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(lufthansaApiTokenAndUrlInformation);
-                    testData.setDepartureDate(new Date());
+                    testData.setDepartureDate(ZonedDateTime.now());
                     testData.setDeparture("ZRH");
                     testData.setArrival("FRA");
                     testData.setPath(httpCallBuilderService.buildLufthansaJourneyPathWith(testData.build()));

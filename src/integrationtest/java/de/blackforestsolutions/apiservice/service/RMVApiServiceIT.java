@@ -16,9 +16,10 @@ import org.springframework.http.ResponseEntity;
 
 import javax.annotation.Resource;
 import javax.xml.bind.JAXBException;
+import java.time.ZonedDateTime;
 
 import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.buildUrlWith;
-import static de.blackforestsolutions.apiservice.testutils.TestUtils.retrieveXmlPojoFromResponse;
+import static de.blackforestsolutions.apiservice.testutils.TestUtils.retrieveXmlToPojoFromResponse;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -48,7 +49,7 @@ class RMVApiServiceIT {
 
         Assertions.assertThat(result.getStatusCode()).isEqualTo(HttpStatus.OK);
         Assertions.assertThat(result.getBody()).isNotEmpty();
-        Assertions.assertThat(retrieveXmlPojoFromResponse(result, LocationList.class).getStopLocationOrCoordLocation()).isNotEmpty();
+        Assertions.assertThat(retrieveXmlToPojoFromResponse(result, LocationList.class).getStopLocationOrCoordLocation()).isNotEmpty();
     }
 
     @Test
@@ -63,7 +64,7 @@ class RMVApiServiceIT {
 
         Assertions.assertThat(HttpStatus.OK).isEqualTo(result.getStatusCode());
         Assertions.assertThat(result.getBody()).isNotEmpty();
-        Assertions.assertThat(retrieveXmlPojoFromResponse(result, LocationList.class).getStopLocationOrCoordLocation()).isNotEmpty();
+        Assertions.assertThat(retrieveXmlToPojoFromResponse(result, LocationList.class).getStopLocationOrCoordLocation()).isNotEmpty();
     }
 
     @Test
@@ -71,6 +72,7 @@ class RMVApiServiceIT {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder testData = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(rmvApiTokenAndUrlInformation);
         testData.setDeparture("003011037");
         testData.setArrival("003000010");
+        testData.setDepartureDate(ZonedDateTime.now());
         testData.setPath(httpCallBuilderService.buildTripPathWith(testData.build()));
 
         ResponseEntity<String> result = callService.get(
@@ -80,6 +82,6 @@ class RMVApiServiceIT {
 
         Assertions.assertThat(HttpStatus.OK).isEqualTo(result.getStatusCode());
         Assertions.assertThat(result.getBody()).isNotEmpty();
-        Assertions.assertThat(retrieveXmlPojoFromResponse(result, TripList.class).getTrip()).isNotEmpty();
+        Assertions.assertThat(retrieveXmlToPojoFromResponse(result, TripList.class).getTrip()).isNotEmpty();
     }
 }

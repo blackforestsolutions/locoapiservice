@@ -16,10 +16,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import javax.annotation.Resource;
-import java.util.Date;
+import java.time.ZonedDateTime;
 
 import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.buildUrlWith;
-import static de.blackforestsolutions.apiservice.testutils.TestUtils.retrieveListJsonPojoFromResponse;
+import static de.blackforestsolutions.apiservice.testutils.TestUtils.retrieveListJsonToPojoFromResponse;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -46,15 +46,15 @@ class BahnApiServiceIT {
 
         Assertions.assertThat(HttpStatus.OK).isEqualTo(result.getStatusCode());
         Assertions.assertThat(result.getBody()).isNotEmpty();
-        Assertions.assertThat(retrieveListJsonPojoFromResponse(result, RailwayStation.class)).isNotEmpty();
-        Assertions.assertThat(retrieveListJsonPojoFromResponse(result, RailwayStation.class).get(0).getName()).contains("Berlin");
+        Assertions.assertThat(retrieveListJsonToPojoFromResponse(result, RailwayStation.class)).isNotEmpty();
+        Assertions.assertThat(retrieveListJsonToPojoFromResponse(result, RailwayStation.class).get(0).getName()).contains("Berlin");
     }
 
     @Test
     void test_BahnArrivalBoard_() throws JsonProcessingException {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder testData = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(bahnApiTokenAndUrlInformation);
         testData.setStationId("8011160");
-        testData.setDepartureDate(new Date());
+        testData.setDepartureDate(ZonedDateTime.now());
         testData.setPath(bahnHttpCallBuilderService.buildBahnArrivalBoardPathWith(testData.build()));
 
         ResponseEntity<String> result = callService.get(
@@ -64,15 +64,15 @@ class BahnApiServiceIT {
 
         Assertions.assertThat(HttpStatus.OK).isEqualTo(result.getStatusCode());
         Assertions.assertThat(result.getBody()).isNotEmpty();
-        Assertions.assertThat(retrieveListJsonPojoFromResponse(result, ArrivalBoard.class)).isNotEmpty();
-        Assertions.assertThat(retrieveListJsonPojoFromResponse(result, ArrivalBoard.class).get(0).getBoardId()).isEqualTo("8011160");
+        Assertions.assertThat(retrieveListJsonToPojoFromResponse(result, ArrivalBoard.class)).isNotEmpty();
+        Assertions.assertThat(retrieveListJsonToPojoFromResponse(result, ArrivalBoard.class).get(0).getBoardId()).isEqualTo("8011160");
     }
 
     @Test
     void test_BahnDepartureBoard() throws JsonProcessingException {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder testData = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(bahnApiTokenAndUrlInformation);
         testData.setStationId("8011160");
-        testData.setDepartureDate(new Date());
+        testData.setDepartureDate(ZonedDateTime.now());
         testData.setPath(bahnHttpCallBuilderService.buildBahnDepartureBoardPathWith(testData.build()));
 
         ResponseEntity<String> result = callService.get(
@@ -82,8 +82,8 @@ class BahnApiServiceIT {
 
         Assertions.assertThat(HttpStatus.OK).isEqualTo(result.getStatusCode());
         Assertions.assertThat(result.getBody()).isNotEmpty();
-        Assertions.assertThat(retrieveListJsonPojoFromResponse(result, DepartureBoard.class)).isNotEmpty();
-        Assertions.assertThat(retrieveListJsonPojoFromResponse(result, DepartureBoard.class).get(0).getBoardId()).isEqualTo("8011160");
+        Assertions.assertThat(retrieveListJsonToPojoFromResponse(result, DepartureBoard.class)).isNotEmpty();
+        Assertions.assertThat(retrieveListJsonToPojoFromResponse(result, DepartureBoard.class).get(0).getBoardId()).isEqualTo("8011160");
     }
 
     @Test
@@ -99,7 +99,7 @@ class BahnApiServiceIT {
 
         Assertions.assertThat(HttpStatus.OK).isEqualTo(result.getStatusCode());
         Assertions.assertThat(result.getBody()).isNotEmpty();
-        Assertions.assertThat(retrieveListJsonPojoFromResponse(result, DepartureBoard.class)).isEqualTo(false);
+        Assertions.assertThat(retrieveListJsonToPojoFromResponse(result, DepartureBoard.class)).isEqualTo(false);
     }
 
 }

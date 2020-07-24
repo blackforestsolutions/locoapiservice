@@ -1,6 +1,5 @@
 package de.blackforestsolutions.apiservice.service.supportservice;
 
-import de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpHeaders;
@@ -10,6 +9,7 @@ import java.io.UncheckedIOException;
 import java.net.URL;
 import java.util.Objects;
 
+import static de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother.getLufthansaTokenAndUrl;
 import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -17,7 +17,7 @@ class HttpCallBuilderServiceTest {
 
     @Test
     void test_buildUrlWith_protocol_host_port_path_http_returns_correcturl() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getLufthansaTokenAndUrl();
+        ApiTokenAndUrlInformation testData = getLufthansaTokenAndUrl();
 
         URL result = buildUrlWith(testData);
 
@@ -29,76 +29,59 @@ class HttpCallBuilderServiceTest {
 
     @Test
     void test_buildUrlWith_protocol_host_port_path_https_returns_correcturl() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getLufthansaTokenAndUrl();
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder = builder.buildFrom(testData);
+        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(getLufthansaTokenAndUrl());
         builder.setProtocol("https");
-        testData = builder.build();
 
-        URL result = buildUrlWith(testData);
+        URL result = buildUrlWith(builder.build());
 
-        assertThat(result.getProtocol()).isEqualToIgnoringCase(testData.getProtocol());
-        assertThat(result.getHost()).isEqualToIgnoringCase(testData.getHost());
-        assertThat(result.getPort()).isEqualTo(testData.getPort());
-        assertThat(result.getPath()).isEqualToIgnoringCase(testData.getPath());
+        assertThat(result.getProtocol()).isEqualToIgnoringCase(builder.getProtocol());
+        assertThat(result.getHost()).isEqualToIgnoringCase(builder.getHost());
+        assertThat(result.getPort()).isEqualTo(builder.getPort());
+        assertThat(result.getPath()).isEqualToIgnoringCase(builder.getPath());
     }
 
     @Test
     void test_buildUrlWith_wrong_protocol_host_port_path_throws_MalformedURLException() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getLufthansaTokenAndUrl();
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder = builder.buildFrom(testData);
+        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(getLufthansaTokenAndUrl());
         builder.setProtocol("wrong");
-        testData = builder.build();
 
-        ApiTokenAndUrlInformation finalTestData = testData;
-        org.junit.jupiter.api.Assertions.assertThrows(UncheckedIOException.class, () -> buildUrlWith(finalTestData));
+        org.junit.jupiter.api.Assertions.assertThrows(UncheckedIOException.class, () -> buildUrlWith(builder.build()));
     }
 
     @Test
     void test_buildUrlWith_protocol_host_path_http_returns_correcturl() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getLufthansaTokenAndUrl();
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder = builder.buildFrom(testData);
+        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(getLufthansaTokenAndUrl());
         builder.setPort(-1);
-        testData = builder.build();
 
-        URL result = buildUrlWith(testData);
+        URL result = buildUrlWith(builder.build());
 
-        assertThat(result.getProtocol()).isEqualToIgnoringCase(testData.getProtocol());
-        assertThat(result.getHost()).isEqualToIgnoringCase(testData.getHost());
-        assertThat(result.getPort()).isEqualTo(testData.getPort());
-        assertThat(result.getPath()).isEqualToIgnoringCase(testData.getPath());
+        assertThat(result.getProtocol()).isEqualToIgnoringCase(builder.getProtocol());
+        assertThat(result.getHost()).isEqualToIgnoringCase(builder.getHost());
+        assertThat(result.getPort()).isEqualTo(builder.getPort());
+        assertThat(result.getPath()).isEqualToIgnoringCase(builder.getPath());
     }
 
     @Test
     void test_buildUrlWith_protocol_host_path_correct_params_https_returns_correcturl() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getLufthansaTokenAndUrl();
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder = builder.buildFrom(testData);
+        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(getLufthansaTokenAndUrl());
         builder.setProtocol("https");
         builder.setPort(-1);
-        testData = builder.build();
 
-        URL result = buildUrlWith(testData);
+        URL result = buildUrlWith(builder.build());
 
-        assertThat(result.getProtocol()).isEqualToIgnoringCase(testData.getProtocol());
-        assertThat(result.getHost()).isEqualToIgnoringCase(testData.getHost());
-        assertThat(result.getPort()).isEqualTo(testData.getPort());
-        assertThat(result.getPath()).isEqualToIgnoringCase(testData.getPath());
+        assertThat(result.getProtocol()).isEqualToIgnoringCase(builder.getProtocol());
+        assertThat(result.getHost()).isEqualToIgnoringCase(builder.getHost());
+        assertThat(result.getPort()).isEqualTo(builder.getPort());
+        assertThat(result.getPath()).isEqualToIgnoringCase(builder.getPath());
     }
 
     @Test
     void test_buildUrlWith_wrong_protocol_host_path_throws_MalformedURLException() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getLufthansaTokenAndUrl();
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder = builder.buildFrom(testData);
+        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(getLufthansaTokenAndUrl());
         builder.setProtocol("wrong");
         builder.setPort(-1);
-        testData = builder.build();
 
-        ApiTokenAndUrlInformation finalTestData = testData;
-        org.junit.jupiter.api.Assertions.assertThrows(UncheckedIOException.class, () -> buildUrlWith(finalTestData));
+        org.junit.jupiter.api.Assertions.assertThrows(UncheckedIOException.class, () -> buildUrlWith(builder.build()));
     }
 
     @Test

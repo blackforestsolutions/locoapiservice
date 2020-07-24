@@ -1,61 +1,41 @@
 package de.blackforestsolutions.apiservice.service.mapper;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import de.blackforestsolutions.apiservice.configuration.AirportConfiguration;
-import de.blackforestsolutions.datamodel.CallStatus;
-import de.blackforestsolutions.datamodel.Status;
 import de.blackforestsolutions.datamodel.TravelPoint;
-import org.assertj.core.api.Assertions;
+import de.blackforestsolutions.datamodel.TravelPointStatus;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 
 import static de.blackforestsolutions.apiservice.objectmothers.TravelPointObjectMother.getTravelPointsForAirportsFinder;
 import static de.blackforestsolutions.apiservice.testutils.TestUtils.getResourceFileAsString;
+import static org.assertj.core.api.Assertions.assertThat;
 
 
-public class AirportsFinderMapperServiceTest {
+class AirportsFinderMapperServiceTest {
 
 
     private final AirportConfiguration airportConfiguration = new AirportConfiguration();
 
     private final AirportsFinderMapperService classUnderTest = new AirportsFinderMapperServiceImpl(airportConfiguration.airports());
 
-    public AirportsFinderMapperServiceTest() throws IOException {
+    AirportsFinderMapperServiceTest() throws IOException {
     }
 
     @Test
-    public void test_map_jsonObject_and_return_linkedHashSet_with_two_successful_and_one_failed_callstatus() {
+    void test_map_jsonObject_and_return_linkedHashSet_with_two_successful_and_one_failed_callstatus() throws JsonProcessingException {
         String airportsFinderResource = getResourceFileAsString("json/AirportsFinderJsons/fromTriberg300KmOnlyThree.json");
-        ArrayList<TravelPoint> testDataArrayList = getTravelPointsForAirportsFinder();
-        LinkedHashSet<CallStatus> resultLinkedHashSet = classUnderTest.map(airportsFinderResource);
-        ArrayList<CallStatus> resultArrayList = convertSetToArrayListForTestingPurpose(resultLinkedHashSet);
+        List<TravelPoint> testDataArrayList = getTravelPointsForAirportsFinder();
 
-        Assertions.assertThat(resultArrayList.get(0).getCalledObject()).isEqualToComparingFieldByField(testDataArrayList.get(0));
-        Assertions.assertThat(resultArrayList.get(1).getCalledObject()).isEqualToComparingFieldByField(testDataArrayList.get(1));
-        Assertions.assertThat(resultArrayList.get(2).getCalledObject()).isEqualTo(null);
-        Assertions.assertThat(resultArrayList.get(2).getStatus()).isEqualTo(Status.FAILED);
-        Assertions.assertThat(resultArrayList.get(2).getException().getMessage()).isEqualTo("The provided AirportFinding object is not mapped because the airport code is not provided in the airports.dat");
+        LinkedHashSet<TravelPointStatus> result = classUnderTest.map(airportsFinderResource);
+
+        assertThat(new ArrayList<>(result).get(0).getTravelPoint().get()).isEqualToComparingFieldByField(testDataArrayList.get(0));
+        assertThat(new ArrayList<>(result).get(1).getTravelPoint().get()).isEqualToComparingFieldByField(testDataArrayList.get(1));
+        assertThat(new ArrayList<>(result).get(2).getProblem().get().getExceptions().get(0)).isInstanceOf(Exception.class);
     }
 
-    @Test
-    public void test_map_jsonObject_with_airportCode_as_null_and_return_callStatus_with_null() {
-        String airportsFinderResource = getResourceFileAsString("json/AirportsFinderJsons/callStatusFailedWithExceptions.json");
-        LinkedHashSet<CallStatus> resultLinkedHashSet = classUnderTest.map(airportsFinderResource);
-        ArrayList<CallStatus> resultArrayList = convertSetToArrayListForTestingPurpose(resultLinkedHashSet);
-        Assertions.assertThat(resultArrayList.get(0).getException().getMessage()).isEqualTo("The provided AirportFinding object is not mapped because the airport code appears to be null");
-    }
-
-    @Test
-    public void test_map_jsonObject_with_airportCode_as_not_an_airportId_and_return_callStatus_with_airportCode_of_no_airport_in_airportBat() {
-        String airportsFinderResource = getResourceFileAsString("json/AirportsFinderJsons/callStatusFailedWithExceptions.json");
-        LinkedHashSet<CallStatus> resultLinkedHashSet = classUnderTest.map(airportsFinderResource);
-        ArrayList<CallStatus> resultArrayList = convertSetToArrayListForTestingPurpose(resultLinkedHashSet);
-        Assertions.assertThat(resultArrayList.get(2).getException().getMessage()).isEqualTo("The provided AirportFinding object is not mapped because the airport code is not provided in the airports.dat");
-    }
-
-    private ArrayList<CallStatus> convertSetToArrayListForTestingPurpose(LinkedHashSet<CallStatus> linkedHashSet) {
-        return new ArrayList<>(linkedHashSet);
-    }
 }

@@ -25,6 +25,12 @@ public class VBBApiServiceImpl implements VBBApiService {
         this.hafasApiService = hafasApiService;
     }
 
+    @Override
+    public CallStatus<Map<UUID, JourneyStatus>> getJourneysForRouteWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
+        HafasPriceMapper priceMapper = VBBApiServiceImpl::mapPrice;
+        return hafasApiService.getJourneysForRouteWith(apiTokenAndUrlInformation, TravelProvider.VBB, priceMapper);
+    }
+
     private static Price mapPrice(TrfRes trfRes) {
         Price.PriceBuilder price = new Price.PriceBuilder();
         price.setSymbol(CurrencyConfiguration.EURO);
@@ -40,12 +46,6 @@ public class VBBApiServiceImpl implements VBBApiService {
         return Map.of(
                 PriceCategory.ADULT, new BigDecimal(sb.toString())
         );
-    }
-
-    @Override
-    public Map<UUID, JourneyStatus> getJourneysForRouteWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
-        HafasPriceMapper priceMapper = VBBApiServiceImpl::mapPrice;
-        return hafasApiService.getJourneysForRouteWith(apiTokenAndUrlInformation, TravelProvider.VBB, priceMapper);
     }
 
 }

@@ -3,9 +3,8 @@ package de.blackforestsolutions.apiservice.service.supportservice;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import org.springframework.stereotype.Service;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 
@@ -67,20 +66,18 @@ public class SearchChHttpCallBuilderServiceImpl implements SearchChHttpCallBuild
                 .concat("&")
                 .concat(apiTokenAndUrlInformation.getTimePathVariable())
                 .concat("=")
-                .concat(transformDateToTimeOfDayString(apiTokenAndUrlInformation.getDepartureDate()))
+                .concat(transformTimeToString(apiTokenAndUrlInformation.getDepartureDate()))
                 .concat("&")
                 .concat(apiTokenAndUrlInformation.getSearchChDelayParameter())
                 .concat("&")
                 .concat(apiTokenAndUrlInformation.getSearchChResults());
     }
 
-    private String transformDateToString(Date date) {
-        DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-        return dateFormat.format(date);
+    private String transformDateToString(ZonedDateTime date) {
+        return date.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
     }
 
-    private String transformDateToTimeOfDayString(Date date) {
-        DateFormat dateFormat = new SimpleDateFormat("HH:mm");
-        return dateFormat.format(date);
+    private String transformTimeToString(ZonedDateTime date) {
+        return date.format(DateTimeFormatter.ofPattern("HH:mm"));
     }
 }

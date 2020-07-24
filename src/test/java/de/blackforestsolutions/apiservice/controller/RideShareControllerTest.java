@@ -3,15 +3,19 @@ package de.blackforestsolutions.apiservice.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother;
 import de.blackforestsolutions.apiservice.service.communicationservice.BBCApiService;
+import de.blackforestsolutions.apiservice.service.exceptionhandling.ExceptionHandlerService;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import de.blackforestsolutions.datamodel.util.LocoJsonMapper;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import static org.mockito.Mockito.mock;
+
 class RideShareControllerTest {
 
     private final LocoJsonMapper locoJsonMapper = new LocoJsonMapper();
     private final BBCApiService bbcApiService = Mockito.mock(BBCApiService.class);
+    private final ExceptionHandlerService exceptionHandlerService = mock(ExceptionHandlerService.class);
 
     private final RideShareController classUnderTest = initClassUnderTest();
 
@@ -28,7 +32,7 @@ class RideShareControllerTest {
     }
 
     private RideShareController initClassUnderTest() {
-        RideShareController classUnderTest = new RideShareController(bbcApiService);
+        RideShareController classUnderTest = new RideShareController(bbcApiService, exceptionHandlerService);
         classUnderTest.setBbcApiTokenAndUrlInformation(ApiTokenAndUrlInformationObjectMother.getBBCTokenAndUrl());
         return classUnderTest;
     }

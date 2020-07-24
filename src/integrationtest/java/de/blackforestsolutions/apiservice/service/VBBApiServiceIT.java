@@ -2,7 +2,6 @@ package de.blackforestsolutions.apiservice.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallService;
-import de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder;
 import de.blackforestsolutions.apiservice.service.supportservice.hafas.HafasHttpCallBuilderService;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import de.blackforestsolutions.generatedcontent.hafas.response.journey.HafasJourneyResponse;
@@ -16,12 +15,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import javax.annotation.Resource;
+import java.time.ZonedDateTime;
 
-import java.util.Date;
-
-import static de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother.getVBBTokenAndUrl;
 import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.buildUrlWith;
-import static de.blackforestsolutions.apiservice.testutils.TestUtils.retrieveJsonPojoFromResponse;
+import static de.blackforestsolutions.apiservice.testutils.TestUtils.retrieveJsonToPojoFromResponse;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -48,14 +45,14 @@ class VBBApiServiceIT {
 
         Assertions.assertThat(HttpStatus.OK).isEqualTo(result.getStatusCode());
         Assertions.assertThat(result.getBody()).isNotEmpty();
-        Assertions.assertThat(retrieveJsonPojoFromResponse(result, HafasLocationResponse.class).getSvcResL().get(0).getErr()).isEqualTo("OK");
+        Assertions.assertThat(retrieveJsonToPojoFromResponse(result, HafasLocationResponse.class).getSvcResL().get(0).getErr()).isEqualTo("OK");
     }
 
     @Test
     void test_getJourney() throws JsonProcessingException {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder testData = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(vbbApiTokenAndUrlInformation);
         testData.setDeparture("770000350");
-        testData.setDepartureDate(new Date());
+        testData.setDepartureDate(ZonedDateTime.now());
         testData.setArrival("900985256");
         testData.setPath(httpCallBuilderService.buildPathWith(testData.build(), null));
 
@@ -66,7 +63,7 @@ class VBBApiServiceIT {
 
         Assertions.assertThat(HttpStatus.OK).isEqualTo(result.getStatusCode());
         Assertions.assertThat(result.getBody()).isNotEmpty();
-        Assertions.assertThat(retrieveJsonPojoFromResponse(result, HafasJourneyResponse.class).getSvcResL().get(0).getErr()).isEqualTo("OK");
+        Assertions.assertThat(retrieveJsonToPojoFromResponse(result, HafasJourneyResponse.class).getSvcResL().get(0).getErr()).isEqualTo("OK");
     }
 
 }

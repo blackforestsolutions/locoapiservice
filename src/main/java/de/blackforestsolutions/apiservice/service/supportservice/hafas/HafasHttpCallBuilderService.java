@@ -5,11 +5,9 @@ import org.springframework.http.HttpEntity;
 
 public interface HafasHttpCallBuilderService {
 
-    @SuppressWarnings("rawtypes")
-    HttpEntity buildHttpEntityStationForHafas(ApiTokenAndUrlInformation apiTokenAndUrlInformation, String station);
+    HttpEntity<String> buildHttpEntityStationForHafas(ApiTokenAndUrlInformation apiTokenAndUrlInformation, String station);
 
     String buildPathWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation, String station);
 
-    @SuppressWarnings("rawtypes")
-    HttpEntity buildHttpEntityJourneyForHafas(ApiTokenAndUrlInformation apiTokenAndUrlInformation);
+    HttpEntity<String> buildHttpEntityJourneyForHafas(ApiTokenAndUrlInformation apiTokenAndUrlInformation);
 }

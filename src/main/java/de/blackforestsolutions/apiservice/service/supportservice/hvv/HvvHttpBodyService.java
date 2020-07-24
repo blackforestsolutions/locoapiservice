@@ -2,61 +2,42 @@ package de.blackforestsolutions.apiservice.service.supportservice.hvv;
 
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import de.blackforestsolutions.generatedcontent.hvv.request.*;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.stereotype.Service;
 
-import java.nio.charset.StandardCharsets;
-import java.text.SimpleDateFormat;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Date;
 import java.util.Objects;
 
-import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.setFormatToJsonFor;
-import static de.blackforestsolutions.apiservice.service.supportservice.hvv.HvvHttpCallBuilder.*;
+import static de.blackforestsolutions.apiservice.service.supportservice.hvv.HvvHttpCallBuilder.combineBaseHttpBodyWithApiCallBody;
 
-@Slf4j
-@Service
-public class HvvJourneyHttpCallBuilderServiceImpl implements HvvJourneyHttpCallBuilderService {
+class HvvHttpBodyService {
 
     private static final int NORMAL_TARIFF = 1;
     private static final int CHILD_TARIFF = 2;
 
-    @SuppressWarnings("rawtypes")
-    @Override
-    public HttpEntity buildJourneyHttpEntityForHvv(ApiTokenAndUrlInformation apiTokenAndUrlInformation, HvvStation start, HvvStation destination) {
-        String body;
-        body = buildJourneyHttpBodyForHvv(apiTokenAndUrlInformation, start, destination);
-        HttpHeaders httpHeaders = buildHttpHeadersForHvvJourneyWith(apiTokenAndUrlInformation, start, destination);
-        return new HttpEntity<>(
-                body,
-                httpHeaders
-        );
+    static String buildStationListHttpBodyForHvv(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
+        HvvStationListBody hvvStationListBody = new HvvStationListBody();
+        hvvStationListBody.setFilterEquivalent(apiTokenAndUrlInformation.getHvvFilterEquivalent());
+        hvvStationListBody.setModificationTypes(ModificationType.MAIN);
+
+        return combineBaseHttpBodyWithApiCallBody(hvvStationListBody, apiTokenAndUrlInformation);
     }
 
-    @Override
-    public String buildJourneyPathWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
-        Objects.requireNonNull(apiTokenAndUrlInformation.getPathVariable(), "path variable is not allowed to be null");
-        Objects.requireNonNull(apiTokenAndUrlInformation.getJourneyPathVariable(), "journey path variable is not allowed to be null");
-        return "/"
-                .concat(apiTokenAndUrlInformation.getPathVariable())
-                .concat(apiTokenAndUrlInformation.getJourneyPathVariable());
+    static String buildTravelPointHttpBodyForHvv(ApiTokenAndUrlInformation apiTokenAndUrlInformation, String station) {
+        HvvTravelPointBody hvvTravelPointBody = new HvvTravelPointBody();
+
+        hvvTravelPointBody.setTheName(new HvvStation(station));
+        hvvTravelPointBody.setAllowTypeSwitch(apiTokenAndUrlInformation.getHvvAllowTypeSwitch());
+        hvvTravelPointBody.setMaxList(apiTokenAndUrlInformation.getResultLength());
+        hvvTravelPointBody.setMaxDistance(apiTokenAndUrlInformation.getDistanceFromTravelPoint());
+        hvvTravelPointBody.setTariffDetails(apiTokenAndUrlInformation.getAllowTariffDetails());
+
+        return combineBaseHttpBodyWithApiCallBody(hvvTravelPointBody, apiTokenAndUrlInformation);
+
     }
 
-    private HttpHeaders buildHttpHeadersForHvvJourneyWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation, HvvStation start, HvvStation destination) {
-        HttpHeaders httpHeaders = new HttpHeaders();
-        setFormatToJsonFor(httpHeaders);
-        setBaseHttpHeaderFor(httpHeaders, apiTokenAndUrlInformation);
-
-        String jsonBody = buildJourneyHttpBodyForHvv(apiTokenAndUrlInformation, start, destination);
-        setHvvAuthentificationSignatureFor(httpHeaders, apiTokenAndUrlInformation, jsonBody.getBytes(StandardCharsets.UTF_8));
-
-        return httpHeaders;
-    }
-
-    private String buildJourneyHttpBodyForHvv(ApiTokenAndUrlInformation apiTokenAndUrlInformation, HvvStation start, HvvStation destination) {
+    static String buildJourneyHttpBodyForHvv(ApiTokenAndUrlInformation apiTokenAndUrlInformation, HvvStation start, HvvStation destination) {
         Objects.requireNonNull(apiTokenAndUrlInformation.getDepartureDate(), "departure date is not allowed to be null");
         Objects.requireNonNull(apiTokenAndUrlInformation.getTimeIsDeparture(), "timeIsDeparture date is not allowed to be null");
         Objects.requireNonNull(apiTokenAndUrlInformation.getAllowTariffDetails(), "allowTarifDetails date is not allowed to be null");
@@ -93,20 +74,18 @@ public class HvvJourneyHttpCallBuilderServiceImpl implements HvvJourneyHttpCallB
         return combineBaseHttpBodyWithApiCallBody(journeyBody, apiTokenAndUrlInformation);
     }
 
-    private Time getHvvTimeFormat(Date depatureDate) {
+    private static Time getHvvTimeFormat(ZonedDateTime depatureDate) {
         return new Time(
                 buildDateStringFrom(depatureDate),
                 buildTimeStringFrom(depatureDate)
         );
     }
 
-    private String buildDateStringFrom(Date date) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-        return dateFormat.format(date);
+    private static String buildDateStringFrom(ZonedDateTime date) {
+        return date.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
     }
 
-    private String buildTimeStringFrom(Date date) {
-        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
-        return timeFormat.format(date);
+    private static String buildTimeStringFrom(ZonedDateTime time) {
+        return time.format(DateTimeFormatter.ISO_LOCAL_TIME);
     }
 }

@@ -1,0 +1,30 @@
+[
+  {
+    "place_id": 92492061,
+    "licence": "Data © OpenStreetMap contributors, ODbL 1.0. https://osm.org/copyright",
+    "osm_type": "way",
+    "osm_id": 24996425,
+    "boundingbox": [
+      "48.0502709",
+      "48.0518737",
+      "8.2059689",
+      "8.2087765"
+    ],
+    "lat": null,
+    "lon": null,
+    "display_name": "Gerwigstraße, Schlossers Mühle, Furtwangen im Schwarzwald, Verwaltungsgemeinschaft Furtwangen im Schwarzwald, Schwarzwald-Baar-Kreis, Baden-Württemberg, 78120, Deutschland",
+    "class": "highway",
+    "type": "living_street",
+    "importance": 0.4,
+    "address": {
+      "road": "Gerwigstraße",
+      "hamlet": "Schlossers Mühle",
+      "city": "Furtwangen im Schwarzwald",
+      "county": "Verwaltungsgemeinschaft Furtwangen im Schwarzwald",
+      "state": "Baden-Württemberg",
+      "postcode": "78120",
+      "country": "Deutschland",
+      "country_code": "de"
+    }
+  }
+]

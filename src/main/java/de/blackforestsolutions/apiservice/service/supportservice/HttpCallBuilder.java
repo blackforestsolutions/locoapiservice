@@ -11,10 +11,9 @@ import org.springframework.http.MediaType;
 import java.io.UncheckedIOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Collections;
-import java.util.Date;
 import java.util.Objects;
 
 @Slf4j
@@ -60,9 +59,8 @@ public class HttpCallBuilder {
      * @param date a java date type
      * @return transformed date string
      */
-    public static String transformDateToString(Date date) {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        return dateFormat.format(date);
+    public static String transformDateToString(ZonedDateTime date) {
+        return date.format(DateTimeFormatter.ISO_LOCAL_DATE);
     }
 
     @SuppressWarnings("rawtypes")

@@ -1,30 +1,37 @@
 package de.blackforestsolutions.apiservice.service.mapper;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import de.blackforestsolutions.apiservice.objectmothers.JourneyObjectMother;
 import de.blackforestsolutions.apiservice.service.supportservice.UuidService;
-import de.blackforestsolutions.datamodel.*;
+import de.blackforestsolutions.datamodel.Journey;
+import de.blackforestsolutions.datamodel.JourneyStatus;
+import de.blackforestsolutions.datamodel.Leg;
+import de.blackforestsolutions.datamodel.TravelLine;
+import de.blackforestsolutions.generatedcontent.searchCh.Route;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.springframework.test.util.ReflectionTestUtils;
 
-import java.text.ParseException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.UUID;
 
 import static de.blackforestsolutions.apiservice.objectmothers.UUIDObjectMother.*;
 import static de.blackforestsolutions.apiservice.testutils.TestUtils.getResourceFileAsString;
+import static de.blackforestsolutions.apiservice.testutils.TestUtils.retrieveJsonToPojo;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class SearchChMapperServiceTest {
 
     @Mock
-    private UuidService uuidService = Mockito.mock(UuidService.class);
+    private final UuidService uuidService = Mockito.mock(UuidService.class);
 
     @InjectMocks
-    private SearchChMapperService classUnderTest = new SearchChMapperServiceImpl(uuidService);
+    private final SearchChMapperService classUnderTest = new SearchChMapperServiceImpl(uuidService);
 
     @BeforeEach
     void init() {
@@ -36,7 +43,7 @@ class SearchChMapperServiceTest {
     }
 
     @Test
-    void test_getJourneysFrom_with_json_and_return_map_with_journeys() {
+    void test_getJourneysFrom_with_json_and_return_map_with_journeys() throws JsonProcessingException {
         String journeyJson = getResourceFileAsString("json/searchChTestRoute.json");
 
         Map<UUID, JourneyStatus> result = classUnderTest.getJourneysFrom(journeyJson);
@@ -46,7 +53,7 @@ class SearchChMapperServiceTest {
 
     @SuppressWarnings("OptionalGetWithoutIsPresent")
     @Test
-    void test_getJourneysFrom_with_json_and_return_correct_journey() throws ParseException {
+    void test_getJourneysFrom_with_json_and_return_correct_journey() throws JsonProcessingException {
         String journeyJson = getResourceFileAsString("json/searchChTestRoute.json");
         Journey testJourneyData = JourneyObjectMother.getEinsiedeln_to_Zuerich_Foerlibuckstreet60_Journey();
 
@@ -57,7 +64,7 @@ class SearchChMapperServiceTest {
 
     @SuppressWarnings("OptionalGetWithoutIsPresent")
     @Test
-    void test_getJourneysFrom_with_json_and_return_correct_legs() throws ParseException {
+    void test_getJourneysFrom_with_json_and_return_correct_legs() throws JsonProcessingException {
         String journeyJson = getResourceFileAsString("json/searchChTestRoute.json");
         LinkedHashMap<UUID, Leg> testLegs = JourneyObjectMother.getEinsiedeln_to_Zuerich_Foerlibuckstreet60_Journey().getLegs();
 
@@ -72,7 +79,7 @@ class SearchChMapperServiceTest {
 
     @SuppressWarnings("OptionalGetWithoutIsPresent")
     @Test
-    void test_getJourneysFrom_with_json_and_return_correct_travelLine() throws ParseException {
+    void test_getJourneysFrom_with_json_and_return_correct_travelLine() throws JsonProcessingException {
         String journeyJson = getResourceFileAsString("json/searchChTestRoute.json");
         TravelLine testTravelLine = JourneyObjectMother.getEinsiedeln_to_Zuerich_Foerlibuckstreet60_Journey().getLegs().get(TEST_UUID_2).getTravelLine();
 
@@ -87,15 +94,32 @@ class SearchChMapperServiceTest {
     }
 
     @Test
-    void test_getTravelPointsForStationFromApi_with_mocked_rest_service_is_executed_correctly_and_maps_correctly_returns_map() throws Exception {
-        String jsonResources = getResourceFileAsString("json/searchChTestStation.json");
+    void test_getIdFromStation_with_mocked_rest_service_is_executed_correctly_and_maps_correctly_withId() throws Exception {
+        String jsonResources = getResourceFileAsString("json/searchChTestStationWithId.json");
 
-        Map<String, TravelPoint> result = classUnderTest.getTravelPointFrom(jsonResources);
+        String result = classUnderTest.getIdFromStation(jsonResources);
 
-        Assertions.assertThat("Luzern").isEqualTo(result.get("8505000").getStationName());
-        Assertions.assertThat(51.016962568215476).isEqualTo(result.get("8505000").getGpsCoordinates().getLatitude());
-        Assertions.assertThat(1.9118631730189604).isEqualTo(result.get("8505000").getGpsCoordinates().getLongitude());
+        Assertions.assertThat(result).isEqualTo("8505000");
+    }
 
-        Assertions.assertThat("Zürich, Förrlibuckstr. 60/62 ").isEqualTo(result.get("Zürich, Förrlibuckstr. 60/62 ").getStreet());
+    @Test
+    void test_getIdFromStation_with_mocked_rest_service_is_executed_correctly_and_maps_correctly_withoutId() throws Exception {
+        String jsonResources = getResourceFileAsString("json/searchChTestStationWithoutId.json");
+
+        String result = classUnderTest.getIdFromStation(jsonResources);
+
+        Assertions.assertThat(result).isEqualTo("Zürich, Förrlibuckstr. 60/62 ");
+    }
+
+    @Test
+    void test_mapRouteToJourneyMap_with_wrong_pojo_returns_problem_with_nullPointerException() throws JsonProcessingException {
+        String json = getResourceFileAsString("json/searchChTestRoute.json");
+        Route route = retrieveJsonToPojo(json, Route.class);
+        route.getConnections().get(0).getLegs().get(0).setDeparture(null);
+
+        Map<UUID, JourneyStatus> result = ReflectionTestUtils.invokeMethod(classUnderTest, "mapRouteToJourneyMap", route);
+
+        assertThat(result.get(TEST_UUID_3).getProblem().get().getExceptions().get(0)).isInstanceOf(NullPointerException.class);
+        assertThat(result.get(TEST_UUID_3).getProblem().get().getExceptions().get(0)).isInstanceOf(Exception.class);
     }
 }

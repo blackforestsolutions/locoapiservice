@@ -4,7 +4,6 @@ import de.blackforestsolutions.datamodel.Journey;
 import de.blackforestsolutions.datamodel.Leg;
 import de.blackforestsolutions.datamodel.TravelProvider;
 
-import java.text.ParseException;
 import java.util.LinkedHashMap;
 import java.util.UUID;
 
@@ -15,7 +14,7 @@ import static de.blackforestsolutions.apiservice.objectmothers.UUIDObjectMother.
 
 public class JourneyObjectMother {
 
-    public static Journey getFlughafenBerlinToHamburgHbfJourney() throws ParseException {
+    public static Journey getFlughafenBerlinToHamburgHbfJourney() {
         LinkedHashMap<UUID, Leg> legs = new LinkedHashMap<>();
         legs.put(getFlughafenBerlinToHamburgHbfLeg().getId(), getFlughafenBerlinToHamburgHbfLeg());
         return new Journey.JourneyBuilder(TEST_UUID_2)
@@ -23,7 +22,7 @@ public class JourneyObjectMother {
                 .build();
     }
 
-    public static Journey getBerlinHbfToHamburgLandwehrJourney() throws ParseException {
+    public static Journey getBerlinHbfToHamburgLandwehrJourney() {
         LinkedHashMap<UUID, Leg> legs = new LinkedHashMap<>();
         legs.put(getBerlinHbfHamburgMittlerLandwegLeg().getId(), getBerlinHbfHamburgMittlerLandwegLeg());
         return new Journey.JourneyBuilder(TEST_UUID_4)
@@ -31,7 +30,7 @@ public class JourneyObjectMother {
                 .build();
     }
 
-    public static Journey getLorchhausenOberfleckenToFrankfurtHauptbahnhofJourney() throws ParseException {
+    public static Journey getLorchhausenOberfleckenToFrankfurtHauptbahnhofJourney() {
         LinkedHashMap<UUID, Leg> legs = new LinkedHashMap<>();
         legs.put(getLorchhausenOberfleckenToWiesbadenHauptbahnhofLeg().getId(), getLorchhausenOberfleckenToWiesbadenHauptbahnhofLeg());
         legs.put(getWiesbadenHauptbahnhofTransferLeg().getId(), getWiesbadenHauptbahnhofTransferLeg());
@@ -70,7 +69,7 @@ public class JourneyObjectMother {
         return journey.build();
     }
 
-    public static Journey getEinsiedeln_to_Zuerich_Foerlibuckstreet60_Journey() throws ParseException {
+    public static Journey getEinsiedeln_to_Zuerich_Foerlibuckstreet60_Journey() {
         Journey.JourneyBuilder journey = new Journey.JourneyBuilder(TEST_UUID_1);
         LinkedHashMap<UUID, Leg> legs = new LinkedHashMap<>();
         legs.put(getEinsiedeln_to_WaedenswilLeg().getId(), getEinsiedeln_to_WaedenswilLeg());
@@ -80,7 +79,7 @@ public class JourneyObjectMother {
         return journey.build();
     }
 
-    public static Journey getGustavHeinemannStreetToUniversityJourney() throws ParseException {
+    public static Journey getGustavHeinemannStreetToUniversityJourney() {
         Journey.JourneyBuilder journey = new Journey.JourneyBuilder(TEST_UUID_1);
         LinkedHashMap<UUID, Leg> legs = new LinkedHashMap<>();
         legs.put(getGustavHeinemannStreetToHainholzLeg().getId(), getGustavHeinemannStreetToHainholzLeg());

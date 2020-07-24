@@ -41,12 +41,7 @@ public class BahnRailwayStationServiceImpl implements BahnRailwayStationService 
     }
 
     private String getBahnRailwayStationsRequestString(ApiTokenAndUrlInformation apiTokenAndUrlInformation, String location) {
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder = builder.buildFrom(apiTokenAndUrlInformation);
-        builder.setHost(apiTokenAndUrlInformation.getHost());
-        builder.setPathVariable(apiTokenAndUrlInformation.getPathVariable());
-        builder.setApiVersion(apiTokenAndUrlInformation.getApiVersion());
-        builder.setGermanRailLocationPath(apiTokenAndUrlInformation.getGermanRailLocationPath());
+        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(apiTokenAndUrlInformation);
         builder.setPath(bahnRailwayStationHttpCallBuilderService.buildBahnRailwayStationPathWith(builder.build(), location));
         URL requestUrl = buildUrlWith(builder.build());
         return requestUrl.toString();

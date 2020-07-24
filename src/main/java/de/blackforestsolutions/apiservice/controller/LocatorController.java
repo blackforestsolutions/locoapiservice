@@ -1,9 +1,10 @@
 package de.blackforestsolutions.apiservice.controller;
 
 import com.google.common.annotations.VisibleForTesting;
-import de.blackforestsolutions.apiservice.service.communicationservice.SearchChApiService;
+import de.blackforestsolutions.apiservice.service.communicationservice.OSMApiService;
+import de.blackforestsolutions.apiservice.service.exceptionhandling.ExceptionHandlerService;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
-import de.blackforestsolutions.datamodel.JourneyStatus;
+import de.blackforestsolutions.datamodel.Coordinates;
 import de.blackforestsolutions.datamodel.util.LocoJsonMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,37 +13,36 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("locate")
 public class LocatorController {
 
     private final LocoJsonMapper locoJsonMapper = new LocoJsonMapper();
-    private final SearchChApiService searchChApiService;
+    private final OSMApiService osmApiService;
+    private final ExceptionHandlerService exceptionHandlerService;
 
-    @Resource(name = "searchApiTokenAndUrlInformation")
-    private ApiTokenAndUrlInformation searchApiTokenAndUrlInformation;
+    @Resource(name = "osmApiTokenAndUrlInformation")
+    private ApiTokenAndUrlInformation osmApiTokenAndUrlInformation;
 
     @Autowired
-    public LocatorController(SearchChApiService searchChApiService) {
-        this.searchChApiService = searchChApiService;
+    public LocatorController(OSMApiService osmApiService, ExceptionHandlerService exceptionHandlerService) {
+        this.osmApiService = osmApiService;
+        this.exceptionHandlerService = exceptionHandlerService;
     }
 
     @RequestMapping("/get")
-    public Map<UUID, JourneyStatus> retrieveLocatorJourneys(@RequestBody String request) throws IOException {
+    public Coordinates retrieveLocatorJourneys(@RequestBody String request) throws IOException {
         ApiTokenAndUrlInformation requestInformation = locoJsonMapper.mapJsonToApiTokenAndUrlInformation(request);
-        return new HashMap<>(searchChApiService.getJourneysForRouteWith(getSearchApiTokenAndUrlInformation(requestInformation)));
+        return this.exceptionHandlerService.handleExceptions(osmApiService.getCoordinatesFromTravelPointWith(getOsmApiTokenAndUrlInformation(requestInformation), request));
     }
 
-    private ApiTokenAndUrlInformation getSearchApiTokenAndUrlInformation(ApiTokenAndUrlInformation request) {
-        return RequestTokenHandler.getRequestApiTokenWith(request, searchApiTokenAndUrlInformation);
+    private ApiTokenAndUrlInformation getOsmApiTokenAndUrlInformation(ApiTokenAndUrlInformation request) {
+        return RequestTokenHandler.getRequestApiTokenWith(request, osmApiTokenAndUrlInformation);
     }
 
     @VisibleForTesting
-    void setSearchApiTokenAndUrlInformation(ApiTokenAndUrlInformation searchApiTokenAndUrlInformation) {
-        this.searchApiTokenAndUrlInformation = searchApiTokenAndUrlInformation;
+    void setOsmApiTokenAndUrlInformation(ApiTokenAndUrlInformation osmApiTokenAndUrlInformation) {
+        this.osmApiTokenAndUrlInformation = osmApiTokenAndUrlInformation;
     }
 }

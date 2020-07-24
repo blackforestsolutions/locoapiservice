@@ -5,6 +5,7 @@ import de.blackforestsolutions.apiservice.service.mapper.BritishAirwaysMapperSer
 import de.blackforestsolutions.apiservice.service.supportservice.BritishAirwaysHttpCallBuilderService;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import de.blackforestsolutions.datamodel.CallStatus;
+import de.blackforestsolutions.datamodel.JourneyStatus;
 import de.blackforestsolutions.datamodel.Status;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.net.URL;
+import java.util.Map;
+import java.util.UUID;
 
 import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.buildUrlWith;
 
@@ -31,27 +34,18 @@ public class BritishAirwaysApiServiceImpl implements BritishAirwaysApiService {
     }
 
     @Override
-    public CallStatus getJourneysForRouteWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
-        String url = getBritishAirwaysRequestString(apiTokenAndUrlInformation);
-        ResponseEntity<String> result;
+    public CallStatus<Map<UUID, JourneyStatus>> getJourneysForRouteWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
         try {
-            result = callService.get(url, britishAirwaysHttpCallBuilderService.buildHttpEntityBritishAirways(apiTokenAndUrlInformation));
-            return new CallStatus(this.britishAirwaysMapperService.map(result.getBody()), Status.SUCCESS, null);
+            String url = getBritishAirwaysRequestString(apiTokenAndUrlInformation);
+            ResponseEntity<String> result = callService.get(url, britishAirwaysHttpCallBuilderService.buildHttpEntityBritishAirways(apiTokenAndUrlInformation));
+            return new CallStatus<>(this.britishAirwaysMapperService.map(result.getBody()), Status.SUCCESS, null);
         } catch (Exception ex) {
-            log.error("BritishAirways api call was not successful", ex);
-            return new CallStatus(null, Status.FAILED, ex);
+            return new CallStatus<>(null, Status.FAILED, ex);
         }
-
-
     }
 
     private String getBritishAirwaysRequestString(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder = builder.buildFrom(apiTokenAndUrlInformation);
-        builder.setPath(apiTokenAndUrlInformation.getHazelcastPath());
-        builder.setDeparture(apiTokenAndUrlInformation.getDeparture());
-        builder.setArrival(apiTokenAndUrlInformation.getArrival());
-        builder.setDepartureDate(apiTokenAndUrlInformation.getDepartureDate());
+        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(apiTokenAndUrlInformation);
         builder.setPath(britishAirwaysHttpCallBuilderService.buildPathWith(builder.build()));
         URL requestUrl = buildUrlWith(builder.build());
         return requestUrl.toString();

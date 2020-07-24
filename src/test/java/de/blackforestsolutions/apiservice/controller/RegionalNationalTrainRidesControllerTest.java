@@ -6,23 +6,25 @@ import de.blackforestsolutions.apiservice.service.communicationservice.HvvApiSer
 import de.blackforestsolutions.apiservice.service.communicationservice.NahShApiService;
 import de.blackforestsolutions.apiservice.service.communicationservice.RMVApiService;
 import de.blackforestsolutions.apiservice.service.communicationservice.VBBApiService;
+import de.blackforestsolutions.apiservice.service.exceptionhandling.ExceptionHandlerService;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import de.blackforestsolutions.datamodel.util.LocoJsonMapper;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import java.text.ParseException;
+import static org.mockito.Mockito.mock;
 
-class RegionalTrainRidesControllerTest {
+class RegionalNationalTrainRidesControllerTest {
 
     private final LocoJsonMapper locoJsonMapper = new LocoJsonMapper();
     private final HvvApiService hvvApiService = Mockito.mock(HvvApiService.class);
     private final RMVApiService rmvApiService = Mockito.mock(RMVApiService.class);
     private final VBBApiService vbbApiService = Mockito.mock(VBBApiService.class);
     private final NahShApiService nahShApiService = Mockito.mock(NahShApiService.class);
+    private final ExceptionHandlerService exceptionHandlerService = mock(ExceptionHandlerService.class);
     private final RegionalTrainRidesController classUnderTest = initClassUnderTest();
 
-    RegionalTrainRidesControllerTest() throws ParseException {
+    RegionalNationalTrainRidesControllerTest() {
     }
 
     @Test
@@ -40,8 +42,8 @@ class RegionalTrainRidesControllerTest {
         Mockito.verify(nahShApiService, Mockito.times(1)).getJourneysForRouteWith(Mockito.any(ApiTokenAndUrlInformation.class));
     }
 
-    private RegionalTrainRidesController initClassUnderTest() throws ParseException {
-        RegionalTrainRidesController classUnderTest = new RegionalTrainRidesController(hvvApiService, rmvApiService, vbbApiService, nahShApiService);
+    private RegionalTrainRidesController initClassUnderTest() {
+        RegionalTrainRidesController classUnderTest = new RegionalTrainRidesController(hvvApiService, rmvApiService, vbbApiService, nahShApiService, exceptionHandlerService);
         classUnderTest.setHvvApiTokenAndUrlInformation(ApiTokenAndUrlInformationObjectMother.getHvvTokenAndUrl());
         classUnderTest.setRMVApiTokenAndUrlInformation(ApiTokenAndUrlInformationObjectMother.getRMVTokenAndUrl("", ""));
         classUnderTest.setVbbApiTokenAndUrlInformation(ApiTokenAndUrlInformationObjectMother.getVBBTokenAndUrl("", ""));

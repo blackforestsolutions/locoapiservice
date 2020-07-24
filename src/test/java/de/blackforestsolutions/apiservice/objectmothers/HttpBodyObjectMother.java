@@ -31,7 +31,7 @@ public class HttpBodyObjectMother {
         return body;
     }
 
-    public static HvvStationListBody getStationListHttpBodyObject() {
+    public static HvvStationListBody getStationListHttpBody() {
         HvvStationListBody body = new HvvStationListBody();
 
         body.setLanguage("de");
@@ -43,7 +43,7 @@ public class HttpBodyObjectMother {
         return body;
     }
 
-    public static HvvTravelPointBody getHvvTravelPointBodyObject() {
+    public static HvvTravelPointBody getHvvTravelPointBody() {
         HvvTravelPointBody body = new HvvTravelPointBody();
 
         body.setLanguage("de");
@@ -58,7 +58,7 @@ public class HttpBodyObjectMother {
         return body;
     }
 
-    public static HvvJourneyBody getHvvJourneyBodyObject() {
+    public static HvvJourneyBody getHvvJourneyBody() {
         HvvJourneyBody body = new HvvJourneyBody();
 
         body.setLanguage("de");

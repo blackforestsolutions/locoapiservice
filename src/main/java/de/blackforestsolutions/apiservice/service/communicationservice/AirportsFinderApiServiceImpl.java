@@ -3,16 +3,14 @@ package de.blackforestsolutions.apiservice.service.communicationservice;
 import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallService;
 import de.blackforestsolutions.apiservice.service.mapper.AirportsFinderMapperService;
 import de.blackforestsolutions.apiservice.service.supportservice.AirportsFinderHttpCallBuilderService;
-import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
-import de.blackforestsolutions.datamodel.CallStatus;
-import de.blackforestsolutions.datamodel.Coordinates;
-import de.blackforestsolutions.datamodel.Status;
+import de.blackforestsolutions.datamodel.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.net.URL;
+import java.util.LinkedHashSet;
 
 import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.buildUrlWith;
 
@@ -33,23 +31,20 @@ public class AirportsFinderApiServiceImpl implements AirportsFinderApiService {
 
 
     @Override
-    public CallStatus getAirportsWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
+    public CallStatus<LinkedHashSet<TravelPointStatus>> getAirportsWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
         try {
             String url = getAirportsFinderRequestString(apiTokenAndUrlInformation);
-
             ResponseEntity<String> result = callService.get(url, airportsFinderHttpCallBuilderService.buildHttpEntityAirportsFinder(apiTokenAndUrlInformation));
-            return new CallStatus(this.airportsFinderMapperService.map(result.getBody()), Status.SUCCESS, null);
+            return new CallStatus<>(airportsFinderMapperService.map(result.getBody()), Status.SUCCESS, null);
         } catch (Exception ex) {
-            log.error("AirportsFinder api call was not successful", ex);
-            return new CallStatus(null, Status.FAILED, ex);
+            log.error("Error during AirportFinder Api call", ex);
+            return new CallStatus<>(null, Status.FAILED, ex);
         }
     }
 
 
     private String getAirportsFinderRequestString(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder = builder.buildFrom(apiTokenAndUrlInformation);
-        builder.setPath(apiTokenAndUrlInformation.getHazelcastPath());
+        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(apiTokenAndUrlInformation);
         builder.setDepartureCoordinates(getBuilderDepartureCoordinates(apiTokenAndUrlInformation));
         builder.setPath(airportsFinderHttpCallBuilderService.buildPathWith(builder.build()));
         URL requestUrl = buildUrlWith(builder.build());

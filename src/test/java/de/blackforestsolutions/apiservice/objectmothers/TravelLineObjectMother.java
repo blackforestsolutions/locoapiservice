@@ -2,7 +2,6 @@ package de.blackforestsolutions.apiservice.objectmothers;
 
 import de.blackforestsolutions.datamodel.TravelLine;
 
-import java.text.ParseException;
 import java.util.Collections;
 import java.util.Map;
 
@@ -16,9 +15,9 @@ public class TravelLineObjectMother {
                 .build();
     }
 
-    static TravelLine getWiesbadenHauptbahnhofFrankfurtHauptbahnhofTravelLine() throws ParseException {
+    static TravelLine getWiesbadenHauptbahnhofFrankfurtHauptbahnhofTravelLine() {
         return new TravelLine.TravelLineBuilder()
-                .setDirection(getRödemarkOberRodenTravelPoint())
+                .setDirection(getRoedemarkOberRodenTravelPoint())
                 .setBetweenHolds(Map.of(
                         0, getGriesheimbahnhofTravelPoint()
                 ))
@@ -57,7 +56,7 @@ public class TravelLineObjectMother {
         return travelLine.build();
     }
 
-    static TravelLine getElmshornHamburgAltonaTravelLine() throws ParseException {
+    static TravelLine getElmshornHamburgAltonaTravelLine() {
         TravelLine.TravelLineBuilder travelLine = new TravelLine.TravelLineBuilder();
         travelLine.setOrigin(getWristTravelPoint());
         travelLine.setDirection(getHamburgAltonaDirectionTravelPoint());

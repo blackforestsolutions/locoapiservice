@@ -9,6 +9,7 @@ import de.blackforestsolutions.datamodel.CallStatus;
 import de.blackforestsolutions.datamodel.Coordinates;
 import de.blackforestsolutions.datamodel.Status;
 import de.blackforestsolutions.generatedcontent.osm.OsmTravelPoint;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,7 @@ import java.util.List;
 import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.buildEmptyHttpEntity;
 import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.buildUrlWith;
 
+@Slf4j
 @Service
 public class OSMApiServiceImpl implements OSMApiService {
 
@@ -47,27 +49,19 @@ public class OSMApiServiceImpl implements OSMApiService {
     }
 
     @Override
-    public CallStatus getCoordinatesFromTravelPointWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation, String address) {
-        String url = getOSMRequestString(apiTokenAndUrlInformation, address);
-        ResponseEntity<String> result = callService.get(url, buildEmptyHttpEntity());
+    public CallStatus<Coordinates> getCoordinatesFromTravelPointWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation, String address) {
         try {
-            return new CallStatus(
-                    map(result.getBody()),
-                    Status.SUCCESS,
-                    null
-            );
-        } catch (JsonProcessingException e) {
-            return new CallStatus(
-                    null,
-                    Status.FAILED,
-                    e
-            );
+            String url = getOSMRequestString(apiTokenAndUrlInformation, address);
+            ResponseEntity<String> result = callService.get(url, buildEmptyHttpEntity());
+            return new CallStatus<>(map(result.getBody()), Status.SUCCESS, null);
+        } catch (Exception e) {
+            log.error("Unable to get Coordinates for TravelPoint due to : ", e);
+            return new CallStatus<>(null, Status.FAILED, e);
         }
     }
 
     private String getOSMRequestString(ApiTokenAndUrlInformation apiTokenAndUrlInformation, String address) {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(apiTokenAndUrlInformation);
-        builder = builder.buildFrom(apiTokenAndUrlInformation);
         builder.setPath(osmHttpCallBuilderService.buildOSMPathWith(builder.build(), address));
         URL requestUrl = buildUrlWith(builder.build());
         return requestUrl.toString();

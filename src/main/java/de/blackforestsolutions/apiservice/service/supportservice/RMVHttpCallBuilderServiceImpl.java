@@ -6,8 +6,8 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 @Service
@@ -145,19 +145,19 @@ public class RMVHttpCallBuilderServiceImpl implements RMVHttpCallBuilderService 
     private String getArrivalOrDepartureDate(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
         if (apiTokenAndUrlInformation.getTimeIsDeparture()) {
             Objects.requireNonNull(apiTokenAndUrlInformation.getDepartureDate(), "departure date is not allowed to be null");
-            return convertDateToDateString(apiTokenAndUrlInformation.getDepartureDate());
+            return convertDateToString(apiTokenAndUrlInformation.getDepartureDate());
         }
         Objects.requireNonNull(apiTokenAndUrlInformation.getArrivalDate(), "arrival date is not allowed to be null");
-        return convertDateToDateString(apiTokenAndUrlInformation.getArrivalDate());
+        return convertDateToString(apiTokenAndUrlInformation.getArrivalDate());
     }
 
     private String getArrivalOrDepartureTime(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
         if (apiTokenAndUrlInformation.getTimeIsDeparture()) {
             Objects.requireNonNull(apiTokenAndUrlInformation.getDepartureDate(), "departure date is not allowed to be null");
-            return convertDateToTimeString(apiTokenAndUrlInformation.getDepartureDate());
+            return convertTimeToString(apiTokenAndUrlInformation.getDepartureDate());
         }
         Objects.requireNonNull(apiTokenAndUrlInformation.getArrivalDate(), "arrival date is not allowed to be null");
-        return convertDateToTimeString(apiTokenAndUrlInformation.getArrivalDate());
+        return convertTimeToString(apiTokenAndUrlInformation.getArrivalDate());
     }
 
     private String getTimeIsDeparture(boolean criteria) {
@@ -184,11 +184,11 @@ public class RMVHttpCallBuilderServiceImpl implements RMVHttpCallBuilderService 
         return httpHeaders;
     }
 
-    private String convertDateToDateString(Date date) {
-        return new SimpleDateFormat("yyyy-MM-dd").format(date);
+    private String convertDateToString(ZonedDateTime date) {
+        return date.format(DateTimeFormatter.ISO_LOCAL_DATE);
     }
 
-    private String convertDateToTimeString(Date date) {
-        return new SimpleDateFormat("HH:mm").format(date);
+    private String convertTimeToString(ZonedDateTime date) {
+        return date.format(DateTimeFormatter.ofPattern("HH:mm"));
     }
 }

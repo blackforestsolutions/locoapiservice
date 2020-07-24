@@ -1,12 +1,14 @@
 package de.blackforestsolutions.apiservice.service.mapper;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import de.blackforestsolutions.apiservice.service.supportservice.UuidService;
 import de.blackforestsolutions.datamodel.Journey;
 import de.blackforestsolutions.datamodel.JourneyStatus;
+import de.blackforestsolutions.generatedcontent.bbc.Rides;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.test.util.ReflectionTestUtils;
 
-import java.text.ParseException;
 import java.util.Map;
 import java.util.UUID;
 
@@ -14,6 +16,7 @@ import static de.blackforestsolutions.apiservice.objectmothers.JourneyObjectMoth
 import static de.blackforestsolutions.apiservice.objectmothers.JourneyObjectMother.getFlughafenBerlinToHamburgHbfJourney;
 import static de.blackforestsolutions.apiservice.objectmothers.UUIDObjectMother.*;
 import static de.blackforestsolutions.apiservice.testutils.TestUtils.getResourceFileAsString;
+import static de.blackforestsolutions.apiservice.testutils.TestUtils.retrieveJsonToPojo;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -35,7 +38,7 @@ class BBCMapperServiceTest {
 
 
     @Test
-    void test_mapJsonToJourneys_with_mocked_json_and_apiToken_returns() {
+    void test_mapJsonToJourneys_with_mocked_json_and_apiToken_returns() throws JsonProcessingException {
         String json = getResourceFileAsString("json/bbcTest.json");
 
         Map<UUID, JourneyStatus> result = classUnderTest.mapJsonToJourneys(json);
@@ -44,7 +47,7 @@ class BBCMapperServiceTest {
     }
 
     @Test
-    void test_mapJsonToJourneys_returns_correct_journey() throws ParseException {
+    void test_mapJsonToJourneys_returns_correct_journey() throws JsonProcessingException {
         String json = getResourceFileAsString("json/bbcTest.json");
         Journey expectedJourney = getFlughafenBerlinToHamburgHbfJourney();
 
@@ -58,7 +61,7 @@ class BBCMapperServiceTest {
     }
 
     @Test
-    void test_mapJsonToJourneys_returns_journey_without_vehicleName_and_travelLine() throws ParseException {
+    void test_mapJsonToJourneys_returns_journey_without_vehicleName_and_travelLine() throws JsonProcessingException {
         String json = getResourceFileAsString("json/bbcTest.json");
         Journey expectedJourney = getBerlinHbfToHamburgLandwehrJourney();
 
@@ -72,5 +75,19 @@ class BBCMapperServiceTest {
         assertThat(result.getLegs().get(TEST_UUID_3).getTravelLine()).isNull();
     }
 
+    @Test
+    void test_buildJourneysWith_with_wrong_pojo_returns_one_problem_with_nullPointerException() throws JsonProcessingException {
+        String json = getResourceFileAsString("json/bbcTest.json");
+        Rides rides = retrieveJsonToPojo(json, Rides.class);
+        rides.getTrips().get(0).setDepartureDate(null);
+
+        Map<UUID, JourneyStatus> result = ReflectionTestUtils.invokeMethod(classUnderTest, "buildJourneysWith", rides);
+
+        //noinspection ConstantConditions
+        assertThat(result.size()).isEqualTo(2);
+        assertThat(result.get(TEST_UUID_2).getProblem().get().getExceptions().get(0)).isInstanceOf(NullPointerException.class);
+        assertThat(result.get(TEST_UUID_2).getProblem().get().getExceptions().get(0)).isInstanceOf(Exception.class);
+        assertThat(result.get(TEST_UUID_4).getJourney().get()).isInstanceOf(Journey.class);
+    }
 
 }

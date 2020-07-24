@@ -3,6 +3,7 @@ package de.blackforestsolutions.apiservice.service.mapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import de.blackforestsolutions.apiservice.configuration.TimeConfiguration;
 import de.blackforestsolutions.apiservice.service.supportservice.UuidService;
 import de.blackforestsolutions.apiservice.util.CoordinatesUtil;
 import de.blackforestsolutions.datamodel.*;
@@ -14,21 +15,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 import static de.blackforestsolutions.apiservice.configuration.LocaleConfiguration.LOCALE_SWITZERLAND;
+import static de.blackforestsolutions.apiservice.service.mapper.JourneyStatusBuilder.createJourneyStatusProblemWith;
 
 @Slf4j
 @Service
 public class SearchChMapperServiceImpl implements SearchChMapperService {
 
+    private static final int FIRST_INDEX = 0;
     private final UuidService uuidService;
 
     @Autowired
@@ -103,50 +105,26 @@ public class SearchChMapperServiceImpl implements SearchChMapperService {
         return new Coordinates.CoordinatesBuilder().build();
     }
 
-    private static Date buildDateFrom(String dateTime) {
-        try {
-            return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(dateTime);
-        } catch (ParseException e) {
-            log.error("Error while parsing Date and was replaced by new Date()", e);
-            return new Date();
-        }
-    }
-
-    private static LocalDateTime convertToLocalDateTime(Date dateToConvert) {
-        return LocalDateTime.ofInstant(
-                dateToConvert.toInstant(),
-                ZoneId.systemDefault()
-        );
-    }
-
-    private static Duration buildDurationBetween(Date departure, Date arrival) {
-        return Duration.between(
-                convertToLocalDateTime(departure),
-                convertToLocalDateTime(arrival)
-        );
+    private static ZonedDateTime buildDateFrom(String dateTime) {
+        return LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
+                .atZone(TimeConfiguration.GERMAN_TIME_ZONE);
     }
 
     @Override
-    public Map<String, TravelPoint> getTravelPointFrom(String jsonString) throws IOException {
+    public String getIdFromStation(String jsonString) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        return mapStationListToTravelPointMap(objectMapper.readValue(
+        return extractIdFrom(objectMapper.readValue(
                 jsonString,
                 objectMapper.getTypeFactory().constructCollectionType(List.class, Station.class)
         ));
     }
 
     @Override
-    public Map<UUID, JourneyStatus> getJourneysFrom(String jsonString) {
+    public Map<UUID, JourneyStatus> getJourneysFrom(String jsonString) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
-        Route route;
-        try {
-            route = mapper.readValue(jsonString, Route.class);
-        } catch (JsonProcessingException e) {
-            log.error("Error while parsing json: {}", jsonString, e);
-            return Collections.singletonMap(uuidService.createUUID(), JourneyStatusBuilder.createJourneyStatusProblemWith(e));
-        }
+        Route route = mapper.readValue(jsonString, Route.class);
         return mapRouteToJourneyMap(route);
     }
 
@@ -156,14 +134,18 @@ public class SearchChMapperServiceImpl implements SearchChMapperService {
                 .orElse(Collections.emptyList())
                 .stream()
                 .map(this::buildLegWith)
-                .map(JourneyStatusBuilder::createJourneyStatusWith)
-                .collect(Collectors.toMap(JourneyStatusBuilder::extractJourneyUuidFrom, journey -> journey));
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
-    private Journey buildLegWith(Connection connection) {
-        Journey.JourneyBuilder journey = new Journey.JourneyBuilder(uuidService.createUUID());
-        journey.setLegs(buildLegsWith(connection.getLegs()));
-        return journey.build();
+    private Map.Entry<UUID, JourneyStatus> buildLegWith(Connection connection) {
+        try {
+            Journey.JourneyBuilder journey = new Journey.JourneyBuilder(uuidService.createUUID());
+            journey.setLegs(buildLegsWith(connection.getLegs()));
+            return Map.entry(journey.getId(), JourneyStatusBuilder.createJourneyStatusWith(journey.build()));
+        } catch (Exception e) {
+            log.error("Unable to map Pojo: ", e);
+            return Map.entry(uuidService.createUUID(), createJourneyStatusProblemWith(List.of(e), Collections.emptyList()));
+        }
     }
 
     private LinkedHashMap<UUID, de.blackforestsolutions.datamodel.Leg> buildLegsWith(List<Leg> legs) {
@@ -180,7 +162,7 @@ public class SearchChMapperServiceImpl implements SearchChMapperService {
         leg.setDestination(buildDestinationTravelPointWith(betweenTrip.getExit()));
         leg.setStartTime(buildDateFrom(betweenTrip.getDeparture()));
         leg.setArrivalTime(buildDateFrom(betweenTrip.getExit().getArrival()));
-        leg.setDuration(buildDurationBetween(leg.getStartTime(), leg.getArrivalTime()));
+        leg.setDuration(Duration.between(leg.getStartTime(), leg.getArrivalTime()));
         Optional.ofNullable(betweenTrip.getStops()).ifPresent(stops -> leg.setTravelLine(buildTravelLineWith(stops)));
         Optional.ofNullable(betweenTrip.getTripid()).ifPresent(leg::setProviderId);
         buildTravelProviderWith(betweenTrip, leg);
@@ -191,25 +173,9 @@ public class SearchChMapperServiceImpl implements SearchChMapperService {
         return leg.build();
     }
 
-    private Map<String, TravelPoint> mapStationListToTravelPointMap(List<Station> stations) {
-        return stations
-                .stream()
-                .map(this::buildTravelPointWith)
-                .collect(Collectors.toMap(TravelPoint::getStationId, travelPoint -> travelPoint));
-    }
-
-    private TravelPoint buildTravelPointWith(Station station) {
-        TravelPoint.TravelPointBuilder travelPoint = new TravelPoint.TravelPointBuilder();
-        return Optional.ofNullable(station.getId()).map(id -> {
-            travelPoint.setStationName(station.getLabel());
-            travelPoint.setGpsCoordinates(CoordinatesUtil.convertCh1903ToCoordinatesWith(Integer.parseInt(station.getX()), Integer.parseInt(station.getY())));
-            travelPoint.setStationId(id);
-            return travelPoint.build();
-        }).orElseGet(() -> {
-            travelPoint.setStationId(station.getLabel());
-            travelPoint.setStreet(station.getLabel());
-            return travelPoint.build();
-        });
+    private String extractIdFrom(List<Station> stations) {
+        Station firstStation = stations.get(FIRST_INDEX);
+        return Optional.ofNullable(firstStation.getId()).orElse(firstStation.getLabel());
     }
 
     private VehicleType getVehicleType(String vehicleType) {

@@ -1,5 +1,6 @@
 package de.blackforestsolutions.apiservice.service.mapper;
 
+import de.blackforestsolutions.apiservice.configuration.TimeConfiguration;
 import de.blackforestsolutions.apiservice.service.supportservice.UuidService;
 import de.blackforestsolutions.datamodel.Journey;
 import de.blackforestsolutions.datamodel.Leg;
@@ -16,13 +17,16 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import java.io.StringReader;
 import java.math.BigDecimal;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
-import static de.blackforestsolutions.apiservice.service.mapper.MapperService.generateDurationFromStartToDestination;
+import static de.blackforestsolutions.apiservice.service.mapper.JourneyStatusBuilder.createJourneyStatusProblemWith;
+import static de.blackforestsolutions.apiservice.service.mapper.JourneyStatusBuilder.createJourneyStatusWith;
 
 @Slf4j
 @Service
@@ -34,9 +38,8 @@ public class RMVMapperServiceImpl implements RMVMapperService {
     private static final int FOURTH_INDEX = 3;
     private static final String PUBLIC_JOURNEY_KEY = "JNY";
     private static final String CAR_KEY = "KISS";
+
     private final UuidService uuidService;
-    private JAXBContext jaxbContext;
-    private Unmarshaller unmarshaller;
 
     @Autowired
     public RMVMapperServiceImpl(UuidService uuidService) {
@@ -44,58 +47,44 @@ public class RMVMapperServiceImpl implements RMVMapperService {
     }
 
     @Override
-    public CallStatus getIdFrom(String resultBody) {
+    public String getIdFrom(String resultBody) throws JAXBException {
         StringReader readerResultBody = new StringReader(resultBody);
-        LocationList locationList;
-        try {
-            jaxbContext = JAXBContext.newInstance(LocationList.class);
-            unmarshaller = jaxbContext.createUnmarshaller();
-            locationList = (LocationList) unmarshaller.unmarshal(readerResultBody);
-        } catch (JAXBException e) {
-            log.error("Error during unmarshalling of XML Objects: {}", readerResultBody, e);
-            return new CallStatus(null, Status.FAILED, e);
-        }
+        JAXBContext jaxbContext = JAXBContext.newInstance(LocationList.class);
+        Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+        LocationList locationList = (LocationList) unmarshaller.unmarshal(readerResultBody);
         try {
             StopLocation stopLocation = (StopLocation) locationList.getStopLocationOrCoordLocation().get(START_INDEX);
-            return new CallStatus(stopLocation.getId(), Status.SUCCESS, null);
+            return stopLocation.getId();
         } catch (ClassCastException e) {
-            try {
-                CoordLocation coordLocation = (CoordLocation) locationList.getStopLocationOrCoordLocation().get(START_INDEX);
-                return new CallStatus(coordLocation.getId(), Status.SUCCESS, null);
-            } catch (ClassCastException ex) {
-                log.error("Error during mapping xml to station type. Type not found.");
-                return new CallStatus(null, Status.FAILED, ex);
-            }
+            CoordLocation coordLocation = (CoordLocation) locationList.getStopLocationOrCoordLocation().get(START_INDEX);
+            return coordLocation.getId();
         }
     }
 
     @Override
-    public Map<UUID, JourneyStatus> getJourneysFrom(String resultBody) {
-        TripList tripList;
+    public Map<UUID, JourneyStatus> getJourneysFrom(String resultBody) throws JAXBException {
         StringReader readerResultBody = new StringReader(resultBody);
-        try {
-            jaxbContext = JAXBContext.newInstance(TripList.class);
-            unmarshaller = jaxbContext.createUnmarshaller();
-            tripList = (TripList) unmarshaller.unmarshal(readerResultBody);
-        } catch (JAXBException e) {
-            log.error("Error during unmarshalling of XML Objects: {}", readerResultBody, e);
-            return Collections.singletonMap(uuidService.createUUID(), JourneyStatusBuilder.createJourneyStatusProblemWith(e));
-        }
-        return getJourneysFrom(tripList);
+        JAXBContext jaxbContext = JAXBContext.newInstance(TripList.class);
+        Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+        return getJourneysFrom((TripList) unmarshaller.unmarshal(readerResultBody));
     }
 
     private Map<UUID, JourneyStatus> getJourneysFrom(TripList tripList) {
         return tripList.getTrip()
                 .stream()
                 .map(this::getJourneyFrom)
-                .map(JourneyStatusBuilder::createJourneyStatusWith)
-                .collect(Collectors.toMap(JourneyStatusBuilder::extractJourneyUuidFrom, journey -> journey));
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
-    private Journey getJourneyFrom(Trip trip) {
-        Journey.JourneyBuilder journey = new Journey.JourneyBuilder(uuidService.createUUID());
-        journey.setLegs(getLegsFrom(trip.getLegList(), extractPriceFrom(trip)));
-        return journey.build();
+    private Map.Entry<UUID, JourneyStatus> getJourneyFrom(Trip trip) {
+        try {
+            Journey.JourneyBuilder journey = new Journey.JourneyBuilder(uuidService.createUUID());
+            journey.setLegs(getLegsFrom(trip.getLegList(), extractPriceFrom(trip)));
+            return Map.entry(journey.getId(), createJourneyStatusWith(journey.build()));
+        } catch (Exception e) {
+            log.error("Unable to map Pojo: ", e);
+            return Map.entry(uuidService.createUUID(), createJourneyStatusProblemWith(List.of(e), Collections.emptyList()));
+        }
     }
 
     private LinkedHashMap<UUID, Leg> getLegsFrom(LegList legList, Price price) {
@@ -110,9 +99,9 @@ public class RMVMapperServiceImpl implements RMVMapperService {
         Leg.LegBuilder newLeg = new Leg.LegBuilder(uuidService.createUUID());
         newLeg.setStart(buildTravelPointWith(leg.getOrigin()));
         newLeg.setDestination(buildTravelPointWith(leg.getDestination()));
-        newLeg.setStartTime(buildDateFrom(leg.getOrigin().getDate().concat("-").concat(leg.getOrigin().getTime())));
-        newLeg.setArrivalTime(buildDateFrom(leg.getDestination().getDate().concat("-").concat(leg.getDestination().getTime())));
-        newLeg.setDuration(generateDurationFromStartToDestination(newLeg.getStartTime(), newLeg.getArrivalTime()));
+        newLeg.setStartTime(buildDateFrom(leg.getOrigin().getDate().concat("T").concat(leg.getOrigin().getTime())));
+        newLeg.setArrivalTime(buildDateFrom(leg.getDestination().getDate().concat("T").concat(leg.getDestination().getTime())));
+        newLeg.setDuration(Duration.between(newLeg.getStartTime(), newLeg.getArrivalTime()));
         newLeg.setTravelProvider(TravelProvider.RMV);
         Optional.ofNullable(leg.getDist()).ifPresent(distance -> newLeg.setDistance(new Distance(distance)));
         Optional.ofNullable(leg.getProduct()).ifPresent(product -> newLeg.setVehicleName(product.getName()));
@@ -207,8 +196,8 @@ public class RMVMapperServiceImpl implements RMVMapperService {
         travelPoint.setStationName(stop.getName());
         travelPoint.setStationId(stop.getId());
         travelPoint.setCountry(Locale.GERMANY);
-        Optional.ofNullable(stop.getDepDate()).ifPresent(depTime -> travelPoint.setDepartureTime(buildDateFrom(stop.getDepDate().concat("-").concat(stop.getDepTime()))));
-        Optional.ofNullable(stop.getArrDate()).ifPresent(arrTime -> travelPoint.setArrivalTime(buildDateFrom(stop.getArrDate().concat("-").concat(stop.getArrTime()))));
+        Optional.ofNullable(stop.getDepDate()).ifPresent(depTime -> travelPoint.setDepartureTime(buildDateFrom(stop.getDepDate().concat("T").concat(stop.getDepTime()))));
+        Optional.ofNullable(stop.getArrDate()).ifPresent(arrTime -> travelPoint.setArrivalTime(buildDateFrom(stop.getArrDate().concat("T").concat(stop.getArrTime()))));
         return travelPoint.build();
     }
 
@@ -222,13 +211,7 @@ public class RMVMapperServiceImpl implements RMVMapperService {
         return travelPoint.build();
     }
 
-    private Date buildDateFrom(String dateTime) {
-        try {
-            SimpleDateFormat inFormat = new SimpleDateFormat("yyyy-MM-dd'-'HH:mm:ss");
-            return inFormat.parse(dateTime);
-        } catch (ParseException e) {
-            log.error("Error while parsing Date and was replaced by new Date(): ", e);
-            return new Date();
-        }
+    private ZonedDateTime buildDateFrom(String dateTime) {
+        return LocalDateTime.parse(dateTime, DateTimeFormatter.ISO_LOCAL_DATE_TIME).atZone(TimeConfiguration.GERMAN_TIME_ZONE);
     }
 }

@@ -22,7 +22,6 @@ public interface LuftHansaHttpCallBuilderService {
      */
     String buildLufthansaAuthorizationPathWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation);
 
-    @SuppressWarnings("rawtypes")
     HttpEntity<String> buildHttpEntityForLufthansaJourney(ApiTokenAndUrlInformation apiTokenAndUrlInformation);
 
     HttpEntity<MultiValueMap<String, String>> buildHttpEntityForLufthansaAuthorization(ApiTokenAndUrlInformation apiTokenAndUrlInformation);

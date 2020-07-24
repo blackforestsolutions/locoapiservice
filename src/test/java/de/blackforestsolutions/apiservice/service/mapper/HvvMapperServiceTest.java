@@ -1,17 +1,22 @@
 package de.blackforestsolutions.apiservice.service.mapper;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import de.blackforestsolutions.apiservice.objectmothers.JourneyObjectMother;
 import de.blackforestsolutions.apiservice.objectmothers.TravelPointObjectMother;
 import de.blackforestsolutions.apiservice.service.supportservice.UuidService;
-import de.blackforestsolutions.datamodel.*;
+import de.blackforestsolutions.datamodel.Journey;
+import de.blackforestsolutions.datamodel.JourneyStatus;
+import de.blackforestsolutions.datamodel.Leg;
+import de.blackforestsolutions.datamodel.TravelPoint;
+import de.blackforestsolutions.generatedcontent.hvv.response.journey.HvvRoute;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mockito;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +24,8 @@ import java.util.UUID;
 
 import static de.blackforestsolutions.apiservice.objectmothers.UUIDObjectMother.*;
 import static de.blackforestsolutions.apiservice.testutils.TestUtils.getResourceFileAsString;
+import static de.blackforestsolutions.apiservice.testutils.TestUtils.retrieveJsonToPojo;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @SuppressWarnings("OptionalGetWithoutIsPresent")
 class HvvMapperServiceTest {
@@ -52,7 +59,7 @@ class HvvMapperServiceTest {
     }
 
     @Test
-    void test_getJourneyMapFrom_json_returns_map_with_journeys() throws ParseException {
+    void test_getJourneyMapFrom_json_returns_map_with_journeys() throws JsonProcessingException {
         String jsonJourneys = getResourceFileAsString("json/hvvJourney.json");
         Journey testData = JourneyObjectMother.getGustavHeinemannStreetToUniversityJourney();
 
@@ -63,7 +70,7 @@ class HvvMapperServiceTest {
     }
 
     @Test
-    void test_getJourneyMapFrom_json_returns_correct_legs() throws ParseException {
+    void test_getJourneyMapFrom_json_returns_correct_legs() throws JsonProcessingException {
         String jsonJourneys = getResourceFileAsString("json/hvvJourney.json");
         LinkedHashMap<UUID, Leg> testData = JourneyObjectMother.getGustavHeinemannStreetToUniversityJourney().getLegs();
 
@@ -80,6 +87,19 @@ class HvvMapperServiceTest {
         Assertions.assertThat(result.get(TEST_UUID_5)).isEqualToIgnoringGivenFields(testData.get(TEST_UUID_5), "travelLine");
         Assertions.assertThat(result.get(TEST_UUID_5).getTravelLine()).isEqualToComparingFieldByField(testData.get(TEST_UUID_5).getTravelLine());
         Assertions.assertThat(result.get(TEST_UUID_5).getPrice()).isNull();
+    }
+
+    @Test
+    void test_mapHvvRouteToJourneyMap_with_wrong_pojo_returns_problem_with_nullPointerException() throws JsonProcessingException {
+        String json = getResourceFileAsString("json/hvvJourney.json");
+        HvvRoute hvvRoute = retrieveJsonToPojo(json, HvvRoute.class);
+        hvvRoute.getRealtimeSchedules().get(0).getScheduleElements().get(0).setFrom(null);
+
+        Map<UUID, JourneyStatus> result = ReflectionTestUtils.invokeMethod(classUnderTest, "mapHvvRouteToJourneyMap", hvvRoute);
+
+        //noinspection ConstantConditions
+        assertThat(result.get(TEST_UUID_3).getProblem().get().getExceptions().get(0)).isInstanceOf(NullPointerException.class);
+        assertThat(result.get(TEST_UUID_3).getProblem().get().getExceptions().get(0)).isInstanceOf(Exception.class);
     }
 }
 
