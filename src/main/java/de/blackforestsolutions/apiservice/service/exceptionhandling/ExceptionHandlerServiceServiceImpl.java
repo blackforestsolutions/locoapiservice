@@ -86,9 +86,11 @@ public class ExceptionHandlerServiceServiceImpl implements ExceptionHandlerServi
 
     @Override
     public Coordinates handleExceptions(CallStatus<Coordinates> coordinatesCallStatus) {
-        logErrorCoordinate(coordinatesCallStatus);
-        if (Status.SUCCESS.equals(coordinatesCallStatus.getStatus())) {
-            return coordinatesCallStatus.getCalledObject();
+        if (coordinatesCallStatus.getCalledObject() != null) {
+            logErrorCoordinate(coordinatesCallStatus);
+            if (Status.SUCCESS.equals(coordinatesCallStatus.getStatus())) {
+                return coordinatesCallStatus.getCalledObject();
+            }
         }
         return null;
     }
