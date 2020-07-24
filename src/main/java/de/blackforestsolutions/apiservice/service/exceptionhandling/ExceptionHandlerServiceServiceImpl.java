@@ -65,17 +65,19 @@ public class ExceptionHandlerServiceServiceImpl implements ExceptionHandlerServi
 
     @Override
     public LinkedHashSet<TravelPoint> handleExceptionsTravelPoints(CallStatus<LinkedHashSet<TravelPointStatus>> linkedHashSetCallStatus) {
-        logErrorCallStatus(linkedHashSetCallStatus);
-        if (Status.SUCCESS.equals(linkedHashSetCallStatus.getStatus())) {
-            linkedHashSetCallStatus.getCalledObject()
-                    .forEach(ExceptionHandlerServiceServiceImpl::logErrorTravelPoint);
-            return linkedHashSetCallStatus.getCalledObject().stream()
-                    .map(TravelPointStatus::getTravelPoint)
-                    .filter(Optional::isPresent)
-                    .map(Optional::get)
-                    .collect(toCollection(LinkedHashSet::new));
+        if (linkedHashSetCallStatus.getCalledObject() != null) {
+            logErrorCallStatus(linkedHashSetCallStatus);
+            if (Status.SUCCESS.equals(linkedHashSetCallStatus.getStatus())) {
+                linkedHashSetCallStatus.getCalledObject()
+                        .forEach(ExceptionHandlerServiceServiceImpl::logErrorTravelPoint);
+                return linkedHashSetCallStatus.getCalledObject().stream()
+                        .map(TravelPointStatus::getTravelPoint)
+                        .filter(Optional::isPresent)
+                        .map(Optional::get)
+                        .collect(toCollection(LinkedHashSet::new));
+            }
         }
-        return null;
+        return new LinkedHashSet<>();
     }
 
     private void logErrorCallStatus(CallStatus<LinkedHashSet<TravelPointStatus>> linkedHashSetCallStatus) {
