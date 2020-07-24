@@ -41,12 +41,15 @@ public class ExceptionHandlerServiceServiceImpl implements ExceptionHandlerServi
     }
 
     private static Map<UUID, Journey> handleCallStatus(CallStatus<Map<UUID, JourneyStatus>> callStatus) {
-        callStatus.getCalledObject().values().forEach(ExceptionHandlerServiceServiceImpl::logError);
-        return callStatus.getCalledObject().values().stream()
-                .filter(journeyStatus -> journeyStatus.getJourney().isPresent())
-                .map(JourneyStatus::getJourney)
-                .map(Optional::get)
-                .collect(toMap(Journey::getId, journey -> journey));
+        if (callStatus.getCalledObject() != null) {
+            callStatus.getCalledObject().values().forEach(ExceptionHandlerServiceServiceImpl::logError);
+            return callStatus.getCalledObject().values().stream()
+                    .filter(journeyStatus -> journeyStatus.getJourney().isPresent())
+                    .map(JourneyStatus::getJourney)
+                    .map(Optional::get)
+                    .collect(toMap(Journey::getId, journey -> journey));
+        }
+        return new HashMap<>();
     }
 
     private static void logError(JourneyStatus journeyStatus) {
