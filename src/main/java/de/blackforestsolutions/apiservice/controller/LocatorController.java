@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import java.io.IOException;
 
 @RestController
 @RequestMapping("locate")
@@ -30,7 +29,7 @@ public class LocatorController {
     }
 
     @RequestMapping("/get")
-    public Coordinates retrieveLocatorJourneys(@RequestParam String address) throws IOException {
+    public Coordinates retrieveLocatorJourneys(@RequestParam String address) {
         return exceptionHandlerService.handleExceptions(osmApiService.getCoordinatesFromTravelPointWith(osmApiTokenAndUrlInformation, address));
     }
 

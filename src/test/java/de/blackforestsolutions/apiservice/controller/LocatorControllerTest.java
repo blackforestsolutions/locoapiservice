@@ -8,8 +8,6 @@ import de.blackforestsolutions.datamodel.util.LocoJsonMapper;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 
-import java.io.IOException;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
@@ -23,7 +21,7 @@ class LocatorControllerTest {
     private final LocatorController classUnderTest = initClassUnderTest();
 
     @Test
-    void test_if_calls_executed_correctly() throws IOException {
+    void test_if_calls_executed_correctly() {
         String address = "Schaffhausen";
         ArgumentCaptor<String> addressArg = ArgumentCaptor.forClass(String.class);
 
