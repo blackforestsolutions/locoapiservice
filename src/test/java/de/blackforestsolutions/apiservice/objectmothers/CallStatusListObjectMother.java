@@ -19,9 +19,15 @@ public class CallStatusListObjectMother {
         journeyStatus.setJourney(Optional.of(JourneyObjectMother.getBerlinHbfToHamburgLandwehrJourney()));
         journeyStatus.setProblem(Optional.empty());
         CallStatus<Map<UUID, JourneyStatus>> callStatusSuccess = new CallStatus<>(Collections.singletonMap(JourneyObjectMother.getBerlinHbfToHamburgLandwehrJourney().getId(), journeyStatus), Status.SUCCESS, null);
-        CallStatus<Map<UUID, JourneyStatus>> callStatusFailure = new CallStatus<>(Collections.emptyMap(), Status.FAILED, new Exception("Test CallStatus"));
         callStatuses.add(callStatusSuccess);
+        return callStatuses;
+    }
+
+    public static List<CallStatus<Map<UUID, JourneyStatus>>> retrieveCallStatusListFailed() {
+        List<CallStatus<Map<UUID, JourneyStatus>>> callStatuses = new ArrayList<>();
+        CallStatus<Map<UUID, JourneyStatus>> callStatusFailure = new CallStatus<>(Collections.emptyMap(), Status.FAILED, new Exception("Test CallStatus"));
         callStatuses.add(callStatusFailure);
         return callStatuses;
     }
+
 }

@@ -39,6 +39,7 @@ class ExceptionHandlerServiceTest {
 
         LinkedHashSet<TravelPoint> result = this.classUnderTest.handleExceptionsTravelPoints(testData);
 
+        //noinspection OptionalGetWithoutIsPresent (justification: it`s a test and we know that the get is not null)
         assertThat(result.stream().findAny().get()).isEqualToComparingFieldByField(travelPoint);
     }
 
@@ -59,5 +60,24 @@ class ExceptionHandlerServiceTest {
         Coordinates result = this.classUnderTest.handleExceptions(testData);
 
         assertThat(result).isEqualToComparingFieldByField(coordinates);
+    }
+
+    @Test
+    void test_handleExceptionsWith_exception_in_root_delivers_empty_list() {
+        List<CallStatus<Map<UUID, JourneyStatus>>> testData = CallStatusListObjectMother.retrieveCallStatusListFailed();
+
+        Map<UUID, Journey> result = this.classUnderTest.handleExceptions(testData);
+
+        assertThat(result.size()).isEqualTo(0);
+    }
+
+    @Test
+    void test_handleExceptionsTravelPoints_with_exception_in_root_delivers_empty_list() {
+
+        CallStatus<LinkedHashSet<TravelPointStatus>> testData = new CallStatus<>(null, Status.SUCCESS, new Exception("Test"));
+
+        LinkedHashSet<TravelPoint> result = this.classUnderTest.handleExceptionsTravelPoints(testData);
+
+        assertThat(result.size()).isEqualTo(0);
     }
 }
