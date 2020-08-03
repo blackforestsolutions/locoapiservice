@@ -3,6 +3,8 @@ package de.blackforestsolutions.apiservice.configuration;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.geo.Box;
+import org.springframework.data.geo.Point;
 
 @SpringBootConfiguration
 public class BoxServiceConfiguration {
@@ -17,23 +19,16 @@ public class BoxServiceConfiguration {
     @Value("${coord2lon}")
     private double lowerBoxLon;
 
-    @Bean(name = "upperBoxLat")
-    public double upperBoxLat() {
-        return upperBoxLat;
-    }
+    private Point first = new Point(upperBoxLat, upperBoxLon);
+    private Point second = new Point(lowerBoxLat, lowerBoxLon);
 
-    @Bean(name = "upperBoxLat")
-    public double upperBoxLon() {
-        return upperBoxLon;
+    //Config kommt in die entsprechende API Config -> RMV
+    @Bean
+    public Box box() {
+        return new Box(first, second);
     }
-
-    @Bean(name = "upperBoxLat")
-    public double lowerBoxLat() {
-        return lowerBoxLat;
-    }
-
-    @Bean(name = "upperBoxLat")
-    public double lowerBoxLon() {
-        return lowerBoxLon;
-    }
+    //todo die Bean gibt null weiter.
+    //todo davon abgesehen: Beans Autowiren? - nützlich? wieso gefährlich?
+    //this.first = first;
+    //this.second = second;
 }

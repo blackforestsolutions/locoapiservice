@@ -1,9 +1,12 @@
 package de.blackforestsolutions.apiservice.configuration;
 
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.geo.Box;
+import org.springframework.data.geo.Point;
 import org.springframework.http.HttpHeaders;
 
 @SpringBootConfiguration
@@ -35,6 +38,17 @@ public class RMVConfiguration {
     private Integer rmvResultLengthAfterDate;
     @Value("${rmvAllowIntermediateStops}")
     private boolean rmvAllowIntermediateStops;
+    @Value("${coord1lat}")
+    private double upperBoxLat;
+    @Value("${coord1lon}")
+    private double upperBoxLon;
+    @Value("${coord2lat}")
+    private double lowerBoxLat;
+    @Value("${coord2lon}")
+    private double lowerBoxLon;
+
+    private Point first = new Point(upperBoxLat, upperBoxLon);
+    private Point second = new Point(lowerBoxLat, lowerBoxLon);
 
 
     @Bean(name = "rmvApiTokenAndUrlInformation")
@@ -57,5 +71,10 @@ public class RMVConfiguration {
         builder.setResultLengthAfterDepartureTime(rmvResultLengthAfterDate);
         builder.setAllowIntermediateStops(rmvAllowIntermediateStops);
         return builder.build();
+    }
+
+    @Autowired
+    public Box box() {
+        return new Box(first, second);
     }
 }
