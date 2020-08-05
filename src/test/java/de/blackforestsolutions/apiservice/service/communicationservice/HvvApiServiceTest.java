@@ -59,8 +59,10 @@ class HvvApiServiceTest {
         when(REST_TEMPLATE.exchange(anyString(), any(), any(), any(Class.class))).thenReturn(rotenhofTravelPointResult).thenReturn(stadthausbrueckeTravelPointResult).thenReturn(journeyTestResult);
         HashMap<UUID, JourneyStatus> mockedJourneys = new HashMap<>();
         Journey mockedJourney = JourneyObjectMother.getGustavHeinemannStreetToUniversityJourney();
-        JourneyStatus journeyStatus = new JourneyStatus();
-        journeyStatus.setJourney(Optional.of(mockedJourney));
+        JourneyStatus journeyStatus = new JourneyStatus(
+                Optional.of(mockedJourney),
+                Optional.empty()
+        );
         mockedJourneys.put(mockedJourney.getId(), journeyStatus);
         when(mapperService.getJourneyMapFrom(journeyJson)).thenReturn(mockedJourneys);
 

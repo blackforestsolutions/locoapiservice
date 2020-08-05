@@ -4,17 +4,14 @@ import de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformatio
 import de.blackforestsolutions.apiservice.service.communicationservice.OSMApiService;
 import de.blackforestsolutions.apiservice.service.exceptionhandling.ExceptionHandlerService;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
-import de.blackforestsolutions.datamodel.util.LocoJsonMapper;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 class LocatorControllerTest {
 
-    private final LocoJsonMapper locoJsonMapper = new LocoJsonMapper();
     private final OSMApiService osmApiService = mock(OSMApiService.class);
     private final ExceptionHandlerService exceptionHandlerService = mock(ExceptionHandlerService.class);
 
@@ -25,9 +22,9 @@ class LocatorControllerTest {
         String address = "Schaffhausen";
         ArgumentCaptor<String> addressArg = ArgumentCaptor.forClass(String.class);
 
-        classUnderTest.retrieveLocatorJourneys(address);
+        classUnderTest.retrieveLocatorTravelPoints(address);
 
-        verify(osmApiService, times(1)).getCoordinatesFromTravelPointWith(any(ApiTokenAndUrlInformation.class), addressArg.capture());
+        verify(osmApiService, times(1)).getTravelPointFrom(any(ApiTokenAndUrlInformation.class), addressArg.capture());
         assertThat(addressArg.getValue()).isEqualTo(address);
     }
 

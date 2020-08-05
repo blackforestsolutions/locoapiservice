@@ -19,6 +19,24 @@ public class TravelPointObjectMother {
 
     private static final Locale SWIZERLAND_LOCALE = Locale.forLanguageTag("de-CH");
 
+    public static TravelPoint getEuropeTravelPoint() {
+        return new TravelPoint.TravelPointBuilder()
+                .setStationName("Europa")
+                .setGpsCoordinates(new Coordinates.CoordinatesBuilder(51d, 10d).build())
+                .build();
+    }
+
+    public static TravelPoint getStuttgartWaiblingerStreetTravelPoint() {
+        return new TravelPoint.TravelPointBuilder()
+                .setStationName("84, Waiblinger Straße, Seelberg, Bad Cannstatt, Stuttgart, Baden-Württemberg, 70372, Deutschland")
+                .setGpsCoordinates(new Coordinates.CoordinatesBuilder(48.80549925, 9.228576954173775).build())
+                .setCountry(Locale.GERMAN)
+                .setCity("Stuttgart")
+                .setStreet("Waiblinger Straße 84")
+                .setPostalCode("70372")
+                .build();
+    }
+
     public static HvvStation getRosenhofHvvStation() {
         HvvStation travelPoint = new HvvStation();
 

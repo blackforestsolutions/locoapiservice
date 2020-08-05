@@ -4,7 +4,7 @@ import com.google.common.annotations.VisibleForTesting;
 import de.blackforestsolutions.apiservice.service.communicationservice.OSMApiService;
 import de.blackforestsolutions.apiservice.service.exceptionhandling.ExceptionHandlerService;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
-import de.blackforestsolutions.datamodel.Coordinates;
+import de.blackforestsolutions.datamodel.TravelPoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,8 +29,8 @@ public class LocatorController {
     }
 
     @RequestMapping("/get")
-    public Coordinates retrieveLocatorJourneys(@RequestParam String address) {
-        return exceptionHandlerService.handleExceptions(osmApiService.getCoordinatesFromTravelPointWith(osmApiTokenAndUrlInformation, address));
+    public TravelPoint retrieveLocatorTravelPoints(@RequestParam String address) {
+        return exceptionHandlerService.handleExceptions(osmApiService.getTravelPointFrom(osmApiTokenAndUrlInformation, address));
     }
 
     @VisibleForTesting

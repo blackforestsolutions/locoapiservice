@@ -25,7 +25,6 @@ import static de.blackforestsolutions.apiservice.objectmothers.JourneyObjectMoth
 import static de.blackforestsolutions.apiservice.testutils.TestUtils.createJourneyStatusWith;
 import static de.blackforestsolutions.apiservice.testutils.TestUtils.getResourceFileAsString;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 
@@ -59,15 +58,17 @@ class BBCApiServiceTest {
                 .thenReturn(new ResponseEntity<>(getResourceFileAsString("json/bbcTest.json"), HttpStatus.OK));
         ArgumentCaptor<String> url = ArgumentCaptor.forClass(String.class);
         ArgumentCaptor<String> body = ArgumentCaptor.forClass(String.class);
+        ArgumentCaptor<HttpEntity> httpEntity = ArgumentCaptor.forClass(HttpEntity.class);
 
         CallStatus<Map<UUID, JourneyStatus>> result = classUnderTest.getJourneysForRouteWith(testData);
 
         InOrder inOrder = inOrder(bbcMapperService, bbcHttpCallBuilderService, callService);
         inOrder.verify(bbcHttpCallBuilderService, times(1)).bbcBuildJourneyStringPathWith(any(ApiTokenAndUrlInformation.class));
-        inOrder.verify(callService, times(1)).get(url.capture(), any(HttpEntity.class));
+        inOrder.verify(callService, times(1)).get(url.capture(), httpEntity.capture());
         inOrder.verify(bbcMapperService, times(1)).mapJsonToJourneys(body.capture());
         assertThat(url.getValue()).isEqualTo("https://public-api.blablacar.com");
         assertThat(body.getValue()).isEqualTo(getResourceFileAsString("json/bbcTest.json"));
+        assertThat(httpEntity.getValue()).isEqualTo(HttpEntity.EMPTY);
         assertThat(result.getCalledObject().size()).isEqualTo(2);
     }
 
@@ -78,15 +79,17 @@ class BBCApiServiceTest {
                 .thenReturn(new ResponseEntity<>(getResourceFileAsString("json/bbcTest.json"), HttpStatus.OK));
         ArgumentCaptor<String> url = ArgumentCaptor.forClass(String.class);
         ArgumentCaptor<String> body = ArgumentCaptor.forClass(String.class);
+        ArgumentCaptor<HttpEntity> httpEntity = ArgumentCaptor.forClass(HttpEntity.class);
 
         CallStatus<Map<UUID, JourneyStatus>> result = classUnderTest.getJourneysForRouteByCoordinates(testData);
 
         InOrder inOrder = inOrder(bbcMapperService, bbcHttpCallBuilderService, callService);
         inOrder.verify(bbcHttpCallBuilderService, times(1)).bbcBuildJourneyCoordinatesPathWith(any(ApiTokenAndUrlInformation.class));
-        inOrder.verify(callService, times(1)).get(url.capture(), any(HttpEntity.class));
+        inOrder.verify(callService, times(1)).get(url.capture(), httpEntity.capture());
         inOrder.verify(bbcMapperService, times(1)).mapJsonToJourneys(body.capture());
         assertThat(url.getValue()).isEqualTo("https://public-api.blablacar.com");
         assertThat(body.getValue()).isEqualTo(getResourceFileAsString("json/bbcTest.json"));
+        assertThat(httpEntity.getValue()).isEqualTo(HttpEntity.EMPTY);
         assertThat(result.getCalledObject().size()).isEqualTo(2);
     }
 

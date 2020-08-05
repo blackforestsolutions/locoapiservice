@@ -15,8 +15,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import javax.annotation.Resource;
+import java.time.ZonedDateTime;
 
-import static de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother.getDBTokenAndUrl;
 import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.buildUrlWith;
 import static de.blackforestsolutions.apiservice.testutils.TestUtils.retrieveJsonToPojoFromResponse;
 
@@ -53,7 +53,7 @@ class DBApiServiceIT {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder testData = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(dbApiTokenAndUrlInformation);
         testData.setDeparture("981067408");
         testData.setArrival("000362734");
-        testData.setDepartureDate(getDBTokenAndUrl(null, null).getDepartureDate());
+        testData.setDepartureDate(ZonedDateTime.now());
         testData.setPath(httpCallBuilderService.buildPathWith(testData.build(), null));
 
         ResponseEntity<String> result = hafasCallService.post(

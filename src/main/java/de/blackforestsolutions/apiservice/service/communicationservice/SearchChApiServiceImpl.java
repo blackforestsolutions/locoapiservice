@@ -9,6 +9,7 @@ import de.blackforestsolutions.datamodel.JourneyStatus;
 import de.blackforestsolutions.datamodel.Status;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +17,6 @@ import java.net.URL;
 import java.util.Map;
 import java.util.UUID;
 
-import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.buildEmptyHttpEntity;
 import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.buildUrlWith;
 
 @Slf4j
@@ -42,7 +42,7 @@ public class SearchChApiServiceImpl implements SearchChApiService {
             String arrivalId = getIdFromStation(apiTokenAndUrlInformation, apiTokenAndUrlInformation.getArrival());
 
             String url = getRouteRequestString(apiTokenAndUrlInformation, departureId, arrivalId);
-            ResponseEntity<String> result = callService.get(url, buildEmptyHttpEntity());
+            ResponseEntity<String> result = callService.get(url, HttpEntity.EMPTY);
             return new CallStatus<>(searchChMapperService.getJourneysFrom(result.getBody()), Status.SUCCESS, null);
 
         } catch (Exception ex) {
@@ -53,7 +53,7 @@ public class SearchChApiServiceImpl implements SearchChApiService {
 
     private String getIdFromStation(ApiTokenAndUrlInformation apiTokenAndUrlInformation, String station) throws Exception {
         String url = getTravelPointRequestString(apiTokenAndUrlInformation, station);
-        ResponseEntity<String> result = callService.get(url, buildEmptyHttpEntity());
+        ResponseEntity<String> result = callService.get(url, HttpEntity.EMPTY);
         return searchChMapperService.getIdFromStation(result.getBody());
     }
 

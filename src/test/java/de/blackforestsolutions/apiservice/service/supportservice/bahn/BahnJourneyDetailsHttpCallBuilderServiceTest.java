@@ -28,7 +28,7 @@ class BahnJourneyDetailsHttpCallBuilderServiceTest {
 
         String result = classUnderTest.buildBahnJourneyDetailsPath(testData);
 
-        Assertions.assertThat(result).isEqualTo("/fahrplan-plus/v1/journeyDetails/715770%252F254084%252F898562%252F210691%252F80%253fstation_evaId%253D8000312");
+        Assertions.assertThat(result).isEqualTo("/fahrplan-plus/v1/journeyDetails/715770%2F254084%2F898562%2F210691%2F80%3fstation_evaId%3D8000312");
     }
 
     @Test

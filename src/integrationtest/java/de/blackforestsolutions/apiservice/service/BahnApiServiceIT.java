@@ -6,6 +6,7 @@ import de.blackforestsolutions.apiservice.service.supportservice.BahnHttpCallBui
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import de.blackforestsolutions.generatedcontent.bahn.ArrivalBoard;
 import de.blackforestsolutions.generatedcontent.bahn.DepartureBoard;
+import de.blackforestsolutions.generatedcontent.bahn.JourneyDetail;
 import de.blackforestsolutions.generatedcontent.bahn.RailwayStation;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -89,7 +90,7 @@ class BahnApiServiceIT {
     @Test
     void test_BahnJourneyDetails() throws JsonProcessingException {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder testData = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(bahnApiTokenAndUrlInformation);
-        testData.setJourneyDetailsId("400758%2F140119%2F855402%2F294115%2F80%3fstation_evaId%3D8011160");
+        testData.setJourneyDetailsId("286239%2F112496%2F243978%2F26576%2F80%3fstation_evaId%3D8098160");
         testData.setPath(bahnHttpCallBuilderService.buildBahnJourneyDetailsPath(testData.build()));
 
         ResponseEntity<String> result = callService.get(
@@ -99,7 +100,7 @@ class BahnApiServiceIT {
 
         Assertions.assertThat(HttpStatus.OK).isEqualTo(result.getStatusCode());
         Assertions.assertThat(result.getBody()).isNotEmpty();
-        Assertions.assertThat(retrieveListJsonToPojoFromResponse(result, DepartureBoard.class)).isEqualTo(false);
+        Assertions.assertThat(retrieveListJsonToPojoFromResponse(result, JourneyDetail.class)).isNotEmpty();
     }
 
 }
