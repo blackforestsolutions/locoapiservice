@@ -128,10 +128,7 @@ public class TestUtils {
     }
 
     public static JourneyStatus createJourneyStatusWith(Journey journey) {
-        JourneyStatus journeyStatus = new JourneyStatus();
-        journeyStatus.setJourney(Optional.of(journey));
-        journeyStatus.setProblem(Optional.empty());
-        return journeyStatus;
+        return new JourneyStatus(Optional.of(journey), Optional.empty());
     }
 
 }

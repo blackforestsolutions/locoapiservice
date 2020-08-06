@@ -4,21 +4,18 @@ import com.google.common.annotations.VisibleForTesting;
 import de.blackforestsolutions.apiservice.service.communicationservice.OSMApiService;
 import de.blackforestsolutions.apiservice.service.exceptionhandling.ExceptionHandlerService;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
-import de.blackforestsolutions.datamodel.Coordinates;
-import de.blackforestsolutions.datamodel.util.LocoJsonMapper;
+import de.blackforestsolutions.datamodel.TravelPoint;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import java.io.IOException;
 
 @RestController
 @RequestMapping("locate")
 public class LocatorController {
 
-    private final LocoJsonMapper locoJsonMapper = new LocoJsonMapper();
     private final OSMApiService osmApiService;
     private final ExceptionHandlerService exceptionHandlerService;
 
@@ -32,13 +29,8 @@ public class LocatorController {
     }
 
     @RequestMapping("/get")
-    public Coordinates retrieveLocatorJourneys(@RequestBody String request) throws IOException {
-        ApiTokenAndUrlInformation requestInformation = locoJsonMapper.mapJsonToApiTokenAndUrlInformation(request);
-        return this.exceptionHandlerService.handleExceptions(osmApiService.getCoordinatesFromTravelPointWith(getOsmApiTokenAndUrlInformation(requestInformation), request));
-    }
-
-    private ApiTokenAndUrlInformation getOsmApiTokenAndUrlInformation(ApiTokenAndUrlInformation request) {
-        return RequestTokenHandler.getRequestApiTokenWith(request, osmApiTokenAndUrlInformation);
+    public TravelPoint retrieveLocatorTravelPoints(@RequestParam String address) {
+        return exceptionHandlerService.handleExceptions(osmApiService.getTravelPointFrom(osmApiTokenAndUrlInformation, address));
     }
 
     @VisibleForTesting

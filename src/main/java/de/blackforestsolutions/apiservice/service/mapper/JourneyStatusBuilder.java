@@ -13,17 +13,14 @@ import java.util.UUID;
 public class JourneyStatusBuilder {
 
     public static JourneyStatus createJourneyStatusWith(Journey journey) {
-        JourneyStatus journeyStatus = new JourneyStatus();
-        journeyStatus.setJourney(Optional.of(journey));
-        journeyStatus.setProblem(Optional.empty());
-        return journeyStatus;
+        return new JourneyStatus(Optional.of(journey), Optional.empty());
     }
 
     public static JourneyStatus createJourneyStatusProblemWith(List<Exception> exceptions, List<String> loggedMessages) {
-        JourneyStatus journeyStatus = new JourneyStatus();
-        journeyStatus.setJourney(Optional.empty());
-        journeyStatus.setProblem(Optional.of(solve(exceptions, loggedMessages)));
-        return journeyStatus;
+        return new JourneyStatus(
+                Optional.empty(),
+                Optional.of(solve(exceptions, loggedMessages))
+        );
     }
 
     private static Problem solve(List<Exception> exceptions, List<String> loggedMessages) {

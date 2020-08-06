@@ -1,67 +1,68 @@
 package de.blackforestsolutions.apiservice.service.communicationservice;
 
-import com.fasterxml.jackson.databind.exc.MismatchedInputException;
-import de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother;
 import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallService;
-import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallServiceImpl;
+import de.blackforestsolutions.apiservice.service.mapper.OsmMapperService;
 import de.blackforestsolutions.apiservice.service.supportservice.OSMHttpCallBuilderService;
-import de.blackforestsolutions.apiservice.service.supportservice.OSMHttpCallBuilderServiceImpl;
-import de.blackforestsolutions.apiservice.stubs.RestTemplateBuilderStub;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import de.blackforestsolutions.datamodel.CallStatus;
-import de.blackforestsolutions.datamodel.Coordinates;
 import de.blackforestsolutions.datamodel.Status;
-import org.junit.jupiter.api.Assertions;
+import de.blackforestsolutions.datamodel.TravelPointStatus;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.mockito.ArgumentCaptor;
+import org.mockito.InOrder;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.RestTemplate;
+
+import java.util.Optional;
 
 import static de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother.getOSMApiTokenAndUrl;
+import static de.blackforestsolutions.apiservice.objectmothers.TravelPointObjectMother.getStuttgartWaiblingerStreetTravelPoint;
 import static de.blackforestsolutions.apiservice.testutils.TestUtils.getResourceFileAsString;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
 class OSMApiServiceTest {
-    private static final RestTemplate restTemplate = mock(RestTemplate.class);
 
-    private final RestTemplateBuilder restTemplateBuilder = new RestTemplateBuilderStub(restTemplate);
+    private final CallService callService = mock(CallService.class);
 
-    private final CallService callService = new CallServiceImpl(restTemplateBuilder);
+    private final OSMHttpCallBuilderService osmHttpCallBuilderService = mock(OSMHttpCallBuilderService.class);
 
-    private final OSMHttpCallBuilderService osmHttpCallBuilderService = new OSMHttpCallBuilderServiceImpl();
+    private final OsmMapperService osmMapperService = mock(OsmMapperService.class);
 
-    private final OSMApiService classUnderTest = new OSMApiServiceImpl(callService, osmHttpCallBuilderService);
+    private final OSMApiService classUnderTest = new OSMApiServiceImpl(callService, osmHttpCallBuilderService, osmMapperService);
 
-    @Test
-    void test_getCoordinatesFromTavelpointWith_mocked_json_apiToken_return_correct_departure_coordinates() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getOSMApiTokenAndUrl();
-        String departureJson = getResourceFileAsString("json/osmTravelPointDeparture.json");
-        ResponseEntity<String> testResultDeparture = new ResponseEntity<>(departureJson, HttpStatus.OK);
-        //noinspection unchecked (justification: no type known for runtime therefore)
-        doReturn(testResultDeparture).when(restTemplate).exchange(anyString(), any(), any(), any(Class.class));
+    @BeforeEach
+    void init() {
+        String addressJson = getResourceFileAsString("json/osmTravelPointAddress.json");
 
-        CallStatus<Coordinates> result = classUnderTest.getCoordinatesFromTravelPointWith(testData, testData.getDeparture());
-        Coordinates coordinatesResult = result.getCalledObject();
+        when(callService.get(anyString(), any(HttpEntity.class))).thenReturn(new ResponseEntity<>(addressJson, HttpStatus.OK));
 
-        Assertions.assertEquals(48.80549925, coordinatesResult.getLatitude());
-        Assertions.assertEquals(9.228576954173775, coordinatesResult.getLongitude());
+        when(osmHttpCallBuilderService.buildOSMPathWith(any(ApiTokenAndUrlInformation.class), anyString())).thenReturn("");
+
+        when(osmMapperService.mapOsmJsonToTravelPoint(anyString())).thenReturn(
+                new TravelPointStatus(Optional.of(getStuttgartWaiblingerStreetTravelPoint()), Optional.empty())
+        );
     }
 
     @Test
-    void test_getCoordinatesFromTavelpointWith_mocked_json_apiToken_return_correct_arrival_coordinates() {
-        ApiTokenAndUrlInformation testData = ApiTokenAndUrlInformationObjectMother.getOSMApiTokenAndUrl();
-        String arrivalJson = getResourceFileAsString("json/osmTravelPointArrival.json");
-        ResponseEntity<String> testResultArrival = new ResponseEntity<>(arrivalJson, HttpStatus.OK);
-        //noinspection unchecked (justification: no type known for runtime therefore)
-        doReturn(testResultArrival).when(restTemplate).exchange(anyString(), any(), any(), any(Class.class));
+    void test_getTravelPointFrom_with_mocked_services_is_executed_correctly() {
+        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder testData = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(getOSMApiTokenAndUrl());
+        ArgumentCaptor<String> url = ArgumentCaptor.forClass(String.class);
+        ArgumentCaptor<String> body = ArgumentCaptor.forClass(String.class);
+        ArgumentCaptor<HttpEntity> httpEntity = ArgumentCaptor.forClass(HttpEntity.class);
 
-        CallStatus<Coordinates> result = classUnderTest.getCoordinatesFromTravelPointWith(testData, testData.getArrival());
-        Coordinates coordinatesResult = result.getCalledObject();
+        CallStatus<TravelPointStatus> result = classUnderTest.getTravelPointFrom(testData.build(), testData.getArrival());
 
-        Assertions.assertEquals(48.0510888, coordinatesResult.getLatitude());
-        Assertions.assertEquals(8.2073542, coordinatesResult.getLongitude());
+        InOrder inOrder = inOrder(callService, osmHttpCallBuilderService, osmMapperService);
+        inOrder.verify(osmHttpCallBuilderService, times(1)).buildOSMPathWith(any(ApiTokenAndUrlInformation.class), anyString());
+        inOrder.verify(callService, times(1)).get(url.capture(), httpEntity.capture());
+        inOrder.verify(osmMapperService, times(1)).mapOsmJsonToTravelPoint(body.capture());
+        assertThat(url.getValue()).isEqualTo("https://nominatim.openstreetmap.org");
+        assertThat(body.getValue()).isEqualTo(getResourceFileAsString("json/osmTravelPointAddress.json"));
+        assertThat(httpEntity.getValue()).isEqualToComparingFieldByField(HttpEntity.EMPTY);
+        assertThat(result.getCalledObject().getTravelPoint().get()).isEqualToComparingFieldByField(getStuttgartWaiblingerStreetTravelPoint());
     }
 
     @Test
@@ -69,47 +70,20 @@ class OSMApiServiceTest {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder testData = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(getOSMApiTokenAndUrl());
         testData.setHost(null);
 
-        CallStatus<Coordinates> result = classUnderTest.getCoordinatesFromTravelPointWith(testData.build(), testData.getArrival());
+        CallStatus<TravelPointStatus> result = classUnderTest.getTravelPointFrom(testData.build(), testData.getArrival());
 
         assertThat(result.getStatus()).isEqualTo(Status.FAILED);
         assertThat(result.getException()).isInstanceOf(NullPointerException.class);
-    }
-
-    @Test
-    void test_getCoordinatesFromTravelPointWith_apiToken_and_wrong_mocked_http_answer_returns_failed_call_status() {
-        ApiTokenAndUrlInformation testData = getOSMApiTokenAndUrl();
-        //noinspection unchecked
-        when(restTemplate.exchange(anyString(), any(), any(), any(Class.class))).thenReturn(new ResponseEntity<>("", HttpStatus.BAD_REQUEST));
-
-        CallStatus<Coordinates> result = classUnderTest.getCoordinatesFromTravelPointWith(testData, testData.getArrival());
-
-        assertThat(result.getStatus()).isEqualTo(Status.FAILED);
-        assertThat(result.getException()).isInstanceOf(MismatchedInputException.class);
     }
 
     @Test
     void test_getCoordinatesFromTravelPointWith_apiToken_throws_exception_during_http_call_returns_failed_call_status() {
         ApiTokenAndUrlInformation testData = getOSMApiTokenAndUrl();
-        //noinspection unchecked
-        doThrow(new RuntimeException()).when(restTemplate).exchange(anyString(), any(), any(), any(Class.class));
+        doThrow(new RuntimeException()).when(callService).get(anyString(), any(HttpEntity.class));
 
-        CallStatus<Coordinates> result = classUnderTest.getCoordinatesFromTravelPointWith(testData, testData.getArrival());
+        CallStatus<TravelPointStatus> result = classUnderTest.getTravelPointFrom(testData, testData.getArrival());
 
         assertThat(result.getStatus()).isEqualTo(Status.FAILED);
         assertThat(result.getException()).isInstanceOf(RuntimeException.class);
-    }
-
-    @Test
-    void test_getCoordinatesFromTravelPointWith_wrong_pojo_returns__one_problem_with_nullPointerException() {
-        ApiTokenAndUrlInformation testData = getOSMApiTokenAndUrl();
-        String arrivalJson = getResourceFileAsString("json/osmTravelPointArrivalError.json");
-        ResponseEntity<String> testResultArrival = new ResponseEntity<>(arrivalJson, HttpStatus.OK);
-        //noinspection unchecked (justification: no type known for runtime therefore)
-        doReturn(testResultArrival).when(restTemplate).exchange(anyString(), any(), any(), any(Class.class));
-
-        CallStatus<Coordinates> result = classUnderTest.getCoordinatesFromTravelPointWith(testData, testData.getArrival());
-
-        assertThat(result.getException()).isInstanceOf(NullPointerException.class);
-        assertThat(result.getException()).isInstanceOf(Exception.class);
     }
 }

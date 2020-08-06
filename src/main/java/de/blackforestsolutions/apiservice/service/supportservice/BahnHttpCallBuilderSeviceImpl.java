@@ -94,6 +94,6 @@ public class BahnHttpCallBuilderSeviceImpl extends HttpCallBuilder implements Ba
                 .concat("/")
                 .concat(apiTokenAndUrlInformation.getGermanRailJourneyDeatilsPath())
                 .concat("/")
-                .concat(apiTokenAndUrlInformation.getJourneyDetailsId().replaceAll("%", "%25"));
+                .concat(apiTokenAndUrlInformation.getJourneyDetailsId());
     }
 }

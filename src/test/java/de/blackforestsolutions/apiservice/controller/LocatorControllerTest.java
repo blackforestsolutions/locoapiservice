@@ -4,31 +4,28 @@ import de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformatio
 import de.blackforestsolutions.apiservice.service.communicationservice.OSMApiService;
 import de.blackforestsolutions.apiservice.service.exceptionhandling.ExceptionHandlerService;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
-import de.blackforestsolutions.datamodel.util.LocoJsonMapper;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
+import org.mockito.ArgumentCaptor;
 
-import java.io.IOException;
-
-import static org.mockito.Mockito.mock;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.*;
 
 class LocatorControllerTest {
 
-    private final LocoJsonMapper locoJsonMapper = new LocoJsonMapper();
-    private final OSMApiService osmApiService = Mockito.mock(OSMApiService.class);
+    private final OSMApiService osmApiService = mock(OSMApiService.class);
     private final ExceptionHandlerService exceptionHandlerService = mock(ExceptionHandlerService.class);
 
     private final LocatorController classUnderTest = initClassUnderTest();
 
     @Test
-    void test_if_calls_executed_correctly() throws IOException {
-        //arrange
-        ApiTokenAndUrlInformation testRequest = ApiTokenAndUrlInformationObjectMother.requestInfos();
-        String testRequestString = locoJsonMapper.map(testRequest);
-        //act
-        classUnderTest.retrieveLocatorJourneys(testRequestString);
-        //assert
-        Mockito.verify(osmApiService, Mockito.times(1)).getCoordinatesFromTravelPointWith(Mockito.any(ApiTokenAndUrlInformation.class), Mockito.anyString());
+    void test_if_calls_executed_correctly() {
+        String address = "Schaffhausen";
+        ArgumentCaptor<String> addressArg = ArgumentCaptor.forClass(String.class);
+
+        classUnderTest.retrieveLocatorTravelPoints(address);
+
+        verify(osmApiService, times(1)).getTravelPointFrom(any(ApiTokenAndUrlInformation.class), addressArg.capture());
+        assertThat(addressArg.getValue()).isEqualTo(address);
     }
 
     private LocatorController initClassUnderTest() {
