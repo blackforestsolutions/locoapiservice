@@ -33,7 +33,7 @@ public class NearestStationFinderController {
     }
 
     @RequestMapping("/get")
-    public LinkedHashSet<TravelPoint> retrieveAirportsFinderTravelPoints(@RequestBody String request) throws JsonProcessingException {
+    public LinkedHashSet<TravelPoint> retrieveNearestAirportTravelPoints(@RequestBody String request) throws JsonProcessingException {
         ApiTokenAndUrlInformation requestInformation = locoJsonMapper.mapJsonToApiTokenAndUrlInformation(request);
         return this.exceptionHandlerService.handleExceptionsTravelPoints(airportsFinderApiService.getAirportsWith(getAirportsFinderApiTokenAndUrlInformation(requestInformation)));
     }
