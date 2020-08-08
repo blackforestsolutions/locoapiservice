@@ -10,10 +10,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
 import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.setFormatToJsonFor;
-import static de.blackforestsolutions.apiservice.service.supportservice.hvv.HvvHttpBodyService.buildJourneyHttpBodyForHvv;
-import static de.blackforestsolutions.apiservice.service.supportservice.hvv.HvvHttpBodyService.buildTravelPointHttpBodyForHvv;
-import static de.blackforestsolutions.apiservice.service.supportservice.hvv.HvvHttpCallBuilder.setBaseHttpHeaderFor;
-import static de.blackforestsolutions.apiservice.service.supportservice.hvv.HvvHttpCallBuilder.setHvvAuthentificationSignatureFor;
+import static de.blackforestsolutions.apiservice.service.supportservice.hvv.HvvHttpBodyService.*;
+import static de.blackforestsolutions.apiservice.service.supportservice.hvv.HvvHttpCallBuilder.*;
 
 @Service
 public class HvvHttpCallBuilderServiceImpl implements HvvHttpCallBuilderService {
