@@ -109,27 +109,6 @@ public class ApiTokenAndUrlInformationObjectMother {
         return builder;
     }
 
-    public static ApiTokenAndUrlInformation getSearchChTokenAndUrl() {
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder.setProtocol("https");
-        builder.setHost("fahrplan.search.ch");
-        builder.setPathVariable("api");
-        builder.setLocationPath("completion.json");
-        builder.setJourneyPathVariable("route.json");
-        builder.setSearchChTermParameter("term");
-        builder.setLocationSearchTerm("lu");
-        builder.setSearchChStationId("show_ids=1");
-        builder.setSearchChStationCoordinateParameter("show_coordinates=1");
-        builder.setDatePathVariable("date");
-        builder.setDeparture("8503283");
-        builder.setArrival("Zürich,+Förrlibuckstr.+60");
-        builder.setTimePathVariable("time");
-        builder.setSearchChDelayParameter("show_delays=1");
-        builder.setSearchChResults("num=1");
-        builder.setDepartureDate(TestUtils.generateDateFromLocalDateTimeAndString("yyyy-MM-dd HH:mm:ss", "2019-11-04 14:00:00"));
-        return builder.build();
-    }
-
     public static ApiTokenAndUrlInformation getHvvTokenAndUrl() {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
 
