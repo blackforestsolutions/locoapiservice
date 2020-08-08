@@ -6,10 +6,8 @@ import de.blackforestsolutions.apiservice.service.communicationservice.restcalls
 import de.blackforestsolutions.apiservice.service.supportservice.hvv.HvvHttpCallBuilderService;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import de.blackforestsolutions.generatedcontent.hvv.request.HvvStation;
-import de.blackforestsolutions.generatedcontent.hvv.response.HvvStationList;
 import de.blackforestsolutions.generatedcontent.hvv.response.HvvTravelPointResponse;
 import de.blackforestsolutions.generatedcontent.hvv.response.journey.HvvRoute;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -23,6 +21,7 @@ import java.time.ZonedDateTime;
 import static de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother.getHvvTokenAndUrl;
 import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.buildUrlWith;
 import static de.blackforestsolutions.apiservice.testutils.TestUtils.retrieveJsonToPojoFromResponse;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -37,17 +36,6 @@ class HvvApiServiceIT {
     @Autowired
     private HvvHttpCallBuilderService httpCallBuilderService;
 
-    @Test
-    void test_getStationList() throws JsonProcessingException {
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder testData = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(hvvApiTokenAndUrlInformation);
-        testData.setPath(httpCallBuilderService.buildStationListPathWith(testData.build()));
-
-        ResponseEntity<String> result = callService.post(buildUrlWith(testData.build()).toString(), httpCallBuilderService.buildStationListHttpEntityForHvv(testData.build()));
-
-        Assertions.assertThat(HttpStatus.OK).isEqualTo(result.getStatusCode());
-        Assertions.assertThat(result.getBody()).isNotNull();
-        Assertions.assertThat(retrieveJsonToPojoFromResponse(result, HvvStationList.class).getReturnCode()).isEqualTo("OK");
-    }
 
     @Test
     void test_getTravelPoint() throws JsonProcessingException {
@@ -57,9 +45,9 @@ class HvvApiServiceIT {
 
         ResponseEntity<String> result = callService.post(buildUrlWith(testData.build()).toString(), httpCallBuilderService.buildTravelPointHttpEntityForHvv(testData.build(), testData.getDeparture()));
 
-        Assertions.assertThat(HttpStatus.OK).isEqualTo(result.getStatusCode());
-        Assertions.assertThat(result.getBody()).isNotEmpty();
-        Assertions.assertThat(retrieveJsonToPojoFromResponse(result, HvvTravelPointResponse.class).getReturnCode()).isEqualTo("OK");
+        assertThat(HttpStatus.OK).isEqualTo(result.getStatusCode());
+        assertThat(result.getBody()).isNotEmpty();
+        assertThat(retrieveJsonToPojoFromResponse(result, HvvTravelPointResponse.class).getReturnCode()).isEqualTo("OK");
     }
 
     @Test
@@ -72,9 +60,9 @@ class HvvApiServiceIT {
 
         ResponseEntity<String> result = callService.post(buildUrlWith(testData.build()).toString(), httpCallBuilderService.buildJourneyHttpEntityForHvv(testData.build(), start, destination));
 
-        Assertions.assertThat(HttpStatus.OK).isEqualTo(result.getStatusCode());
-        Assertions.assertThat(result.getBody()).isNotEmpty();
-        Assertions.assertThat(retrieveJsonToPojoFromResponse(result, HvvRoute.class).getReturnCode()).isEqualTo("OK");
+        assertThat(HttpStatus.OK).isEqualTo(result.getStatusCode());
+        assertThat(result.getBody()).isNotEmpty();
+        assertThat(retrieveJsonToPojoFromResponse(result, HvvRoute.class).getReturnCode()).isEqualTo("OK");
     }
 
 

@@ -10,27 +10,13 @@ import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
 import static de.blackforestsolutions.apiservice.service.supportservice.HttpCallBuilder.setFormatToJsonFor;
-import static de.blackforestsolutions.apiservice.service.supportservice.hvv.HvvHttpBodyService.*;
+import static de.blackforestsolutions.apiservice.service.supportservice.hvv.HvvHttpBodyService.buildJourneyHttpBodyForHvv;
+import static de.blackforestsolutions.apiservice.service.supportservice.hvv.HvvHttpBodyService.buildTravelPointHttpBodyForHvv;
 import static de.blackforestsolutions.apiservice.service.supportservice.hvv.HvvHttpCallBuilder.setBaseHttpHeaderFor;
 import static de.blackforestsolutions.apiservice.service.supportservice.hvv.HvvHttpCallBuilder.setHvvAuthentificationSignatureFor;
 
 @Service
 public class HvvHttpCallBuilderServiceImpl implements HvvHttpCallBuilderService {
-
-    @Override
-    public HttpEntity<String> buildStationListHttpEntityForHvv(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
-        String body = buildStationListHttpBodyForHvv(apiTokenAndUrlInformation);
-        return new HttpEntity<>(body, buildHttpHeadersForHvvWith(apiTokenAndUrlInformation, body));
-    }
-
-    @Override
-    public String buildStationListPathWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
-        Objects.requireNonNull(apiTokenAndUrlInformation.getPathVariable(), "path variable is not allowed to be null");
-        Objects.requireNonNull(apiTokenAndUrlInformation.getStationListPathVariable(), "station list path variable is not allowed to be null");
-        return "/"
-                .concat(apiTokenAndUrlInformation.getPathVariable())
-                .concat(apiTokenAndUrlInformation.getStationListPathVariable());
-    }
 
     @Override
     public HttpEntity<String> buildJourneyHttpEntityForHvv(ApiTokenAndUrlInformation apiTokenAndUrlInformation, HvvStation start, HvvStation destination) {

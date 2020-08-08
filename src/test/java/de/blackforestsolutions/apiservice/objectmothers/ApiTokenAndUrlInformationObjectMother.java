@@ -137,7 +137,6 @@ public class ApiTokenAndUrlInformationObjectMother {
         builder.setHost("api-test.geofox.de");
         builder.setPathVariable("gti/public");
         builder.setTravelPointPathVariable("/checkName");
-        builder.setStationListPathVariable("/listStations");
         builder.setJourneyPathVariable("/getRoute");
         builder.setAuthentificationType("HmacSHA1");
         builder.setAuthentificationUser("janhendrikhausner");
