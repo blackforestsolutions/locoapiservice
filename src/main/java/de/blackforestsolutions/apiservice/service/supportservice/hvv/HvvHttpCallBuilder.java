@@ -26,6 +26,8 @@ import java.util.UUID;
 class HvvHttpCallBuilder {
 
     static void setBaseHttpHeaderFor(HttpHeaders httpHeaders, ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
+        Objects.requireNonNull(apiTokenAndUrlInformation.getAuthentificationType(), "authentificationType is not allowed to be null");
+        Objects.requireNonNull(apiTokenAndUrlInformation.getAuthentificationUser(), "authentificationUser is not allowed to be null");
         httpHeaders.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
         httpHeaders.add(AdditionalHttpConfiguration.GEO_FEX_AUTH_TYPE, apiTokenAndUrlInformation.getAuthentificationType());
         httpHeaders.add(AdditionalHttpConfiguration.GEO_FEX_AUTH_USER, apiTokenAndUrlInformation.getAuthentificationUser());
@@ -41,6 +43,8 @@ class HvvHttpCallBuilder {
     }
 
     static void setHvvAuthentificationSignatureFor(HttpHeaders httpHeaders, ApiTokenAndUrlInformation apiTokenAndUrlInformation, byte[] requestBody) {
+        Objects.requireNonNull(apiTokenAndUrlInformation.getAuthentificationPassword(), "authentificationPassword is not allowed to be null");
+        Objects.requireNonNull(apiTokenAndUrlInformation.getAuthentificationType(), "authentificationType is not allowed to be null");
         byte[] key = apiTokenAndUrlInformation.getAuthentificationPassword().getBytes(StandardCharsets.UTF_8);
         SecretKeySpec keySpec = new SecretKeySpec(key, apiTokenAndUrlInformation.getAuthentificationType());
         Mac mac = createMacWith(apiTokenAndUrlInformation);

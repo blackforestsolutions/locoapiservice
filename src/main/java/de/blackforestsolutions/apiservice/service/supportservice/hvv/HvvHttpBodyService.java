@@ -16,15 +16,11 @@ class HvvHttpBodyService {
     private static final int NORMAL_TARIFF = 1;
     private static final int CHILD_TARIFF = 2;
 
-    static String buildStationListHttpBodyForHvv(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
-        HvvStationListBody hvvStationListBody = new HvvStationListBody();
-        hvvStationListBody.setFilterEquivalent(apiTokenAndUrlInformation.getHvvFilterEquivalent());
-        hvvStationListBody.setModificationTypes(ModificationType.MAIN);
-
-        return combineBaseHttpBodyWithApiCallBody(hvvStationListBody, apiTokenAndUrlInformation);
-    }
-
     static String buildTravelPointHttpBodyForHvv(ApiTokenAndUrlInformation apiTokenAndUrlInformation, String station) {
+        Objects.requireNonNull(apiTokenAndUrlInformation.getHvvAllowTypeSwitch(), "hvvAllowTypeSwitch is not allowed to be null");
+        Objects.requireNonNull(apiTokenAndUrlInformation.getResultLength(), "resultLength is not allowed to be null");
+        Objects.requireNonNull(apiTokenAndUrlInformation.getDistanceFromTravelPoint(), "distanceFromTravelPoint is not allowed to be null");
+        Objects.requireNonNull(apiTokenAndUrlInformation.getAllowTariffDetails(), "allowTariffDetails is not allowed to be null");
         HvvTravelPointBody hvvTravelPointBody = new HvvTravelPointBody();
 
         hvvTravelPointBody.setTheName(new HvvStation(station));
@@ -38,7 +34,7 @@ class HvvHttpBodyService {
     }
 
     static String buildJourneyHttpBodyForHvv(ApiTokenAndUrlInformation apiTokenAndUrlInformation, HvvStation start, HvvStation destination) {
-        Objects.requireNonNull(apiTokenAndUrlInformation.getDepartureDate(), "departure date is not allowed to be null");
+        Objects.requireNonNull(apiTokenAndUrlInformation.getDepartureDate(), "departureDate is not allowed to be null");
         Objects.requireNonNull(apiTokenAndUrlInformation.getTimeIsDeparture(), "timeIsDeparture date is not allowed to be null");
         Objects.requireNonNull(apiTokenAndUrlInformation.getAllowTariffDetails(), "allowTarifDetails date is not allowed to be null");
         Objects.requireNonNull(apiTokenAndUrlInformation.getResultLengthBeforeDepartureTime(), "resultLengthBeforeDepartureTime is not allowed to be null");

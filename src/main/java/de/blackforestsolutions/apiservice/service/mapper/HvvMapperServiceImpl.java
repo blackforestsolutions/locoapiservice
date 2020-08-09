@@ -7,9 +7,9 @@ import de.blackforestsolutions.apiservice.configuration.CurrencyConfiguration;
 import de.blackforestsolutions.apiservice.configuration.TimeConfiguration;
 import de.blackforestsolutions.apiservice.service.supportservice.UuidService;
 import de.blackforestsolutions.datamodel.*;
+import de.blackforestsolutions.datamodel.exception.NoExternalResultFoundException;
 import de.blackforestsolutions.generatedcontent.hvv.request.HvvStation;
 import de.blackforestsolutions.generatedcontent.hvv.response.Coordinate;
-import de.blackforestsolutions.generatedcontent.hvv.response.HvvStationList;
 import de.blackforestsolutions.generatedcontent.hvv.response.HvvTravelPointResponse;
 import de.blackforestsolutions.generatedcontent.hvv.response.journey.*;
 import lombok.extern.slf4j.Slf4j;
@@ -125,18 +125,14 @@ public class HvvMapperServiceImpl implements HvvMapperService {
     }
 
     @Override
-    public HvvStation getHvvStationFrom(String jsonString) throws JsonProcessingException {
+    public HvvStation getHvvStationFrom(String jsonString) throws JsonProcessingException, NoExternalResultFoundException {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         HvvTravelPointResponse response = objectMapper.readValue(jsonString, HvvTravelPointResponse.class);
+        if (response.getResults().size() == 0) {
+            throw new NoExternalResultFoundException();
+        }
         return mapHvvTravelPointResponseToHvvStation(response);
-    }
-
-    @Override
-    public List<TravelPoint> getStationListFrom(String jsonBody) throws JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
-        HvvStationList hvvStationList = mapper.readValue(jsonBody, HvvStationList.class);
-        return mapHvvStationListToTravelPointList(hvvStationList);
     }
 
     @Override
@@ -211,17 +207,6 @@ public class HvvMapperServiceImpl implements HvvMapperService {
             leg.setTravelLine(buildTravelLineWith(scheduleElement));
             leg.setProviderId(scheduleElement.getLine().getId());
         }
-    }
-
-    private List<TravelPoint> mapHvvStationListToTravelPointList(HvvStationList hvvStationList) {
-        return hvvStationList.getStations()
-                .stream()
-                .map(station -> {
-                    From hvvStation = new From();
-                    BeanUtils.copyProperties(station, hvvStation);
-                    return buildTravelPointWith(hvvStation).build();
-                })
-                .collect(Collectors.toList());
     }
 
     private VehicleType getVehicleType(String vehicleType) {

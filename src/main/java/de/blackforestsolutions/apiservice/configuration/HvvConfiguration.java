@@ -12,8 +12,6 @@ public class HvvConfiguration {
     private String hvvHost;
     @Value("${hvvPathVariable}")
     private String hvvPathVariable;
-    @Value("${hvvStationsPathVariable}")
-    private String hvvStationsPathVariable;
     @Value("${hvvJourneyPathVariable}")
     private String hvvJourneyPathVariable;
     @Value("${hvvTravelPointPathVariable}")
@@ -60,7 +58,6 @@ public class HvvConfiguration {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
         builder.setHost(hvvHost);
         builder.setPathVariable(hvvPathVariable);
-        builder.setStationListPathVariable(hvvStationsPathVariable);
         builder.setJourneyPathVariable(hvvJourneyPathVariable);
         builder.setTravelPointPathVariable(hvvTravelPointPathVariable);
         builder.setAuthentificationType(hvvAuthentificationType);
