@@ -25,7 +25,7 @@ class NearestStationFinderControllerTest {
         ApiTokenAndUrlInformation testRequest = ApiTokenAndUrlInformationObjectMother.requestInfos();
         String testRequestString = locoJsonMapper.map(testRequest);
         //act
-        classUnderTest.retrieveAirportsFinderTravelPoints(testRequestString);
+        classUnderTest.retrieveNearestAirportTravelPoints(testRequestString);
         //assert
         Mockito.verify(airportsFinderApiService, Mockito.times(1)).getAirportsWith(Mockito.any(ApiTokenAndUrlInformation.class));
     }

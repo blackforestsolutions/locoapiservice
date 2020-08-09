@@ -29,7 +29,7 @@ public class LocatorController {
     }
 
     @RequestMapping("/get")
-    public TravelPoint retrieveLocatorTravelPoints(@RequestParam String address) {
+    public TravelPoint retrieveLocatorTravelPoint(@RequestParam String address) {
         return exceptionHandlerService.handleExceptions(osmApiService.getTravelPointFrom(osmApiTokenAndUrlInformation, address));
     }
 

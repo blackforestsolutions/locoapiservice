@@ -22,7 +22,7 @@ class LocatorControllerTest {
         String address = "Schaffhausen";
         ArgumentCaptor<String> addressArg = ArgumentCaptor.forClass(String.class);
 
-        classUnderTest.retrieveLocatorTravelPoints(address);
+        classUnderTest.retrieveLocatorTravelPoint(address);
 
         verify(osmApiService, times(1)).getTravelPointFrom(any(ApiTokenAndUrlInformation.class), addressArg.capture());
         assertThat(addressArg.getValue()).isEqualTo(address);
