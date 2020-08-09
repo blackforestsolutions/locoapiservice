@@ -27,7 +27,7 @@ class FlightControllerTest {
         ApiTokenAndUrlInformation testRequest = ApiTokenAndUrlInformationObjectMother.requestInfos();
         String testRequestString = locoJsonMapper.map(testRequest);
         //act
-        classUnderTest.flights(testRequestString);
+        classUnderTest.retrieveFlightJourneys(testRequestString);
         //assert
         verify(lufthansaApiService, times(1)).getJourneysForRouteWith(Mockito.any(ApiTokenAndUrlInformation.class));
         verify(britishAirwaysApiService, times(1)).getJourneysForRouteWith(Mockito.any(ApiTokenAndUrlInformation.class));
