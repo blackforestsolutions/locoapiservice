@@ -40,7 +40,7 @@ public class FlightController {
 
 
     @RequestMapping("/get")
-    public Map<UUID, Journey> flights(@RequestBody String request) throws JsonProcessingException {
+    public Map<UUID, Journey> retrieveFlightJourneys(@RequestBody String request) throws JsonProcessingException {
         ApiTokenAndUrlInformation requestInformation = locoJsonMapper.mapJsonToApiTokenAndUrlInformation(request);
         return this.exceptionHandlerService.handleExceptions(Arrays.asList(
                 britishAirwaysApiService.getJourneysForRouteWith(getBritishAirwaysApiTokenAndUrlInformation(requestInformation)),
