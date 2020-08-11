@@ -6,12 +6,9 @@ import org.springframework.data.geo.Box;
 import org.springframework.data.geo.Point;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
-
 @Service
 public class BoxServiceImpl implements BoxService {
 
-    //@Resource(name = "boxWithPoints")
     private Box boxWithPoints;
 
     @Autowired
@@ -20,25 +17,27 @@ public class BoxServiceImpl implements BoxService {
     }
 
     @Override
-    public boolean checkIfProviderIsInRangeWiths(Coordinates positionCoordinate) {
+    public boolean isProviderInRangeWiths(Coordinates positionCoordinate) {
 
         double positionCoordinateLat = positionCoordinate.getLatitude();
         double positionCoordinateLon = positionCoordinate.getLongitude();
+        double upperPointLat = boxWithPoints.getFirst().getX();
+        double upperPointLon = boxWithPoints.getFirst().getY();
+        double lowerPointLat = boxWithPoints.getSecond().getX();
+        double lowerPointLon = boxWithPoints.getSecond().getY();
 
-        Point firstPoint = this.boxWithPoints.getFirst();
-        Point secondPoint = this.boxWithPoints.getSecond();
-
-        double upperBoxLat = boxWithPoints.getFirst().getX();
-        double upperBoxLon = boxWithPoints.getFirst().getY();
-        double lowerBoxLat = boxWithPoints.getSecond().getX();
-        double lowerBoxLon = boxWithPoints.getSecond().getY();
-
-        return calculateBoxLogic(upperBoxLat, upperBoxLon, lowerBoxLat, lowerBoxLon, positionCoordinateLat, positionCoordinateLon);
+        return calculateBoxLogic(upperPointLat, upperPointLon, lowerPointLat, lowerPointLon, positionCoordinateLat, positionCoordinateLon);
     }
 
-    private boolean calculateBoxLogic(double upperBoxLat, double upperBoxLon, double lowerBoxLat, double lowerBoxLon, double positionCoordinateLat, double positionCoordinateLon) {
-        if (upperBoxLat >= positionCoordinateLat && lowerBoxLat <= positionCoordinateLat && upperBoxLon >= positionCoordinateLon && lowerBoxLon <= positionCoordinateLon) {
-            return true;
+    private boolean calculateBoxLogic(double upperPointLat, double upperPointLon, double lowerPointLat, double lowerPointLon, double positionCoordinateLat, double positionCoordinateLon) {
+        if (upperPointLat >= positionCoordinateLat) {
+            if (upperPointLon <= positionCoordinateLon) {
+                if (lowerPointLat <= positionCoordinateLat) {
+                    if (lowerPointLon >= positionCoordinateLon) {
+                        return true;
+                    }
+                }
+            }
         }
         return false;
     }
