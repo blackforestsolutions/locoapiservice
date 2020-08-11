@@ -3,7 +3,6 @@ package de.blackforestsolutions.apiservice.service.searchfilter;
 import de.blackforestsolutions.datamodel.Coordinates;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.geo.Box;
-import org.springframework.data.geo.Point;
 import org.springframework.stereotype.Service;
 
 @Service
