@@ -29,15 +29,6 @@ public class BoxServiceImpl implements BoxService {
     }
 
     private boolean calculateBoxLogic(double upperPointLat, double upperPointLon, double lowerPointLat, double lowerPointLon, double positionCoordinateLat, double positionCoordinateLon) {
-        if (upperPointLat >= positionCoordinateLat) {
-            if (upperPointLon <= positionCoordinateLon) {
-                if (lowerPointLat <= positionCoordinateLat) {
-                    if (lowerPointLon >= positionCoordinateLon) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
+        return upperPointLat >= positionCoordinateLat && upperPointLon <= positionCoordinateLon && lowerPointLat <= positionCoordinateLat && lowerPointLon >= positionCoordinateLon;
     }
 }
