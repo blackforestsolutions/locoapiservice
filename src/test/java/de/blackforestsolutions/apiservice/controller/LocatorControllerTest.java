@@ -30,7 +30,7 @@ class LocatorControllerTest {
 
     private LocatorController initClassUnderTest() {
         LocatorController classUnderTest = new LocatorController(osmApiService, exceptionHandlerService);
-        classUnderTest.setOsmApiTokenAndUrlInformation(ApiTokenAndUrlInformationObjectMother.getSearchChTokenAndUrl());
+        classUnderTest.setOsmApiTokenAndUrlInformation(ApiTokenAndUrlInformationObjectMother.getHvvTokenAndUrl());
         return classUnderTest;
     }
 }
