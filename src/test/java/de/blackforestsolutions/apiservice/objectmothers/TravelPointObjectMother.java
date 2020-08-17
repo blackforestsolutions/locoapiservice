@@ -1,7 +1,6 @@
 package de.blackforestsolutions.apiservice.objectmothers;
 
 import de.blackforestsolutions.apiservice.testutils.TestUtils;
-import de.blackforestsolutions.apiservice.util.CoordinatesUtil;
 import de.blackforestsolutions.datamodel.Coordinates;
 import de.blackforestsolutions.datamodel.TravelPoint;
 import de.blackforestsolutions.generatedcontent.hvv.request.Coordinate;
@@ -318,16 +317,6 @@ public class TravelPointObjectMother {
         return travelPoint.build();
     }
 
-    public static TravelPoint getPinnebergRichardKoehnHvvTravelPoint() {
-        TravelPoint.TravelPointBuilder travelPoint = new TravelPoint.TravelPointBuilder();
-
-        travelPoint.setStationId("Master:99969");
-        travelPoint.setStationName("Richard-Köhn-Straße/Jahnhalle");
-        travelPoint.setCity("Pinneberg");
-        travelPoint.setCountry(Locale.GERMANY);
-        return travelPoint.build();
-    }
-
     public static TravelPoint getHvvHauptbahnhofTravelPoint() {
         TravelPoint.TravelPointBuilder travelPoint = new TravelPoint.TravelPointBuilder();
 
@@ -340,71 +329,6 @@ public class TravelPointObjectMother {
         coordinates.setLongitude(53.34432432);
         travelPoint.setGpsCoordinates(coordinates.build());
 
-        return travelPoint.build();
-    }
-
-    public static TravelPoint getEinsiedelnTravelPoint() {
-        TravelPoint.TravelPointBuilder travelPoint = new TravelPoint.TravelPointBuilder();
-        travelPoint.setStationName("Einsiedeln");
-        travelPoint.setStationId("8503283");
-        travelPoint.setTerminal("Wädenswil");
-        travelPoint.setPlatform("4");
-        travelPoint.setGpsCoordinates(CoordinatesUtil.convertCh1903ToCoordinatesWith(699075, 220557));
-        travelPoint.setCountry(SWIZERLAND_LOCALE);
-        return travelPoint.build();
-    }
-
-    public static TravelPoint getWaedenswilExitTravelPoint() {
-        TravelPoint.TravelPointBuilder travelPoint = new TravelPoint.TravelPointBuilder();
-        travelPoint.setStationName("Wädenswil");
-        travelPoint.setStationId("8503206");
-        travelPoint.setPlatform("1");
-        travelPoint.setGpsCoordinates(CoordinatesUtil.convertCh1903ToCoordinatesWith(693643, 231668));
-        travelPoint.setCountry(SWIZERLAND_LOCALE);
-        return travelPoint.build();
-    }
-
-    public static TravelPoint getZuerichHbLegTravelPoint() {
-        TravelPoint.TravelPointBuilder travelPoint = new TravelPoint.TravelPointBuilder();
-        travelPoint.setStationName("Zürich HB");
-        travelPoint.setStationId("8503000");
-        travelPoint.setCountry(SWIZERLAND_LOCALE);
-        travelPoint.setGpsCoordinates(CoordinatesUtil.convertCh1903ToCoordinatesWith(683212, 248030));
-        return travelPoint.build();
-    }
-
-    public static TravelPoint getZuerichSihlquaiExitTravelPoint() {
-        TravelPoint.TravelPointBuilder travelPoint = new TravelPoint.TravelPointBuilder();
-        travelPoint.setStationName("Zürich, Sihlquai/HB");
-        travelPoint.setStationId("8591368");
-        travelPoint.setCountry(SWIZERLAND_LOCALE);
-        travelPoint.setGpsCoordinates(CoordinatesUtil.convertCh1903ToCoordinatesWith(682990, 248252));
-        return travelPoint.build();
-    }
-
-    public static TravelPoint getZuerichLegFoerlibuckstreet() {
-        TravelPoint.TravelPointBuilder travelPoint = new TravelPoint.TravelPointBuilder();
-        travelPoint.setStationName("Zürich, Förrlibuckstrasse");
-        travelPoint.setStationId("8591135");
-        travelPoint.setCountry(SWIZERLAND_LOCALE);
-        travelPoint.setGpsCoordinates(CoordinatesUtil.convertCh1903ToCoordinatesWith(681427, 249602));
-        return travelPoint.build();
-    }
-
-    public static TravelPoint getZuerichExitFoerlibuckstreet60() {
-        TravelPoint.TravelPointBuilder travelPoint = new TravelPoint.TravelPointBuilder();
-        travelPoint.setStationName("Zürich, Förrlibuckstr. 60");
-        travelPoint.setCountry(SWIZERLAND_LOCALE);
-        return travelPoint.build();
-    }
-
-    public static TravelPoint getBiberbruggTravelPoint() {
-        TravelPoint.TravelPointBuilder travelPoint = new TravelPoint.TravelPointBuilder();
-        travelPoint.setStationName("Biberbrugg");
-        travelPoint.setStationId("8503284");
-        travelPoint.setGpsCoordinates(CoordinatesUtil.convertCh1903ToCoordinatesWith(697373, 223619));
-        travelPoint.setArrivalTime(TestUtils.generateDateFromLocalDateTimeAndString("yyyy-MM-dd HH:mm:ss", "2019-11-04 14:32:00"));
-        travelPoint.setDepartureTime(TestUtils.generateDateFromLocalDateTimeAndString("yyyy-MM-dd HH:mm:ss", "2019-11-04 14:32:00"));
         return travelPoint.build();
     }
 
@@ -424,7 +348,7 @@ public class TravelPointObjectMother {
         travelPoint.setStationName("Elmshorn, Hainholz");
         travelPoint.setCity("Elmshorn");
         travelPoint.setCountry(Locale.GERMANY);
-        travelPoint.setGpsCoordinates(new Coordinates.CoordinatesBuilder(53.738052,9.670171).build());
+        travelPoint.setGpsCoordinates(new Coordinates.CoordinatesBuilder(53.738052, 9.670171).build());
         return travelPoint.build();
     }
 
@@ -446,7 +370,7 @@ public class TravelPointObjectMother {
         travelPoint.setStationName("Elmshorn");
         travelPoint.setCity("Elmshorn");
         travelPoint.setCountry(Locale.GERMANY);
-        travelPoint.setGpsCoordinates(new Coordinates.CoordinatesBuilder(53.754662,9.659292).build());
+        travelPoint.setGpsCoordinates(new Coordinates.CoordinatesBuilder(53.754662, 9.659292).build());
         travelPoint.setPlatform("Gleis 2");
         return travelPoint.build();
     }
@@ -457,7 +381,7 @@ public class TravelPointObjectMother {
         travelPoint.setStationName("Hamburg-Altona");
         travelPoint.setCity("Hamburg");
         travelPoint.setCountry(Locale.GERMANY);
-        travelPoint.setGpsCoordinates(new Coordinates.CoordinatesBuilder(53.553269,9.935405).build());
+        travelPoint.setGpsCoordinates(new Coordinates.CoordinatesBuilder(53.553269, 9.935405).build());
         travelPoint.setPlatform("Gleis 9");
         return travelPoint.build();
     }
@@ -468,7 +392,7 @@ public class TravelPointObjectMother {
         travelPoint.setStationName("Pinneberg");
         travelPoint.setCity("Pinneberg");
         travelPoint.setCountry(Locale.GERMANY);
-        travelPoint.setGpsCoordinates(new Coordinates.CoordinatesBuilder(53.654943,9.798367).build());
+        travelPoint.setGpsCoordinates(new Coordinates.CoordinatesBuilder(53.654943, 9.798367).build());
         travelPoint.setDepartureTime(TestUtils.generateDateFromLocalDateTimeAndString("yyyy-MM-dd HH:mm", "2020-05-05 13:52"));
         return travelPoint.build();
     }
@@ -529,27 +453,6 @@ public class TravelPointObjectMother {
         TravelPoint.TravelPointBuilder travelPoint = new TravelPoint.TravelPointBuilder();
         travelPoint.setStationName("Hauptbahnhof/ZOB");
         travelPoint.setCountry(Locale.GERMANY);
-        return travelPoint.build();
-    }
-
-    public static TravelPoint getSchindellegiFeusisbergTravelPoint() {
-        TravelPoint.TravelPointBuilder travelPoint = new TravelPoint.TravelPointBuilder();
-        travelPoint.setStationName("Schindellegi-Feusisberg");
-        travelPoint.setStationId("8503285");
-        travelPoint.setCountry(SWIZERLAND_LOCALE);
-        travelPoint.setGpsCoordinates(CoordinatesUtil.convertCh1903ToCoordinatesWith(696326, 225829));
-        travelPoint.setArrivalTime(TestUtils.generateDateFromLocalDateTimeAndString("yyyy-MM-dd HH:mm:ss", "2019-11-04 14:36:00"));
-        travelPoint.setDepartureTime(TestUtils.generateDateFromLocalDateTimeAndString("yyyy-MM-dd HH:mm:ss", "2019-11-04 14:36:00"));
-        return travelPoint.build();
-    }
-
-    public static TravelPoint getSamstagernTravelPoint() {
-        TravelPoint.TravelPointBuilder travelPoint = new TravelPoint.TravelPointBuilder();
-        travelPoint.setStationName("Samstagern");
-        travelPoint.setStationId("8503286");
-        travelPoint.setGpsCoordinates(CoordinatesUtil.convertCh1903ToCoordinatesWith(694526, 227483));
-        travelPoint.setArrivalTime(TestUtils.generateDateFromLocalDateTimeAndString("yyyy-MM-dd HH:mm:ss", "2019-11-04 14:40:00"));
-        travelPoint.setDepartureTime(TestUtils.generateDateFromLocalDateTimeAndString("yyyy-MM-dd HH:mm:ss", "2019-11-04 14:41:00"));
         return travelPoint.build();
     }
 

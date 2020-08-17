@@ -193,27 +193,6 @@ public class ApiTokenAndUrlInformationObjectMother {
         return builder.build();
     }
 
-    public static ApiTokenAndUrlInformation getBahnTokenAndUrl() {
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder.setProtocol("https");
-        builder.setHost("api.deutschebahn.com");
-        builder.setApiVersion("v1");
-        builder.setPathVariable("fahrplan-plus");
-        builder.setGermanRailLocationPath("location");
-        builder.setGermanRailArrivalBoardPath("arrivalBoard");
-        builder.setStationId("8011160");
-        builder.setGermanRailDatePathVariable(generateDateFromLocalDatePatternAndString(DateTimeFormatter.ISO_LOCAL_DATE, "2019-07-25"));
-        builder.setDepartureDate(generateDateFromLocalDatePatternAndString(DateTimeFormatter.ISO_LOCAL_DATE, "2019-07-25"));
-        builder.setGermanRailDepartureBoardPath("departureBoard");
-        builder.setStationId("8011160");
-        builder.setLocationPath("location");
-        builder.setGermanRailJourneyDeatilsPath("journeyDetails");
-        builder.setJourneyDetailsId("715770%2F254084%2F898562%2F210691%2F80%3fstation_evaId%3D8000312");
-        builder.setAuthorizationKey("Authorization");
-        builder.setAuthorization("Bearer 4d3c7b35a42c7ecadeb41b905e0007f8");
-        return builder.build();
-    }
-
     public static ApiTokenAndUrlInformation getLufthansaTokenAndUrl() {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
         builder.setProtocol("https");

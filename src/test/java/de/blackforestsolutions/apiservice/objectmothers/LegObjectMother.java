@@ -1,15 +1,16 @@
 package de.blackforestsolutions.apiservice.objectmothers;
 
 import de.blackforestsolutions.apiservice.testutils.TestUtils;
-import de.blackforestsolutions.datamodel.*;
+import de.blackforestsolutions.datamodel.Leg;
+import de.blackforestsolutions.datamodel.Price;
+import de.blackforestsolutions.datamodel.TravelProvider;
+import de.blackforestsolutions.datamodel.VehicleType;
 import org.springframework.data.geo.Distance;
 import org.springframework.data.geo.Metrics;
 
 import java.time.Duration;
 import java.time.ZonedDateTime;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static de.blackforestsolutions.apiservice.objectmothers.PriceObjectMother.*;
 import static de.blackforestsolutions.apiservice.objectmothers.TravelLineObjectMother.*;
@@ -20,8 +21,8 @@ import static de.blackforestsolutions.apiservice.testutils.TestUtils.generateDat
 public class LegObjectMother {
 
     public static Leg getFlughafenBerlinToHamburgHbfLeg() {
-        ZonedDateTime startTime = TestUtils.generateDateFromLocalDateTimeAndString("dd/MM/yyyy HH:mm:ss","30/04/2021 08:00:00");
-        ZonedDateTime arrivalTime = TestUtils.generateDateFromLocalDateTimeAndString("dd/MM/yyyy HH:mm:ss","30/04/2021 08:00:00").plusSeconds(10775);
+        ZonedDateTime startTime = TestUtils.generateDateFromLocalDateTimeAndString("dd/MM/yyyy HH:mm:ss", "30/04/2021 08:00:00");
+        ZonedDateTime arrivalTime = TestUtils.generateDateFromLocalDateTimeAndString("dd/MM/yyyy HH:mm:ss", "30/04/2021 08:00:00").plusSeconds(10775);
         return new Leg.LegBuilder(TEST_UUID_1)
                 .setStartTime(startTime)
                 .setStart(getBerlinFlughafenTravelPoint())
@@ -196,49 +197,6 @@ public class LegObjectMother {
         leg.setVehicleName("Intercity-Express");
         leg.setVehicleNumber("ICE 771");
         leg.setTravelProvider(TravelProvider.DB);
-        return leg.build();
-    }
-
-    public static Leg getEinsiedeln_to_WaedenswilLeg() {
-        Leg.LegBuilder leg = new Leg.LegBuilder(TEST_UUID_2);
-        leg.setStartTime(TestUtils.generateDateFromLocalDateTimeAndString("yyyy-MM-dd HH:mm:ss", "2019-11-04 14:25:00"));
-        leg.setArrivalTime(TestUtils.generateDateFromLocalDateTimeAndString("yyyy-MM-dd HH:mm:ss", "2019-11-04 14:50:00"));
-        leg.setDuration(Duration.between(leg.getStartTime(), leg.getArrivalTime()));
-        leg.setStart(getEinsiedelnTravelPoint());
-        leg.setDestination(getWaedenswilExitTravelPoint());
-        leg.setProviderId("T2019_19353_000082_101_b560270_0");
-        leg.setUnknownTravelProvider("SOB-sob");
-        leg.setVehicleName("S13");
-        leg.setVehicleType(VehicleType.TRAIN);
-        TravelLine.TravelLineBuilder travelLine = new TravelLine.TravelLineBuilder();
-        Map<Integer, TravelPoint> betweenHolds = new HashMap<>();
-        betweenHolds.put(0, getBiberbruggTravelPoint());
-        betweenHolds.put(1, getSchindellegiFeusisbergTravelPoint());
-        betweenHolds.put(2, getSamstagernTravelPoint());
-        travelLine.setBetweenHolds(betweenHolds);
-        leg.setTravelLine(travelLine.build());
-        return leg.build();
-    }
-
-    public static Leg getZuerichHb_to_ZurichSihlauaiLeg() {
-        Leg.LegBuilder leg = new Leg.LegBuilder(TEST_UUID_3);
-        leg.setStartTime(TestUtils.generateDateFromLocalDateTimeAndString("yyyy-MM-dd HH:mm:ss", "2019-11-04 15:17:00"));
-        leg.setArrivalTime(TestUtils.generateDateFromLocalDateTimeAndString("yyyy-MM-dd HH:mm:ss", "2019-11-04 15:24:00"));
-        leg.setDuration(Duration.between(leg.getStartTime(), leg.getArrivalTime()));
-        leg.setStart(getZuerichHbLegTravelPoint());
-        leg.setDestination(getZuerichSihlquaiExitTravelPoint());
-        leg.setVehicleType(VehicleType.WALK);
-        return leg.build();
-    }
-
-    public static Leg getZuerichFoerlibuckstreet_to_ZuerichFoerlibuckstreet60_Leg() {
-        Leg.LegBuilder leg = new Leg.LegBuilder(TEST_UUID_4);
-        leg.setStartTime(TestUtils.generateDateFromLocalDateTimeAndString("yyyy-MM-dd HH:mm:ss", "2019-11-04 15:38:00"));
-        leg.setArrivalTime(TestUtils.generateDateFromLocalDateTimeAndString("yyyy-MM-dd HH:mm:ss", "2019-11-04 15:43:00"));
-        leg.setDuration(Duration.between(leg.getStartTime(), leg.getArrivalTime()));
-        leg.setStart(getZuerichLegFoerlibuckstreet());
-        leg.setDestination(getZuerichExitFoerlibuckstreet60());
-        leg.setVehicleType(VehicleType.WALK);
         return leg.build();
     }
 
