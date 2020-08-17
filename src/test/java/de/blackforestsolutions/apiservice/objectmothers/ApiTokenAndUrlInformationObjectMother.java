@@ -152,7 +152,7 @@ public class ApiTokenAndUrlInformationObjectMother {
         builder.setHost("www.rmv.de");
         builder.setLocationPath("hapi/location.name?");
         builder.setCoordinatesPath("hapi/location.nearbystops?");
-        builder.setGermanRailJourneyDeatilsPath("hapi/trip?");
+        builder.setJourneyPathVariable("hapi/trip?");
         builder.setAuthorizationKey("Authorization");
         builder.setAuthorization("1a4fbca8-ce2b-40fc-a1ed-333bcf5aed6e");
         builder.setLanguage("de");
@@ -178,7 +178,7 @@ public class ApiTokenAndUrlInformationObjectMother {
         builder.setPort(0);
         builder.setPathVariable("hapi/location.name?");
         builder.setLocationPath("hapi/location.name?");
-        builder.setGermanRailJourneyDeatilsPath("hapi/trip?");
+        builder.setJourneyPathVariable("hapi/trip?");
         builder.setAuthorizationKey(HttpHeaders.AUTHORIZATION);
         builder.setAuthorization("1a4fbca8-ce2b-40fc-a1ed-333bcf5aed6e");
         return builder.build();
@@ -209,7 +209,6 @@ public class ApiTokenAndUrlInformationObjectMother {
         builder.setClientId("v6tqqk92k2a6zzaharpz56x6");
         builder.setClientSecret("c9kUKEuT3k");
         builder.setClientType("client_credentials");
-        builder.setAuthorization("fhfdds7fskppmt6xn2z423a9");
         builder.setPath("/v1/operations/schedules/ZRH/FRA/2019-12-28");
         builder.setAuthorizationKey("Authorization");
         builder.setXOriginationIp("88.66.47.47");
