@@ -5,9 +5,6 @@ import de.blackforestsolutions.generatedcontent.hvv.request.HvvStation;
 import org.springframework.http.HttpEntity;
 
 public interface HvvHttpCallBuilderService {
-    HttpEntity<String> buildStationListHttpEntityForHvv(ApiTokenAndUrlInformation apiTokenAndUrlInformation);
-
-    String buildStationListPathWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation);
 
     HttpEntity<String> buildJourneyHttpEntityForHvv(ApiTokenAndUrlInformation apiTokenAndUrlInformation, HvvStation start, HvvStation destination);
 

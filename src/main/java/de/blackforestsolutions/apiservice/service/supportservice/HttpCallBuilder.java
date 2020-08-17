@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 
@@ -61,10 +60,5 @@ public class HttpCallBuilder {
      */
     public static String transformDateToString(ZonedDateTime date) {
         return date.format(DateTimeFormatter.ISO_LOCAL_DATE);
-    }
-
-    @SuppressWarnings("rawtypes")
-    public static HttpEntity buildEmptyHttpEntity() {
-        return new HttpEntity<>(new HttpHeaders());
     }
 }

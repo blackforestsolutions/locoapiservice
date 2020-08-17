@@ -2,23 +2,19 @@ package de.blackforestsolutions.apiservice.service.mapper;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import de.blackforestsolutions.apiservice.objectmothers.JourneyObjectMother;
-import de.blackforestsolutions.apiservice.objectmothers.TravelPointObjectMother;
 import de.blackforestsolutions.apiservice.service.supportservice.UuidService;
 import de.blackforestsolutions.datamodel.Journey;
 import de.blackforestsolutions.datamodel.JourneyStatus;
 import de.blackforestsolutions.datamodel.Leg;
-import de.blackforestsolutions.datamodel.TravelPoint;
+import de.blackforestsolutions.datamodel.exception.NoExternalResultFoundException;
 import de.blackforestsolutions.generatedcontent.hvv.response.journey.HvvRoute;
-import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
-import org.mockito.Mockito;
 import org.springframework.test.util.ReflectionTestUtils;
 
-import java.io.IOException;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -26,36 +22,24 @@ import static de.blackforestsolutions.apiservice.objectmothers.UUIDObjectMother.
 import static de.blackforestsolutions.apiservice.testutils.TestUtils.getResourceFileAsString;
 import static de.blackforestsolutions.apiservice.testutils.TestUtils.retrieveJsonToPojo;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-@SuppressWarnings("OptionalGetWithoutIsPresent")
 class HvvMapperServiceTest {
 
-    private final UuidService uuidGenerator = Mockito.mock(UuidService.class);
+    private final UuidService uuidGenerator = mock(UuidService.class);
+
     @InjectMocks
     private HvvMapperService classUnderTest = new HvvMapperServiceImpl(uuidGenerator);
 
     @BeforeEach
     void init() {
-        Mockito.when(uuidGenerator.createUUID())
+        when(uuidGenerator.createUUID())
                 .thenReturn(TEST_UUID_1)
                 .thenReturn(TEST_UUID_2)
                 .thenReturn(TEST_UUID_3)
                 .thenReturn(TEST_UUID_4)
                 .thenReturn(TEST_UUID_5);
-    }
-
-    @Test
-    void test_getStationListFrom_json_return_list_with_travelpoints() throws IOException {
-        String jsonTravelPoints = getResourceFileAsString("json/hvvStationList.json");
-        TravelPoint firstExpectedResult = TravelPointObjectMother.getPinnebergRichardKoehnHvvTravelPoint();
-        TravelPoint secondExpectedResult = TravelPointObjectMother.getHvvHauptbahnhofTravelPoint();
-
-        List<TravelPoint> result = classUnderTest.getStationListFrom(jsonTravelPoints);
-
-        Assertions.assertThat(result.size()).isEqualTo(2);
-        Assertions.assertThat(result.get(0)).isEqualToComparingFieldByField(firstExpectedResult);
-        Assertions.assertThat(result.get(1)).isEqualToComparingFieldByField(secondExpectedResult);
-        Assertions.assertThat(result).isEqualTo(List.of(firstExpectedResult, secondExpectedResult));
     }
 
     @Test
@@ -65,8 +49,8 @@ class HvvMapperServiceTest {
 
         Map<UUID, JourneyStatus> result = classUnderTest.getJourneyMapFrom(jsonJourneys);
 
-        Assertions.assertThat(result.size()).isEqualTo(1);
-        Assertions.assertThat(result.get(TEST_UUID_1).getJourney().get()).isEqualToIgnoringGivenFields(testData, "legs");
+        assertThat(result.size()).isEqualTo(1);
+        assertThat(result.get(TEST_UUID_1).getJourney().get()).isEqualToIgnoringGivenFields(testData, "legs");
     }
 
     @Test
@@ -76,17 +60,17 @@ class HvvMapperServiceTest {
 
         LinkedHashMap<UUID, Leg> result = classUnderTest.getJourneyMapFrom(jsonJourneys).get(TEST_UUID_1).getJourney().get().getLegs();
 
-        Assertions.assertThat(result.size()).isEqualTo(4);
-        Assertions.assertThat(result.get(TEST_UUID_2)).isEqualToIgnoringGivenFields(testData.get(TEST_UUID_2), "price");
-        Assertions.assertThat(result.get(TEST_UUID_2).getPrice()).isEqualToComparingFieldByField(testData.get(TEST_UUID_2).getPrice());
-        Assertions.assertThat(result.get(TEST_UUID_3)).isEqualToIgnoringGivenFields(testData.get(TEST_UUID_3), "travelLine");
-        Assertions.assertThat(result.get(TEST_UUID_3).getTravelLine()).isEqualToComparingFieldByField(testData.get(TEST_UUID_3).getTravelLine());
-        Assertions.assertThat(result.get(TEST_UUID_3).getPrice()).isNull();
-        Assertions.assertThat(result.get(TEST_UUID_4)).isEqualToComparingFieldByField(testData.get(TEST_UUID_4));
-        Assertions.assertThat(result.get(TEST_UUID_4).getPrice()).isNull();
-        Assertions.assertThat(result.get(TEST_UUID_5)).isEqualToIgnoringGivenFields(testData.get(TEST_UUID_5), "travelLine");
-        Assertions.assertThat(result.get(TEST_UUID_5).getTravelLine()).isEqualToComparingFieldByField(testData.get(TEST_UUID_5).getTravelLine());
-        Assertions.assertThat(result.get(TEST_UUID_5).getPrice()).isNull();
+        assertThat(result.size()).isEqualTo(4);
+        assertThat(result.get(TEST_UUID_2)).isEqualToIgnoringGivenFields(testData.get(TEST_UUID_2), "price");
+        assertThat(result.get(TEST_UUID_2).getPrice()).isEqualToComparingFieldByField(testData.get(TEST_UUID_2).getPrice());
+        assertThat(result.get(TEST_UUID_3)).isEqualToIgnoringGivenFields(testData.get(TEST_UUID_3), "travelLine");
+        assertThat(result.get(TEST_UUID_3).getTravelLine()).isEqualToComparingFieldByField(testData.get(TEST_UUID_3).getTravelLine());
+        assertThat(result.get(TEST_UUID_3).getPrice()).isNull();
+        assertThat(result.get(TEST_UUID_4)).isEqualToComparingFieldByField(testData.get(TEST_UUID_4));
+        assertThat(result.get(TEST_UUID_4).getPrice()).isNull();
+        assertThat(result.get(TEST_UUID_5)).isEqualToIgnoringGivenFields(testData.get(TEST_UUID_5), "travelLine");
+        assertThat(result.get(TEST_UUID_5).getTravelLine()).isEqualToComparingFieldByField(testData.get(TEST_UUID_5).getTravelLine());
+        assertThat(result.get(TEST_UUID_5).getPrice()).isNull();
     }
 
     @Test
@@ -100,6 +84,16 @@ class HvvMapperServiceTest {
         //noinspection ConstantConditions
         assertThat(result.get(TEST_UUID_3).getProblem().get().getExceptions().get(0)).isInstanceOf(NullPointerException.class);
         assertThat(result.get(TEST_UUID_3).getProblem().get().getExceptions().get(0)).isInstanceOf(Exception.class);
+    }
+
+    @Test
+    void test_getHvvStationFrom_with_wrong_json_throws_NoExternalResultFoundException() {
+        String noJourneyFoundJson = "{\"returnCode\":\"OK\"}";
+
+        Assertions.assertThrows(
+                NoExternalResultFoundException.class,
+                () -> classUnderTest.getHvvStationFrom(noJourneyFoundJson)
+        );
     }
 }
 

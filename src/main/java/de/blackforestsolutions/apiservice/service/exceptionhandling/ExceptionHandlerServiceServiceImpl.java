@@ -7,9 +7,6 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static java.util.stream.Collectors.toCollection;
-import static java.util.stream.Collectors.toMap;
-
 @Service
 @Slf4j
 public class ExceptionHandlerServiceServiceImpl implements ExceptionHandlerService {
@@ -20,33 +17,14 @@ public class ExceptionHandlerServiceServiceImpl implements ExceptionHandlerServi
         }
     }
 
-    private static Map<UUID, Journey> handleCallStatusList(List<CallStatus<Map<UUID, JourneyStatus>>> callStatusList) {
-        callStatusList.forEach(ExceptionHandlerServiceServiceImpl::logError);
-        List<Map<UUID, Journey>> result = callStatusList.stream()
-                .map(ExceptionHandlerServiceServiceImpl::handleCallStatus)
-                .collect(Collectors.toList());
-        return reduce(result);
-    }
-
-    private static Map<UUID, Journey> reduce(List<Map<UUID, Journey>> mapList) {
-        Map<UUID, Journey> journeyMap = new HashMap<>();
-        mapList.forEach(journeyMap::putAll);
-        return journeyMap;
-    }
-
-    private static void logError(CallStatus<Map<UUID, JourneyStatus>> callStatus) {
-        if (Status.FAILED.equals(callStatus.getStatus())) {
-            log.error("A call failed due to", callStatus.getException());
-        }
-    }
-
-    private static Map<UUID, Journey> handleCallStatus(CallStatus<Map<UUID, JourneyStatus>> callStatus) {
-        callStatus.getCalledObject().values().forEach(ExceptionHandlerServiceServiceImpl::logError);
-        return callStatus.getCalledObject().values().stream()
+    private static Map<UUID, Journey> handleCallStatus(Map<UUID, JourneyStatus> journeys) {
+        return journeys.values()
+                .stream()
+                .peek(ExceptionHandlerServiceServiceImpl::logError)
                 .filter(journeyStatus -> journeyStatus.getJourney().isPresent())
                 .map(JourneyStatus::getJourney)
                 .map(Optional::get)
-                .collect(toMap(Journey::getId, journey -> journey));
+                .collect(Collectors.toMap(Journey::getId, journey -> journey));
     }
 
     private static void logError(JourneyStatus journeyStatus) {
@@ -57,42 +35,57 @@ public class ExceptionHandlerServiceServiceImpl implements ExceptionHandlerServi
 
     @Override
     public Map<UUID, Journey> handleExceptions(List<CallStatus<Map<UUID, JourneyStatus>>> callStatusList) {
-        return handleCallStatusList(callStatusList);
+        try {
+            return callStatusList.stream()
+                    .peek(ExceptionHandlerServiceServiceImpl::logError)
+                    .filter(callStatus -> callStatus.getStatus().equals(Status.SUCCESS))
+                    .filter(callStatus -> Optional.ofNullable(callStatus.getCalledObject()).isPresent())
+                    .map(CallStatus::getCalledObject)
+                    .map(ExceptionHandlerServiceServiceImpl::handleCallStatus)
+                    .flatMap(journeyMap -> journeyMap.entrySet().stream())
+                    .filter(journey -> Optional.ofNullable(journey).isPresent())
+                    .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+        } catch (NullPointerException e) {
+            log.error("Error during mapping callStatusList to journeyMap: ", e);
+            return Collections.emptyMap();
+        }
     }
 
     @Override
     public LinkedHashSet<TravelPoint> handleExceptionsTravelPoints(CallStatus<LinkedHashSet<TravelPointStatus>> linkedHashSetCallStatus) {
-        logErrorCallStatus(linkedHashSetCallStatus);
+        logError(linkedHashSetCallStatus);
         if (Status.SUCCESS.equals(linkedHashSetCallStatus.getStatus())) {
-            linkedHashSetCallStatus.getCalledObject()
-                    .forEach(ExceptionHandlerServiceServiceImpl::logErrorTravelPoint);
-            return linkedHashSetCallStatus.getCalledObject().stream()
-                    .map(TravelPointStatus::getTravelPoint)
-                    .filter(Optional::isPresent)
-                    .map(Optional::get)
-                    .collect(toCollection(LinkedHashSet::new));
+            return Optional.ofNullable(linkedHashSetCallStatus.getCalledObject())
+                    .map(travelPoints -> travelPoints
+                            .stream()
+                            .peek(ExceptionHandlerServiceServiceImpl::logErrorTravelPoint)
+                            .map(TravelPointStatus::getTravelPoint)
+                            .filter(Optional::isPresent)
+                            .map(Optional::get)
+                            .collect(Collectors.toCollection(LinkedHashSet::new))
+                    ).orElse(new LinkedHashSet<>());
         }
-        return null;
-    }
-
-    private void logErrorCallStatus(CallStatus<LinkedHashSet<TravelPointStatus>> linkedHashSetCallStatus) {
-        if (Status.FAILED.equals(linkedHashSetCallStatus.getStatus())) {
-            log.error("Error during Service Call.", linkedHashSetCallStatus.getException());
-        }
+        return new LinkedHashSet<>();
     }
 
     @Override
-    public Coordinates handleExceptions(CallStatus<Coordinates> coordinatesCallStatus) {
-        logErrorCoordinate(coordinatesCallStatus);
-        if (Status.SUCCESS.equals(coordinatesCallStatus.getStatus())) {
-            return coordinatesCallStatus.getCalledObject();
+    public TravelPoint handleExceptions(CallStatus<TravelPointStatus> travelPointCallStatus) {
+        logError(travelPointCallStatus);
+        if (Status.SUCCESS.equals(travelPointCallStatus.getStatus())) {
+            return Optional.ofNullable(travelPointCallStatus.getCalledObject())
+                    .map(travelPointStatus -> {
+                        logErrorTravelPoint(travelPointStatus);
+                        return travelPointStatus;
+                    })
+                    .flatMap(TravelPointStatus::getTravelPoint)
+                    .orElse(new TravelPoint.TravelPointBuilder().build());
         }
-        return null;
+        return new TravelPoint.TravelPointBuilder().build();
     }
 
-    private void logErrorCoordinate(CallStatus<Coordinates> coordinatesCallStatus) {
-        if (Status.FAILED.equals(coordinatesCallStatus.getStatus())) {
-            log.error("Error during Service Call.", coordinatesCallStatus.getException());
+    private static <T> void logError(CallStatus<T> callStatus) {
+        if (Status.FAILED.equals(callStatus.getStatus())) {
+            log.error("Error during Service Call.", callStatus.getException());
         }
     }
 }

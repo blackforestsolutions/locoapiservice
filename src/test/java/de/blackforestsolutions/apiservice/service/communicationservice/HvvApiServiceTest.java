@@ -1,97 +1,115 @@
 package de.blackforestsolutions.apiservice.service.communicationservice;
 
-import com.fasterxml.jackson.databind.exc.MismatchedInputException;
-import de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother;
-import de.blackforestsolutions.apiservice.objectmothers.JourneyObjectMother;
-import de.blackforestsolutions.apiservice.objectmothers.TravelPointObjectMother;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallService;
-import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallServiceImpl;
 import de.blackforestsolutions.apiservice.service.mapper.HvvMapperService;
-import de.blackforestsolutions.apiservice.service.mapper.HvvMapperServiceImpl;
-import de.blackforestsolutions.apiservice.service.supportservice.UuidService;
-import de.blackforestsolutions.apiservice.service.supportservice.UuidServiceImpl;
 import de.blackforestsolutions.apiservice.service.supportservice.hvv.HvvHttpCallBuilderService;
-import de.blackforestsolutions.apiservice.service.supportservice.hvv.HvvHttpCallBuilderServiceImpl;
-import de.blackforestsolutions.apiservice.stubs.RestTemplateBuilderStub;
-import de.blackforestsolutions.apiservice.testutils.TestUtils;
 import de.blackforestsolutions.datamodel.*;
-import org.assertj.core.api.Assertions;
+import de.blackforestsolutions.datamodel.exception.NoExternalResultFoundException;
+import de.blackforestsolutions.generatedcontent.hvv.request.HvvStation;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
+import org.mockito.InOrder;
 import org.mockito.InjectMocks;
-import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.*;
 
 import static de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother.getHvvTokenAndUrl;
+import static de.blackforestsolutions.apiservice.objectmothers.JourneyObjectMother.getGustavHeinemannStreetToUniversityJourney;
+import static de.blackforestsolutions.apiservice.objectmothers.TravelPointObjectMother.getRosenhofHvvStation;
+import static de.blackforestsolutions.apiservice.objectmothers.TravelPointObjectMother.getStadthausbrueckeHvvStation;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
 class HvvApiServiceTest {
 
-    private static final RestTemplate REST_TEMPLATE = mock(RestTemplate.class);
+    private final CallService callService = mock(CallService.class);
 
-    private final RestTemplateBuilder restTemplateBuilder = new RestTemplateBuilderStub(REST_TEMPLATE);
+    private final HvvHttpCallBuilderService hvvHttpCallBuilderService = mock(HvvHttpCallBuilderService.class);
 
-    private final CallService callService = new CallServiceImpl(restTemplateBuilder);
-
-    private final HvvHttpCallBuilderService hvvHttpCallBuilderService = new HvvHttpCallBuilderServiceImpl();
-
-    private final UuidService uuidService = new UuidServiceImpl();
-
-    private final HvvMapperService mapperService = spy(new HvvMapperServiceImpl(uuidService));
+    private final HvvMapperService mapperService = mock(HvvMapperService.class);
 
     @InjectMocks
     private HvvApiService classUnderTest = new HvvApiServiceImpl(callService, hvvHttpCallBuilderService, mapperService);
 
-    @Test
-    void test_getJourneysForRouteFromHvvApiWith_with_mocked_rest_and_json_is_excuted_correctly_and_returns_map() throws Exception {
-        ApiTokenAndUrlInformation apiTokenAndUrlInformation = ApiTokenAndUrlInformationObjectMother.getHvvTokenAndUrl();
-        String rotenhofTravelPointJson = TestUtils.getResourceFileAsString("json/hvvRotenhofTravelPoint.json");
-        ResponseEntity<String> rotenhofTravelPointResult = new ResponseEntity<>(rotenhofTravelPointJson, HttpStatus.OK);
-        String stadthausbrueckeTravelPointJson = TestUtils.getResourceFileAsString("json/hvvStadthausbrueckeTravelPoint.json");
-        ResponseEntity<String> stadthausbrueckeTravelPointResult = new ResponseEntity<>(stadthausbrueckeTravelPointJson, HttpStatus.OK);
-        String journeyJson = TestUtils.getResourceFileAsString("json/hvvJourney.json");
-        ResponseEntity<String> journeyTestResult = new ResponseEntity<>(journeyJson, HttpStatus.OK);
-        //noinspection unchecked (justification: no type known for runtime therefore)
-        when(REST_TEMPLATE.exchange(anyString(), any(), any(), any(Class.class))).thenReturn(rotenhofTravelPointResult).thenReturn(stadthausbrueckeTravelPointResult).thenReturn(journeyTestResult);
-        HashMap<UUID, JourneyStatus> mockedJourneys = new HashMap<>();
-        Journey mockedJourney = JourneyObjectMother.getGustavHeinemannStreetToUniversityJourney();
-        JourneyStatus journeyStatus = new JourneyStatus();
-        journeyStatus.setJourney(Optional.of(mockedJourney));
-        mockedJourneys.put(mockedJourney.getId(), journeyStatus);
-        when(mapperService.getJourneyMapFrom(journeyJson)).thenReturn(mockedJourneys);
+    @BeforeEach
+    void init() throws JsonProcessingException, NoExternalResultFoundException {
+        when(hvvHttpCallBuilderService.buildTravelPointPathWith(any(ApiTokenAndUrlInformation.class))).thenReturn("");
 
-        Map<UUID, JourneyStatus> result = classUnderTest.getJourneysForRouteWith(apiTokenAndUrlInformation).getCalledObject();
+        when(hvvHttpCallBuilderService.buildTravelPointHttpEntityForHvv(any(ApiTokenAndUrlInformation.class), anyString()))
+                .thenReturn(new HttpEntity<>(""));
 
-        Assertions.assertThat(result.size()).isEqualTo(1);
-        //noinspection OptionalGetWithoutIsPresent (justification: we allways knoww that there optional here is not empty)
-        Assertions.assertThat(result.get(mockedJourney.getId()).getJourney().get()).isEqualToComparingFieldByField(mockedJourney);
-        verify(mapperService, times(1)).getJourneyMapFrom(journeyJson);
+        when(hvvHttpCallBuilderService.buildJourneyPathWith(any(ApiTokenAndUrlInformation.class))).thenReturn("/journey");
+
+        when(hvvHttpCallBuilderService.buildJourneyHttpEntityForHvv(any(ApiTokenAndUrlInformation.class), any(HvvStation.class), any(HvvStation.class)))
+                .thenReturn(new HttpEntity<>(""));
+
+        when(callService.post(anyString(), any(HttpEntity.class)))
+                .thenReturn(new ResponseEntity<>("departure", HttpStatus.OK))
+                .thenReturn(new ResponseEntity<>("destination", HttpStatus.OK))
+                .thenReturn(new ResponseEntity<>("journey", HttpStatus.OK));
+
+        Journey mockedJourney = getGustavHeinemannStreetToUniversityJourney();
+        when(mapperService.getJourneyMapFrom(anyString())).thenReturn(Collections.singletonMap(
+                    mockedJourney.getId(),
+                    new JourneyStatus(Optional.of(mockedJourney), Optional.empty())
+                )
+        );
+
+        when(mapperService.getHvvStationFrom(anyString())).thenReturn(
+                getRosenhofHvvStation(),
+                getStadthausbrueckeHvvStation()
+        );
     }
 
     @Test
-    void test_getStationListFromHvvApiWith_with_mocked_rest_is_excuted_correctly_and_returns_map() throws Exception {
-        ApiTokenAndUrlInformation apiTokenAndUrlInformation = ApiTokenAndUrlInformationObjectMother.getHvvTokenAndUrl();
-        String stationListJson = TestUtils.getResourceFileAsString("json/hvvStationList.json");
-        ResponseEntity<String> testResult = new ResponseEntity<>(stationListJson, HttpStatus.OK);
-        //noinspection unchecked
-        doReturn(testResult).when(REST_TEMPLATE).exchange(anyString(), any(), any(), any(Class.class));
-        List<TravelPoint> mockedTravelPointsList = Arrays.asList(
-                TravelPointObjectMother.getHvvHauptbahnhofTravelPoint(),
-                TravelPointObjectMother.getPinnebergRichardKoehnHvvTravelPoint()
-        );
-        when(mapperService.getStationListFrom(stationListJson)).thenReturn(mockedTravelPointsList);
+    void test_getJourneysForRouteWith_mocked_services_is_excuted_correctly_in_order_and_passes_right_arguments_for_services() throws NoExternalResultFoundException, JsonProcessingException {
+        ApiTokenAndUrlInformation testData = getHvvTokenAndUrl();
+        ArgumentCaptor<String> travelPointUrlArg = ArgumentCaptor.forClass(String.class);
+        ArgumentCaptor<String> departureArg = ArgumentCaptor.forClass(String.class);
+        ArgumentCaptor<String> departureJsonArg = ArgumentCaptor.forClass(String.class);
+        ArgumentCaptor<String> arrivalArg = ArgumentCaptor.forClass(String.class);
+        ArgumentCaptor<String> destinationJsonArg = ArgumentCaptor.forClass(String.class);
+        ArgumentCaptor<HvvStation> departureStationArg = ArgumentCaptor.forClass(HvvStation.class);
+        ArgumentCaptor<HvvStation> arrivalStationArg = ArgumentCaptor.forClass(HvvStation.class);
+        ArgumentCaptor<String> journeyUrlArg = ArgumentCaptor.forClass(String.class);
 
-        List<TravelPoint> result = classUnderTest.getStationListFromHvvApiWith(apiTokenAndUrlInformation).getCalledObject();
+        CallStatus<Map<UUID, JourneyStatus>> result = classUnderTest.getJourneysForRouteWith(testData);
 
-        Assertions.assertThat(result).isNotEmpty();
-        Assertions.assertThat(result.size()).isEqualTo(2);
-        Assertions.assertThat(result.get(0)).isEqualToComparingFieldByField(TravelPointObjectMother.getHvvHauptbahnhofTravelPoint());
-        Assertions.assertThat(result.get(1)).isEqualToComparingFieldByField(TravelPointObjectMother.getPinnebergRichardKoehnHvvTravelPoint());
-        verify(mapperService, times(1)).getStationListFrom(stationListJson);
+        InOrder inOrder = inOrder(hvvHttpCallBuilderService, callService, mapperService);
+        inOrder.verify(hvvHttpCallBuilderService, times(1)).buildTravelPointPathWith(any(ApiTokenAndUrlInformation.class));
+        inOrder.verify(hvvHttpCallBuilderService, times(1)).buildTravelPointHttpEntityForHvv(any(ApiTokenAndUrlInformation.class), departureArg.capture());
+        inOrder.verify(callService, times(1)).post(travelPointUrlArg.capture(), any(HttpEntity.class));
+        inOrder.verify(mapperService, times(1)).getHvvStationFrom(departureJsonArg.capture());
+        inOrder.verify(hvvHttpCallBuilderService, times(1)).buildTravelPointHttpEntityForHvv(any(ApiTokenAndUrlInformation.class), arrivalArg.capture());
+        inOrder.verify(callService, times(1)).post(travelPointUrlArg.capture(), any(HttpEntity.class));
+        inOrder.verify(mapperService, times(1)).getHvvStationFrom(destinationJsonArg.capture());
+        inOrder.verify(hvvHttpCallBuilderService, times(1)).buildJourneyPathWith(any(ApiTokenAndUrlInformation.class));
+        inOrder.verify(hvvHttpCallBuilderService, times(1)).buildJourneyHttpEntityForHvv(any(ApiTokenAndUrlInformation.class), departureStationArg.capture(), arrivalStationArg.capture());
+        inOrder.verify(callService, times(1)).post(journeyUrlArg.capture(), any(HttpEntity.class));
+        assertThat(departureArg.getValue()).isEqualTo(testData.getDeparture());
+        assertThat(departureJsonArg.getValue()).isEqualTo("departure");
+        assertThat(arrivalArg.getValue()).isEqualTo(testData.getArrival());
+        assertThat(travelPointUrlArg.getAllValues()).isEqualTo(List.of("http://api-test.geofox.de", "http://api-test.geofox.de"));
+        assertThat(destinationJsonArg.getValue()).isEqualTo("destination");
+        assertThat(departureStationArg.getValue()).isEqualToIgnoringGivenFields(getRosenhofHvvStation(), "coordinate");
+        assertThat(arrivalStationArg.getValue()).isEqualToIgnoringGivenFields(getStadthausbrueckeHvvStation(), "coordinate");
+        assertThat(journeyUrlArg.getValue()).isEqualTo("http://api-test.geofox.de/journey");
+    }
+
+
+
+    @Test
+    void test_getJourneysForRouteFromHvvApiWith_with_mocked_services_returns_same_size_of_journeys() {
+        ApiTokenAndUrlInformation apiTokenAndUrlInformation = getHvvTokenAndUrl();
+
+        Map<UUID, JourneyStatus> result = classUnderTest.getJourneysForRouteWith(apiTokenAndUrlInformation).getCalledObject();
+
+        assertThat(result.size()).isEqualTo(1);
     }
 
     @Test
@@ -108,25 +126,34 @@ class HvvApiServiceTest {
     @Test
     void test_getJourneysForRouteWith_apiToken_and_wrong_mocked_http_answer_returns_failed_call_status() {
         ApiTokenAndUrlInformation testData = getHvvTokenAndUrl();
-        //noinspection unchecked
-        when(REST_TEMPLATE.exchange(anyString(), any(), any(), any(Class.class))).thenReturn(new ResponseEntity<>("", HttpStatus.BAD_REQUEST));
+        when(callService.post(anyString(), any(HttpEntity.class))).thenReturn(new ResponseEntity<>(null, HttpStatus.BAD_REQUEST));
 
         CallStatus<Map<UUID, JourneyStatus>> result = classUnderTest.getJourneysForRouteWith(testData);
 
         assertThat(result.getStatus()).isEqualTo(Status.FAILED);
-        assertThat(result.getException()).isInstanceOf(MismatchedInputException.class);
+        assertThat(result.getException()).isInstanceOf(NullPointerException.class);
     }
 
     @Test
     void test_getJourneysForRouteWith_apiToken_throws_exception_during_http_call_returns_failed_call_status() {
         ApiTokenAndUrlInformation testData = getHvvTokenAndUrl();
-        //noinspection unchecked
-        doThrow(new RuntimeException()).when(REST_TEMPLATE).exchange(anyString(), any(), any(), any(Class.class));
+        doThrow(new RuntimeException()).when(callService).post(anyString(), any(HttpEntity.class));
 
         CallStatus<Map<UUID, JourneyStatus>> result = classUnderTest.getJourneysForRouteWith(testData);
 
         assertThat(result.getStatus()).isEqualTo(Status.FAILED);
         assertThat(result.getException()).isInstanceOf(RuntimeException.class);
+    }
+
+    @Test
+    void test_getJourneysForRouteWith_apiToken_returns_empty_map_when_noExternalResultFoundException_is_thrown_by_mapperservice() throws NoExternalResultFoundException, JsonProcessingException {
+        ApiTokenAndUrlInformation testData = getHvvTokenAndUrl();
+        doThrow(new NoExternalResultFoundException()).when(mapperService).getHvvStationFrom(anyString());
+
+        CallStatus<Map<UUID, JourneyStatus>> result = classUnderTest.getJourneysForRouteWith(testData);
+
+        assertThat(result.getStatus()).isEqualTo(Status.SUCCESS);
+        assertThat(result.getCalledObject()).isEqualTo(Collections.EMPTY_MAP);
     }
 
 }
