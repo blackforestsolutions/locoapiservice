@@ -1,7 +1,6 @@
 package de.blackforestsolutions.apiservice.configuration;
 
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -38,18 +37,15 @@ public class RMVConfiguration {
     private Integer rmvResultLengthAfterDate;
     @Value("${rmvAllowIntermediateStops}")
     private boolean rmvAllowIntermediateStops;
-    @Value("${coord1lat}")
-    private double upperBoxLat;
-    @Value("${coord1lon}")
-    private double upperBoxLon;
-    @Value("${coord2lat}")
-    private double lowerBoxLat;
-    @Value("${coord2lon}")
-    private double lowerBoxLon;
 
-    private Point first = new Point(upperBoxLat, upperBoxLon);
-    private Point second = new Point(lowerBoxLat, lowerBoxLon);
-
+    @Value("${rmvLeftTopLatitude}")
+    private double rmvLeftTopLatitude;
+    @Value("${rmvLeftTopLongitude}")
+    private double rmvLeftTopLongitude;
+    @Value("${rmvRightBottomLatitude}")
+    private double rmvRightBottomLatitude;
+    @Value("${rmvRightBottomLongitude}")
+    private double rmvRightBottomLongitude;
 
     @Bean(name = "rmvApiTokenAndUrlInformation")
     public ApiTokenAndUrlInformation apiTokenAndUrlInformation() {
@@ -73,8 +69,10 @@ public class RMVConfiguration {
         return builder.build();
     }
 
-    @Autowired
+    @Bean(name = "rmvBox")
     public Box box() {
-        return new Box(first, second);
+        Point leftTop = new Point(rmvLeftTopLongitude, rmvLeftTopLatitude);
+        Point rightBottom = new Point(rmvRightBottomLongitude, rmvRightBottomLatitude);
+        return new Box(leftTop, rightBottom);
     }
 }

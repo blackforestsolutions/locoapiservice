@@ -2,6 +2,7 @@ package de.blackforestsolutions.apiservice.service.communicationservice;
 
 import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallService;
 import de.blackforestsolutions.apiservice.service.mapper.RMVMapperService;
+import de.blackforestsolutions.apiservice.service.supportservice.BoxService;
 import de.blackforestsolutions.apiservice.service.supportservice.RMVHttpCallBuilderService;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import de.blackforestsolutions.datamodel.CallStatus;
@@ -9,11 +10,13 @@ import de.blackforestsolutions.datamodel.JourneyStatus;
 import de.blackforestsolutions.datamodel.Status;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.geo.Box;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.xml.bind.JAXBException;
 import java.net.URL;
+import java.util.Collections;
 import java.util.Map;
 import java.util.UUID;
 
@@ -26,23 +29,30 @@ public class RMVApiServiceImpl implements RMVApiService {
     private final CallService callService;
     private final RMVHttpCallBuilderService httpCallBuilderService;
     private final RMVMapperService rmvMapperService;
+    private final BoxService boxService;
+    private final Box rmvBox;
 
     @Autowired
-    public RMVApiServiceImpl(CallService callService, RMVHttpCallBuilderService httpCallBuilderService, RMVMapperService rmvMapperService) {
+    public RMVApiServiceImpl(CallService callService, RMVHttpCallBuilderService httpCallBuilderService, RMVMapperService rmvMapperService, BoxService boxService, Box rmvBox) {
         this.callService = callService;
         this.httpCallBuilderService = httpCallBuilderService;
         this.rmvMapperService = rmvMapperService;
+        this.boxService = boxService;
+        this.rmvBox = rmvBox;
     }
 
     @Override
     public CallStatus<Map<UUID, JourneyStatus>> getJourneysForRouteByCoordinatesWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
-        try {
-            ResponseEntity<String> result = buildAndExecteCallForCoordinates(apiTokenAndUrlInformation);
-            return new CallStatus<>(rmvMapperService.getJourneysFrom(result.getBody()), Status.SUCCESS, null);
-        } catch (Exception e) {
-            log.error("Error during calling rmv api: ", e);
-            return new CallStatus<>(null, Status.FAILED, e);
+        if (boxService.isCoordinateInBox(apiTokenAndUrlInformation.getDepartureCoordinates(), rmvBox) && boxService.isCoordinateInBox(apiTokenAndUrlInformation.getArrivalCoordinates(), rmvBox)) {
+            try {
+                ResponseEntity<String> result = buildAndExecteCallForCoordinates(apiTokenAndUrlInformation);
+                return new CallStatus<>(rmvMapperService.getJourneysFrom(result.getBody()), Status.SUCCESS, null);
+            } catch (Exception e) {
+                log.error("Error during calling rmv api: ", e);
+                return new CallStatus<>(null, Status.FAILED, e);
+            }
         }
+        return new CallStatus<>(Collections.emptyMap(), Status.SUCCESS, null);
     }
 
     @Override
