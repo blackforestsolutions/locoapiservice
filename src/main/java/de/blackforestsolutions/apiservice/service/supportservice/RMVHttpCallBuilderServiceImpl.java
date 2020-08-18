@@ -95,7 +95,7 @@ public class RMVHttpCallBuilderServiceImpl implements RMVHttpCallBuilderService 
 
     @Override
     public String buildTripPathWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
-        Objects.requireNonNull(apiTokenAndUrlInformation.getGermanRailJourneyDeatilsPath(), "path is not allowed to be null");
+        Objects.requireNonNull(apiTokenAndUrlInformation.getJourneyPathVariable(), "path is not allowed to be null");
         Objects.requireNonNull(apiTokenAndUrlInformation.getAuthorization(), "authorization is not allowed to be null");
         Objects.requireNonNull(apiTokenAndUrlInformation.getDeparture(), "departure is not allowed to be null");
         Objects.requireNonNull(apiTokenAndUrlInformation.getArrival(), "arrival is not allowed to be null");
@@ -104,7 +104,7 @@ public class RMVHttpCallBuilderServiceImpl implements RMVHttpCallBuilderService 
         Objects.requireNonNull(apiTokenAndUrlInformation.getResultLengthAfterDepartureTime(), "resultLengthAfterDepartureTime is not allowed to be null");
         Objects.requireNonNull(apiTokenAndUrlInformation.getAllowIntermediateStops(), "allowIntermediateStops is not allowed to be null");
         return "/"
-                .concat(apiTokenAndUrlInformation.getGermanRailJourneyDeatilsPath())
+                .concat(apiTokenAndUrlInformation.getJourneyPathVariable())
                 .concat(ACCESS_ID)
                 .concat("=")
                 .concat(apiTokenAndUrlInformation.getAuthorization())

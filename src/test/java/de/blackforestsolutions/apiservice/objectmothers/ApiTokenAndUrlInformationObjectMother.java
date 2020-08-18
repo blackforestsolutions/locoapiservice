@@ -152,7 +152,7 @@ public class ApiTokenAndUrlInformationObjectMother {
         builder.setHost("www.rmv.de");
         builder.setLocationPath("hapi/location.name?");
         builder.setCoordinatesPath("hapi/location.nearbystops?");
-        builder.setGermanRailJourneyDeatilsPath("hapi/trip?");
+        builder.setJourneyPathVariable("hapi/trip?");
         builder.setAuthorizationKey("Authorization");
         builder.setAuthorization("1a4fbca8-ce2b-40fc-a1ed-333bcf5aed6e");
         builder.setLanguage("de");
@@ -178,7 +178,7 @@ public class ApiTokenAndUrlInformationObjectMother {
         builder.setPort(0);
         builder.setPathVariable("hapi/location.name?");
         builder.setLocationPath("hapi/location.name?");
-        builder.setGermanRailJourneyDeatilsPath("hapi/trip?");
+        builder.setJourneyPathVariable("hapi/trip?");
         builder.setAuthorizationKey(HttpHeaders.AUTHORIZATION);
         builder.setAuthorization("1a4fbca8-ce2b-40fc-a1ed-333bcf5aed6e");
         return builder.build();
@@ -190,27 +190,6 @@ public class ApiTokenAndUrlInformationObjectMother {
         builder.setArrival("testArrival");
         builder.setArrivalDate(ZonedDateTime.parse("2020-06-29T10:15:30+01:00"));
         builder.setDepartureDate(ZonedDateTime.parse("2020-06-29T10:15:30+01:00"));
-        return builder.build();
-    }
-
-    public static ApiTokenAndUrlInformation getBahnTokenAndUrl() {
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder.setProtocol("https");
-        builder.setHost("api.deutschebahn.com");
-        builder.setApiVersion("v1");
-        builder.setPathVariable("fahrplan-plus");
-        builder.setGermanRailLocationPath("location");
-        builder.setGermanRailArrivalBoardPath("arrivalBoard");
-        builder.setStationId("8011160");
-        builder.setGermanRailDatePathVariable(generateDateFromLocalDatePatternAndString(DateTimeFormatter.ISO_LOCAL_DATE, "2019-07-25"));
-        builder.setDepartureDate(generateDateFromLocalDatePatternAndString(DateTimeFormatter.ISO_LOCAL_DATE, "2019-07-25"));
-        builder.setGermanRailDepartureBoardPath("departureBoard");
-        builder.setStationId("8011160");
-        builder.setLocationPath("location");
-        builder.setGermanRailJourneyDeatilsPath("journeyDetails");
-        builder.setJourneyDetailsId("715770%2F254084%2F898562%2F210691%2F80%3fstation_evaId%3D8000312");
-        builder.setAuthorizationKey("Authorization");
-        builder.setAuthorization("Bearer 4d3c7b35a42c7ecadeb41b905e0007f8");
         return builder.build();
     }
 
@@ -230,7 +209,6 @@ public class ApiTokenAndUrlInformationObjectMother {
         builder.setClientId("v6tqqk92k2a6zzaharpz56x6");
         builder.setClientSecret("c9kUKEuT3k");
         builder.setClientType("client_credentials");
-        builder.setAuthorization("fhfdds7fskppmt6xn2z423a9");
         builder.setPath("/v1/operations/schedules/ZRH/FRA/2019-12-28");
         builder.setAuthorizationKey("Authorization");
         builder.setXOriginationIp("88.66.47.47");

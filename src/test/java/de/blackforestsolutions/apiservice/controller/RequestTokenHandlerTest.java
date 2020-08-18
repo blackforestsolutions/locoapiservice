@@ -21,7 +21,7 @@ class RequestTokenHandlerTest {
         Assertions.assertThat(result.getPort()).isEqualTo(configured.getPort());
         Assertions.assertThat(result.getPathVariable()).isEqualTo(configured.getPathVariable());
         Assertions.assertThat(result.getLocationPath()).isEqualTo(configured.getLocationPath());
-        Assertions.assertThat(result.getGermanRailJourneyDeatilsPath()).isEqualTo(configured.getGermanRailJourneyDeatilsPath());
+        Assertions.assertThat(result.getJourneyPathVariable()).isEqualTo(configured.getJourneyPathVariable());
         Assertions.assertThat(result.getAuthorizationKey()).isEqualTo(configured.getAuthorizationKey());
         Assertions.assertThat(result.getAuthorization()).isEqualTo(configured.getAuthorization());
         Assertions.assertThat(result.getDeparture()).isEqualTo(requestInfos.getDeparture());

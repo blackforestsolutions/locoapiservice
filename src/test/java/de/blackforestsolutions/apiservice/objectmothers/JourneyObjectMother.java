@@ -69,16 +69,6 @@ public class JourneyObjectMother {
         return journey.build();
     }
 
-    public static Journey getEinsiedeln_to_Zuerich_Foerlibuckstreet60_Journey() {
-        Journey.JourneyBuilder journey = new Journey.JourneyBuilder(TEST_UUID_1);
-        LinkedHashMap<UUID, Leg> legs = new LinkedHashMap<>();
-        legs.put(getEinsiedeln_to_WaedenswilLeg().getId(), getEinsiedeln_to_WaedenswilLeg());
-        legs.put(getZuerichHb_to_ZurichSihlauaiLeg().getId(), getZuerichHb_to_ZurichSihlauaiLeg());
-        legs.put(getZuerichFoerlibuckstreet_to_ZuerichFoerlibuckstreet60_Leg().getId(), getZuerichFoerlibuckstreet_to_ZuerichFoerlibuckstreet60_Leg());
-        journey.setLegs(legs);
-        return journey.build();
-    }
-
     public static Journey getGustavHeinemannStreetToUniversityJourney() {
         Journey.JourneyBuilder journey = new Journey.JourneyBuilder(TEST_UUID_1);
         LinkedHashMap<UUID, Leg> legs = new LinkedHashMap<>();

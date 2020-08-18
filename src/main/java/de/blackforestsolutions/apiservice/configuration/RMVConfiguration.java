@@ -56,7 +56,7 @@ public class RMVConfiguration {
         builder.setPathVariable(rmvPathLocation);
         builder.setLocationPath(rmvPathLocation);
         builder.setCoordinatesPath(rmvPathCoordinates);
-        builder.setGermanRailJourneyDeatilsPath(rmvPathTrip);
+        builder.setJourneyPathVariable(rmvPathTrip);
         builder.setAuthorizationKey(HttpHeaders.AUTHORIZATION);
         builder.setAuthorization(authorization);
         builder.setLanguage(rmvLanguage);

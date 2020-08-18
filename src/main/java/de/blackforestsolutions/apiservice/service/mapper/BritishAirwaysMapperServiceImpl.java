@@ -190,7 +190,7 @@ public class BritishAirwaysMapperServiceImpl implements BritishAirwaysMapperServ
     private void setLegReportedArrivalDateTime(Leg.LegBuilder leg, LinkedHashMap sector) {
         String reportedArrivalDateTime = (String) sector.get("ReportedArrivalDateTime");
         Optional.ofNullable(reportedArrivalDateTime).ifPresent(arrivalTime -> leg.setArrivalTime(buildDateFrom(reportedArrivalDateTime)));
-        if (!Optional.ofNullable(leg.getArrivalTime()).isPresent()) {
+        if (Optional.ofNullable(leg.getArrivalTime()).isEmpty()) {
             String scheduledArrivalDateTime = (String) sector.get("ScheduledArrivalDateTime");
             leg.setArrivalTime(buildDateFrom(scheduledArrivalDateTime));
         }
@@ -199,7 +199,7 @@ public class BritishAirwaysMapperServiceImpl implements BritishAirwaysMapperServ
     private void setLegReportedDepartureDateTime(Leg.LegBuilder leg, LinkedHashMap sector) {
         String reportedDepartureDateTime = (String) sector.get("ReportedDepartureDateTime");
         Optional.ofNullable(reportedDepartureDateTime).ifPresent(startTime -> leg.setStartTime(buildDateFrom(reportedDepartureDateTime)));
-        if (!Optional.ofNullable(leg.getStartTime()).isPresent()) {
+        if (Optional.ofNullable(leg.getStartTime()).isEmpty()) {
             String scheduledDepartureDateTime = (String) sector.get("ScheduledDepartureDateTime");
             leg.setStartTime(buildDateFrom(scheduledDepartureDateTime));
         }
