@@ -4,6 +4,8 @@ import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.geo.Box;
+import org.springframework.data.geo.Point;
 import org.springframework.http.HttpHeaders;
 
 @SpringBootConfiguration
@@ -36,6 +38,14 @@ public class RMVConfiguration {
     @Value("${rmvAllowIntermediateStops}")
     private boolean rmvAllowIntermediateStops;
 
+    @Value("${rmvLeftTopLatitude}")
+    private double rmvLeftTopLatitude;
+    @Value("${rmvLeftTopLongitude}")
+    private double rmvLeftTopLongitude;
+    @Value("${rmvRightBottomLatitude}")
+    private double rmvRightBottomLatitude;
+    @Value("${rmvRightBottomLongitude}")
+    private double rmvRightBottomLongitude;
 
     @Bean(name = "rmvApiTokenAndUrlInformation")
     public ApiTokenAndUrlInformation apiTokenAndUrlInformation() {
@@ -57,5 +67,12 @@ public class RMVConfiguration {
         builder.setResultLengthAfterDepartureTime(rmvResultLengthAfterDate);
         builder.setAllowIntermediateStops(rmvAllowIntermediateStops);
         return builder.build();
+    }
+
+    @Bean(name = "rmvBox")
+    public Box box() {
+        Point leftTop = new Point(rmvLeftTopLongitude, rmvLeftTopLatitude);
+        Point rightBottom = new Point(rmvRightBottomLongitude, rmvRightBottomLatitude);
+        return new Box(leftTop, rightBottom);
     }
 }
