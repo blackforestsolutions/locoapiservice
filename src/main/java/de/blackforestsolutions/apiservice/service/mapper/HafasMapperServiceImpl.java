@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import de.blackforestsolutions.apiservice.configuration.TimeConfiguration;
 import de.blackforestsolutions.apiservice.service.supportservice.UuidService;
 import de.blackforestsolutions.datamodel.*;
+import de.blackforestsolutions.generatedcontent.hafas.response.LocL;
 import de.blackforestsolutions.generatedcontent.hafas.response.journey.*;
 import de.blackforestsolutions.generatedcontent.hafas.response.locations.HafasLocationResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -97,8 +98,8 @@ public class HafasMapperServiceImpl implements HafasMapperService {
 
     private Leg getLegFrom(SecL betweenTrip, TravelProvider travelProvider, Price price, int index, List<LocL> locations, List<ProdL> vehicles, String date) {
         Leg.LegBuilder leg = new Leg.LegBuilder(uuidService.createUUID());
-        leg.setStart(buildTravelPointWith(locations.get(betweenTrip.getDep().getLocX()), null, null, betweenTrip.getDep().getDPlatfS(), date));
-        leg.setDestination(buildTravelPointWith(locations.get(betweenTrip.getArr().getLocX()), null, null, betweenTrip.getArr().getAPlatfS(), date));
+        leg.setStart(buildTravelPointWith(locations.get(Math.toIntExact(betweenTrip.getDep().getLocX())), null, null, betweenTrip.getDep().getDPlatfS(), date));
+        leg.setDestination(buildTravelPointWith(locations.get(Math.toIntExact(betweenTrip.getArr().getLocX())), null, null, betweenTrip.getArr().getAPlatfS(), date));
         leg.setStartTime(buildDateWith(date, betweenTrip.getDep().getDTimeS()));
         leg.setArrivalTime(buildDateWith(date, betweenTrip.getArr().getATimeS()));
         leg.setDuration(Duration.between(leg.getStartTime(), leg.getArrivalTime()));
@@ -123,7 +124,7 @@ public class HafasMapperServiceImpl implements HafasMapperService {
             leg.setProviderId(hafasLeg.getJid());
             leg.setTravelProvider(travelProvider);
             leg.setTravelLine(buildTravelLineWith(hafasLeg, locations, date));
-            ProdL vehicle = vehicles.get(hafasLeg.getProdX());
+            ProdL vehicle = vehicles.get(Math.toIntExact(hafasLeg.getProdX()));
             leg.setVehicleType(getVehicleType(vehicle.getProdCtx().getCatOut()));
             leg.setVehicleName(vehicle.getProdCtx().getCatOutL());
             leg.setVehicleNumber(vehicle.getName());
@@ -152,7 +153,7 @@ public class HafasMapperServiceImpl implements HafasMapperService {
                 .stream()
                 .skip(INDEX_SUBTRACTION)
                 .limit(intermediateStops.size() - INDEX_SUBTRACTION - INDEX_SUBTRACTION)
-                .map(stop -> buildTravelPointWith(locations.get(stop.getLocX()), stop.getDTimeS(), stop.getATimeS(), extractPlatformFrom(stop), date))
+                .map(stop -> buildTravelPointWith(locations.get(Math.toIntExact(stop.getLocX())), stop.getDTimeS(), stop.getATimeS(), extractPlatformFrom(stop), date))
                 .collect(Collectors.toMap(travelPoint -> counter.getAndIncrement(), travelPoint -> travelPoint));
     }
 

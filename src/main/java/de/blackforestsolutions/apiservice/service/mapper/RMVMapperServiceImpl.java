@@ -169,7 +169,7 @@ public class RMVMapperServiceImpl implements RMVMapperService {
         }
     }
 
-    private String convertPriceToPriceWithComma(int price) {
+    private String convertPriceToPriceWithComma(long price) {
         StringBuilder sb = new StringBuilder(String.valueOf(price));
         int length = (int) Math.log10(price) + 1;
         sb.insert(length - 2, ".");

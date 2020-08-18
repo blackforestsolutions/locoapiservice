@@ -36,7 +36,7 @@ public class CoordinatesUtil {
      * @param y y-coordinate
      * @return transformed date
      */
-    public static Coordinates convertWGS84ToCoordinatesWith(int x, int y) {
+    public static Coordinates convertWGS84ToCoordinatesWith(long x, long y) {
         Coordinates.CoordinatesBuilder coordinates = new Coordinates.CoordinatesBuilder();
         coordinates.setLongitude((double) x / Math.pow(WGS84_BASE, WGS84_EXP));
         coordinates.setLatitude((double) y / Math.pow(WGS84_BASE, WGS84_EXP));

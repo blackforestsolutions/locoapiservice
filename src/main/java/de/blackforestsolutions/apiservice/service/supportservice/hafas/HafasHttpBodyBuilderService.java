@@ -78,8 +78,8 @@ class HafasHttpBodyBuilderService {
         req.setOutDate(transformDateToString(apiTokenAndUrlInformation.getDepartureDate()));
         req.setOutTime(transformDateToTime(apiTokenAndUrlInformation.getDepartureDate()));
         req.setGetPasslist(apiTokenAndUrlInformation.getAllowIntermediateStops());
-        req.setMaxChg(apiTokenAndUrlInformation.getTransfers());
-        req.setMinChgTime(apiTokenAndUrlInformation.getMinTransferTime());
+        req.setMaxChg(Long.valueOf(apiTokenAndUrlInformation.getTransfers()));
+        req.setMinChgTime(Long.valueOf(apiTokenAndUrlInformation.getMinTransferTime()));
         req.setDepLocL(buildDepartureBodyWith(apiTokenAndUrlInformation));
         req.setArrLocL(buildArrivalBodyWith(apiTokenAndUrlInformation));
         req.setJnyFltrL(journeyFltr(apiTokenAndUrlInformation));
@@ -89,7 +89,7 @@ class HafasHttpBodyBuilderService {
         req.setGetPT(true);
         req.setGetIV(false);
         req.setGetPolyline(apiTokenAndUrlInformation.getAllowCoordinates());
-        Optional.ofNullable(apiTokenAndUrlInformation.getResultLengthAfterDepartureTime()).ifPresent(req::setNumF);
+        Optional.ofNullable(apiTokenAndUrlInformation.getResultLengthAfterDepartureTime()).ifPresent(resultLengthAfterDeparture -> req.setNumF(Long.valueOf(resultLengthAfterDeparture)));
         Optional.ofNullable(apiTokenAndUrlInformation.getTimeIsDeparture()).ifPresent(req::setOutFrwd);
         Optional.ofNullable(apiTokenAndUrlInformation.getAllowReducedPrice()).ifPresent(reducedPrice -> req.setTrfReq(trfReq()));
         return req;

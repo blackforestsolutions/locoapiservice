@@ -62,7 +62,7 @@ public class HttpBodyObjectMother {
         HvvJourneyBody body = new HvvJourneyBody();
 
         body.setLanguage("de");
-        body.setVersion(37.3);
+        body.setVersion(37.3d);
         body.setFilterType(FilterType.NO_FILTER);
         body.setStart(getRosenhofHvvStation());
         body.setDest(getStadthausbrueckeHvvStation());
@@ -74,13 +74,13 @@ public class HttpBodyObjectMother {
         );
         body.setTimeIsDeparture(true);
         body.setTariffDetails(true);
-        body.setSchedulesBefore(2);
-        body.setSchedulesAfter(2);
+        body.setSchedulesBefore(2L);
+        body.setSchedulesAfter(2L);
         body.setReturnReduced(true);
         body.setTariffInfoSelector(Collections.singletonList(
                 new TariffInfoSelector(
                         "all",
-                        Arrays.asList(1, 2)
+                        Arrays.asList(1L, 2L)
                 )
         ));
         body.setRealtime(RealtimeType.REALTIME);
@@ -249,7 +249,7 @@ public class HttpBodyObjectMother {
         req.setDepLocL(getVBBDepartureLocL());
         req.setArrLocL(getVBBArrivalLocL());
         req.setGisFltrL(getVBBGisFltrL());
-        req.setNumF(1);
+        req.setNumF(1L);
         req.setOutFrwd(true);
         return req;
     }
@@ -290,7 +290,7 @@ public class HttpBodyObjectMother {
         req.setDepLocL(getDBDepartureLocL());
         req.setArrLocL(getDBArrivalLocl());
         req.setGisFltrL(new ArrayList<>());
-        req.setNumF(1);
+        req.setNumF(1L);
         req.setOutFrwd(true);
         req.setTrfReq(getDBTrafficRequest());
         return req;
@@ -299,8 +299,8 @@ public class HttpBodyObjectMother {
     private static Req getBasicReq() {
         Req req = new Req();
         req.setGetPasslist(true);
-        req.setMaxChg(-1);
-        req.setMinChgTime(0);
+        req.setMaxChg(-1L);
+        req.setMinChgTime(0L);
         req.setJnyFltrL(getBasicJourneyFilter());
         req.setGetTariff(true);
         req.setUshrp(true);
@@ -398,7 +398,7 @@ public class HttpBodyObjectMother {
         req.setDepLocL(getNahSHDepartureLocL());
         req.setArrLocL(getNahSHArrivalLocL());
         req.setGisFltrL(new ArrayList<>());
-        req.setNumF(1);
+        req.setNumF(1L);
         req.setOutFrwd(true);
         return req;
     }
