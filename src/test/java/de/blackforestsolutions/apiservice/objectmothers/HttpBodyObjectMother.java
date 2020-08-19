@@ -35,7 +35,7 @@ public class HttpBodyObjectMother {
         HvvStationListBody body = new HvvStationListBody();
 
         body.setLanguage("de");
-        body.setVersion(37.3);
+        body.setVersion(37.3d);
         body.setFilterType(FilterType.NO_FILTER);
         body.setModificationTypes(ModificationType.MAIN);
         body.setFilterEquivalent(true);
@@ -47,7 +47,7 @@ public class HttpBodyObjectMother {
         HvvTravelPointBody body = new HvvTravelPointBody();
 
         body.setLanguage("de");
-        body.setVersion(37.3);
+        body.setVersion(37.3d);
         body.setFilterType(FilterType.NO_FILTER);
         body.setTheName(new HvvStation("Ahrensburg"));
         body.setMaxList(1);
