@@ -29,7 +29,7 @@ public class MapperService {
         return price.build();
     }
 
-    private static Map<PriceCategory, BigDecimal> convertPriceToPriceWithComma(int price) {
+    private static Map<PriceCategory, BigDecimal> convertPriceToPriceWithComma(long price) {
         StringBuilder sb = new StringBuilder(String.valueOf(price));
         int length = (int) Math.log10(price) + 1;
         sb.insert(length - 2, ".");

@@ -13,8 +13,8 @@ import static de.blackforestsolutions.apiservice.service.supportservice.hvv.HvvH
 
 class HvvHttpBodyService {
 
-    private static final int NORMAL_TARIFF = 1;
-    private static final int CHILD_TARIFF = 2;
+    private static final long NORMAL_TARIFF = 1;
+    private static final long CHILD_TARIFF = 2;
 
     static String buildTravelPointHttpBodyForHvv(ApiTokenAndUrlInformation apiTokenAndUrlInformation, String station) {
         Objects.requireNonNull(apiTokenAndUrlInformation.getHvvAllowTypeSwitch(), "hvvAllowTypeSwitch is not allowed to be null");
@@ -51,8 +51,8 @@ class HvvHttpBodyService {
         journeyBody.setTime(getHvvTimeFormat(apiTokenAndUrlInformation.getDepartureDate()));
         journeyBody.setTimeIsDeparture(apiTokenAndUrlInformation.getTimeIsDeparture());
         journeyBody.setTariffDetails(apiTokenAndUrlInformation.getAllowTariffDetails());
-        journeyBody.setSchedulesBefore(apiTokenAndUrlInformation.getResultLengthBeforeDepartureTime());
-        journeyBody.setSchedulesAfter(apiTokenAndUrlInformation.getResultLengthAfterDepartureTime());
+        journeyBody.setSchedulesBefore(Long.valueOf(apiTokenAndUrlInformation.getResultLengthBeforeDepartureTime()));
+        journeyBody.setSchedulesAfter(Long.valueOf(apiTokenAndUrlInformation.getResultLengthAfterDepartureTime()));
         journeyBody.setReturnReduced(apiTokenAndUrlInformation.getAllowReducedPrice());
         journeyBody.setIntermediateStops(apiTokenAndUrlInformation.getAllowIntermediateStops());
         journeyBody.setTariffInfoSelector(Collections.singletonList(
