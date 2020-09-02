@@ -14,14 +14,6 @@ import static de.blackforestsolutions.apiservice.objectmothers.UUIDObjectMother.
 
 public class JourneyObjectMother {
 
-    public static Journey getFlughafenBerlinToHamburgHbfJourney() {
-        LinkedHashMap<UUID, Leg> legs = new LinkedHashMap<>();
-        legs.put(getFlughafenBerlinToHamburgHbfLeg().getId(), getFlughafenBerlinToHamburgHbfLeg());
-        return new Journey.JourneyBuilder(TEST_UUID_2)
-                .setLegs(legs)
-                .build();
-    }
-
     public static Journey getBerlinHbfToHamburgLandwehrJourney() {
         LinkedHashMap<UUID, Leg> legs = new LinkedHashMap<>();
         legs.put(getBerlinHbfHamburgMittlerLandwegLeg().getId(), getBerlinHbfHamburgMittlerLandwegLeg());
