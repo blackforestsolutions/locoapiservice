@@ -1,5 +1,6 @@
 package de.blackforestsolutions.apiservice.objectmothers;
 
+import de.blackforestsolutions.apiservice.configuration.TimeConfiguration;
 import de.blackforestsolutions.apiservice.testutils.TestUtils;
 import de.blackforestsolutions.datamodel.Leg;
 import de.blackforestsolutions.datamodel.Price;
@@ -10,7 +11,6 @@ import org.springframework.data.geo.Metrics;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -24,8 +24,8 @@ import static de.blackforestsolutions.apiservice.testutils.TestUtils.generateDat
 public class LegObjectMother {
 
     public static Leg getFlughafenBerlinToHamburgHbfLeg() {
-        ZonedDateTime startTime = LocalDateTime.parse("30/04/2021 08:00:00", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")).atZone(ZoneId.systemDefault());
-        ZonedDateTime arrivalTime = LocalDateTime.parse("30/04/2021 08:00:00", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")).atZone(ZoneId.systemDefault()).plusSeconds(10775);
+        ZonedDateTime startTime = LocalDateTime.parse("30/04/2021 08:00:00", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")).atZone(TimeConfiguration.GERMAN_TIME_ZONE);
+        ZonedDateTime arrivalTime = LocalDateTime.parse("30/04/2021 08:00:00", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")).atZone(TimeConfiguration.GERMAN_TIME_ZONE).plusSeconds(10775);
         return new Leg.LegBuilder(TEST_UUID_2)
                 .setStartTime(startTime)
                 .setStart(getBerlinFlughafenTravelPoint())
@@ -41,8 +41,8 @@ public class LegObjectMother {
     }
 
     public static Leg getBerlinHbfHamburgMittlerLandwegLeg() {
-        ZonedDateTime startTime = LocalDateTime.parse("25/10/2020 17:00:00", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")).atZone(ZoneId.systemDefault());
-        ZonedDateTime arrivalTime = LocalDateTime.parse("25/10/2020 17:00:00", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")).atZone(ZoneId.systemDefault()).plusSeconds(11130);
+        ZonedDateTime startTime = LocalDateTime.parse("25/10/2020 17:00:00", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")).atZone(TimeConfiguration.GERMAN_TIME_ZONE);
+        ZonedDateTime arrivalTime = LocalDateTime.parse("25/10/2020 17:00:00", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")).atZone(TimeConfiguration.GERMAN_TIME_ZONE).plusSeconds(11130);
         return new Leg.LegBuilder(TEST_UUID_4)
                 .setStartTime(startTime)
                 .setStart(getBerlinHbfTravelPointForBlaBlaCar())
