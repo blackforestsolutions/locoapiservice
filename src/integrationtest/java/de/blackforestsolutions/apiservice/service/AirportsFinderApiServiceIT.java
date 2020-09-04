@@ -1,6 +1,5 @@
 package de.blackforestsolutions.apiservice.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallService;
 import de.blackforestsolutions.apiservice.service.supportservice.AirportsFinderHttpCallBuilderService;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
@@ -33,12 +32,12 @@ class AirportsFinderApiServiceIT {
     private AirportsFinderHttpCallBuilderService airportsFinderHttpCallBuilderService;
 
     @Test
-    void test_nearest_airport_api() throws JsonProcessingException {
+    void test_nearest_airport_api() {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder testData = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(airportsFinderApiTokenAndUrlInformation);
         testData.setDepartureCoordinates(getAirportsFinderTokenAndUrl().getDepartureCoordinates());
         testData.setPath(airportsFinderHttpCallBuilderService.buildPathWith(testData.build()));
 
-        ResponseEntity<String> result = callService.get(buildUrlWith(testData.build()).toString(), airportsFinderHttpCallBuilderService.buildHttpEntityAirportsFinder(testData.build()));
+        ResponseEntity<String> result = callService.getOld(buildUrlWith(testData.build()).toString(), airportsFinderHttpCallBuilderService.buildHttpEntityAirportsFinder(testData.build()));
 
         Assertions.assertThat(HttpStatus.OK).isEqualTo(result.getStatusCode());
         Assertions.assertThat(result.getBody()).isNotEmpty();

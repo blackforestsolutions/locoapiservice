@@ -162,7 +162,7 @@ class HafasMapperServiceTest {
     }
 
     @Test
-    void test_getJourneysFrom_with_wrong_pojo_returns_problem_with_nullPointerException() throws JsonProcessingException {
+    void test_getJourneysFrom_with_wrong_pojo_returns_problem_with_nullPointerException() {
         String json = getResourceFileAsString("json/dbHafasJourney.json");
         HafasJourneyResponse testData = retrieveJsonToPojo(json, HafasJourneyResponse.class);
         testData.getSvcResL().get(0).getRes().getOutConL().get(0).setDate(null);

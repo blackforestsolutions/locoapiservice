@@ -36,7 +36,7 @@ public class OSMApiServiceImpl implements OSMApiService {
     public CallStatus<TravelPointStatus> getTravelPointFrom(ApiTokenAndUrlInformation apiTokenAndUrlInformation, String address) {
         try {
             String url = getOSMRequestString(apiTokenAndUrlInformation, address);
-            ResponseEntity<String> result = callService.get(url, HttpEntity.EMPTY);
+            ResponseEntity<String> result = callService.getOld(url, HttpEntity.EMPTY);
             return new CallStatus<>(osmMapperService.mapOsmJsonToTravelPoint(result.getBody()), Status.SUCCESS, null);
         } catch (Exception e) {
             log.error("Unable to get Coordinates for TravelPoint due to : ", e);

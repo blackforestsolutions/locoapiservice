@@ -22,6 +22,7 @@ import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -41,7 +42,7 @@ class BritishAirwaysApiServiceTest {
 
     private final RestTemplateBuilder restTemplateBuilder = new RestTemplateBuilderStub(restTemplate);
 
-    private final CallService callService = new CallServiceImpl(restTemplateBuilder);
+    private final CallService callService = new CallServiceImpl(restTemplateBuilder, WebClient.create());
 
     private final AirportConfiguration airportConfiguration = new AirportConfiguration();
 
@@ -212,7 +213,7 @@ class BritishAirwaysApiServiceTest {
         CallStatus<Map<UUID, JourneyStatus>> result = classUnderTest.getJourneysForRouteWith(testData.build());
 
         assertThat(result.getStatus()).isEqualTo(Status.FAILED);
-        assertThat(result.getException()).isInstanceOf(NullPointerException.class);
+        assertThat(result.getThrowable()).isInstanceOf(NullPointerException.class);
     }
 
     @Test
@@ -224,7 +225,7 @@ class BritishAirwaysApiServiceTest {
         CallStatus<Map<UUID, JourneyStatus>> result = classUnderTest.getJourneysForRouteWith(testData);
 
         assertThat(result.getStatus()).isEqualTo(Status.FAILED);
-        assertThat(result.getException()).isInstanceOf(MismatchedInputException.class);
+        assertThat(result.getThrowable()).isInstanceOf(MismatchedInputException.class);
     }
 
     @Test
@@ -236,7 +237,7 @@ class BritishAirwaysApiServiceTest {
         CallStatus<Map<UUID, JourneyStatus>> result = classUnderTest.getJourneysForRouteWith(testData);
 
         assertThat(result.getStatus()).isEqualTo(Status.FAILED);
-        assertThat(result.getException()).isInstanceOf(RuntimeException.class);
+        assertThat(result.getThrowable()).isInstanceOf(RuntimeException.class);
     }
 
 }

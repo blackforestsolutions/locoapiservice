@@ -16,7 +16,41 @@ import static de.blackforestsolutions.apiservice.util.CoordinatesUtil.convertWGS
 
 public class TravelPointObjectMother {
 
-    private static final Locale SWIZERLAND_LOCALE = Locale.forLanguageTag("de-CH");
+    public static TravelPoint getBerlinHbfTravelPointForBlaBlaCar() {
+        return new TravelPoint.TravelPointBuilder()
+                .setCity("Berlin")
+                .setStationName("Berlin Hauptbahnhof, Berlin")
+                .setGpsCoordinates(new Coordinates.CoordinatesBuilder(52.525083d, 13.369402d).build())
+                .setCountry(Locale.GERMAN)
+                .build();
+    }
+
+    public static TravelPoint getBerlinFlughafenTravelPoint() {
+        return new TravelPoint.TravelPointBuilder()
+                .setCity("Berlin")
+                .setStationName("Flughafen Berlin-Tegel, Berlin")
+                .setGpsCoordinates(new Coordinates.CoordinatesBuilder(52.558832d, 13.288437d).build())
+                .setCountry(Locale.GERMAN)
+                .build();
+    }
+
+    public static TravelPoint getHamburgHbfTravelPoint() {
+        return new TravelPoint.TravelPointBuilder()
+                .setCity("Hamburg")
+                .setStationName("Hamburg Hbf, Hamburg")
+                .setGpsCoordinates(new Coordinates.CoordinatesBuilder(53.552925d, 10.006604d).build())
+                .setCountry(Locale.GERMAN)
+                .build();
+    }
+
+    public static TravelPoint getHamburgMittlerLandwegTravelPoint() {
+        return new TravelPoint.TravelPointBuilder()
+                .setCity("Hamburg")
+                .setStationName("Mittlerer Landweg, Hamburg")
+                .setGpsCoordinates(new Coordinates.CoordinatesBuilder(53.495142d, 10.128684d).build())
+                .setCountry(Locale.GERMAN)
+                .build();
+    }
 
     public static TravelPoint getEuropeTravelPoint() {
         return new TravelPoint.TravelPointBuilder()
@@ -44,12 +78,7 @@ public class TravelPointObjectMother {
         travelPoint.setCombinedName("Ahrensburg");
         travelPoint.setId("Master:35009");
         travelPoint.setType(SDType.STATION);
-        travelPoint.setCoordinate(
-                new Coordinate(
-                        9.93454,
-                        53.552405
-                )
-        );
+        travelPoint.setCoordinate(new Coordinate(9.93454, 53.552405));
 
         return travelPoint;
     }
@@ -62,42 +91,9 @@ public class TravelPointObjectMother {
         travelPoint.setCombinedName("Stadthausbrücke");
         travelPoint.setId("Master:11952");
         travelPoint.setType(SDType.STATION);
-
-        travelPoint.setCoordinate(
-                new Coordinate(
-                        9.93454,
-                        53.552405
-                )
-        );
+        travelPoint.setCoordinate(new Coordinate(9.93454, 53.552405));
 
         return travelPoint;
-    }
-
-    public static TravelPoint getBerlinFlughafenTravelPoint() {
-        return new TravelPoint.TravelPointBuilder()
-                .setCity("Berlin")
-                .setStationName("Flughafen Berlin-Tegel, Berlin")
-                .setGpsCoordinates(new Coordinates.CoordinatesBuilder(52.558832d, 13.288437d).build())
-                .setCountry(Locale.GERMAN)
-                .build();
-    }
-
-    public static TravelPoint getHamburgHbfTravelPoint() {
-        return new TravelPoint.TravelPointBuilder()
-                .setCity("Hamburg")
-                .setStationName("Hamburg Hbf, Hamburg")
-                .setGpsCoordinates(new Coordinates.CoordinatesBuilder(53.552925d, 10.006604d).build())
-                .setCountry(Locale.GERMAN)
-                .build();
-    }
-
-    public static TravelPoint getRostockHbfTravelPoint() {
-        return new TravelPoint.TravelPointBuilder()
-                .setCity("Rostock")
-                .setStationName("Rostock Hbf, Rostock")
-                .setGpsCoordinates(new Coordinates.CoordinatesBuilder(53.552925d, 10.006604d).build())
-                .setCountry(Locale.GERMAN)
-                .build();
     }
 
     public static TravelPoint getBerlinHbfTravelPoint() {
@@ -105,15 +101,6 @@ public class TravelPointObjectMother {
                 .setCity("Berlin")
                 .setStationName("Berlin Hauptbahnhof, Berlin")
                 .setGpsCoordinates(new Coordinates.CoordinatesBuilder(52.525083d, 13.369402d).build())
-                .setCountry(Locale.GERMAN)
-                .build();
-    }
-
-    public static TravelPoint getHamburgMittlerLandwegTravelPoint() {
-        return new TravelPoint.TravelPointBuilder()
-                .setCity("Hamburg")
-                .setStationName("Mittlerer Landweg, Hamburg")
-                .setGpsCoordinates(new Coordinates.CoordinatesBuilder(53.495142d, 10.128684d).build())
                 .setCountry(Locale.GERMAN)
                 .build();
     }

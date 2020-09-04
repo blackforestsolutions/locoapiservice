@@ -22,7 +22,7 @@ import java.util.UUID;
 import static de.blackforestsolutions.apiservice.objectmothers.ApiTokenAndUrlInformationObjectMother.getBBCTokenAndUrl;
 import static de.blackforestsolutions.apiservice.objectmothers.JourneyObjectMother.getBerlinHbfToHamburgLandwehrJourney;
 import static de.blackforestsolutions.apiservice.objectmothers.JourneyObjectMother.getFlughafenBerlinToHamburgHbfJourney;
-import static de.blackforestsolutions.apiservice.testutils.TestUtils.createJourneyStatusWith;
+import static de.blackforestsolutions.apiservice.service.mapper.JourneyStatusBuilder.createJourneyStatusWith;
 import static de.blackforestsolutions.apiservice.testutils.TestUtils.getResourceFileAsString;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
@@ -54,7 +54,7 @@ class BBCApiServiceTest {
     @Test
     void test_getJourneysForRouteWith_executes_apiSerive_in_right_order() throws JsonProcessingException {
         ApiTokenAndUrlInformation testData = getBBCTokenAndUrl();
-        when(callService.get(anyString(), any(HttpEntity.class)))
+        when(callService.getOld(anyString(), any(HttpEntity.class)))
                 .thenReturn(new ResponseEntity<>(getResourceFileAsString("json/bbcTest.json"), HttpStatus.OK));
         ArgumentCaptor<String> url = ArgumentCaptor.forClass(String.class);
         ArgumentCaptor<String> body = ArgumentCaptor.forClass(String.class);
@@ -64,7 +64,7 @@ class BBCApiServiceTest {
 
         InOrder inOrder = inOrder(bbcMapperService, bbcHttpCallBuilderService, callService);
         inOrder.verify(bbcHttpCallBuilderService, times(1)).bbcBuildJourneyStringPathWith(any(ApiTokenAndUrlInformation.class));
-        inOrder.verify(callService, times(1)).get(url.capture(), httpEntity.capture());
+        inOrder.verify(callService, times(1)).getOld(url.capture(), httpEntity.capture());
         inOrder.verify(bbcMapperService, times(1)).mapJsonToJourneys(body.capture());
         assertThat(url.getValue()).isEqualTo("https://public-api.blablacar.com");
         assertThat(body.getValue()).isEqualTo(getResourceFileAsString("json/bbcTest.json"));
@@ -75,7 +75,7 @@ class BBCApiServiceTest {
     @Test
     void test_getJourneysForRouteByCoordinates_executes_apiSerive_in_right_order() throws JsonProcessingException {
         ApiTokenAndUrlInformation testData = getBBCTokenAndUrl();
-        when(callService.get(anyString(), any(HttpEntity.class)))
+        when(callService.getOld(anyString(), any(HttpEntity.class)))
                 .thenReturn(new ResponseEntity<>(getResourceFileAsString("json/bbcTest.json"), HttpStatus.OK));
         ArgumentCaptor<String> url = ArgumentCaptor.forClass(String.class);
         ArgumentCaptor<String> body = ArgumentCaptor.forClass(String.class);
@@ -85,7 +85,7 @@ class BBCApiServiceTest {
 
         InOrder inOrder = inOrder(bbcMapperService, bbcHttpCallBuilderService, callService);
         inOrder.verify(bbcHttpCallBuilderService, times(1)).bbcBuildJourneyCoordinatesPathWith(any(ApiTokenAndUrlInformation.class));
-        inOrder.verify(callService, times(1)).get(url.capture(), httpEntity.capture());
+        inOrder.verify(callService, times(1)).getOld(url.capture(), httpEntity.capture());
         inOrder.verify(bbcMapperService, times(1)).mapJsonToJourneys(body.capture());
         assertThat(url.getValue()).isEqualTo("https://public-api.blablacar.com");
         assertThat(body.getValue()).isEqualTo(getResourceFileAsString("json/bbcTest.json"));
@@ -112,7 +112,7 @@ class BBCApiServiceTest {
         CallStatus<Map<UUID, JourneyStatus>> result = classUnderTest.getJourneysForRouteByCoordinates(testData.build());
 
         assertThat(result.getStatus()).isEqualTo(Status.FAILED);
-        assertThat(result.getException()).isInstanceOf(NullPointerException.class);
+        assertThat(result.getThrowable()).isInstanceOf(NullPointerException.class);
     }
 
     @Test
@@ -123,6 +123,6 @@ class BBCApiServiceTest {
         CallStatus<Map<UUID, JourneyStatus>> result = classUnderTest.getJourneysForRouteWith(testData.build());
 
         assertThat(result.getStatus()).isEqualTo(Status.FAILED);
-        assertThat(result.getException()).isInstanceOf(NullPointerException.class);
+        assertThat(result.getThrowable()).isInstanceOf(NullPointerException.class);
     }
 }

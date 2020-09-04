@@ -1,6 +1,7 @@
 package de.blackforestsolutions.apiservice.service.exceptionhandling;
 
 import de.blackforestsolutions.datamodel.*;
+import reactor.core.publisher.Mono;
 
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -13,6 +14,9 @@ public interface ExceptionHandlerService {
 
     LinkedHashSet<TravelPoint> handleExceptionsTravelPoints(CallStatus<LinkedHashSet<TravelPointStatus>> linkedHashSetCallStatus);
 
-    TravelPoint handleExceptions(CallStatus<TravelPointStatus> coordinatesCallStatus);
+    TravelPoint handleExceptionsOld(CallStatus<TravelPointStatus> travelPointCallStatus);
 
+    <T> Mono<T> handleExceptions(Throwable throwable);
+
+    <T> Mono<T> handleExceptions(CallStatus<T> callStatus);
 }

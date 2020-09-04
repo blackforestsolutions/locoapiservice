@@ -1,56 +1,52 @@
 package de.blackforestsolutions.apiservice.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.google.common.annotations.VisibleForTesting;
-import de.blackforestsolutions.apiservice.service.communicationservice.BBCApiService;
-import de.blackforestsolutions.apiservice.service.exceptionhandling.ExceptionHandlerService;
+import de.blackforestsolutions.apiservice.service.communicationservice.BlaBlaCarApiService;
+import de.blackforestsolutions.apiservice.service.communicationservice.JourneyApiService;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
+import de.blackforestsolutions.datamodel.CallStatus;
 import de.blackforestsolutions.datamodel.Journey;
-import de.blackforestsolutions.datamodel.util.LocoJsonMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.util.Pair;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Flux;
 
-import javax.annotation.Resource;
-import java.util.Arrays;
-import java.util.Map;
-import java.util.UUID;
+import java.util.List;
+import java.util.Optional;
+import java.util.function.Function;
 
-import static de.blackforestsolutions.apiservice.controller.RequestTokenHandler.getRequestApiTokenWith;
-
+@Slf4j
 @RestController
 @RequestMapping("ride-shares")
 public class RideShareController {
 
-    private final LocoJsonMapper locoJsonMapper = new LocoJsonMapper();
-    private final BBCApiService bbcApiService;
-    private final ExceptionHandlerService exceptionHandlerService;
-
-    @Resource(name = "bbcApiTokenAndUrlInformation")
-    private ApiTokenAndUrlInformation bbcApiTokenAndUrlInformation;
+    private final JourneyApiService journeyApiService;
+    private final BlaBlaCarApiService blaBlaCarApiService;
+    private final ApiTokenAndUrlInformation blaBlaCarApiTokenAndUrlInformation;
 
     @Autowired
-    public RideShareController(BBCApiService bbcApiService, ExceptionHandlerService exceptionHandlerService) {
-        this.bbcApiService = bbcApiService;
-        this.exceptionHandlerService = exceptionHandlerService;
+    public RideShareController(JourneyApiService journeyApiService, BlaBlaCarApiService blaBlaCarApiService, ApiTokenAndUrlInformation blaBlaCarApiTokenAndUrlInformation) {
+        this.journeyApiService = journeyApiService;
+        this.blaBlaCarApiService = blaBlaCarApiService;
+        this.blaBlaCarApiTokenAndUrlInformation = blaBlaCarApiTokenAndUrlInformation;
     }
 
-    @RequestMapping("get")
-    public Map<UUID, Journey> retrieveRideSharingJourneys(@RequestBody String request) throws JsonProcessingException {
-        ApiTokenAndUrlInformation requestInformation = locoJsonMapper.mapJsonToApiTokenAndUrlInformation(request);
-        return this.exceptionHandlerService.handleExceptions(Arrays.asList(
-                bbcApiService.getJourneysForRouteByCoordinates(getBbcApiTokenAndUrlInformation(requestInformation)),
-                bbcApiService.getJourneysForRouteWith(getBbcApiTokenAndUrlInformation(requestInformation)))
+    @RequestMapping(value = "/get", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    public Flux<String> retrieveRideSharingJourneys(@RequestBody String request) {
+        return Optional.ofNullable(request)
+                .map(r -> journeyApiService.retrieveJourneysFromApiServices(r, getApiTokensWithApiServices()))
+                .orElseGet(() -> {
+                    log.warn("No provided request body!");
+                    return Flux.empty();
+                });
+    }
+
+    private List<Pair<ApiTokenAndUrlInformation, Function<ApiTokenAndUrlInformation, Flux<CallStatus<Journey>>>>> getApiTokensWithApiServices() {
+        return List.of(
+                Pair.of(blaBlaCarApiTokenAndUrlInformation, blaBlaCarApiService::getJourneysForRouteByCoordinates)
         );
-    }
-
-    private ApiTokenAndUrlInformation getBbcApiTokenAndUrlInformation(ApiTokenAndUrlInformation request) {
-        return getRequestApiTokenWith(request, bbcApiTokenAndUrlInformation);
-    }
-
-    @VisibleForTesting
-    void setBbcApiTokenAndUrlInformation(ApiTokenAndUrlInformation bbcApiTokenAndUrlInformation) {
-        this.bbcApiTokenAndUrlInformation = bbcApiTokenAndUrlInformation;
     }
 }

@@ -1,6 +1,5 @@
 package de.blackforestsolutions.apiservice.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallService;
 import de.blackforestsolutions.apiservice.service.supportservice.BritishAirwaysHttpCallBuilderService;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
@@ -34,14 +33,14 @@ class BritishAirwaysApiServiceIT {
     private BritishAirwaysHttpCallBuilderService httpCallBuilderService;
 
     @Test
-    void test() throws JsonProcessingException {
+    void test() {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder testData = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(britishAirwaysApiTokenAndUrlInformation);
         testData.setDeparture(getBritishAirwaysTokenAndUrl().getDeparture());
         testData.setArrival(getBritishAirwaysTokenAndUrl().getArrival());
         testData.setDepartureDate(ZonedDateTime.now());
         testData.setPath(httpCallBuilderService.buildPathWith(testData.build()));
 
-        ResponseEntity<String> result = callService.get(
+        ResponseEntity<String> result = callService.getOld(
                 buildUrlWith(testData.build()).toString(),
                 httpCallBuilderService.buildHttpEntityBritishAirways(testData.build())
         );

@@ -34,7 +34,7 @@ public class AirportsFinderApiServiceImpl implements AirportsFinderApiService {
     public CallStatus<LinkedHashSet<TravelPointStatus>> getAirportsWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
         try {
             String url = getAirportsFinderRequestString(apiTokenAndUrlInformation);
-            ResponseEntity<String> result = callService.get(url, airportsFinderHttpCallBuilderService.buildHttpEntityAirportsFinder(apiTokenAndUrlInformation));
+            ResponseEntity<String> result = callService.getOld(url, airportsFinderHttpCallBuilderService.buildHttpEntityAirportsFinder(apiTokenAndUrlInformation));
             return new CallStatus<>(airportsFinderMapperService.map(result.getBody()), Status.SUCCESS, null);
         } catch (Exception ex) {
             log.error("Error during AirportFinder Api call", ex);

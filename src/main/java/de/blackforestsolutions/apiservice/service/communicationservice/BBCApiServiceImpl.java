@@ -39,7 +39,7 @@ public class BBCApiServiceImpl implements BBCApiService {
     public CallStatus<Map<UUID, JourneyStatus>> getJourneysForRouteWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
         try {
             String url = getBbcRequestString(apiTokenAndUrlInformation, bbcHttpCallBuilderService.bbcBuildJourneyStringPathWith(apiTokenAndUrlInformation));
-            ResponseEntity<String> result = callService.get(url, HttpEntity.EMPTY);
+            ResponseEntity<String> result = callService.getOld(url, HttpEntity.EMPTY);
             return new CallStatus<>(bbcMapperService.mapJsonToJourneys(result.getBody()), Status.SUCCESS, null);
         } catch (Exception e) {
             log.error("Error doing calling BBC Api with String: ", e);
@@ -53,7 +53,7 @@ public class BBCApiServiceImpl implements BBCApiService {
         try {
             if (Optional.ofNullable(apiTokenAndUrlInformation.getArrivalCoordinates()).isPresent() || Optional.ofNullable(apiTokenAndUrlInformation.getDepartureCoordinates()).isPresent()) {
                 String url = getBbcRequestString(apiTokenAndUrlInformation, bbcHttpCallBuilderService.bbcBuildJourneyCoordinatesPathWith(apiTokenAndUrlInformation));
-                ResponseEntity<String> result = callService.get(url, HttpEntity.EMPTY);
+                ResponseEntity<String> result = callService.getOld(url, HttpEntity.EMPTY);
                 return new CallStatus<>(bbcMapperService.mapJsonToJourneys(result.getBody()), Status.SUCCESS, null);
             }
             return new CallStatus<>(null, Status.FAILED, new Exception("No coordinates found doing calling BBC Api:"));

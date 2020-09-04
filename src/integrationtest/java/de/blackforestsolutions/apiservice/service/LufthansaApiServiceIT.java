@@ -64,7 +64,7 @@ class LufthansaApiServiceIT {
                     testData.setArrival("FRA");
                     testData.setPath(httpCallBuilderService.buildLufthansaJourneyPathWith(testData.build()));
 
-                    ResponseEntity<String> result = callService.get(buildUrlWith(testData.build()).toString(), httpCallBuilderService.buildHttpEntityForLufthansaJourney(testData.build()));
+                    ResponseEntity<String> result = callService.getOld(buildUrlWith(testData.build()).toString(), httpCallBuilderService.buildHttpEntityForLufthansaJourney(testData.build()));
 
                     Assertions.assertThat(HttpStatus.OK).isEqualTo(result.getStatusCode());
                     Assertions.assertThat(result.getBody()).isNotEmpty();

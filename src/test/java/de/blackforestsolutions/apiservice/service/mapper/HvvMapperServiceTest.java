@@ -74,7 +74,7 @@ class HvvMapperServiceTest {
     }
 
     @Test
-    void test_mapHvvRouteToJourneyMap_with_wrong_pojo_returns_problem_with_nullPointerException() throws JsonProcessingException {
+    void test_mapHvvRouteToJourneyMap_with_wrong_pojo_returns_problem_with_nullPointerException() {
         String json = getResourceFileAsString("json/hvvJourney.json");
         HvvRoute hvvRoute = retrieveJsonToPojo(json, HvvRoute.class);
         hvvRoute.getRealtimeSchedules().get(0).getScheduleElements().get(0).setFrom(null);

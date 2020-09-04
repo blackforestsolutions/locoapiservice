@@ -1,6 +1,5 @@
 package de.blackforestsolutions.apiservice.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import de.blackforestsolutions.apiservice.configuration.TimeConfiguration;
 import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallService;
 import de.blackforestsolutions.apiservice.service.supportservice.BBCHttpCallBuilderService;
@@ -37,14 +36,14 @@ class BBCApiServiceIT {
     private BBCHttpCallBuilderService bBCHttpCallBuilderService;
 
     @Test
-    void test_journey_with_string() throws JsonProcessingException {
+    void test_journey_with_string() {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder testData = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(bbcApiTokenAndUrlInformation);
         testData.setDeparture("Berlin");
         testData.setArrival("Hamburg");
         testData.setDepartureDate(LocalDate.now().plus(1, ChronoUnit.DAYS).atStartOfDay(TimeConfiguration.GERMAN_TIME_ZONE));
         testData.setPath(bBCHttpCallBuilderService.bbcBuildJourneyStringPathWith(testData.build()));
 
-        ResponseEntity<String> result = callService.get(
+        ResponseEntity<String> result = callService.getOld(
                 buildUrlWith(testData.build()).toString(),
                 HttpEntity.EMPTY
         );
@@ -55,7 +54,7 @@ class BBCApiServiceIT {
     }
 
     @Test
-    void test_journeys_with_coordinates() throws JsonProcessingException {
+    void test_journeys_with_coordinates() {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder testData = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(bbcApiTokenAndUrlInformation);
         testData.setDepartureCoordinates(new Coordinates.CoordinatesBuilder(52.526455d, 13.367701d).build());
         testData.setArrivalCoordinates(new Coordinates.CoordinatesBuilder(53.553918d, 10.005147d).build());
@@ -64,7 +63,7 @@ class BBCApiServiceIT {
         testData.setArrival("Hamburg");
         testData.setPath(bBCHttpCallBuilderService.bbcBuildJourneyStringPathWith(testData.build()));
 
-        ResponseEntity<String> result = callService.get(
+        ResponseEntity<String> result = callService.getOld(
                 buildUrlWith(testData.build()).toString(),
                 HttpEntity.EMPTY
         );
@@ -75,7 +74,7 @@ class BBCApiServiceIT {
     }
 
     @Test
-    void test_journeys_with_arrival_coordinates_as_null() throws JsonProcessingException {
+    void test_journeys_with_arrival_coordinates_as_null() {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder testData = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(bbcApiTokenAndUrlInformation);
         testData.setDepartureCoordinates(new Coordinates.CoordinatesBuilder(52.526455d, 13.367701d).build());
         testData.setArrivalCoordinates(null);
@@ -84,7 +83,7 @@ class BBCApiServiceIT {
         testData.setArrival("Hamburg");
         testData.setPath(bBCHttpCallBuilderService.bbcBuildJourneyStringPathWith(testData.build()));
 
-        ResponseEntity<String> result = callService.get(
+        ResponseEntity<String> result = callService.getOld(
                 buildUrlWith(testData.build()).toString(),
                 HttpEntity.EMPTY
         );
@@ -95,7 +94,7 @@ class BBCApiServiceIT {
     }
 
     @Test
-    void test_journey_with_arrivalDate() throws JsonProcessingException {
+    void test_journey_with_arrivalDate() {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder testData = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(bbcApiTokenAndUrlInformation);
         testData.setDepartureCoordinates(new Coordinates.CoordinatesBuilder(52.526455d, 13.367701d).build());
         testData.setArrivalDate(LocalDate.now().plus(2, ChronoUnit.DAYS).atStartOfDay(TimeConfiguration.GERMAN_TIME_ZONE));
@@ -104,7 +103,7 @@ class BBCApiServiceIT {
         testData.setTimeIsDeparture(false);
         testData.setPath(bBCHttpCallBuilderService.bbcBuildJourneyStringPathWith(testData.build()));
 
-        ResponseEntity<String> result = callService.get(
+        ResponseEntity<String> result = callService.getOld(
                 buildUrlWith(testData.build()).toString(),
                 HttpEntity.EMPTY
         );
