@@ -1,6 +1,5 @@
 package de.blackforestsolutions.apiservice.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallService;
 import de.blackforestsolutions.apiservice.service.supportservice.hafas.HafasHttpCallBuilderService;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
@@ -34,7 +33,7 @@ class VBBApiServiceIT {
     private HafasHttpCallBuilderService httpCallBuilderService;
 
     @Test
-    void test_getStationId() throws JsonProcessingException {
+    void test_getStationId() {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder testData = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(vbbApiTokenAndUrlInformation);
         testData.setPath(httpCallBuilderService.buildPathWith(testData.build(), "Eiderstraße 87"));
 
@@ -49,7 +48,7 @@ class VBBApiServiceIT {
     }
 
     @Test
-    void test_getJourney() throws JsonProcessingException {
+    void test_getJourney() {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder testData = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(vbbApiTokenAndUrlInformation);
         testData.setDeparture("770000350");
         testData.setDepartureDate(ZonedDateTime.now());

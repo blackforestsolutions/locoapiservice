@@ -10,14 +10,28 @@ import java.util.UUID;
 import static de.blackforestsolutions.apiservice.objectmothers.LegObjectMother.*;
 import static de.blackforestsolutions.apiservice.objectmothers.PriceObjectMother.getDBPrice;
 import static de.blackforestsolutions.apiservice.objectmothers.PriceObjectMother.getNahShPrice;
-import static de.blackforestsolutions.apiservice.objectmothers.UUIDObjectMother.*;
+import static de.blackforestsolutions.apiservice.objectmothers.UUIDObjectMother.TEST_UUID_1;
+import static de.blackforestsolutions.apiservice.objectmothers.UUIDObjectMother.TEST_UUID_3;
 
 public class JourneyObjectMother {
+
+    public static Journey getJourneyWithEmptyFields(UUID id) {
+        return new Journey.JourneyBuilder(id)
+                .build();
+    }
+
+    public static Journey getFlughafenBerlinToHamburgHbfJourney() {
+        LinkedHashMap<UUID, Leg> legs = new LinkedHashMap<>();
+        legs.put(getFlughafenBerlinToHamburgHbfLeg().getId(), getFlughafenBerlinToHamburgHbfLeg());
+        return new Journey.JourneyBuilder(TEST_UUID_1)
+                .setLegs(legs)
+                .build();
+    }
 
     public static Journey getBerlinHbfToHamburgLandwehrJourney() {
         LinkedHashMap<UUID, Leg> legs = new LinkedHashMap<>();
         legs.put(getBerlinHbfHamburgMittlerLandwegLeg().getId(), getBerlinHbfHamburgMittlerLandwegLeg());
-        return new Journey.JourneyBuilder(TEST_UUID_4)
+        return new Journey.JourneyBuilder(TEST_UUID_3)
                 .setLegs(legs)
                 .build();
     }

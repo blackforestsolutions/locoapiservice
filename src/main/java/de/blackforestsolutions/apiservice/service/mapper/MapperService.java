@@ -1,10 +1,12 @@
 package de.blackforestsolutions.apiservice.service.mapper;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import de.blackforestsolutions.apiservice.configuration.CurrencyConfiguration;
 import de.blackforestsolutions.datamodel.Leg;
 import de.blackforestsolutions.datamodel.Price;
 import de.blackforestsolutions.datamodel.PriceCategory;
 import de.blackforestsolutions.generatedcontent.hafas.response.journey.TrfRes;
+import reactor.core.publisher.Mono;
 
 import java.math.BigDecimal;
 import java.util.Currency;
@@ -41,6 +43,15 @@ public class MapperService {
     static void setPriceForLegBy(int index, Leg.LegBuilder leg, Price price) {
         if (index == FIRST_INDEX) {
             leg.setPrice(price);
+        }
+    }
+
+    public static <T> Mono<T> convertJsonToPojo(String json, Class<T> pojo) {
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            return Mono.just(mapper.readValue(json, pojo));
+        } catch (Exception e) {
+            return Mono.error(e);
         }
     }
 }

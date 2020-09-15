@@ -1,0 +1,75 @@
+{
+  "link": "https://www.blablacar.de/search?fc=52.520006,13.404954&tc=53.551084,9.993681&db=2020-05-31",
+  "search_info": {
+    "count": 2,
+    "full_trip_count": 0
+  },
+  "trips": [
+    {
+      "link": "https://www.blablacar.de/trip/carpooling/1981400891-berlin-hamburg",
+      "waypoints": [
+        {
+          "date_time": "2021-04-30T08:00:00Z",
+          "place": {
+            "city": "Berlin",
+            "address": "Flughafen Berlin-Tegel, Berlin",
+            "latitude": 52.558832,
+            "longitude": 13.288437,
+            "country_code": "DE"
+          }
+        },
+        {
+          "date_time": "2021-04-30T10:59:35Z",
+          "place": {
+            "city": "Hamburg",
+            "address": "Hamburg Hbf, Hamburg",
+            "latitude": 53.552925,
+            "longitude": 10.006604,
+            "country_code": "DE"
+          }
+        }
+      ],
+      "price": {
+        "amount": "11.00",
+        "currency": "EUR"
+      },
+      "vehicle": {
+        "make": "TESLA",
+        "model": "MODEL X"
+      },
+      "distance_in_meters": 276000,
+      "duration_in_seconds": 12000
+    },
+    {
+      "link": "https://www.blablacar.de/trip/carpooling/1928522132-berlin-hamburg",
+      "waypoints": [
+        {
+          "date_time": "2020-10-25T17:00:00Z",
+          "place": {
+            "city": "Berlin",
+            "address": "Berlin Hauptbahnhof, Berlin",
+            "latitude": 52.525083,
+            "longitude": 13.369402,
+            "country_code": "DE"
+          }
+        },
+        {
+          "date_time": "2020-10-25T20:05:30Z",
+          "place": {
+            "city": "Hamburg",
+            "address": "Mittlerer Landweg, Hamburg",
+            "latitude": 53.495142,
+            "longitude": 10.128684,
+            "country_code": "DE"
+          }
+        }
+      ],
+      "price": {
+        "amount": "14.00",
+        "currency": "EUR"
+      },
+      "distance_in_meters": 281000,
+      "duration_in_seconds": 11130
+    }
+  ]
+}

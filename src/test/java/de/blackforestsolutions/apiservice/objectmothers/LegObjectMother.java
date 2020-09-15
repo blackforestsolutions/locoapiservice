@@ -1,5 +1,6 @@
 package de.blackforestsolutions.apiservice.objectmothers;
 
+import de.blackforestsolutions.apiservice.configuration.TimeConfiguration;
 import de.blackforestsolutions.apiservice.testutils.TestUtils;
 import de.blackforestsolutions.datamodel.Leg;
 import de.blackforestsolutions.datamodel.Price;
@@ -9,7 +10,9 @@ import org.springframework.data.geo.Distance;
 import org.springframework.data.geo.Metrics;
 
 import java.time.Duration;
+import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import static de.blackforestsolutions.apiservice.objectmothers.PriceObjectMother.*;
@@ -20,18 +23,35 @@ import static de.blackforestsolutions.apiservice.testutils.TestUtils.generateDat
 
 public class LegObjectMother {
 
-    public static Leg getBerlinHbfHamburgMittlerLandwegLeg() {
-        ZonedDateTime startTime = TestUtils.generateDateFromLocalDateTimeAndString("dd/MM/yyyy HH:mm:ss", "25/10/2020 17:00:00");
-        ZonedDateTime arrivalTime = TestUtils.generateDateFromLocalDateTimeAndString("dd/MM/yyyy HH:mm:ss", "25/10/2020 17:00:00").plusSeconds(11130);
-        return new Leg.LegBuilder(TEST_UUID_3)
+    public static Leg getFlughafenBerlinToHamburgHbfLeg() {
+        ZonedDateTime startTime = LocalDateTime.parse("30/04/2021 08:00:00", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")).atZone(TimeConfiguration.GERMAN_TIME_ZONE);
+        ZonedDateTime arrivalTime = LocalDateTime.parse("30/04/2021 08:00:00", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")).atZone(TimeConfiguration.GERMAN_TIME_ZONE).plusSeconds(10775);
+        return new Leg.LegBuilder(TEST_UUID_2)
                 .setStartTime(startTime)
-                .setStart(getBerlinHbfTravelPoint())
+                .setStart(getBerlinFlughafenTravelPoint())
+                .setDestination(getHamburgHbfTravelPoint())
+                .setPrice(getBlaBlaCarPriceFromBerlinFlughafenToHamburgHbf())
+                .setHasPrice(true)
+                .setArrivalTime(arrivalTime)
+                .setDuration(Duration.between(startTime, arrivalTime))
+                .setDistance(new Distance(276, Metrics.KILOMETERS))
+                .setVehicleName("TESLA MODEL X")
+                .setVehicleType(VehicleType.CAR)
+                .build();
+    }
+
+    public static Leg getBerlinHbfHamburgMittlerLandwegLeg() {
+        ZonedDateTime startTime = LocalDateTime.parse("25/10/2020 17:00:00", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")).atZone(TimeConfiguration.GERMAN_TIME_ZONE);
+        ZonedDateTime arrivalTime = LocalDateTime.parse("25/10/2020 17:00:00", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")).atZone(TimeConfiguration.GERMAN_TIME_ZONE).plusSeconds(11130);
+        return new Leg.LegBuilder(TEST_UUID_4)
+                .setStartTime(startTime)
+                .setStart(getBerlinHbfTravelPointForBlaBlaCar())
                 .setDestination(getHamburgMittlerLandwegTravelPoint())
-                .setPrice(getBBCPriceFromBerlinHbfToHamburgLandwehr())
+                .setPrice(getBlaBlaCarPriceFromBerlinHbfToHamburgLandwehr())
+                .setHasPrice(true)
                 .setArrivalTime(arrivalTime)
                 .setDuration(Duration.between(startTime, arrivalTime))
                 .setDistance(new Distance(281, Metrics.KILOMETERS))
-                .setProviderId("1928522132-berlin-hamburg")
                 .setVehicleType(VehicleType.CAR)
                 .build();
     }

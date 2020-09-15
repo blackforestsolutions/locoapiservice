@@ -42,7 +42,7 @@ class RMVApiServiceIT {
                 new Coordinates.CoordinatesBuilder(50.052278d, 8.571331d).build()
         ));
 
-        ResponseEntity<String> result = callService.get(
+        ResponseEntity<String> result = callService.getOld(
                 buildUrlWith(testData.build()).toString(),
                 httpCallBuilderService.buildHttpEntityForRMV(testData.build())
         );
@@ -57,7 +57,7 @@ class RMVApiServiceIT {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder testData = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(rmvApiTokenAndUrlInformation);
         testData.setPath(httpCallBuilderService.buildLocationStringPathWith(testData.build(), "frankfurt hauptbahnhof"));
 
-        ResponseEntity<String> result = callService.get(
+        ResponseEntity<String> result = callService.getOld(
                 buildUrlWith(testData.build()).toString(),
                 httpCallBuilderService.buildHttpEntityForRMV(testData.build())
         );
@@ -75,7 +75,7 @@ class RMVApiServiceIT {
         testData.setDepartureDate(ZonedDateTime.now());
         testData.setPath(httpCallBuilderService.buildTripPathWith(testData.build()));
 
-        ResponseEntity<String> result = callService.get(
+        ResponseEntity<String> result = callService.getOld(
                 buildUrlWith(testData.build()).toString(),
                 httpCallBuilderService.buildHttpEntityForRMV(testData.build())
         );

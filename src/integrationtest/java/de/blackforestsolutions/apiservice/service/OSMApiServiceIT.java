@@ -1,6 +1,5 @@
 package de.blackforestsolutions.apiservice.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallService;
 import de.blackforestsolutions.apiservice.service.supportservice.OSMHttpCallBuilderService;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
@@ -33,11 +32,11 @@ class OSMApiServiceIT {
     private OSMHttpCallBuilderService osmHttpCallBuilderService;
 
     @Test
-    void test_getCoordinates() throws JsonProcessingException {
+    void test_getCoordinates() {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder testData = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(osmApiTokenAndUrlInformation);
         testData.setPath(osmHttpCallBuilderService.buildOSMPathWith(testData.build(), "Stuttgart, Waiblinger Str. 84"));
 
-        ResponseEntity<String> result = callService.get(buildUrlWith(testData.build()).toString(), HttpEntity.EMPTY);
+        ResponseEntity<String> result = callService.getOld(buildUrlWith(testData.build()).toString(), HttpEntity.EMPTY);
 
         Assertions.assertThat(result.getStatusCode()).isEqualTo(HttpStatus.OK);
         Assertions.assertThat(result.getBody()).isNotEmpty();

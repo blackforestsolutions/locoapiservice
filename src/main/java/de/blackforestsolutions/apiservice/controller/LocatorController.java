@@ -30,7 +30,7 @@ public class LocatorController {
 
     @RequestMapping("/get")
     public TravelPoint retrieveLocatorTravelPoint(@RequestParam String address) {
-        return exceptionHandlerService.handleExceptions(osmApiService.getTravelPointFrom(osmApiTokenAndUrlInformation, address));
+        return exceptionHandlerService.handleExceptionsOld(osmApiService.getTravelPointFrom(osmApiTokenAndUrlInformation, address));
     }
 
     @VisibleForTesting

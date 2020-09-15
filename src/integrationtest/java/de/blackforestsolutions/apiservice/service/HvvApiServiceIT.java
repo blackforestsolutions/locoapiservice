@@ -1,6 +1,5 @@
 package de.blackforestsolutions.apiservice.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import de.blackforestsolutions.apiservice.objectmothers.TravelPointObjectMother;
 import de.blackforestsolutions.apiservice.service.communicationservice.restcalls.CallService;
 import de.blackforestsolutions.apiservice.service.supportservice.hvv.HvvHttpCallBuilderService;
@@ -38,7 +37,7 @@ class HvvApiServiceIT {
 
 
     @Test
-    void test_getTravelPoint() throws JsonProcessingException {
+    void test_getTravelPoint() {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder testData = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(hvvApiTokenAndUrlInformation);
         testData.setDeparture(getHvvTokenAndUrl().getDeparture());
         testData.setPath(httpCallBuilderService.buildTravelPointPathWith(testData.build()));
@@ -51,7 +50,7 @@ class HvvApiServiceIT {
     }
 
     @Test
-    void test_getJourney() throws JsonProcessingException {
+    void test_getJourney() {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder testData = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(hvvApiTokenAndUrlInformation);
         testData.setDepartureDate(ZonedDateTime.now());
         testData.setPath(httpCallBuilderService.buildJourneyPathWith(testData.build()));

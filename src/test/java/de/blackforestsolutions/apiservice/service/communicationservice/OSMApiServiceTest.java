@@ -37,7 +37,7 @@ class OSMApiServiceTest {
     void init() {
         String addressJson = getResourceFileAsString("json/osmTravelPointAddress.json");
 
-        when(callService.get(anyString(), any(HttpEntity.class))).thenReturn(new ResponseEntity<>(addressJson, HttpStatus.OK));
+        when(callService.getOld(anyString(), any(HttpEntity.class))).thenReturn(new ResponseEntity<>(addressJson, HttpStatus.OK));
 
         when(osmHttpCallBuilderService.buildOSMPathWith(any(ApiTokenAndUrlInformation.class), anyString())).thenReturn("");
 
@@ -57,7 +57,7 @@ class OSMApiServiceTest {
 
         InOrder inOrder = inOrder(callService, osmHttpCallBuilderService, osmMapperService);
         inOrder.verify(osmHttpCallBuilderService, times(1)).buildOSMPathWith(any(ApiTokenAndUrlInformation.class), anyString());
-        inOrder.verify(callService, times(1)).get(url.capture(), httpEntity.capture());
+        inOrder.verify(callService, times(1)).getOld(url.capture(), httpEntity.capture());
         inOrder.verify(osmMapperService, times(1)).mapOsmJsonToTravelPoint(body.capture());
         assertThat(url.getValue()).isEqualTo("https://nominatim.openstreetmap.org");
         assertThat(body.getValue()).isEqualTo(getResourceFileAsString("json/osmTravelPointAddress.json"));
@@ -73,17 +73,17 @@ class OSMApiServiceTest {
         CallStatus<TravelPointStatus> result = classUnderTest.getTravelPointFrom(testData.build(), testData.getArrival());
 
         assertThat(result.getStatus()).isEqualTo(Status.FAILED);
-        assertThat(result.getException()).isInstanceOf(NullPointerException.class);
+        assertThat(result.getThrowable()).isInstanceOf(NullPointerException.class);
     }
 
     @Test
     void test_getCoordinatesFromTravelPointWith_apiToken_throws_exception_during_http_call_returns_failed_call_status() {
         ApiTokenAndUrlInformation testData = getOSMApiTokenAndUrl();
-        doThrow(new RuntimeException()).when(callService).get(anyString(), any(HttpEntity.class));
+        doThrow(new RuntimeException()).when(callService).getOld(anyString(), any(HttpEntity.class));
 
         CallStatus<TravelPointStatus> result = classUnderTest.getTravelPointFrom(testData, testData.getArrival());
 
         assertThat(result.getStatus()).isEqualTo(Status.FAILED);
-        assertThat(result.getException()).isInstanceOf(RuntimeException.class);
+        assertThat(result.getThrowable()).isInstanceOf(RuntimeException.class);
     }
 }

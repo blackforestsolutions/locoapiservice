@@ -91,19 +91,19 @@ public class RMVApiServiceImpl implements RMVApiService {
     }
 
     private ResponseEntity<String> buildAndExecuteCall(ApiTokenAndUrlInformation apiTokenAndUrlInformation, String urlDeparture, String urlArrival) throws JAXBException {
-        ResponseEntity<String> departureIdJson = callService.get(
+        ResponseEntity<String> departureIdJson = callService.getOld(
                 urlDeparture,
                 httpCallBuilderService.buildHttpEntityForRMV(apiTokenAndUrlInformation)
         );
         String departureId = rmvMapperService.getIdFrom(departureIdJson.getBody());
-        ResponseEntity<String> arrivalIdJson = callService.get(
+        ResponseEntity<String> arrivalIdJson = callService.getOld(
                 urlArrival,
                 httpCallBuilderService.buildHttpEntityForRMV(apiTokenAndUrlInformation)
         );
         String arrivalId = rmvMapperService.getIdFrom(arrivalIdJson.getBody());
         ApiTokenAndUrlInformation callToken = replaceStartAndDestinationIn(apiTokenAndUrlInformation, departureId, arrivalId);
         String urlTrip = getRMVRequestString(callToken, httpCallBuilderService.buildTripPathWith(callToken));
-        return callService.get(urlTrip, httpCallBuilderService.buildHttpEntityForRMV(callToken));
+        return callService.getOld(urlTrip, httpCallBuilderService.buildHttpEntityForRMV(callToken));
     }
 
     private ApiTokenAndUrlInformation replaceStartAndDestinationIn(ApiTokenAndUrlInformation apiTokenAndUrlInformation, String departureId, String arrivalId) {

@@ -120,7 +120,7 @@ class HvvApiServiceTest {
         CallStatus<Map<UUID, JourneyStatus>> result = classUnderTest.getJourneysForRouteWith(testData.build());
 
         assertThat(result.getStatus()).isEqualTo(Status.FAILED);
-        assertThat(result.getException()).isInstanceOf(NullPointerException.class);
+        assertThat(result.getThrowable()).isInstanceOf(NullPointerException.class);
     }
 
     @Test
@@ -131,7 +131,7 @@ class HvvApiServiceTest {
         CallStatus<Map<UUID, JourneyStatus>> result = classUnderTest.getJourneysForRouteWith(testData);
 
         assertThat(result.getStatus()).isEqualTo(Status.FAILED);
-        assertThat(result.getException()).isInstanceOf(NullPointerException.class);
+        assertThat(result.getThrowable()).isInstanceOf(NullPointerException.class);
     }
 
     @Test
@@ -142,7 +142,7 @@ class HvvApiServiceTest {
         CallStatus<Map<UUID, JourneyStatus>> result = classUnderTest.getJourneysForRouteWith(testData);
 
         assertThat(result.getStatus()).isEqualTo(Status.FAILED);
-        assertThat(result.getException()).isInstanceOf(RuntimeException.class);
+        assertThat(result.getThrowable()).isInstanceOf(RuntimeException.class);
     }
 
     @Test

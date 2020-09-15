@@ -44,7 +44,7 @@ class RMVApiServiceTest {
         String departureCall = getResourceFileAsString("xml/LocationList.xml");
         String arrivalCall = getResourceFileAsString("xml/LocationList-frankfurt.xml");
         String tripListXml = getResourceFileAsString("xml/TripList.xml");
-        when(callService.get(anyString(), any(HttpEntity.class)))
+        when(callService.getOld(anyString(), any(HttpEntity.class)))
                 .thenReturn(new ResponseEntity<>(departureCall, HttpStatus.OK))
                 .thenReturn(new ResponseEntity<>(arrivalCall, HttpStatus.OK))
                 .thenReturn(new ResponseEntity<>(tripListXml, HttpStatus.OK));
@@ -66,12 +66,12 @@ class RMVApiServiceTest {
 
         InOrder inOrder = inOrder(httpCallBuilderService, callService, rmvMapperService);
         inOrder.verify(httpCallBuilderService, times(2)).buildLocationStringPathWith(any(ApiTokenAndUrlInformation.class), httpCallBuilderArg.capture());
-        inOrder.verify(callService, times(1)).get(anyString(), any(HttpEntity.class));
+        inOrder.verify(callService, times(1)).getOld(anyString(), any(HttpEntity.class));
         inOrder.verify(rmvMapperService, times(1)).getIdFrom(anyString());
-        inOrder.verify(callService, times(1)).get(anyString(), any(HttpEntity.class));
+        inOrder.verify(callService, times(1)).getOld(anyString(), any(HttpEntity.class));
         inOrder.verify(rmvMapperService, times(1)).getIdFrom(anyString());
         inOrder.verify(httpCallBuilderService, times(1)).buildTripPathWith(any(ApiTokenAndUrlInformation.class));
-        inOrder.verify(callService, times(1)).get(callServiceArg.capture(), any(HttpEntity.class));
+        inOrder.verify(callService, times(1)).getOld(callServiceArg.capture(), any(HttpEntity.class));
         inOrder.verify(rmvMapperService, times(1)).getJourneysFrom(anyString());
         assertThat(result.size()).isEqualTo(6);
         assertThat(httpCallBuilderArg.getAllValues()).isEqualTo(List.of(expectedDeparture, expectedArrival));
@@ -90,12 +90,12 @@ class RMVApiServiceTest {
 
         InOrder inOrder = inOrder(httpCallBuilderService, callService, rmvMapperService);
         inOrder.verify(httpCallBuilderService, times(2)).buildLocationCoordinatesPathWith(any(ApiTokenAndUrlInformation.class), httpCallBuilderArg.capture());
-        inOrder.verify(callService, times(1)).get(anyString(), any(HttpEntity.class));
+        inOrder.verify(callService, times(1)).getOld(anyString(), any(HttpEntity.class));
         inOrder.verify(rmvMapperService, times(1)).getIdFrom(anyString());
-        inOrder.verify(callService, times(1)).get(anyString(), any(HttpEntity.class));
+        inOrder.verify(callService, times(1)).getOld(anyString(), any(HttpEntity.class));
         inOrder.verify(rmvMapperService, times(1)).getIdFrom(anyString());
         inOrder.verify(httpCallBuilderService, times(1)).buildTripPathWith(any(ApiTokenAndUrlInformation.class));
-        inOrder.verify(callService, times(1)).get(callServiceArg.capture(), any(HttpEntity.class));
+        inOrder.verify(callService, times(1)).getOld(callServiceArg.capture(), any(HttpEntity.class));
         inOrder.verify(rmvMapperService, times(1)).getJourneysFrom(anyString());
         assertThat(result.size()).isEqualTo(6);
         assertThat(httpCallBuilderArg.getAllValues()).isEqualTo(List.of(
@@ -114,29 +114,29 @@ class RMVApiServiceTest {
         CallStatus<Map<UUID, JourneyStatus>> result = classUnderTest.getJourneysForRouteByCoordinatesWith(testData.build());
 
         assertThat(result.getStatus()).isEqualTo(Status.FAILED);
-        assertThat(result.getException()).isInstanceOf(NullPointerException.class);
+        assertThat(result.getThrowable()).isInstanceOf(NullPointerException.class);
     }
 
     @Test
     void test_getJourneysForRouteByCoordinatesWith_apiToken_and_wrong_mocked_http_answer_returns_failed_call_status() {
         ApiTokenAndUrlInformation testData = getRMVTokenAndUrl("", "");
-        when(callService.get(anyString(), any())).thenReturn(new ResponseEntity<>("", HttpStatus.BAD_REQUEST));
+        when(callService.getOld(anyString(), any())).thenReturn(new ResponseEntity<>("", HttpStatus.BAD_REQUEST));
 
         CallStatus<Map<UUID, JourneyStatus>> result = classUnderTest.getJourneysForRouteByCoordinatesWith(testData);
 
         assertThat(result.getStatus()).isEqualTo(Status.FAILED);
-        assertThat(result.getException()).isInstanceOf(UnmarshalException.class);
+        assertThat(result.getThrowable()).isInstanceOf(UnmarshalException.class);
     }
 
     @Test
     void test_getJourneysForRouteByCoordinatesWith_apiToken_throws_exception_during_http_call_returns_failed_call_status() {
         ApiTokenAndUrlInformation testData = getRMVTokenAndUrl("", "");
-        doThrow(new RuntimeException()).when(callService).get(anyString(), any());
+        doThrow(new RuntimeException()).when(callService).getOld(anyString(), any());
 
         CallStatus<Map<UUID, JourneyStatus>> result = classUnderTest.getJourneysForRouteByCoordinatesWith(testData);
 
         assertThat(result.getStatus()).isEqualTo(Status.FAILED);
-        assertThat(result.getException()).isInstanceOf(RuntimeException.class);
+        assertThat(result.getThrowable()).isInstanceOf(RuntimeException.class);
     }
 
     @Test
@@ -147,29 +147,29 @@ class RMVApiServiceTest {
         CallStatus<Map<UUID, JourneyStatus>> result = classUnderTest.getJourneysForRouteBySearchStringWith(testData.build());
 
         assertThat(result.getStatus()).isEqualTo(Status.FAILED);
-        assertThat(result.getException()).isInstanceOf(NullPointerException.class);
+        assertThat(result.getThrowable()).isInstanceOf(NullPointerException.class);
     }
 
     @Test
     void test_getJourneysForRouteBySearchStringWith_apiToken_and_wrong_mocked_http_answer_returns_failed_call_status() {
         ApiTokenAndUrlInformation testData = getRMVTokenAndUrl("", "");
-        when(callService.get(anyString(), any())).thenReturn(new ResponseEntity<>("", HttpStatus.BAD_REQUEST));
+        when(callService.getOld(anyString(), any())).thenReturn(new ResponseEntity<>("", HttpStatus.BAD_REQUEST));
 
         CallStatus<Map<UUID, JourneyStatus>> result = classUnderTest.getJourneysForRouteBySearchStringWith(testData);
 
         assertThat(result.getStatus()).isEqualTo(Status.FAILED);
-        assertThat(result.getException()).isInstanceOf(UnmarshalException.class);
+        assertThat(result.getThrowable()).isInstanceOf(UnmarshalException.class);
     }
 
     @Test
     void test_getJourneysForRouteBySearchStringWith_apiToken_throws_exception_during_http_call_returns_failed_call_status() {
         ApiTokenAndUrlInformation testData = getRMVTokenAndUrl("", "");
-        doThrow(new RuntimeException()).when(callService).get(anyString(), any());
+        doThrow(new RuntimeException()).when(callService).getOld(anyString(), any());
 
         CallStatus<Map<UUID, JourneyStatus>> result = classUnderTest.getJourneysForRouteBySearchStringWith(testData);
 
         assertThat(result.getStatus()).isEqualTo(Status.FAILED);
-        assertThat(result.getException()).isInstanceOf(RuntimeException.class);
+        assertThat(result.getThrowable()).isInstanceOf(RuntimeException.class);
     }
 
     @Test

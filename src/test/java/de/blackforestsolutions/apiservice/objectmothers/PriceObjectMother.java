@@ -11,9 +11,18 @@ import java.util.Map;
 
 public class PriceObjectMother {
 
-    public static Price getBBCPriceFromBerlinHbfToHamburgLandwehr() {
+    public static Price getBlaBlaCarPriceFromBerlinFlughafenToHamburgHbf() {
         return new Price.PriceBuilder()
-                .setValues(Map.of(PriceCategory.ADULT, new BigDecimal("14")))
+                .setValues(Map.of(PriceCategory.ADULT, new BigDecimal("11.00")))
+                .setAffiliateLinks(Map.of(PriceCategory.ADULT, "https://www.blablacar.de/trip/carpooling/1981400891-berlin-hamburg"))
+                .setSymbol("€")
+                .setCurrency(Currency.getInstance("EUR"))
+                .build();
+    }
+
+    public static Price getBlaBlaCarPriceFromBerlinHbfToHamburgLandwehr() {
+        return new Price.PriceBuilder()
+                .setValues(Map.of(PriceCategory.ADULT, new BigDecimal("14.00")))
                 .setAffiliateLinks(Map.of(PriceCategory.ADULT, "https://www.blablacar.de/trip/carpooling/1928522132-berlin-hamburg"))
                 .setSymbol("€")
                 .setCurrency(Currency.getInstance("EUR"))

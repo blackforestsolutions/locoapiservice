@@ -86,7 +86,7 @@ class LufthansaMapperServiceTest {
     }
 
     @Test
-    void test_mapScheduledResourceToJourneyList_with_wrong_pojo_returns__one_problem_with_nullPointerException() throws JsonProcessingException {
+    void test_mapScheduledResourceToJourneyList_with_wrong_pojo_returns__one_problem_with_nullPointerException() {
         String scheduledResourcesJson = getResourceFileAsString("json/lufthansaJourneyTest.json");
         ScheduleResource scheduleResource = retrieveJsonToPojo(scheduledResourcesJson, ScheduleResource.class);
         scheduleResource.getScheduleResource().getSchedule().get(0).getFlight().get(0).setDeparture(null);

@@ -3,9 +3,12 @@ package de.blackforestsolutions.apiservice.objectmothers;
 import de.blackforestsolutions.apiservice.testutils.TestUtils;
 import de.blackforestsolutions.datamodel.ApiTokenAndUrlInformation;
 import de.blackforestsolutions.datamodel.Coordinates;
+import de.blackforestsolutions.datamodel.util.LocoJsonMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -257,6 +260,47 @@ public class ApiTokenAndUrlInformationObjectMother {
         builder.setAuthorizationKey("x-rapidapi-key");
         builder.setAuthorization("b441403e78mshfe074d6ec0c2af2p1be89cjsn04932ccb889e");
         builder.setPath("/api/airports/by-radius;radius=300;lng=8.2324351;lat=48.1301564");
+        return builder.build();
+    }
+
+    public static ApiTokenAndUrlInformation getUserRequestToken() {
+        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
+        builder.setDeparture("Hamburg");
+        builder.setArrival("Berlin");
+        builder.setDepartureDate(ZonedDateTime.parse("2020-08-14T10:15:30+01:00[Europe/Berlin]", DateTimeFormatter.ISO_ZONED_DATE_TIME));
+        builder.setArrivalDate(ZonedDateTime.parse("2020-08-16T10:15:30+01:00[Europe/Berlin]", DateTimeFormatter.ISO_ZONED_DATE_TIME));
+        return builder.build();
+    }
+
+    public static String getUserRequestTokenSerialized() {
+        LocoJsonMapper jsonMapper = new LocoJsonMapper();
+        try {
+            return jsonMapper.map(getUserRequestToken());
+        } catch (Exception e) {
+            log.info("User RequestToken could not be serialized: ", e);
+            return "";
+        }
+    }
+
+    public static ApiTokenAndUrlInformation getBlaBlaCarApiTokenAndUrl() {
+        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
+        builder.setAuthorization("7f529ec36ab542b78e63f5270a621837");
+        builder.setHost("public-api.blablacar.com");
+        builder.setPathVariable("api");
+        builder.setJourneyPathVariable("trips");
+        builder.setApiVersion("v3");
+        builder.setProtocol("https");
+        builder.setLanguage("de_DE");
+        builder.setCurrency("EUR");
+        builder.setRadius(30000);
+        builder.setNumberOfPersons(1);
+        builder.setResultLength(100);
+        builder.setSortDirection("departure_datetime:asc");
+        builder.setDepartureCoordinates(new Coordinates.CoordinatesBuilder(52.526455d, 13.367701d).build());
+        builder.setArrivalCoordinates(new Coordinates.CoordinatesBuilder(53.553918d, 10.005147d).build());
+        builder.setDepartureDate(LocalDateTime.parse("2020-09-01 13:00:00", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")).atZone(ZoneId.systemDefault()));
+        builder.setArrivalDate(LocalDateTime.parse("2020-09-01 23:00:00", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")).atZone(ZoneId.systemDefault()));
+        builder.setCountry("DE");
         return builder.build();
     }
 }

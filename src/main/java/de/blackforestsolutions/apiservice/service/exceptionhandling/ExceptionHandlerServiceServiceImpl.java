@@ -3,6 +3,7 @@ package de.blackforestsolutions.apiservice.service.exceptionhandling;
 import de.blackforestsolutions.datamodel.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Mono;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -69,7 +70,7 @@ public class ExceptionHandlerServiceServiceImpl implements ExceptionHandlerServi
     }
 
     @Override
-    public TravelPoint handleExceptions(CallStatus<TravelPointStatus> travelPointCallStatus) {
+    public TravelPoint handleExceptionsOld(CallStatus<TravelPointStatus> travelPointCallStatus) {
         logError(travelPointCallStatus);
         if (Status.SUCCESS.equals(travelPointCallStatus.getStatus())) {
             return Optional.ofNullable(travelPointCallStatus.getCalledObject())
@@ -83,9 +84,52 @@ public class ExceptionHandlerServiceServiceImpl implements ExceptionHandlerServi
         return new TravelPoint.TravelPointBuilder().build();
     }
 
-    private static <T> void logError(CallStatus<T> callStatus) {
-        if (Status.FAILED.equals(callStatus.getStatus())) {
-            log.error("Error during Service Call.", callStatus.getException());
+    @Override
+    public <T> Mono<T> handleExceptions(Throwable exception) {
+        logError(exception);
+        return Mono.empty();
+    }
+
+    public <T> Mono<T> handleExceptions(CallStatus<T> callStatus) {
+        if (Optional.ofNullable(callStatus.getThrowable()).isPresent()) {
+            logError(callStatus);
+            return Mono.empty();
         }
+        if (Optional.ofNullable(callStatus.getStatus()).isEmpty()) {
+            logMissingStatus();
+            return Mono.empty();
+        }
+        if (callStatus.getStatus().equals(Status.FAILED)) {
+            logMissingException();
+            return Mono.empty();
+        }
+        if (Optional.ofNullable(callStatus.getCalledObject()).isPresent()) {
+            return Mono.just(callStatus.getCalledObject());
+        }
+        if (callStatus.getStatus().equals(Status.SUCCESS)) {
+            logMissingCalledObject();
+            return Mono.empty();
+        }
+        return Mono.empty();
+    }
+
+    private static <T> void logError(CallStatus<T> callStatus) {
+        log.error("Error during ApiServiceCall: ", callStatus.getThrowable());
+    }
+
+    private static void logError(Throwable e) {
+        log.error("Error outside of ApiServiceCall: ", e);
+    }
+
+    private static void logMissingStatus() {
+        log.warn("No Status for CallStatus found, eventually also no calledObject and exception");
+    }
+
+    private static void logMissingException() {
+        log.warn("No Exception for failed CallStatus found");
+    }
+
+    private static void logMissingCalledObject() {
+        log.warn("No Exception for failed CallStatus found");
     }
 }
