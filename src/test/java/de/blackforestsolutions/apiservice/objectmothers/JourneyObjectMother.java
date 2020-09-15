@@ -10,7 +10,8 @@ import java.util.UUID;
 import static de.blackforestsolutions.apiservice.objectmothers.LegObjectMother.*;
 import static de.blackforestsolutions.apiservice.objectmothers.PriceObjectMother.getDBPrice;
 import static de.blackforestsolutions.apiservice.objectmothers.PriceObjectMother.getNahShPrice;
-import static de.blackforestsolutions.apiservice.objectmothers.UUIDObjectMother.*;
+import static de.blackforestsolutions.apiservice.objectmothers.UUIDObjectMother.TEST_UUID_1;
+import static de.blackforestsolutions.apiservice.objectmothers.UUIDObjectMother.TEST_UUID_3;
 
 public class JourneyObjectMother {
 

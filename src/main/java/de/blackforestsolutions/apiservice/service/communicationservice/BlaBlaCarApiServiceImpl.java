@@ -47,14 +47,14 @@ public class BlaBlaCarApiServiceImpl implements BlaBlaCarApiService {
     private Flux<CallStatus<Journey>> getJourneysForRouteWith(ApiTokenAndUrlInformation apiTokenAndUrlInformation) {
         return Mono.just(apiTokenAndUrlInformation)
                 .map(blaBlaCarHttpCallBuilderService::buildJourneyCoordinatesPathWith)
-                .map(path -> getBbcRequestString(apiTokenAndUrlInformation, path))
+                .map(path -> getBlaBlaCarRequestString(apiTokenAndUrlInformation, path))
                 .flatMap(url -> callService.get(url, HttpEntity.EMPTY))
                 .flatMap(response -> convertJsonToPojo(response.getBody(), Rides.class))
                 .flatMapMany(blaBlaCarMapperService::buildJourneysWith)
                 .onErrorResume(e -> Flux.just(new CallStatus<>(null, Status.FAILED, e)));
     }
 
-    private String getBbcRequestString(ApiTokenAndUrlInformation apiTokenAndUrlInformation, String path) {
+    private String getBlaBlaCarRequestString(ApiTokenAndUrlInformation apiTokenAndUrlInformation, String path) {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder(apiTokenAndUrlInformation);
         builder.setPath(path);
         URL requestUrl = buildUrlWith(builder.build());

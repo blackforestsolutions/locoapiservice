@@ -1,6 +1,5 @@
 package de.blackforestsolutions.apiservice.service.mapper;
 
-import de.blackforestsolutions.apiservice.objectmothers.JourneyObjectMother;
 import de.blackforestsolutions.apiservice.service.supportservice.UuidService;
 import de.blackforestsolutions.datamodel.CallStatus;
 import de.blackforestsolutions.datamodel.Journey;
