@@ -16,8 +16,6 @@ import static de.blackforestsolutions.apiservice.util.CoordinatesUtil.convertWGS
 
 public class TravelPointObjectMother {
 
-    private static final Locale SWIZERLAND_LOCALE = Locale.forLanguageTag("de-CH");
-
     public static TravelPoint getEuropeTravelPoint() {
         return new TravelPoint.TravelPointBuilder()
                 .setStationName("Europa")
@@ -71,33 +69,6 @@ public class TravelPointObjectMother {
         );
 
         return travelPoint;
-    }
-
-    public static TravelPoint getBerlinFlughafenTravelPoint() {
-        return new TravelPoint.TravelPointBuilder()
-                .setCity("Berlin")
-                .setStationName("Flughafen Berlin-Tegel, Berlin")
-                .setGpsCoordinates(new Coordinates.CoordinatesBuilder(52.558832d, 13.288437d).build())
-                .setCountry(Locale.GERMAN)
-                .build();
-    }
-
-    public static TravelPoint getHamburgHbfTravelPoint() {
-        return new TravelPoint.TravelPointBuilder()
-                .setCity("Hamburg")
-                .setStationName("Hamburg Hbf, Hamburg")
-                .setGpsCoordinates(new Coordinates.CoordinatesBuilder(53.552925d, 10.006604d).build())
-                .setCountry(Locale.GERMAN)
-                .build();
-    }
-
-    public static TravelPoint getRostockHbfTravelPoint() {
-        return new TravelPoint.TravelPointBuilder()
-                .setCity("Rostock")
-                .setStationName("Rostock Hbf, Rostock")
-                .setGpsCoordinates(new Coordinates.CoordinatesBuilder(53.552925d, 10.006604d).build())
-                .setCountry(Locale.GERMAN)
-                .build();
     }
 
     public static TravelPoint getBerlinHbfTravelPoint() {

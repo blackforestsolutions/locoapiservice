@@ -72,10 +72,6 @@ public class TestUtils {
         return ZonedDateTime.of(datePart, timePart, TimeConfiguration.GERMAN_TIME_ZONE);
     }
 
-    public static ZonedDateTime generateTimeFromString(String time) {
-        return LocalTime.parse(time, DateTimeFormatter.ofPattern("HH:mm")).atDate(LocalDate.now()).atZone(TimeConfiguration.GERMAN_TIME_ZONE);
-    }
-
     public static <T> T retrieveJsonToPojoFromResponse(ResponseEntity<String> response, Class<T> pojo) throws JsonProcessingException {
         Objects.requireNonNull(response.getBody(), "response body is not allowed to be null");
         ObjectMapper mapper = new ObjectMapper();

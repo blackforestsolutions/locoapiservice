@@ -13,7 +13,7 @@ class TravelPointStatusBuilderTest {
 
     @Test
     void test_createTravelPointStatusWith_returns_travelPoint_with_status() {
-        TravelPoint testData = TravelPointObjectMother.getBerlinFlughafenTravelPoint();
+        TravelPoint testData = TravelPointObjectMother.getEuropeTravelPoint();
 
         TravelPointStatus result = TravelPointStatusBuilder.createTravelPointStatusWith(testData);
 

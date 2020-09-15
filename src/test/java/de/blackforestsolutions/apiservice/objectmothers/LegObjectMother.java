@@ -20,25 +20,6 @@ import static de.blackforestsolutions.apiservice.testutils.TestUtils.generateDat
 
 public class LegObjectMother {
 
-    public static Leg getFlughafenBerlinToHamburgHbfLeg() {
-        ZonedDateTime startTime = TestUtils.generateDateFromLocalDateTimeAndString("dd/MM/yyyy HH:mm:ss", "30/04/2021 08:00:00");
-        ZonedDateTime arrivalTime = TestUtils.generateDateFromLocalDateTimeAndString("dd/MM/yyyy HH:mm:ss", "30/04/2021 08:00:00").plusSeconds(10775);
-        return new Leg.LegBuilder(TEST_UUID_1)
-                .setStartTime(startTime)
-                .setStart(getBerlinFlughafenTravelPoint())
-                .setDestination(getHamburgHbfTravelPoint())
-                .setPrice(getBBCPriceFromBerlinFlughafenToHamburgHbf())
-                .setArrivalTime(arrivalTime)
-                .setDuration(Duration.between(startTime, arrivalTime))
-                .setDistance(new Distance(276, Metrics.KILOMETERS))
-                .setProviderId("1981400891-berlin-hamburg")
-                .setIncidents(List.of("Bitte eine Schutzmaske tragen!"))
-                .setVehicleName("TESLA MODEL X")
-                .setVehicleType(VehicleType.CAR)
-                .setTravelLine(getBerlinFlughafenHamburgHbfTravelLine())
-                .build();
-    }
-
     public static Leg getBerlinHbfHamburgMittlerLandwegLeg() {
         ZonedDateTime startTime = TestUtils.generateDateFromLocalDateTimeAndString("dd/MM/yyyy HH:mm:ss", "25/10/2020 17:00:00");
         ZonedDateTime arrivalTime = TestUtils.generateDateFromLocalDateTimeAndString("dd/MM/yyyy HH:mm:ss", "25/10/2020 17:00:00").plusSeconds(11130);

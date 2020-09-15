@@ -248,30 +248,6 @@ public class ApiTokenAndUrlInformationObjectMother {
         return builder.build();
     }
 
-    public static ApiTokenAndUrlInformation getBBCTokenAndUrl() {
-        ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
-        builder.setAuthorization("7f529ec36ab542b78e63f5270a621837");
-        builder.setHost("public-api.blablacar.com");
-        builder.setPathVariable("api");
-        builder.setJourneyPathVariable("trips");
-        builder.setApiVersion("v2");
-        builder.setProtocol("https");
-        builder.setLanguage("de_DE");
-        builder.setCurrency("EUR");
-        builder.setRadius(30);
-        builder.setNumberOfPersons(1);
-        builder.setResultLength(100);
-        builder.setTimeIsDeparture(true);
-        builder.setSortDirection("departure_datetime:desc");
-        builder.setDeparture("Berlin");
-        builder.setArrival("Hamburg");
-        builder.setDepartureCoordinates(new Coordinates.CoordinatesBuilder(52.526455d, 13.367701d).build());
-        builder.setArrivalCoordinates(new Coordinates.CoordinatesBuilder(53.553918d, 10.005147d).build());
-        builder.setDepartureDate(TestUtils.generateDateFromLocalDateTimeAndString("yyyy-MM-dd HH:mm:ss", "2020-05-31 13:00:00"));
-        builder.setArrivalDate(TestUtils.generateDateFromLocalDateTimeAndString("yyyy-MM-dd HH:mm:ss", "2020-06-02 13:00:00"));
-        return builder.build();
-    }
-
     public static ApiTokenAndUrlInformation getAirportsFinderTokenAndUrl() {
         ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder builder = new ApiTokenAndUrlInformation.ApiTokenAndUrlInformationBuilder();
         builder.setProtocol("https");

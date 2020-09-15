@@ -9,12 +9,6 @@ import static de.blackforestsolutions.apiservice.objectmothers.TravelPointObject
 
 public class TravelLineObjectMother {
 
-    static TravelLine getBerlinFlughafenHamburgHbfTravelLine() {
-        return new TravelLine.TravelLineBuilder()
-                .setBetweenHolds(Map.of(0, getRostockHbfTravelPoint()))
-                .build();
-    }
-
     static TravelLine getWiesbadenHauptbahnhofFrankfurtHauptbahnhofTravelLine() {
         return new TravelLine.TravelLineBuilder()
                 .setDirection(getRoedemarkOberRodenTravelPoint())
